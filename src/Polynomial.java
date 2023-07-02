@@ -15,7 +15,7 @@ public class Polynomial {
             // The contribution is the coefficient times x raised to the power of the degree of the current term
             // The degree of the current term is the number of terms remaining after the current term
             // minus one (since the degree of the highest-order term is zero)
-            res += coeffs.get(i) * Math.pow(x, coeffs.size() - i - 1);
+            res += coeffs.get(i) * Math.pow(x, i);
         }
         return res;
     }
