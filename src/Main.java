@@ -31,6 +31,6 @@ public class Main {
         System.out.println("Simpson 1/3 : " + Integral.getSimpson3(func, a, b, n));
         System.out.println("Simpson 3/8 : " + Integral.getSimpson8(func, a, b, n));
         System.out.println("Paul : " + Integral.getPaul(func, a, b, n));
-        // 1.6 4.953 1.8 6.050 2.0 7.389 2.2 9.025 2.4 11.025 2.6 13.464 // 2.8 15.646 3.0 16.651 3.2 18.1621
+        // 0 0 0.1 0.0001 0.2 0.0016 0.3 0.0081 0.4 0.0256 0.5 0.0625 0.6 0.1296
     }
 }
