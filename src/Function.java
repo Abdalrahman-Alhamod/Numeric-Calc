@@ -25,4 +25,11 @@ public class Function {
     public double getDiffAt(double x, int rank) {
         return 0;
     }
+
+    ArrayList<Double> getXp(){
+        return xp;
+    }
+    ArrayList<Double> getYp(){
+        return yp;
+    }
 }
