@@ -55,4 +55,17 @@ public class Polynomial {
         }
         return sb.toString(); // Return the final string representation
     }
+
+    public Polynomial getDerivative() {
+        int n = coeffs.size(); // Get the size of the coefficient list
+        ArrayList<Double> derivativeCoeffs = new ArrayList<>(n - 1); // Create a new ArrayList to store the derivative coefficients
+
+        for (int i = 1; i < n; i++) { // Iterate through the coefficient list starting from the second term (index 1)
+            double coeff = coeffs.get(i); // Get the coefficient at index i in the original polynomial
+            derivativeCoeffs.add(coeff * i); // Multiply the coefficient by i (the exponent of the term) and add it to the derivative coefficient list
+        }
+
+        return new Polynomial(derivativeCoeffs); // Create a new Polynomial object using the derivative coefficient list and return it
+    }
+
 }
