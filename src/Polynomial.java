@@ -160,4 +160,23 @@ public class Polynomial {
         return new Polynomial(newCoeffs);
     }
 
+    /**
+     * Multiplies the polynomial by a scalar value.
+     *
+     * @param scalar the scalar value to multiply the polynomial by.
+     * @return a new Polynomial object representing the product of the polynomial and the scalar value.
+     */
+    public Polynomial multiply(double scalar) {
+        // Create a new ArrayList to store the scaled coefficients
+        ArrayList<Double> scaledCoeffs = new ArrayList<>(coeffs.size());
+
+        // Multiply each coefficient by the scalar value and add it to the scaled coefficient list
+        for (double coeff : coeffs) {
+            scaledCoeffs.add(coeff * scalar);
+        }
+
+        // Create a new Polynomial object using the scaled coefficient list and return it
+        return new Polynomial(scaledCoeffs);
+    }
+
 }
