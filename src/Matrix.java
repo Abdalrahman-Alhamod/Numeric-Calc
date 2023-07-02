@@ -50,6 +50,10 @@ class Matrix {
         return a.get(row);
     }
 
+    public void setRow(int index, ArrayList<Double> row) {
+        a.set(index, row);
+    }
+
     // Method to get the entire matrix data (all rows)
     public ArrayList<ArrayList<Double>> getData() {
         return a;
@@ -132,7 +136,7 @@ class Matrix {
 
     // Method to multiply this matrix with another matrix 'other'
     public Matrix multiply(Matrix other) {
-        if(this.m!=other.n){
+        if (this.m != other.n) {
             throw new ArithmeticException("Matrices dimensions mismatch");
         }
         Matrix product = new Matrix(n, other.m);
@@ -251,5 +255,18 @@ class Matrix {
         }
 
         return solution;
+    }
+
+    static Matrix getVandermonde(ArrayList<Double> xp) {
+        ArrayList<ArrayList<Double>> a = new ArrayList<>();
+        for (int i = 0; i < xp.size(); i++) {
+            ArrayList<Double> v = new ArrayList<>();
+            double x = xp.get(i);
+            for (int j = 0; j < xp.size(); j++) {
+                v.add(Math.pow(x, j));
+            }
+            a.add(v);
+        }
+        return new Matrix(a);
     }
 }
