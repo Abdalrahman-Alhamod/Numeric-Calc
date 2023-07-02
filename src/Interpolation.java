@@ -13,4 +13,23 @@ public class Interpolation {
         System.out.println("Interpolated Function using the general method : ");
         return new Polynomial(coeffs);
     }
+
+    static Polynomial getLagrangePolyAt(int index, ArrayList<Double> xp) {
+        double scalar = 1.0;
+        ArrayList<Double> coeffs = new ArrayList<>();
+        coeffs.add(1.0);
+        Polynomial lag = new Polynomial(coeffs);
+        for (int i = 0; i < xp.size(); i++) {
+            if (i != index) {
+                scalar *= (xp.get(index) - xp.get(i));
+                coeffs = new ArrayList<>();
+                coeffs.add(-1 * xp.get(i));
+                coeffs.add(1.0);
+                Polynomial poly = new Polynomial(coeffs);
+                lag = lag.multiply(poly);
+            }
+        }
+        lag = lag.multiply(1 / scalar);
+        return lag;
+    }
 }
