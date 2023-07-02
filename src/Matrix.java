@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 class Matrix {
-    private ArrayList<ArrayList<Integer>> a; // ArrayList of ArrayLists to represent the matrix
+    private ArrayList<ArrayList<Double>> a; // ArrayList of ArrayLists to represent the matrix
     private int n; // Number of rows in the matrix
     private int m; // Number of columns in the matrix
 
@@ -14,9 +14,9 @@ class Matrix {
         m = columns;
         a = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            ArrayList<Integer> row = new ArrayList<>();
+            ArrayList<Double> row = new ArrayList<>();
             for (int j = 0; j < m; j++) {
-                row.add(0);
+                row.add(0.0);
             }
             a.add(row);
         }
@@ -28,29 +28,29 @@ class Matrix {
         m = columns;
         a = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            ArrayList<Integer> row = new ArrayList<>();
+            ArrayList<Double> row = new ArrayList<>();
             for (int j = 0; j < m; j++) {
-                row.add(0);
+                row.add(0.0);
             }
             a.add(row);
         }
     }
 
     // Method to get a specific row of the matrix
-    public ArrayList<Integer> getRow(int row) {
+    public ArrayList<Double> getRow(int row) {
         return a.get(row);
     }
 
     // Method to get the entire matrix data (all rows)
-    public ArrayList<ArrayList<Integer>> getData() {
+    public ArrayList<ArrayList<Double>> getData() {
         return a;
     }
 
     // Method to assign the values of another matrix 'other' to this matrix
     public Matrix assign(Matrix other) {
         for (int i = 0; i < n; i++) {
-            ArrayList<Integer> row = a.get(i);
-            ArrayList<Integer> otherRow = other.getRow(i);
+            ArrayList<Double> row = a.get(i);
+            ArrayList<Double> otherRow = other.getRow(i);
             for (int j = 0; j < m; j++) {
                 row.set(j, otherRow.get(j));
             }
@@ -61,7 +61,7 @@ class Matrix {
     // Method to assign a constant value 'c' to all elements of the matrix
     public Matrix assign(int c) {
         for (int i = 0; i < n; i++) {
-            ArrayList<Integer> row = a.get(i);
+            ArrayList<Double> row = a.get(i);
             Arrays.fill(row.toArray(), c);
         }
         return this;
@@ -71,9 +71,9 @@ class Matrix {
     public Matrix add(Matrix other) {
         Matrix sum = new Matrix(n, m);
         for (int i = 0; i < n; i++) {
-            ArrayList<Integer> row = a.get(i);
-            ArrayList<Integer> otherRow = other.getRow(i);
-            ArrayList<Integer> sumRow = sum.getRow(i);
+            ArrayList<Double> row = a.get(i);
+            ArrayList<Double> otherRow = other.getRow(i);
+            ArrayList<Double> sumRow = sum.getRow(i);
             for (int j = 0; j < m; j++) {
                 sumRow.set(j, (row.get(j) + otherRow.get(j)) % mod); // Perform modulo arithmetic while adding elements
             }
@@ -85,8 +85,8 @@ class Matrix {
     public Matrix add(int c) {
         Matrix sum = new Matrix(n, m);
         for (int i = 0; i < n; i++) {
-            ArrayList<Integer> row = a.get(i);
-            ArrayList<Integer> sumRow = sum.getRow(i);
+            ArrayList<Double> row = a.get(i);
+            ArrayList<Double> sumRow = sum.getRow(i);
             for (int j = 0; j < m; j++) {
                 sumRow.set(j, (row.get(j) + c) % mod); // Perform modulo arithmetic while adding constant value
             }
@@ -98,9 +98,9 @@ class Matrix {
     public Matrix subtract(Matrix other) {
         Matrix sub = new Matrix(n, m);
         for (int i = 0; i < n; i++) {
-            ArrayList<Integer> row = a.get(i);
-            ArrayList<Integer> otherRow = other.getRow(i);
-            ArrayList<Integer> subRow = sub.getRow(i);
+            ArrayList<Double> row = a.get(i);
+            ArrayList<Double> otherRow = other.getRow(i);
+            ArrayList<Double> subRow = sub.getRow(i);
             for (int j = 0; j < m; j++) {
                 subRow.set(j, (row.get(j) - otherRow.get(j) + mod) % mod); // Perform modulo arithmetic while subtracting elements
             }
@@ -112,8 +112,8 @@ class Matrix {
     public Matrix subtract(int c) {
         Matrix sub = new Matrix(n, m);
         for (int i = 0; i < n; i++) {
-            ArrayList<Integer> row = a.get(i);
-            ArrayList<Integer> subRow = sub.getRow(i);
+            ArrayList<Double> row = a.get(i);
+            ArrayList<Double> subRow = sub.getRow(i);
             for (int j = 0; j < m; j++) {
                 subRow.set(j, (row.get(j) - c + mod) % mod); // Perform modulo arithmetic while subtracting constant value
             }
@@ -125,9 +125,9 @@ class Matrix {
     public Matrix multiply(Matrix other) {
         Matrix product = new Matrix(n, other.m);
         for (int i = 0; i < n; i++) {
-            ArrayList<Integer> row = a.get(i);
-            ArrayList<ArrayList<Integer>> otherData = other.getData();
-            ArrayList<Integer> productRow = product.getRow(i);
+            ArrayList<Double> row = a.get(i);
+            ArrayList<ArrayList<Double>> otherData = other.getData();
+            ArrayList<Double> productRow = product.getRow(i);
             for (int j = 0; j < other.m; j++) {
                 for (int k = 0; k < m; k++) {
                     productRow.set(j, (productRow.get(j) + (row.get(k) * otherData.get(k).get(j)) % mod) % mod); // Perform modulo arithmetic while multiplying elements
@@ -141,8 +141,8 @@ class Matrix {
     public Matrix multiply(int c) {
         Matrix product = new Matrix(n, m);
         for (int i = 0; i < n; i++) {
-            ArrayList<Integer> row = a.get(i);
-            ArrayList<Integer> productRow = product.getRow(i);
+            ArrayList<Double> row = a.get(i);
+            ArrayList<Double> productRow = product.getRow(i);
             for (int j = 0; j < m; j++) {
                 productRow.set(j, (row.get(j) * c) % mod); // Perform modulo arithmetic while multiplying with constant value
             }
@@ -154,7 +154,7 @@ class Matrix {
 
     static void neutralize() {
         for (int i = 0; i < neutral.n; i++) {
-            neutral.getRow(i).set(i, 1); // Set diagonal elements of the neutral matrix to 1
+            neutral.getRow(i).set(i, 1.0); // Set diagonal elements of the neutral matrix to 1
         }
     }
 
@@ -184,7 +184,7 @@ class Matrix {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (ArrayList<Integer> row : a) {
+        for (ArrayList<Double> row : a) {
             sb.append(a.toString());
             sb.append('\n');
         }
