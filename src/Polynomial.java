@@ -179,4 +179,38 @@ public class Polynomial {
         return new Polynomial(scaledCoeffs);
     }
 
+    /**
+     * Adds this polynomial to another polynomial.
+     *
+     * @param other the other polynomial to add to this polynomial.
+     * @return a new Polynomial object representing the sum of the two polynomials.
+     * @throws NullPointerException if the other polynomial is null.
+     */
+    public Polynomial add(Polynomial other) {
+        Objects.requireNonNull(other, "other cannot be null");
+
+        // Create a new ArrayList to store the coefficients of the sum polynomial
+        ArrayList<Double> newCoeffs = new ArrayList<>();
+
+        // Determine the larger of the two polynomials
+        Polynomial larger = (this.coeffs.size() > other.coeffs.size()) ? this : other;
+
+        // Determine the smaller of the two polynomials
+        Polynomial smaller = (this.coeffs.size() > other.coeffs.size()) ? other : this;
+
+        // Compute the sum of the corresponding terms in the two polynomials
+        for (int i = 0; i < larger.coeffs.size(); i++) {
+            double coeff = larger.coeffs.get(i);
+
+            if (i < smaller.coeffs.size()) {
+                coeff += smaller.coeffs.get(i);
+            }
+
+            newCoeffs.add(coeff);
+        }
+
+        // Create a new Polynomial object using the computed coefficients and return it
+        return new Polynomial(newCoeffs);
+    }
+
 }
