@@ -145,6 +145,7 @@ public class Main {
         Polynomial p3 = new Polynomial(a3);
         p1 = p1.multiply(p3);
         System.out.println(p1);
+        System.out.println(p1.multiply(3));
 
     }
 }
