@@ -5,6 +5,7 @@ import static java.lang.Double.parseDouble;
 
 public class Main {
     public static void main(String[] args) {
+        //Testing Integral
         /*Scanner in = new Scanner(System.in);
         double a, b, n, temp;
         ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
@@ -32,7 +33,7 @@ public class Main {
         System.out.println("Simpson 3/8 : " + Integral.getSimpson8(func, a, b, n));
         System.out.println("Paul : " + Integral.getPaul(func, a, b, n));
         // 0 0 0.1 0.0001 0.2 0.0016 0.3 0.0081 0.4 0.0256 0.5 0.0625 0.6 0.1296*/
-
+        //Testing Polynomial
         /*ArrayList<Double> coeffs = new ArrayList<>();
         coeffs.add(-4.0);
         coeffs.add(5.0);
@@ -43,7 +44,7 @@ public class Main {
         System.out.println(p);
         System.out.println(p.getDerivative());
         System.out.println(p.getIntegral());*/
-
+        //Testing Matrix
         /*ArrayList<Double> r1 = new ArrayList<>();
         r1.add(1.2);
         r1.add(5.7);
@@ -81,7 +82,7 @@ public class Main {
         System.out.println(m.multiply(m));
         System.out.println(m.add(m));
         System.out.println(m.subtract(m));*/
-
+        //Testing Matrix Solve
         /*ArrayList<Double> r1 = new ArrayList<>();
         r1.add(1.0);
         r1.add(1.0);
@@ -104,14 +105,14 @@ public class Main {
         Matrix m = new Matrix(a);
         System.out.println(m);
         System.out.println(m.solve());*/
-
+        //Testing Vandermonde
         /*ArrayList<Double> r1 = new ArrayList<>();
         r1.add(1.0);
         r1.add(2.0);
         r1.add(3.0);
         r1.add(4.0);
         System.out.println(Matrix.getVandermonde(r1));*/
-
+        //Testing General Method
         /*Scanner in = new Scanner(System.in);
         double n, temp;
         ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
@@ -130,8 +131,8 @@ public class Main {
         System.out.println(Interpolation.getGeneralMethod(func));
         // 1 3 2 1 3 5
         // 11.0 + -11.0x + 3.0x^2*/
-
-        ArrayList<Double> a1 = new ArrayList<>();
+        //Testing Polynomial Multiplying
+        /*ArrayList<Double> a1 = new ArrayList<>();
         a1.add(1.0);
         Polynomial p1 = new Polynomial(a1);
         ArrayList<Double> a2 = new ArrayList<>();
@@ -145,7 +146,25 @@ public class Main {
         Polynomial p3 = new Polynomial(a3);
         p1 = p1.multiply(p3);
         System.out.println(p1);
-        System.out.println(p1.multiply(3));
+        System.out.println(p1.multiply(3));*/
 
+        Scanner in = new Scanner(System.in);
+        double n, temp;
+        ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
+        System.out.print("Enter number of points : ");
+        n = in.nextDouble();
+        n--; //Because n is the number of domains ; number of domains = number of points -1
+        for (int i = 0; i <= n; i++) {
+            System.out.print("Enter x" + i + " : ");
+            temp = parseDouble(in.next());
+            xp.add(temp);
+            System.out.print("Enter y" + i + " : ");
+            temp = parseDouble(in.next());
+            yp.add(temp);
+        }
+        Function func = new Function(xp, yp);
+        System.out.println("Interpolated Function using Lagrange method : ");
+        System.out.println(Interpolation.getLagrange(func));
+        // 1 2 2 -1 4 3
     }
 }
