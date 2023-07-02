@@ -71,10 +71,10 @@ class Matrix {
     }
 
     // Method to assign a constant value 'c' to all elements of the matrix
-    public Matrix assign(int c) {
+    public Matrix assign(double c) {
         for (int i = 0; i < n; i++) {
             ArrayList<Double> row = a.get(i);
-            Arrays.fill(row.toArray(), c);
+            row.replaceAll(ignored -> c);
         }
         return this;
     }
@@ -150,7 +150,7 @@ class Matrix {
     }
 
     // Method to multiply all elements of the matrix with a constant value 'c'
-    public Matrix multiply(int c) {
+    public Matrix multiply(double c) {
         Matrix product = new Matrix(n, m);
         for (int i = 0; i < n; i++) {
             ArrayList<Double> row = a.get(i);
