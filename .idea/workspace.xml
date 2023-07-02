@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add evaluate method to Polynomial" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add comment to evaluate in Polynomial">
+      <change beforePath="$PROJECT_DIR$/src/Polynomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polynomial.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -193,7 +195,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688311822994</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL؜-٠٠٠١٩" summary="Add comment to evaluate in Polynomial">
+      <created>1688312264093</created>
+      <option name="number" value="٠٠٠١٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠١٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688312264093</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -232,6 +241,7 @@
     <MESSAGE value="Add Java DOC for Integral Class" />
     <MESSAGE value="Initializing Polynomial class" />
     <MESSAGE value="Add evaluate method to Polynomial" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add evaluate method to Polynomial" />
+    <MESSAGE value="Add comment to evaluate in Polynomial" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add comment to evaluate in Polynomial" />
   </component>
 </project>
