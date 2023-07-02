@@ -202,4 +202,54 @@ class Matrix {
         }
         return sb.toString();
     }
+
+    public ArrayList<Double> solve() {
+        int rowCount = n;
+        int colCount = m;
+
+        int lead = 0;
+        for (int r = 0; r < rowCount; r++) {
+            if (lead >= colCount)
+                break;
+
+            int i = r;
+            while (a.get(i).get(lead) == 0) {
+                i++;
+                if (i == rowCount) {
+                    i = r;
+                    lead++;
+                    if (lead == colCount)
+                        return null; // No unique solution
+                }
+            }
+
+            // Swap rows i and r
+            ArrayList<Double> temp = a.get(i);
+            a.set(i, a.get(r));
+            a.set(r, temp);
+
+            double lv = a.get(r).get(lead);
+            for (int j = 0; j < colCount; j++)
+                a.get(r).set(j, a.get(r).get(j) / lv);
+
+            for (i = 0; i < rowCount; i++) {
+                if (i != r) {
+                    double lv2 = a.get(i).get(lead);
+                    for (int j = 0; j < colCount; j++)
+                        a.get(i).set(j, a.get(i).get(j) - a.get(r).get(j) * lv2);
+                }
+            }
+
+            lead++;
+        }
+
+        // Extract the solution from the transformed matrix
+        ArrayList<Double> solution = new ArrayList<>();
+        for (int i = 0; i < rowCount; i++) {
+            double val = (i < colCount) ? a.get(i).get(colCount) : 0.0;
+            solution.add(val);
+        }
+
+        return solution;
+    }
 }
