@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 public class Integral {
 
     private static double e;
