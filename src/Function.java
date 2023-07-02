@@ -15,8 +15,8 @@ public class Function {
     }
 
     public double getValueAt(double x) {
-        System.out.println("Value : "+x);
-        System.out.println("Func : "+Math.log(x));
+        //System.out.println("Value : "+x);
+        //System.out.println("Func : "+Math.log(x));
         return yp.get(xp.indexOf(x));
     }
 
