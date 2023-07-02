@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -53,14 +54,14 @@ public class Polynomial {
             double coeff = coeffs.get(i); // Get the current coefficient
             if (coeff != 0) { // If the coefficient is nonzero
                 if (i == 0) { // If the term is the constant term
-                    sb.append(coeff); // Append the coefficient
+                    sb.append(getFormattedCoefficient(coeff)); // Append the coefficient
                 } else if (i == 1) { // If the term is the linear term
                     if (coeff == 1) { // If the coefficient is 1
                         sb.append("x"); // Append the variable symbol
                     } else if (coeff == -1) { // If the coefficient is -1
                         sb.append("-x"); // Append the negative variable symbol
                     } else { // If the coefficient is not 1 or -1
-                        sb.append(coeff).append("x"); // Append the coefficient and variable symbol
+                        sb.append(getFormattedCoefficient(coeff)).append("x"); // Append the coefficient and variable symbol
                     }
                 } else { // If the term is a higher-order term
                     if (coeff == 1) { // If the coefficient is 1
@@ -68,7 +69,7 @@ public class Polynomial {
                     } else if (coeff == -1) { // If the coefficient is -1
                         sb.append("-x^").append(i); // Append the negative variable symbol and exponent
                     } else { // If the coefficient is not 1 or -1
-                        sb.append(coeff).append("x^").append(i); // Append the coefficient, variable symbol, and exponent
+                        sb.append(getFormattedCoefficient(coeff)).append("x^").append(i); // Append the coefficient, variable symbol, and exponent
                     }
                 }
                 if (i < n) {  //If there are more terms
@@ -77,6 +78,19 @@ public class Polynomial {
             }
         }
         return sb.toString(); // Return the final string representation
+    }
+
+    /**
+     * Formats the given coefficient as a string.
+     *
+     * <p>If the coefficient is an integer, it is formatted as an integer with no decimal places. Otherwise, it is
+     * formatted as a decimal with one decimal place, using Western numerals and a period as the decimal separator.</p>
+     *
+     * @param coeff the coefficient to format.
+     * @return the formatted coefficient as a string.
+     */
+    private String getFormattedCoefficient(double coeff) {
+        return (coeff == (int) coeff) ? String.valueOf((int) coeff) : String.format(Locale.ENGLISH, "%.1f", coeff);
     }
 
     /**

@@ -60,8 +60,10 @@ public class Interpolation {
             }
             scalar = 1 / scalar;
             scalar *= yp.get(i);
-            sb.append(scalar);
-            sb.append(" ");
+            if (scalar != 1.0) {
+                sb.append(scalar);
+                sb.append(" ");
+            }
             for (int j = 0; j < xp.size(); j++) {
                 if (j != i) {
                     ArrayList<Double> coeffs = new ArrayList<>();
