@@ -1,13 +1,33 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Represents a polynomial with real coefficients.
+ * The Polynomial class provides methods for evaluating the polynomial, computing its derivative and integral,
+ * and performing basic arithmetic operations.
+ */
 public class Polynomial {
+    /**
+     * coefficients ArrayList of the current Polynomial
+     */
     private ArrayList<Double> coeffs = null;
 
+    /**
+     * Constructs a Polynomial object with the given coefficients.
+     *
+     * @param coeffs the list of coefficients representing the polynomial terms, in descending order of degree.
+     * @throws NullPointerException if the given list of coefficients is null.
+     */
     public Polynomial(ArrayList<Double> coeffs) {
         this.coeffs = Objects.requireNonNull(coeffs, "coeffs cannot be null");
     }
 
+    /**
+     * Computes the value of the polynomial at the given x.
+     *
+     * @param x the value at which to evaluate the polynomial.
+     * @return the computed value of the polynomial.
+     */
     public double getValueAt(double x) {
         double res = 0.0;
         for (int i = 0; i < coeffs.size(); i++) {
@@ -20,6 +40,11 @@ public class Polynomial {
         return res;
     }
 
+    /**
+     * Returns a string representation of the polynomial.
+     *
+     * @return a string representation of the polynomial in the form "a_n * x^n + a_(n-1) * x^(n-1) + ... + a_1 * x + a_0".
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(); // Create a new StringBuilder to build the string representation
@@ -54,6 +79,11 @@ public class Polynomial {
         return sb.toString(); // Return the final string representation
     }
 
+    /**
+     * Computes the derivative of the polynomial.
+     *
+     * @return a new Polynomial object representing the derivative of the current polynomial.
+     */
     public Polynomial getDerivative() {
         int n = coeffs.size(); // Get the size of the coefficient list
         ArrayList<Double> derivativeCoeffs = new ArrayList<>(n - 1); // Create a new ArrayList to store the derivative coefficients
@@ -66,6 +96,11 @@ public class Polynomial {
         return new Polynomial(derivativeCoeffs); // Create a new Polynomial object using the derivative coefficient list and return it
     }
 
+    /**
+     * Computes the integral of the polynomial.
+     *
+     * @return a new Polynomial object representing the integral of the current polynomial.
+     */
     public Polynomial getIntegral() {
         int n = coeffs.size(); // Get the size of the coefficient list
         ArrayList<Double> integralCoeffs = new ArrayList<>(n + 1); // Create a new ArrayList to store the integral coefficients
@@ -80,5 +115,13 @@ public class Polynomial {
         return new Polynomial(integralCoeffs); // Create a new Polynomial object using the integral coefficient list and return it
     }
 
+    /**
+     * Returns the list of coefficients of the polynomial.
+     *
+     * @return the list of coefficients representing the polynomial terms, in descending order of degree.
+     */
+    ArrayList<Double> getCoeffs() {
+        return coeffs;
+    }
 
 }
