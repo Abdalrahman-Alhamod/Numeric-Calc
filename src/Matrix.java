@@ -133,6 +133,9 @@ class Matrix {
 
     // Method to multiply this matrix with another matrix 'other'
     public Matrix multiply(Matrix other) {
+        if(this.m!=other.n){
+            throw new ArithmeticException("Matrices dimensions mismatch");
+        }
         Matrix product = new Matrix(n, other.m);
         for (int i = 0; i < n; i++) {
             ArrayList<Double> row = a.get(i);
