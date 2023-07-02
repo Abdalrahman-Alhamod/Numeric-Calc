@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Initializing Integral class">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add paul integral implementation method">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Integral.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Integral.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +75,42 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688294634691</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL؜-٠٠٠٠٣" summary="Add Rectangle integral implementation method">
+      <created>1688294739345</created>
+      <option name="number" value="٠٠٠٠٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٠٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688294739345</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٠٤" summary="Add trapezoidal integral implementation method">
+      <created>1688294803124</created>
+      <option name="number" value="٠٠٠٠٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٠٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688294803124</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٠٥" summary="Add simpson 1/3 integral implementation method">
+      <created>1688294836396</created>
+      <option name="number" value="٠٠٠٠٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٠٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688294836396</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٠٦" summary="Add simpson 3/8 integral implementation method">
+      <created>1688294873951</created>
+      <option name="number" value="٠٠٠٠٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٠٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688294873951</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٠٧" summary="Add paul integral implementation method">
+      <created>1688294912874</created>
+      <option name="number" value="٠٠٠٠٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٠٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688294912874</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -97,6 +133,11 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initializing Function class with a primitive getValueAt(x) and getDiffAt(x,rank) methods" />
     <MESSAGE value="Initializing Integral class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initializing Integral class" />
+    <MESSAGE value="Add Rectangle integral implementation method" />
+    <MESSAGE value="Add trapezoidal integral implementation method" />
+    <MESSAGE value="Add simpson 1/3 integral implementation method" />
+    <MESSAGE value="Add simpson 3/8 integral implementation method" />
+    <MESSAGE value="Add paul integral implementation method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add paul integral implementation method" />
   </component>
 </project>

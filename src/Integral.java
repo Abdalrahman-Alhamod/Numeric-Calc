@@ -1,4 +1,7 @@
 public class Integral {
+
+    private static double e;
+
     public static double getRect(Function func, double a, double b, double n) {
         double h = (b - a) / n;
         double sum = 0;
@@ -7,6 +10,8 @@ public class Integral {
             sum += func.getValueAt(value);
             value += h;
         }
+
+        e = ((b - a) / 2) * h * (Math.max(func.getDiffAt(a, 1), func.getDiffAt(b, 1)));
 
         return sum * h;
     }
@@ -20,6 +25,8 @@ public class Integral {
             sum += 2 * func.getValueAt(value);
             value += h;
         }
+
+        e = ((b - a) / 12) * Math.pow(h, 2) * (Math.max(func.getDiffAt(a, 2), func.getDiffAt(b, 2)));
 
         return sum * (h / 2);
     }
@@ -37,6 +44,8 @@ public class Integral {
             value += h;
         }
 
+        e = ((b - a) / 180) * Math.pow(h, 4) * (Math.max(func.getDiffAt(a, 4), func.getDiffAt(b, 4)));
+
         return sum * (h / 3);
     }
 
@@ -52,6 +61,8 @@ public class Integral {
                 sum += 3 * func.getValueAt(value);
             value += h;
         }
+
+        e = ((b - a) / 80) * Math.pow(h, 4) * (Math.max(func.getDiffAt(a, 4), func.getDiffAt(b, 4)));
 
         return sum * 3 * (h / 8);
     }
@@ -71,6 +82,14 @@ public class Integral {
             value += h;
         }
 
+        e = (2 * (b - a) / 945) * Math.pow(h, 6) * (Math.max(func.getDiffAt(a, 6), func.getDiffAt(b, 6)));
+
         return sum * 2 * (h / 45);
     }
+
+    public static double getError() {
+        return e;
+    }
+
+
 }
