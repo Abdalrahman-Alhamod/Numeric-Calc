@@ -169,5 +169,6 @@ public class Main {
         System.out.println(Interpolation.getLagrangeNoShorthand(func));
         // 1 2 2 -1 4 3 */
 
+
     }
 }
