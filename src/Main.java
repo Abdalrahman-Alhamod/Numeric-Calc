@@ -165,6 +165,8 @@ public class Main {
         Function func = new Function(xp, yp);
         System.out.println("Interpolated Function using Lagrange method : ");
         System.out.println(Interpolation.getLagrange(func));
+        System.out.println("Interpolated Function using Lagrange method without shorthand : ");
+        System.out.println(Interpolation.getLagrangeNoShorthand(func));
         // 1 2 2 -1 4 3
     }
 }
