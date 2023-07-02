@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fixing accuracy issue in value in integral class">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Function.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Function.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fixing indexOutOfBounds in Integral&#10;&amp; testing a new example" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -139,7 +135,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688299275929</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL؜-٠٠٠١٢" summary="Fixing indexOutOfBounds in Integral&#10;&amp; testing a new example">
+      <created>1688300631574</created>
+      <option name="number" value="٠٠٠١٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠١٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688300631574</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -171,6 +174,7 @@
     <MESSAGE value="Add x points and y points Arraylists to Function class" />
     <MESSAGE value="Testing function x&amp;y points with integral" />
     <MESSAGE value="Fixing accuracy issue in value in integral class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing accuracy issue in value in integral class" />
+    <MESSAGE value="Fixing indexOutOfBounds in Integral&#10;&amp; testing a new example" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixing indexOutOfBounds in Integral&#10;&amp; testing a new example" />
   </component>
 </project>

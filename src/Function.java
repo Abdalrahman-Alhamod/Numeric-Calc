@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Function {
 
@@ -10,8 +11,8 @@ public class Function {
     }
 
     public Function(ArrayList<Double> xp, ArrayList<Double> yp) {
-        this.xp = xp;
-        this.yp = yp;
+        this.xp = Objects.requireNonNull(xp,"xp cannot be null");
+        this.yp = Objects.requireNonNull(yp,"yp cannot be null");;
     }
 
     public double getValueAt(double x) {
