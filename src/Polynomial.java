@@ -46,10 +46,8 @@ public class Polynomial {
                         sb.append(coeff).append("x^").append(i); // Append the coefficient, variable symbol, and exponent
                     }
                 }
-                if (i < n && coeffs.get(i + 1) > 0) { // If there are more terms and the next coefficient is positive
-                    sb.append(" + "); // Append the addition operator with spacing
-                } else if (i < n && coeffs.get(i + 1) < 0) { // If there are more terms and the next coefficient is negative
-                    sb.append(" - "); // Append the subtraction operator with spacing
+                if (i < n) {  //If there are more terms
+                    sb.append(" + ");  // Append the addition operator with spacing
                 }
             }
         }
