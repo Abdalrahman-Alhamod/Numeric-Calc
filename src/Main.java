@@ -102,7 +102,12 @@ public class Main {
         System.out.println(m);
         System.out.println(m.solve());*/
 
-
+        /*ArrayList<Double> r1 = new ArrayList<>();
+        r1.add(1.0);
+        r1.add(2.0);
+        r1.add(3.0);
+        r1.add(4.0);
+        System.out.println(Matrix.getVandermonde(r1));*/
 
 
     }
