@@ -190,7 +190,7 @@ class Matrix {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (ArrayList<Double> row : a) {
-            sb.append(a.toString());
+            sb.append(row.toString());
             sb.append('\n');
         }
         return sb.toString();
