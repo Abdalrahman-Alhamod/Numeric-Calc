@@ -68,4 +68,19 @@ public class Polynomial {
         return new Polynomial(derivativeCoeffs); // Create a new Polynomial object using the derivative coefficient list and return it
     }
 
+    public Polynomial getIntegral() {
+        int n = coeffs.size(); // Get the size of the coefficient list
+        ArrayList<Double> integralCoeffs = new ArrayList<>(n + 1); // Create a new ArrayList to store the integral coefficients
+
+        integralCoeffs.add(0.0); // Add the constant term of the integral polynomial, which is always 0
+
+        for (int i = 0; i < n; i++) { // Iterate through the coefficient list
+            double coeff = coeffs.get(i); // Get the coefficient at index i in the original polynomial
+            integralCoeffs.add(coeff / (i + 1)); // Divide the coefficient by (i + 1) and add it to the integral coefficient list
+        }
+
+        return new Polynomial(integralCoeffs); // Create a new Polynomial object using the integral coefficient list and return it
+    }
+
+
 }
