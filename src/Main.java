@@ -79,7 +79,7 @@ public class Main {
         System.out.println(m.add(m));
         System.out.println(m.subtract(m));*/
 
-        ArrayList<Double> r1 = new ArrayList<>();
+        /*ArrayList<Double> r1 = new ArrayList<>();
         r1.add(1.0);
         r1.add(1.0);
         r1.add(1.0);
@@ -100,7 +100,9 @@ public class Main {
         a.add(r3);
         Matrix m = new Matrix(a);
         System.out.println(m);
-        System.out.println(m.solve());
+        System.out.println(m.solve());*/
+
+
 
 
     }
