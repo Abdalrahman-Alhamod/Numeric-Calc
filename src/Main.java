@@ -30,8 +30,8 @@ public class Main {
         System.out.println("Traps : " + Integral.getTraps(func, a, b, n));
         System.out.println("Simpson 1/3 : " + Integral.getSimpson3(func, a, b, n));
         System.out.println("Simpson 3/8 : " + Integral.getSimpson8(func, a, b, n));
-        System.out.println("Paul : " + Integral.getPaul(func, a, b, n));*/
-        // 0 0 0.1 0.0001 0.2 0.0016 0.3 0.0081 0.4 0.0256 0.5 0.0625 0.6 0.1296
+        System.out.println("Paul : " + Integral.getPaul(func, a, b, n));
+        // 0 0 0.1 0.0001 0.2 0.0016 0.3 0.0081 0.4 0.0256 0.5 0.0625 0.6 0.1296*/
 
         /*ArrayList<Double> coeffs = new ArrayList<>();
         coeffs.add(-4.0);
@@ -112,8 +112,7 @@ public class Main {
         r1.add(4.0);
         System.out.println(Matrix.getVandermonde(r1));*/
 
-
-        Scanner in = new Scanner(System.in);
+        /*Scanner in = new Scanner(System.in);
         double n, temp;
         ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
         System.out.print("Enter number of points : ");
@@ -129,7 +128,23 @@ public class Main {
         }
         Function func = new Function(xp, yp);
         System.out.println(Interpolation.getGeneralMethod(func));
-
         // 1 3 2 1 3 5
+        // 11.0 + -11.0x + 3.0x^2*/
+
+        ArrayList<Double> a1 = new ArrayList<>();
+        a1.add(1.0);
+        Polynomial p1 = new Polynomial(a1);
+        ArrayList<Double> a2 = new ArrayList<>();
+        a2.add(-1.0);
+        a2.add(2.0);
+        Polynomial p2 = new Polynomial(a2);
+        p1 = p1.multiply(p2);
+        ArrayList<Double> a3 = new ArrayList<>();
+        a3.add(1.0);
+        a3.add(3.0);
+        Polynomial p3 = new Polynomial(a3);
+        p1 = p1.multiply(p3);
+        System.out.println(p1);
+
     }
 }
