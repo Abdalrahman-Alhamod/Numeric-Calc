@@ -39,4 +39,20 @@ public class Integral {
 
         return sum * (h / 3);
     }
+
+    public static double getSimpson8(Function func, double a, double b, double n) {
+        double h = (b - a) / n;
+        double sum = 0;
+        sum += func.getValueAt(a) + func.getValueAt(b);
+        double value = a + h;
+        for (int i = 1; i <= n - 1; i++) {
+            if (i % 3 == 0)
+                sum += 2 * func.getValueAt(value);
+            else
+                sum += 3 * func.getValueAt(value);
+            value += h;
+        }
+
+        return sum * 3 * (h / 8);
+    }
 }
