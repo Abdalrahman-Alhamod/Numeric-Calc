@@ -7,8 +7,6 @@ class Matrix {
     private int n; // Number of rows in the matrix
     private int m; // Number of columns in the matrix
 
-    static final int mod = (int) (1e9 + 7); // A constant representing modulo value for arithmetic operations
-
     // Constructor to create an n x m matrix initialized with zeros
     public Matrix(int rows, int columns) {
         n = rows;
@@ -87,7 +85,7 @@ class Matrix {
             ArrayList<Double> otherRow = other.getRow(i);
             ArrayList<Double> sumRow = sum.getRow(i);
             for (int j = 0; j < m; j++) {
-                sumRow.set(j, (row.get(j) + otherRow.get(j)) % mod); // Perform modulo arithmetic while adding elements
+                sumRow.set(j, (row.get(j) + otherRow.get(j))); // Perform modulo arithmetic while adding elements
             }
         }
         return sum;
@@ -100,7 +98,7 @@ class Matrix {
             ArrayList<Double> row = a.get(i);
             ArrayList<Double> sumRow = sum.getRow(i);
             for (int j = 0; j < m; j++) {
-                sumRow.set(j, (row.get(j) + c) % mod); // Perform modulo arithmetic while adding constant value
+                sumRow.set(j, (row.get(j) + c)); // Perform modulo arithmetic while adding constant value
             }
         }
         return sum;
@@ -114,20 +112,20 @@ class Matrix {
             ArrayList<Double> otherRow = other.getRow(i);
             ArrayList<Double> subRow = sub.getRow(i);
             for (int j = 0; j < m; j++) {
-                subRow.set(j, (row.get(j) - otherRow.get(j) + mod) % mod); // Perform modulo arithmetic while subtracting elements
+                subRow.set(j, row.get(j) - otherRow.get(j)); // Perform modulo arithmetic while subtracting elements
             }
         }
         return sub;
     }
 
     // Method to subtract a constant value 'c' from all elements of the matrix
-    public Matrix subtract(int c) {
+    public Matrix subtract(double c) {
         Matrix sub = new Matrix(n, m);
         for (int i = 0; i < n; i++) {
             ArrayList<Double> row = a.get(i);
             ArrayList<Double> subRow = sub.getRow(i);
             for (int j = 0; j < m; j++) {
-                subRow.set(j, (row.get(j) - c + mod) % mod); // Perform modulo arithmetic while subtracting constant value
+                subRow.set(j, row.get(j) - c); // Perform modulo arithmetic while subtracting constant value
             }
         }
         return sub;
@@ -142,7 +140,7 @@ class Matrix {
             ArrayList<Double> productRow = product.getRow(i);
             for (int j = 0; j < other.m; j++) {
                 for (int k = 0; k < m; k++) {
-                    productRow.set(j, (productRow.get(j) + (row.get(k) * otherData.get(k).get(j)) % mod) % mod); // Perform modulo arithmetic while multiplying elements
+                    productRow.set(j, productRow.get(j) + (row.get(k) * otherData.get(k).get(j))); // Perform modulo arithmetic while multiplying elements
                 }
             }
         }
@@ -156,7 +154,7 @@ class Matrix {
             ArrayList<Double> row = a.get(i);
             ArrayList<Double> productRow = product.getRow(i);
             for (int j = 0; j < m; j++) {
-                productRow.set(j, (row.get(j) * c) % mod); // Perform modulo arithmetic while multiplying with constant value
+                productRow.set(j, row.get(j) * c); // Perform modulo arithmetic while multiplying with constant value
             }
         }
         return product;
