@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add comments" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add Java DOC for Integral Class" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,6 +24,12 @@
     <option name="NEW_BASE" value="origin/main" />
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="main" />
@@ -166,7 +172,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688303493641</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL؜-٠٠٠١٦" summary="Add Java DOC for Integral Class">
+      <created>1688303840193</created>
+      <option name="number" value="٠٠٠١٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠١٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688303840193</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -202,6 +215,7 @@
     <MESSAGE value="Add requireNonNull xp&amp;yp to Function Constructor" />
     <MESSAGE value="Add exceptions to Integral class" />
     <MESSAGE value="Add comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add comments" />
+    <MESSAGE value="Add Java DOC for Integral Class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Java DOC for Integral Class" />
   </component>
 </project>
