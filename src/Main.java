@@ -41,7 +41,7 @@ public class Main {
         System.out.println(p.getDerivative());
         System.out.println(p.getIntegral());*/
 
-        ArrayList<Double> r1 = new ArrayList<>();
+        /*ArrayList<Double> r1 = new ArrayList<>();
         r1.add(1.2);
         r1.add(5.7);
         r1.add(2.4);
@@ -77,7 +77,30 @@ public class Main {
         System.out.println(m.assign(m.add(1)));
         System.out.println(m.multiply(m));
         System.out.println(m.add(m));
-        System.out.println(m.subtract(m));
+        System.out.println(m.subtract(m));*/
+
+        ArrayList<Double> r1 = new ArrayList<>();
+        r1.add(1.0);
+        r1.add(1.0);
+        r1.add(1.0);
+        r1.add(3.0);
+        ArrayList<Double> r2 = new ArrayList<>();
+        r2.add(1.0);
+        r2.add(2.0);
+        r2.add(4.0);
+        r2.add(1.0);
+        ArrayList<Double> r3 = new ArrayList<>();
+        r3.add(1.0);
+        r3.add(3.0);
+        r3.add(9.0);
+        r3.add(5.0);
+        ArrayList<ArrayList<Double>> a = new ArrayList<>();
+        a.add(r1);
+        a.add(r2);
+        a.add(r3);
+        Matrix m = new Matrix(a);
+        System.out.println(m);
+        System.out.println(m.solve());
 
 
     }

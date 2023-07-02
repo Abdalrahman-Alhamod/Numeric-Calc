@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Removing mod">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix solve method in Matrix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Matrix.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +21,7 @@
     </option>
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="integral" />
+    <option name="BRANCH" value="matrix" />
   </component>
   <component name="Git.Rebase.Settings">
     <option name="NEW_BASE" value="origin/main" />
@@ -331,7 +330,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688324076492</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL؜-٠٠٠٣٨" summary="Add solve method">
+      <created>1688327633099</created>
+      <option name="number" value="٠٠٠٣٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٣٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688327633099</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٣٩" summary="Fix solve method in Matrix">
+      <created>1688328040723</created>
+      <option name="number" value="٠٠٠٣٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٣٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688328040723</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -352,8 +365,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixing indexOutOfBounds in Integral&#10;&amp; testing a new example" />
-    <MESSAGE value="Add requireNonNull xp&amp;yp to Function Constructor" />
     <MESSAGE value="Add exceptions to Integral class" />
     <MESSAGE value="Add comments" />
     <MESSAGE value="Add Java DOC for Integral Class" />
@@ -377,6 +388,8 @@
     <MESSAGE value="Fix Matrix Constructor and add Exception" />
     <MESSAGE value="Fix add and multiply and assign in Matrix" />
     <MESSAGE value="Removing mod" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removing mod" />
+    <MESSAGE value="Add solve method" />
+    <MESSAGE value="Fix solve method in Matrix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix solve method in Matrix" />
   </component>
 </project>
