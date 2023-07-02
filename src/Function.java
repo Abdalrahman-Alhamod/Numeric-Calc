@@ -13,7 +13,9 @@ public class Function {
     public Function(ArrayList<Double> xp, ArrayList<Double> yp) {
         this.xp = Objects.requireNonNull(xp, "xp cannot be null");
         this.yp = Objects.requireNonNull(yp, "yp cannot be null");
-        ;
+        if (xp.size() != yp.size()) {
+            throw new ArithmeticException("number of function points mismatch");
+        }
     }
 
     public double getValueAt(double x) {
@@ -26,10 +28,11 @@ public class Function {
         return 0;
     }
 
-    ArrayList<Double> getXp(){
+    ArrayList<Double> getXp() {
         return xp;
     }
-    ArrayList<Double> getYp(){
+
+    ArrayList<Double> getYp() {
         return yp;
     }
 }
