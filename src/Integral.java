@@ -1,6 +1,23 @@
+/**
+ * The Integral class provides methods for numerical integration using various methods.
+ * It supports rectangular, trapezoidal, Simpson's 1/3, Simpson's 3/8, and Paul's method.
+ */
 public class Integral {
+    /**
+     * Estimated Error value for Integral methods
+     */
     private static double e;
 
+    /**
+     * Calculates the integral using the rectangular method.
+     *
+     * @param func the function to integrate
+     * @param a    the lower limit of integration
+     * @param b    the upper limit of integration
+     * @param n    the number of sub-intervals
+     * @return the calculated integral value
+     * @throws ArithmeticException if the function is null, a is greater than or equal to b, or n is less than or equal to 0
+     */
     public static double getRect(Function func, double a, double b, double n) {
         if (func == null || a <= b || n <= 0)
             throw new ArithmeticException("invalid inputs");
@@ -18,6 +35,16 @@ public class Integral {
         return sum * h;
     }
 
+    /**
+     * Calculates the integral using the trapezoidal method.
+     *
+     * @param func the function to integrate
+     * @param a    the lower limit of integration
+     * @param b    the upper limit of integration
+     * @param n    the number of sub-intervals
+     * @return the calculated integral value
+     * @throws ArithmeticException if the function is null, a is greater than or equal to b, or n is less than or equal to 0
+     */
     public static double getTraps(Function func, double a, double b, double n) {
         if (func == null || a <= b || n <= 0)
             throw new ArithmeticException("invalid inputs");
@@ -37,6 +64,16 @@ public class Integral {
         return sum * (h / 2);
     }
 
+    /**
+     * Calculates the integral using Simpson's 1/3 method.
+     *
+     * @param func the function to integrate
+     * @param a    the lower limit of integration
+     * @param b    the upper limit of integration
+     * @param n    the number of sub-intervals (must be an even number)
+     * @return the calculated integral value
+     * @throws ArithmeticException if the function is null, a is greater than or equal to b, n is less than or equal to 0, or n is not an even number
+     */
     public static double getSimpson3(Function func, double a, double b, double n) {
         if (func == null || a <= b || n <= 0 || n % 2 != 0)
             throw new ArithmeticException("invalid inputs");
@@ -59,6 +96,16 @@ public class Integral {
         return sum * (h / 3);
     }
 
+    /**
+     * Calculates the integral using Simpson's 3/8 method.
+     *
+     * @param func the function to integrate
+     * @param a    the lower limit of integration
+     * @param b    the upper limit of integration
+     * @param n    the number of sub-intervals (must be divisible by 3)
+     * @return the calculated integral value
+     * @throws ArithmeticException if the function is null, a is greater than or equal to b, n is less than or equal to 0, or n is not divisible by 3
+     */
     public static double getSimpson8(Function func, double a, double b, double n) {
         if (func == null || a <= b || n <= 0 || n % 3 != 0)
             throw new ArithmeticException("invalid inputs");
@@ -81,6 +128,16 @@ public class Integral {
         return sum * 3 * (h / 8);
     }
 
+    /**
+     * Calculates the integral using Paul's method.
+     *
+     * @param func the function to integrate
+     * @param a    the lower limit of integration
+     * @param b    the upper limit of integration
+     * @param n    the number of sub-intervals (must be divisible by 4)
+     * @return the calculated integral value
+     * @throws ArithmeticException if the function is null, a is greater than or equal to b, n is less than or equal to 0, or n is not divisible by 4
+     */
     public static double getPaul(Function func, double a, double b, double n) {
         if (func == null || a <= b || n <= 0 || n % 4 != 0)
             throw new ArithmeticException("invalid inputs");
@@ -105,6 +162,11 @@ public class Integral {
         return sum * 2 * (h / 45);
     }
 
+    /**
+     * Returns the estimated error of the last performed integration.
+     *
+     * @return the estimated error
+     */
     public static double getError() {
         return e;
     }
