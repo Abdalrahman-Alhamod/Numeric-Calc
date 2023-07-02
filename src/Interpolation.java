@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Interpolation {
-    static Polynomial getGeneralMethod(Function func) {
+    public static Polynomial getGeneralMethod(Function func) {
         ArrayList<Double> xp = func.getXp();
         ArrayList<Double> yp = func.getYp();
         Matrix SE = new Matrix(Matrix.getVandermonde(xp).getData());
@@ -14,7 +14,7 @@ public class Interpolation {
         return new Polynomial(coeffs);
     }
 
-    static Polynomial getLagrangePolyAt(int index, ArrayList<Double> xp) {
+    private static Polynomial getLagrangePolyAt(int index, ArrayList<Double> xp) {
         double scalar = 1.0;
         ArrayList<Double> coeffs = new ArrayList<>();
         coeffs.add(1.0);
@@ -31,5 +31,19 @@ public class Interpolation {
         }
         lag = lag.multiply(1 / scalar);
         return lag;
+    }
+
+    public static Polynomial getLagrange(Function func) {
+        ArrayList<Double> xp = func.getXp();
+        ArrayList<Double> yp = func.getYp();
+        ArrayList<Double> coeffs = new ArrayList<>();
+        coeffs.add(0.0);
+        Polynomial res = new Polynomial(coeffs);
+        for (int i = 0; i < xp.size(); i++) {
+            Polynomial lag = getLagrangePolyAt(i, xp);
+            lag = lag.multiply(yp.get(i));
+            res = res.add(lag);
+        }
+        return res;
     }
 }
