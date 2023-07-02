@@ -23,8 +23,15 @@ class Matrix {
         }
     }
 
-    public Matrix(ArrayList<ArrayList<Double>> a){
-        this.a = Objects.requireNonNull(a,"a cannot be null");
+    public Matrix(ArrayList<ArrayList<Double>> a) {
+        this.a = Objects.requireNonNull(a, "a cannot be null");
+        int size = a.get(0).size();
+        for (ArrayList<Double> row : a) {
+            if (row.size() != size)
+                throw new ArithmeticException("rows size is not identical");
+        }
+        n = a.size();
+        m = size;
     }
 
     // Method to resize the matrix to X x Y and initialize with zeros
@@ -87,7 +94,7 @@ class Matrix {
     }
 
     // Method to add a constant value 'c' to all elements of the matrix
-    public Matrix add(int c) {
+    public Matrix add(double c) {
         Matrix sum = new Matrix(n, m);
         for (int i = 0; i < n; i++) {
             ArrayList<Double> row = a.get(i);
