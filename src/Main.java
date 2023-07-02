@@ -34,11 +34,15 @@ public class Main {
         // 0 0 0.1 0.0001 0.2 0.0016 0.3 0.0081 0.4 0.0256 0.5 0.0625 0.6 0.1296
 
         ArrayList<Double> coeffs = new ArrayList<>();
-        coeffs.add(1.0);
         coeffs.add(2.0);
-        coeffs.add(3.0);
+        coeffs.add(7.0);
+        coeffs.add(5.0);
         Polynomial p = new Polynomial(coeffs);
-        System.out.println(p.evaluate(2));
+        System.out.println(p.getValueAt(4));
         System.out.println(p);
+        System.out.println(p.getDerivative());
+        System.out.println(p.getIntegral());
+
+
     }
 }

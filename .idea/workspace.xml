@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add override toString method to Polynomial with comments">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add getDerivative method to Polynomial with comments">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Polynomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polynomial.java" afterDir="false" />
     </list>
@@ -210,7 +211,35 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688312447825</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL؜-٠٠٠٢١" summary="Removing static">
+      <created>1688312631303</created>
+      <option name="number" value="٠٠٠٢١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٢١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688312631303</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٢٢" summary="Fix evaluate method in Polynomial">
+      <created>1688312851093</created>
+      <option name="number" value="٠٠٠٢٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٢٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688312851093</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٢٣" summary="Testing Polynomial methods">
+      <created>1688312890705</created>
+      <option name="number" value="٠٠٠٢٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٢٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688312890705</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٢٤" summary="Add getDerivative method to Polynomial with comments">
+      <created>1688316169446</created>
+      <option name="number" value="٠٠٠٢٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٢٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688316169446</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -251,6 +280,10 @@
     <MESSAGE value="Add evaluate method to Polynomial" />
     <MESSAGE value="Add comment to evaluate in Polynomial" />
     <MESSAGE value="Add override toString method to Polynomial with comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add override toString method to Polynomial with comments" />
+    <MESSAGE value="Removing static" />
+    <MESSAGE value="Fix evaluate method in Polynomial" />
+    <MESSAGE value="Testing Polynomial methods" />
+    <MESSAGE value="Add getDerivative method to Polynomial with comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add getDerivative method to Polynomial with comments" />
   </component>
 </project>
