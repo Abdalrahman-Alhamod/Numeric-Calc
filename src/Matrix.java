@@ -242,11 +242,11 @@ class Matrix {
 
             lead++;
         }
-
+        System.out.println(a);
         // Extract the solution from the transformed matrix
         ArrayList<Double> solution = new ArrayList<>();
         for (int i = 0; i < rowCount; i++) {
-            double val = (i < colCount) ? a.get(i).get(colCount) : 0.0;
+            double val = (i < colCount) ? a.get(i).get(colCount - 1) : 0.0;
             solution.add(val);
         }
 
