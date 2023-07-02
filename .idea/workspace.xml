@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix solve method in Matrix">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Testing Interpolation getGeneralMethod">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +41,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -344,7 +343,70 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688328040723</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL؜-٠٠٠٤٠" summary="Testing solve method in Matrix">
+      <created>1688328520811</created>
+      <option name="number" value="٠٠٠٤٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٤٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688328520811</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٤١" summary="Initializing Interpolation class">
+      <created>1688328742028</created>
+      <option name="number" value="٠٠٠٤١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٤١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688328742028</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٤٢" summary="Add getter for yp and xp in Function">
+      <created>1688329019328</created>
+      <option name="number" value="٠٠٠٤٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٤٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688329019328</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٤٣" summary="Add Exception in Function Constructor">
+      <created>1688329936266</created>
+      <option name="number" value="٠٠٠٤٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٤٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688329936266</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٤٤" summary="Add getVandermonde to Matrix &amp;&#10;Add setRow">
+      <created>1688330284182</created>
+      <option name="number" value="٠٠٠٤٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٤٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688330284182</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٤٥" summary="Testing getVandermonde">
+      <created>1688330344909</created>
+      <option name="number" value="٠٠٠٤٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٤٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688330344909</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٤٦" summary="Add getColsNum and setColsNum">
+      <created>1688331827048</created>
+      <option name="number" value="٠٠٠٤٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٤٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688331827048</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٤٧" summary="Add getGeneralMethod to Interpolation class">
+      <created>1688332856481</created>
+      <option name="number" value="٠٠٠٤٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٤٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688332856481</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٤٨" summary="Testing Interpolation getGeneralMethod">
+      <created>1688332876351</created>
+      <option name="number" value="٠٠٠٤٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٤٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688332876351</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -365,15 +427,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add exceptions to Integral class" />
-    <MESSAGE value="Add comments" />
-    <MESSAGE value="Add Java DOC for Integral Class" />
-    <MESSAGE value="Initializing Polynomial class" />
-    <MESSAGE value="Add evaluate method to Polynomial" />
-    <MESSAGE value="Add comment to evaluate in Polynomial" />
-    <MESSAGE value="Add override toString method to Polynomial with comments" />
-    <MESSAGE value="Removing static" />
-    <MESSAGE value="Fix evaluate method in Polynomial" />
     <MESSAGE value="Add getDerivative method to Polynomial with comments" />
     <MESSAGE value="Add getIntegral method to Polynomial with comments" />
     <MESSAGE value="Renaming evaluate to getValueAt" />
@@ -390,6 +443,15 @@
     <MESSAGE value="Removing mod" />
     <MESSAGE value="Add solve method" />
     <MESSAGE value="Fix solve method in Matrix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix solve method in Matrix" />
+    <MESSAGE value="Testing solve method in Matrix" />
+    <MESSAGE value="Initializing Interpolation class" />
+    <MESSAGE value="Add getter for yp and xp in Function" />
+    <MESSAGE value="Add Exception in Function Constructor" />
+    <MESSAGE value="Add getVandermonde to Matrix &amp;&#10;Add setRow" />
+    <MESSAGE value="Testing getVandermonde" />
+    <MESSAGE value="Add getColsNum and setColsNum" />
+    <MESSAGE value="Add getGeneralMethod to Interpolation class" />
+    <MESSAGE value="Testing Interpolation getGeneralMethod" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing Interpolation getGeneralMethod" />
   </component>
 </project>
