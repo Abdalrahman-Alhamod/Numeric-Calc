@@ -8,7 +8,7 @@ public class Polynomial {
         this.coeffs = Objects.requireNonNull(coeffs, "coeffs cannot be null");
     }
 
-    public double evaluate(double x) {
+    public double getValueAt(double x) {
         double res = 0.0;
         for (int i = 0; i < coeffs.size(); i++) {
             // Compute the contribution of the current term to the result and add it to the running sum
