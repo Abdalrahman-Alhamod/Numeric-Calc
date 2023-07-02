@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Create tag v1.0.3">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fixing toString method in Polynomial and printing in getLagrangeNoShorthand">
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Polynomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polynomial.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,13 +69,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠١٠" summary="Testing function x&amp;y points with integral">
-      <created>1688299144962</created>
-      <option name="number" value="٠٠٠١٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠١٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688299144962</updated>
     </task>
     <task id="LOCAL؜-٠٠٠١١" summary="Fixing accuracy issue in value in integral class">
       <created>1688299275929</created>
@@ -415,7 +406,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688338830904</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL؜-٠٠٠٥٩" summary="Fixing toString method in Polynomial and printing in getLagrangeNoShorthand">
+      <created>1688340233749</created>
+      <option name="number" value="٠٠٠٥٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٥٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688340233749</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -436,7 +434,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix toString in Matrix" />
     <MESSAGE value="Fix Matrix Constructor and add Exception" />
     <MESSAGE value="Fix add and multiply and assign in Matrix" />
     <MESSAGE value="Removing mod" />
@@ -461,6 +458,7 @@
     <MESSAGE value="Add getLagrange to Interpolation" />
     <MESSAGE value="Testing getLagrange" />
     <MESSAGE value="Create tag v1.0.3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create tag v1.0.3" />
+    <MESSAGE value="Fixing toString method in Polynomial and printing in getLagrangeNoShorthand" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixing toString method in Polynomial and printing in getLagrangeNoShorthand" />
   </component>
 </project>
