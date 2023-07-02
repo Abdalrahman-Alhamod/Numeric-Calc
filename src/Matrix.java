@@ -246,7 +246,7 @@ class Matrix {
 
             lead++;
         }
-        System.out.println(a);
+        //System.out.println(a);
         // Extract the solution from the transformed matrix
         ArrayList<Double> solution = new ArrayList<>();
         for (int i = 0; i < rowCount; i++) {
@@ -268,5 +268,13 @@ class Matrix {
             a.add(v);
         }
         return new Matrix(a);
+    }
+
+    public int getColsNum() {
+        return m;
+    }
+
+    public void setColsNum(int cols) {
+        m = cols;
     }
 }
