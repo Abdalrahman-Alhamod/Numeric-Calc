@@ -124,4 +124,40 @@ public class Polynomial {
         return coeffs;
     }
 
+    /**
+     * Computes the product of two polynomials.
+     *
+     * @param other the other polynomial to multiply with this polynomial.
+     * @return a new Polynomial object representing the product of the two polynomials.
+     * @throws NullPointerException if the other polynomial is null.
+     */
+    public Polynomial multiply(Polynomial other) {
+        Objects.requireNonNull(other, "other cannot be null");
+
+        // Create a new ArrayList to store the coefficients of the product polynomial
+        ArrayList<Double> newCoeffs = new ArrayList<>();
+
+        // Compute the degree of the product polynomial
+        int degree = this.coeffs.size() + other.coeffs.size() - 2;
+
+        // Loop over each term in the product polynomial
+        for (int i = 0; i <= degree; i++) {
+            double coeff = 0.0;
+
+            // Compute the coefficient of the current term as the sum of the products of the corresponding terms
+            // in the two input polynomials
+            for (int j = 0; j <= i; j++) {
+                if (j < this.coeffs.size() && (i - j) < other.coeffs.size()) {
+                    coeff += this.coeffs.get(j) * other.coeffs.get(i - j);
+                }
+            }
+
+            // Add the computed coefficient to the list of coefficients of the product polynomial
+            newCoeffs.add(coeff);
+        }
+
+        // Create a new Polynomial object using the computed coefficients and return it
+        return new Polynomial(newCoeffs);
+    }
+
 }
