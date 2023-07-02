@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add toString method" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Removing mod">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Matrix.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -285,7 +289,49 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688319590072</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL؜-٠٠٠٣٢" summary="Make Matrix inner implementation by Double">
+      <created>1688320023741</created>
+      <option name="number" value="٠٠٠٣٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٣٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688320023741</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٣٣" summary="Add new constructor to Matrix">
+      <created>1688322679584</created>
+      <option name="number" value="٠٠٠٣٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٣٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688322679584</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٣٤" summary="Fix toString in Matrix">
+      <created>1688322941153</created>
+      <option name="number" value="٠٠٠٣٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٣٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688322941153</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٣٥" summary="Fix Matrix Constructor and add Exception">
+      <created>1688323386528</created>
+      <option name="number" value="٠٠٠٣٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٣٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688323386528</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٣٦" summary="Fix add and multiply and assign in Matrix">
+      <created>1688323923216</created>
+      <option name="number" value="٠٠٠٣٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٣٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688323923216</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٣٧" summary="Removing mod">
+      <created>1688324076492</created>
+      <option name="number" value="٠٠٠٣٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٣٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688324076492</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -306,12 +352,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add simpson 3/8 integral implementation method" />
-    <MESSAGE value="Add paul integral implementation method" />
-    <MESSAGE value="Test integral methods inside main" />
-    <MESSAGE value="Add x points and y points Arraylists to Function class" />
-    <MESSAGE value="Testing function x&amp;y points with integral" />
-    <MESSAGE value="Fixing accuracy issue in value in integral class" />
     <MESSAGE value="Fixing indexOutOfBounds in Integral&#10;&amp; testing a new example" />
     <MESSAGE value="Add requireNonNull xp&amp;yp to Function Constructor" />
     <MESSAGE value="Add exceptions to Integral class" />
@@ -331,6 +371,12 @@
     <MESSAGE value="Testing Polynomial methods" />
     <MESSAGE value="Initializing Matrix class with its methods and with comments" />
     <MESSAGE value="Add toString method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add toString method" />
+    <MESSAGE value="Make Matrix inner implementation by Double" />
+    <MESSAGE value="Add new constructor to Matrix" />
+    <MESSAGE value="Fix toString in Matrix" />
+    <MESSAGE value="Fix Matrix Constructor and add Exception" />
+    <MESSAGE value="Fix add and multiply and assign in Matrix" />
+    <MESSAGE value="Removing mod" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removing mod" />
   </component>
 </project>
