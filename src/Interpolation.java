@@ -46,4 +46,37 @@ public class Interpolation {
         }
         return res;
     }
+
+    public static String getLagrangeNoShorthand(Function func) {
+        ArrayList<Double> xp = func.getXp();
+        ArrayList<Double> yp = func.getYp();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < yp.size(); i++) {
+            double scalar = 1.0;
+            for (int j = 0; j < xp.size(); j++) {
+                if (j != i) {
+                    scalar *= (xp.get(i) - xp.get(j));
+                }
+            }
+            scalar = 1 / scalar;
+            scalar *= yp.get(i);
+            sb.append(scalar);
+            sb.append(" ");
+            for (int j = 0; j < xp.size(); j++) {
+                if (j != i) {
+                    ArrayList<Double> coeffs = new ArrayList<>();
+                    coeffs.add(-1 * xp.get(j));
+                    coeffs.add(1.0);
+                    Polynomial poly = new Polynomial(coeffs);
+                    sb.append('(');
+                    sb.append(poly);
+                    sb.append(')');
+                }
+            }
+            if (i != yp.size() - 1) {
+                sb.append(" + ");
+            }
+        }
+        return sb.toString();
+    }
 }
