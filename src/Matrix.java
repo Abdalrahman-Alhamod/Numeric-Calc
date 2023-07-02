@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
- class Matrix {
+
+class Matrix {
     private ArrayList<ArrayList<Integer>> a; // ArrayList of ArrayLists to represent the matrix
     private int n; // Number of rows in the matrix
     private int m; // Number of columns in the matrix
@@ -8,9 +9,9 @@ import java.util.Arrays;
     static final int mod = (int) (1e9 + 7); // A constant representing modulo value for arithmetic operations
 
     // Constructor to create an n x m matrix initialized with zeros
-    public Matrix(int X, int Y) {
-        n = X;
-        m = Y;
+    public Matrix(int rows, int columns) {
+        n = rows;
+        m = columns;
         a = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             ArrayList<Integer> row = new ArrayList<>();
@@ -22,9 +23,9 @@ import java.util.Arrays;
     }
 
     // Method to resize the matrix to X x Y and initialize with zeros
-    public void resize(int X, int Y) {
-        n = X;
-        m = Y;
+    public void resize(int rows, int columns) {
+        n = rows;
+        m = columns;
         a = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             ArrayList<Integer> row = new ArrayList<>();
@@ -36,8 +37,8 @@ import java.util.Arrays;
     }
 
     // Method to get a specific row of the matrix
-    public ArrayList<Integer> getRow(int r) {
-        return a.get(r);
+    public ArrayList<Integer> getRow(int row) {
+        return a.get(row);
     }
 
     // Method to get the entire matrix data (all rows)
@@ -178,5 +179,15 @@ import java.util.Arrays;
         }
         Matrix c = A.multiply(A);
         return neutral.add(A).multiply(sumPow(c, k / 2)); // Recursively calculate sumPow(c, k / 2) and multiply it with (neutral + A)
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (ArrayList<Integer> row : a) {
+            sb.append(a.toString());
+            sb.append('\n');
+        }
+        return sb.toString();
     }
 }
