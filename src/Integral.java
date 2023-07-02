@@ -5,6 +5,8 @@ public class Integral {
     private static double e;
 
     public static double getRect(Function func, double a, double b, double n) {
+        if (func == null || a <= b || n <= 0)
+            throw new ArithmeticException("invalid inputs");
         double h = (b - a) / n;
         double sum = 0;
         double value = a;
@@ -20,6 +22,8 @@ public class Integral {
     }
 
     public static double getTraps(Function func, double a, double b, double n) {
+        if (func == null || a <= b || n <= 0)
+            throw new ArithmeticException("invalid inputs");
         double h = (b - a) / n;
         double sum = 0;
         sum += func.getValueAt(a) + func.getValueAt(b);
@@ -37,6 +41,8 @@ public class Integral {
     }
 
     public static double getSimpson3(Function func, double a, double b, double n) {
+        if (func == null || a <= b || n <= 0 || n % 2 != 0)
+            throw new ArithmeticException("invalid inputs");
         double h = (b - a) / n;
         double sum = 0;
         sum += func.getValueAt(a) + func.getValueAt(b);
@@ -57,6 +63,8 @@ public class Integral {
     }
 
     public static double getSimpson8(Function func, double a, double b, double n) {
+        if (func == null || a <= b || n <= 0 || n % 3 != 0)
+            throw new ArithmeticException("invalid inputs");
         double h = (b - a) / n;
         double sum = 0;
         sum += func.getValueAt(a) + func.getValueAt(b);
@@ -77,6 +85,8 @@ public class Integral {
     }
 
     public static double getPaul(Function func, double a, double b, double n) {
+        if (func == null || a <= b || n <= 0 || n % 4 != 0)
+            throw new ArithmeticException("invalid inputs");
         double h = (b - a) / n;
         double sum = 0;
         sum += 7 * func.getValueAt(a) + 7 * func.getValueAt(b);
