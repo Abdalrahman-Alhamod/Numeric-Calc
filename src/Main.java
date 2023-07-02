@@ -147,8 +147,8 @@ public class Main {
         p1 = p1.multiply(p3);
         System.out.println(p1);
         System.out.println(p1.multiply(3));*/
-
-        Scanner in = new Scanner(System.in);
+        //Testing Lagrange Method
+        /*Scanner in = new Scanner(System.in);
         double n, temp;
         ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
         System.out.print("Enter number of points : ");
@@ -167,6 +167,7 @@ public class Main {
         System.out.println(Interpolation.getLagrange(func));
         System.out.println("Interpolated Function using Lagrange method without shorthand : ");
         System.out.println(Interpolation.getLagrangeNoShorthand(func));
-        // 1 2 2 -1 4 3
+        // 1 2 2 -1 4 3 */
+
     }
 }

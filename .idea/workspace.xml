@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Testing Interpolation getGeneralMethod">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Testing getLagrange">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpolation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +22,7 @@
     </option>
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="matrix" />
+    <option name="BRANCH" value="interpolation" />
   </component>
   <component name="Git.Rebase.Settings">
     <option name="NEW_BASE" value="origin/main" />
@@ -69,62 +71,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٠١" summary="Initializing Function class with a primitive getValueAt(x) and getDiffAt(x,rank) methods">
-      <created>1688294151387</created>
-      <option name="number" value="٠٠٠٠١" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٠١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688294151387</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٠٢" summary="Initializing Integral class">
-      <created>1688294634691</created>
-      <option name="number" value="٠٠٠٠٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٠٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688294634691</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٠٣" summary="Add Rectangle integral implementation method">
-      <created>1688294739345</created>
-      <option name="number" value="٠٠٠٠٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٠٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688294739345</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٠٤" summary="Add trapezoidal integral implementation method">
-      <created>1688294803124</created>
-      <option name="number" value="٠٠٠٠٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٠٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688294803124</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٠٥" summary="Add simpson 1/3 integral implementation method">
-      <created>1688294836396</created>
-      <option name="number" value="٠٠٠٠٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٠٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688294836396</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٠٦" summary="Add simpson 3/8 integral implementation method">
-      <created>1688294873951</created>
-      <option name="number" value="٠٠٠٠٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٠٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688294873951</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٠٧" summary="Add paul integral implementation method">
-      <created>1688294912874</created>
-      <option name="number" value="٠٠٠٠٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٠٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688294912874</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٠٨" summary="Test integral methods inside main">
-      <created>1688295300961</created>
-      <option name="number" value="٠٠٠٠٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٠٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688295300961</updated>
     </task>
     <task id="LOCAL؜-٠٠٠٠٩" summary="Add x points and y points Arraylists to Function class">
       <created>1688296036186</created>
@@ -406,7 +352,70 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688332876351</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL؜-٠٠٠٤٩" summary="Create tag v1.0.2">
+      <created>1688333218093</created>
+      <option name="number" value="٠٠٠٤٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٤٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688333218093</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٥٠" summary="Add multiply method to Polynomial">
+      <created>1688335414762</created>
+      <option name="number" value="٠٠٠٥٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٥٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688335414762</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٥١" summary="Testing multiply by Polynomial">
+      <created>1688335782662</created>
+      <option name="number" value="٠٠٠٥١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٥١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688335782662</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٥٢" summary="Add multiply by scalar in Polynomial">
+      <created>1688335817574</created>
+      <option name="number" value="٠٠٠٥٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٥٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688335817574</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٥٣" summary="Test multiply by scalar">
+      <created>1688335852656</created>
+      <option name="number" value="٠٠٠٥٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٥٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688335852656</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٥٤" summary="Add getLagrangeAt method in Interpolation">
+      <created>1688336748619</created>
+      <option name="number" value="٠٠٠٥٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٥٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688336748619</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٥٥" summary="Add add method two polynomial in Polynomial">
+      <created>1688336937707</created>
+      <option name="number" value="٠٠٠٥٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٥٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688336937707</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٥٦" summary="Add getLagrange to Interpolation">
+      <created>1688337622496</created>
+      <option name="number" value="٠٠٠٥٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٥٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688337622496</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٥٧" summary="Testing getLagrange">
+      <created>1688337639096</created>
+      <option name="number" value="٠٠٠٥٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٥٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688337639096</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -427,15 +436,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add getDerivative method to Polynomial with comments" />
-    <MESSAGE value="Add getIntegral method to Polynomial with comments" />
-    <MESSAGE value="Renaming evaluate to getValueAt" />
-    <MESSAGE value="Testing Polynomial methods getIntegral &amp; getDerivative" />
-    <MESSAGE value="Fixing toSting method in Polynomial" />
-    <MESSAGE value="Testing Polynomial methods" />
-    <MESSAGE value="Initializing Matrix class with its methods and with comments" />
-    <MESSAGE value="Add toString method" />
-    <MESSAGE value="Make Matrix inner implementation by Double" />
     <MESSAGE value="Add new constructor to Matrix" />
     <MESSAGE value="Fix toString in Matrix" />
     <MESSAGE value="Fix Matrix Constructor and add Exception" />
@@ -452,6 +452,15 @@
     <MESSAGE value="Add getColsNum and setColsNum" />
     <MESSAGE value="Add getGeneralMethod to Interpolation class" />
     <MESSAGE value="Testing Interpolation getGeneralMethod" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing Interpolation getGeneralMethod" />
+    <MESSAGE value="Create tag v1.0.2" />
+    <MESSAGE value="Add multiply method to Polynomial" />
+    <MESSAGE value="Testing multiply by Polynomial" />
+    <MESSAGE value="Add multiply by scalar in Polynomial" />
+    <MESSAGE value="Test multiply by scalar" />
+    <MESSAGE value="Add getLagrangeAt method in Interpolation" />
+    <MESSAGE value="Add add method two polynomial in Polynomial" />
+    <MESSAGE value="Add getLagrange to Interpolation" />
+    <MESSAGE value="Testing getLagrange" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing getLagrange" />
   </component>
 </project>

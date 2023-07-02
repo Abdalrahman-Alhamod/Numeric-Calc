@@ -10,7 +10,7 @@ public class Polynomial {
     /**
      * coefficients ArrayList of the current Polynomial
      */
-    private ArrayList<Double> coeffs = null;
+    private ArrayList<Double> coeffs;
 
     /**
      * Constructs a Polynomial object with the given coefficients.
