@@ -1,12 +1,32 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * This class represents a matrix of double values and provides various operations on matrices.
+ * <p>
+ * The matrix is stored as an ArrayList of ArrayLists of Double values.
+ */
 class Matrix {
+    /**
+     * The matrix data is stored as an ArrayList of ArrayLists.
+     * Each inner ArrayList represents a row of the matrix.
+     */
     private ArrayList<ArrayList<Double>> a; // ArrayList of ArrayLists to represent the matrix
-    private int n; // Number of rows in the matrix
-    private int m; // Number of columns in the matrix
+    /**
+     * The number of rows in the matrix.
+     */
+    private int n;
+    /**
+     * The number of columns in the matrix.
+     */
+    private int m;
 
-    // Constructor to create an n x m matrix initialized with zeros
+    /**
+     * Creates an n x m matrix initialized with zeros.
+     *
+     * @param rows    the number of rows in the matrix
+     * @param columns the number of columns in the matrix
+     */
     public Matrix(int rows, int columns) {
         n = rows;
         m = columns;
@@ -20,8 +40,15 @@ class Matrix {
         }
     }
 
-    public Matrix(ArrayList<ArrayList<Double>> a) {
-        this.a = Objects.requireNonNull(a, "a cannot be null");
+    /**
+     * Creates a matrix from the given data.
+     *
+     * @param data the matrix data as an ArrayList of ArrayLists
+     * @throws NullPointerException if the data is null
+     * @throws ArithmeticException  if the rows in the data have different sizes
+     */
+    public Matrix(ArrayList<ArrayList<Double>> data) {
+        this.a = Objects.requireNonNull(data, "a cannot be null");
         int size = a.get(0).size();
         for (ArrayList<Double> row : a) {
             if (row.size() != size)
@@ -31,7 +58,12 @@ class Matrix {
         m = size;
     }
 
-    // Method to resize the matrix to X x Y and initialize with zeros
+    /**
+     * Resizes the matrix to the given number of rows and columns and initializes all elements to zero.
+     *
+     * @param rows    the new number of rows
+     * @param columns the new number of columns
+     */
     public void resize(int rows, int columns) {
         n = rows;
         m = columns;
@@ -45,22 +77,45 @@ class Matrix {
         }
     }
 
-    // Method to get a specific row of the matrix
-    public ArrayList<Double> getRow(int row) {
-        return a.get(row);
+    /**
+     * Returns the row at the specified index.
+     *
+     * @param index the row index
+     * @return the row at the specified index
+     */
+    public ArrayList<Double> getRow(int index) {
+        return a.get(index);
     }
 
+    /**
+     * Sets the row at the specified index to the given row.
+     *
+     * @param index the row index
+     * @param row   the new row
+     */
     public void setRow(int index, ArrayList<Double> row) {
         a.set(index, row);
     }
 
-    // Method to get the entire matrix data (all rows)
+    /**
+     * Returns the entire matrix data as an ArrayList of ArrayLists.
+     *
+     * @return the matrix data
+     */
     public ArrayList<ArrayList<Double>> getData() {
         return a;
     }
 
-    // Method to assign the values of another matrix 'other' to this matrix
+    /**
+     * Assigns the values of another matrix to this matrix.
+     *
+     * @param other the matrix to assign
+     * @return this matrix after assigning the values of the other matrix
+     * @throws ArithmeticException if the matrices have different sizes
+     */
     public Matrix assign(Matrix other) {
+        if (n != other.n || m != other.m)
+            throw new ArithmeticException("Matrices dimensions mismatch");
         for (int i = 0; i < n; i++) {
             ArrayList<Double> row = a.get(i);
             ArrayList<Double> otherRow = other.getRow(i);
@@ -71,7 +126,12 @@ class Matrix {
         return this;
     }
 
-    // Method to assign a constant value 'c' to all elements of the matrix
+    /**
+     * Assigns a constant value to all elements of the matrix.
+     *
+     * @param c the constant value to assign
+     * @return this matrix after assigning the constant value
+     */
     public Matrix assign(double c) {
         for (int i = 0; i < n; i++) {
             ArrayList<Double> row = a.get(i);
@@ -80,8 +140,16 @@ class Matrix {
         return this;
     }
 
-    // Method to add another matrix 'other' to this matrix
+    /**
+     * Adds another matrix to this matrix and returns the result as a new matrix.
+     *
+     * @param other the matrix to add
+     * @return the sum of the matrices as a new matrix
+     * @throws ArithmeticException if the matrices have different sizes
+     */
     public Matrix add(Matrix other) {
+        if (n != other.n || m != other.m)
+            throw new ArithmeticException("Matrices dimensions mismatch");
         Matrix sum = new Matrix(n, m);
         for (int i = 0; i < n; i++) {
             ArrayList<Double> row = a.get(i);
@@ -94,7 +162,12 @@ class Matrix {
         return sum;
     }
 
-    // Method to add a constant value 'c' to all elements of the matrix
+    /**
+     * Add a constant value to all elements of the matrix.
+     *
+     * @param c the constant value to Add
+     * @return sum matrix after Adding the constant value
+     */
     public Matrix add(double c) {
         Matrix sum = new Matrix(n, m);
         for (int i = 0; i < n; i++) {
@@ -107,8 +180,16 @@ class Matrix {
         return sum;
     }
 
-    // Method to subtract another matrix 'other' from this matrix
+    /**
+     * Subtracts another matrix from this matrix and returns the result as a new matrix.
+     *
+     * @param other the matrix to subtract
+     * @return the difference between the matrices as a new matrix
+     * @throws ArithmeticException if the matrices have different sizes
+     */
     public Matrix subtract(Matrix other) {
+        if (n != other.n || m != other.m)
+            throw new ArithmeticException("Matrices dimensions mismatch");
         Matrix sub = new Matrix(n, m);
         for (int i = 0; i < n; i++) {
             ArrayList<Double> row = a.get(i);
@@ -121,7 +202,12 @@ class Matrix {
         return sub;
     }
 
-    // Method to subtract a constant value 'c' from all elements of the matrix
+    /**
+     * Subtract a constant value to all elements of the matrix.
+     *
+     * @param c the constant value to Subtract
+     * @return sub matrix after Subtracting the constant value
+     */
     public Matrix subtract(double c) {
         Matrix sub = new Matrix(n, m);
         for (int i = 0; i < n; i++) {
@@ -134,7 +220,13 @@ class Matrix {
         return sub;
     }
 
-    // Method to multiply this matrix with another matrix 'other'
+    /**
+     * Multiplies this matrix by the given matrix.
+     *
+     * @param other the matrix to multiply by
+     * @return a new matrix that is the result of multiplying this matrix by the other matrix
+     * @throws ArithmeticException if the matrices have incompatible sizes for multiplication
+     */
     public Matrix multiply(Matrix other) {
         if (this.m != other.n) {
             throw new ArithmeticException("Matrices dimensions mismatch");
@@ -153,27 +245,46 @@ class Matrix {
         return product;
     }
 
-    // Method to multiply all elements of the matrix with a constant value 'c'
-    public Matrix multiply(double c) {
+    /**
+     * Multiplies this matrix by the given scalar.
+     *
+     * @param scalar the scalar to multiply by
+     * @return a new matrix that is the result of multiplying this matrix by the scalar
+     */
+    public Matrix multiply(double scalar) {
         Matrix product = new Matrix(n, m);
         for (int i = 0; i < n; i++) {
             ArrayList<Double> row = a.get(i);
             ArrayList<Double> productRow = product.getRow(i);
             for (int j = 0; j < m; j++) {
-                productRow.set(j, row.get(j) * c); // Perform modulo arithmetic while multiplying with constant value
+                productRow.set(j, row.get(j) * scalar); // Perform modulo arithmetic while multiplying with constant value
             }
         }
         return product;
     }
 
-    static Matrix neutral; // A matrix representing the neutral element for matrix multiplication
+    /**
+     * A matrix representing the neutral element for matrix multiplication
+     */
+    static Matrix neutral;
 
+    /**
+     * Initializes the static neutral matrix to the identity matrix of the given size.
+     */
     static void neutralize() {
         for (int i = 0; i < neutral.n; i++) {
             neutral.getRow(i).set(i, 1.0); // Set diagonal elements of the neutral matrix to 1
         }
     }
 
+    /**
+     * Computes the power of the given matrix A to the given non-negative integer exponent p.
+     * Returns the resulting matrix.
+     *
+     * @param A the matrix to compute the power of
+     * @param p the non-negative integer exponent to raise the matrix to
+     * @return the resulting matrix
+     */
     static Matrix power(Matrix A, long p) {
         Matrix ans = neutral;
         while (p > 0) {
@@ -186,6 +297,14 @@ class Matrix {
         return ans;
     }
 
+    /**
+     * Computes the sum of the powers of the given matrix A up to the given non-negative integer exponent k.
+     * Returns the resulting matrix.
+     *
+     * @param A the matrix to compute the powers of
+     * @param k the non-negative integer exponent to sum the powers up to
+     * @return the resulting matrix
+     */
     static Matrix sumPow(Matrix A, long k) {
         if (k == 0) {
             return neutral; // If k is zero, return the neutral matrix
@@ -197,6 +316,11 @@ class Matrix {
         return neutral.add(A).multiply(sumPow(c, k / 2)); // Recursively calculate sumPow(c, k / 2) and multiply it with (neutral + A)
     }
 
+    /**
+     * Returns a string representation of the matrix.
+     *
+     * @return a string representation of the matrix
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -207,6 +331,13 @@ class Matrix {
         return sb.toString();
     }
 
+    /**
+     * Solves the system of linear equations represented by the matrix using <b>Gaussian elimination</b>.
+     * <p>
+     * Returns an ArrayList of solutions to the system of equations, or null if there is no unique solution.
+     *
+     * @return an ArrayList of solutions to the system of equations, or null if there is no unique solution
+     */
     public ArrayList<Double> solve() {
         int rowCount = n;
         int colCount = m;
@@ -257,6 +388,12 @@ class Matrix {
         return solution;
     }
 
+    /**
+     * Returns a <b>Vandermonde</b> matrix of the given x values.
+     *
+     * @param xp an ArrayList of x values
+     * @return the Vandermonde matrix of the given x values
+     */
     static Matrix getVandermonde(ArrayList<Double> xp) {
         ArrayList<ArrayList<Double>> a = new ArrayList<>();
         for (int i = 0; i < xp.size(); i++) {
@@ -270,10 +407,20 @@ class Matrix {
         return new Matrix(a);
     }
 
+    /**
+     * Returns the number of columns in the matrix.
+     *
+     * @return the number of columns in the matrix
+     */
     public int getColsNum() {
         return m;
     }
 
+    /**
+     * Sets the number of columns in the matrix to the given value.
+     *
+     * @param cols the new number of columns in the matrix
+     */
     public void setColsNum(int cols) {
         m = cols;
     }

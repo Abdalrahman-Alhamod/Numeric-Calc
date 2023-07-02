@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fixing toString method in Polynomial and printing in getLagrangeNoShorthand">
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Testing Interpolation methods with new printing">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Matrix.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,14 +35,15 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="interpolation" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Matrix.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -69,13 +71,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠١١" summary="Fixing accuracy issue in value in integral class">
-      <created>1688299275929</created>
-      <option name="number" value="٠٠٠١١" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠١١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688299275929</updated>
     </task>
     <task id="LOCAL؜-٠٠٠١٢" summary="Fixing indexOutOfBounds in Integral&#10;&amp; testing a new example">
       <created>1688300631574</created>
@@ -413,7 +408,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688340233749</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL؜-٠٠٠٦٠" summary="Testing Interpolation methods with new printing">
+      <created>1688340584562</created>
+      <option name="number" value="٠٠٠٦٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٦٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688340584562</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -434,7 +436,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix Matrix Constructor and add Exception" />
     <MESSAGE value="Fix add and multiply and assign in Matrix" />
     <MESSAGE value="Removing mod" />
     <MESSAGE value="Add solve method" />
@@ -459,6 +460,7 @@
     <MESSAGE value="Testing getLagrange" />
     <MESSAGE value="Create tag v1.0.3" />
     <MESSAGE value="Fixing toString method in Polynomial and printing in getLagrangeNoShorthand" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing toString method in Polynomial and printing in getLagrangeNoShorthand" />
+    <MESSAGE value="Testing Interpolation methods with new printing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing Interpolation methods with new printing" />
   </component>
 </project>
