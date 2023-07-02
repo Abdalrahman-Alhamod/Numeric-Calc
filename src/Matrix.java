@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 class Matrix {
     private ArrayList<ArrayList<Double>> a; // ArrayList of ArrayLists to represent the matrix
@@ -20,6 +21,10 @@ class Matrix {
             }
             a.add(row);
         }
+    }
+
+    public Matrix(ArrayList<ArrayList<Double>> a){
+        this.a = Objects.requireNonNull(a,"a cannot be null");
     }
 
     // Method to resize the matrix to X x Y and initialize with zeros
