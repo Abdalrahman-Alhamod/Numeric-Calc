@@ -262,6 +262,9 @@ public class Interpolation {
                 break;
             sb.append(temp);
             sb.append(" ");
+            sb.append('(');
+            sb.append(P);
+            sb.append(')');
             for (int j = 1; j < i; j++) {
                 sb.append('(');
                 Polynomial NGFPoly = P.add(-1 * j);
@@ -271,6 +274,7 @@ public class Interpolation {
         }
         return sb.toString();
     }
+
 
 
 }
