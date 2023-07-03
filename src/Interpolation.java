@@ -301,7 +301,7 @@ public class Interpolation {
             sb.append(getFormattedDouble(dfn.get(0))); // Adding fn
         }
         ArrayList<Double> Scoeffs = new ArrayList<>(); //Creating coefficients Arraylist for P polynomial
-        Scoeffs.add(-1 * xp.get(0)); // add -x0
+        Scoeffs.add(-1 * xp.get(xp.size()-1)); // add -xn
         Scoeffs.add(1.0);            // add x
         Polynomial S = new Polynomial(Scoeffs); // Creating S Polynomial
         S = S.multiply(1 / h);            // Dividing S on h
