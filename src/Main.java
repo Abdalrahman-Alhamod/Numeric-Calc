@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 import static java.lang.Double.parseDouble;
@@ -169,7 +170,7 @@ public class Main {
         System.out.println(Interpolation.getLagrangeNoShorthand(func));
         // 1 2 2 -1 4 3 */
 
-        //Testing getNewtonGregoryForwardTable and getNewtonGregoryBackwardTable
+        //Testing Newton Gregory methods
         Scanner in = new Scanner(System.in);
         double n, temp;
         ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
@@ -185,12 +186,28 @@ public class Main {
             yp.add(temp);
         }
         Function func = new Function(xp, yp);
-        //System.out.println(Interpolation.getNewtonGregoryForwardTable(func));
-        //System.out.println(Interpolation.getNewtonGregoryBackwardTable(func));
+        System.out.print("Enter Degree : ");
+        int degree = in.nextInt();
         System.out.println();
-        System.out.println(Interpolation.getNewtonGregoryForward(func, 3));
-        System.out.println(Interpolation.getNewtonGregoryBackward(func,3));
+        System.out.println("Upper diameter (▲Yn) Newton Gregory Forward : ");
+        System.out.println(Interpolation.getNewtonGregoryForwardTable(func));
+        System.out.println();
+        System.out.println("Lower diameter (▼Yn) Newton Gregory Backward : ");
+        System.out.println(Interpolation.getNewtonGregoryBackwardTable(func));
+        System.out.println();
+        System.out.println("Interpolated Function using Newton Gregory Forward : ");
+        System.out.println(Interpolation.getNewtonGregoryForward(func, degree));
+        System.out.println();
+        System.out.println("Interpolated Function using Newton Gregory Forward No Shorthand : ");
+        System.out.println(Interpolation.getNewtonGregoryForwardNoShorthand(func, degree));
+        System.out.println();
+        System.out.println("Interpolated Function using Newton Gregory Backward : ");
+        System.out.println(Interpolation.getNewtonGregoryBackward(func, degree));
+        System.out.println();
+        System.out.println("Interpolated Function using Newton Gregory Backward No Shorthand : ");
+        System.out.println(Interpolation.getNewtonGregoryBackwardNoShorthand(func, degree));
         //0 -6 1 2 2 -2 3 6
         // 0 0 0.2 0.203 0.4 0.423 0.6 0.684 0.8 1.030 1 1.557
     }
+
 }

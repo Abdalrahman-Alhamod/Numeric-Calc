@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Testing getNewtonGregoryBackward">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix floating-point precision errors in getFormattedDouble method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpolation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,76 +72,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٢٣" summary="Testing Polynomial methods">
-      <created>1688312890705</created>
-      <option name="number" value="٠٠٠٢٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٢٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688312890705</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٢٤" summary="Add getDerivative method to Polynomial with comments">
-      <created>1688316169446</created>
-      <option name="number" value="٠٠٠٢٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٢٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688316169446</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٢٥" summary="Add getIntegral method to Polynomial with comments">
-      <created>1688316252443</created>
-      <option name="number" value="٠٠٠٢٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٢٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688316252443</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٢٦" summary="Renaming evaluate to getValueAt">
-      <created>1688316297136</created>
-      <option name="number" value="٠٠٠٢٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٢٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688316297136</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٢٧" summary="Testing Polynomial methods getIntegral &amp; getDerivative">
-      <created>1688316524829</created>
-      <option name="number" value="٠٠٠٢٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٢٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688316524829</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٢٨" summary="Fixing toSting method in Polynomial">
-      <created>1688317470496</created>
-      <option name="number" value="٠٠٠٢٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٢٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688317470496</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٢٩" summary="Testing Polynomial methods">
-      <created>1688317920460</created>
-      <option name="number" value="٠٠٠٢٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٢٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688317920460</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٣٠" summary="Initializing Matrix class with its methods and with comments">
-      <created>1688319008265</created>
-      <option name="number" value="٠٠٠٣٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٣٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688319008265</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٣١" summary="Add toString method">
-      <created>1688319590072</created>
-      <option name="number" value="٠٠٠٣١" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٣١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688319590072</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٣٢" summary="Make Matrix inner implementation by Double">
-      <created>1688320023741</created>
-      <option name="number" value="٠٠٠٣٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٣٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688320023741</updated>
     </task>
     <task id="LOCAL؜-٠٠٠٣٣" summary="Add new constructor to Matrix">
       <created>1688322679584</created>
@@ -416,7 +346,77 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688399948294</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL؜-٠٠٠٧٢" summary="Fixing bug when Newton Gregory Table have zeros">
+      <created>1688400421885</created>
+      <option name="number" value="٠٠٠٧٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٧٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688400421885</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٧٣" summary="Add getNewtonGregoryForwardNoShorthand">
+      <created>1688402126180</created>
+      <option name="number" value="٠٠٠٧٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٧٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688402126180</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٧٤" summary="Add print P to getNewtonGregoryForwardNoShorthand">
+      <created>1688402472272</created>
+      <option name="number" value="٠٠٠٧٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٧٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688402472272</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٧٥" summary="Add getFormattedDouble">
+      <created>1688402494405</created>
+      <option name="number" value="٠٠٠٧٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٧٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688402494405</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٧٦" summary="Fix getNewtonGregoryForwardNoShorthand printing">
+      <created>1688402614246</created>
+      <option name="number" value="٠٠٠٧٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٧٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688402614246</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٧٧" summary="Add getNewtonGregoryBackwardNoShorthand">
+      <created>1688402771146</created>
+      <option name="number" value="٠٠٠٧٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٧٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688402771148</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٧٨" summary="Fix getFormattedCoefficient method in Polynomial">
+      <created>1688403781907</created>
+      <option name="number" value="٠٠٠٧٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٧٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688403781907</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٧٩" summary="Fix getFormattedDouble method in Polynomial&#10;Fix printing zeros in Newton Gregory NoShorthand method">
+      <created>1688403947241</created>
+      <option name="number" value="٠٠٠٧٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٧٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688403947241</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٨٠" summary="Fix floating-point precision errors in getFormattedCoefficient method">
+      <created>1688404091697</created>
+      <option name="number" value="٠٠٠٨٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٨٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688404091697</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٨١" summary="Fix floating-point precision errors in getFormattedDouble method">
+      <created>1688404104958</created>
+      <option name="number" value="٠٠٠٨١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٨١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688404104958</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -446,16 +446,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add getGeneralMethod to Interpolation class" />
-    <MESSAGE value="Testing Interpolation getGeneralMethod" />
-    <MESSAGE value="Create tag v1.0.2" />
-    <MESSAGE value="Add multiply method to Polynomial" />
-    <MESSAGE value="Testing multiply by Polynomial" />
-    <MESSAGE value="Add multiply by scalar in Polynomial" />
-    <MESSAGE value="Test multiply by scalar" />
-    <MESSAGE value="Add getLagrangeAt method in Interpolation" />
-    <MESSAGE value="Add add method two polynomial in Polynomial" />
-    <MESSAGE value="Add getLagrange to Interpolation" />
     <MESSAGE value="Testing getLagrange" />
     <MESSAGE value="Create tag v1.0.3" />
     <MESSAGE value="Fixing toString method in Polynomial and printing in getLagrangeNoShorthand" />
@@ -471,6 +461,16 @@
     <MESSAGE value="Testing getNewtonGregoryForward" />
     <MESSAGE value="Add getNewtonGregoryBackward&#10;Fix step h in getNewtonGregoryForward and getNewtonGregoryBackward" />
     <MESSAGE value="Testing getNewtonGregoryBackward" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing getNewtonGregoryBackward" />
+    <MESSAGE value="Fixing bug when Newton Gregory Table have zeros" />
+    <MESSAGE value="Add getNewtonGregoryForwardNoShorthand" />
+    <MESSAGE value="Add print P to getNewtonGregoryForwardNoShorthand" />
+    <MESSAGE value="Add getFormattedDouble" />
+    <MESSAGE value="Fix getNewtonGregoryForwardNoShorthand printing" />
+    <MESSAGE value="Add getNewtonGregoryBackwardNoShorthand" />
+    <MESSAGE value="Fix getFormattedCoefficient method in Polynomial" />
+    <MESSAGE value="Fix getFormattedDouble method in Polynomial&#10;Fix printing zeros in Newton Gregory NoShorthand method" />
+    <MESSAGE value="Fix floating-point precision errors in getFormattedCoefficient method" />
+    <MESSAGE value="Fix floating-point precision errors in getFormattedDouble method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix floating-point precision errors in getFormattedDouble method" />
   </component>
 </project>
