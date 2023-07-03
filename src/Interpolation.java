@@ -109,4 +109,30 @@ public class Interpolation {
         res.add(q.poll());
         return res;
     }
+
+    public static ArrayList<Double> getNewtonGregoryBackwardTable(Function func) {
+        ArrayList<Double> yp = func.getYp();
+        ArrayList<Double> res = new ArrayList<>();
+        res.add(yp.get(yp.size() - 1));
+        Queue<Double> q = new LinkedList<>(yp);
+        int n = yp.size(), i = 0;
+        double yi, yi1, temp;
+        while (q.size() > 1) {
+            yi = q.poll();
+            yi1 = q.element();
+            temp = yi - yi1;
+            q.add(temp);
+            if (i == n-2) {
+                res.add(temp);
+            }
+            i++;
+            if (i == n - 1) {
+                i = 0;
+                n--;
+                q.poll();
+            }
+        }
+        res.add(q.poll());
+        return res;
+    }
 }
