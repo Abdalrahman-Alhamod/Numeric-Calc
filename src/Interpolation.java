@@ -95,6 +95,7 @@ public class Interpolation {
             yi = q.poll();
             yi1 = q.element();
             temp = yi1 - yi;
+            temp = Math.round(temp * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
             q.add(temp);
             if (i == 0) {
                 res.add(temp);
@@ -106,7 +107,6 @@ public class Interpolation {
                 q.poll();
             }
         }
-        res.add(q.poll());
         return res;
     }
 
@@ -120,7 +120,8 @@ public class Interpolation {
         while (q.size() > 1) {
             yi = q.poll();
             yi1 = q.element();
-            temp = yi - yi1;
+            temp = yi1 - yi;
+            temp = Math.round(temp * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
             q.add(temp);
             if (i == n-2) {
                 res.add(temp);
@@ -132,7 +133,6 @@ public class Interpolation {
                 q.poll();
             }
         }
-        res.add(q.poll());
         return res;
     }
 }
