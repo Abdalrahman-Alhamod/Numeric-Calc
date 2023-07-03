@@ -98,6 +98,8 @@ public class Interpolation {
             temp = Math.round(temp * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
             q.add(temp);
             if (i == 0) {
+                if (temp == 0)
+                    break;
                 res.add(temp);
             }
             i++;
@@ -124,6 +126,8 @@ public class Interpolation {
             temp = Math.round(temp * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
             q.add(temp);
             if (i == n - 2) {
+                if (temp == 0)
+                    break;
                 res.add(temp);
             }
             i++;
@@ -167,7 +171,10 @@ public class Interpolation {
             for (int j = 1; j < i; j++) {
                 NGFPoly = NGFPoly.multiply(P.add(-1 * j)); // Multiply by (P-1)(P-2)..
             }
-            NGFPoly = NGFPoly.multiply(df0.get(i));// Multiply by df0
+            if (i < df0.size())
+                NGFPoly = NGFPoly.multiply(df0.get(i));// Multiply by df0
+            else
+                break;// Reaching zeros
             double factorial = 1;
             for (int j = 2; j <= i; j++) {
                 factorial *= j;
@@ -209,7 +216,10 @@ public class Interpolation {
             for (int j = 1; j < i; j++) {
                 NGFPoly = NGFPoly.multiply(S.add(j)); // Multiply by (S+1)(S+2)..
             }
-            NGFPoly = NGFPoly.multiply(dfn.get(i));// Multiply by dfn
+            if (i < dfn.size())
+                NGFPoly = NGFPoly.multiply(dfn.get(i));// Multiply by dfn
+            else
+                break; // Reaching zeros
             double factorial = 1;
             for (int j = 2; j <= i; j++) {
                 factorial *= j;
@@ -219,4 +229,6 @@ public class Interpolation {
         }
         return res;
     }
+
+
 }

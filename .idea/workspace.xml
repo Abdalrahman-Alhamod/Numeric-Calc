@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Testing getNewtonGregoryForward">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Testing getNewtonGregoryBackward">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpolation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,20 +72,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٢١" summary="Removing static">
-      <created>1688312631303</created>
-      <option name="number" value="٠٠٠٢١" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٢١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688312631303</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٢٢" summary="Fix evaluate method in Polynomial">
-      <created>1688312851093</created>
-      <option name="number" value="٠٠٠٢٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٢٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688312851093</updated>
     </task>
     <task id="LOCAL؜-٠٠٠٢٣" summary="Testing Polynomial methods">
       <created>1688312890705</created>
@@ -417,7 +402,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688398861328</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL؜-٠٠٠٧٠" summary="Add getNewtonGregoryBackward&#10;Fix step h in getNewtonGregoryForward and getNewtonGregoryBackward">
+      <created>1688399927406</created>
+      <option name="number" value="٠٠٠٧٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٧٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688399927406</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٧١" summary="Testing getNewtonGregoryBackward">
+      <created>1688399948294</created>
+      <option name="number" value="٠٠٠٧١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٧١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688399948294</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -447,8 +446,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Testing getVandermonde" />
-    <MESSAGE value="Add getColsNum and setColsNum" />
     <MESSAGE value="Add getGeneralMethod to Interpolation class" />
     <MESSAGE value="Testing Interpolation getGeneralMethod" />
     <MESSAGE value="Create tag v1.0.2" />
@@ -472,6 +469,8 @@
     <MESSAGE value="Fix Add method in Polynomial" />
     <MESSAGE value="Add and Fix getNewtonGregoryForward with exceptions" />
     <MESSAGE value="Testing getNewtonGregoryForward" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing getNewtonGregoryForward" />
+    <MESSAGE value="Add getNewtonGregoryBackward&#10;Fix step h in getNewtonGregoryForward and getNewtonGregoryBackward" />
+    <MESSAGE value="Testing getNewtonGregoryBackward" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing getNewtonGregoryBackward" />
   </component>
 </project>
