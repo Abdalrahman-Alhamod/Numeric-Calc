@@ -90,7 +90,7 @@ public class Polynomial {
      * @return the formatted coefficient as a string.
      */
     private String getFormattedCoefficient(double coeff) {
-        return (coeff == (int) coeff) ? String.valueOf((int) coeff) : String.format(Locale.ENGLISH, "%.1f", coeff);
+        return (coeff == (int) coeff) ? String.valueOf((int) coeff) : String.valueOf(coeff);
     }
 
     /**
