@@ -246,6 +246,7 @@ public class Interpolation {
         }
         StringBuilder sb = new StringBuilder();
         ArrayList<Double> df0 = getNewtonGregoryForwardTable(func);
+
         if (df0.get(0) != 0.0) {
             sb.append(getFormattedDouble(df0.get(0))); // Adding f0
         }
@@ -255,6 +256,8 @@ public class Interpolation {
         Polynomial P = new Polynomial(Pcoeffs); // Creating P Polynomial
         P = P.multiply(1 / h);            // Dividing P on h
         for (int i = 1; i <= degree; i++) {
+            if (i >= df0.size())
+                break;
             double factorial = 1;
             for (int j = 2; j <= i; j++) {
                 factorial *= j;
@@ -303,6 +306,8 @@ public class Interpolation {
         Polynomial S = new Polynomial(Scoeffs); // Creating S Polynomial
         S = S.multiply(1 / h);            // Dividing S on h
         for (int i = 1; i <= degree; i++) {
+            if (i >= dfn.size())
+                break;
             double factorial = 1;
             for (int j = 2; j <= i; j++) {
                 factorial *= j;
