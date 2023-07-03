@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Interpolation {
     public static Polynomial getGeneralMethod(Function func) {
@@ -80,5 +82,28 @@ public class Interpolation {
             }
         }
         return sb.toString();
+    }
+
+    private static ArrayList<Double> getNewtonGregoryForwardTable(Function func) {
+        ArrayList<Double> xp = func.getXp();
+        ArrayList<Double> yp = func.getYp();
+        ArrayList<Double> res = new ArrayList<>();
+        Queue<Double> q = new LinkedList<>(yp);
+        int n = yp.size(), i = 1;
+        while (!q.isEmpty()) {
+            double temp = yp.get(i + 1) - yp.get(i);
+            q.add(temp);
+            if (i == 1) {
+                res.add(q.peek());
+            }
+            q.poll();
+            i++;
+            if (i == n) {
+                i = 1;
+                n--;
+            }
+
+        }
+        return res;
     }
 }
