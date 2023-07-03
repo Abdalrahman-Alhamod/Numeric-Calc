@@ -246,7 +246,7 @@ public class Interpolation {
         }
         StringBuilder sb = new StringBuilder();
         ArrayList<Double> df0 = getNewtonGregoryForwardTable(func);
-        sb.append(df0.get(0)); // Adding f0
+        sb.append(getFormattedDouble(df0.get(0))); // Adding f0
         ArrayList<Double> Pcoeffs = new ArrayList<>(); //Creating coefficients Arraylist for P polynomial
         Pcoeffs.add(-1 * xp.get(0)); // add -x0
         Pcoeffs.add(1.0);            // add x
@@ -261,7 +261,7 @@ public class Interpolation {
             double temp = df0.get(i) * (1 / factorial);
             if (temp == 0)
                 break;
-            sb.append(temp);
+            sb.append(getFormattedDouble(temp));
             sb.append(" ");
             sb.append('(');
             sb.append(P);
@@ -285,7 +285,7 @@ public class Interpolation {
      * @param num the Double to format.
      * @return the formatted Double as a string.
      */
-    private String getFormattedDouble(double num) {
+    private static String getFormattedDouble(double num) {
         return (num == (int) num) ? String.valueOf((int) num) : String.format(Locale.ENGLISH, "%.1f", num);
     }
 
