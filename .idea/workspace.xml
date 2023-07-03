@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add add(const) method in Polynomial class">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Testing getNewtonGregoryForward">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpolation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Polynomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polynomial.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,27 +73,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠١٨" summary="Add evaluate method to Polynomial">
-      <created>1688311822994</created>
-      <option name="number" value="٠٠٠١٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠١٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688311822994</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠١٩" summary="Add comment to evaluate in Polynomial">
-      <created>1688312264093</created>
-      <option name="number" value="٠٠٠١٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠١٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688312264093</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٢٠" summary="Add override toString method to Polynomial with comments">
-      <created>1688312447825</created>
-      <option name="number" value="٠٠٠٢٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٢٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688312447825</updated>
     </task>
     <task id="LOCAL؜-٠٠٠٢١" summary="Removing static">
       <created>1688312631303</created>
@@ -418,7 +396,28 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688394591806</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL؜-٠٠٠٦٧" summary="Fix Add method in Polynomial">
+      <created>1688398831135</created>
+      <option name="number" value="٠٠٠٦٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٦٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688398831135</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٦٨" summary="Add and Fix getNewtonGregoryForward with exceptions">
+      <created>1688398849919</created>
+      <option name="number" value="٠٠٠٦٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٦٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688398849919</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٦٩" summary="Testing getNewtonGregoryForward">
+      <created>1688398861327</created>
+      <option name="number" value="٠٠٠٦٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٦٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688398861328</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -448,9 +447,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add getter for yp and xp in Function" />
-    <MESSAGE value="Add Exception in Function Constructor" />
-    <MESSAGE value="Add getVandermonde to Matrix &amp;&#10;Add setRow" />
     <MESSAGE value="Testing getVandermonde" />
     <MESSAGE value="Add getColsNum and setColsNum" />
     <MESSAGE value="Add getGeneralMethod to Interpolation class" />
@@ -473,6 +469,9 @@
     <MESSAGE value="Fix floating-point precision errors" />
     <MESSAGE value="Testing getNewtonGregoryBackwardTable" />
     <MESSAGE value="Add add(const) method in Polynomial class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add add(const) method in Polynomial class" />
+    <MESSAGE value="Fix Add method in Polynomial" />
+    <MESSAGE value="Add and Fix getNewtonGregoryForward with exceptions" />
+    <MESSAGE value="Testing getNewtonGregoryForward" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing getNewtonGregoryForward" />
   </component>
 </project>
