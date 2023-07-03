@@ -211,23 +211,65 @@ public class Interpolation {
         for (int i = 1; i <= degree; i++) {
             coeffs = new ArrayList<>(); // //Creating coefficients Arraylist for Temp  polynomial
             coeffs.add(1.0); //Initializing coefficients for Temp poly multiplication
-            Polynomial NGFPoly = new Polynomial(coeffs); //Create Temp poly
-            NGFPoly = NGFPoly.multiply(S); //Multiply by S
+            Polynomial NGBPoly = new Polynomial(coeffs); //Create Temp poly
+            NGBPoly = NGBPoly.multiply(S); //Multiply by S
             for (int j = 1; j < i; j++) {
-                NGFPoly = NGFPoly.multiply(S.add(j)); // Multiply by (S+1)(S+2)..
+                NGBPoly = NGBPoly.multiply(S.add(j)); // Multiply by (S+1)(S+2)..
             }
             if (i < dfn.size())
-                NGFPoly = NGFPoly.multiply(dfn.get(i));// Multiply by dfn
+                NGBPoly = NGBPoly.multiply(dfn.get(i));// Multiply by dfn
             else
                 break; // Reaching zeros
             double factorial = 1;
             for (int j = 2; j <= i; j++) {
                 factorial *= j;
             }
-            NGFPoly = NGFPoly.multiply(1 / factorial); // Dividing by n!
-            res = res.add(NGFPoly);
+            NGBPoly = NGBPoly.multiply(1 / factorial); // Dividing by n!
+            res = res.add(NGBPoly);
         }
         return res;
+    }
+
+    public static String getNewtonGregoryForwardNoShorthand(Function func, int degree) {
+        if (func == null || degree < 0)
+            throw new ArithmeticException("invalid inputs");
+        ArrayList<Double> xp = func.getXp();
+        double h = xp.get(1) - xp.get(0);
+        h = Math.round(h * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
+        for (int i = 1; i < xp.size() - 1; i++) {
+            double temp = (xp.get(i + 1) - xp.get(i));
+            temp = Math.round(temp * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
+            if (temp != h) {
+                throw new ArithmeticException("step h is not static");
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        ArrayList<Double> df0 = getNewtonGregoryForwardTable(func);
+        sb.append(df0.get(0)); // Adding f0
+        ArrayList<Double> Pcoeffs = new ArrayList<>(); //Creating coefficients Arraylist for P polynomial
+        Pcoeffs.add(-1 * xp.get(0)); // add -x0
+        Pcoeffs.add(1.0);            // add x
+        Polynomial P = new Polynomial(Pcoeffs); // Creating P Polynomial
+        P = P.multiply(1 / h);            // Dividing P on h
+        for (int i = 1; i <= degree; i++) {
+            sb.append(" + ");
+            double factorial = 1;
+            for (int j = 2; j <= i; j++) {
+                factorial *= j;
+            }
+            double temp = df0.get(i) * (1 / factorial);
+            if (temp == 0)
+                break;
+            sb.append(temp);
+            sb.append(" ");
+            for (int j = 1; j < i; j++) {
+                sb.append('(');
+                Polynomial NGFPoly = P.add(-1 * j);
+                sb.append(NGFPoly);
+                sb.append(')');
+            }
+        }
+        return sb.toString();
     }
 
 
