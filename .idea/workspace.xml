@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix floating-point precision errors in getFormattedDouble method">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix getNewtonGregoryBackwardNoShorthand add -xn">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -35,7 +35,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="interpolation" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -54,16 +54,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -72,27 +72,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٣٣" summary="Add new constructor to Matrix">
-      <created>1688322679584</created>
-      <option name="number" value="٠٠٠٣٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٣٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688322679584</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٣٤" summary="Fix toString in Matrix">
-      <created>1688322941153</created>
-      <option name="number" value="٠٠٠٣٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٣٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688322941153</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٣٥" summary="Fix Matrix Constructor and add Exception">
-      <created>1688323386528</created>
-      <option name="number" value="٠٠٠٣٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٣٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688323386528</updated>
     </task>
     <task id="LOCAL؜-٠٠٠٣٦" summary="Fix add and multiply and assign in Matrix">
       <created>1688323923216</created>
@@ -416,7 +395,28 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688404104958</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL؜-٠٠٠٨٢" summary="Create tag v1.0.4">
+      <created>1688405082674</created>
+      <option name="number" value="٠٠٠٨٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٨٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688405082674</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٨٣" summary="Fix degree bug (if degree &gt;= df0||dfn)">
+      <created>1688405574599</created>
+      <option name="number" value="٠٠٠٨٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٨٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688405574599</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٨٤" summary="Fix getNewtonGregoryBackwardNoShorthand add -xn">
+      <created>1688405771345</created>
+      <option name="number" value="٠٠٠٨٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٨٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688405771345</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -446,9 +446,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Testing getLagrange" />
-    <MESSAGE value="Create tag v1.0.3" />
-    <MESSAGE value="Fixing toString method in Polynomial and printing in getLagrangeNoShorthand" />
     <MESSAGE value="Testing Interpolation methods with new printing" />
     <MESSAGE value="Add getNewtonGregoryForwardTable method" />
     <MESSAGE value="Testing getNewtonGregoryForwardTable method" />
@@ -471,6 +468,9 @@
     <MESSAGE value="Fix getFormattedDouble method in Polynomial&#10;Fix printing zeros in Newton Gregory NoShorthand method" />
     <MESSAGE value="Fix floating-point precision errors in getFormattedCoefficient method" />
     <MESSAGE value="Fix floating-point precision errors in getFormattedDouble method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix floating-point precision errors in getFormattedDouble method" />
+    <MESSAGE value="Create tag v1.0.4" />
+    <MESSAGE value="Fix degree bug (if degree &gt;= df0||dfn)" />
+    <MESSAGE value="Fix getNewtonGregoryBackwardNoShorthand add -xn" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix getNewtonGregoryBackwardNoShorthand add -xn" />
   </component>
 </project>
