@@ -84,26 +84,29 @@ public class Interpolation {
         return sb.toString();
     }
 
-    private static ArrayList<Double> getNewtonGregoryForwardTable(Function func) {
-        ArrayList<Double> xp = func.getXp();
+    public static ArrayList<Double> getNewtonGregoryForwardTable(Function func) {
         ArrayList<Double> yp = func.getYp();
         ArrayList<Double> res = new ArrayList<>();
+        res.add(yp.get(0));
         Queue<Double> q = new LinkedList<>(yp);
-        int n = yp.size(), i = 1;
-        while (!q.isEmpty()) {
-            double temp = yp.get(i + 1) - yp.get(i);
+        int n = yp.size(), i = 0;
+        double yi, yi1, temp;
+        while (q.size() > 1) {
+            yi = q.poll();
+            yi1 = q.element();
+            temp = yi1 - yi;
             q.add(temp);
-            if (i == 1) {
-                res.add(q.peek());
+            if (i == 0) {
+                res.add(temp);
             }
-            q.poll();
             i++;
-            if (i == n) {
-                i = 1;
+            if (i == n - 1) {
+                i = 0;
                 n--;
+                q.poll();
             }
-
         }
+        res.add(q.poll());
         return res;
     }
 }

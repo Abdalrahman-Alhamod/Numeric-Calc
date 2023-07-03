@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add java Doc to Matrix">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add getNewtonGregoryForwardTable method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpolation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,13 +73,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠١٢" summary="Fixing indexOutOfBounds in Integral&#10;&amp; testing a new example">
-      <created>1688300631574</created>
-      <option name="number" value="٠٠٠١٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠١٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688300631574</updated>
     </task>
     <task id="LOCAL؜-٠٠٠١٣" summary="Add requireNonNull xp&amp;yp to Function Constructor">
       <created>1688300969493</created>
@@ -416,7 +410,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688340584562</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL؜-٠٠٠٦١" summary="Add getNewtonGregoryForwardTable method">
+      <created>1688391087745</created>
+      <option name="number" value="٠٠٠٦١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٦١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688391087745</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -435,9 +436,17 @@
         </entry>
       </map>
     </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix add and multiply and assign in Matrix" />
     <MESSAGE value="Removing mod" />
     <MESSAGE value="Add solve method" />
     <MESSAGE value="Fix solve method in Matrix" />
@@ -462,6 +471,7 @@
     <MESSAGE value="Create tag v1.0.3" />
     <MESSAGE value="Fixing toString method in Polynomial and printing in getLagrangeNoShorthand" />
     <MESSAGE value="Testing Interpolation methods with new printing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing Interpolation methods with new printing" />
+    <MESSAGE value="Add getNewtonGregoryForwardTable method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add getNewtonGregoryForwardTable method" />
   </component>
 </project>

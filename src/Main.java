@@ -169,6 +169,23 @@ public class Main {
         System.out.println(Interpolation.getLagrangeNoShorthand(func));
         // 1 2 2 -1 4 3 */
 
+        //Testing getNewtonGregoryForwardTable
+        Scanner in = new Scanner(System.in);
+        double n, temp;
+        ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
+        System.out.print("Enter number of points : ");
+        n = in.nextDouble();
+        n--; //Because n is the number of domains ; number of domains = number of points -1
+        for (int i = 0; i <= n; i++) {
+            System.out.print("Enter x" + i + " : ");
+            temp = parseDouble(in.next());
+            xp.add(temp);
+            System.out.print("Enter y" + i + " : ");
+            temp = parseDouble(in.next());
+            yp.add(temp);
+        }
+        Function func = new Function(xp, yp);
+        System.out.println(Interpolation.getNewtonGregoryForwardTable(func));
 
     }
 }
