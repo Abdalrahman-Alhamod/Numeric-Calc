@@ -186,6 +186,7 @@ public class Main {
         }
         Function func = new Function(xp, yp);
         System.out.println(Interpolation.getNewtonGregoryForwardTable(func));
+        System.out.println(Interpolation.getNewtonGregoryBackwardTable(func));
 
     }
 }
