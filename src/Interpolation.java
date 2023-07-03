@@ -141,8 +141,11 @@ public class Interpolation {
             throw new ArithmeticException("invalid inputs");
         ArrayList<Double> xp = func.getXp();
         double h = xp.get(1) - xp.get(0);
+        h = Math.round(h * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
         for (int i = 1; i < xp.size() - 1; i++) {
-            if ((xp.get(i + 1) - xp.get(i)) != h) {
+            double temp = (xp.get(i + 1) - xp.get(i));
+            temp = Math.round(temp * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
+            if (temp != h) {
                 throw new ArithmeticException("step h is not static");
             }
         }
@@ -165,6 +168,48 @@ public class Interpolation {
                 NGFPoly = NGFPoly.multiply(P.add(-1 * j)); // Multiply by (P-1)(P-2)..
             }
             NGFPoly = NGFPoly.multiply(df0.get(i));// Multiply by df0
+            double factorial = 1;
+            for (int j = 2; j <= i; j++) {
+                factorial *= j;
+            }
+            NGFPoly = NGFPoly.multiply(1 / factorial); // Dividing by n!
+            res = res.add(NGFPoly);
+        }
+        return res;
+    }
+
+    public static Polynomial getNewtonGregoryBackward(Function func, int degree) {
+        if (func == null || degree < 0)
+            throw new ArithmeticException("invalid inputs");
+        ArrayList<Double> xp = func.getXp();
+        double h = xp.get(1) - xp.get(0);
+        h = Math.round(h * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
+        for (int i = 1; i < xp.size() - 1; i++) {
+            double temp = (xp.get(i + 1) - xp.get(i));
+            temp = Math.round(temp * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
+            if (temp != h) {
+                throw new ArithmeticException("step h is not static");
+            }
+        }
+        ArrayList<Double> Scoeffs = new ArrayList<>(); //Creating coefficients Arraylist for S polynomial
+        Scoeffs.add(-1 * xp.get(xp.size() - 1)); // add -xn
+        Scoeffs.add(1.0);            // add x
+        Polynomial S = new Polynomial(Scoeffs); // Creating S Polynomial
+        S = S.multiply(1 / h);            // Dividing S on h
+        ArrayList<Double> coeffs = new ArrayList<>();
+        coeffs.add(0.0);
+        Polynomial res = new Polynomial(coeffs); //Creating coefficients Arraylist for res polynomial
+        ArrayList<Double> dfn = getNewtonGregoryBackwardTable(func); //Getting Newton Gregory Back Table values
+        res = res.add(dfn.get(0)); // Adding yn
+        for (int i = 1; i <= degree; i++) {
+            coeffs = new ArrayList<>(); // //Creating coefficients Arraylist for Temp  polynomial
+            coeffs.add(1.0); //Initializing coefficients for Temp poly multiplication
+            Polynomial NGFPoly = new Polynomial(coeffs); //Create Temp poly
+            NGFPoly = NGFPoly.multiply(S); //Multiply by S
+            for (int j = 1; j < i; j++) {
+                NGFPoly = NGFPoly.multiply(S.add(j)); // Multiply by (S+1)(S+2)..
+            }
+            NGFPoly = NGFPoly.multiply(dfn.get(i));// Multiply by dfn
             double factorial = 1;
             for (int j = 2; j <= i; j++) {
                 factorial *= j;
