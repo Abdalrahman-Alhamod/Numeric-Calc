@@ -6,6 +6,7 @@ import static java.lang.Double.parseDouble;
 
 public class Main {
     public static void main(String[] args) {
+
         //Testing Integral
         /*Scanner in = new Scanner(System.in);
         double a, b, n, temp;
@@ -34,6 +35,7 @@ public class Main {
         System.out.println("Simpson 3/8 : " + Integral.getSimpson8(func, a, b, n));
         System.out.println("Paul : " + Integral.getPaul(func, a, b, n));
         // 0 0 0.1 0.0001 0.2 0.0016 0.3 0.0081 0.4 0.0256 0.5 0.0625 0.6 0.1296*/
+
         //Testing Polynomial
         /*ArrayList<Double> coeffs = new ArrayList<>();
         coeffs.add(-4.0);
@@ -45,6 +47,7 @@ public class Main {
         System.out.println(p);
         System.out.println(p.getDerivative());
         System.out.println(p.getIntegral());*/
+
         //Testing Matrix
         /*ArrayList<Double> r1 = new ArrayList<>();
         r1.add(1.2);
@@ -83,6 +86,7 @@ public class Main {
         System.out.println(m.multiply(m));
         System.out.println(m.add(m));
         System.out.println(m.subtract(m));*/
+
         //Testing Matrix Solve
         /*ArrayList<Double> r1 = new ArrayList<>();
         r1.add(1.0);
@@ -106,6 +110,7 @@ public class Main {
         Matrix m = new Matrix(a);
         System.out.println(m);
         System.out.println(m.solve());*/
+
         //Testing Vandermonde
         /*ArrayList<Double> r1 = new ArrayList<>();
         r1.add(1.0);
@@ -113,6 +118,7 @@ public class Main {
         r1.add(3.0);
         r1.add(4.0);
         System.out.println(Matrix.getVandermonde(r1));*/
+
         //Testing General Method
         /*Scanner in = new Scanner(System.in);
         double n, temp;
@@ -132,6 +138,7 @@ public class Main {
         System.out.println(Interpolation.getGeneralMethod(func));
         // 1 3 2 1 3 5
         // 11.0 + -11.0x + 3.0x^2*/
+
         //Testing Polynomial Multiplying
         /*ArrayList<Double> a1 = new ArrayList<>();
         a1.add(1.0);
@@ -148,6 +155,7 @@ public class Main {
         p1 = p1.multiply(p3);
         System.out.println(p1);
         System.out.println(p1.multiply(3));*/
+
         //Testing Lagrange Method
         /*Scanner in = new Scanner(System.in);
         double n, temp;
@@ -171,7 +179,7 @@ public class Main {
         // 1 2 2 -1 4 3 */
 
         //Testing Newton Gregory methods
-        Scanner in = new Scanner(System.in);
+        /*Scanner in = new Scanner(System.in);
         double n, temp;
         ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
         System.out.print("Enter number of points : ");
@@ -207,7 +215,9 @@ public class Main {
         System.out.println("Interpolated Function using Newton Gregory Backward No Shorthand : ");
         System.out.println(Interpolation.getNewtonGregoryBackwardNoShorthand(func, degree));
         //0 -6 1 2 2 -2 3 6
-        // 0 0 0.2 0.203 0.4 0.423 0.6 0.684 0.8 1.030 1 1.557
+        // 0 0 0.2 0.203 0.4 0.423 0.6 0.684 0.8 1.030 1 1.557*/
+
+
     }
 
 }
