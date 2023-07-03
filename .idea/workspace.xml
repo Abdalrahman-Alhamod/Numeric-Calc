@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add getNewtonGregoryForwardTable method">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add add(const) method in Polynomial class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpolation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polynomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polynomial.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +45,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Matrix.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -73,41 +74,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠١٣" summary="Add requireNonNull xp&amp;yp to Function Constructor">
-      <created>1688300969493</created>
-      <option name="number" value="٠٠٠١٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠١٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688300969493</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠١٤" summary="Add exceptions to Integral class">
-      <created>1688301286131</created>
-      <option name="number" value="٠٠٠١٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠١٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688301286131</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠١٥" summary="Add comments">
-      <created>1688303493641</created>
-      <option name="number" value="٠٠٠١٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠١٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688303493641</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠١٦" summary="Add Java DOC for Integral Class">
-      <created>1688303840193</created>
-      <option name="number" value="٠٠٠١٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠١٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688303840193</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠١٧" summary="Initializing Polynomial class">
-      <created>1688311796660</created>
-      <option name="number" value="٠٠٠١٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠١٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688311796660</updated>
     </task>
     <task id="LOCAL؜-٠٠٠١٨" summary="Add evaluate method to Polynomial">
       <created>1688311822994</created>
@@ -417,7 +383,42 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688391087745</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL؜-٠٠٠٦٢" summary="Testing getNewtonGregoryForwardTable method">
+      <created>1688391977827</created>
+      <option name="number" value="٠٠٠٦٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٦٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688391977827</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٦٣" summary="Add getNewtonGregoryBackwardTable">
+      <created>1688392321598</created>
+      <option name="number" value="٠٠٠٦٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٦٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688392321598</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٦٤" summary="Fix floating-point precision errors">
+      <created>1688393102645</created>
+      <option name="number" value="٠٠٠٦٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٦٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688393102645</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٦٥" summary="Testing getNewtonGregoryBackwardTable">
+      <created>1688393126208</created>
+      <option name="number" value="٠٠٠٦٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٦٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688393126208</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٦٦" summary="Add add(const) method in Polynomial class">
+      <created>1688394591805</created>
+      <option name="number" value="٠٠٠٦٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٦٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688394591806</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -447,11 +448,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Removing mod" />
-    <MESSAGE value="Add solve method" />
-    <MESSAGE value="Fix solve method in Matrix" />
-    <MESSAGE value="Testing solve method in Matrix" />
-    <MESSAGE value="Initializing Interpolation class" />
     <MESSAGE value="Add getter for yp and xp in Function" />
     <MESSAGE value="Add Exception in Function Constructor" />
     <MESSAGE value="Add getVandermonde to Matrix &amp;&#10;Add setRow" />
@@ -472,6 +468,11 @@
     <MESSAGE value="Fixing toString method in Polynomial and printing in getLagrangeNoShorthand" />
     <MESSAGE value="Testing Interpolation methods with new printing" />
     <MESSAGE value="Add getNewtonGregoryForwardTable method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add getNewtonGregoryForwardTable method" />
+    <MESSAGE value="Testing getNewtonGregoryForwardTable method" />
+    <MESSAGE value="Add getNewtonGregoryBackwardTable" />
+    <MESSAGE value="Fix floating-point precision errors" />
+    <MESSAGE value="Testing getNewtonGregoryBackwardTable" />
+    <MESSAGE value="Add add(const) method in Polynomial class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add add(const) method in Polynomial class" />
   </component>
 </project>

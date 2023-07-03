@@ -169,7 +169,7 @@ public class Main {
         System.out.println(Interpolation.getLagrangeNoShorthand(func));
         // 1 2 2 -1 4 3 */
 
-        //Testing getNewtonGregoryForwardTable
+        //Testing getNewtonGregoryForwardTable and getNewtonGregoryBackwardTable
         Scanner in = new Scanner(System.in);
         double n, temp;
         ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
@@ -185,8 +185,9 @@ public class Main {
             yp.add(temp);
         }
         Function func = new Function(xp, yp);
-        System.out.println(Interpolation.getNewtonGregoryForwardTable(func));
-        System.out.println(Interpolation.getNewtonGregoryBackwardTable(func));
-
+        //System.out.println(Interpolation.getNewtonGregoryForwardTable(func));
+        //System.out.println(Interpolation.getNewtonGregoryBackwardTable(func));
+        System.out.println(Interpolation.getNewtonGregoryForward(func, 3));
+        //0 -6 1 2 2 -2 3 6
     }
 }
