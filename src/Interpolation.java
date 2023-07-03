@@ -246,14 +246,15 @@ public class Interpolation {
         }
         StringBuilder sb = new StringBuilder();
         ArrayList<Double> df0 = getNewtonGregoryForwardTable(func);
-        sb.append(getFormattedDouble(df0.get(0))); // Adding f0
+        if (df0.get(0) != 0.0) {
+            sb.append(getFormattedDouble(df0.get(0))); // Adding f0
+        }
         ArrayList<Double> Pcoeffs = new ArrayList<>(); //Creating coefficients Arraylist for P polynomial
         Pcoeffs.add(-1 * xp.get(0)); // add -x0
         Pcoeffs.add(1.0);            // add x
         Polynomial P = new Polynomial(Pcoeffs); // Creating P Polynomial
         P = P.multiply(1 / h);            // Dividing P on h
         for (int i = 1; i <= degree; i++) {
-            sb.append(" + ");
             double factorial = 1;
             for (int j = 2; j <= i; j++) {
                 factorial *= j;
@@ -261,6 +262,8 @@ public class Interpolation {
             double temp = df0.get(i) * (1 / factorial);
             if (temp == 0)
                 break;
+            else if (!sb.isEmpty())
+                sb.append(" + ");
             sb.append(getFormattedDouble(temp));
             sb.append(" ");
             sb.append('(');
@@ -275,6 +278,7 @@ public class Interpolation {
         }
         return sb.toString();
     }
+
     public static String getNewtonGregoryBackwardNoShorthand(Function func, int degree) {
         if (func == null || degree < 0)
             throw new ArithmeticException("invalid inputs");
@@ -290,14 +294,15 @@ public class Interpolation {
         }
         StringBuilder sb = new StringBuilder();
         ArrayList<Double> dfn = getNewtonGregoryBackwardTable(func);
-        sb.append(getFormattedDouble(dfn.get(0))); // Adding fn
+        if (dfn.get(0) != 0.0) {
+            sb.append(getFormattedDouble(dfn.get(0))); // Adding fn
+        }
         ArrayList<Double> Scoeffs = new ArrayList<>(); //Creating coefficients Arraylist for P polynomial
         Scoeffs.add(-1 * xp.get(0)); // add -x0
         Scoeffs.add(1.0);            // add x
         Polynomial S = new Polynomial(Scoeffs); // Creating S Polynomial
         S = S.multiply(1 / h);            // Dividing S on h
         for (int i = 1; i <= degree; i++) {
-            sb.append(" + ");
             double factorial = 1;
             for (int j = 2; j <= i; j++) {
                 factorial *= j;
@@ -305,6 +310,8 @@ public class Interpolation {
             double temp = dfn.get(i) * (1 / factorial);
             if (temp == 0)
                 break;
+            else if (!sb.isEmpty())
+                sb.append(" + ");
             sb.append(getFormattedDouble(temp));
             sb.append(" ");
             sb.append('(');
@@ -312,8 +319,8 @@ public class Interpolation {
             sb.append(')');
             for (int j = 1; j < i; j++) {
                 sb.append('(');
-                Polynomial NGFPoly = S.add( j);
-                sb.append(NGFPoly);
+                Polynomial NGBPoly = S.add(j);
+                sb.append(NGBPoly);
                 sb.append(')');
             }
         }
@@ -330,9 +337,8 @@ public class Interpolation {
      * @return the formatted Double as a string.
      */
     private static String getFormattedDouble(double num) {
-        return (num == (int) num) ? String.valueOf((int) num) : String.format(Locale.ENGLISH, "%.1f", num);
+        return (num == (int) num) ? String.valueOf((int) num) : String.valueOf(num);
     }
-
 
 
 }
