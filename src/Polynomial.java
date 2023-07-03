@@ -234,7 +234,7 @@ public class Polynomial {
      * @return a new Polynomial object representing the sum of this polynomial with c value.
      */
     public Polynomial add(double c) {
-        ArrayList<Double> coeffs = this.getCoeffs();
+        ArrayList<Double> coeffs = new ArrayList<>(this.getCoeffs());
         coeffs.set(0, this.getCoeffs().get(0) + c);
         return new Polynomial(coeffs);
     }
