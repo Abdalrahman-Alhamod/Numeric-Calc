@@ -337,7 +337,7 @@ public class Interpolation {
      * @return the formatted Double as a string.
      */
     private static String getFormattedDouble(double num) {
-        return (num == (int) num) ? String.valueOf((int) num) : String.valueOf(num);
+        return (num == (int) num) ? String.valueOf((int) num) : String.valueOf(Math.round(num * 1e10) / 1e10);
     }
 
 
