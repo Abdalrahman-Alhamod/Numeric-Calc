@@ -227,4 +227,16 @@ public class Polynomial {
         return new Polynomial(newCoeffs);
     }
 
+    /**
+     * Adds to this polynomial the constant c.
+     *
+     * @param c the constant to add to this polynomial.
+     * @return a new Polynomial object representing the sum of this polynomial with c value.
+     */
+    public Polynomial add(double c) {
+        ArrayList<Double> coeffs = this.getCoeffs();
+        coeffs.set(0, this.getCoeffs().get(0) + c);
+        return new Polynomial(coeffs);
+    }
+
 }
