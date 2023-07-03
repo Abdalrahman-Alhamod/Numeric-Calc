@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Locale;
 import java.util.Queue;
 
 public class Interpolation {
@@ -273,6 +274,19 @@ public class Interpolation {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * Formats the given Double as a string.
+     *
+     * <p>If the Double is an integer, it is formatted as an integer with no decimal places. Otherwise, it is
+     * formatted as a decimal with one decimal place, using Western numerals and a period as the decimal separator.</p>
+     *
+     * @param num the Double to format.
+     * @return the formatted Double as a string.
+     */
+    private String getFormattedDouble(double num) {
+        return (num == (int) num) ? String.valueOf((int) num) : String.format(Locale.ENGLISH, "%.1f", num);
     }
 
 
