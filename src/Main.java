@@ -219,7 +219,7 @@ public class Main {
         System.out.println("Interpolated Function using Newton Gregory Backward No Shorthand : ");
         System.out.println(Interpolation.getNewtonGregoryBackwardNoShorthand(func, degree));
         //0 -6 1 2 2 -2 3 6
-        // 0 0 0.2 0.203 0.4 0.423 0.6 0.684 0.8 1.030 1 1.557*/
+        // 0 0 0.2 0.203 0.4 0.423 0.6 0.684 0.8 1.030 1 1.557 */
 
         //Testing Newton Divides
         Scanner in = new Scanner(System.in);
@@ -240,10 +240,24 @@ public class Main {
         System.out.print("Enter Degree : ");
         int degree = in.nextInt();
         System.out.println();
+        System.out.println("Upper diameter (▲Yn) Newton Divides Forward : ");
         System.out.println(Interpolation.getNewtonDividesForwardTable(func));
+        System.out.println();
+        System.out.println("Lower diameter (▼Yn) Newton Divides Backward : ");
         System.out.println(Interpolation.getNewtonDividesBackwardTable(func));
-
-        // n=4 5 53 3 19 4 30 1 9Te
+        System.out.println();
+        System.out.println("Interpolated Function using Newton Divides Forward : ");
+        System.out.println(Interpolation.getNewtonDividesForward(func, degree));
+        System.out.println();
+        System.out.println("Interpolated Function using Newton Divides Forward No Shorthand : ");
+        System.out.println(Interpolation.getNewtonDividesForwardNoShorthand(func, degree));
+        System.out.println();
+        System.out.println("Interpolated Function using Newton Divides Backward : ");
+        System.out.println(Interpolation.getNewtonDividesBackward(func, degree));
+        System.out.println();
+        System.out.println("Interpolated Function using Newton Divides Backward No Shorthand : ");
+        System.out.println(Interpolation.getNewtonDividesBackwardNoShorthand(func, degree));
+        // n=4 5 53 3 19 4 30 1 9
         // n=6 0 132.651 0.2 140.877 0.3 157.464 0.4 166.375 0.7 195.112 0.9 216
 
 
