@@ -256,7 +256,7 @@ public class Main {
         // n=6 0 132.651 0.2 140.877 0.3 157.464 0.4 166.375 0.7 195.112 0.9 216 */
 
         //Testing Least Squares
-        Scanner in = new Scanner(System.in);
+        /*Scanner in = new Scanner(System.in);
         double n, temp;
         ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
         System.out.print("Enter number of points : ");
@@ -276,7 +276,7 @@ public class Main {
         System.out.println();
         System.out.println("Interpolated Function using Least-Squares : ");
         System.out.println(Interpolation.getLeastSquares(func, degree));
-        // n=6 0 1 2 5.1 4 9 6 13 8 17 10 21
+        // n=6 0 1 2 5.1 4 9 6 13 8 17 10 21 */
     }
 
 }
