@@ -5,79 +5,105 @@ import java.util.Queue;
 
 public class Interpolation {
     public static Polynomial getGeneralMethod(Function func) {
+        // Get x point
         ArrayList<Double> xp = func.getXp();
+        // Get y points
         ArrayList<Double> yp = func.getYp();
+        //Get vandermonde Matrix
+        // where vandermonde Matrix is :
+        // | a0^0 a0^1 a0^2 ... a0^n |
+        // | a1^0 a1^1 a1^2 ... a1^n |
+        // | ...  .... .... ... .... |
+        // | am^0 am^1 am^2 ... am^n |
         Matrix SE = new Matrix(Matrix.getVandermonde(xp).getData());
         for (int i = 0; i < yp.size(); i++) {
+            //Add the y points to vandermonde Matrix to solve the system of equations
             SE.getRow(i).add(yp.get(i));
         }
-        SE.setColsNum(SE.getColsNum() + 1);
-        ArrayList<Double> coeffs = SE.solve();
-        System.out.println("Interpolated Function using the general method : ");
+        SE.setColsNum(SE.getColsNum() + 1); // increase the number of columns in vandermonde Matrix ; because of adding y points
+        ArrayList<Double> coeffs = SE.solve(); // solve the system of equations
         return new Polynomial(coeffs);
     }
 
     private static Polynomial getLagrangePolyAt(int index, ArrayList<Double> xp) {
-        double scalar = 1.0;
-        ArrayList<Double> coeffs = new ArrayList<>();
-        coeffs.add(1.0);
-        Polynomial lag = new Polynomial(coeffs);
+        // initialize scalar to 1 to be multiplied with a number
+        double scalar = 1;
+        // initialize a Polynomial with the value a0 = 1 to be multiplied with other polynomials ; the Lagrange Polynomial
+        Polynomial lag = new Polynomial(1);
         for (int i = 0; i < xp.size(); i++) {
+            // xi != xj ; where j is Lagrange Polynomial is created for (Lj) ; other words j = index
             if (i != index) {
+                // make scalar = (xj - xj) => (xj - x0 ) * (xj - x1 ) ... (xj - xj-1) * (xj - xj+1)
                 scalar *= (xp.get(index) - xp.get(i));
-                coeffs = new ArrayList<>();
-                coeffs.add(-1 * xp.get(i));
-                coeffs.add(1.0);
-                Polynomial poly = new Polynomial(coeffs);
+                // create a Polynomial with a0 = -xi and a1 = 1 (a1*x + a0) ; (x - xi ) => (x - x0 ) * (x - x1)
+                Polynomial poly = new Polynomial(-1 * xp.get(i), 1);
+                // create Lagrange Polynomial by : (x - x0 ) * (x - x1) .. (x - xj) * (x - xj+1) ..
                 lag = lag.multiply(poly);
             }
         }
+        // Divide the multiplied polynomials ( (x - x0 ) * (x - x1) .. (x - xj) * (x - xj+1) ..)
+        // on scalar ( (xj - x0 ) * (xj - x1 ) ... (xj - xj-1) * (xj - xj+1)..)
+        // which is Lagrange Polynomial
         lag = lag.multiply(1 / scalar);
         return lag;
     }
 
     public static Polynomial getLagrange(Function func) {
+        // get x points
         ArrayList<Double> xp = func.getXp();
+        // get y point
         ArrayList<Double> yp = func.getYp();
-        ArrayList<Double> coeffs = new ArrayList<>();
-        coeffs.add(0.0);
-        Polynomial res = new Polynomial(coeffs);
+        // initialize result Polynomial (Interpolation answer by Lagrange )
+        // with value 0 to add it to other Polynomial
+        Polynomial res = new Polynomial(0);
         for (int i = 0; i < xp.size(); i++) {
+            //get Lagrange Polynomial at index = i (Li)
             Polynomial lag = getLagrangePolyAt(i, xp);
+            //multiply Lagrange Polynomial with yi ( yi * Li)
             lag = lag.multiply(yp.get(i));
+            // add the multiply result to result Polynomial (Interpolation answer by Lagrange )
             res = res.add(lag);
         }
         return res;
     }
 
     public static String getLagrangeNoShorthand(Function func) {
+        // get x points
         ArrayList<Double> xp = func.getXp();
+        // get y points
         ArrayList<Double> yp = func.getYp();
+        // initialize a string builder to create the wanted Polynomial without shorthand
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < yp.size(); i++) {
+            // initialize scalar with value 1 to multiply with other number
             double scalar = 1.0;
             for (int j = 0; j < xp.size(); j++) {
                 if (j != i) {
+                    // make scalar = (xj - xj) => (xj - x0 ) * (xj - x1 ) ... (xj - xj-1) * (xj - xj+1)
                     scalar *= (xp.get(i) - xp.get(j));
                 }
             }
+            // to divide on the scalar => make 1/scalar and multiply with it
             scalar = 1 / scalar;
+            // divide yi on scalar ( (xj - x0 ) * (xj - x1 ) ... (xj - xj-1) * (xj - xj+1) )
             scalar *= yp.get(i);
+            // if scalar = 1.0 don't append it => don't make (1.0 x +..) do (x + ...)
             if (scalar != 1.0) {
                 sb.append(scalar);
                 sb.append(" ");
             }
             for (int j = 0; j < xp.size(); j++) {
+                // xj != xi ; where i is Lagrange Polynomial is created for (Li)
                 if (j != i) {
-                    ArrayList<Double> coeffs = new ArrayList<>();
-                    coeffs.add(-1 * xp.get(j));
-                    coeffs.add(1.0);
-                    Polynomial poly = new Polynomial(coeffs);
+                    // create a Polynomial with a0 = -xj and a1 = 1 (a1*x + a0) ; (x - xj ) => (x - x0 ) * (x - x1)
+                    Polynomial poly = new Polynomial(-1 * xp.get(j), 1);
+                    // append Polynomial with practices ; ( x - xj )
                     sb.append('(');
                     sb.append(poly);
                     sb.append(')');
                 }
             }
+            // if it is the end of the Polynomial , don't append ' + '
             if (i != yp.size() - 1) {
                 sb.append(" + ");
             }
@@ -86,27 +112,50 @@ public class Interpolation {
     }
 
     public static ArrayList<Double> getNewtonGregoryForwardTable(Function func) {
+        //get y points
         ArrayList<Double> yp = func.getYp();
+        // initialize result ArrayList (Upper diameter values)
         ArrayList<Double> res = new ArrayList<>();
+        // add y0
         res.add(yp.get(0));
+        // initialize queue with the first column values ( yi )
         Queue<Double> q = new LinkedList<>(yp);
+        // n : the number of the valid element to the current columns
+        // i = the index of the current element
         int n = yp.size(), i = 0;
+        // yi : current y value
+        // yi1 : forward y value ( yi+1 )
+        // temp : temporary result of yi+1 - yi
         double yi, yi1, temp;
         while (q.size() > 1) {
+            // get yi and delete it from queue
             yi = q.poll();
+            // get yi+1 without deleting ; to use it in the next iteration
             yi1 = q.element();
+            // get current element result
             temp = yi1 - yi;
-            temp = Math.round(temp * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
+            //Rounding value back to fix floating-point precision errors
+            temp = Math.round(temp * 1e10) / 1e10;
+            // add the current element to the queue
             q.add(temp);
+            // reaching first element of the current columns ( upper diameter element)
             if (i == 0) {
+                // reaching zeros ; no more terms
                 if (temp == 0)
                     break;
+                // add the current element to result
                 res.add(temp);
             }
+            // i = i+1 the index of the second element to the next iteration
             i++;
+            // reaching end of valid element of the current column
             if (i == n - 1) {
+                // reset index
                 i = 0;
+                // resize the valid element in next column in the next iteration
                 n--;
+                // delete the last element of this current columns ;
+                // so it do not interfere with the next column answer
                 q.poll();
             }
         }
@@ -114,27 +163,49 @@ public class Interpolation {
     }
 
     public static ArrayList<Double> getNewtonGregoryBackwardTable(Function func) {
+        //get y points
         ArrayList<Double> yp = func.getYp();
+        // initialize result ArrayList (Lower diameter values)
         ArrayList<Double> res = new ArrayList<>();
+        // add yn
         res.add(yp.get(yp.size() - 1));
+        // initialize queue with the first column values ( yi )
         Queue<Double> q = new LinkedList<>(yp);
+        // n : the number of the valid element to the current columns
+        // i = the index of the current element
         int n = yp.size(), i = 0;
+        // yi : current y value ( yi-1 )
+        // yi1 : forward y value ( yi )
+        // temp : temporary result of yi - yi-1
         double yi, yi1, temp;
         while (q.size() > 1) {
+            // get yi-1 and delete it from queue
             yi = q.poll();
+            // get yi without deleting ; to use it in the next iteration
             yi1 = q.element();
+            // get current element result
             temp = yi1 - yi;
-            temp = Math.round(temp * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
+            //Rounding value back to fix floating-point precision errors
+            temp = Math.round(temp * 1e10) / 1e10;
+            // add the current element to the queue
             q.add(temp);
+            // reaching last element of the current columns ( Lower diameter element)
             if (i == n - 2) {
+                // reaching zeros ; no more terms
                 if (temp == 0)
                     break;
+                // add the current element to result
                 res.add(temp);
             }
+            // i = i+1 the index of the second element to the next iteration
             i++;
             if (i == n - 1) {
+                // reset index
                 i = 0;
+                // resize the valid element in next column in the next iteration
                 n--;
+                // delete the last element of this current columns ;
+                // so it do not interfere with the next column answer
                 q.poll();
             }
         }
@@ -144,43 +215,60 @@ public class Interpolation {
     public static Polynomial getNewtonGregoryForward(Function func, int degree) {
         if (func == null || degree < 0)
             throw new ArithmeticException("invalid inputs");
+        //get x point
         ArrayList<Double> xp = func.getXp();
+        // initialize and calculate h ; h = xi+1 - xi;
         double h = xp.get(1) - xp.get(0);
-        h = Math.round(h * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
+        //Rounding value back to fix floating-point precision errors
+        h = Math.round(h * 1e10) / 1e10;
         for (int i = 1; i < xp.size() - 1; i++) {
+            // get the temporary value of xi+1 - xi
             double temp = (xp.get(i + 1) - xp.get(i));
-            temp = Math.round(temp * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
+            //Rounding value back to fix floating-point precision errors
+            temp = Math.round(temp * 1e10) / 1e10;
+            // if the temporary value do not equal h => the step is invalid
             if (temp != h) {
                 throw new ArithmeticException("step h is not static");
             }
         }
-        ArrayList<Double> Pcoeffs = new ArrayList<>(); //Creating coefficients Arraylist for P polynomial
-        Pcoeffs.add(-1 * xp.get(0)); // add -x0
-        Pcoeffs.add(1.0);            // add x
-        Polynomial P = new Polynomial(Pcoeffs); // Creating P Polynomial
-        P = P.multiply(1 / h);            // Dividing P on h
-        ArrayList<Double> coeffs = new ArrayList<>();
-        coeffs.add(0.0);
-        Polynomial res = new Polynomial(coeffs); //Creating coefficients Arraylist for res polynomial
-        ArrayList<Double> df0 = getNewtonGregoryForwardTable(func); //Getting Newton Gregory Forward Table values
-        res = res.add(df0.get(0)); // Adding y0
+        // Creating P Polynomial with a0 = -x0 and a1 = 1 ; x - x0
+        Polynomial P = new Polynomial(-1 * xp.get(0), 1);
+        // Dividing P on h
+        P = P.multiply(1 / h);
+        // Initialize the result Polynomial (Interpolation Polynomial by Newton-Gregory Forward)
+        // with 0 to add it to other Polynomials
+        Polynomial res = new Polynomial(0);
+        //Get Newton Gregory Forward Table values (Upper diameter values)
+        ArrayList<Double> df0 = getNewtonGregoryForwardTable(func);
+        // Adding y0
+        res = res.add(df0.get(0));
         for (int i = 1; i <= degree; i++) {
-            coeffs = new ArrayList<>(); // //Creating coefficients Arraylist for Temp  polynomial
-            coeffs.add(1.0); //Initializing coefficients for Temp poly multiplication
-            Polynomial NGFPoly = new Polynomial(coeffs); //Create Temp poly
-            NGFPoly = NGFPoly.multiply(P); //Multiply by P
+            // Initialize Newton-Gregory Forward Polynomial
+            // with value 1 to multiply it with other Polynomials
+            Polynomial NGFPoly = new Polynomial(1);
+            //Multiply by P ( x-x0/h)
+            NGFPoly = NGFPoly.multiply(P);
             for (int j = 1; j < i; j++) {
-                NGFPoly = NGFPoly.multiply(P.add(-1 * j)); // Multiply by (P-1)(P-2)..
+                // Multiply Newton-Gregory Forward Polynomial by (P-1)(P-2)..
+                NGFPoly = NGFPoly.multiply(P.add(-1 * j));
             }
+            //if the current iteration is valid according to the
+            // upper diameter values (not reaching zeros)
             if (i < df0.size())
-                NGFPoly = NGFPoly.multiply(df0.get(i));// Multiply by df0
+                // Multiply by df0
+                NGFPoly = NGFPoly.multiply(df0.get(i));
             else
-                break;// Reaching zeros
+                // otherwise exit the loop
+                break;
+            // init factorial with value 1 to multiply it by other numbers
             double factorial = 1;
             for (int j = 2; j <= i; j++) {
+                // Get n! : 1 * 2 * 3 * .. * n
                 factorial *= j;
             }
-            NGFPoly = NGFPoly.multiply(1 / factorial); // Dividing by n!
+            // Dividing Newton-Gregory Forward Polynomial by n!
+            NGFPoly = NGFPoly.multiply(1 / factorial);
+            // add this Newton-Gregory Forward Polynomial to result
             res = res.add(NGFPoly);
         }
         return res;
@@ -189,43 +277,60 @@ public class Interpolation {
     public static Polynomial getNewtonGregoryBackward(Function func, int degree) {
         if (func == null || degree < 0)
             throw new ArithmeticException("invalid inputs");
+        //get x point
         ArrayList<Double> xp = func.getXp();
+        // initialize and calculate h ; h = xi+1 - xi;
         double h = xp.get(1) - xp.get(0);
-        h = Math.round(h * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
+        //Rounding value back to fix floating-point precision errors
+        h = Math.round(h * 1e10) / 1e10;
         for (int i = 1; i < xp.size() - 1; i++) {
+            // get the temporary value of xi+1 - xi
             double temp = (xp.get(i + 1) - xp.get(i));
-            temp = Math.round(temp * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
+            //Rounding value back to fix floating-point precision errors
+            temp = Math.round(temp * 1e10) / 1e10;
+            // if the temporary value do not equal h => the step is invalid
             if (temp != h) {
                 throw new ArithmeticException("step h is not static");
             }
         }
-        ArrayList<Double> Scoeffs = new ArrayList<>(); //Creating coefficients Arraylist for S polynomial
-        Scoeffs.add(-1 * xp.get(xp.size() - 1)); // add -xn
-        Scoeffs.add(1.0);            // add x
-        Polynomial S = new Polynomial(Scoeffs); // Creating S Polynomial
-        S = S.multiply(1 / h);            // Dividing S on h
-        ArrayList<Double> coeffs = new ArrayList<>();
-        coeffs.add(0.0);
-        Polynomial res = new Polynomial(coeffs); //Creating coefficients Arraylist for res polynomial
-        ArrayList<Double> dfn = getNewtonGregoryBackwardTable(func); //Getting Newton Gregory Back Table values
-        res = res.add(dfn.get(0)); // Adding yn
+        // Creating S Polynomial with a0 = -xn and a1 = 1 ; x - xn
+        Polynomial S = new Polynomial(-1 * xp.get(xp.size() - 1), 1); // Creating S Polynomial
+        // Dividing S on h
+        S = S.multiply(1 / h);
+        // Initialize the result Polynomial (Interpolation Polynomial by Newton-Gregory Backward)
+        // with 0 to add it to other Polynomials
+        Polynomial res = new Polynomial(0);
+        //Getting Newton Gregory Backward Table values (Lower diameter values)
+        ArrayList<Double> dfn = getNewtonGregoryBackwardTable(func);
+        // Adding yn
+        res = res.add(dfn.get(0));
         for (int i = 1; i <= degree; i++) {
-            coeffs = new ArrayList<>(); // //Creating coefficients Arraylist for Temp  polynomial
-            coeffs.add(1.0); //Initializing coefficients for Temp poly multiplication
-            Polynomial NGBPoly = new Polynomial(coeffs); //Create Temp poly
-            NGBPoly = NGBPoly.multiply(S); //Multiply by S
+            // Initialize Newton-Gregory Backward Polynomial
+            // with value 1 to multiply it with other Polynomials
+            Polynomial NGBPoly = new Polynomial(1);
+            //Multiply Newton-Gregory Backward Polynomial by S
+            NGBPoly = NGBPoly.multiply(S);
             for (int j = 1; j < i; j++) {
-                NGBPoly = NGBPoly.multiply(S.add(j)); // Multiply by (S+1)(S+2)..
+                // Multiply Newton-Gregory Backward Polynomial by (S+1)(S+2)..
+                NGBPoly = NGBPoly.multiply(S.add(j));
             }
+            //if the current iteration is valid according to the
+            // lower diameter values (not reaching zeros)
             if (i < dfn.size())
-                NGBPoly = NGBPoly.multiply(dfn.get(i));// Multiply by dfn
+                // Multiply Newton-Gregory Backward Polynomial by dfn
+                NGBPoly = NGBPoly.multiply(dfn.get(i));
             else
-                break; // Reaching zeros
+                //otherwise exit from the loop
+                break;
+            // init factorial with value 1 to multiply it by other numbers
             double factorial = 1;
             for (int j = 2; j <= i; j++) {
+                // Get n! : 1 * 2 * 3 * .. * n
                 factorial *= j;
             }
-            NGBPoly = NGBPoly.multiply(1 / factorial); // Dividing by n!
+            // Dividing Newton-Gregory Backward Polynomial by n!
+            NGBPoly = NGBPoly.multiply(1 / factorial);
+            // add this Newton-Gregory Backward Polynomial to result
             res = res.add(NGBPoly);
         }
         return res;
@@ -234,45 +339,62 @@ public class Interpolation {
     public static String getNewtonGregoryForwardNoShorthand(Function func, int degree) {
         if (func == null || degree < 0)
             throw new ArithmeticException("invalid inputs");
+        //get x point
         ArrayList<Double> xp = func.getXp();
+        // initialize and calculate h ; h = xi+1 - xi;
         double h = xp.get(1) - xp.get(0);
-        h = Math.round(h * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
+        //Rounding value back to fix floating-point precision errors
+        h = Math.round(h * 1e10) / 1e10;
         for (int i = 1; i < xp.size() - 1; i++) {
+            // get the temporary value of xi+1 - xi
             double temp = (xp.get(i + 1) - xp.get(i));
-            temp = Math.round(temp * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
+            //Rounding value back to fix floating-point precision errors
+            temp = Math.round(temp * 1e10) / 1e10;
+            // if the temporary value do not equal h => the step is invalid
             if (temp != h) {
                 throw new ArithmeticException("step h is not static");
             }
         }
+        //init a string builder to create the Interpolation answer
         StringBuilder sb = new StringBuilder();
+        //Getting Newton Gregory Forward Table values (Upper diameter values)
         ArrayList<Double> df0 = getNewtonGregoryForwardTable(func);
-
+        // if the y0 != 0
         if (df0.get(0) != 0.0) {
-            sb.append(getFormattedDouble(df0.get(0))); // Adding f0
+            // Adding f0 with formatted string value ; if y0 = 1.0 => append 1
+            sb.append(getFormattedDouble(df0.get(0)));
         }
-        ArrayList<Double> Pcoeffs = new ArrayList<>(); //Creating coefficients Arraylist for P polynomial
-        Pcoeffs.add(-1 * xp.get(0)); // add -x0
-        Pcoeffs.add(1.0);            // add x
-        Polynomial P = new Polynomial(Pcoeffs); // Creating P Polynomial
-        P = P.multiply(1 / h);            // Dividing P on h
+        // Creating P Polynomial with a0 = -x0 and a1 = 1 ; x - x0
+        Polynomial P = new Polynomial(-1 * xp.get(0), 1);
+        // Dividing P on h
+        P = P.multiply(1 / h);
         for (int i = 1; i <= degree; i++) {
+            // reaching zeros in the upper diameter values
             if (i >= df0.size())
                 break;
+            // init factorial with value 1 to multiply it by other numbers
             double factorial = 1;
             for (int j = 2; j <= i; j++) {
+                // Get n! : 1 * 2 * 3 * .. * n
                 factorial *= j;
             }
+            // init a temporary value with the answer of dividing df0 on n!
             double temp = df0.get(i) * (1 / factorial);
+            // reaching zeros
             if (temp == 0)
                 break;
+                // if it is the start of the result , do not append ' + '
             else if (!sb.isEmpty())
                 sb.append(" + ");
+            // append the temporary value to result ; df0/n!
             sb.append(getFormattedDouble(temp));
+            // append P with practices ; (x-x0/h)
             sb.append(" ");
             sb.append('(');
             sb.append(P);
             sb.append(')');
             for (int j = 1; j < i; j++) {
+                // append (P-1)(P-2)..
                 sb.append('(');
                 Polynomial NGFPoly = P.add(-1 * j);
                 sb.append(NGFPoly);
@@ -285,44 +407,62 @@ public class Interpolation {
     public static String getNewtonGregoryBackwardNoShorthand(Function func, int degree) {
         if (func == null || degree < 0)
             throw new ArithmeticException("invalid inputs");
+        //get x point
         ArrayList<Double> xp = func.getXp();
+        // initialize and calculate h ; h = xi+1 - xi;
         double h = xp.get(1) - xp.get(0);
-        h = Math.round(h * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
+        //Rounding value back to fix floating-point precision errors
+        h = Math.round(h * 1e10) / 1e10;
         for (int i = 1; i < xp.size() - 1; i++) {
+            // get the temporary value of xi+1 - xi
             double temp = (xp.get(i + 1) - xp.get(i));
-            temp = Math.round(temp * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
+            //Rounding value back to fix floating-point precision errors
+            temp = Math.round(temp * 1e10) / 1e10;
+            // if the temporary value do not equal h => the step is invalid
             if (temp != h) {
                 throw new ArithmeticException("step h is not static");
             }
         }
+        //init a string builder to create the Interpolation answer
         StringBuilder sb = new StringBuilder();
+        //Getting Newton Gregory Backward Table values (Lower diameter values)
         ArrayList<Double> dfn = getNewtonGregoryBackwardTable(func);
+        // if yn != 0
         if (dfn.get(0) != 0.0) {
-            sb.append(getFormattedDouble(dfn.get(0))); // Adding fn
+            // Adding yn with formatted string value ; if y0 = 1.0 => append 1
+            sb.append(getFormattedDouble(dfn.get(0)));
         }
-        ArrayList<Double> Scoeffs = new ArrayList<>(); //Creating coefficients Arraylist for P polynomial
-        Scoeffs.add(-1 * xp.get(xp.size() - 1)); // add -xn
-        Scoeffs.add(1.0);            // add x
-        Polynomial S = new Polynomial(Scoeffs); // Creating S Polynomial
-        S = S.multiply(1 / h);            // Dividing S on h
+        // Creating S Polynomial with a0 = -xn and a1 = 1 ; x - xn
+        Polynomial S = new Polynomial(-1 * xp.get(xp.size() - 1), 1);
+        // Dividing S on h
+        S = S.multiply(1 / h);
         for (int i = 1; i <= degree; i++) {
+            // reaching zeros ; no more terms
             if (i >= dfn.size())
                 break;
+            // init factorial with value 1 to multiply it by other numbers
             double factorial = 1;
             for (int j = 2; j <= i; j++) {
+                // Get n! : 1 * 2 * 3 * .. * n
                 factorial *= j;
             }
+            // init a temporary value with the answer of dividing dfn on n!
             double temp = dfn.get(i) * (1 / factorial);
+            //reaching zeros
             if (temp == 0)
                 break;
+                // if it is the start of the result , do not append ' + '
             else if (!sb.isEmpty())
                 sb.append(" + ");
+            // append the temporary value to result ; dfn/n!
             sb.append(getFormattedDouble(temp));
+            // append S with practices ; (x-xn/h)
             sb.append(" ");
             sb.append('(');
             sb.append(S);
             sb.append(')');
             for (int j = 1; j < i; j++) {
+                // append (S+1)(S+2)..
                 sb.append('(');
                 Polynomial NGBPoly = S.add(j);
                 sb.append(NGBPoly);
@@ -333,31 +473,62 @@ public class Interpolation {
     }
 
     public static ArrayList<Double> getNewtonDividesForwardTable(Function func) {
+        // get x points
         ArrayList<Double> xp = func.getXp();
+        // get y points
         ArrayList<Double> yp = func.getYp();
+        // init result ArrayList (Upper diameter values)
         ArrayList<Double> res = new ArrayList<>();
-        res.add(yp.get(0));  //add y0 to result
+        //add y0 to result
+        res.add(yp.get(0));
+        // initialize queue with the first column values ( yi )
         Queue<Double> q = new LinkedList<>(yp);
-        int n = yp.size(), i = 0, add = 1;
+        // n : the number of the valid element to the current columns
+        // i : the index of the current element
+        // j : the difference between the two x point
+        // in the current iteration : xi+j - xi
+        int n = yp.size(), i = 0, j = 1;
+        // yi : current y value
+        // yi1 : forward y value ( yi+1 )
+        // xi : current x value
+        // xi1 : forward x value ( xi+j )
+        // temp : temporary result of (yi+1 - yi) / (xi+j - xi)
         double yi, yi1, xi, xi1, temp;
         while (q.size() > 1) {
+            // get yi and delete it from queue
             yi = q.poll();
+            // get yi+1 without deleting ; to use it in the next iteration
             yi1 = q.element();
+            // get xi value
             xi = xp.get(i);
-            xi1 = xp.get(i + add);
+            // get xi+j value
+            xi1 = xp.get(i + j);
+            // get current element result
             temp = (yi1 - yi) / (xi1 - xi);
-            temp = Math.round(temp * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
+            //Rounding value back to fix floating-point precision errors
+            temp = Math.round(temp * 1e10) / 1e10;
+            // add the current element to the queue
             q.add(temp);
-            if (i == 0) { // reaching the start of the column c
-                if (temp == 0) // reaching zeros ; no more terms => end while -> return result
+            // reaching the start of the column c
+            if (i == 0) {
+                // reaching zeros ; no more terms => end while -> return result
+                if (temp == 0)
                     break;
-                res.add(temp); // add this value to result
+                // add this value to result
+                res.add(temp);
             }
+            // i = i+1 the index of the second element to the next iteration
             i++;
-            if (i == n - 1) { // reaching end of columns c => reinitialize variables for the next loop
+            // reaching end of columns c => reinitialize variables for the next loop
+            if (i == n - 1) {
+                // reset index
                 i = 0;
+                // resize the valid element in next column in the next iteration
                 n--;
-                add++;
+                // make the difference bigger between xi+j and xi
+                j++;
+                // delete the last element of this current columns ;
+                // so it do not interfere with the next column answer
                 q.poll();
             }
         }
@@ -365,31 +536,62 @@ public class Interpolation {
     }
 
     public static ArrayList<Double> getNewtonDividesBackwardTable(Function func) {
+        // get x points
         ArrayList<Double> xp = func.getXp();
+        // get y points
         ArrayList<Double> yp = func.getYp();
+        // init result ArrayList (Lower diameter values)
         ArrayList<Double> res = new ArrayList<>();
-        res.add(yp.get(yp.size() - 1));  //add yn to result
+        //add yn to result
+        res.add(yp.get(yp.size() - 1));
+        // initialize queue with the first column values ( yi )
         Queue<Double> q = new LinkedList<>(yp);
+        // n : the number of the valid element to the current columns
+        // i : the index of the current element
+        // j : the difference between the two x point
+        // in the current iteration : xi+j - xi
         int n = yp.size(), i = 0, add = 1;
+        // yi : current y value ( yi-1)
+        // yi1 : forward y value ( yi )
+        // xi : current x value
+        // xi1 : forward x value ( xi+j )
+        // temp : temporary result of (yi - yi-1) / (xi+j - xi)
         double yi, yi1, xi, xi1, temp;
         while (q.size() > 1) {
+            // get yi-1 and delete it from queue
             yi = q.poll();
+            // get yi without deleting ; to use it in the next iteration
             yi1 = q.element();
+            // get xi value
             xi = xp.get(i);
+            // get xi+j value
             xi1 = xp.get(i + add);
+            // get current element result
             temp = (yi1 - yi) / (xi1 - xi);
-            temp = Math.round(temp * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
+            //Rounding value back to fix floating-point precision errors
+            temp = Math.round(temp * 1e10) / 1e10;
+            // add the current element to the queue
             q.add(temp);
-            if (i == n - 2) { // reaching the end of the column c
-                if (temp == 0) // reaching zeros ; no more terms => end while -> return result
+            // reaching the end of the column c
+            if (i == n - 2) {
+                // reaching zeros ; no more terms => end while -> return result
+                if (temp == 0)
                     break;
-                res.add(temp); // add this value to result
+                // add this value to result
+                res.add(temp);
             }
+            // i = i+1 the index of the second element to the next iteration
             i++;
-            if (i == n - 1) { // reaching end of columns c => reinitialize variables for the next loop
+            // reaching end of columns c => reinitialize variables for the next loop
+            if (i == n - 1) {
+                // reset index
                 i = 0;
+                // resize the valid element in next column in the next iteration
                 n--;
+                // make the difference bigger between xi+j and xi
                 add++;
+                // delete the last element of this current columns ;
+                // so it do not interfere with the next column answer
                 q.poll();
             }
         }

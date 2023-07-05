@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add getNewtonDividesBackwardTable">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add constructor(a0,a1) to Polynomial">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpolation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,27 +72,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٤٠" summary="Testing solve method in Matrix">
-      <created>1688328520811</created>
-      <option name="number" value="٠٠٠٤٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٤٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688328520811</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٤١" summary="Initializing Interpolation class">
-      <created>1688328742028</created>
-      <option name="number" value="٠٠٠٤١" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٤١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688328742028</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٤٢" summary="Add getter for yp and xp in Function">
-      <created>1688329019328</created>
-      <option name="number" value="٠٠٠٤٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٤٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688329019328</updated>
     </task>
     <task id="LOCAL؜-٠٠٠٤٣" summary="Add Exception in Function Constructor">
       <created>1688329936266</created>
@@ -416,7 +395,28 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688549074978</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL؜-٠٠٠٨٩" summary="Testing getNewtonDividesForwardTable and getNewtonDividesBackwardTable">
+      <created>1688549508963</created>
+      <option name="number" value="٠٠٠٨٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٨٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688549508963</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٩٠" summary="Add constructor(a0) to Polynomial">
+      <created>1688549810774</created>
+      <option name="number" value="٠٠٠٩٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٩٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688549810774</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٩١" summary="Add constructor(a0,a1) to Polynomial">
+      <created>1688550832089</created>
+      <option name="number" value="٠٠٠٩١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٩١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688550832089</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -458,9 +458,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix floating-point precision errors" />
-    <MESSAGE value="Testing getNewtonGregoryBackwardTable" />
-    <MESSAGE value="Add add(const) method in Polynomial class" />
     <MESSAGE value="Fix Add method in Polynomial" />
     <MESSAGE value="Add and Fix getNewtonGregoryForward with exceptions" />
     <MESSAGE value="Testing getNewtonGregoryForward" />
@@ -483,6 +480,9 @@
     <MESSAGE value="Add getNewtonDividesForwardTable" />
     <MESSAGE value="Make getNewtonDividesForwardTable static and add comments" />
     <MESSAGE value="Add getNewtonDividesBackwardTable" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add getNewtonDividesBackwardTable" />
+    <MESSAGE value="Testing getNewtonDividesForwardTable and getNewtonDividesBackwardTable" />
+    <MESSAGE value="Add constructor(a0) to Polynomial" />
+    <MESSAGE value="Add constructor(a0,a1) to Polynomial" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add constructor(a0,a1) to Polynomial" />
   </component>
 </project>
