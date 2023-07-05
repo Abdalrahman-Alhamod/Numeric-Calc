@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Differentiation {
     /**
@@ -53,7 +55,7 @@ public class Differentiation {
             ArrayList<Double> xp = func.getXp();
             // get y point
             ArrayList<Double> yp = func.getYp();
-            // initialize result Polynomial (Interpolation answer by Lagrange )
+            // initialize result Polynomial (Differentiation answer by Lagrange )
             // with value 0 to add it to other Polynomial
             Polynomial res = new Polynomial(0);
             for (int i = 0; i < xp.size(); i++) {
@@ -61,9 +63,310 @@ public class Differentiation {
                 Polynomial lag = getLagrangePolyAt(i, xp);
                 //multiply Lagrange Polynomial with yi ( yi * L'i)
                 lag = lag.multiply(yp.get(i));
-                // add the multiply result to result Polynomial (Interpolation answer by Lagrange )
+                // add the multiply result to result Polynomial (Differentiation answer by Lagrange )
                 res = res.add(lag);
             }
+            return res;
+        }
+    }
+
+    /**
+     * Newton-Gregory Forward Subtractions class provides methods for getting the Differential function
+     * using <b>Newton-Gregory Forward Subtractions</b> method
+     */
+    public static class Newton_GregoryForwardSubtractions {
+        /**
+         * Returns the values of the upper diameter of the Newton-Gregory Forward Subtractions Table
+         *
+         * @param func {@link Function} object representing a function to get its x and y point
+         * @return the values of the upper diameter of the <b>Newton-Gregory Forward Subtractions Table</b>
+         * @throws ArithmeticException if the given function is null
+         */
+        private static ArrayList<Double> getUDV(Function func) {
+            if (func == null)
+                throw new ArithmeticException("invalid inputs");
+            //get y points
+            ArrayList<Double> yp = func.getYp();
+            // initialize result ArrayList (Upper diameter values)
+            ArrayList<Double> res = new ArrayList<>();
+            // add y0
+            res.add(yp.get(0));
+            // initialize queue with the first column values ( yi )
+            Queue<Double> q = new LinkedList<>(yp);
+            // n : the number of the valid element to the current columns
+            // i = the index of the current element
+            int n = yp.size(), i = 0;
+            // yi : current y value
+            // yi1 : forward y value ( yi+1 )
+            // temp : temporary result of yi+1 - yi
+            double yi, yi1, temp;
+            while (q.size() > 1) {
+                // get yi and delete it from queue
+                yi = q.poll();
+                // get yi+1 without deleting ; to use it in the next iteration
+                yi1 = q.element();
+                // get current element result
+                temp = yi1 - yi;
+                //Rounding value back to fix floating-point precision errors
+                temp = Math.round(temp * 1e10) / 1e10;
+                // add the current element to the queue
+                q.add(temp);
+                // reaching first element of the current columns ( upper diameter element)
+                if (i == 0) {
+                    // reaching zeros ; no more terms
+                    if (temp == 0)
+                        break;
+                    // add the current element to result
+                    res.add(temp);
+                }
+                // i = i+1 the index of the second element to the next iteration
+                i++;
+                // reaching end of valid element of the current column
+                if (i == n - 1) {
+                    // reset index
+                    i = 0;
+                    // resize the valid element in next column in the next iteration
+                    n--;
+                    // delete the last element of this current columns ;
+                    // so it do not interfere with the next column answer
+                    q.poll();
+                }
+            }
+            return res;
+        }
+
+        /**
+         * Returns Differential Function As {@link Polynomial} using <b>Newton-Gregory Forward Subtractions</b>
+         *
+         * @param func   {@link Function} object representing the function to be differentiated
+         * @param degree the degree of the required Polynomial
+         * @param rank   the rank of the required Differentiation
+         * @return the result of Differentiation as {@link Polynomial}
+         * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
+         */
+        public static Polynomial getIFAP(Function func, int degree, int rank) {
+            if (func == null || degree < 0 || rank < 1)
+                throw new ArithmeticException("invalid inputs");
+            //get x point
+            ArrayList<Double> xp = func.getXp();
+            // initialize and calculate h ; h = xi+1 - xi;
+            double h = xp.get(1) - xp.get(0);
+            //Rounding value back to fix floating-point precision errors
+            h = Math.round(h * 1e10) / 1e10;
+            for (int i = 1; i < xp.size() - 1; i++) {
+                // get the temporary value of xi+1 - xi
+                double temp = (xp.get(i + 1) - xp.get(i));
+                //Rounding value back to fix floating-point precision errors
+                temp = Math.round(temp * 1e10) / 1e10;
+                // if the temporary value do not equal h => the step is invalid
+                if (temp != h) {
+                    throw new ArithmeticException("step h is not static");
+                }
+            }
+            // Creating P Polynomial with a0 = -x0 and a1 = 1 ; x - x0
+            Polynomial P = new Polynomial(-1 * xp.get(0), 1);
+            // Dividing P on h
+            P = P.multiply(1 / h);
+            // Initialize the result Polynomial (Differentiation Polynomial by Newton-Gregory Forward)
+            // with 0 to add it to other Polynomials
+            Polynomial res = new Polynomial(0);
+            //Get Newton Gregory Forward Table values (Upper diameter values)
+            ArrayList<Double> df0 = getUDV(func);
+            for (int i = 1; i <= degree; i++) {
+                // Initialize Newton-Gregory Forward Polynomial
+                // with value 1 to multiply it with other Polynomials
+                Polynomial NGFPoly = new Polynomial(1);
+                // Init P variable ( to get df/dp )
+                Polynomial PV = new Polynomial(0, 1);
+                //Multiply by P ( x-x0/h)
+                NGFPoly = NGFPoly.multiply(PV);
+                for (int j = 1; j < i; j++) {
+                    // Multiply Newton-Gregory Forward Polynomial by (P-1)(P-2)..
+                    NGFPoly = NGFPoly.multiply(PV.add(-1 * j));
+                }
+                // Differentiate rank times ; df/dp ; d2p/dp^2....
+                for (int j = 1; j <= rank; j++) {
+                    // if current poly do not equal zero
+                    if (NGFPoly.getCoeffs().size() > 0)
+                        // Derivative the current Poly by rank
+                        NGFPoly = NGFPoly.getDerivative();
+                    else
+                        break; // current poly zero
+                }
+                //current poly do not equal zero
+                if (NGFPoly.getCoeffs().size() >= 1)
+                    // get the value of Substituting p in the differentiated poly
+                    NGFPoly = NGFPoly.getPolyOf(P);
+                //if the current iteration is valid according to the
+                // upper diameter values (not reaching zeros)
+                if (i < df0.size())
+                    // Multiply by df0
+                    NGFPoly = NGFPoly.multiply(df0.get(i));
+                else
+                    // otherwise exit the loop
+                    break;
+                // init factorial with value 1 to multiply it by other numbers
+                double factorial = 1;
+                for (int j = 2; j <= i; j++) {
+                    // Get n! : 1 * 2 * 3 * .. * n
+                    factorial *= j;
+                }
+                // Dividing Newton-Gregory Forward Polynomial by n!
+                NGFPoly = NGFPoly.multiply(1 / factorial);
+                // add this Newton-Gregory Forward Polynomial to result
+                res = res.add(NGFPoly);
+            }
+            res = res.multiply(1 / (Math.pow(h, rank)));
+            return res;
+        }
+    }
+
+    /**
+     * Newton-Gregory Backward Subtractions class provides methods for getting the Differentiation function
+     * using <b>Newton-Gregory Backward Subtractions</b> method
+     */
+    public static class Newton_GregoryBackwardSubtractions {
+        /**
+         * Returns the values of the lower diameter of the Newton-Gregory Backward Subtractions Table
+         *
+         * @param func {@link Function} object representing a function to get its x and y point
+         * @return the values of the upper diameter of the <b>Newton-Gregory Backward Subtractions Table</b>
+         * @throws ArithmeticException if the given function is null
+         */
+        public static ArrayList<Double> getLDV(Function func) {
+            if (func == null)
+                throw new ArithmeticException("invalid inputs");
+            //get y points
+            ArrayList<Double> yp = func.getYp();
+            // initialize result ArrayList (Lower diameter values)
+            ArrayList<Double> res = new ArrayList<>();
+            // add yn
+            res.add(yp.get(yp.size() - 1));
+            // initialize queue with the first column values ( yi )
+            Queue<Double> q = new LinkedList<>(yp);
+            // n : the number of the valid element to the current columns
+            // i = the index of the current element
+            int n = yp.size(), i = 0;
+            // yi : current y value ( yi-1 )
+            // yi1 : forward y value ( yi )
+            // temp : temporary result of yi - yi-1
+            double yi, yi1, temp;
+            while (q.size() > 1) {
+                // get yi-1 and delete it from queue
+                yi = q.poll();
+                // get yi without deleting ; to use it in the next iteration
+                yi1 = q.element();
+                // get current element result
+                temp = yi1 - yi;
+                //Rounding value back to fix floating-point precision errors
+                temp = Math.round(temp * 1e10) / 1e10;
+                // add the current element to the queue
+                q.add(temp);
+                // reaching last element of the current columns ( Lower diameter element)
+                if (i == n - 2) {
+                    // reaching zeros ; no more terms
+                    if (temp == 0)
+                        break;
+                    // add the current element to result
+                    res.add(temp);
+                }
+                // i = i+1 the index of the second element to the next iteration
+                i++;
+                if (i == n - 1) {
+                    // reset index
+                    i = 0;
+                    // resize the valid element in next column in the next iteration
+                    n--;
+                    // delete the last element of this current columns ;
+                    // so it do not interfere with the next column answer
+                    q.poll();
+                }
+            }
+            return res;
+        }
+
+        /**
+         * Returns Differential Function As {@link Polynomial} using <b>Newton-Gregory Backward Subtractions</b>
+         *
+         * @param func   {@link Function} object representing the function to be differentiated
+         * @param degree the degree of the required Polynomial
+         * @param rank   the rank of the required Differentiation
+         * @return the result of Differentiation as {@link Polynomial}
+         * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
+         */
+        public static Polynomial getIFAP(Function func, int degree, int rank) {
+            if (func == null || degree < 0 || rank < 1)
+                throw new ArithmeticException("invalid inputs");
+            //get x point
+            ArrayList<Double> xp = func.getXp();
+            // initialize and calculate h ; h = xi+1 - xi;
+            double h = xp.get(1) - xp.get(0);
+            //Rounding value back to fix floating-point precision errors
+            h = Math.round(h * 1e10) / 1e10;
+            for (int i = 1; i < xp.size() - 1; i++) {
+                // get the temporary value of xi+1 - xi
+                double temp = (xp.get(i + 1) - xp.get(i));
+                //Rounding value back to fix floating-point precision errors
+                temp = Math.round(temp * 1e10) / 1e10;
+                // if the temporary value do not equal h => the step is invalid
+                if (temp != h) {
+                    throw new ArithmeticException("step h is not static");
+                }
+            }
+            // Creating S Polynomial with a0 = -xn and a1 = 1 ; x - xn
+            Polynomial S = new Polynomial(-1 * xp.get(xp.size() - 1), 1);
+            // Dividing S on h
+            S = S.multiply(1 / h);
+            // Initialize the result Polynomial (Differentiation Polynomial by Newton-Gregory Backward)
+            // with 0 to add it to other Polynomials
+            Polynomial res = new Polynomial(0);
+            //Get Newton Gregory Backward Table values (lower diameter values)
+            ArrayList<Double> dfn = getLDV(func);
+            for (int i = 1; i <= degree; i++) {
+                // Initialize Newton-Gregory Backward Polynomial
+                // with value 1 to multiply it with other Polynomials
+                Polynomial NGBPoly = new Polynomial(1);
+                // Init S variable ( to get df/ds )
+                Polynomial SV = new Polynomial(0, 1);
+                //Multiply by S ( x-xn/h)
+                NGBPoly = NGBPoly.multiply(SV);
+                for (int j = 1; j < i; j++) {
+                    // Multiply Newton-Gregory Backward Polynomial by (S+1)(S+2)..
+                    NGBPoly = NGBPoly.multiply(SV.add(j));
+                }
+                // Differentiate rank times ; df/ds ; d2s/ds^2....
+                for (int j = 1; j <= rank; j++) {
+                    // if current poly do not equal zero
+                    if (NGBPoly.getCoeffs().size() > 0)
+                        // Derivative the current Poly by rank
+                        NGBPoly = NGBPoly.getDerivative();
+                    else
+                        break; // current poly zero
+                }
+                //current poly do not equal zero
+                if (NGBPoly.getCoeffs().size() >= 1)
+                    // get the value of Substituting S in the differentiated poly
+                    NGBPoly = NGBPoly.getPolyOf(S);
+                //if the current iteration is valid according to the
+                // lower diameter values (not reaching zeros)
+                if (i < dfn.size())
+                    // Multiply by dfn
+                    NGBPoly = NGBPoly.multiply(dfn.get(i));
+                else
+                    // otherwise exit the loop
+                    break;
+                // init factorial with value 1 to multiply it by other numbers
+                double factorial = 1;
+                for (int j = 2; j <= i; j++) {
+                    // Get n! : 1 * 2 * 3 * .. * n
+                    factorial *= j;
+                }
+                // Dividing Newton-Gregory Backward Polynomial by n!
+                NGBPoly = NGBPoly.multiply(1 / factorial);
+                // add this Newton-Gregory Backward Polynomial to result
+                res = res.add(NGBPoly);
+            }
+            res = res.multiply(1 / (Math.pow(h, rank)));
             return res;
         }
     }
