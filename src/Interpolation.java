@@ -2,6 +2,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * Interpolation class provides Inner classes representing various methods to get Interpolated
+ * Function as a {@link Polynomial} <b>OR</b> as a {@link String}
+ * and some useful methods related to the currently used Interpolation Class
+ */
 public class Interpolation {
     /**
      * The GeneralMethod class provides methods to get the Interpolation Function using the <b>General Method</b>
