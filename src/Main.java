@@ -277,6 +277,30 @@ public class Main {
         System.out.println("Interpolated Function using Least-Squares : ");
         System.out.println(Interpolation.getLeastSquares(func, degree));
         // n=6 0 1 2 5.1 4 9 6 13 8 17 10 21 */
+
+        //Testing Spline
+        Scanner in = new Scanner(System.in);
+        double n, temp;
+        ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
+        System.out.print("Enter number of points : ");
+        n = in.nextDouble();
+        n--; //Because n is the number of domains ; number of domains = number of points -1
+        for (int i = 0; i <= n; i++) {
+            System.out.print("Enter x" + i + " : ");
+            temp = parseDouble(in.next());
+            xp.add(temp);
+            System.out.print("Enter y" + i + " : ");
+            temp = parseDouble(in.next());
+            yp.add(temp);
+        }
+        Function func = new Function(xp, yp);
+        System.out.println();
+        ArrayList<Polynomial> ans = Interpolation.getSpline(func);
+        System.out.println("Interpolated Function S(x) using Spline : ");
+        for (int i = 0; i < ans.size(); i++) {
+            System.out.println("S" + i + "(x) = " + ans.get(i) + "\t\t" + xp.get(i) + " <= x <= " + xp.get(i + 1));
+        }
+        // n=4  1 2 2 -1 3 0 4 2
     }
 
 }

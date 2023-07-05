@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add getLeastSquares">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Comment getLeastSquares test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpolation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
@@ -36,7 +36,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="interpolation" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -74,13 +74,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٥١" summary="Testing multiply by Polynomial">
-      <created>1688335782662</created>
-      <option name="number" value="٠٠٠٥١" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٥١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688335782662</updated>
     </task>
     <task id="LOCAL؜-٠٠٠٥٢" summary="Add multiply by scalar in Polynomial">
       <created>1688335817574</created>
@@ -418,7 +411,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688569388300</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL؜-٠٠١٠٠" summary="Comment getLeastSquares test">
+      <created>1688570337249</created>
+      <option name="number" value="٠٠١٠٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٠٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688570337249</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -460,7 +460,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add getFormattedDouble" />
     <MESSAGE value="Fix getNewtonGregoryForwardNoShorthand printing" />
     <MESSAGE value="Add getNewtonGregoryBackwardNoShorthand" />
     <MESSAGE value="Fix getFormattedCoefficient method in Polynomial" />
@@ -485,6 +484,7 @@
     <MESSAGE value="Add getNewtonDividesForwardNoShorthand method" />
     <MESSAGE value="Create tag v1.0.5" />
     <MESSAGE value="Add getLeastSquares" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add getLeastSquares" />
+    <MESSAGE value="Comment getLeastSquares test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Comment getLeastSquares test" />
   </component>
 </project>
