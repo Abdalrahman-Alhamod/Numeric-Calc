@@ -1,10 +1,5 @@
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
-import java.util.function.Consumer;
-import java.util.function.ObjDoubleConsumer;
-import java.util.function.ToDoubleBiFunction;
-import java.util.function.ToDoubleFunction;
 
 import static java.lang.Double.parseDouble;
 
