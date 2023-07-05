@@ -24,6 +24,16 @@ public class Polynomial {
     }
 
     /**
+     * Constructs a Polynomial object with the given constant a0 value.
+     *
+     * @param a0 the constant value (first term of the Polynomial)
+     */
+    public Polynomial(double a0) {
+        coeffs = new ArrayList<>();
+        coeffs.add(a0);
+    }
+
+    /**
      * Computes the value of the polynomial at the given x.
      *
      * @param x the value at which to evaluate the polynomial.
