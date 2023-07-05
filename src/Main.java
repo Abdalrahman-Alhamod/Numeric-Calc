@@ -255,7 +255,28 @@ public class Main {
         // n=4 5 53 3 19 4 30 1 9
         // n=6 0 132.651 0.2 140.877 0.3 157.464 0.4 166.375 0.7 195.112 0.9 216 */
 
-
+        //Testing Least Squares
+        Scanner in = new Scanner(System.in);
+        double n, temp;
+        ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
+        System.out.print("Enter number of points : ");
+        n = in.nextDouble();
+        n--; //Because n is the number of domains ; number of domains = number of points -1
+        for (int i = 0; i <= n; i++) {
+            System.out.print("Enter x" + i + " : ");
+            temp = parseDouble(in.next());
+            xp.add(temp);
+            System.out.print("Enter y" + i + " : ");
+            temp = parseDouble(in.next());
+            yp.add(temp);
+        }
+        Function func = new Function(xp, yp);
+        System.out.print("Enter Degree : ");
+        int degree = in.nextInt();
+        System.out.println();
+        System.out.println("Interpolated Function using Least-Squares : ");
+        System.out.println(Interpolation.getLeastSquares(func, degree));
+        // n=6 0 1 2 5.1 4 9 6 13 8 17 10 21
     }
 
 }
