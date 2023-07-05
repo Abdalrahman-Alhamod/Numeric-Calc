@@ -61,12 +61,16 @@ public class Interpolation {
                 if (i != index) {
                     // make scalar = (xj - xj) => (xj - x0 ) * (xj - x1 ) ... (xj - xj-1) * (xj - xj+1)
                     scalar *= (xp.get(index) - xp.get(i));
+                    //Rounding value back to fix floating-point precision errors
+                    scalar = Math.round(scalar * 1e10) / 1e10;
                     // create a Polynomial with a0 = -xi and a1 = 1 (a1*x + a0) ; (x - xi ) => (x - x0 ) * (x - x1)
                     Polynomial poly = new Polynomial(-1 * xp.get(i), 1);
                     // create Lagrange Polynomial by : (x - x0 ) * (x - x1) .. (x - xj) * (x - xj+1) ..
                     lag = lag.multiply(poly);
                 }
             }
+            //Rounding value back to fix floating-point precision errors
+            scalar = Math.round(scalar * 1e10) / 1e10;
             // Divide the multiplied polynomials ( (x - x0 ) * (x - x1) .. (x - xj) * (x - xj+1) ..)
             // on scalar ( (xj - x0 ) * (xj - x1 ) ... (xj - xj-1) * (xj - xj+1)..)
             // which is Lagrange Polynomial
