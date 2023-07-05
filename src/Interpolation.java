@@ -332,11 +332,11 @@ public class Interpolation {
         return sb.toString();
     }
 
-    public ArrayList<Double> getNewtonDividesForwardTable(Function func) {
+    public static ArrayList<Double> getNewtonDividesForwardTable(Function func) {
         ArrayList<Double> xp = func.getXp();
         ArrayList<Double> yp = func.getYp();
         ArrayList<Double> res = new ArrayList<>();
-        res.add(yp.get(0));
+        res.add(yp.get(0));  //add y0 to result
         Queue<Double> q = new LinkedList<>(yp);
         int n = yp.size(), i = 0, add = 1;
         double yi, yi1, xi, xi1, temp;
@@ -349,12 +349,12 @@ public class Interpolation {
             temp = Math.round(temp * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
             q.add(temp);
             if (i == 0) {
-                if (temp == 0)
+                if (temp == 0) // reaching zeros ; no more terms => end while -> return result
                     break;
-                res.add(temp);
+                res.add(temp); // add this value to result
             }
             i++;
-            if (i == n - 1) {
+            if (i == n - 1) { // reaching end of columns c => reinitialize variables for the next loop
                 i = 0;
                 n--;
                 add++;
