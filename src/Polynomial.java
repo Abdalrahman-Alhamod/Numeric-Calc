@@ -94,7 +94,7 @@ public class Polynomial {
                         sb.append(getFormattedCoefficient(coeff)).append(" ").append("x^").append(i); // Append the coefficient, variable symbol, and exponent
                     }
                 }
-                if (i > 0) {  //If there are more terms
+                if (i > 0 && coeffs.get(i - 1) != 0) {  //If there are more terms
                     sb.append(" + ");  // Append the addition operator with spacing
                 }
             }
