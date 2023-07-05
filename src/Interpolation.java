@@ -715,6 +715,38 @@ public class Interpolation {
         return sb.toString();
     }
 
+    public static Polynomial getLeastSquares(Function func, int degree) {
+        if (func == null || degree < 0)
+            throw new ArithmeticException("invalid inputs");
+        // get x points
+        ArrayList<Double> xp = func.getXp();
+        // get y point
+        ArrayList<Double> yp = func.getYp();
+        // init a new matrix to solve a system of equations
+        // of m + 1 equation (row) and m + 2 column
+        // where degree = m
+        Matrix SE = new Matrix(degree + 1, degree + 2);
+        // loop for equations coefficients
+        for (int i = 0; i <= degree; i++) {
+            ArrayList<Double> coeffs = new ArrayList<>();
+            // loop for getting current equation coefficient
+            for (int s = i; s <= i + degree; s++) {
+                // init xksum for ∑xk^s ; ∑xk^s , ∑xk^s+1 ∑xk^s+2 ...
+                double xksum = 0;
+                // loop for  ∑xk^s
+                for (int k = 0; k < xp.size(); k++) {
+                    xksum += Math.pow(xp.get(k), s);
+                }
+                coeffs.add(xksum);
+            }
+            coeffs.add(yp.get(i));
+            SE.setRow(i, coeffs);
+        }
+        //get solution Polynomial coefficient by solving the system of equations
+        ArrayList<Double> solcoeefs = SE.solve();
+        return new Polynomial(solcoeefs);
+    }
+
     /**
      * Formats the given Double as a string.
      *
