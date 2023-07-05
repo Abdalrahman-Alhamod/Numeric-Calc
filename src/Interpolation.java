@@ -491,7 +491,7 @@ public class Interpolation {
     static class NewtonForwardDividedSubtractions {
 
         // Get Table Upper Diameter Values
-        public static ArrayList<Double> getTUPV(Function func) {
+        public static ArrayList<Double> getTUDV(Function func) {
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get y points
@@ -561,7 +561,7 @@ public class Interpolation {
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get Newton Divides table values (upper diameter values)
-            ArrayList<Double> f0 = getTUPV(func);
+            ArrayList<Double> f0 = getTUDV(func);
             // init result Polynomial (Interpolation answer by Newton Divides ) with the y0 value;
             Polynomial res = new Polynomial(f0.get(0));
             for (int i = 1; i <= degree; i++) {
@@ -590,7 +590,7 @@ public class Interpolation {
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get Newton Divides table values (upper diameter values)
-            ArrayList<Double> f0 = getTUPV(func);
+            ArrayList<Double> f0 = getTUDV(func);
             // init string builder to create string representing
             // the answer of interpolation by Newton Divides Forward
             StringBuilder sb = new StringBuilder();
