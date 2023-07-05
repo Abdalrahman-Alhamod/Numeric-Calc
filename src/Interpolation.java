@@ -739,7 +739,14 @@ public class Interpolation {
                 }
                 coeffs.add(xksum);
             }
-            coeffs.add(yp.get(i));
+            // init xk * f(xk) sum for ∑xk^s*f(xk)
+            double xk_fxk_sum = 0;
+            // loop for  ∑xk^s*f(xk)
+            for (int k = 0; k < xp.size(); k++) {
+                xk_fxk_sum += Math.pow(xp.get(k), i) * yp.get(k);
+            }
+            coeffs.add(xk_fxk_sum);
+            System.out.println(coeffs);
             SE.setRow(i, coeffs);
         }
         //get solution Polynomial coefficient by solving the system of equations
