@@ -598,6 +598,34 @@ public class Interpolation {
         return res;
     }
 
+    public static Polynomial getNewtonDividesForward(Function func, int degree) {
+        if (func == null || degree < 0)
+            throw new ArithmeticException("invalid inputs");
+        // get x points
+        ArrayList<Double> xp = func.getXp();
+        // get Newton Divides table values (upper diameter values)
+        ArrayList<Double> f0 = getNewtonDividesForwardTable(func);
+        // init result Polynomial (Interpolation answer by Newton Divides ) with the y0 value;
+        Polynomial res = new Polynomial(f0.get(0));
+        for (int i = 1; i <= degree; i++) {
+            // init a temporary Polynomial with the value 1
+            // to multiply it by other Polynomials
+            Polynomial poly = new Polynomial(1);
+            for (int j = 0; j < degree; j++) {
+                //init the current poly with the values
+                // a0 = -xj , a1 = 1 ; x - xj
+                Polynomial curr = new Polynomial(-1 * xp.get(j), 1);
+                // get the temp poly : ( x - x0 ) * ( x - x1 ) * ... * ( x - xi-1 )
+                poly = poly.multiply(curr);
+            }
+            // multiply the temp poly by f0i
+            poly = poly.multiply(f0.get(i));
+            // add the temp poly to answer
+            res = res.add(poly);
+        }
+        return res;
+    }
+
 
     /**
      * Formats the given Double as a string.
