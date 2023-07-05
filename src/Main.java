@@ -301,6 +301,50 @@ public class Main {
             System.out.println("S" + i + "(x) = " + ans.get(i) + "\t\t" + xp.get(i) + " <= x <= " + xp.get(i + 1));
         }
         // n=4  1 2 2 -1 3 0 4 2 */
+        //Testing Interpolation
+        Scanner in = new Scanner(System.in);
+        double n, temp;
+        ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
+        System.out.print("Enter number of points : ");
+        n = in.nextDouble();
+        n--; //Because n is the number of domains ; number of domains = number of points -1
+        for (int i = 0; i <= n; i++) {
+            System.out.print("Enter x" + i + " : ");
+            temp = parseDouble(in.next());
+            xp.add(temp);
+            System.out.print("Enter y" + i + " : ");
+            temp = parseDouble(in.next());
+            yp.add(temp);
+        }
+        Function func = new Function(xp, yp);
+        int degree = xp.size() - 1;
+        System.out.println();
+        System.out.println("Interpolation Function using The General Method : ");
+        System.out.println(Interpolation.GeneralMethod.getIFAP(func));
+        System.out.println();
+        System.out.println("Interpolated Function using Lagrange method : ");
+        System.out.println(Interpolation.Lagrange.getIFAP(func));
+        System.out.println();
+        System.out.println("Interpolated Function using Newton-Gregory Forward : ");
+        System.out.println(Interpolation.Newton_GregoryForwardSubtractions.getIFAP(func, degree));
+        System.out.println();
+        System.out.println("Interpolated Function using Newton-Gregory Backward : ");
+        System.out.println(Interpolation.Newton_GregoryBackwardSubtractions.getIFAP(func, degree));
+        System.out.println();
+        System.out.println("Interpolated Function using Newton Divides Forward : ");
+        System.out.println(Interpolation.NewtonForwardDividedSubtractions.getIFAP(func, degree));
+        System.out.println();
+        System.out.println("Interpolated Function using Newton Divides Backward : ");
+        System.out.println(Interpolation.NewtonBackwardDividedSubtractions.getIFAP(func, degree));
+        System.out.println();
+        System.out.println("Interpolated Function using Least-Squares : ");
+        System.out.println(Interpolation.LeastSquares.getIFAP(func, degree));
+        System.out.println();
+        ArrayList<Polynomial> ans = Interpolation.Spline.getIFAPs(func);
+        System.out.println("Interpolated Function S(x) using Spline : ");
+        for (int i = 0; i < ans.size(); i++) {
+            System.out.println("S" + i + "(x) = " + ans.get(i) + "\t\t" + xp.get(i) + " <= x <= " + xp.get(i + 1));
+        }
 
 
     }

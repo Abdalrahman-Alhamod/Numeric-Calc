@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add java DOC to Interpolation class">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix toString in Polynomial ( printing ' + ' )">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpolation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Polynomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polynomial.java" afterDir="false" />
     </list>
@@ -44,7 +45,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Function.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Matrix.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="SKIP_INSPECTION" />
   </component>
@@ -75,34 +76,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٦١" summary="Add getNewtonGregoryForwardTable method">
-      <created>1688391087745</created>
-      <option name="number" value="٠٠٠٦١" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٦١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688391087745</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٦٢" summary="Testing getNewtonGregoryForwardTable method">
-      <created>1688391977827</created>
-      <option name="number" value="٠٠٠٦٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٦٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688391977827</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٦٣" summary="Add getNewtonGregoryBackwardTable">
-      <created>1688392321598</created>
-      <option name="number" value="٠٠٠٦٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٦٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688392321598</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٦٤" summary="Fix floating-point precision errors">
-      <created>1688393102645</created>
-      <option name="number" value="٠٠٠٦٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٦٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688393102645</updated>
     </task>
     <task id="LOCAL؜-٠٠٠٦٥" summary="Testing getNewtonGregoryBackwardTable">
       <created>1688393126208</created>
@@ -419,7 +392,35 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688580180210</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL؜-٠٠١١٠" summary="Fixing toString printing in Polynomial class ( start printing from x^n )">
+      <created>1688580869250</created>
+      <option name="number" value="٠٠١١٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠١١٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688580869250</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١١١" summary="Retesting Interpolation after java DOC and new printing">
+      <created>1688581004553</created>
+      <option name="number" value="٠٠١١١" />
+      <option name="presentableId" value="LOCAL؜-٠٠١١١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688581004553</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١١٢" summary="Fix Newton-Divides-Subtraction bug (reaching zeros )">
+      <created>1688583108837</created>
+      <option name="number" value="٠٠١١٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠١١٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688583108837</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١١٣" summary="Fix toString in Polynomial ( printing ' + ' )">
+      <created>1688583243990</created>
+      <option name="number" value="٠٠١١٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠١١٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688583243990</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -461,10 +462,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Retesting Newton Gregory methods" />
-    <MESSAGE value="Add getNewtonDividesForwardTable" />
-    <MESSAGE value="Make getNewtonDividesForwardTable static and add comments" />
-    <MESSAGE value="Add getNewtonDividesBackwardTable" />
     <MESSAGE value="Testing getNewtonDividesForwardTable and getNewtonDividesBackwardTable" />
     <MESSAGE value="Add constructor(a0) to Polynomial" />
     <MESSAGE value="Add constructor(a0,a1) to Polynomial" />
@@ -486,6 +483,10 @@
     <MESSAGE value="Renaming N-G-F-S and N-G-B-S in Interpolation class" />
     <MESSAGE value="Fixing tests of Interpolation class methods" />
     <MESSAGE value="Add java DOC to Interpolation class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add java DOC to Interpolation class" />
+    <MESSAGE value="Fixing toString printing in Polynomial class ( start printing from x^n )" />
+    <MESSAGE value="Retesting Interpolation after java DOC and new printing" />
+    <MESSAGE value="Fix Newton-Divides-Subtraction bug (reaching zeros )" />
+    <MESSAGE value="Fix toString in Polynomial ( printing ' + ' )" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix toString in Polynomial ( printing ' + ' )" />
   </component>
 </project>
