@@ -372,6 +372,102 @@ public class Differentiation {
     }
 
     /**
+     * Subtractions class provides inner classes to calculate
+     * the differential function of a specified value
+     */
+    public static class Subtractions {
+        /**
+         * Central class provide a method to calculate the differential
+         * function of a specified value using <b>Central Subtractions</b>
+         */
+        public static class Central {
+            /**
+             * Returns the differentiation answer of the given index using <b>Central Subtractions</b>
+             *
+             * @param func  {@link Function} object representing the function to get its x and y points
+             * @param index the index of the required element to get the differentiation at
+             * @return the result of the differentiation
+             * @throws ArithmeticException if func is null <b>OR</b> index = 0 <b>OR</b> index = n
+             */
+            public static double getValueAt(Function func, int index) {
+                if (func == null)
+                    throw new ArithmeticException("invalid inputs");
+                //get x points
+                ArrayList<Double> xp = func.getXp();
+                // get y point
+                ArrayList<Double> yp = func.getYp();
+                if (index == (xp.size() - 1) || index == 0)
+                    throw new ArithmeticException("invalid inputs");
+                // apply the law : (yi+1 - yi-1) / (xi+1 - xi-1)
+                double res = (yp.get(index + 1) / yp.get(index - 1)) / (xp.get(index + 1) - xp.get(index - 1));
+                //Rounding value back to fix floating-point precision errors
+                res = Math.round(res * 1e10) / 1e10;
+                return res;
+            }
+        }
+
+        /**
+         * Forward class provide a method to calculate the differential
+         * function of a specified value using <b>Forward Subtractions</b>
+         */
+        public static class Forward {
+            /**
+             * Returns the differentiation answer of the given index using <b>Forward Subtractions</b>
+             *
+             * @param func  {@link Function} object representing the function to get its x and y points
+             * @param index the index of the required element to get the differentiation at
+             * @return the result of the differentiation
+             * @throws ArithmeticException if func is null <b>OR</b> index = n
+             */
+            public static double getValueAt(Function func, int index) {
+                if (func == null)
+                    throw new ArithmeticException("invalid inputs");
+                //get x points
+                ArrayList<Double> xp = func.getXp();
+                // get y point
+                ArrayList<Double> yp = func.getYp();
+                if (index == (xp.size() - 1))
+                    throw new ArithmeticException("invalid inputs");
+                // apply the law : (yi+1 - yi) / (xi+1 - xi)
+                double res = (yp.get(index + 1) / yp.get(index)) / (xp.get(index + 1) - xp.get(index));
+                //Rounding value back to fix floating-point precision errors
+                res = Math.round(res * 1e10) / 1e10;
+                return res;
+            }
+        }
+
+        /**
+         * Backward class provide a method to calculate the differential
+         * function of a specified value using <b>Backward Subtractions</b>
+         */
+        public static class Backward {
+            /**
+             * Returns the differentiation answer of the given index using <b>Backward Subtractions</b>
+             *
+             * @param func  {@link Function} object representing the function to get its x and y points
+             * @param index the index of the required element to get the differentiation at
+             * @return the result of the differentiation
+             * @throws ArithmeticException if func is null <b>OR</b> index = 0
+             */
+            public static double getValueAt(Function func, int index) {
+                if (func == null)
+                    throw new ArithmeticException("invalid inputs");
+                //get x points
+                ArrayList<Double> xp = func.getXp();
+                // get y point
+                ArrayList<Double> yp = func.getYp();
+                if (index == 0)
+                    throw new ArithmeticException("invalid inputs");
+                // apply the law : (yi - yi-1) / (xi - xi-1)
+                double res = (yp.get(index) / yp.get(index - 1)) / (xp.get(index) - xp.get(index - 1));
+                //Rounding value back to fix floating-point precision errors
+                res = Math.round(res * 1e10) / 1e10;
+                return res;
+            }
+        }
+    }
+
+    /**
      * Formats the given Double as a string.
      *
      * <p>If the Double is an integer, it is formatted as an integer with no decimal places. Otherwise, it is
