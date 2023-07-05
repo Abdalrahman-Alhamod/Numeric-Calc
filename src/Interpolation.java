@@ -625,6 +625,33 @@ public class Interpolation {
         }
         return res;
     }
+    public static Polynomial getNewtonDividesBackward(Function func, int degree) {
+        if (func == null || degree < 0)
+            throw new ArithmeticException("invalid inputs");
+        // get x points
+        ArrayList<Double> xp = func.getXp();
+        // get Newton Divides table values (lower diameter values)
+        ArrayList<Double> fn = getNewtonDividesBackwardTable(func);
+        // init result Polynomial (Interpolation answer by Newton Divides ) with the yn value;
+        Polynomial res = new Polynomial(fn.get(0));
+        for (int i = 1; i <= degree; i++) {
+            // init a temporary Polynomial with the value 1
+            // to multiply it by other Polynomials
+            Polynomial poly = new Polynomial(1);
+            for (int j = degree; j > i; j--) {
+                //init the current poly with the values
+                // a0 = -xn-j , a1 = 1 ; x - xn-j
+                Polynomial curr = new Polynomial(-1 * xp.get(j), 1);
+                // get the temp poly : ( x - xn ) * ( x - xn-1 ) * ... * ( x - xn-i-1 )
+                poly = poly.multiply(curr);
+            }
+            // multiply the temp poly by fni
+            poly = poly.multiply(fn.get(i));
+            // add the temp poly to answer
+            res = res.add(poly);
+        }
+        return res;
+    }
 
 
     /**
