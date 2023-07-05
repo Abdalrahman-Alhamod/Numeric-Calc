@@ -611,7 +611,7 @@ public class Interpolation {
             // init a temporary Polynomial with the value 1
             // to multiply it by other Polynomials
             Polynomial poly = new Polynomial(1);
-            for (int j = 0; j < degree; j++) {
+            for (int j = 0; j < i; j++) {
                 //init the current poly with the values
                 // a0 = -xj , a1 = 1 ; x - xj
                 Polynomial curr = new Polynomial(-1 * xp.get(j), 1);
