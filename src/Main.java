@@ -217,7 +217,7 @@ public class Main {
         // 0 0 0.2 0.203 0.4 0.423 0.6 0.684 0.8 1.030 1 1.557 */
 
         //Testing Newton Divides
-        Scanner in = new Scanner(System.in);
+        /*Scanner in = new Scanner(System.in);
         double n, temp;
         ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
         System.out.print("Enter number of points : ");
@@ -253,7 +253,7 @@ public class Main {
         System.out.println("Interpolated Function using Newton Divides Backward No Shorthand : ");
         System.out.println(Interpolation.getNewtonDividesBackwardNoShorthand(func, degree));
         // n=4 5 53 3 19 4 30 1 9
-        // n=6 0 132.651 0.2 140.877 0.3 157.464 0.4 166.375 0.7 195.112 0.9 216
+        // n=6 0 132.651 0.2 140.877 0.3 157.464 0.4 166.375 0.7 195.112 0.9 216 */
 
 
     }
