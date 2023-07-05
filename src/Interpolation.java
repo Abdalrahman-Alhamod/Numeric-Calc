@@ -654,6 +654,36 @@ public class Interpolation {
         return res;
     }
 
+    public static String getNewtonDividesForwardNoShorthand(Function func, int degree) {
+        if (func == null || degree < 0)
+            throw new ArithmeticException("invalid inputs");
+        // get x points
+        ArrayList<Double> xp = func.getXp();
+        // get Newton Divides table values (upper diameter values)
+        ArrayList<Double> f0 = getNewtonDividesForwardTable(func);
+        // init string builder to create string representing
+        // the answer of interpolation by Newton Divides Forward
+        StringBuilder sb = new StringBuilder();
+        // append y0 to answer
+        sb.append(f0.get(0));
+        for (int i = 1; i <= degree; i++) {
+            // append ' + ' to make .. + ..
+            sb.append(" + ");
+            // append f0i to answer
+            sb.append(f0.get(0));
+            sb.append(" ");
+            for (int j = 0; j < i; j++) {
+                //init the current poly with the values
+                // a0 = -xj , a1 = 1 ; x - xj
+                Polynomial curr = new Polynomial(-1 * xp.get(j), 1);
+                // append the curr poly to answer with practices
+                sb.append('(');
+                sb.append(curr);
+                sb.append(')');
+            }
+        }
+        return sb.toString();
+    }
 
     /**
      * Formats the given Double as a string.
