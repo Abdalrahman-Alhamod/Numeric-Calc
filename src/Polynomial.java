@@ -74,6 +74,8 @@ public class Polynomial {
         int n = coeffs.size() - 1; // Get the degree of the polynomial (the size of the coefficient ArrayList minus one)
         for (int i = n; i >= 0; i--) { // Loop over each coefficient from the constant term to the highest-order term
             double coeff = coeffs.get(i); // Get the current coefficient
+            //Rounding value back to fix floating-point precision errors
+            coeff = Math.round(coeff * 1e10) / 1e10;
             if (coeff != 0) { // If the coefficient is nonzero
                 if (i == 0) { // If the term is the constant term
                     sb.append(getFormattedCoefficient(coeff)); // Append the coefficient
@@ -94,7 +96,12 @@ public class Polynomial {
                         sb.append(getFormattedCoefficient(coeff)).append(" ").append("x^").append(i); // Append the coefficient, variable symbol, and exponent
                     }
                 }
-                if (i > 0 && coeffs.get(i - 1) != 0) {  //If there are more terms
+                double coeff1 = 1;
+                if (i > 0)
+                    coeff1 = coeffs.get(i - 1); // Get the prev coefficient
+                //Rounding value back to fix floating-point precision errors
+                coeff1 = Math.round(coeff1 * 1e10) / 1e10;
+                if (i > 0 && coeff1 != 0) {  //If there are more terms
                     sb.append(" + ");  // Append the addition operator with spacing
                 }
             }
