@@ -625,6 +625,7 @@ public class Interpolation {
         }
         return res;
     }
+
     public static Polynomial getNewtonDividesBackward(Function func, int degree) {
         if (func == null || degree < 0)
             throw new ArithmeticException("invalid inputs");
@@ -638,10 +639,10 @@ public class Interpolation {
             // init a temporary Polynomial with the value 1
             // to multiply it by other Polynomials
             Polynomial poly = new Polynomial(1);
-            for (int j = degree; j > i; j--) {
+            for (int j = 0; j < i; j++) {
                 //init the current poly with the values
                 // a0 = -xn-j , a1 = 1 ; x - xn-j
-                Polynomial curr = new Polynomial(-1 * xp.get(j), 1);
+                Polynomial curr = new Polynomial(-1 * xp.get(degree - j), 1);
                 // get the temp poly : ( x - xn ) * ( x - xn-1 ) * ... * ( x - xn-i-1 )
                 poly = poly.multiply(curr);
             }
