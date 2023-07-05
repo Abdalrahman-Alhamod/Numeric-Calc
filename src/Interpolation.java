@@ -133,7 +133,7 @@ public class Interpolation {
                 scalar *= yp.get(i);
                 // if scalar = 1.0 don't append it => don't make (1.0 x +..) do (x + ...)
                 if (scalar != 1.0) {
-                    sb.append(scalar);
+                    sb.append(getFormattedDouble(scalar));
                     sb.append(" ");
                 }
                 for (int j = 0; j < xp.size(); j++) {
@@ -675,6 +675,9 @@ public class Interpolation {
             // init result Polynomial (Interpolation answer by Newton Divides ) with the y0 value;
             Polynomial res = new Polynomial(f0.get(0));
             for (int i = 1; i <= degree; i++) {
+                // reaching zeros
+                if (i >= f0.size())
+                    break;
                 // init a temporary Polynomial with the value 1
                 // to multiply it by other Polynomials
                 Polynomial poly = new Polynomial(1);
@@ -714,6 +717,9 @@ public class Interpolation {
             // append y0 to answer
             sb.append(getFormattedDouble(f0.get(0)));
             for (int i = 1; i <= degree; i++) {
+                // reaching zeros
+                if (i >= f0.size())
+                    break;
                 // append ' + ' to make .. + ..
                 sb.append(" + ");
                 // append f0i to answer
@@ -828,6 +834,9 @@ public class Interpolation {
             // init result Polynomial (Interpolation answer by Newton Divides ) with the yn value;
             Polynomial res = new Polynomial(fn.get(0));
             for (int i = 1; i <= degree; i++) {
+                // reaching zeros
+                if (i >= fn.size())
+                    break;
                 // init a temporary Polynomial with the value 1
                 // to multiply it by other Polynomials
                 Polynomial poly = new Polynomial(1);
@@ -867,6 +876,9 @@ public class Interpolation {
             // append yn to answer
             sb.append(getFormattedDouble(fn.get(0)));
             for (int i = 1; i <= degree; i++) {
+                // reaching zeros
+                if (i >= fn.size())
+                    break;
                 // append ' + ' to make .. + ..
                 sb.append(" + ");
                 // append fni to answer
