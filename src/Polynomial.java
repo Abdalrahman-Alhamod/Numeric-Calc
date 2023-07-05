@@ -268,4 +268,28 @@ public class Polynomial {
         return new Polynomial(coeffs);
     }
 
+    /**
+     * Returns Polynomial representing the result Polynomial
+     * by replacing the Polynomial p instead of double x
+     *
+     * @param p the Polynomial to be Substituted
+     * @return Polynomial representing the result of replacing the Polynomial p instead of double x
+     * @throws ArithmeticException if the given p is null
+     */
+    public Polynomial getPolyOf(Polynomial p) {
+        if (p == null)
+            throw new ArithmeticException("invalid inputs");
+        // Init res poly with a0 of coeff input
+        Polynomial res = new Polynomial(coeffs.get(0));
+        for (int i = 1; i < coeffs.size(); i++) {
+            Polynomial multAns = new Polynomial(1);
+            for (int j = 0; j < i; j++) {
+                multAns = multAns.multiply(p);
+            }
+            multAns = multAns.multiply(coeffs.get(i));
+            res = res.add(multAns);
+        }
+        return res;
+    }
+
 }
