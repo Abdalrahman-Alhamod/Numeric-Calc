@@ -12,7 +12,7 @@ public class Interpolation {
      * The GeneralMethod class provides methods to get the Interpolation Function using the <b>General Method</b>
      * by solving a system of equations using <a href="https://en.wikipedia.org/wiki/Gaussian_elimination">Gaussian elimination</a>
      */
-    static class GeneralMethod {
+    public static class GeneralMethod {
         /**
          * Returns Interpolation Function As {@link Polynomial} using the <b>General Method</b>
          *
@@ -48,7 +48,7 @@ public class Interpolation {
     /**
      * The Lagrange class provides methods to get the Interpolation Function using <b>Lagrange</b> method
      */
-    static class Lagrange {
+    public static class Lagrange {
         /**
          * Returns <b>Lagrange Polynomial</b> at the given index
          *
@@ -169,7 +169,7 @@ public class Interpolation {
      * Newton-Gregory Forward Subtractions class provides methods for getting the interpolation function using <b>Newton-Gregory Forward Subtractions</b> method
      * <p>It also provide function to get Newton-Gregory Forward Subtractions Table values </p>
      */
-    static class Newton_GregoryForwardSubtractions {
+    public static class Newton_GregoryForwardSubtractions {
         /**
          * Returns the values of the upper diameter of the Newton-Gregory Forward Subtractions Table
          *
@@ -381,7 +381,7 @@ public class Interpolation {
      * Newton-Gregory Backward Subtractions class provides methods for getting the interpolation function using <b>Newton-Gregory Backward Subtractions</b> method
      * <p>It also provide function to get Newton-Gregory Backward Subtractions Table values </p>
      */
-    static class Newton_GregoryBackwardSubtractions {
+    public static class Newton_GregoryBackwardSubtractions {
         /**
          * Returns the values of the lower diameter of the Newton-Gregory Backward Subtractions Table
          *
@@ -592,7 +592,7 @@ public class Interpolation {
      * Newton Forward Divided Subtractions class provides methods for getting the interpolation function using <b>Newton Forward Divided Subtractions</b> method
      * <p>It also provide function to get Newton Forward Divided Subtractions Table values </p>
      */
-    static class NewtonForwardDividedSubtractions {
+    public static class NewtonForwardDividedSubtractions {
 
         /**
          * Returns the values of the lower diameter of the Newton Forward Divided Subtractions Table
@@ -752,7 +752,7 @@ public class Interpolation {
      * Newton Backward Divided Subtractions class provides methods for getting the interpolation function using <b>Newton Backward Divided Subtractions</b> method
      * <p>It also provide function to get Newton Backward Divided Subtractions Table values </p>
      */
-    static class NewtonBackwardDividedSubtractions {
+    public static class NewtonBackwardDividedSubtractions {
         /**
          * Returns the values of the lower diameter of the Newton Backward Divided Subtractions Table
          *
@@ -910,7 +910,7 @@ public class Interpolation {
     /**
      * Least-Squares class methods for getting the interpolation function using <b>Least-Squares</b> method
      */
-    static class LeastSquares {
+    public static class LeastSquares {
         /**
          * Returns Interpolation Function As {@link Polynomial} using <b>Least-Squares</b>
          *
@@ -965,7 +965,7 @@ public class Interpolation {
     /**
      * Spline class methods for getting the interpolation function using <b>Spline</b> method
      */
-    static class Spline {
+    public static class Spline {
         /**
          * Returns an ArrayList of {@link Polynomial} representing the Interpolation Function using <b>Spline</b>
          *
