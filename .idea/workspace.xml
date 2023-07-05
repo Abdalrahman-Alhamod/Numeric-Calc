@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Comment getLeastSquares test">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Restructure Interpolation class methods">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpolation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
@@ -74,41 +74,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٥٢" summary="Add multiply by scalar in Polynomial">
-      <created>1688335817574</created>
-      <option name="number" value="٠٠٠٥٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٥٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688335817574</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٥٣" summary="Test multiply by scalar">
-      <created>1688335852656</created>
-      <option name="number" value="٠٠٠٥٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٥٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688335852656</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٥٤" summary="Add getLagrangeAt method in Interpolation">
-      <created>1688336748619</created>
-      <option name="number" value="٠٠٠٥٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٥٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688336748619</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٥٥" summary="Add add method two polynomial in Polynomial">
-      <created>1688336937707</created>
-      <option name="number" value="٠٠٠٥٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٥٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688336937707</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٥٦" summary="Add getLagrange to Interpolation">
-      <created>1688337622496</created>
-      <option name="number" value="٠٠٠٥٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٥٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688337622496</updated>
     </task>
     <task id="LOCAL؜-٠٠٠٥٧" summary="Testing getLagrange">
       <created>1688337639096</created>
@@ -418,7 +383,42 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688570337249</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL؜-٠٠١٠١" summary="Add getSpline method">
+      <created>1688571746695</created>
+      <option name="number" value="٠٠١٠١" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٠١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688571746695</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٠٢" summary="Test getSpline">
+      <created>1688571768124</created>
+      <option name="number" value="٠٠١٠٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٠٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688571768124</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٠٣" summary="Create tag v1.0.7">
+      <created>1688571876867</created>
+      <option name="number" value="٠٠١٠٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٠٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688571876867</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٠٤" summary="Fix floating-point precision errors">
+      <created>1688572280877</created>
+      <option name="number" value="٠٠١٠٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٠٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688572280877</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٠٥" summary="Restructure Interpolation class methods">
+      <created>1688573994850</created>
+      <option name="number" value="٠٠١٠٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٠٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688573994850</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -460,11 +460,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix getNewtonGregoryForwardNoShorthand printing" />
-    <MESSAGE value="Add getNewtonGregoryBackwardNoShorthand" />
-    <MESSAGE value="Fix getFormattedCoefficient method in Polynomial" />
-    <MESSAGE value="Fix getFormattedDouble method in Polynomial&#10;Fix printing zeros in Newton Gregory NoShorthand method" />
-    <MESSAGE value="Fix floating-point precision errors in getFormattedCoefficient method" />
     <MESSAGE value="Fix floating-point precision errors in getFormattedDouble method" />
     <MESSAGE value="Create tag v1.0.4" />
     <MESSAGE value="Fix degree bug (if degree &gt;= df0||dfn)" />
@@ -485,6 +480,11 @@
     <MESSAGE value="Create tag v1.0.5" />
     <MESSAGE value="Add getLeastSquares" />
     <MESSAGE value="Comment getLeastSquares test" />
-    <option name="LAST_COMMIT_MESSAGE" value="Comment getLeastSquares test" />
+    <MESSAGE value="Add getSpline method" />
+    <MESSAGE value="Test getSpline" />
+    <MESSAGE value="Create tag v1.0.7" />
+    <MESSAGE value="Fix floating-point precision errors" />
+    <MESSAGE value="Restructure Interpolation class methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="Restructure Interpolation class methods" />
   </component>
 </project>

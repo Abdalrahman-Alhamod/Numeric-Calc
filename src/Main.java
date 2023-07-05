@@ -134,9 +134,9 @@ public class Main {
             yp.add(temp);
         }
         Function func = new Function(xp, yp);
-        System.out.println(Interpolation.getGeneralMethod(func));
+        System.out.println(Interpolation.GeneralMethod.getIFAP(func));
         // 1 3 2 1 3 5
-        // 11.0 + -11.0x + 3.0x^2*/
+        // 11.0 + -11.0x + 3.0x^2  */
 
         //Testing Polynomial Multiplying
         /*ArrayList<Double> a1 = new ArrayList<>();
@@ -172,10 +172,10 @@ public class Main {
         }
         Function func = new Function(xp, yp);
         System.out.println("Interpolated Function using Lagrange method : ");
-        System.out.println(Interpolation.getLagrange(func));
+        System.out.println(Interpolation.Lagrange.getIFAP(func));
         System.out.println("Interpolated Function using Lagrange method without shorthand : ");
-        System.out.println(Interpolation.getLagrangeNoShorthand(func));
-        // 1 2 2 -1 4 3 */
+        System.out.println(Interpolation.Lagrange.getIFASNS(func));
+        // 1 2 2 -1 4 3  */
 
         //Testing Newton Gregory methods
         /*Scanner in = new Scanner(System.in);
@@ -197,24 +197,24 @@ public class Main {
         int degree = in.nextInt();
         System.out.println();
         System.out.println("Upper diameter (▲Yn) Newton Gregory Forward : ");
-        System.out.println(Interpolation.getNewtonGregoryForwardTable(func));
+        System.out.println(Interpolation.NewtonGregoryForwardSubtractions.getTUDV(func));
         System.out.println();
         System.out.println("Lower diameter (▼Yn) Newton Gregory Backward : ");
-        System.out.println(Interpolation.getNewtonGregoryBackwardTable(func));
+        System.out.println(Interpolation.NewtonGregoryBackwardSubtractions.getTLDV(func));
         System.out.println();
         System.out.println("Interpolated Function using Newton Gregory Forward : ");
-        System.out.println(Interpolation.getNewtonGregoryForward(func, degree));
+        System.out.println(Interpolation.NewtonGregoryForwardSubtractions.getIFAP(func, degree));
         System.out.println();
         System.out.println("Interpolated Function using Newton Gregory Forward No Shorthand : ");
-        System.out.println(Interpolation.getNewtonGregoryForwardNoShorthand(func, degree));
+        System.out.println(Interpolation.NewtonGregoryForwardSubtractions.getIFASNS(func, degree));
         System.out.println();
         System.out.println("Interpolated Function using Newton Gregory Backward : ");
-        System.out.println(Interpolation.getNewtonGregoryBackward(func, degree));
+        System.out.println(Interpolation.NewtonGregoryBackwardSubtractions.getIFAP(func, degree));
         System.out.println();
         System.out.println("Interpolated Function using Newton Gregory Backward No Shorthand : ");
-        System.out.println(Interpolation.getNewtonGregoryBackwardNoShorthand(func, degree));
+        System.out.println(Interpolation.NewtonGregoryBackwardSubtractions.getIFASNS(func, degree));
         //0 -6 1 2 2 -2 3 6
-        // 0 0 0.2 0.203 0.4 0.423 0.6 0.684 0.8 1.030 1 1.557 */
+        // 0 0 0.2 0.203 0.4 0.423 0.6 0.684 0.8 1.030 1 1.557  */
 
         //Testing Newton Divides
         /*Scanner in = new Scanner(System.in);
@@ -236,24 +236,24 @@ public class Main {
         int degree = in.nextInt();
         System.out.println();
         System.out.println("Upper diameter (▲Yn) Newton Divides Forward : ");
-        System.out.println(Interpolation.getNewtonDividesForwardTable(func));
+        System.out.println(Interpolation.NewtonForwardDividedSubtractions.getTUDV(func));
         System.out.println();
         System.out.println("Lower diameter (▼Yn) Newton Divides Backward : ");
-        System.out.println(Interpolation.getNewtonDividesBackwardTable(func));
+        System.out.println(Interpolation.NewtonBackwardDividedSubtractions.getTLDV(func));
         System.out.println();
         System.out.println("Interpolated Function using Newton Divides Forward : ");
-        System.out.println(Interpolation.getNewtonDividesForward(func, degree));
+        System.out.println(Interpolation.NewtonForwardDividedSubtractions.getIFAP(func, degree));
         System.out.println();
         System.out.println("Interpolated Function using Newton Divides Forward No Shorthand : ");
-        System.out.println(Interpolation.getNewtonDividesForwardNoShorthand(func, degree));
+        System.out.println(Interpolation.NewtonForwardDividedSubtractions.getIFASNS(func, degree));
         System.out.println();
         System.out.println("Interpolated Function using Newton Divides Backward : ");
-        System.out.println(Interpolation.getNewtonDividesBackward(func, degree));
+        System.out.println(Interpolation.NewtonBackwardDividedSubtractions.getIFAP(func, degree));
         System.out.println();
         System.out.println("Interpolated Function using Newton Divides Backward No Shorthand : ");
-        System.out.println(Interpolation.getNewtonDividesBackwardNoShorthand(func, degree));
+        System.out.println(Interpolation.NewtonBackwardDividedSubtractions.getIFASNS(func, degree));
         // n=4 5 53 3 19 4 30 1 9
-        // n=6 0 132.651 0.2 140.877 0.3 157.464 0.4 166.375 0.7 195.112 0.9 216 */
+        // n=6 0 132.651 0.2 140.877 0.3 157.464 0.4 166.375 0.7 195.112 0.9 216*/
 
         //Testing Least Squares
         /*Scanner in = new Scanner(System.in);
@@ -275,7 +275,7 @@ public class Main {
         int degree = in.nextInt();
         System.out.println();
         System.out.println("Interpolated Function using Least-Squares : ");
-        System.out.println(Interpolation.getLeastSquares(func, degree));
+        System.out.println(Interpolation.LeastSquares.getIFAP(func, degree));
         // n=6 0 1 2 5.1 4 9 6 13 8 17 10 21 */
 
         //Testing Spline
@@ -295,14 +295,14 @@ public class Main {
         }
         Function func = new Function(xp, yp);
         System.out.println();
-        ArrayList<Polynomial> ans = Interpolation.getSpline(func);
+        ArrayList<Polynomial> ans = Interpolation.Spline.getIFAPs(func);
         System.out.println("Interpolated Function S(x) using Spline : ");
         for (int i = 0; i < ans.size(); i++) {
             System.out.println("S" + i + "(x) = " + ans.get(i) + "\t\t" + xp.get(i) + " <= x <= " + xp.get(i + 1));
         }
         // n=4  1 2 2 -1 3 0 4 2 */
 
-        
+
     }
 
 }
