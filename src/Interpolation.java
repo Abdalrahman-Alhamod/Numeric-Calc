@@ -746,7 +746,6 @@ public class Interpolation {
                 xk_fxk_sum += Math.pow(xp.get(k), i) * yp.get(k);
             }
             coeffs.add(xk_fxk_sum);
-            System.out.println(coeffs);
             SE.setRow(i, coeffs);
         }
         //get solution Polynomial coefficient by solving the system of equations
