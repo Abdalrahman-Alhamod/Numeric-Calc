@@ -737,6 +737,8 @@ public class Interpolation {
                 for (int k = 0; k < xp.size(); k++) {
                     xksum += Math.pow(xp.get(k), s);
                 }
+                //Rounding value back to fix floating-point precision errors
+                xksum = Math.round(xksum * 1e10) / 1e10;
                 coeffs.add(xksum);
             }
             // init xk * f(xk) sum for ∑xk^s*f(xk)
@@ -745,6 +747,8 @@ public class Interpolation {
             for (int k = 0; k < xp.size(); k++) {
                 xk_fxk_sum += Math.pow(xp.get(k), i) * yp.get(k);
             }
+            //Rounding value back to fix floating-point precision errors
+            xk_fxk_sum = Math.round(xk_fxk_sum * 1e10) / 1e10;
             coeffs.add(xk_fxk_sum);
             SE.setRow(i, coeffs);
         }
@@ -766,6 +770,8 @@ public class Interpolation {
         for (int i = 0; i < yp.size() - 1; i++) {
             // init a scalar for the result of : (yi+1 - yi) / (xi+1 - xi)
             double scalar = (yp.get(i + 1) - yp.get(i)) / (xp.get(i + 1) - xp.get(i));
+            //Rounding value back to fix floating-point precision errors
+            scalar = Math.round(scalar * 1e10) / 1e10;
             // init curr Polynomial with a0 = -xi , a1 = 1 ; x - xi
             Polynomial curr = new Polynomial(-1 * xp.get(i), 1);
             // multiply the curr Polynomial by scalar value
