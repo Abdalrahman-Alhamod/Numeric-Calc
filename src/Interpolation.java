@@ -117,7 +117,7 @@ public class Interpolation {
         }
     }
 
-    static class NewtonGregoryForwardSubtractions {
+    static class Newton_GregoryForwardSubtractions {
         //Get Table Upper Diameter Values
         public static ArrayList<Double> getTUDV(Function func) {
             //get y points
@@ -303,7 +303,7 @@ public class Interpolation {
         }
     }
 
-    static class NewtonGregoryBackwardSubtractions {
+    static class Newton_GregoryBackwardSubtractions {
         // Get Table Lower Diameter Values
         public static ArrayList<Double> getTLDV(Function func) {
             //get y points
