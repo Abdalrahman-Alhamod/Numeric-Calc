@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.function.Consumer;
+import java.util.function.ObjDoubleConsumer;
+import java.util.function.ToDoubleBiFunction;
+import java.util.function.ToDoubleFunction;
 
 import static java.lang.Double.parseDouble;
 
@@ -216,6 +220,31 @@ public class Main {
         System.out.println(Interpolation.getNewtonGregoryBackwardNoShorthand(func, degree));
         //0 -6 1 2 2 -2 3 6
         // 0 0 0.2 0.203 0.4 0.423 0.6 0.684 0.8 1.030 1 1.557*/
+
+        //Testing Newton Divides
+        Scanner in = new Scanner(System.in);
+        double n, temp;
+        ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
+        System.out.print("Enter number of points : ");
+        n = in.nextDouble();
+        n--; //Because n is the number of domains ; number of domains = number of points -1
+        for (int i = 0; i <= n; i++) {
+            System.out.print("Enter x" + i + " : ");
+            temp = parseDouble(in.next());
+            xp.add(temp);
+            System.out.print("Enter y" + i + " : ");
+            temp = parseDouble(in.next());
+            yp.add(temp);
+        }
+        Function func = new Function(xp, yp);
+        System.out.print("Enter Degree : ");
+        int degree = in.nextInt();
+        System.out.println();
+        System.out.println(Interpolation.getNewtonDividesForwardTable(func));
+        System.out.println(Interpolation.getNewtonDividesBackwardTable(func));
+
+        // n=4 5 53 3 19 4 30 1 9Te
+        // n=6 0 132.651 0.2 140.877 0.3 157.464 0.4 166.375 0.7 195.112 0.9 216
 
 
     }
