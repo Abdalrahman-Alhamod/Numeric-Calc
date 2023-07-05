@@ -301,8 +301,9 @@ public class Main {
             System.out.println("S" + i + "(x) = " + ans.get(i) + "\t\t" + xp.get(i) + " <= x <= " + xp.get(i + 1));
         }
         // n=4  1 2 2 -1 3 0 4 2 */
+
         //Testing Interpolation
-        Scanner in = new Scanner(System.in);
+        /*Scanner in = new Scanner(System.in);
         double n, temp;
         ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
         System.out.print("Enter number of points : ");
@@ -344,7 +345,7 @@ public class Main {
         System.out.println("Interpolated Function S(x) using Spline : ");
         for (int i = 0; i < ans.size(); i++) {
             System.out.println("S" + i + "(x) = " + ans.get(i) + "\t\t" + xp.get(i) + " <= x <= " + xp.get(i + 1));
-        }
+        } */
 
 
     }

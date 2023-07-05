@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix toString in Polynomial ( printing ' + ' )">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Testing All Interpolations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpolation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Polynomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polynomial.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,27 +75,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٦٥" summary="Testing getNewtonGregoryBackwardTable">
-      <created>1688393126208</created>
-      <option name="number" value="٠٠٠٦٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٦٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688393126208</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٦٦" summary="Add add(const) method in Polynomial class">
-      <created>1688394591805</created>
-      <option name="number" value="٠٠٠٦٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٦٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688394591806</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٦٧" summary="Fix Add method in Polynomial">
-      <created>1688398831135</created>
-      <option name="number" value="٠٠٠٦٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٦٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688398831135</updated>
     </task>
     <task id="LOCAL؜-٠٠٠٦٨" summary="Add and Fix getNewtonGregoryForward with exceptions">
       <created>1688398849919</created>
@@ -420,7 +398,28 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688583243990</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL؜-٠٠١١٤" summary="Fix toString int Polynomial class ( fix floating-point precision errors )">
+      <created>1688583830390</created>
+      <option name="number" value="٠٠١١٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠١١٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688583830390</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١١٥" summary="Fix Lagrange bug ( floating-point precision errors )">
+      <created>1688583869985</created>
+      <option name="number" value="٠٠١١٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠١١٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688583869985</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١١٦" summary="Testing All Interpolations">
+      <created>1688583916991</created>
+      <option name="number" value="٠٠١١٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠١١٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688583916991</updated>
+    </task>
+    <option name="localTasksCounter" value="117" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -462,9 +461,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Testing getNewtonDividesForwardTable and getNewtonDividesBackwardTable" />
-    <MESSAGE value="Add constructor(a0) to Polynomial" />
-    <MESSAGE value="Add constructor(a0,a1) to Polynomial" />
     <MESSAGE value="Add comments to Interpolation class in every line&#10;Enhance code by applying changes for the new Polynomial constructor(a0,a1)" />
     <MESSAGE value="Add getNewtonDividesForward method" />
     <MESSAGE value="Fix getNewtonDividesForward bug" />
@@ -487,6 +483,9 @@
     <MESSAGE value="Retesting Interpolation after java DOC and new printing" />
     <MESSAGE value="Fix Newton-Divides-Subtraction bug (reaching zeros )" />
     <MESSAGE value="Fix toString in Polynomial ( printing ' + ' )" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix toString in Polynomial ( printing ' + ' )" />
+    <MESSAGE value="Fix toString int Polynomial class ( fix floating-point precision errors )" />
+    <MESSAGE value="Fix Lagrange bug ( floating-point precision errors )" />
+    <MESSAGE value="Testing All Interpolations" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing All Interpolations" />
   </component>
 </project>
