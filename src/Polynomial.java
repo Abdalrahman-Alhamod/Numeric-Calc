@@ -24,13 +24,25 @@ public class Polynomial {
     }
 
     /**
-     * Constructs a Polynomial object with the given constant a0 value.
+     * Constructs a Polynomial object with the degree 0 (P0) with the given constant a0 value.
      *
      * @param a0 the constant value (first term of the Polynomial)
      */
     public Polynomial(double a0) {
         coeffs = new ArrayList<>();
         coeffs.add(a0);
+    }
+
+    /**
+     * Construct a Polynomial with the degree 1 (P1) with the given constant a0 and a1
+     *
+     * @param a0 the constant value (first term of the Polynomial
+     * @param a1 the value multiplied with x term (second term of the Polynomial)
+     */
+    public Polynomial(double a0, double a1) {
+        coeffs = new ArrayList<>();
+        coeffs.add(a0);
+        coeffs.add(a1);
     }
 
     /**
