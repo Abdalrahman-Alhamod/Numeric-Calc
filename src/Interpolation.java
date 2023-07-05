@@ -753,6 +753,33 @@ public class Interpolation {
         return new Polynomial(solcoeefs);
     }
 
+    public static ArrayList<Polynomial> getSpline(Function func) {
+        if (func == null)
+            throw new ArithmeticException("invalid inputs");
+        // get x points
+        ArrayList<Double> xp = func.getXp();
+        // get y points
+        ArrayList<Double> yp = func.getYp();
+        // create ArrayList of Polynomials representing Spline Polynomials
+        // where the number of Spline Polynomials = number of points -1
+        ArrayList<Polynomial> S = new ArrayList<>(yp.size() - 1);
+        for (int i = 0; i < yp.size() - 1; i++) {
+            // init a scalar for the result of : (yi+1 - yi) / (xi+1 - xi)
+            double scalar = (yp.get(i + 1) - yp.get(i)) / (xp.get(i + 1) - xp.get(i));
+            // init curr Polynomial with a0 = -xi , a1 = 1 ; x - xi
+            Polynomial curr = new Polynomial(-1 * xp.get(i), 1);
+            // multiply the curr Polynomial by scalar value
+            // (yi+1 - yi) / (xi+1 - xi)   *  ( x - xi )
+            curr = curr.multiply(scalar);
+            // add yi to curr Polynomial
+            // yi  +  (yi+1 - yi) / (xi+1 - xi)   *  ( x - xi )
+            curr = curr.add(yp.get(i));
+            // add the curr Polynomial to answer ; S(x)
+            S.add(curr);
+        }
+        return S;
+    }
+
     /**
      * Formats the given Double as a string.
      *
