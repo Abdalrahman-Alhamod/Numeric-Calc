@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Restructure Interpolation class methods">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fixing tests of Interpolation class methods">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpolation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +43,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Function.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Matrix.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="SKIP_INSPECTION" />
   </component>
@@ -74,27 +74,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٥٧" summary="Testing getLagrange">
-      <created>1688337639096</created>
-      <option name="number" value="٠٠٠٥٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٥٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688337639096</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٥٨" summary="Create tag v1.0.3">
-      <created>1688338830904</created>
-      <option name="number" value="٠٠٠٥٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٥٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688338830904</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٥٩" summary="Fixing toString method in Polynomial and printing in getLagrangeNoShorthand">
-      <created>1688340233749</created>
-      <option name="number" value="٠٠٠٥٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٥٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688340233749</updated>
     </task>
     <task id="LOCAL؜-٠٠٠٦٠" summary="Testing Interpolation methods with new printing">
       <created>1688340584562</created>
@@ -418,7 +397,28 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688573994850</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL؜-٠٠١٠٦" summary="Rename getTUPV to getTUDV in Interpolation - N-G-F-S">
+      <created>1688574898277</created>
+      <option name="number" value="٠٠١٠٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٠٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688574898277</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٠٧" summary="Renaming N-G-F-S and N-G-B-S in Interpolation class">
+      <created>1688575059392</created>
+      <option name="number" value="٠٠١٠٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٠٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688575059392</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٠٨" summary="Fixing tests of Interpolation class methods">
+      <created>1688575079589</created>
+      <option name="number" value="٠٠١٠٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٠٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688575079589</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -460,9 +460,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix floating-point precision errors in getFormattedDouble method" />
-    <MESSAGE value="Create tag v1.0.4" />
-    <MESSAGE value="Fix degree bug (if degree &gt;= df0||dfn)" />
     <MESSAGE value="Fix getNewtonGregoryBackwardNoShorthand add -xn" />
     <MESSAGE value="Retesting Newton Gregory methods" />
     <MESSAGE value="Add getNewtonDividesForwardTable" />
@@ -485,6 +482,9 @@
     <MESSAGE value="Create tag v1.0.7" />
     <MESSAGE value="Fix floating-point precision errors" />
     <MESSAGE value="Restructure Interpolation class methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="Restructure Interpolation class methods" />
+    <MESSAGE value="Rename getTUPV to getTUDV in Interpolation - N-G-F-S" />
+    <MESSAGE value="Renaming N-G-F-S and N-G-B-S in Interpolation class" />
+    <MESSAGE value="Fixing tests of Interpolation class methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixing tests of Interpolation class methods" />
   </component>
 </project>

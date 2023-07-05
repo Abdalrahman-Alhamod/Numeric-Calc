@@ -3,9 +3,22 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Interpolation {
+    /**
+     * The GeneralMethod class provides methods to get the Interpolation Function using the <b>General Method</b>
+     * by solving a system of equations using <a href="https://en.wikipedia.org/wiki/Gaussian_elimination">Gaussian elimination</a>
+     */
     static class GeneralMethod {
+        /**
+         * Returns Interpolation Function As {@link Polynomial} using the <b>General Method</b>
+         *
+         * @param func {@link Function} object representing the function to be interpolated
+         * @return the result of Interpolation as {@link Polynomial}
+         * @throws ArithmeticException if the given function is null
+         */
         // Get Interpolation Function As Polynomial
         public static Polynomial getIFAP(Function func) {
+            if (func == null)
+                throw new ArithmeticException("invalid inputs");
             // Get x point
             ArrayList<Double> xp = func.getXp();
             // Get y points
@@ -27,7 +40,17 @@ public class Interpolation {
         }
     }
 
+    /**
+     * The Lagrange class provides methods to get the Interpolation Function using <b>Lagrange</b> method
+     */
     static class Lagrange {
+        /**
+         * Returns <b>Lagrange Polynomial</b> at the given index
+         *
+         * @param index the index of the required Lagrange Polynomial (Lj)
+         * @param xp    an ArrayList of x points
+         * @return the result Lagrange Polynomial as {@link Polynomial}
+         */
         private static Polynomial getLagrangePolyAt(int index, ArrayList<Double> xp) {
             // initialize scalar to 1 to be multiplied with a number
             double scalar = 1;
@@ -51,8 +74,16 @@ public class Interpolation {
             return lag;
         }
 
-        // Get Interpolation Function As Polynomial
+        /**
+         * Returns Interpolation Function As {@link Polynomial} using <b>Lagrange</b>
+         *
+         * @param func {@link Function} object representing the function to be interpolated
+         * @return the result of Interpolation as {@link Polynomial}
+         * @throws ArithmeticException if the given function is null
+         */
         public static Polynomial getIFAP(Function func) {
+            if (func == null)
+                throw new ArithmeticException("invalid inputs");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get y point
@@ -71,8 +102,16 @@ public class Interpolation {
             return res;
         }
 
-        //Get Interpolation Function As String No Shorthand
+        /**
+         * Returns Interpolation Function As <b>String</b> without shorthand using <b>Lagrange</b>
+         *
+         * @param func {@link Function} object representing the function to be interpolated
+         * @return the result of Interpolation as {@link String}
+         * @throws ArithmeticException if the given function is null
+         */
         public static String getIFASNS(Function func) {
+            if (func == null)
+                throw new ArithmeticException("invalid inputs");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get y points
@@ -117,9 +156,21 @@ public class Interpolation {
         }
     }
 
+    /**
+     * Newton-Gregory Forward Subtractions class provides methods for getting the interpolation function using <b>Newton-Gregory Forward Subtractions</b> method
+     * <p>It also provide function to get Newton-Gregory Forward Subtractions Table values </p>
+     */
     static class Newton_GregoryForwardSubtractions {
-        //Get Table Upper Diameter Values
-        public static ArrayList<Double> getTUDV(Function func) {
+        /**
+         * Returns the values of the upper diameter of the Newton-Gregory Forward Subtractions Table
+         *
+         * @param func {@link Function} object representing a function to get its x and y point
+         * @return the values of the upper diameter of the <b>Newton-Gregory Forward Subtractions Table</b>
+         * @throws ArithmeticException if the given function is null
+         */
+        public static ArrayList<Double> getUDV(Function func) {
+            if (func == null)
+                throw new ArithmeticException("invalid inputs");
             //get y points
             ArrayList<Double> yp = func.getYp();
             // initialize result ArrayList (Upper diameter values)
@@ -170,7 +221,14 @@ public class Interpolation {
             return res;
         }
 
-        // Get Interpolation Function As Polynomial
+        /**
+         * Returns Interpolation Function As {@link Polynomial} using <b>Newton-Gregory Forward Subtractions</b>
+         *
+         * @param func   {@link Function} object representing the function to be interpolated
+         * @param degree the degree of the required Polynomial
+         * @return the result of Interpolation as {@link Polynomial}
+         * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
+         */
         public static Polynomial getIFAP(Function func, int degree) {
             if (func == null || degree < 0)
                 throw new ArithmeticException("invalid inputs");
@@ -198,7 +256,7 @@ public class Interpolation {
             // with 0 to add it to other Polynomials
             Polynomial res = new Polynomial(0);
             //Get Newton Gregory Forward Table values (Upper diameter values)
-            ArrayList<Double> df0 = getTUDV(func);
+            ArrayList<Double> df0 = getUDV(func);
             // Adding y0
             res = res.add(df0.get(0));
             for (int i = 1; i <= degree; i++) {
@@ -233,7 +291,14 @@ public class Interpolation {
             return res;
         }
 
-        //Get Interpolation Function As String No Shorthand
+        /**
+         * Returns Interpolation Function As <b>String</b> without shorthand using <b>Newton-Gregory Forward Subtractions</b>
+         *
+         * @param func   {@link Function} object representing the function to be interpolated
+         * @param degree the degree of the required Polynomial
+         * @return the result of Interpolation as {@link String}
+         * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
+         */
         public static String getIFASNS(Function func, int degree) {
             if (func == null || degree < 0)
                 throw new ArithmeticException("invalid inputs");
@@ -256,7 +321,7 @@ public class Interpolation {
             //init a string builder to create the Interpolation answer
             StringBuilder sb = new StringBuilder();
             //Getting Newton Gregory Forward Table values (Upper diameter values)
-            ArrayList<Double> df0 = getTUDV(func);
+            ArrayList<Double> df0 = getUDV(func);
             // if the y0 != 0
             if (df0.get(0) != 0.0) {
                 // Adding f0 with formatted string value ; if y0 = 1.0 => append 1
@@ -303,9 +368,21 @@ public class Interpolation {
         }
     }
 
+    /**
+     * Newton-Gregory Backward Subtractions class provides methods for getting the interpolation function using <b>Newton-Gregory Backward Subtractions</b> method
+     * <p>It also provide function to get Newton-Gregory Backward Subtractions Table values </p>
+     */
     static class Newton_GregoryBackwardSubtractions {
-        // Get Table Lower Diameter Values
-        public static ArrayList<Double> getTLDV(Function func) {
+        /**
+         * Returns the values of the lower diameter of the Newton-Gregory Backward Subtractions Table
+         *
+         * @param func {@link Function} object representing a function to get its x and y point
+         * @return the values of the upper diameter of the <b>Newton-Gregory Backward Subtractions Table</b>
+         * @throws ArithmeticException if the given function is null
+         */
+        public static ArrayList<Double> getLDV(Function func) {
+            if (func == null)
+                throw new ArithmeticException("invalid inputs");
             //get y points
             ArrayList<Double> yp = func.getYp();
             // initialize result ArrayList (Lower diameter values)
@@ -355,7 +432,14 @@ public class Interpolation {
             return res;
         }
 
-        // Get Interpolation Function As Polynomial
+        /**
+         * Returns Interpolation Function As {@link Polynomial} using <b>Newton-Gregory Backward Subtractions</b>
+         *
+         * @param func   {@link Function} object representing the function to be interpolated
+         * @param degree the degree of the required Polynomial
+         * @return the result of Interpolation as {@link Polynomial}
+         * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
+         */
         public static Polynomial getIFAP(Function func, int degree) {
             if (func == null || degree < 0)
                 throw new ArithmeticException("invalid inputs");
@@ -383,7 +467,7 @@ public class Interpolation {
             // with 0 to add it to other Polynomials
             Polynomial res = new Polynomial(0);
             //Getting Newton Gregory Backward Table values (Lower diameter values)
-            ArrayList<Double> dfn = getTLDV(func);
+            ArrayList<Double> dfn = getLDV(func);
             // Adding yn
             res = res.add(dfn.get(0));
             for (int i = 1; i <= degree; i++) {
@@ -418,7 +502,14 @@ public class Interpolation {
             return res;
         }
 
-        //Get Interpolation Function As String No Shorthand
+        /**
+         * Returns Interpolation Function As <b>String</b> without shorthand using <b>Newton-Gregory Backward Subtractions</b>
+         *
+         * @param func   {@link Function} object representing the function to be interpolated
+         * @param degree the degree of the required Polynomial
+         * @return the result of Interpolation as {@link String}
+         * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
+         */
         public static String getIFASNS(Function func, int degree) {
             if (func == null || degree < 0)
                 throw new ArithmeticException("invalid inputs");
@@ -441,7 +532,7 @@ public class Interpolation {
             //init a string builder to create the Interpolation answer
             StringBuilder sb = new StringBuilder();
             //Getting Newton Gregory Backward Table values (Lower diameter values)
-            ArrayList<Double> dfn = getTLDV(func);
+            ArrayList<Double> dfn = getLDV(func);
             // if yn != 0
             if (dfn.get(0) != 0.0) {
                 // Adding yn with formatted string value ; if y0 = 1.0 => append 1
@@ -488,10 +579,22 @@ public class Interpolation {
         }
     }
 
+    /**
+     * Newton Forward Divided Subtractions class provides methods for getting the interpolation function using <b>Newton Forward Divided Subtractions</b> method
+     * <p>It also provide function to get Newton Forward Divided Subtractions Table values </p>
+     */
     static class NewtonForwardDividedSubtractions {
 
-        // Get Table Upper Diameter Values
-        public static ArrayList<Double> getTUDV(Function func) {
+        /**
+         * Returns the values of the lower diameter of the Newton Forward Divided Subtractions Table
+         *
+         * @param func {@link Function} object representing a function to get its x and y point
+         * @return the values of the upper diameter of the <b>Newton Forward Divided Subtractions Table</b>
+         * @throws ArithmeticException if the given function is null
+         */
+        public static ArrayList<Double> getUDV(Function func) {
+            if (func == null)
+                throw new ArithmeticException("invalid inputs");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get y points
@@ -554,14 +657,21 @@ public class Interpolation {
             return res;
         }
 
-        // Get Interpolation Function as Polynomial
+        /**
+         * Returns Interpolation Function As {@link Polynomial} using <b>Newton Forward Divided Subtractions</b>
+         *
+         * @param func   {@link Function} object representing the function to be interpolated
+         * @param degree the degree of the required Polynomial
+         * @return the result of Interpolation as {@link Polynomial}
+         * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
+         */
         public static Polynomial getIFAP(Function func, int degree) {
             if (func == null || degree < 0)
                 throw new ArithmeticException("invalid inputs");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get Newton Divides table values (upper diameter values)
-            ArrayList<Double> f0 = getTUDV(func);
+            ArrayList<Double> f0 = getUDV(func);
             // init result Polynomial (Interpolation answer by Newton Divides ) with the y0 value;
             Polynomial res = new Polynomial(f0.get(0));
             for (int i = 1; i <= degree; i++) {
@@ -583,14 +693,21 @@ public class Interpolation {
             return res;
         }
 
-        //Get Interpolation Function As String No Shorthand
+        /**
+         * Returns Interpolation Function As <b>String</b> without shorthand using <b>Newton Forward Divided Subtractions</b>
+         *
+         * @param func   {@link Function} object representing the function to be interpolated
+         * @param degree the degree of the required Polynomial
+         * @return the result of Interpolation as {@link String}
+         * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
+         */
         public static String getIFASNS(Function func, int degree) {
             if (func == null || degree < 0)
                 throw new ArithmeticException("invalid inputs");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get Newton Divides table values (upper diameter values)
-            ArrayList<Double> f0 = getTUDV(func);
+            ArrayList<Double> f0 = getUDV(func);
             // init string builder to create string representing
             // the answer of interpolation by Newton Divides Forward
             StringBuilder sb = new StringBuilder();
@@ -616,9 +733,21 @@ public class Interpolation {
         }
     }
 
+    /**
+     * Newton Backward Divided Subtractions class provides methods for getting the interpolation function using <b>Newton Backward Divided Subtractions</b> method
+     * <p>It also provide function to get Newton Backward Divided Subtractions Table values </p>
+     */
     static class NewtonBackwardDividedSubtractions {
-        // Get Table Lower Diameter Values
-        public static ArrayList<Double> getTLDV(Function func) {
+        /**
+         * Returns the values of the lower diameter of the Newton Backward Divided Subtractions Table
+         *
+         * @param func {@link Function} object representing a function to get its x and y point
+         * @return the values of the upper diameter of the <b>Newton Backward Divided Subtractions Table</b>
+         * @throws ArithmeticException if the given function is null
+         */
+        public static ArrayList<Double> getLDV(Function func) {
+            if (func == null)
+                throw new ArithmeticException("invalid inputs");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get y points
@@ -681,14 +810,21 @@ public class Interpolation {
             return res;
         }
 
-        // Get Interpolation Function As Polynomial
+        /**
+         * Returns Interpolation Function As {@link Polynomial} using <b>Newton Backward Divided Subtractions</b>
+         *
+         * @param func   {@link Function} object representing the function to be interpolated
+         * @param degree the degree of the required Polynomial
+         * @return the result of Interpolation as {@link Polynomial}
+         * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
+         */
         public static Polynomial getIFAP(Function func, int degree) {
             if (func == null || degree < 0)
                 throw new ArithmeticException("invalid inputs");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get Newton Divides table values (lower diameter values)
-            ArrayList<Double> fn = getTLDV(func);
+            ArrayList<Double> fn = getLDV(func);
             // init result Polynomial (Interpolation answer by Newton Divides ) with the yn value;
             Polynomial res = new Polynomial(fn.get(0));
             for (int i = 1; i <= degree; i++) {
@@ -710,14 +846,21 @@ public class Interpolation {
             return res;
         }
 
-        //Get Interpolation Function As String No Shorthand
+        /**
+         * Returns Interpolation Function As <b>String</b> without shorthand using <b>Newton Backward Divided Subtractions</b>
+         *
+         * @param func   {@link Function} object representing the function to be interpolated
+         * @param degree the degree of the required Polynomial
+         * @return the result of Interpolation as {@link String}
+         * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
+         */
         public static String getIFASNS(Function func, int degree) {
             if (func == null || degree < 0)
                 throw new ArithmeticException("invalid inputs");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get Newton Divides table values (lower diameter values)
-            ArrayList<Double> fn = getTLDV(func);
+            ArrayList<Double> fn = getLDV(func);
             // init string builder to create string representing
             // the answer of interpolation by Newton Divides Forward
             StringBuilder sb = new StringBuilder();
@@ -743,8 +886,18 @@ public class Interpolation {
         }
     }
 
+    /**
+     * Least-Squares class methods for getting the interpolation function using <b>Least-Squares</b> method
+     */
     static class LeastSquares {
-        // Get Interpolation Function As Polynomial
+        /**
+         * Returns Interpolation Function As {@link Polynomial} using <b>Least-Squares</b>
+         *
+         * @param func   {@link Function} object representing the function to be interpolated
+         * @param degree the degree of the required Polynomial
+         * @return the result of Interpolation as {@link Polynomial}
+         * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
+         */
         public static Polynomial getIFAP(Function func, int degree) {
             if (func == null || degree < 0)
                 throw new ArithmeticException("invalid inputs");
@@ -788,8 +941,17 @@ public class Interpolation {
         }
     }
 
+    /**
+     * Spline class methods for getting the interpolation function using <b>Spline</b> method
+     */
     static class Spline {
-        // Get Interpolation Function As Polynomials
+        /**
+         * Returns an ArrayList of {@link Polynomial} representing the Interpolation Function using <b>Spline</b>
+         *
+         * @param func {@link Function} object representing the function to be interpolated
+         * @return the result of Interpolation an ArrayList of {@link Polynomial}
+         * @throws ArithmeticException if the given function is null
+         */
         public static ArrayList<Polynomial> getIFAPs(Function func) {
             if (func == null)
                 throw new ArithmeticException("invalid inputs");
