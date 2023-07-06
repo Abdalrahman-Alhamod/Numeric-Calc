@@ -27,7 +27,6 @@ public abstract class EvaluateString {
         for (int i = 0; i < tokens.length; i++) {
 
             if ((i == 0 && tokens[i] == '-') || (tokens[i] == '-' && !Character.isDigit(tokens[i - 1]))) {
-                System.out.println("check");
                 i++;
                 StringBuilder sb = new StringBuilder();
 
