@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class ExpressionFunction {
+public class ExpressionFunction extends Function {
     private final String func;
 
     public ExpressionFunction(String f) {
