@@ -411,7 +411,7 @@ public class Main {
         System.out.println(ans.getValueAt(a)); */
 
         // Central,Forward,Backward Subtraction
-        Scanner in = new Scanner(System.in);
+        /*Scanner in = new Scanner(System.in);
         double n, temp;
         ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
         System.out.print("Enter number of points : ");
@@ -436,7 +436,7 @@ public class Main {
         System.out.println(Differentiation.Subtractions.Forward.getValueAt(func, a));
         System.out.println();
         System.out.print("Differentiation answer using Backward Subtractions : \nans = ");
-        System.out.println(Differentiation.Subtractions.Backward.getValueAt(func, a));
+        System.out.println(Differentiation.Subtractions.Backward.getValueAt(func, a)); */
 
 
     }
