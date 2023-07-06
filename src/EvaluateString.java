@@ -16,6 +16,7 @@ public abstract class EvaluateString {
      */
     public static double evaluate(String expression, double x) {
         expression = expression.replaceAll("(?<!\\w)x(?!\\w)", Double.toString(x));
+        expression = expression.replaceAll("\\s", ""); // Remove all whitespace characters from the expression
         char[] tokens = expression.toCharArray();
 
         // Stack for numbers: 'values'
@@ -24,11 +25,8 @@ public abstract class EvaluateString {
         Stack<String> ops = new Stack<>();
 
         for (int i = 0; i < tokens.length; i++) {
-            // Current token is a whitespace, skip it
-            if (tokens[i] == ' ')
-                continue;
 
-            if (ops.empty() && values.empty() && tokens[i] == '-') {
+            if ((i == 0 && tokens[i] == '-') || (tokens[i] == '-' && !Character.isDigit(tokens[i - 1]))) {
                 System.out.println("check");
                 i++;
                 StringBuilder sb = new StringBuilder();
