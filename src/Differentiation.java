@@ -2,6 +2,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * Differentiation class provides inner classes to get the differential function
+ * with multiple methods such as <b>Lagrange</b>, <b>Newton_Gregory Forward Subtractions</b>,
+ * <b>Newton_Gregory Backward Subtractions</b> and <b>Central,Forward,Backward Subtractions</b>
+ */
 public class Differentiation {
     /**
      * The Lagrange class provides methods to get the Differential Function using <b>Lagrange</b> method
