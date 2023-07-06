@@ -477,9 +477,29 @@ public class Main {
         System.out.println(f.toPointsFunction(a, b, n));*/
 
         //Testing toPointsFunction in Polynomial
-        /*Polynomial p = new Polynomial(1, 2);
+        /* p = new Polynomial(1, 2);
         System.out.println(p);
         System.out.println(p.toPointsFunction(0, 5, 100));*/
+
+        //Testing getDiffAt and getIntegralAt in PointsFunction
+        /*Scanner in = new Scanner(System.in);
+        double n, temp;
+        ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
+        System.out.print("Enter number of points : ");
+        n = in.nextDouble();
+        n--; //Because n is the number of domains ; number of domains = number of points -1
+        for (int i = 0; i <= n; i++) {
+            System.out.print("Enter x" + i + " : ");
+            temp = parseDouble(in.next());
+            xp.add(temp);
+            System.out.print("Enter y" + i + " : ");
+            temp = parseDouble(in.next());
+            yp.add(temp);
+        }
+        PointsFunction func = new PointsFunction(xp, yp);
+        System.out.println(func);
+        System.out.println(func.getDiffAt(3,1));
+        System.out.println(func.getIntegralAt(4,1));*/
 
 
     }
