@@ -23,11 +23,13 @@ public class PointsFunction implements Function {
     }
 
     public double getDiffAt(double x, int rank) {
-        return 0;
+        Polynomial poly = Interpolation.NewtonForwardDividedSubtractions.getIFAP(this, xp.size() - 1);
+        return poly.getDiffAt(x, rank);
     }
 
     public double getIntegralAt(double x, int rank) {
-        return 0;
+        Polynomial poly = Interpolation.NewtonForwardDividedSubtractions.getIFAP(this, xp.size() - 1);
+        return poly.getIntegralAt(x, rank);
     }
 
     ArrayList<Double> getXp() {
