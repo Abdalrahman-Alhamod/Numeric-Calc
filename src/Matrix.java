@@ -347,7 +347,6 @@ class Matrix {
         for (int r = 0; r < rowCount; r++) {
             if (lead >= colCount)
                 break;
-
             int i = r;
             while (a.get(i).get(lead) == 0) {
                 i++;
