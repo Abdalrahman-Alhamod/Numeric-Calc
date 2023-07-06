@@ -15,7 +15,8 @@ class EvaluateString {
      * @return The result of the evaluation.
      */
     public static double evaluate(String expression, double x) {
-        expression = expression.replace("x", Double.toString(x));
+        expression = expression.replaceAll("(?<!\\w)x(?!\\w)", Double.toString(x));
+        System.out.println(expression);
         char[] tokens = expression.toCharArray();
 
         // Stack for numbers: 'values'
