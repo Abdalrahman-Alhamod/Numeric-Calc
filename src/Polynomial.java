@@ -335,4 +335,28 @@ public class Polynomial extends Function {
         return integPoly.getValueAt(x);
     }
 
+    /**
+     * Convert this Polynomial into Points Function
+     *
+     * @param a the lower limit of x point
+     * @param b the upper limit of x point
+     * @param n the number of total between points
+     * @return {@link PointsFunction} object representing the converted Polynomial
+     * @throws ArithmeticException if a>=b or n<=0
+     */
+    public PointsFunction toPointsFunction(double a, double b, double n) {
+        if (a >= b || n <= 0)
+            throw new ArithmeticException("invalid inputs");
+        double h = (a + b) / n;
+        //Rounding value back to fix floating-point precision errors
+        h = Math.round(h * 1e10) / 1e10;
+        ArrayList<Double> xp = new ArrayList<>();
+        ArrayList<Double> yp = new ArrayList<>();
+        for (double i = a; i <= b; i += h) {
+            xp.add(i);
+            yp.add(getValueAt(i));
+        }
+        return new PointsFunction(xp, yp);
+    }
+
 }
