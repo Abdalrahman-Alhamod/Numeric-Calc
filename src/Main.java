@@ -450,15 +450,30 @@ public class Main {
         System.out.println("F(" + x + ") = " + f.getValueAt(x));*/
 
         //Testing Polynomial getDiffAt and getIntegralAt
-        ArrayList<Double> coeffs = new ArrayList<>();
+        /*ArrayList<Double> coeffs = new ArrayList<>();
         coeffs.add(5.0);
         coeffs.add(-4.0);
         coeffs.add(6.0);
         Polynomial p = new Polynomial(coeffs);
         System.out.println(p);
         System.out.println(p.getDiffAt(1,2));
-        System.out.println(p.getIntegralAt(1,1));
+        System.out.println(p.getIntegralAt(1,1));*/
 
+        //Testing toPointsFunction in ExpressionFunction
+        /*Scanner in = new Scanner(System.in);
+        System.out.print("Enter function : ");
+        String s = in.next();
+        ExpressionFunction f = new ExpressionFunction(s);
+        System.out.print("Enter a : ");
+        double a = parseDouble(in.next());
+        System.out.print("Enter b : ");
+        double b = parseDouble(in.next());
+        System.out.print("Enter n : ");
+        int n = in.nextInt();
+        System.out.println("Expression Function You Have Entered : ");
+        System.out.println(f);
+        System.out.println("Points Function Converting : ");
+        System.out.println(f.toPointsFunction(a, b, n));*/
 
 
     }
