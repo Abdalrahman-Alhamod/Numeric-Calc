@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
-public abstract class Function {
+public interface Function {
 
     abstract public double getValueAt(double x);
 

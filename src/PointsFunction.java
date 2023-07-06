@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class PointsFunction extends  Function{
+public class PointsFunction implements  Function{
     private final ArrayList<Double> xp;
     private final ArrayList<Double> yp;
 

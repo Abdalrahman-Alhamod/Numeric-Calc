@@ -7,7 +7,7 @@ import java.util.Objects;
  * The Polynomial class provides methods for evaluating the polynomial, computing its derivative and integral,
  * and performing basic arithmetic operations.
  */
-public class Polynomial extends Function {
+public class Polynomial implements Function {
     /**
      * coefficients ArrayList of the current Polynomial
      */

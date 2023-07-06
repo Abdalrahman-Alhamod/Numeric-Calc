@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ExpressionFunction extends Function {
+public class ExpressionFunction implements Function {
     private final String func;
 
     public ExpressionFunction(String f) {
