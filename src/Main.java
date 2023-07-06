@@ -426,6 +426,7 @@ public class Main {
             yp.add(temp);
         }
         Function func = new Function(xp, yp);
+        System.out.println(func);
         System.out.print("Enter a : ");
         double a = parseDouble(in.next());
         System.out.println();
@@ -436,7 +437,17 @@ public class Main {
         System.out.println(Differentiation.Subtractions.Forward.getValueAt(func, a));
         System.out.println();
         System.out.print("Differentiation answer using Backward Subtractions : \nans = ");
-        System.out.println(Differentiation.Subtractions.Backward.getValueAt(func, a)); */
+        System.out.println(Differentiation.Subtractions.Backward.getValueAt(func, a));*/
+
+        //Testing Function Value
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter function : ");
+        String s = in.next();
+        Function f = new Function(s);
+        System.out.print("Enter x : ");
+        double x = parseDouble(in.next());
+        System.out.println(f);
+        System.out.println("F(" + x + ") = " + f.getValueAt(x));
 
 
     }

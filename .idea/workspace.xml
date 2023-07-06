@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix integral bug ( a&gt;=b)">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix evaluate exp bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EvaluateString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EvaluateString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Function.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Function.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +44,8 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Differentiation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Function.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/EvaluateString.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Function.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Matrix.java" root0="SKIP_INSPECTION" />
@@ -75,27 +79,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٨٢" summary="Create tag v1.0.4">
-      <created>1688405082674</created>
-      <option name="number" value="٠٠٠٨٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٨٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688405082674</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٨٣" summary="Fix degree bug (if degree &gt;= df0||dfn)">
-      <created>1688405574599</created>
-      <option name="number" value="٠٠٠٨٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٨٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688405574599</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٨٤" summary="Fix getNewtonGregoryBackwardNoShorthand add -xn">
-      <created>1688405771345</created>
-      <option name="number" value="٠٠٠٨٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٨٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688405771345</updated>
     </task>
     <task id="LOCAL؜-٠٠٠٨٥" summary="Retesting Newton Gregory methods">
       <created>1688406184000</created>
@@ -419,7 +402,28 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688663912248</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL؜-٠٠١٣١" summary="Add EvaluateString with its methods and java doc and comments">
+      <created>1688676993107</created>
+      <option name="number" value="٠٠١٣١" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٣١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688676993107</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٣٢" summary="Add evaluate with a value in EvaluateString class method">
+      <created>1688678445700</created>
+      <option name="number" value="٠٠١٣٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٣٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688678445700</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٣٣" summary="Fix evaluate exp bug">
+      <created>1688678649146</created>
+      <option name="number" value="٠٠١٣٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٣٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688678649146</updated>
+    </task>
+    <option name="localTasksCounter" value="134" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -461,9 +465,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Restructure Interpolation class methods" />
-    <MESSAGE value="Rename getTUPV to getTUDV in Interpolation - N-G-F-S" />
-    <MESSAGE value="Renaming N-G-F-S and N-G-B-S in Interpolation class" />
     <MESSAGE value="Fixing tests of Interpolation class methods" />
     <MESSAGE value="Add java DOC to Interpolation class" />
     <MESSAGE value="Fixing toString printing in Polynomial class ( start printing from x^n )" />
@@ -486,6 +487,9 @@
     <MESSAGE value="Replace lambda expression with Collections in Matrix" />
     <MESSAGE value="Remove mod comments from Matrix" />
     <MESSAGE value="Fix integral bug ( a&gt;=b)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix integral bug ( a&gt;=b)" />
+    <MESSAGE value="Add EvaluateString with its methods and java doc and comments" />
+    <MESSAGE value="Add evaluate with a value in EvaluateString class method" />
+    <MESSAGE value="Fix evaluate exp bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix evaluate exp bug" />
   </component>
 </project>
