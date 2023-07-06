@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add toPointsFunction to Polynomial with java doc">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix floating-point precision errors in toPointsFunction">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PointsFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PointsFunction.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,13 +42,13 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/Differentiation.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Differentiation.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/EvaluateString.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Function.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Matrix.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -76,34 +78,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٠١" summary="Add getSpline method">
-      <created>1688571746695</created>
-      <option name="number" value="٠٠١٠١" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٠١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688571746695</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٠٢" summary="Test getSpline">
-      <created>1688571768124</created>
-      <option name="number" value="٠٠١٠٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٠٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688571768124</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٠٣" summary="Create tag v1.0.7">
-      <created>1688571876867</created>
-      <option name="number" value="٠٠١٠٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٠٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688571876867</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٠٤" summary="Fix floating-point precision errors">
-      <created>1688572280877</created>
-      <option name="number" value="٠٠١٠٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٠٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688572280877</updated>
     </task>
     <task id="LOCAL؜-٠٠١٠٥" summary="Restructure Interpolation class methods">
       <created>1688573994850</created>
@@ -420,7 +394,35 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688683377165</updated>
     </task>
-    <option name="localTasksCounter" value="150" />
+    <task id="LOCAL؜-٠٠١٥٠" summary="Testing toPointsFunction in Polynomial">
+      <created>1688683500585</created>
+      <option name="number" value="٠٠١٥٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٥٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688683500585</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٥١" summary="Make EvaluateString and Integral and Interpolation and Differentiation abstract">
+      <created>1688684216687</created>
+      <option name="number" value="٠٠١٥١" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٥١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688684216687</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٥٢" summary="Make Function Interface and its son implements it">
+      <created>1688684330542</created>
+      <option name="number" value="٠٠١٥٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٥٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688684330542</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٥٣" summary="Fix floating-point precision errors in toPointsFunction">
+      <created>1688684498226</created>
+      <option name="number" value="٠٠١٥٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٥٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688684498226</updated>
+    </task>
+    <option name="localTasksCounter" value="154" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -462,10 +464,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add Central,Forward,Backward Subtractions" />
-    <MESSAGE value="Fix Differentiation Subtraction bugs" />
-    <MESSAGE value="Create tag v1.0.9" />
-    <MESSAGE value="Replace lambda expression with Collections in Matrix" />
     <MESSAGE value="Remove mod comments from Matrix" />
     <MESSAGE value="Fix integral bug ( a&gt;=b)" />
     <MESSAGE value="Add EvaluateString with its methods and java doc and comments" />
@@ -487,6 +485,10 @@
     <MESSAGE value="Add toPointsFunction to ExpressionFunction" />
     <MESSAGE value="Testing toPointsFunction in ExpressionFunction" />
     <MESSAGE value="Add toPointsFunction to Polynomial with java doc" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add toPointsFunction to Polynomial with java doc" />
+    <MESSAGE value="Testing toPointsFunction in Polynomial" />
+    <MESSAGE value="Make EvaluateString and Integral and Interpolation and Differentiation abstract" />
+    <MESSAGE value="Make Function Interface and its son implements it" />
+    <MESSAGE value="Fix floating-point precision errors in toPointsFunction" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix floating-point precision errors in toPointsFunction" />
   </component>
 </project>

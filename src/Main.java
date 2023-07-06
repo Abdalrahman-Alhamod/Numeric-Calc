@@ -21,7 +21,7 @@ public class Main {
             temp = parseDouble(in.next());
             yp.add(temp);
         }
-        Function func = new Function(xp, yp);
+        PointsFunction func = new PointsFunction(xp, yp);
         a = xp.get(0);
         b = xp.get(xp.size() - 1);
         System.out.println("xp : " + xp);
@@ -133,7 +133,7 @@ public class Main {
             temp = parseDouble(in.next());
             yp.add(temp);
         }
-        Function func = new Function(xp, yp);
+        PointsFunction func = new PointsFunction(xp, yp);
         System.out.println(Interpolation.GeneralMethod.getIFAP(func));
         // 1 3 2 1 3 5
         // 11.0 + -11.0x + 3.0x^2  */
@@ -170,7 +170,7 @@ public class Main {
             temp = parseDouble(in.next());
             yp.add(temp);
         }
-        Function func = new Function(xp, yp);
+        PointsFunction func = new PointsFunction(xp, yp);
         System.out.println("Interpolated Function using Lagrange method : ");
         System.out.println(Interpolation.Lagrange.getIFAP(func));
         System.out.println("Interpolated Function using Lagrange method without shorthand : ");
@@ -192,7 +192,7 @@ public class Main {
             temp = parseDouble(in.next());
             yp.add(temp);
         }
-        Function func = new Function(xp, yp);
+        PointsFunction func = new PointsFunction(xp, yp);
         System.out.print("Enter Degree : ");
         int degree = in.nextInt();
         System.out.println();
@@ -231,7 +231,7 @@ public class Main {
             temp = parseDouble(in.next());
             yp.add(temp);
         }
-        Function func = new Function(xp, yp);
+        PointsFunction func = new PointsFunction(xp, yp);
         System.out.print("Enter Degree : ");
         int degree = in.nextInt();
         System.out.println();
@@ -270,7 +270,7 @@ public class Main {
             temp = parseDouble(in.next());
             yp.add(temp);
         }
-        Function func = new Function(xp, yp);
+        PointsFunction func = new PointsFunction(xp, yp);
         System.out.print("Enter Degree : ");
         int degree = in.nextInt();
         System.out.println();
@@ -293,13 +293,14 @@ public class Main {
             temp = parseDouble(in.next());
             yp.add(temp);
         }
-        Function func = new Function(xp, yp);
+        PointsFunction func = new PointsFunction(xp, yp);
         System.out.println();
         ArrayList<Polynomial> ans = Interpolation.Spline.getIFAPs(func);
         System.out.println("Interpolated Function S(x) using Spline : ");
         for (int i = 0; i < ans.size(); i++) {
             System.out.println("S" + i + "(x) = " + ans.get(i) + "\t\t" + xp.get(i) + " <= x <= " + xp.get(i + 1));
-        }
+        } */
+
         // n=4  1 2 2 -1 3 0 4 2 */
 
         //Testing Interpolation
@@ -317,7 +318,7 @@ public class Main {
             temp = parseDouble(in.next());
             yp.add(temp);
         }
-        Function func = new Function(xp, yp);
+        PointsFunction func = new PointsFunction(xp, yp);
         int degree = xp.size() - 1;
         System.out.println();
         System.out.println("Interpolation Function using The General Method : ");
@@ -363,7 +364,7 @@ public class Main {
             temp = parseDouble(in.next());
             yp.add(temp);
         }
-        Function func = new Function(xp, yp);
+        PointsFunction func = new PointsFunction(xp, yp);
         System.out.print("Enter a : ");
         double a = parseDouble(in.next());
         System.out.println();
@@ -388,7 +389,7 @@ public class Main {
             temp = parseDouble(in.next());
             yp.add(temp);
         }
-        Function func = new Function(xp, yp);
+        PointsFunction func = new PointsFunction(xp, yp);
         System.out.print("Enter the degree of the required Polynomial : ");
         int degree = in.nextInt();
         System.out.print("Enter the rank of the required differentiation : ");
@@ -425,7 +426,7 @@ public class Main {
             temp = parseDouble(in.next());
             yp.add(temp);
         }
-        Function func = new Function(xp, yp);
+        PointsFunction func = new PointsFunction(xp, yp);
         System.out.println(func);
         System.out.print("Enter a : ");
         double a = parseDouble(in.next());
@@ -443,7 +444,7 @@ public class Main {
         /*Scanner in = new Scanner(System.in);
         System.out.print("Enter function : ");
         String s = in.next();
-        Function f = new ExpressionFunction(s);
+        PointsFunction f = new ExpressionPointsFunction(s);
         System.out.print("Enter x : ");
         double x = parseDouble(in.next());
         System.out.println(f);
@@ -476,9 +477,9 @@ public class Main {
         System.out.println(f.toPointsFunction(a, b, n));*/
 
         //Testing toPointsFunction in Polynomial
-        Polynomial p = new Polynomial(1, 2);
+        /*Polynomial p = new Polynomial(1, 2);
         System.out.println(p);
-        System.out.println(p.toPointsFunction(0, 5, 10));
+        System.out.println(p.toPointsFunction(0, 5, 100));*/
 
 
     }
