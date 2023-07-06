@@ -19,11 +19,15 @@ public class ExpressionFunction implements Function {
     }
 
     public double getDiffAt(double x, int rank) {
-        return 0;
+        PointsFunction pf = this.toPointsFunction(x - 10, x + 10, 20);
+        Polynomial poly = Interpolation.NewtonForwardDividedSubtractions.getIFAP(pf, pf.getXp().size() - 1);
+        return poly.getDiffAt(x, rank);
     }
 
     public double getIntegralAt(double x, int rank) {
-        return 0;
+        PointsFunction pf = this.toPointsFunction(x - 10, x + 10, 20);
+        Polynomial poly = Interpolation.NewtonForwardDividedSubtractions.getIFAP(pf, pf.getXp().size() - 1);
+        return poly.getIntegralAt(x, rank);
     }
 
     public PointsFunction toPointsFunction(double a, double b, double n) {
@@ -38,7 +42,7 @@ public class ExpressionFunction implements Function {
             xp.add(i);
             yp.add(getValueAt(i));
         }
-        return new PointsFunction(xp,yp);
+        return new PointsFunction(xp, yp);
     }
 
     @Override
