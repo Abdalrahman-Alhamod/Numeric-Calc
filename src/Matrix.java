@@ -239,7 +239,7 @@ class Matrix {
             ArrayList<Double> productRow = product.getRow(i);
             for (int j = 0; j < other.m; j++) {
                 for (int k = 0; k < m; k++) {
-                    productRow.set(j, productRow.get(j) + (row.get(k) * otherData.get(k).get(j))); // Perform modulo arithmetic while multiplying elements
+                    productRow.set(j, productRow.get(j) + (row.get(k) * otherData.get(k).get(j)));
                 }
             }
         }
@@ -258,7 +258,7 @@ class Matrix {
             ArrayList<Double> row = a.get(i);
             ArrayList<Double> productRow = product.getRow(i);
             for (int j = 0; j < m; j++) {
-                productRow.set(j, row.get(j) * scalar); // Perform modulo arithmetic while multiplying with constant value
+                productRow.set(j, row.get(j) * scalar);
             }
         }
         return product;
