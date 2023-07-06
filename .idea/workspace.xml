@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix evaluate exp bug">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add getDiffAt and getIntegralAt to Polynomial with java doc">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EvaluateString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EvaluateString.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Function.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Function.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polynomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polynomial.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,9 +43,9 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Differentiation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/EvaluateString.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/EvaluateString.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Function.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Matrix.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="FORCE_HIGHLIGHTING" />
@@ -79,90 +78,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٨٥" summary="Retesting Newton Gregory methods">
-      <created>1688406184000</created>
-      <option name="number" value="٠٠٠٨٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٨٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688406184000</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٨٦" summary="Add getNewtonDividesForwardTable">
-      <created>1688548480281</created>
-      <option name="number" value="٠٠٠٨٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٨٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688548480281</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٨٧" summary="Make getNewtonDividesForwardTable static and add comments">
-      <created>1688548890308</created>
-      <option name="number" value="٠٠٠٨٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٨٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688548890308</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٨٨" summary="Add getNewtonDividesBackwardTable">
-      <created>1688549074978</created>
-      <option name="number" value="٠٠٠٨٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٨٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688549074978</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٨٩" summary="Testing getNewtonDividesForwardTable and getNewtonDividesBackwardTable">
-      <created>1688549508963</created>
-      <option name="number" value="٠٠٠٨٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٨٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688549508963</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٩٠" summary="Add constructor(a0) to Polynomial">
-      <created>1688549810774</created>
-      <option name="number" value="٠٠٠٩٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٩٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688549810774</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٩١" summary="Add constructor(a0,a1) to Polynomial">
-      <created>1688550832089</created>
-      <option name="number" value="٠٠٠٩١" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٩١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688550832089</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٩٢" summary="Add comments to Interpolation class in every line&#10;Enhance code by applying changes for the new Polynomial constructor(a0,a1)">
-      <created>1688557421097</created>
-      <option name="number" value="٠٠٠٩٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٩٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688557421097</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٩٣" summary="Add getNewtonDividesForward method">
-      <created>1688558474720</created>
-      <option name="number" value="٠٠٠٩٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٩٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688558474720</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٩٤" summary="Fix getNewtonDividesForward bug">
-      <created>1688558715255</created>
-      <option name="number" value="٠٠٠٩٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٩٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688558715255</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٩٥" summary="Add getNewtonDividesBackward method">
-      <created>1688559019604</created>
-      <option name="number" value="٠٠٠٩٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٩٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688559019604</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٩٦" summary="Fix getNewtonDividesBackward bug">
-      <created>1688559347877</created>
-      <option name="number" value="٠٠٠٩٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٩٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688559347877</updated>
     </task>
     <task id="LOCAL؜-٠٠٠٩٧" summary="Add getNewtonDividesForwardNoShorthand method">
       <created>1688559764790</created>
@@ -423,7 +338,91 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688678649146</updated>
     </task>
-    <option name="localTasksCounter" value="134" />
+    <task id="LOCAL؜-٠٠١٣٤" summary="Fix evaluate minus bug">
+      <created>1688679710994</created>
+      <option name="number" value="٠٠١٣٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٣٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688679710994</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٣٥" summary="delete printing from Evaluate class">
+      <created>1688679842559</created>
+      <option name="number" value="٠٠١٣٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٣٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688679842559</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٣٦" summary="Add new constructor(string) to Function&#10;Update getValueAt with EvaluateExpression&#10;Add toString to Function">
+      <created>1688679973164</created>
+      <option name="number" value="٠٠١٣٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٣٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688679973164</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٣٧" summary="Testing Function getValueAt">
+      <created>1688679992488</created>
+      <option name="number" value="٠٠١٣٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٣٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688679992488</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٣٨" summary="Add ExpressionFunction with its methods">
+      <created>1688680777611</created>
+      <option name="number" value="٠٠١٣٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٣٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688680777611</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٣٩" summary="Add PointsFunction with its methods">
+      <created>1688680789720</created>
+      <option name="number" value="٠٠١٣٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٣٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688680789720</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٤٠" summary="Restructuring Function (make it abstract )">
+      <created>1688681251869</created>
+      <option name="number" value="٠٠١٤٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٤٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688681251869</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٤١" summary="Make ExpressionFunction extends Function">
+      <created>1688681270051</created>
+      <option name="number" value="٠٠١٤١" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٤١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688681270051</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٤٢" summary="Make PointsFunction extends Function">
+      <created>1688681290750</created>
+      <option name="number" value="٠٠١٤٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٤٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688681290750</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٤٣" summary="Replace Function with PointsFunction in Interpolation">
+      <created>1688681319877</created>
+      <option name="number" value="٠٠١٤٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٤٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688681319877</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٤٤" summary="Replace Function with PointsFunction in Differentiation">
+      <created>1688681456469</created>
+      <option name="number" value="٠٠١٤٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٤٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688681456469</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٤٥" summary="Add getDiffAt and getIntegralAt to Polynomial with java doc">
+      <created>1688682154683</created>
+      <option name="number" value="٠٠١٤٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٤٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688682154683</updated>
+    </task>
+    <option name="localTasksCounter" value="146" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -465,18 +464,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixing tests of Interpolation class methods" />
-    <MESSAGE value="Add java DOC to Interpolation class" />
-    <MESSAGE value="Fixing toString printing in Polynomial class ( start printing from x^n )" />
-    <MESSAGE value="Retesting Interpolation after java DOC and new printing" />
-    <MESSAGE value="Fix Newton-Divides-Subtraction bug (reaching zeros )" />
-    <MESSAGE value="Fix toString in Polynomial ( printing ' + ' )" />
-    <MESSAGE value="Fix toString int Polynomial class ( fix floating-point precision errors )" />
-    <MESSAGE value="Fix Lagrange bug ( floating-point precision errors )" />
-    <MESSAGE value="Testing All Interpolations" />
-    <MESSAGE value="Add java DOC to Interpolation (doc for the header interpolation class )" />
-    <MESSAGE value="Make all Interpolation public" />
-    <MESSAGE value="Retesting Interpolation methods" />
     <MESSAGE value="Add Lagrange to Differentiation with Java doc and comments &#10;Add getFormattedDouble methos" />
     <MESSAGE value="Add getPolyOf method to Polynomial class" />
     <MESSAGE value="Add Newton-Gregory to Differentiation with fixing bugs" />
@@ -490,6 +477,18 @@
     <MESSAGE value="Add EvaluateString with its methods and java doc and comments" />
     <MESSAGE value="Add evaluate with a value in EvaluateString class method" />
     <MESSAGE value="Fix evaluate exp bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix evaluate exp bug" />
+    <MESSAGE value="Fix evaluate minus bug" />
+    <MESSAGE value="delete printing from Evaluate class" />
+    <MESSAGE value="Add new constructor(string) to Function&#10;Update getValueAt with EvaluateExpression&#10;Add toString to Function" />
+    <MESSAGE value="Testing Function getValueAt" />
+    <MESSAGE value="Add ExpressionFunction with its methods" />
+    <MESSAGE value="Add PointsFunction with its methods" />
+    <MESSAGE value="Restructuring Function (make it abstract )" />
+    <MESSAGE value="Make ExpressionFunction extends Function" />
+    <MESSAGE value="Make PointsFunction extends Function" />
+    <MESSAGE value="Replace Function with PointsFunction in Interpolation" />
+    <MESSAGE value="Replace Function with PointsFunction in Differentiation" />
+    <MESSAGE value="Add getDiffAt and getIntegralAt to Polynomial with java doc" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add getDiffAt and getIntegralAt to Polynomial with java doc" />
   </component>
 </project>

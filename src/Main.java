@@ -440,14 +440,25 @@ public class Main {
         System.out.println(Differentiation.Subtractions.Backward.getValueAt(func, a));*/
 
         //Testing Function Value
-        Scanner in = new Scanner(System.in);
+        /*Scanner in = new Scanner(System.in);
         System.out.print("Enter function : ");
         String s = in.next();
-        Function f = new Function(s);
+        Function f = new ExpressionFunction(s);
         System.out.print("Enter x : ");
         double x = parseDouble(in.next());
         System.out.println(f);
-        System.out.println("F(" + x + ") = " + f.getValueAt(x));
+        System.out.println("F(" + x + ") = " + f.getValueAt(x));*/
+
+        //Testing Polynomial getDiffAt and getIntegralAt
+        ArrayList<Double> coeffs = new ArrayList<>();
+        coeffs.add(5.0);
+        coeffs.add(-4.0);
+        coeffs.add(6.0);
+        Polynomial p = new Polynomial(coeffs);
+        System.out.println(p);
+        System.out.println(p.getDiffAt(1,2));
+        System.out.println(p.getIntegralAt(1,1));
+
 
 
     }
