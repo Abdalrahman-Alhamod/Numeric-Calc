@@ -49,11 +49,11 @@ public class Differentiation {
         /**
          * Returns Differential Function As {@link Polynomial} using <b>Lagrange</b>
          *
-         * @param func {@link Function} object representing the function to be differentiated
+         * @param func {@link PointsFunction} object representing the function to be differentiated
          * @return the result of Differentiation as {@link Polynomial}
          * @throws ArithmeticException if the given function is null
          */
-        public static Polynomial getDFAP(Function func) {
+        public static Polynomial getDFAP(PointsFunction func) {
             if (func == null)
                 throw new ArithmeticException("invalid inputs");
             // get x points
@@ -83,11 +83,11 @@ public class Differentiation {
         /**
          * Returns the values of the upper diameter of the Newton-Gregory Forward Subtractions Table
          *
-         * @param func {@link Function} object representing a function to get its x and y point
+         * @param func {@link PointsFunction} object representing a function to get its x and y point
          * @return the values of the upper diameter of the <b>Newton-Gregory Forward Subtractions Table</b>
          * @throws ArithmeticException if the given function is null
          */
-        private static ArrayList<Double> getUDV(Function func) {
+        private static ArrayList<Double> getUDV(PointsFunction func) {
             if (func == null)
                 throw new ArithmeticException("invalid inputs");
             //get y points
@@ -143,13 +143,13 @@ public class Differentiation {
         /**
          * Returns Differential Function As {@link Polynomial} using <b>Newton-Gregory Forward Subtractions</b>
          *
-         * @param func   {@link Function} object representing the function to be differentiated
+         * @param func   {@link PointsFunction} object representing the function to be differentiated
          * @param degree the degree of the required Polynomial
          * @param rank   the rank of the required Differentiation
          * @return the result of Differentiation as {@link Polynomial}
          * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
          */
-        public static Polynomial getIFAP(Function func, int degree, int rank) {
+        public static Polynomial getIFAP(PointsFunction func, int degree, int rank) {
             if (func == null || degree < 0 || rank < 1)
                 throw new ArithmeticException("invalid inputs");
             //get x point
@@ -234,11 +234,11 @@ public class Differentiation {
         /**
          * Returns the values of the lower diameter of the Newton-Gregory Backward Subtractions Table
          *
-         * @param func {@link Function} object representing a function to get its x and y point
+         * @param func {@link PointsFunction} object representing a function to get its x and y point
          * @return the values of the upper diameter of the <b>Newton-Gregory Backward Subtractions Table</b>
          * @throws ArithmeticException if the given function is null
          */
-        public static ArrayList<Double> getLDV(Function func) {
+        public static ArrayList<Double> getLDV(PointsFunction func) {
             if (func == null)
                 throw new ArithmeticException("invalid inputs");
             //get y points
@@ -293,13 +293,13 @@ public class Differentiation {
         /**
          * Returns Differential Function As {@link Polynomial} using <b>Newton-Gregory Backward Subtractions</b>
          *
-         * @param func   {@link Function} object representing the function to be differentiated
+         * @param func   {@link PointsFunction} object representing the function to be differentiated
          * @param degree the degree of the required Polynomial
          * @param rank   the rank of the required Differentiation
          * @return the result of Differentiation as {@link Polynomial}
          * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
          */
-        public static Polynomial getIFAP(Function func, int degree, int rank) {
+        public static Polynomial getIFAP(PointsFunction func, int degree, int rank) {
             if (func == null || degree < 0 || rank < 1)
                 throw new ArithmeticException("invalid inputs");
             //get x point
@@ -389,12 +389,12 @@ public class Differentiation {
             /**
              * Returns the differentiation answer of the given index using <b>Central Subtractions</b>
              *
-             * @param func {@link Function} object representing the function to get its x and y points
+             * @param func {@link PointsFunction} object representing the function to get its x and y points
              * @param x    the value of the required element to get the differentiation at
              * @return the result of the differentiation
              * @throws ArithmeticException if func is null <b>OR</b> index of x = 0 <b>OR</b> index of x = n <b>OR</b> x do not exist
              */
-            public static double getValueAt(Function func, double x) {
+            public static double getValueAt(PointsFunction func, double x) {
                 if (func == null)
                     throw new ArithmeticException("invalid inputs");
                 //get x points
@@ -424,12 +424,12 @@ public class Differentiation {
             /**
              * Returns the differentiation answer of the given index using <b>Forward Subtractions</b>
              *
-             * @param func {@link Function} object representing the function to get its x and y points
+             * @param func {@link PointsFunction} object representing the function to get its x and y points
              * @param x    the value of the required element to get the differentiation at
              * @return the result of the differentiation
              * @throws ArithmeticException if func is null <b>OR</b> index of x = n <b>OR</b> x do not exist
              */
-            public static double getValueAt(Function func, double x) {
+            public static double getValueAt(PointsFunction func, double x) {
                 if (func == null)
                     throw new ArithmeticException("invalid inputs");
                 //get x points
@@ -459,12 +459,12 @@ public class Differentiation {
             /**
              * Returns the differentiation answer of the given index using <b>Backward Subtractions</b>
              *
-             * @param func {@link Function} object representing the function to get its x and y points
+             * @param func {@link PointsFunction} object representing the function to get its x and y points
              * @param x    the value of the required element to get the differentiation at
              * @return the result of the differentiation
              * @throws ArithmeticException if func is null <b>OR</b> index of x = 0 <b>OR</b> x do not exist
              */
-            public static double getValueAt(Function func, double x) {
+            public static double getValueAt(PointsFunction func, double x) {
                 if (func == null)
                     throw new ArithmeticException("invalid inputs");
                 //get x points
