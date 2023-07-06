@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class PointsFunction implements  Function{
+public class PointsFunction implements Function {
     private final ArrayList<Double> xp;
     private final ArrayList<Double> yp;
 
@@ -40,6 +40,10 @@ public class PointsFunction implements  Function{
 
     @Override
     public String toString() {
-        return "X : " + xp + "\nY : " + yp;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < xp.size(); i++) {
+            sb.append("X").append(i).append(" = ").append(xp.get(i)).append("\tY").append(i).append(" = ").append(yp.get(i)).append('\n');
+        }
+        return sb.toString();
     }
 }
