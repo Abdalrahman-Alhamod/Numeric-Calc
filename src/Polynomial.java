@@ -353,6 +353,8 @@ public class Polynomial implements Function {
         ArrayList<Double> xp = new ArrayList<>();
         ArrayList<Double> yp = new ArrayList<>();
         for (double i = a; i <= b; i += h) {
+            //Rounding value back to fix floating-point precision errors
+            i = Math.round(i * 1e10) / 1e10;
             xp.add(i);
             yp.add(getValueAt(i));
         }
