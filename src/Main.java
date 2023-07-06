@@ -279,7 +279,7 @@ public class Main {
         // n=6 0 1 2 5.1 4 9 6 13 8 17 10 21 */
 
         //Testing Spline
-       /*Scanner in = new Scanner(System.in);
+        /*Scanner in = new Scanner(System.in);
         double n, temp;
         ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
         System.out.print("Enter number of points : ");
@@ -346,6 +346,97 @@ public class Main {
         for (int i = 0; i < ans.size(); i++) {
             System.out.println("S" + i + "(x) = " + ans.get(i) + "\t\t" + xp.get(i) + " <= x <= " + xp.get(i + 1));
         } */
+
+        //Testing Differentiation
+        //Lagrange
+        /*Scanner in = new Scanner(System.in);
+        double n, temp;
+        ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
+        System.out.print("Enter number of points : ");
+        n = in.nextDouble();
+        n--; //Because n is the number of domains ; number of domains = number of points -1
+        for (int i = 0; i <= n; i++) {
+            System.out.print("Enter x" + i + " : ");
+            temp = parseDouble(in.next());
+            xp.add(temp);
+            System.out.print("Enter y" + i + " : ");
+            temp = parseDouble(in.next());
+            yp.add(temp);
+        }
+        Function func = new Function(xp, yp);
+        System.out.print("Enter a : ");
+        double a = parseDouble(in.next());
+        System.out.println();
+        System.out.println("Differentiation Function using Lagrange : ");
+        System.out.println(Differentiation.Lagrange.getDFAP(func));
+        System.out.println();
+        System.out.print("Differentiation Function Value at the giving a number : \nans = ");
+        System.out.println(Differentiation.Lagrange.getDFAP(func).getValueAt(a));*/
+
+        //Newton-Gregory
+        /*Scanner in = new Scanner(System.in);
+        double n, temp;
+        ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
+        System.out.print("Enter number of points : ");
+        n = in.nextDouble();
+        n--; //Because n is the number of domains ; number of domains = number of points -1
+        for (int i = 0; i <= n; i++) {
+            System.out.print("Enter x" + i + " : ");
+            temp = parseDouble(in.next());
+            xp.add(temp);
+            System.out.print("Enter y" + i + " : ");
+            temp = parseDouble(in.next());
+            yp.add(temp);
+        }
+        Function func = new Function(xp, yp);
+        System.out.print("Enter the degree of the required Polynomial : ");
+        int degree = in.nextInt();
+        System.out.print("Enter the rank of the required differentiation : ");
+        int rank = in.nextInt();
+        System.out.print("Enter a : ");
+        double a = parseDouble(in.next());
+        System.out.println();
+        System.out.println("Differentiation Function using Newton-Gregory Forward Subtraction : ");
+        Polynomial ans = Differentiation.Newton_GregoryForwardSubtractions.getIFAP(func, degree, rank);
+        System.out.println(ans);
+        System.out.println();
+        System.out.print("Differentiation Function Value at the giving a number : \nans = ");
+        System.out.println(ans.getValueAt(a));
+        System.out.println();
+        System.out.println("Differentiation Function using Newton-Gregory Backward Subtraction : ");
+        ans = Differentiation.Newton_GregoryForwardSubtractions.getIFAP(func, degree, rank);
+        System.out.println(ans);
+        System.out.println();
+        System.out.print("Differentiation Function Value at the giving a number : \nans = ");
+        System.out.println(ans.getValueAt(a)); */
+
+        // Central,Forward,Backward Subtraction
+        Scanner in = new Scanner(System.in);
+        double n, temp;
+        ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
+        System.out.print("Enter number of points : ");
+        n = in.nextDouble();
+        n--; //Because n is the number of domains ; number of domains = number of points -1
+        for (int i = 0; i <= n; i++) {
+            System.out.print("Enter x" + i + " : ");
+            temp = parseDouble(in.next());
+            xp.add(temp);
+            System.out.print("Enter y" + i + " : ");
+            temp = parseDouble(in.next());
+            yp.add(temp);
+        }
+        Function func = new Function(xp, yp);
+        System.out.print("Enter a : ");
+        double a = parseDouble(in.next());
+        System.out.println();
+        System.out.print("Differentiation answer using Central Subtractions : \nans = ");
+        System.out.println(Differentiation.Subtractions.Central.getValueAt(func, a));
+        System.out.println();
+        System.out.print("Differentiation answer using Forward Subtractions : \nans = ");
+        System.out.println(Differentiation.Subtractions.Forward.getValueAt(func, a));
+        System.out.println();
+        System.out.print("Differentiation answer using Backward Subtractions : \nans = ");
+        System.out.println(Differentiation.Subtractions.Backward.getValueAt(func, a));
 
 
     }

@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Testing All Interpolations">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix Differentiation Subtraction bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpolation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Differentiation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Differentiation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,17 +36,18 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="interpolation" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/Differentiation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Function.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Matrix.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -75,69 +76,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٦٨" summary="Add and Fix getNewtonGregoryForward with exceptions">
-      <created>1688398849919</created>
-      <option name="number" value="٠٠٠٦٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٦٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688398849919</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٦٩" summary="Testing getNewtonGregoryForward">
-      <created>1688398861327</created>
-      <option name="number" value="٠٠٠٦٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٦٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688398861328</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٧٠" summary="Add getNewtonGregoryBackward&#10;Fix step h in getNewtonGregoryForward and getNewtonGregoryBackward">
-      <created>1688399927406</created>
-      <option name="number" value="٠٠٠٧٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٧٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688399927406</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٧١" summary="Testing getNewtonGregoryBackward">
-      <created>1688399948294</created>
-      <option name="number" value="٠٠٠٧١" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٧١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688399948294</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٧٢" summary="Fixing bug when Newton Gregory Table have zeros">
-      <created>1688400421885</created>
-      <option name="number" value="٠٠٠٧٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٧٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688400421885</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٧٣" summary="Add getNewtonGregoryForwardNoShorthand">
-      <created>1688402126180</created>
-      <option name="number" value="٠٠٠٧٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٧٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688402126180</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٧٤" summary="Add print P to getNewtonGregoryForwardNoShorthand">
-      <created>1688402472272</created>
-      <option name="number" value="٠٠٠٧٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٧٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688402472272</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٧٥" summary="Add getFormattedDouble">
-      <created>1688402494405</created>
-      <option name="number" value="٠٠٠٧٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٧٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688402494405</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٧٦" summary="Fix getNewtonGregoryForwardNoShorthand printing">
-      <created>1688402614246</created>
-      <option name="number" value="٠٠٠٧٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٧٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688402614246</updated>
     </task>
     <task id="LOCAL؜-٠٠٠٧٧" summary="Add getNewtonGregoryBackwardNoShorthand">
       <created>1688402771146</created>
@@ -419,7 +357,70 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688583916991</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL؜-٠٠١١٧" summary="Add java DOC to Interpolation (doc for the header interpolation class )">
+      <created>1688586270057</created>
+      <option name="number" value="٠٠١١٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠١١٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688586270057</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١١٨" summary="Make all Interpolation public">
+      <created>1688586337102</created>
+      <option name="number" value="٠٠١١٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠١١٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688586337102</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١١٩" summary="Retesting Interpolation methods">
+      <created>1688587433640</created>
+      <option name="number" value="٠٠١١٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠١١٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688587433640</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٢٠" summary="Add Lagrange to Differentiation with Java doc and comments &#10;Add getFormattedDouble methos">
+      <created>1688593419133</created>
+      <option name="number" value="٠٠١٢٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٢٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688593419133</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٢١" summary="Add getPolyOf method to Polynomial class">
+      <created>1688596236640</created>
+      <option name="number" value="٠٠١٢١" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٢١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688596236640</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٢٢" summary="Add Newton-Gregory to Differentiation with fixing bugs">
+      <created>1688598445367</created>
+      <option name="number" value="٠٠١٢٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٢٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688598445367</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٢٣" summary="Fix floating-point precision errors in getValueAt in Polynomial">
+      <created>1688599227084</created>
+      <option name="number" value="٠٠١٢٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٢٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688599227084</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٢٤" summary="Add Central,Forward,Backward Subtractions">
+      <created>1688600360510</created>
+      <option name="number" value="٠٠١٢٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٢٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688600360510</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٢٥" summary="Fix Differentiation Subtraction bugs">
+      <created>1688601397602</created>
+      <option name="number" value="٠٠١٢٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٢٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688601397602</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -461,15 +462,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add comments to Interpolation class in every line&#10;Enhance code by applying changes for the new Polynomial constructor(a0,a1)" />
-    <MESSAGE value="Add getNewtonDividesForward method" />
-    <MESSAGE value="Fix getNewtonDividesForward bug" />
-    <MESSAGE value="Add getNewtonDividesBackward method" />
-    <MESSAGE value="Fix getNewtonDividesBackward bug" />
-    <MESSAGE value="Add getNewtonDividesForwardNoShorthand method" />
-    <MESSAGE value="Create tag v1.0.5" />
-    <MESSAGE value="Add getLeastSquares" />
-    <MESSAGE value="Comment getLeastSquares test" />
     <MESSAGE value="Add getSpline method" />
     <MESSAGE value="Test getSpline" />
     <MESSAGE value="Create tag v1.0.7" />
@@ -486,6 +478,15 @@
     <MESSAGE value="Fix toString int Polynomial class ( fix floating-point precision errors )" />
     <MESSAGE value="Fix Lagrange bug ( floating-point precision errors )" />
     <MESSAGE value="Testing All Interpolations" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing All Interpolations" />
+    <MESSAGE value="Add java DOC to Interpolation (doc for the header interpolation class )" />
+    <MESSAGE value="Make all Interpolation public" />
+    <MESSAGE value="Retesting Interpolation methods" />
+    <MESSAGE value="Add Lagrange to Differentiation with Java doc and comments &#10;Add getFormattedDouble methos" />
+    <MESSAGE value="Add getPolyOf method to Polynomial class" />
+    <MESSAGE value="Add Newton-Gregory to Differentiation with fixing bugs" />
+    <MESSAGE value="Fix floating-point precision errors in getValueAt in Polynomial" />
+    <MESSAGE value="Add Central,Forward,Backward Subtractions" />
+    <MESSAGE value="Fix Differentiation Subtraction bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix Differentiation Subtraction bugs" />
   </component>
 </project>
