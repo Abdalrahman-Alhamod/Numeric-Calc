@@ -7,7 +7,7 @@ import java.util.Objects;
  * The Polynomial class provides methods for evaluating the polynomial, computing its derivative and integral,
  * and performing basic arithmetic operations.
  */
-public class Polynomial {
+public class Polynomial extends Function {
     /**
      * coefficients ArrayList of the current Polynomial
      */
@@ -293,6 +293,46 @@ public class Polynomial {
             res = res.add(multAns);
         }
         return res;
+    }
+
+    /**
+     * Return the value of the differentiated Polynomial at the given x point
+     *
+     * @param x    the value to evaluate the differentiated Polynomial with
+     * @param rank the rank of differentiation
+     * @return the value of the differentiated Polynomial in the given x point
+     * @throws ArithmeticException if rank is smaller than zero
+     */
+    public double getDiffAt(double x, int rank) {
+        if (rank < 0)
+            throw new ArithmeticException("invalid rank");
+        if (rank == 0)
+            return this.getValueAt(x);
+        Polynomial diffPoly = new Polynomial(this.getCoeffs());
+        for (int i = 1; i <= rank; i++) {
+            diffPoly = diffPoly.getDerivative();
+        }
+        return diffPoly.getValueAt(x);
+    }
+
+    /**
+     * Return the value of the Integral Polynomial in the given x point
+     *
+     * @param x    the value to evaluate the Integral Polynomial with
+     * @param rank the rank of Integration
+     * @return the value of the Integral Polynomial in the given x point
+     * @throws ArithmeticException if rank is smaller than zero
+     */
+    public double getIntegralAt(double x, int rank) {
+        if (rank < 0)
+            throw new ArithmeticException("invalid rank");
+        if (rank == 0)
+            return this.getValueAt(x);
+        Polynomial integPoly = new Polynomial(this.getCoeffs());
+        for (int i = 1; i <= rank; i++) {
+            integPoly = integPoly.getIntegral();
+        }
+        return integPoly.getValueAt(x);
     }
 
 }
