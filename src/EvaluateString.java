@@ -29,8 +29,21 @@ class EvaluateString {
             if (tokens[i] == ' ')
                 continue;
 
+            if(ops.empty()&&values.empty()&&tokens[i]=='-'){
+                System.out.println("check");
+                i++;
+                StringBuilder sb = new StringBuilder();
+
+                // Extract the whole number or decimal part
+                while (i < tokens.length && (Character.isDigit(tokens[i]) || tokens[i] == '.'))
+                    sb.append(tokens[i++]);
+                values.push(-1*Double.parseDouble(sb.toString()));
+                // Right now the 'i' points to the character next to the number,
+                // Since the for loop also increases 'i', we need to decrease the value of 'i' by 1 to correct the offset.
+                i--;
+            }
             // Current token is a number, push it to stack for numbers
-            if (Character.isDigit(tokens[i]) || tokens[i] == '.') {
+            else if (Character.isDigit(tokens[i]) || tokens[i] == '.') {
                 StringBuilder sb = new StringBuilder();
 
                 // Extract the whole number or decimal part
@@ -84,7 +97,6 @@ class EvaluateString {
                 ops.push(String.valueOf(tokens[i]));
             }
         }
-
         // Entire expression has been parsed at this point, apply remaining ops to remaining values
         while (!ops.empty()) {
             if (Objects.equals(ops.peek(), "exp") || Objects.equals(ops.peek(), "log") || Objects.equals(ops.peek(), "sqrt"))
