@@ -8,12 +8,14 @@ import java.util.Stack;
 class EvaluateString {
 
     /**
-     * Evaluates the given mathematical expression and returns the result.
+     * Evaluates the given mathematical expression with a giving value and returns the result.
      *
      * @param expression The mathematical expression to evaluate.
+     * @param x          the value to evaluate with
      * @return The result of the evaluation.
      */
-    public static double evaluate(String expression) {
+    public static double evaluate(String expression, double x) {
+        expression = expression.replace("x", Double.toString(x));
         char[] tokens = expression.toCharArray();
 
         // Stack for numbers: 'values'
