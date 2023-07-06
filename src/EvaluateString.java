@@ -5,7 +5,7 @@ import java.util.Stack;
  * The EvaluateString class provides a method to evaluate mathematical expressions given as a string.
  * It supports basic arithmetic operations, logarithm, square root, exponentiation, and parentheses.
  */
-class EvaluateString {
+public abstract class EvaluateString {
 
     /**
      * Evaluates the given mathematical expression with a giving value and returns the result.
@@ -28,7 +28,7 @@ class EvaluateString {
             if (tokens[i] == ' ')
                 continue;
 
-            if(ops.empty()&&values.empty()&&tokens[i]=='-'){
+            if (ops.empty() && values.empty() && tokens[i] == '-') {
                 System.out.println("check");
                 i++;
                 StringBuilder sb = new StringBuilder();
@@ -36,7 +36,7 @@ class EvaluateString {
                 // Extract the whole number or decimal part
                 while (i < tokens.length && (Character.isDigit(tokens[i]) || tokens[i] == '.'))
                     sb.append(tokens[i++]);
-                values.push(-1*Double.parseDouble(sb.toString()));
+                values.push(-1 * Double.parseDouble(sb.toString()));
                 // Right now the 'i' points to the character next to the number,
                 // Since the for loop also increases 'i', we need to decrease the value of 'i' by 1 to correct the offset.
                 i--;

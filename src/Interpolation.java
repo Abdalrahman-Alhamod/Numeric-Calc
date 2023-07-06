@@ -7,7 +7,7 @@ import java.util.Queue;
  * Function as a {@link Polynomial} <b>OR</b> as a {@link String}
  * and some useful methods related to the currently used Interpolation Class
  */
-public class Interpolation {
+public abstract class Interpolation {
     /**
      * The GeneralMethod class provides methods to get the Interpolation Function using the <b>General Method</b>
      * by solving a system of equations using <a href="https://en.wikipedia.org/wiki/Gaussian_elimination">Gaussian elimination</a>
