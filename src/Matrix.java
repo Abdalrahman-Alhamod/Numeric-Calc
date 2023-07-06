@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 /**
@@ -135,7 +136,7 @@ class Matrix {
     public Matrix assign(double c) {
         for (int i = 0; i < n; i++) {
             ArrayList<Double> row = a.get(i);
-            row.replaceAll(ignored -> c);
+            Collections.fill(row, c);
         }
         return this;
     }
