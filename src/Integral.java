@@ -19,7 +19,7 @@ public class Integral {
      * @throws ArithmeticException if the function is null, a is greater than or equal to b, or n is less than or equal to 0
      */
     public static double getRect(Function func, double a, double b, double n) {
-        if (func == null || a <= b || n <= 0)
+        if (func == null || a >= b || n <= 0)
             throw new ArithmeticException("invalid inputs");
         double h = (b - a) / n;
         double sum = 0;
@@ -46,7 +46,7 @@ public class Integral {
      * @throws ArithmeticException if the function is null, a is greater than or equal to b, or n is less than or equal to 0
      */
     public static double getTraps(Function func, double a, double b, double n) {
-        if (func == null || a <= b || n <= 0)
+        if (func == null || a >= b || n <= 0)
             throw new ArithmeticException("invalid inputs");
         double h = (b - a) / n;
         double sum = 0;
@@ -75,7 +75,7 @@ public class Integral {
      * @throws ArithmeticException if the function is null, a is greater than or equal to b, n is less than or equal to 0, or n is not an even number
      */
     public static double getSimpson3(Function func, double a, double b, double n) {
-        if (func == null || a <= b || n <= 0 || n % 2 != 0)
+        if (func == null || a >= b || n <= 0 || n % 2 != 0)
             throw new ArithmeticException("invalid inputs");
         double h = (b - a) / n;
         double sum = 0;
@@ -107,7 +107,7 @@ public class Integral {
      * @throws ArithmeticException if the function is null, a is greater than or equal to b, n is less than or equal to 0, or n is not divisible by 3
      */
     public static double getSimpson8(Function func, double a, double b, double n) {
-        if (func == null || a <= b || n <= 0 || n % 3 != 0)
+        if (func == null || a >= b || n <= 0 || n % 3 != 0)
             throw new ArithmeticException("invalid inputs");
         double h = (b - a) / n;
         double sum = 0;
@@ -139,7 +139,7 @@ public class Integral {
      * @throws ArithmeticException if the function is null, a is greater than or equal to b, n is less than or equal to 0, or n is not divisible by 4
      */
     public static double getPaul(Function func, double a, double b, double n) {
-        if (func == null || a <= b || n <= 0 || n % 4 != 0)
+        if (func == null || a >= b || n <= 0 || n % 4 != 0)
             throw new ArithmeticException("invalid inputs");
         double h = (b - a) / n;
         double sum = 0;
