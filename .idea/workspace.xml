@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix Differentiation Subtraction bugs">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix integral bug ( a&gt;=b)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Differentiation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Differentiation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +20,7 @@
     </option>
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="interpolation" />
+    <option name="BRANCH" value="origin/main" />
   </component>
   <component name="Git.Rebase.Settings">
     <option name="NEW_BASE" value="origin/main" />
@@ -44,7 +42,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Differentiation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Function.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Matrix.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="FORCE_HIGHLIGHTING" />
@@ -58,16 +56,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/Test",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -76,41 +75,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٧٧" summary="Add getNewtonGregoryBackwardNoShorthand">
-      <created>1688402771146</created>
-      <option name="number" value="٠٠٠٧٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٧٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688402771148</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٧٨" summary="Fix getFormattedCoefficient method in Polynomial">
-      <created>1688403781907</created>
-      <option name="number" value="٠٠٠٧٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٧٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688403781907</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٧٩" summary="Fix getFormattedDouble method in Polynomial&#10;Fix printing zeros in Newton Gregory NoShorthand method">
-      <created>1688403947241</created>
-      <option name="number" value="٠٠٠٧٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٧٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688403947241</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٨٠" summary="Fix floating-point precision errors in getFormattedCoefficient method">
-      <created>1688404091697</created>
-      <option name="number" value="٠٠٠٨٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٨٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688404091697</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٨١" summary="Fix floating-point precision errors in getFormattedDouble method">
-      <created>1688404104958</created>
-      <option name="number" value="٠٠٠٨١" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٨١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688404104958</updated>
     </task>
     <task id="LOCAL؜-٠٠٠٨٢" summary="Create tag v1.0.4">
       <created>1688405082674</created>
@@ -420,7 +384,42 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688601397602</updated>
     </task>
-    <option name="localTasksCounter" value="126" />
+    <task id="LOCAL؜-٠٠١٢٦" summary="Create tag v1.0.9">
+      <created>1688602280241</created>
+      <option name="number" value="٠٠١٢٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٢٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688602280241</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٢٧" summary="Replace lambda expression with Collections in Matrix">
+      <created>1688655586238</created>
+      <option name="number" value="٠٠١٢٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٢٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688655586238</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٢٨" summary="Remove mod comments from Matrix">
+      <created>1688656011026</created>
+      <option name="number" value="٠٠١٢٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٢٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688656011026</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٢٩" summary="Remove mod comments from Matrix">
+      <created>1688659144417</created>
+      <option name="number" value="٠٠١٢٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٢٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688659144417</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٣٠" summary="Fix integral bug ( a&gt;=b)">
+      <created>1688663912248</created>
+      <option name="number" value="٠٠١٣٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٣٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688663912248</updated>
+    </task>
+    <option name="localTasksCounter" value="131" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -462,10 +461,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add getSpline method" />
-    <MESSAGE value="Test getSpline" />
-    <MESSAGE value="Create tag v1.0.7" />
-    <MESSAGE value="Fix floating-point precision errors" />
     <MESSAGE value="Restructure Interpolation class methods" />
     <MESSAGE value="Rename getTUPV to getTUDV in Interpolation - N-G-F-S" />
     <MESSAGE value="Renaming N-G-F-S and N-G-B-S in Interpolation class" />
@@ -487,6 +482,10 @@
     <MESSAGE value="Fix floating-point precision errors in getValueAt in Polynomial" />
     <MESSAGE value="Add Central,Forward,Backward Subtractions" />
     <MESSAGE value="Fix Differentiation Subtraction bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Differentiation Subtraction bugs" />
+    <MESSAGE value="Create tag v1.0.9" />
+    <MESSAGE value="Replace lambda expression with Collections in Matrix" />
+    <MESSAGE value="Remove mod comments from Matrix" />
+    <MESSAGE value="Fix integral bug ( a&gt;=b)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix integral bug ( a&gt;=b)" />
   </component>
 </project>
