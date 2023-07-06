@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add toPointsFunction to ExpressionFunction">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add toPointsFunction to Polynomial with java doc">
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +46,7 @@
     <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Matrix.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -76,20 +76,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٠٩٩" summary="Add getLeastSquares">
-      <created>1688569388300</created>
-      <option name="number" value="٠٠٠٩٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠٠٩٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688569388300</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٠٠" summary="Comment getLeastSquares test">
-      <created>1688570337249</created>
-      <option name="number" value="٠٠١٠٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٠٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688570337249</updated>
     </task>
     <task id="LOCAL؜-٠٠١٠١" summary="Add getSpline method">
       <created>1688571746695</created>
@@ -420,7 +406,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688682741865</updated>
     </task>
-    <option name="localTasksCounter" value="148" />
+    <task id="LOCAL؜-٠٠١٤٨" summary="Testing toPointsFunction in ExpressionFunction">
+      <created>1688683126483</created>
+      <option name="number" value="٠٠١٤٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٤٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688683126483</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٤٩" summary="Add toPointsFunction to Polynomial with java doc">
+      <created>1688683377165</created>
+      <option name="number" value="٠٠١٤٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٤٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688683377165</updated>
+    </task>
+    <option name="localTasksCounter" value="150" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -462,8 +462,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add Newton-Gregory to Differentiation with fixing bugs" />
-    <MESSAGE value="Fix floating-point precision errors in getValueAt in Polynomial" />
     <MESSAGE value="Add Central,Forward,Backward Subtractions" />
     <MESSAGE value="Fix Differentiation Subtraction bugs" />
     <MESSAGE value="Create tag v1.0.9" />
@@ -487,6 +485,8 @@
     <MESSAGE value="Add getDiffAt and getIntegralAt to Polynomial with java doc" />
     <MESSAGE value="Testing Polynomial getDiffAt and getIntegralAt" />
     <MESSAGE value="Add toPointsFunction to ExpressionFunction" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add toPointsFunction to ExpressionFunction" />
+    <MESSAGE value="Testing toPointsFunction in ExpressionFunction" />
+    <MESSAGE value="Add toPointsFunction to Polynomial with java doc" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add toPointsFunction to Polynomial with java doc" />
   </component>
 </project>

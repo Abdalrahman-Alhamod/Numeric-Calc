@@ -475,6 +475,11 @@ public class Main {
         System.out.println("Points Function Converting : ");
         System.out.println(f.toPointsFunction(a, b, n));*/
 
+        //Testing toPointsFunction in Polynomial
+        Polynomial p = new Polynomial(1, 2);
+        System.out.println(p);
+        System.out.println(p.toPointsFunction(0, 5, 10));
+
 
     }
 
