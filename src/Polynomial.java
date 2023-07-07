@@ -347,7 +347,7 @@ public class Polynomial implements Function {
     public PointsFunction toPointsFunction(double a, double b, double n) {
         if (a >= b || n <= 0)
             throw new ArithmeticException("invalid inputs");
-        double h = (a + b) / n;
+        double h = (b - a) / n;
         //Rounding value back to fix floating-point precision errors
         h = Math.round(h * 1e10) / 1e10;
         ArrayList<Double> xp = new ArrayList<>();
