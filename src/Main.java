@@ -501,6 +501,14 @@ public class Main {
         System.out.println(func.getDiffAt(3,1));
         System.out.println(func.getIntegralAt(4,1));*/
 
+        //Testing getDiffAt and getIntegralAt in ExpressionFunction
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter function : ");
+        String s = in.nextLine();
+        ExpressionFunction f = new ExpressionFunction(s);
+        System.out.println(f);
+        System.out.println(f.getDiffAt(1, 1));
+        System.out.println(f.getIntegralAt(1, 1));
 
     }
 

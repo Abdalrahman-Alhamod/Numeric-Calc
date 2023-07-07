@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Init getDiffAt and getIntegralAt in PointsFunction">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Remove printing from EvaluateString">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExpressionFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExpressionFunction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,7 +43,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Differentiation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/EvaluateString.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/EvaluateString.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Function.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="SKIP_INSPECTION" />
@@ -76,34 +78,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٠٨" summary="Fixing tests of Interpolation class methods">
-      <created>1688575079589</created>
-      <option name="number" value="٠٠١٠٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٠٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688575079589</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٠٩" summary="Add java DOC to Interpolation class">
-      <created>1688580180210</created>
-      <option name="number" value="٠٠١٠٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٠٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688580180210</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١١٠" summary="Fixing toString printing in Polynomial class ( start printing from x^n )">
-      <created>1688580869250</created>
-      <option name="number" value="٠٠١١٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠١١٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688580869250</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١١١" summary="Retesting Interpolation after java DOC and new printing">
-      <created>1688581004553</created>
-      <option name="number" value="٠٠١١١" />
-      <option name="presentableId" value="LOCAL؜-٠٠١١١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688581004553</updated>
     </task>
     <task id="LOCAL؜-٠٠١١٢" summary="Fix Newton-Divides-Subtraction bug (reaching zeros )">
       <created>1688583108837</created>
@@ -420,7 +394,35 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688685713535</updated>
     </task>
-    <option name="localTasksCounter" value="157" />
+    <task id="LOCAL؜-٠٠١٥٧" summary="Testing getDiffAt and getIntegralAt in PointsFunction">
+      <created>1688686053384</created>
+      <option name="number" value="٠٠١٥٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٥٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688686053384</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٥٨" summary="Init getDiffAt and getIntegralAt in ExpressionFunction">
+      <created>1688686267414</created>
+      <option name="number" value="٠٠١٥٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٥٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688686267414</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٥٩" summary="Fix Minus bug in EvaluateString">
+      <created>1688687191587</created>
+      <option name="number" value="٠٠١٥٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٥٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688687191587</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٦٠" summary="Remove printing from EvaluateString">
+      <created>1688687272992</created>
+      <option name="number" value="٠٠١٦٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٦٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688687272992</updated>
+    </task>
+    <option name="localTasksCounter" value="161" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -462,10 +464,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add evaluate with a value in EvaluateString class method" />
-    <MESSAGE value="Fix evaluate exp bug" />
-    <MESSAGE value="Fix evaluate minus bug" />
-    <MESSAGE value="delete printing from Evaluate class" />
     <MESSAGE value="Add new constructor(string) to Function&#10;Update getValueAt with EvaluateExpression&#10;Add toString to Function" />
     <MESSAGE value="Testing Function getValueAt" />
     <MESSAGE value="Add ExpressionFunction with its methods" />
@@ -487,6 +485,10 @@
     <MESSAGE value="Editing PointsFunction toString method" />
     <MESSAGE value="Retesting and editing" />
     <MESSAGE value="Init getDiffAt and getIntegralAt in PointsFunction" />
-    <option name="LAST_COMMIT_MESSAGE" value="Init getDiffAt and getIntegralAt in PointsFunction" />
+    <MESSAGE value="Testing getDiffAt and getIntegralAt in PointsFunction" />
+    <MESSAGE value="Init getDiffAt and getIntegralAt in ExpressionFunction" />
+    <MESSAGE value="Fix Minus bug in EvaluateString" />
+    <MESSAGE value="Remove printing from EvaluateString" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove printing from EvaluateString" />
   </component>
 </project>
