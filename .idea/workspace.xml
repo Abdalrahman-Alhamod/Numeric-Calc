@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Remove printing from EvaluateString">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Testing getDiffAt and getIntegralAt in ExpressionFunction">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExpressionFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExpressionFunction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Function.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Function.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,12 +42,12 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Differentiation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/EvaluateString.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/EvaluateString.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Function.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Matrix.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -78,20 +77,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١١٢" summary="Fix Newton-Divides-Subtraction bug (reaching zeros )">
-      <created>1688583108837</created>
-      <option name="number" value="٠٠١١٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠١١٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688583108837</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١١٣" summary="Fix toString in Polynomial ( printing ' + ' )">
-      <created>1688583243990</created>
-      <option name="number" value="٠٠١١٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠١١٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688583243990</updated>
     </task>
     <task id="LOCAL؜-٠٠١١٤" summary="Fix toString int Polynomial class ( fix floating-point precision errors )">
       <created>1688583830390</created>
@@ -422,7 +407,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688687272992</updated>
     </task>
-    <option name="localTasksCounter" value="161" />
+    <task id="LOCAL؜-٠٠١٦١" summary="Editing getDiffAt and getIntegralAt">
+      <created>1688688115341</created>
+      <option name="number" value="٠٠١٦١" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٦١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688688115341</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٦٢" summary="Testing getDiffAt and getIntegralAt in ExpressionFunction">
+      <created>1688688124772</created>
+      <option name="number" value="٠٠١٦٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٦٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688688124772</updated>
+    </task>
+    <option name="localTasksCounter" value="163" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -464,8 +463,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add new constructor(string) to Function&#10;Update getValueAt with EvaluateExpression&#10;Add toString to Function" />
-    <MESSAGE value="Testing Function getValueAt" />
     <MESSAGE value="Add ExpressionFunction with its methods" />
     <MESSAGE value="Add PointsFunction with its methods" />
     <MESSAGE value="Restructuring Function (make it abstract )" />
@@ -489,6 +486,8 @@
     <MESSAGE value="Init getDiffAt and getIntegralAt in ExpressionFunction" />
     <MESSAGE value="Fix Minus bug in EvaluateString" />
     <MESSAGE value="Remove printing from EvaluateString" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove printing from EvaluateString" />
+    <MESSAGE value="Editing getDiffAt and getIntegralAt" />
+    <MESSAGE value="Testing getDiffAt and getIntegralAt in ExpressionFunction" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing getDiffAt and getIntegralAt in ExpressionFunction" />
   </component>
 </project>
