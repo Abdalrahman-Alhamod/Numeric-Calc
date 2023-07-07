@@ -340,13 +340,18 @@ public class Polynomial implements Function {
      *
      * @param a the lower limit of x point
      * @param b the upper limit of x point
-     * @param n the number of total between points
+     * @param n the number required points
      * @return {@link PointsFunction} object representing the converted Polynomial
      * @throws ArithmeticException if a>=b or n<=0
      */
     public PointsFunction toPointsFunction(double a, double b, double n) {
         if (a >= b || n <= 0)
             throw new ArithmeticException("invalid inputs");
+        n--;
+        //Rounding value back to fix floating-point precision errors
+        a = Math.round(a * 1e10) / 1e10;
+        //Rounding value back to fix floating-point precision errors
+        b = Math.round(b * 1e10) / 1e10;
         double h = (b - a) / n;
         //Rounding value back to fix floating-point precision errors
         h = Math.round(h * 1e10) / 1e10;

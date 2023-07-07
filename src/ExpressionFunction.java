@@ -88,7 +88,12 @@ public class ExpressionFunction implements Function {
      * @return The PointsFunction representing the function over the given range.
      */
     public PointsFunction toPointsFunction(double a, double b, double n) {
-        double h = (b-a) / n;
+        n--;
+        //Rounding value back to fix floating-point precision errors
+        a = Math.round(a * 1e10) / 1e10;
+        //Rounding value back to fix floating-point precision errors
+        b = Math.round(b * 1e10) / 1e10;
+        double h = (b - a) / n;
         //Rounding value back to fix floating-point precision errors
         h = Math.round(h * 1e10) / 1e10;
         ArrayList<Double> xp = new ArrayList<>();
