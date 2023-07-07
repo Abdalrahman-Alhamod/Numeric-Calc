@@ -1,3 +1,7 @@
+import java.util.Scanner;
+
+import static java.lang.Double.parseDouble;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -436,14 +440,16 @@ public class Main {
         System.out.println(Differentiation.Subtractions.Backward.getValueAt(func, a));*/
 
         //Testing Function Value
-        /*Scanner in = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
         System.out.print("Enter function : ");
-        String s = in.next();
-        PointsFunction f = new ExpressionPointsFunction(s);
+        String s = in.nextLine();
+        ExpressionFunction f = new ExpressionFunction(s);
         System.out.print("Enter x : ");
-        double x = parseDouble(in.next());
+        s = in.nextLine();
+        s = s.replaceAll("pi", Double.toString(Math.PI));
+        double x = EvaluateString.evaluate(s, 0);
         System.out.println(f);
-        System.out.println("F(" + x + ") = " + f.getValueAt(x));*/
+        System.out.println("F(" + x + ") = " + f.getValueAt(x));
 
         //Testing Polynomial getDiffAt and getIntegralAt
         /*ArrayList<Double> coeffs = new ArrayList<>();
@@ -504,6 +510,7 @@ public class Main {
         System.out.println(f);
         System.out.println(f.getDiffAt(1, 1));
         System.out.println(f.getIntegralAt(1, 1));*/
+
 
     }
 
