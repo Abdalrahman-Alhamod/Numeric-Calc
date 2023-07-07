@@ -39,6 +39,21 @@ public class ExpressionFunction implements Function {
     }
 
     /**
+     * Evaluates the value of the function at the given x-coordinate as string
+     *
+     * @param s The string representing x-coordinate at which to evaluate the function.
+     * @return The value of the function at the given x-coordinate.
+     * @throws ArithmeticException If an error occurs during evaluation OR s is null
+     */
+    public double getValueAt(String s) {
+        if (s == null)
+            throw new ArithmeticException("invalid inputs");
+        s = s.replaceAll("pi", Double.toString(Math.PI));
+        double x = EvaluateString.evaluate(s, 0);
+        return getValueAt(x);
+    }
+
+    /**
      * Computes the value of the derivative of the function at the given x-coordinate.
      *
      * @param x    The x-coordinate at which to compute the derivative.
@@ -85,6 +100,27 @@ public class ExpressionFunction implements Function {
             yp.add(getValueAt(i));
         }
         return new PointsFunction(xp, yp);
+    }
+
+    /**
+     * Converts the function into a PointsFunction for interpolation.
+     *
+     * @param a The lower bound of the x-coordinate range as string
+     * @param b The upper bound of the x-coordinate range as string
+     * @param n The number of points to generate for interpolation as string
+     * @return The PointsFunction representing the function over the given range.
+     * @throws ArithmeticException if any of the inputs is null
+     */
+    public PointsFunction toPointsFunction(String a, String b, String n) {
+        if (a == null || b == null || n == null)
+            throw new ArithmeticException("invalid inputs");
+        a = a.replaceAll("pi", Double.toString(Math.PI));
+        double ad = EvaluateString.evaluate(a, 0);
+        b = b.replaceAll("pi", Double.toString(Math.PI));
+        double bd = EvaluateString.evaluate(a, 0);
+        n = n.replaceAll("pi", Double.toString(Math.PI));
+        double nd = EvaluateString.evaluate(a, 0);
+        return toPointsFunction(ad, bd, nd);
     }
 
     /**
