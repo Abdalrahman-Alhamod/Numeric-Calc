@@ -440,16 +440,14 @@ public class Main {
         System.out.println(Differentiation.Subtractions.Backward.getValueAt(func, a));*/
 
         //Testing Function Value
-        Scanner in = new Scanner(System.in);
+        /*Scanner in = new Scanner(System.in);
         System.out.print("Enter function : ");
         String s = in.nextLine();
         ExpressionFunction f = new ExpressionFunction(s);
         System.out.print("Enter x : ");
-        s = in.nextLine();
-        s = s.replaceAll("pi", Double.toString(Math.PI));
-        double x = EvaluateString.evaluate(s, 0);
+        String x = in.nextLine();
         System.out.println(f);
-        System.out.println("F(" + x + ") = " + f.getValueAt(x));
+        System.out.println("F(" + x + ") = " + f.getValueAt(x));*/
 
         //Testing Polynomial getDiffAt and getIntegralAt
         /*ArrayList<Double> coeffs = new ArrayList<>();
@@ -462,20 +460,20 @@ public class Main {
         System.out.println(p.getIntegralAt(1,1));*/
 
         //Testing toPointsFunction in ExpressionFunction
-        /*Scanner in = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
         System.out.print("Enter function : ");
         String s = in.next();
         ExpressionFunction f = new ExpressionFunction(s);
         System.out.print("Enter a : ");
-        double a = parseDouble(in.next());
+        String a = in.next();
         System.out.print("Enter b : ");
-        double b = parseDouble(in.next());
+        String b = in.next();
         System.out.print("Enter n : ");
-        int n = in.nextInt();
+        String n = in.next();
         System.out.println("Expression Function You Have Entered : ");
         System.out.println(f);
         System.out.println("Points Function Converting : ");
-        System.out.println(f.toPointsFunction(a, b, n));*/
+        System.out.println(f.toPointsFunction(a, b, n));
 
         //Testing toPointsFunction in Polynomial
         /* p = new Polynomial(1, 2);
