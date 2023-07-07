@@ -13,19 +13,19 @@ public class ExpressionFunction implements Function {
         try {
             res = EvaluateString.evaluate(func, x);
         } catch (Exception e) {
-            throw new ArithmeticException("invalid function");
+            throw e;
         }
         return res;
     }
 
     public double getDiffAt(double x, int rank) {
-        PointsFunction pf = this.toPointsFunction(x - 10, x + 10, 20);
+        PointsFunction pf = this.toPointsFunction(x, x + 100, 200);
         Polynomial poly = Interpolation.NewtonForwardDividedSubtractions.getIFAP(pf, pf.getXp().size() - 1);
         return poly.getDiffAt(x, rank);
     }
 
     public double getIntegralAt(double x, int rank) {
-        PointsFunction pf = this.toPointsFunction(x - 10, x + 10, 20);
+        PointsFunction pf = this.toPointsFunction(x, x + 100, 200);
         Polynomial poly = Interpolation.NewtonForwardDividedSubtractions.getIFAP(pf, pf.getXp().size() - 1);
         return poly.getIntegralAt(x, rank);
     }
