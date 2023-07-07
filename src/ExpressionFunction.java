@@ -117,9 +117,9 @@ public class ExpressionFunction implements Function {
         a = a.replaceAll("pi", Double.toString(Math.PI));
         double ad = EvaluateString.evaluate(a, 0);
         b = b.replaceAll("pi", Double.toString(Math.PI));
-        double bd = EvaluateString.evaluate(a, 0);
+        double bd = EvaluateString.evaluate(b, 0);
         n = n.replaceAll("pi", Double.toString(Math.PI));
-        double nd = EvaluateString.evaluate(a, 0);
+        double nd = EvaluateString.evaluate(n, 0);
         return toPointsFunction(ad, bd, nd);
     }
 
