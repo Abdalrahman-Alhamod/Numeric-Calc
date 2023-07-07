@@ -18,6 +18,7 @@ public class ExpressionFunction implements Function {
     public ExpressionFunction(String func) {
         this.func = Objects.requireNonNull(func);
     }
+
     /**
      * Evaluates the value of the function at the given x-coordinate.
      *
@@ -29,16 +30,19 @@ public class ExpressionFunction implements Function {
         double res;
         try {
             res = EvaluateString.evaluate(func, x);
+            //Rounding value back to fix floating-point precision errors
+            res = Math.round(res * 1e10) / 1e10;
         } catch (Exception e) {
             throw new ArithmeticException("invalid function");
         }
         return res;
     }
+
     /**
      * Computes the value of the derivative of the function at the given x-coordinate.
      *
-     * @param x     The x-coordinate at which to compute the derivative.
-     * @param rank  The order of the derivative (e.g., 1 for first derivative, 2 for second derivative, and so on).
+     * @param x    The x-coordinate at which to compute the derivative.
+     * @param rank The order of the derivative (e.g., 1 for first derivative, 2 for second derivative, and so on).
      * @return The value of the derivative of the function at the given x-coordinate.
      */
     public double getDiffAt(double x, int rank) {
@@ -46,11 +50,12 @@ public class ExpressionFunction implements Function {
         Polynomial poly = Interpolation.NewtonForwardDividedSubtractions.getIFAP(pf, pf.getXp().size() - 1);
         return poly.getDiffAt(x, rank);
     }
+
     /**
      * Computes the value of the integral of the function at the given x-coordinate.
      *
-     * @param x     The x-coordinate at which to compute the integral.
-     * @param rank  The order of the integral (e.g., 1 for first integral, 2 for second integral, and so on).
+     * @param x    The x-coordinate at which to compute the integral.
+     * @param rank The order of the integral (e.g., 1 for first integral, 2 for second integral, and so on).
      * @return The value of the integral of the function at the given x-coordinate.
      */
     public double getIntegralAt(double x, int rank) {
@@ -58,6 +63,7 @@ public class ExpressionFunction implements Function {
         Polynomial poly = Interpolation.NewtonForwardDividedSubtractions.getIFAP(pf, pf.getXp().size() - 1);
         return poly.getIntegralAt(x, rank);
     }
+
     /**
      * Converts the function into a PointsFunction for interpolation.
      *
@@ -80,6 +86,7 @@ public class ExpressionFunction implements Function {
         }
         return new PointsFunction(xp, yp);
     }
+
     /**
      * Returns the string representation of the function.
      *
