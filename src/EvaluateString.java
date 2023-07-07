@@ -15,7 +15,8 @@ public abstract class EvaluateString {
      * @return The result of the evaluation.
      */
     public static double evaluate(String expression, double x) {
-        expression = expression.replaceAll("(?<!\\w)x(?!\\w)", Double.toString(x));
+        expression = expression.replaceAll("(?<!\\w)x(?!\\w)", Double.toString(x)); // replace x with its given value
+        expression = expression.replaceAll("pi", Double.toString(Math.PI)); // replace string Pi with its value
         expression = expression.replaceAll("\\s", ""); // Remove all whitespace characters from the expression
         char[] tokens = expression.toCharArray();
 
@@ -59,7 +60,11 @@ public abstract class EvaluateString {
                 // Closing brace encountered, solve the entire brace
             else if (tokens[i] == ')') {
                 while (!Objects.equals(ops.peek(), "(")) {
-                    values.push(applyOp(ops.pop(), values.pop(), values.pop()));
+                    String op = ops.peek();
+                    if (isLogSqrtExp(op) || isTrigonometric(op))
+                        values.push(applyOp(ops.pop(), values.pop(), 0));
+                    else
+                        values.push(applyOp(ops.pop(), values.pop(), values.pop()));
                 }
                 ops.pop();
             }
@@ -78,13 +83,58 @@ public abstract class EvaluateString {
                 ops.push("exp");
                 i += 2;
             }
-
+            // Handle the sin operator
+            else if (tokens[i] == 's' && i + 2 < tokens.length && tokens[i + 1] == 'i' && tokens[i + 2] == 'n') {
+                ops.push("sin");
+                i += 2;
+            }
+            // Handle the cos operator
+            else if (tokens[i] == 'c' && i + 2 < tokens.length && tokens[i + 1] == 'o' && tokens[i + 2] == 's') {
+                ops.push("cos");
+                i += 2;
+            }
+            // Handle the tan operator
+            else if (tokens[i] == 't' && i + 2 < tokens.length && tokens[i + 1] == 'a' && tokens[i + 2] == 'n') {
+                ops.push("tan");
+                i += 2;
+            }
+            // Handle the asin operator
+            else if (tokens[i] == 'a' && i + 3 < tokens.length && tokens[i + 1] == 's' && tokens[i + 2] == 'i' && tokens[i + 3] == 'n') {
+                ops.push("asin");
+                i += 3;
+            }
+            // Handle the acos operator
+            else if (tokens[i] == 'a' && i + 3 < tokens.length && tokens[i + 1] == 'c' && tokens[i + 2] == 'o' && tokens[i + 3] == 's') {
+                ops.push("acos");
+                i += 3;
+            }
+            // Handle the atan operator
+            else if (tokens[i] == 'a' && i + 3 < tokens.length && tokens[i + 1] == 't' && tokens[i + 2] == 'a' && tokens[i + 3] == 'n') {
+                ops.push("atan");
+                i += 3;
+            }
+            // Handle the sinh operator
+            else if (tokens[i] == 's' && i + 3 < tokens.length && tokens[i + 1] == 'i' && tokens[i + 2] == 'n' && tokens[i + 3] == 'h') {
+                ops.push("sinh");
+                i += 3;
+            }
+            // Handle the cosh operator
+            else if (tokens[i] == 'c' && i + 3 < tokens.length && tokens[i + 1] == 'o' && tokens[i + 2] == 's' && tokens[i + 3] == 'h') {
+                ops.push("cosh");
+                i += 3;
+            }
+            // Handle the tanh operator
+            else if (tokens[i] == 't' && i + 3 < tokens.length && tokens[i + 1] == 'a' && tokens[i + 2] == 'n' && tokens[i + 3] == 'h') {
+                ops.push("tanh");
+                i += 3;
+            }
             // Current token is an operator
             else if (tokens[i] == '+' || tokens[i] == '-' || tokens[i] == '*' || tokens[i] == '/' || tokens[i] == '^') {
                 // While the top of 'ops' has the same or greater precedence to the current token, which is an operator.
                 // Apply the operator on top of 'ops' to the top two elements in the values stack
                 while (!ops.empty() && hasPrecedence(String.valueOf(tokens[i]), ops.peek())) {
-                    if (Objects.equals(ops.peek(), "exp") || Objects.equals(ops.peek(), "log") || Objects.equals(ops.peek(), "sqrt"))
+                    String op = ops.peek();
+                    if (isLogSqrtExp(op) || isTrigonometric(op))
                         values.push(applyOp(ops.pop(), values.pop(), 0));
                     else
                         values.push(applyOp(ops.pop(), values.pop(), values.pop()));
@@ -95,7 +145,8 @@ public abstract class EvaluateString {
         }
         // Entire expression has been parsed at this point, apply remaining ops to remaining values
         while (!ops.empty()) {
-            if (Objects.equals(ops.peek(), "exp") || Objects.equals(ops.peek(), "log") || Objects.equals(ops.peek(), "sqrt"))
+            String op = ops.peek();
+            if (isLogSqrtExp(op) || isTrigonometric(op))
                 values.push(applyOp(ops.pop(), values.pop(), 0));
             else
                 values.push(applyOp(ops.pop(), values.pop(), values.pop()));
@@ -129,7 +180,8 @@ public abstract class EvaluateString {
      * @return True if op1 has higher precedence than op2, false otherwise.
      */
     private static boolean isHigherPrecedence(String op1, String op2) {
-        return (isLogSqrtExp(op1) && !isLogSqrtExp(op2)) || (isExp(op1) && !isLogSqrtExp(op2)) || (isMulDiv(op1) && isAddSub(op2));
+        return (isLogSqrtExp(op1) && !isLogSqrtExp(op2)) || isTrigonometric(op1) && !isTrigonometric(op2) ||
+                (isExp(op1) && !isLogSqrtExp(op2)) || (isMulDiv(op1) && isAddSub(op2));
     }
 
     /**
@@ -171,6 +223,18 @@ public abstract class EvaluateString {
      */
     private static boolean isLogSqrtExp(String op) {
         return op.equals("log") || op.equals("sqrt") || op.equals("exp");
+    }
+
+    /**
+     * Checks if op is Trigonometric operator.
+     *
+     * @param op The operator.
+     * @return True if op is a Trigonometric operator, false otherwise.
+     */
+    private static boolean isTrigonometric(String op) {
+        return op.equals("sin") || op.equals("cos") || op.equals("tan") ||
+                op.equals("asin") || op.equals("acos") || op.equals("atan") ||
+                op.equals("sinh") || op.equals("cosh") || op.equals("tanh");
     }
 
     /**
@@ -222,6 +286,24 @@ public abstract class EvaluateString {
                 return Math.exp(b);
             case "^":
                 return Math.pow(a, b);
+            case "sin":
+                return Math.sin(b);
+            case "cos":
+                return Math.cos(b);
+            case "tan":
+                return Math.tan(b);
+            case "asin":
+                return Math.asin(b);
+            case "acos":
+                return Math.acos(b);
+            case "atan":
+                return Math.atan(b);
+            case "sinh":
+                return Math.sinh(b);
+            case "cosh":
+                return Math.cosh(b);
+            case "tanh":
+                return Math.tanh(b);
         }
         return 0;
     }
