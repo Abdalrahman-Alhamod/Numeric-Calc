@@ -460,7 +460,7 @@ public class Main {
         System.out.println(p.getIntegralAt(1,1));*/
 
         //Testing toPointsFunction in ExpressionFunction
-        Scanner in = new Scanner(System.in);
+        /*Scanner in = new Scanner(System.in);
         System.out.print("Enter function : ");
         String s = in.next();
         ExpressionFunction f = new ExpressionFunction(s);
@@ -473,7 +473,7 @@ public class Main {
         System.out.println("Expression Function You Have Entered : ");
         System.out.println(f);
         System.out.println("Points Function Converting : ");
-        System.out.println(f.toPointsFunction(a, b, n));
+        System.out.println(f.toPointsFunction(a, b, n));*/
 
         //Testing toPointsFunction in Polynomial
         /* p = new Polynomial(1, 2);
