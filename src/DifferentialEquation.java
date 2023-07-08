@@ -1,13 +1,28 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * The DifferentialEquation class represents a differential equation and provides methods for solving it numerically.
+ */
 public class DifferentialEquation {
-    String dy;
+    private final String dy;
 
+    /**
+     * Constructs a DifferentialEquation object with the given dy/dx expression.
+     *
+     * @param dy The expression representing the derivative dy/dx.
+     */
     public DifferentialEquation(String dy) {
         this.dy = Objects.requireNonNull(dy);
     }
 
+    /**
+     * Evaluates the differential equation at the given values of x and y.
+     *
+     * @param x The value of x.
+     * @param y The value of y.
+     * @return The value of the differential equation at (x, y).
+     */
     public double getValueAt(double x, double y) {
         double ans = EvaluateString.evaluate(dy, x, y);
         //Rounding value back to fix floating-point precision errors
@@ -15,7 +30,20 @@ public class DifferentialEquation {
         return ans;
     }
 
+    /**
+     * The Euler class provides a method for solving a differential equation using the Euler method.
+     */
     public static class Euler {
+        /**
+         * Solves the differential equation using the Euler method.
+         *
+         * @param eq The differential equation to solve.
+         * @param x0 The initial value of x.
+         * @param y0 The initial value of y.
+         * @param h  The step size.
+         * @param x  The target value of x.
+         * @return The approximate value of y at x.
+         */
         public static double solve(DifferentialEquation eq, double x0, double y0, double h, double x) {
             // init yi = y0 , xi = x0,  yi+1 = 0
             double yi = y0, xi = x0, yi1 = 0;
@@ -36,7 +64,20 @@ public class DifferentialEquation {
         }
     }
 
+    /**
+     * The Taylor class provides a method for solving a differential equation using the Taylor method.
+     */
     public static class Taylor {
+        /**
+         * Solves the differential equation using the Taylor method.
+         *
+         * @param eqs The list of differential equations to solve.
+         * @param x0  The initial value of x.
+         * @param y0  The initial value of y.
+         * @param h   The step size.
+         * @param x   The target value of x.
+         * @return The approximate value of y at x.
+         */
         public static double solve(ArrayList<DifferentialEquation> eqs, double x0, double y0, double h, double x) {
             // init yi = y0 , xi = x0,  yi+1 = 0
             double yi = y0, xi = x0, yi1 = 0;
@@ -68,7 +109,21 @@ public class DifferentialEquation {
 
     }
 
+    /**
+     * The MidPoint class provides a method for solving a differential equation using the Midpoint method.
+     */
     public static class MidPoint {
+        /**
+         * Solves the differential equation using the Midpoint method.
+         *
+         * @param eq The differential equation to solve.
+         * @param x0 The initial value of x.
+         * @param y0 The initial value of y.
+         * @param h  The step size.
+         * @param x  The target value of x.
+         * @param a2 The coefficient for the Midpoint method.
+         * @return The approximate value of y at x.
+         */
         private static double solve(DifferentialEquation eq, double x0, double y0, double h, double x, double a2) {
             double a1 = 1 - a2;
             double p = 1 / (2 * a2), q = 1 / (2 * a2);
@@ -102,26 +157,78 @@ public class DifferentialEquation {
             return yi1;
         }
 
+        /**
+         * The ModifiedEuler class provides a method for solving a differential equation using the Modified Euler method.
+         */
         public static class ModifiedEuler {
+            /**
+             * Solves the differential equation using the Modified Euler method.
+             *
+             * @param eq The differential equation to solve.
+             * @param x0 The initial value of x.
+             * @param y0 The initial value of y.
+             * @param h  The step size.
+             * @param x  The target value of x.
+             * @return The approximate value of y at x.
+             */
             public static double solve(DifferentialEquation eq, double x0, double y0, double h, double x) {
                 return MidPoint.solve(eq, x0, y0, h, x, 1);
             }
         }
 
+        /**
+         * The Heun class provides a method for solving a differential equation using the Heun method.
+         */
         public static class Heun {
+            /**
+             * Solves the differential equation using the Heun method.
+             *
+             * @param eq The differential equation to solve.
+             * @param x0 The initial value of x.
+             * @param y0 The initial value of y.
+             * @param h  The step size.
+             * @param x  The target value of x.
+             * @return The approximate value of y at x.
+             */
             public static double solve(DifferentialEquation eq, double x0, double y0, double h, double x) {
                 return MidPoint.solve(eq, x0, y0, h, x, 0.5);
             }
         }
 
+        /**
+         * The Ralston class provides a method for solving a differential equation using the Ralston method.
+         */
         public static class Ralston {
+            /**
+             * Solves the differential equation using the Ralston method.
+             *
+             * @param eq The differential equation to solve.
+             * @param x0 The initial value of x.
+             * @param y0 The initial value of y.
+             * @param h  The step size.
+             * @param x  The target value of x.
+             * @return The approximate value of y at x.
+             */
             public static double solve(DifferentialEquation eq, double x0, double y0, double h, double x) {
                 return MidPoint.solve(eq, x0, y0, h, x, ((double) 2 / 3));
             }
         }
     }
 
+    /**
+     * The Runge_Kutta class provides a method for solving a differential equation using the Runge-Kutta method.
+     */
     public static class Runge_Kutta {
+        /**
+         * Solves the differential equation using the Runge-Kutta method.
+         *
+         * @param eq The differential equation to solve.
+         * @param x0 The initial value of x.
+         * @param y0 The initial value of y.
+         * @param h  The step size.
+         * @param x  The target value of x.
+         * @return The approximate value of y at x.
+         */
         public static double solve(DifferentialEquation eq, double x0, double y0, double h, double x) {
             // init yi = y0 , xi = x0,  yi+1 = 0
             double yi = y0, xi = x0, yi1 = 0;

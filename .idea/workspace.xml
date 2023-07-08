@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add Runge_Kutta method">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Testing Runge-Kutta">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DifferentialEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DifferentialEquation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,20 +79,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٤٧" summary="Add toPointsFunction to ExpressionFunction">
-      <created>1688682741865</created>
-      <option name="number" value="٠٠١٤٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٤٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688682741865</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٤٨" summary="Testing toPointsFunction in ExpressionFunction">
-      <created>1688683126483</created>
-      <option name="number" value="٠٠١٤٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٤٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688683126483</updated>
     </task>
     <task id="LOCAL؜-٠٠١٤٩" summary="Add toPointsFunction to Polynomial with java doc">
       <created>1688683377165</created>
@@ -423,7 +409,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688854458540</updated>
     </task>
-    <option name="localTasksCounter" value="196" />
+    <task id="LOCAL؜-٠٠١٩٦" summary="Remove printing from Runge_Kutta method">
+      <created>1688854791041</created>
+      <option name="number" value="٠٠١٩٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٩٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688854791041</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٩٧" summary="Testing Runge-Kutta">
+      <created>1688854802660</created>
+      <option name="number" value="٠٠١٩٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٩٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688854802660</updated>
+    </task>
+    <option name="localTasksCounter" value="198" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -465,8 +465,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix bug in toPointsFunction(string)" />
-    <MESSAGE value="Fix h bug in toPointsFunction" />
     <MESSAGE value="Fix h bug in toPointsFunction in Polynomial" />
     <MESSAGE value="Fix accuracy bug in toPointsFunction" />
     <MESSAGE value="Testing toPointsFunction in ExpressionFunction" />
@@ -490,6 +488,8 @@
     <MESSAGE value="Restructure MidPoint class" />
     <MESSAGE value="Testing MidPoint :  Modified Euler / Heun / Raphson" />
     <MESSAGE value="Add Runge_Kutta method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Runge_Kutta method" />
+    <MESSAGE value="Remove printing from Runge_Kutta method" />
+    <MESSAGE value="Testing Runge-Kutta" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing Runge-Kutta" />
   </component>
 </project>
