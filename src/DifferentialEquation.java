@@ -131,35 +131,35 @@ public class DifferentialEquation {
                 //Rounding value back to fix floating-point precision errors
                 k1 = Math.round(k1 * 1e10) / 1e10;
 
-                System.out.println("k1 = " + k1);
+                //System.out.println("k1 = " + k1);
 
                 // update k2 = f(xi + (1/2)h , yi + (1/2)k1 )
                 double k2 = eq.getValueAt(xi + (0.5) * h, yi + (0.5) * k1);
                 //Rounding value back to fix floating-point precision errors
                 k2 = Math.round(k2 * 1e10) / 1e10;
 
-                System.out.println("k2 = " + k2);
+                //System.out.println("k2 = " + k2);
 
                 // update k3 = f(xi + (1/2)h , yi + (1/2)k2 )
                 double k3 = eq.getValueAt(xi + (0.5) * h, yi + (0.5) * k2);
                 //Rounding value back to fix floating-point precision errors
                 k3 = Math.round(k3 * 1e10) / 1e10;
 
-                System.out.println("k3 = " + k3);
+                //System.out.println("k3 = " + k3);
 
                 // update k4 = f(xi + h , yi + k3 )
                 double k4 = eq.getValueAt(xi + h, yi + k3);
                 //Rounding value back to fix floating-point precision errors
                 k4 = Math.round(k4 * 1e10) / 1e10;
 
-                System.out.println("k4 = " + k4);
+                //System.out.println("k4 = " + k4);
 
                 // update yi+1 = yi + (h/6) [ k1 + 2k2 + 2k3 + k4 ]
                 yi1 = yi + (h / 6) * (k1 + 2 * k2 + 2 * k3 + k4);
                 //Rounding value back to fix floating-point precision errors
                 yi1 = Math.round(yi1 * 1e10) / 1e10;
 
-                System.out.println("yi+1 = " + yi1);
+                //System.out.println("yi+1 = " + yi1);
 
                 //update xi
                 xi = xi + h;
