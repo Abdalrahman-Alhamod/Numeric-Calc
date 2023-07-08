@@ -68,8 +68,8 @@ public class DifferentialEquation {
 
     }
 
-    private static class MidPoint {
-        public static double solve(DifferentialEquation eq, double x0, double y0, double h, double x, double a2) {
+    public static class MidPoint {
+        private static double solve(DifferentialEquation eq, double x0, double y0, double h, double x, double a2) {
             double a1 = 1 - a2;
             double p = 1 / (2 * a2), q = 1 / (2 * a2);
             // init yi = y0 , xi = x0,  yi+1 = 0
@@ -79,17 +79,19 @@ public class DifferentialEquation {
                 double k1 = eq.getValueAt(xi, yi);
                 //Rounding value back to fix floating-point precision errors
                 k1 = Math.round(k1 * 1e10) / 1e10;
-                System.out.println("k1 = " + k1);
+                //System.out.println("k1 = " + k1);
                 // update k2 = f(xi + p*h , yi +q*h*k1 )
                 double k2 = eq.getValueAt(xi + p * h, yi + q * h * k1);
                 //Rounding value back to fix floating-point precision errors
                 k2 = Math.round(k2 * 1e10) / 1e10;
-                System.out.println("k2 = " + k2);
+                //System.out.println("k2 = " + k2);
                 // update yi+1 = yi + h[ ai * k1 + a2 * k2 ]
                 yi1 = yi + h * (a1 * k1 + a2 * k2);
                 //Rounding value back to fix floating-point precision errors
                 yi1 = Math.round(yi1 * 1e10) / 1e10;
-                System.out.println("yi+1 = " + yi1);
+
+                //System.out.println("yi+1 = " + yi1);
+
                 //update xi
                 xi = xi + h;
                 //Rounding value back to fix floating-point precision errors
@@ -99,11 +101,23 @@ public class DifferentialEquation {
             }
             return yi1;
         }
-    }
 
-    public static class ModifiedEuler {
-        public static double solve(DifferentialEquation eq, double x0, double y0, double h, double x) {
-            return MidPoint.solve(eq, x0, y0, h, x, 1);
+        public static class ModifiedEuler {
+            public static double solve(DifferentialEquation eq, double x0, double y0, double h, double x) {
+                return MidPoint.solve(eq, x0, y0, h, x, 1);
+            }
+        }
+
+        public static class Heun {
+            public static double solve(DifferentialEquation eq, double x0, double y0, double h, double x) {
+                return MidPoint.solve(eq, x0, y0, h, x, 0.5);
+            }
+        }
+
+        public static class Ralston {
+            public static double solve(DifferentialEquation eq, double x0, double y0, double h, double x) {
+                return MidPoint.solve(eq, x0, y0, h, x, ((double) 2 / 3));
+            }
         }
     }
 
