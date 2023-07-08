@@ -55,5 +55,30 @@ public class DifferentialEquation {
 
     }
 
+    private static class MidPoint {
+        public static double solve(DifferentialEquation eq, double x0, double y0, double h, double x, double a2) {
+            double a1 = 1 - a2;
+            double p = 1 / (2 * a2), q = 1 / (2 * a2);
+            // init yi = y0 , xi = x0,  yi+1 = 0
+            double yi = y0, xi = x0, yi1 = 0;
+            while (xi != x) {
+                // update k1 = f(xi,yi)
+                double k1 = eq.getValueAt(xi, yi);
+                System.out.println(k1);
+                // update k2 = f(xi + p*h , yi +q*h*k1 )
+                double k2 = eq.getValueAt(xi + p * h, yi + q * h * k1);
+                System.out.println(k2);
+                // update yi+1 = yi + h[ ai * k1 + a2 * k2 ]
+                yi1 = yi + h * (a1 * k1 + a2 * k2);
+                System.out.println(yi1);
+                //update xi
+                xi = xi + h;
+                // update yi
+                yi = yi1;
+            }
+            return yi1;
+        }
+    }
+
 
 }
