@@ -80,5 +80,11 @@ public class DifferentialEquation {
         }
     }
 
+    public static class ModifiedEuler {
+        private static double solve(DifferentialEquation eq, double x0, double y0, double h, double x) {
+            return MidPoint.solve(eq, x0, y0, h, x, 1);
+        }
+    }
+
 
 }
