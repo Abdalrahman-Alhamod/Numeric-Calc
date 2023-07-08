@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add evaluate(x) and evaluate(x,y) to EvaluateString">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add Euler method to DifferentialEquation">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DifferentialEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DifferentialEquation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,34 +80,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٣٤" summary="Fix evaluate minus bug">
-      <created>1688679710994</created>
-      <option name="number" value="٠٠١٣٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٣٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688679710994</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٣٥" summary="delete printing from Evaluate class">
-      <created>1688679842559</created>
-      <option name="number" value="٠٠١٣٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٣٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688679842559</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٣٦" summary="Add new constructor(string) to Function&#10;Update getValueAt with EvaluateExpression&#10;Add toString to Function">
-      <created>1688679973164</created>
-      <option name="number" value="٠٠١٣٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٣٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688679973164</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٣٧" summary="Testing Function getValueAt">
-      <created>1688679992488</created>
-      <option name="number" value="٠٠١٣٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٣٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688679992488</updated>
     </task>
     <task id="LOCAL؜-٠٠١٣٨" summary="Add ExpressionFunction with its methods">
       <created>1688680777611</created>
@@ -422,7 +396,35 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688847003484</updated>
     </task>
-    <option name="localTasksCounter" value="183" />
+    <task id="LOCAL؜-٠٠١٨٣" summary="Test evaluate(x,y)">
+      <created>1688847140371</created>
+      <option name="number" value="٠٠١٨٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٨٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688847140371</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٨٤" summary="Create DifferentialEquation with constructor">
+      <created>1688848986224</created>
+      <option name="number" value="٠٠١٨٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٨٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688848986224</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٨٥" summary="Create getValueAt for DifferentialEquation">
+      <created>1688849034753</created>
+      <option name="number" value="٠٠١٨٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٨٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688849034753</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٨٦" summary="Add Euler method to DifferentialEquation">
+      <created>1688849078640</created>
+      <option name="number" value="٠٠١٨٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٨٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688849078640</updated>
+    </task>
+    <option name="localTasksCounter" value="187" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -464,10 +466,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Testing getDiffAt and getIntegralAt in PointsFunction" />
-    <MESSAGE value="Init getDiffAt and getIntegralAt in ExpressionFunction" />
-    <MESSAGE value="Fix Minus bug in EvaluateString" />
-    <MESSAGE value="Remove printing from EvaluateString" />
     <MESSAGE value="Editing getDiffAt and getIntegralAt" />
     <MESSAGE value="Testing getDiffAt and getIntegralAt in ExpressionFunction" />
     <MESSAGE value="Add java doc to Function Interface" />
@@ -489,6 +487,10 @@
     <MESSAGE value="Fix floating-point precision errors in Integral" />
     <MESSAGE value="Retest all methods" />
     <MESSAGE value="Add evaluate(x) and evaluate(x,y) to EvaluateString" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add evaluate(x) and evaluate(x,y) to EvaluateString" />
+    <MESSAGE value="Test evaluate(x,y)" />
+    <MESSAGE value="Create DifferentialEquation with constructor" />
+    <MESSAGE value="Create getValueAt for DifferentialEquation" />
+    <MESSAGE value="Add Euler method to DifferentialEquation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Euler method to DifferentialEquation" />
   </component>
 </project>

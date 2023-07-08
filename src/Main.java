@@ -522,8 +522,12 @@ public class Main {
         System.out.println(f.getIntegralAt(1, 1));*/
 
         //Test evaluate(x,y)
-        String s = "-y +x +1";
-        System.out.println(EvaluateString.evaluate(s,5,3));
+        /*String s = "-y +x +1";
+        System.out.println(EvaluateString.evaluate(s,5,3));*/
+
+        //Test differentialEquation
+        DifferentialEquation eq = new DifferentialEquation("x*y");
+        System.out.println(DifferentialEquation.Euler.solve(eq, 0, 1, 0.1, 0.4));
     }
 
 }
