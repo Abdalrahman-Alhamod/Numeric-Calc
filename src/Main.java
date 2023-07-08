@@ -526,8 +526,52 @@ public class Main {
         System.out.println(EvaluateString.evaluate(s,5,3));*/
 
         //Test differentialEquation
-        DifferentialEquation eq = new DifferentialEquation("x*y");
-        System.out.println(DifferentialEquation.Euler.solve(eq, 0, 1, 0.1, 0.4));
+        //Euler
+        /*Scanner in = new Scanner(System.in);
+        double x0, y0, h, x;
+        String eqSt;
+        System.out.print("Enter y' : ");
+        eqSt = in.nextLine();
+        System.out.print("Enter x0 : ");
+        x0 = parseDouble(in.next());
+        System.out.print("Enter y0 : ");
+        y0 = parseDouble(in.next());
+        System.out.print("Enter h : ");
+        h = parseDouble(in.next());
+        System.out.print("Enter x : ");
+        x = parseDouble(in.next());
+        DifferentialEquation eq = new DifferentialEquation(eqSt);
+        System.out.print("The solution of the differential equation using Euler = ");
+        System.out.println(DifferentialEquation.Euler.solve(eq, x0, y0, h, x));*/
+
+        // Taylor
+        Scanner in = new Scanner(System.in);
+        double x0, y0, h, x;
+        int rank;
+        System.out.print("Enter rank : ");
+        rank = in.nextInt();
+        in.nextLine(); // consume the newline character left in the input buffer
+        ArrayList<DifferentialEquation> eqs = new ArrayList<>();
+        for (int i = 0; i < rank; i++) {
+            System.out.print("Enter y");
+            for (int j = 0; j <= i; j++) {
+                System.out.print('\'');
+            }
+            System.out.print(" : ");
+            String eq = in.nextLine();
+            eqs.add(new DifferentialEquation(eq));
+        }
+        System.out.print("Enter x0 : ");
+        x0 = parseDouble(in.next());
+        System.out.print("Enter y0 : ");
+        y0 = parseDouble(in.next());
+        System.out.print("Enter h : ");
+        h = parseDouble(in.next());
+        System.out.print("Enter x : ");
+        x = parseDouble(in.next());
+        System.out.print("The solution of the differential equation using Taylor = ");
+        System.out.println(DifferentialEquation.Taylor.solve(eqs, x0, y0, h, x));
+
     }
 
 }
