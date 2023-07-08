@@ -121,5 +121,56 @@ public class DifferentialEquation {
         }
     }
 
+    public static class Runge_Kutta {
+        public static double solve(DifferentialEquation eq, double x0, double y0, double h, double x) {
+            // init yi = y0 , xi = x0,  yi+1 = 0
+            double yi = y0, xi = x0, yi1 = 0;
+            while (xi != x) {
+                // update k1 = f(xi,yi)
+                double k1 = eq.getValueAt(xi, yi);
+                //Rounding value back to fix floating-point precision errors
+                k1 = Math.round(k1 * 1e10) / 1e10;
+
+                System.out.println("k1 = " + k1);
+
+                // update k2 = f(xi + (1/2)h , yi + (1/2)k1 )
+                double k2 = eq.getValueAt(xi + (0.5) * h, yi + (0.5) * k1);
+                //Rounding value back to fix floating-point precision errors
+                k2 = Math.round(k2 * 1e10) / 1e10;
+
+                System.out.println("k2 = " + k2);
+
+                // update k3 = f(xi + (1/2)h , yi + (1/2)k2 )
+                double k3 = eq.getValueAt(xi + (0.5) * h, yi + (0.5) * k2);
+                //Rounding value back to fix floating-point precision errors
+                k3 = Math.round(k3 * 1e10) / 1e10;
+
+                System.out.println("k3 = " + k3);
+
+                // update k4 = f(xi + h , yi + k3 )
+                double k4 = eq.getValueAt(xi + h, yi + k3);
+                //Rounding value back to fix floating-point precision errors
+                k4 = Math.round(k4 * 1e10) / 1e10;
+
+                System.out.println("k4 = " + k4);
+
+                // update yi+1 = yi + (h/6) [ k1 + 2k2 + 2k3 + k4 ]
+                yi1 = yi + (h / 6) * (k1 + 2 * k2 + 2 * k3 + k4);
+                //Rounding value back to fix floating-point precision errors
+                yi1 = Math.round(yi1 * 1e10) / 1e10;
+
+                System.out.println("yi+1 = " + yi1);
+
+                //update xi
+                xi = xi + h;
+                //Rounding value back to fix floating-point precision errors
+                xi = Math.round(xi * 1e10) / 1e10;
+                // update yi
+                yi = yi1;
+            }
+            return yi1;
+        }
+    }
+
 
 }
