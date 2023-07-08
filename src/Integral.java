@@ -30,7 +30,7 @@ public abstract class Integral {
             value = Math.round(value * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
         }
         //Calculating Error
-        e = ((b - a) / 2) * h * (Math.max(func.getDiffAt(a, 1), func.getDiffAt(b, 1)));
+        //e = ((b - a) / 2) * h * (Math.max(func.getDiffAt(a, 1), func.getDiffAt(b, 1)));
 
         return sum * h;
     }
@@ -59,7 +59,7 @@ public abstract class Integral {
             value = Math.round(value * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
         }
         //Calculating Error
-        e = ((b - a) / 12) * Math.pow(h, 2) * (Math.max(func.getDiffAt(a, 2), func.getDiffAt(b, 2)));
+        //e = ((b - a) / 12) * Math.pow(h, 2) * (Math.max(func.getDiffAt(a, 2), func.getDiffAt(b, 2)));
 
         return sum * (h / 2);
     }
@@ -91,7 +91,7 @@ public abstract class Integral {
             value = Math.round(value * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
         }
         //Calculating Error
-        e = ((b - a) / 180) * Math.pow(h, 4) * (Math.max(func.getDiffAt(a, 4), func.getDiffAt(b, 4)));
+        //e = ((b - a) / 180) * Math.pow(h, 4) * (Math.max(func.getDiffAt(a, 4), func.getDiffAt(b, 4)));
 
         return sum * (h / 3);
     }
@@ -123,7 +123,7 @@ public abstract class Integral {
             value = Math.round(value * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
         }
         //Calculating Error
-        e = ((b - a) / 80) * Math.pow(h, 4) * (Math.max(func.getDiffAt(a, 4), func.getDiffAt(b, 4)));
+        //e = ((b - a) / 80) * Math.pow(h, 4) * (Math.max(func.getDiffAt(a, 4), func.getDiffAt(b, 4)));
 
         return sum * 3 * (h / 8);
     }
@@ -157,7 +157,7 @@ public abstract class Integral {
             value = Math.round(value * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
         }
         //Calculating Error
-        e = (2 * (b - a) / 945) * Math.pow(h, 6) * (Math.max(func.getDiffAt(a, 6), func.getDiffAt(b, 6)));
+        //e = (2 * (b - a) / 945) * Math.pow(h, 6) * (Math.max(func.getDiffAt(a, 6), func.getDiffAt(b, 6)));
 
         return sum * 2 * (h / 45);
     }
