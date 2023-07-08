@@ -22,17 +22,24 @@ public abstract class Integral {
         if (func == null || a >= b || n <= 0)
             throw new ArithmeticException("invalid inputs");
         double h = (b - a) / n;
+        //Rounding value back to fix floating-point precision errors
+        h = Math.round(h * 1e10) / 1e10;
         double sum = 0;
         double value = a;
         for (int i = 0; i <= n - 1; i++) {
             sum += func.getValueAt(value);
+            //Rounding value back to fix floating-point precision errors
+            sum = Math.round(sum * 1e10) / 1e10;
             value += h;
-            value = Math.round(value * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
+            //Rounding value back to fix floating-point precision errors
+            value = Math.round(value * 1e10) / 1e10;
         }
         //Calculating Error
         //e = ((b - a) / 2) * h * (Math.max(func.getDiffAt(a, 1), func.getDiffAt(b, 1)));
-
-        return sum * h;
+        sum *= h;
+        //Rounding value back to fix floating-point precision errors
+        sum = Math.round(sum * 1e10) / 1e10;
+        return sum;
     }
 
     /**
@@ -49,19 +56,25 @@ public abstract class Integral {
         if (func == null || a >= b || n <= 0)
             throw new ArithmeticException("invalid inputs");
         double h = (b - a) / n;
+        //Rounding value back to fix floating-point precision errors
+        h = Math.round(h * 1e10) / 1e10;
         double sum = 0;
         sum += func.getValueAt(a) + func.getValueAt(b);
         double value = a + h;
         value = Math.round(value * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
         for (int i = 1; i <= n - 1; i++) {
             sum += 2 * func.getValueAt(value);
+            //Rounding value back to fix floating-point precision errors
+            sum = Math.round(sum * 1e10) / 1e10;
             value += h;
             value = Math.round(value * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
         }
         //Calculating Error
         //e = ((b - a) / 12) * Math.pow(h, 2) * (Math.max(func.getDiffAt(a, 2), func.getDiffAt(b, 2)));
-
-        return sum * (h / 2);
+        sum *= (h / 2);
+        //Rounding value back to fix floating-point precision errors
+        sum = Math.round(sum * 1e10) / 1e10;
+        return sum;
     }
 
     /**
@@ -78,6 +91,8 @@ public abstract class Integral {
         if (func == null || a >= b || n <= 0 || n % 2 != 0)
             throw new ArithmeticException("invalid inputs");
         double h = (b - a) / n;
+        //Rounding value back to fix floating-point precision errors
+        h = Math.round(h * 1e10) / 1e10;
         double sum = 0;
         sum += func.getValueAt(a) + func.getValueAt(b);
         double value = a + h;
@@ -87,13 +102,17 @@ public abstract class Integral {
                 sum += 2 * func.getValueAt(value);
             else
                 sum += 4 * func.getValueAt(value);
+            //Rounding value back to fix floating-point precision errors
+            sum = Math.round(sum * 1e10) / 1e10;
             value += h;
             value = Math.round(value * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
         }
         //Calculating Error
         //e = ((b - a) / 180) * Math.pow(h, 4) * (Math.max(func.getDiffAt(a, 4), func.getDiffAt(b, 4)));
-
-        return sum * (h / 3);
+        sum *= (h / 3);
+        //Rounding value back to fix floating-point precision errors
+        sum = Math.round(sum * 1e10) / 1e10;
+        return sum;
     }
 
     /**
@@ -110,6 +129,8 @@ public abstract class Integral {
         if (func == null || a >= b || n <= 0 || n % 3 != 0)
             throw new ArithmeticException("invalid inputs");
         double h = (b - a) / n;
+        //Rounding value back to fix floating-point precision errors
+        h = Math.round(h * 1e10) / 1e10;
         double sum = 0;
         sum += func.getValueAt(a) + func.getValueAt(b);
         double value = a + h;
@@ -119,13 +140,17 @@ public abstract class Integral {
                 sum += 2 * func.getValueAt(value);
             else
                 sum += 3 * func.getValueAt(value);
+            //Rounding value back to fix floating-point precision errors
+            sum = Math.round(sum * 1e10) / 1e10;
             value += h;
             value = Math.round(value * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
         }
         //Calculating Error
         //e = ((b - a) / 80) * Math.pow(h, 4) * (Math.max(func.getDiffAt(a, 4), func.getDiffAt(b, 4)));
-
-        return sum * 3 * (h / 8);
+        sum *= 3 * (h / 8);
+        //Rounding value back to fix floating-point precision errors
+        sum = Math.round(sum * 1e10) / 1e10;
+        return sum;
     }
 
     /**
@@ -142,6 +167,8 @@ public abstract class Integral {
         if (func == null || a >= b || n <= 0 || n % 4 != 0)
             throw new ArithmeticException("invalid inputs");
         double h = (b - a) / n;
+        //Rounding value back to fix floating-point precision errors
+        h = Math.round(h * 1e10) / 1e10;
         double sum = 0;
         sum += 7 * func.getValueAt(a) + 7 * func.getValueAt(b);
         double value = a + h;
@@ -153,13 +180,17 @@ public abstract class Integral {
                 sum += 12 * func.getValueAt(value);
             else
                 sum += 32 * func.getValueAt(value);
+            //Rounding value back to fix floating-point precision errors
+            sum = Math.round(sum * 1e10) / 1e10;
             value += h;
             value = Math.round(value * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
         }
         //Calculating Error
         //e = (2 * (b - a) / 945) * Math.pow(h, 6) * (Math.max(func.getDiffAt(a, 6), func.getDiffAt(b, 6)));
-
-        return sum * 2 * (h / 45);
+        sum *= 2 * (h / 45);
+        //Rounding value back to fix floating-point precision errors
+        sum = Math.round(sum * 1e10) / 1e10;
+        return sum;
     }
 
     /**
