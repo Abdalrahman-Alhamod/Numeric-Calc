@@ -520,6 +520,10 @@ public class Main {
         System.out.println(f);
         System.out.println(f.getDiffAt(1, 1));
         System.out.println(f.getIntegralAt(1, 1));*/
+
+        //Test evaluate(x,y)
+        String s = "-y +x +1";
+        System.out.println(EvaluateString.evaluate(s,5,3));
     }
 
 }
