@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.Double.parseDouble;
@@ -8,6 +9,7 @@ public class Main {
         //Testing Integral
         /*Scanner in = new Scanner(System.in);
         double a, b, n, temp;
+        //Points Function
         ArrayList<Double> xp = new ArrayList<>(), yp = new ArrayList<>();
         System.out.print("Enter number of points : ");
         n = in.nextDouble();
@@ -25,14 +27,24 @@ public class Main {
         b = xp.get(xp.size() - 1);
         System.out.println("xp : " + xp);
         System.out.println("yp : " + yp);
+        //Expression Function
+        System.out.print("Enter function : ");
+        String s = in.nextLine();
+        ExpressionFunction func = new ExpressionFunction(s);
+        System.out.print("Enter a : ");
+        a = parseDouble(in.next());
+        System.out.print("Enter b : ");
+        b = parseDouble(in.next());
+        System.out.print("Enter n : ");
+        n = parseDouble(in.next());
         System.out.println("a = " + a + "\nb = " + b + "\nn = " + n);
         System.out.println("Function Integral : ");
-        System.out.println("Rect : " + Integral.getRect(func, a, b, n));
-        System.out.println("Traps : " + Integral.getTraps(func, a, b, n));
-        System.out.println("Simpson 1/3 : " + Integral.getSimpson3(func, a, b, n));
-        System.out.println("Simpson 3/8 : " + Integral.getSimpson8(func, a, b, n));
+        //System.out.println("Rect : " + Integral.getRect(func, a, b, n));
+        //System.out.println("Traps : " + Integral.getTraps(func, a, b, n));
+        //System.out.println("Simpson 1/3 : " + Integral.getSimpson3(func, a, b, n));
+        //System.out.println("Simpson 3/8 : " + Integral.getSimpson8(func, a, b, n));
         System.out.println("Paul : " + Integral.getPaul(func, a, b, n));
-        // 0 0 0.1 0.0001 0.2 0.0016 0.3 0.0081 0.4 0.0256 0.5 0.0625 0.6 0.1296*/
+        // 0 0 0.1 0.0001 0.2 0.0016 0.3 0.0081 0.4 0.0256 0.5 0.0625 0.6 0.1296    */
 
         //Testing Polynomial
         /*ArrayList<Double> coeffs = new ArrayList<>();
@@ -174,7 +186,7 @@ public class Main {
         System.out.println(Interpolation.Lagrange.getIFAP(func));
         System.out.println("Interpolated Function using Lagrange method without shorthand : ");
         System.out.println(Interpolation.Lagrange.getIFASNS(func));
-        // 1 2 2 -1 4 3  */
+        // 1 2 2 -1 4 3 */
 
         //Testing Newton Gregory methods
         /*Scanner in = new Scanner(System.in);
@@ -209,11 +221,12 @@ public class Main {
         System.out.println();
         System.out.println("Interpolated Function using Newton Gregory Backward : ");
         System.out.println(Interpolation.Newton_GregoryBackwardSubtractions.getIFAP(func, degree));
+        System.out.println(Interpolation.Newton_GregoryBackwardSubtractions.getIFAP(func, degree).getValueAt(0.73));
         System.out.println();
         System.out.println("Interpolated Function using Newton Gregory Backward No Shorthand : ");
         System.out.println(Interpolation.Newton_GregoryBackwardSubtractions.getIFASNS(func, degree));
         //0 -6 1 2 2 -2 3 6
-        // 0 0 0.2 0.203 0.4 0.423 0.6 0.684 0.8 1.030 1 1.557 */
+        // 0 0 0.2 0.203 0.4 0.423 0.6 0.684 0.8 1.030 1 1.557  */
 
         //Testing Newton Divides
         /*Scanner in = new Scanner(System.in);
@@ -275,7 +288,7 @@ public class Main {
         System.out.println();
         System.out.println("Interpolated Function using Least-Squares : ");
         System.out.println(Interpolation.LeastSquares.getIFAP(func, degree));
-        // n=6 0 1 2 5.1 4 9 6 13 8 17 10 21 */
+        // n=6 0 1 2 5.1 4 9 6 13 8 17 10 21        */
 
         //Testing Spline
         /*Scanner in = new Scanner(System.in);
@@ -298,7 +311,7 @@ public class Main {
         System.out.println("Interpolated Function S(x) using Spline : ");
         for (int i = 0; i < ans.size(); i++) {
             System.out.println("S" + i + "(x) = " + ans.get(i) + "\t\t" + xp.get(i) + " <= x <= " + xp.get(i + 1));
-        } */
+        }  */
 
         // n=4  1 2 2 -1 3 0 4 2 */
 
@@ -408,7 +421,7 @@ public class Main {
         System.out.println(ans);
         System.out.println();
         System.out.print("Differentiation Function Value at the giving a number : \nans = ");
-        System.out.println(ans.getValueAt(a)); */
+        System.out.println(ans.getValueAt(a));  */
 
         // Central,Forward,Backward Subtraction
         /*Scanner in = new Scanner(System.in);
@@ -426,7 +439,6 @@ public class Main {
             yp.add(temp);
         }
         PointsFunction func = new PointsFunction(xp, yp);
-        System.out.println(func);
         System.out.print("Enter a : ");
         double a = parseDouble(in.next());
         System.out.println();
@@ -437,7 +449,7 @@ public class Main {
         System.out.println(Differentiation.Subtractions.Forward.getValueAt(func, a));
         System.out.println();
         System.out.print("Differentiation answer using Backward Subtractions : \nans = ");
-        System.out.println(Differentiation.Subtractions.Backward.getValueAt(func, a));*/
+        System.out.println(Differentiation.Subtractions.Backward.getValueAt(func, a));  */
 
         //Testing Function Value
         /*Scanner in = new Scanner(System.in);
@@ -508,8 +520,6 @@ public class Main {
         System.out.println(f);
         System.out.println(f.getDiffAt(1, 1));
         System.out.println(f.getIntegralAt(1, 1));*/
-
-
     }
 
 }
