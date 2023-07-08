@@ -408,8 +408,8 @@ public abstract class Differentiation {
                 double h = xp.get(index) - xp.get(index - 1);
                 //Rounding value back to fix floating-point precision errors
                 h = Math.round(h * 1e10) / 1e10;
-                // apply the law : (yi+1 - yi-1) / (xi+1 - xi-1)
-                double res = (yp.get(index + 1) - yp.get(index - 1)) / 2 * h;
+                // apply the law : (yi+1 - yi-1) / 2*h
+                double res = (yp.get(index + 1) - yp.get(index - 1)) / (2 * h);
                 //Rounding value back to fix floating-point precision errors
                 res = Math.round(res * 1e10) / 1e10;
                 return res;
@@ -443,7 +443,7 @@ public abstract class Differentiation {
                 double h = xp.get(index + 1) - xp.get(index);
                 //Rounding value back to fix floating-point precision errors
                 h = Math.round(h * 1e10) / 1e10;
-                // apply the law : (yi+1 - yi) / (xi+1 - xi)
+                // apply the law : (yi+1 - yi) / h
                 double res = (yp.get(index + 1) - yp.get(index)) / h;
                 //Rounding value back to fix floating-point precision errors
                 res = Math.round(res * 1e10) / 1e10;
@@ -478,7 +478,7 @@ public abstract class Differentiation {
                 double h = xp.get(index) - xp.get(index - 1);
                 //Rounding value back to fix floating-point precision errors
                 h = Math.round(h * 1e10) / 1e10;
-                // apply the law : (yi - yi-1) / (xi - xi-1)
+                // apply the law : (yi - yi-1) / h
                 double res = (yp.get(index) - yp.get(index - 1)) / h;
                 //Rounding value back to fix floating-point precision errors
                 res = Math.round(res * 1e10) / 1e10;
