@@ -545,7 +545,7 @@ public class Main {
         System.out.println(DifferentialEquation.Euler.solve(eq, x0, y0, h, x));*/
 
         // Taylor
-        Scanner in = new Scanner(System.in);
+        /*Scanner in = new Scanner(System.in);
         double x0, y0, h, x;
         int rank;
         System.out.print("Enter rank : ");
@@ -570,7 +570,29 @@ public class Main {
         System.out.print("Enter x : ");
         x = parseDouble(in.next());
         System.out.print("The solution of the differential equation using Taylor = ");
-        System.out.println(DifferentialEquation.Taylor.solve(eqs, x0, y0, h, x));
+        System.out.println(DifferentialEquation.Taylor.solve(eqs, x0, y0, h, x));   */
+
+        //Testing MidPoint :  Modified Euler / Heun / Raphson
+        /*Scanner in = new Scanner(System.in);
+        double x0, y0, h, x;
+        String eqSt;
+        System.out.print("Enter y' : ");
+        eqSt = in.nextLine();
+        System.out.print("Enter x0 : ");
+        x0 = parseDouble(in.next());
+        System.out.print("Enter y0 : ");
+        y0 = parseDouble(in.next());
+        System.out.print("Enter h : ");
+        h = parseDouble(in.next());
+        System.out.print("Enter x : ");
+        x = parseDouble(in.next());
+        DifferentialEquation eq = new DifferentialEquation(eqSt);
+        System.out.print("The solution of the differential equation using Modified Euler = ");
+        System.out.println(DifferentialEquation.MidPoint.ModifiedEuler.solve(eq, x0, y0, h, x));
+        System.out.print("The solution of the differential equation using Heun = ");
+        System.out.println(DifferentialEquation.MidPoint.Heun.solve(eq, x0, y0, h, x));
+        System.out.print("The solution of the differential equation using Ralston = ");
+        System.out.println(DifferentialEquation.MidPoint.Ralston.solve(eq, x0, y0, h, x));*/
 
     }
 

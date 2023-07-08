@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Test Euler method">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix floating-point precision errors in DEQ">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DifferentialEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DifferentialEquation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
@@ -80,41 +80,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٣٩" summary="Add PointsFunction with its methods">
-      <created>1688680789720</created>
-      <option name="number" value="٠٠١٣٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٣٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688680789720</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٤٠" summary="Restructuring Function (make it abstract )">
-      <created>1688681251869</created>
-      <option name="number" value="٠٠١٤٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٤٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688681251869</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٤١" summary="Make ExpressionFunction extends Function">
-      <created>1688681270051</created>
-      <option name="number" value="٠٠١٤١" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٤١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688681270051</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٤٢" summary="Make PointsFunction extends Function">
-      <created>1688681290750</created>
-      <option name="number" value="٠٠١٤٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٤٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688681290750</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٤٣" summary="Replace Function with PointsFunction in Interpolation">
-      <created>1688681319877</created>
-      <option name="number" value="٠٠١٤٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٤٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688681319877</updated>
     </task>
     <task id="LOCAL؜-٠٠١٤٤" summary="Replace Function with PointsFunction in Differentiation">
       <created>1688681456469</created>
@@ -424,7 +389,42 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688849499649</updated>
     </task>
-    <option name="localTasksCounter" value="188" />
+    <task id="LOCAL؜-٠٠١٨٨" summary="Add Taylor method">
+      <created>1688851422127</created>
+      <option name="number" value="٠٠١٨٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٨٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688851422127</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٨٩" summary="Test Taylor method">
+      <created>1688851428712</created>
+      <option name="number" value="٠٠١٨٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٨٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688851428712</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٩٠" summary="Add MidPoint method">
+      <created>1688851981675</created>
+      <option name="number" value="٠٠١٩٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٩٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688851981675</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٩١" summary="Add ModifiedEuler method">
+      <created>1688852057911</created>
+      <option name="number" value="٠٠١٩١" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٩١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688852057911</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٩٢" summary="Fix floating-point precision errors in DEQ">
+      <created>1688852904437</created>
+      <option name="number" value="٠٠١٩٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٩٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688852904437</updated>
+    </task>
+    <option name="localTasksCounter" value="193" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -466,11 +466,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Testing getDiffAt and getIntegralAt in ExpressionFunction" />
-    <MESSAGE value="Add java doc to Function Interface" />
-    <MESSAGE value="Add java doc to ExpressionFunction" />
-    <MESSAGE value="Add java doc to PointsFunction" />
-    <MESSAGE value="Add Trigonometric operators to EvaluateString" />
     <MESSAGE value="Fix floating-point precision errors in getValueAt" />
     <MESSAGE value="Testing Trigonometric operator" />
     <MESSAGE value="Add getValueAt(string) and toPoints(string) to ExpressionFunction" />
@@ -491,6 +486,11 @@
     <MESSAGE value="Create getValueAt for DifferentialEquation" />
     <MESSAGE value="Add Euler method to DifferentialEquation" />
     <MESSAGE value="Test Euler method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Test Euler method" />
+    <MESSAGE value="Add Taylor method" />
+    <MESSAGE value="Test Taylor method" />
+    <MESSAGE value="Add MidPoint method" />
+    <MESSAGE value="Add ModifiedEuler method" />
+    <MESSAGE value="Fix floating-point precision errors in DEQ" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix floating-point precision errors in DEQ" />
   </component>
 </project>
