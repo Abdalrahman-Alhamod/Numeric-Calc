@@ -361,6 +361,7 @@ public class Main {
         } */
 
         //Testing Differentiation
+
         //Lagrange
         /*Scanner in = new Scanner(System.in);
         double n, temp;
@@ -525,7 +526,8 @@ public class Main {
         /*String s = "-y +x +1";
         System.out.println(EvaluateString.evaluate(s,5,3));*/
 
-        //Test differentialEquation
+        //Test DifferentialEquation
+
         //Euler
         /*Scanner in = new Scanner(System.in);
         double x0, y0, h, x;
@@ -587,12 +589,30 @@ public class Main {
         System.out.print("Enter x : ");
         x = parseDouble(in.next());
         DifferentialEquation eq = new DifferentialEquation(eqSt);
-        System.out.print("The solution of the differential equation using Modified Euler = ");
-        System.out.println(DifferentialEquation.MidPoint.ModifiedEuler.solve(eq, x0, y0, h, x));
-        System.out.print("The solution of the differential equation using Heun = ");
-        System.out.println(DifferentialEquation.MidPoint.Heun.solve(eq, x0, y0, h, x));
+        //System.out.print("The solution of the differential equation using Modified Euler = ");
+        //System.out.println(DifferentialEquation.MidPoint.ModifiedEuler.solve(eq, x0, y0, h, x));
+        //System.out.print("The solution of the differential equation using Heun = ");
+        //System.out.println(DifferentialEquation.MidPoint.Heun.solve(eq, x0, y0, h, x));
         System.out.print("The solution of the differential equation using Ralston = ");
-        System.out.println(DifferentialEquation.MidPoint.Ralston.solve(eq, x0, y0, h, x));*/
+        System.out.println(DifferentialEquation.MidPoint.Ralston.solve(eq, x0, y0, h, x)); */
+
+        // Testing Runge-Kutta
+        /*Scanner in = new Scanner(System.in);
+        double x0, y0, h, x;
+        String eqSt;
+        System.out.print("Enter y' : ");
+        eqSt = in.nextLine();
+        System.out.print("Enter x0 : ");
+        x0 = parseDouble(in.next());
+        System.out.print("Enter y0 : ");
+        y0 = parseDouble(in.next());
+        System.out.print("Enter h : ");
+        h = parseDouble(in.next());
+        System.out.print("Enter x : ");
+        x = parseDouble(in.next());
+        DifferentialEquation eq = new DifferentialEquation(eqSt);
+        System.out.print("The solution of the differential equation using Runge_Kutta = ");
+        System.out.println(DifferentialEquation.Runge_Kutta.solve(eq, x0, y0, h, x));   */
 
     }
 

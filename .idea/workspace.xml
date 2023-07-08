@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix floating-point precision errors in DEQ">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add Runge_Kutta method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DifferentialEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DifferentialEquation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,27 +79,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٤٤" summary="Replace Function with PointsFunction in Differentiation">
-      <created>1688681456469</created>
-      <option name="number" value="٠٠١٤٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٤٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688681456469</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٤٥" summary="Add getDiffAt and getIntegralAt to Polynomial with java doc">
-      <created>1688682154683</created>
-      <option name="number" value="٠٠١٤٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٤٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688682154683</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٤٦" summary="Testing Polynomial getDiffAt and getIntegralAt">
-      <created>1688682424810</created>
-      <option name="number" value="٠٠١٤٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٤٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688682424810</updated>
     </task>
     <task id="LOCAL؜-٠٠١٤٧" summary="Add toPointsFunction to ExpressionFunction">
       <created>1688682741865</created>
@@ -424,7 +402,28 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688852904437</updated>
     </task>
-    <option name="localTasksCounter" value="193" />
+    <task id="LOCAL؜-٠٠١٩٣" summary="Restructure MidPoint class">
+      <created>1688853756739</created>
+      <option name="number" value="٠٠١٩٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٩٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688853756739</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٩٤" summary="Testing MidPoint :  Modified Euler / Heun / Raphson">
+      <created>1688853787046</created>
+      <option name="number" value="٠٠١٩٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٩٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688853787046</updated>
+    </task>
+    <task id="LOCAL؜-٠٠١٩٥" summary="Add Runge_Kutta method">
+      <created>1688854458540</created>
+      <option name="number" value="٠٠١٩٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠١٩٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688854458540</updated>
+    </task>
+    <option name="localTasksCounter" value="196" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -466,9 +465,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix floating-point precision errors in getValueAt" />
-    <MESSAGE value="Testing Trigonometric operator" />
-    <MESSAGE value="Add getValueAt(string) and toPoints(string) to ExpressionFunction" />
     <MESSAGE value="Fix bug in toPointsFunction(string)" />
     <MESSAGE value="Fix h bug in toPointsFunction" />
     <MESSAGE value="Fix h bug in toPointsFunction in Polynomial" />
@@ -491,6 +487,9 @@
     <MESSAGE value="Add MidPoint method" />
     <MESSAGE value="Add ModifiedEuler method" />
     <MESSAGE value="Fix floating-point precision errors in DEQ" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix floating-point precision errors in DEQ" />
+    <MESSAGE value="Restructure MidPoint class" />
+    <MESSAGE value="Testing MidPoint :  Modified Euler / Heun / Raphson" />
+    <MESSAGE value="Add Runge_Kutta method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Runge_Kutta method" />
   </component>
 </project>
