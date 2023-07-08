@@ -392,7 +392,11 @@ public abstract class Differentiation {
              * @param func {@link PointsFunction} object representing the function to get its x and y points
              * @param x    the value of the required element to get the differentiation at
              * @return the result of the differentiation
-             * @throws ArithmeticException if func is null <b>OR</b> index of x = 0 <b>OR</b> index of x = n <b>OR</b> x do not exist
+             * @throws ArithmeticException if func is null <br>
+             *                             <b>OR</b> index of x = 0 <br>
+             *                             <b>OR</b> index of x = n <br>
+             *                             <b>OR</b> x do not exist <br>
+             *                             <b>OR</b>  step h is not static
              */
             public static double getValueAt(PointsFunction func, double x) {
                 if (func == null)
@@ -401,13 +405,24 @@ public abstract class Differentiation {
                 ArrayList<Double> xp = func.getXp();
                 // get y point
                 ArrayList<Double> yp = func.getYp();
+                // initialize and calculate h ; h = xi+1 - xi;
+                double h = xp.get(1) - xp.get(0);
+                //Rounding value back to fix floating-point precision errors
+                h = Math.round(h * 1e10) / 1e10;
+                for (int i = 1; i < xp.size() - 1; i++) {
+                    // get the temporary value of xi+1 - xi
+                    double temp = (xp.get(i + 1) - xp.get(i));
+                    //Rounding value back to fix floating-point precision errors
+                    temp = Math.round(temp * 1e10) / 1e10;
+                    // if the temporary value do not equal h => the step is invalid
+                    if (temp != h) {
+                        throw new ArithmeticException("step h is not static");
+                    }
+                }
                 //get index
                 int index = xp.indexOf(x);
                 if (index == (xp.size() - 1) || index == 0 || index == -1)
                     throw new ArithmeticException("invalid inputs");
-                double h = xp.get(index) - xp.get(index - 1);
-                //Rounding value back to fix floating-point precision errors
-                h = Math.round(h * 1e10) / 1e10;
                 // apply the law : (yi+1 - yi-1) / 2*h
                 double res = (yp.get(index + 1) - yp.get(index - 1)) / (2 * h);
                 //Rounding value back to fix floating-point precision errors
@@ -427,7 +442,10 @@ public abstract class Differentiation {
              * @param func {@link PointsFunction} object representing the function to get its x and y points
              * @param x    the value of the required element to get the differentiation at
              * @return the result of the differentiation
-             * @throws ArithmeticException if func is null <b>OR</b> index of x = n <b>OR</b> x do not exist
+             * @throws ArithmeticException if func is null <br>
+             *                             <b>OR</b> index of x = 0 <br>
+             *                             <b>OR</b> x do not exist <br>
+             *                             <b>OR</b>  step h is not static
              */
             public static double getValueAt(PointsFunction func, double x) {
                 if (func == null)
@@ -436,13 +454,24 @@ public abstract class Differentiation {
                 ArrayList<Double> xp = func.getXp();
                 // get y point
                 ArrayList<Double> yp = func.getYp();
+                // initialize and calculate h ; h = xi+1 - xi;
+                double h = xp.get(1) - xp.get(0);
+                //Rounding value back to fix floating-point precision errors
+                h = Math.round(h * 1e10) / 1e10;
+                for (int i = 1; i < xp.size() - 1; i++) {
+                    // get the temporary value of xi+1 - xi
+                    double temp = (xp.get(i + 1) - xp.get(i));
+                    //Rounding value back to fix floating-point precision errors
+                    temp = Math.round(temp * 1e10) / 1e10;
+                    // if the temporary value do not equal h => the step is invalid
+                    if (temp != h) {
+                        throw new ArithmeticException("step h is not static");
+                    }
+                }
                 //get index
                 int index = xp.indexOf(x);
                 if (index == (xp.size() - 1) || index == -1)
                     throw new ArithmeticException("invalid inputs");
-                double h = xp.get(index + 1) - xp.get(index);
-                //Rounding value back to fix floating-point precision errors
-                h = Math.round(h * 1e10) / 1e10;
                 // apply the law : (yi+1 - yi) / h
                 double res = (yp.get(index + 1) - yp.get(index)) / h;
                 //Rounding value back to fix floating-point precision errors
@@ -462,7 +491,10 @@ public abstract class Differentiation {
              * @param func {@link PointsFunction} object representing the function to get its x and y points
              * @param x    the value of the required element to get the differentiation at
              * @return the result of the differentiation
-             * @throws ArithmeticException if func is null <b>OR</b> index of x = 0 <b>OR</b> x do not exist
+             * @throws ArithmeticException if func is null <br>
+             *                             <b>OR</b> index of x = n <br>
+             *                             <b>OR</b> x do not exist <br>
+             *                             <b>OR</b>  step h is not static
              */
             public static double getValueAt(PointsFunction func, double x) {
                 if (func == null)
@@ -471,13 +503,24 @@ public abstract class Differentiation {
                 ArrayList<Double> xp = func.getXp();
                 // get y point
                 ArrayList<Double> yp = func.getYp();
+                // initialize and calculate h ; h = xi+1 - xi;
+                double h = xp.get(1) - xp.get(0);
+                //Rounding value back to fix floating-point precision errors
+                h = Math.round(h * 1e10) / 1e10;
+                for (int i = 1; i < xp.size() - 1; i++) {
+                    // get the temporary value of xi+1 - xi
+                    double temp = (xp.get(i + 1) - xp.get(i));
+                    //Rounding value back to fix floating-point precision errors
+                    temp = Math.round(temp * 1e10) / 1e10;
+                    // if the temporary value do not equal h => the step is invalid
+                    if (temp != h) {
+                        throw new ArithmeticException("step h is not static");
+                    }
+                }
                 //get index
                 int index = xp.indexOf(x);
                 if (index == 0 || index == -1)
                     throw new ArithmeticException("invalid inputs");
-                double h = xp.get(index) - xp.get(index - 1);
-                //Rounding value back to fix floating-point precision errors
-                h = Math.round(h * 1e10) / 1e10;
                 // apply the law : (yi - yi-1) / h
                 double res = (yp.get(index) - yp.get(index - 1)) / h;
                 //Rounding value back to fix floating-point precision errors
