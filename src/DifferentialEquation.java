@@ -9,7 +9,10 @@ public class DifferentialEquation {
     }
 
     public double getValueAt(double x, double y) {
-        return EvaluateString.evaluate(dy, x, y);
+        double ans = EvaluateString.evaluate(dy, x, y);
+        //Rounding value back to fix floating-point precision errors
+        ans = Math.round(ans * 1e10) / 1e10;
+        return ans;
     }
 
     public static class Euler {
@@ -19,9 +22,13 @@ public class DifferentialEquation {
             while (xi != x) {//if current value xi != x => continue
                 // get yi+1 = yi + yi' * h
                 yi1 = yi + eq.getValueAt(xi, yi) * h;
-                //System.out.println(yi1);
+                //Rounding value back to fix floating-point precision errors
+                yi1 = Math.round(yi1 * 1e10) / 1e10;
+                //System.out.println("yi+1 = " + yi1);
                 // update xi
                 xi = xi + h;
+                //Rounding value back to fix floating-point precision errors
+                xi = Math.round(xi * 1e10) / 1e10;
                 // update yi
                 yi = yi1;
             }
@@ -39,14 +46,20 @@ public class DifferentialEquation {
                 for (int i = 0; i < eqs.size(); i++) {// for every Differential Equation
                     // update factorial = 1 * 2 * 3 ... * n = n!
                     factor *= (i + 1);
+                    //Rounding value back to fix floating-point precision errors
+                    factor = Math.round(factor * 1e10) / 1e10;
                     // update ans = yi + ( yi'* h ) / 1! + ( yi'' * h^2 ) / 2! + ( yi''' * h^3 ) / 3! ...
                     sum += eqs.get(i).getValueAt(xi, yi) * Math.pow(h, i + 1) * (1 / factor);
+                    //Rounding value back to fix floating-point precision errors
+                    sum = Math.round(sum * 1e10) / 1e10;
                 }
                 // update yi+1
                 yi1 = sum;
-                //System.out.println(yi1);
+                //System.out.println("yi+1 = " + yi1);
                 //update xi
                 xi = xi + h;
+                //Rounding value back to fix floating-point precision errors
+                xi = Math.round(xi * 1e10) / 1e10;
                 // update yi
                 yi = yi1;
             }
@@ -64,15 +77,23 @@ public class DifferentialEquation {
             while (xi != x) {
                 // update k1 = f(xi,yi)
                 double k1 = eq.getValueAt(xi, yi);
-                System.out.println(k1);
+                //Rounding value back to fix floating-point precision errors
+                k1 = Math.round(k1 * 1e10) / 1e10;
+                System.out.println("k1 = " + k1);
                 // update k2 = f(xi + p*h , yi +q*h*k1 )
                 double k2 = eq.getValueAt(xi + p * h, yi + q * h * k1);
-                System.out.println(k2);
+                //Rounding value back to fix floating-point precision errors
+                k2 = Math.round(k2 * 1e10) / 1e10;
+                System.out.println("k2 = " + k2);
                 // update yi+1 = yi + h[ ai * k1 + a2 * k2 ]
                 yi1 = yi + h * (a1 * k1 + a2 * k2);
-                System.out.println(yi1);
+                //Rounding value back to fix floating-point precision errors
+                yi1 = Math.round(yi1 * 1e10) / 1e10;
+                System.out.println("yi+1 = " + yi1);
                 //update xi
                 xi = xi + h;
+                //Rounding value back to fix floating-point precision errors
+                xi = Math.round(xi * 1e10) / 1e10;
                 // update yi
                 yi = yi1;
             }
@@ -81,7 +102,7 @@ public class DifferentialEquation {
     }
 
     public static class ModifiedEuler {
-        private static double solve(DifferentialEquation eq, double x0, double y0, double h, double x) {
+        public static double solve(DifferentialEquation eq, double x0, double y0, double h, double x) {
             return MidPoint.solve(eq, x0, y0, h, x, 1);
         }
     }
