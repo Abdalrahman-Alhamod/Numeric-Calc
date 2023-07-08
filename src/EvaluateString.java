@@ -11,11 +11,9 @@ public abstract class EvaluateString {
      * Evaluates the given mathematical expression with a giving value and returns the result.
      *
      * @param expression The mathematical expression to evaluate.
-     * @param x          the value to evaluate with
      * @return The result of the evaluation.
      */
-    public static double evaluate(String expression, double x) {
-        expression = expression.replaceAll("(?<!\\w)x(?!\\w)", Double.toString(x)); // replace x with its given value
+    public static double evaluate(String expression) {
         expression = expression.replaceAll("pi", Double.toString(Math.PI)); // replace string Pi with its value
         expression = expression.replaceAll("\\s", ""); // Remove all whitespace characters from the expression
         char[] tokens = expression.toCharArray();
@@ -154,6 +152,33 @@ public abstract class EvaluateString {
 
         // Top of 'values' contains the result, return it
         return values.pop();
+    }
+
+    /**
+     * Evaluates the given mathematical expression with a giving value and returns the result.
+     *
+     * @param expression The mathematical expression to evaluate.
+     * @param x          the value to evaluate with
+     * @return The result of the evaluation.
+     */
+    public static double evaluate(String expression, double x) {
+        // replace x with its given value
+        expression = expression.replaceAll("(?<!\\w)x(?!\\w)", Double.toString(x));
+        return evaluate(expression);
+    }
+
+    /**
+     * Evaluates the given mathematical expression with a giving value and returns the result.
+     *
+     * @param expression The mathematical expression to evaluate.
+     * @param x          the value to evaluate with instead of 'x'
+     * @param y          the value to evaluate with instead of 'y'
+     * @return The result of the evaluation.
+     */
+    public static double evaluate(String expression, double x, double y) {
+        // replace y with its value
+        expression = expression.replaceAll("y", Double.toString(y));
+        return evaluate(expression, x);
     }
 
     /**
