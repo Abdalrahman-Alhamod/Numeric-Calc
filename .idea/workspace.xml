@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Test Newton-Raphson class">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Testing Halley class">
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NonLinearEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NonLinearEquation.java" afterDir="false" />
     </list>
@@ -81,20 +80,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٦٠" summary="Remove printing from EvaluateString">
-      <created>1688687272992</created>
-      <option name="number" value="٠٠١٦٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٦٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688687272992</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٦١" summary="Editing getDiffAt and getIntegralAt">
-      <created>1688688115341</created>
-      <option name="number" value="٠٠١٦١" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٦١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688688115341</updated>
     </task>
     <task id="LOCAL؜-٠٠١٦٢" summary="Testing getDiffAt and getIntegralAt in ExpressionFunction">
       <created>1688688124772</created>
@@ -425,7 +410,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688935811007</updated>
     </task>
-    <option name="localTasksCounter" value="209" />
+    <task id="LOCAL؜-٠٠٢٠٩" summary="Add Halley class to NonLinearEquation">
+      <created>1688938023552</created>
+      <option name="number" value="٠٠٢٠٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٠٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688938023552</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢١٠" summary="Testing Halley class">
+      <created>1688938034882</created>
+      <option name="number" value="٠٠٢١٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢١٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688938034882</updated>
+    </task>
+    <option name="localTasksCounter" value="211" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -467,8 +466,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Test evaluate(x,y)" />
-    <MESSAGE value="Create DifferentialEquation with constructor" />
     <MESSAGE value="Create getValueAt for DifferentialEquation" />
     <MESSAGE value="Add Euler method to DifferentialEquation" />
     <MESSAGE value="Test Euler method" />
@@ -492,6 +489,8 @@
     <MESSAGE value="Testing Secant class" />
     <MESSAGE value="Add Newton-Raphson class to NonLinearEquation" />
     <MESSAGE value="Test Newton-Raphson class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Test Newton-Raphson class" />
+    <MESSAGE value="Add Halley class to NonLinearEquation" />
+    <MESSAGE value="Testing Halley class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing Halley class" />
   </component>
 </project>

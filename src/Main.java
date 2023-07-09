@@ -684,7 +684,7 @@ public class Main {
         System.out.println(NonLinearEquation.Newton_Raphson.solveRange(f, df, a, b));   */
 
         //Hali
-        Scanner in = new Scanner(System.in);
+        /*Scanner in = new Scanner(System.in);
         double x0, e;
         String fS, dfS, d2fS;
         System.out.print("Enter f(x) : ");
@@ -701,7 +701,21 @@ public class Main {
         System.out.print("Enter e : ");
         e = parseDouble(in.next());
         System.out.print("The solution of the non-linear equation using Halley : ");
-        System.out.println(NonLinearEquation.Halley.solve(f, df, d2f, x0, e));
+        System.out.println(NonLinearEquation.Halley.solve(f, df, d2f, x0, e));*/
+
+        //Fixed Point Iteration
+        Scanner in = new Scanner(System.in);
+        double x0, e;
+        String gS;
+        System.out.print("Enter g(x) : ");
+        gS = in.nextLine();
+        ExpressionFunction gx = new ExpressionFunction(gS);
+        System.out.print("Enter x0 : ");
+        x0 = parseDouble(in.next());
+        System.out.print("Enter e : ");
+        e = parseDouble(in.next());
+        System.out.print("The solution of the non-linear equation using Fixed Point Iteration : ");
+        System.out.println(NonLinearEquation.FixedPointIteration.solve(gx, x0, e));
 
     }
 
