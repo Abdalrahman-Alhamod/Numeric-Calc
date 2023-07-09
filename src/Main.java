@@ -665,7 +665,7 @@ public class Main {
         System.out.println(NonLinearEquation.Secant.solve(eq, x0, x1, e));*/
 
         //Newton-Raphson
-        Scanner in = new Scanner(System.in);
+        /*Scanner in = new Scanner(System.in);
         double a, b, e;
         String fS, dfS;
         System.out.print("Enter f(x) : ");
@@ -681,8 +681,27 @@ public class Main {
         System.out.print("Enter e : ");
         e = parseDouble(in.next());
         System.out.print("The solution of the non-linear equation using Newton-Raphson : ");
-        System.out.println(NonLinearEquation.Newton_Raphson.solveRange(f, df, a, b));
+        System.out.println(NonLinearEquation.Newton_Raphson.solveRange(f, df, a, b));   */
 
+        //Hali
+        Scanner in = new Scanner(System.in);
+        double x0, e;
+        String fS, dfS, d2fS;
+        System.out.print("Enter f(x) : ");
+        fS = in.nextLine();
+        ExpressionFunction f = new ExpressionFunction(fS);
+        System.out.print("Enter f'(x) : ");
+        dfS = in.nextLine();
+        ExpressionFunction df = new ExpressionFunction(dfS);
+        System.out.print("Enter f''(x) : ");
+        d2fS = in.nextLine();
+        ExpressionFunction d2f = new ExpressionFunction(d2fS);
+        System.out.print("Enter x0 : ");
+        x0 = parseDouble(in.next());
+        System.out.print("Enter e : ");
+        e = parseDouble(in.next());
+        System.out.print("The solution of the non-linear equation using Halley : ");
+        System.out.println(NonLinearEquation.Halley.solve(f, df, d2f, x0, e));
 
     }
 

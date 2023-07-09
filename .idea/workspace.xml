@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Testing Secant class">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Test Newton-Raphson class">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NonLinearEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NonLinearEquation.java" afterDir="false" />
     </list>
@@ -80,20 +81,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٥٨" summary="Init getDiffAt and getIntegralAt in ExpressionFunction">
-      <created>1688686267414</created>
-      <option name="number" value="٠٠١٥٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٥٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688686267414</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٥٩" summary="Fix Minus bug in EvaluateString">
-      <created>1688687191587</created>
-      <option name="number" value="٠٠١٥٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٥٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688687191587</updated>
     </task>
     <task id="LOCAL؜-٠٠١٦٠" summary="Remove printing from EvaluateString">
       <created>1688687272992</created>
@@ -424,7 +411,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688934425721</updated>
     </task>
-    <option name="localTasksCounter" value="207" />
+    <task id="LOCAL؜-٠٠٢٠٧" summary="Add Newton-Raphson class to NonLinearEquation">
+      <created>1688935799718</created>
+      <option name="number" value="٠٠٢٠٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٠٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688935799718</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٠٨" summary="Test Newton-Raphson class">
+      <created>1688935811007</created>
+      <option name="number" value="٠٠٢٠٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٠٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688935811007</updated>
+    </task>
+    <option name="localTasksCounter" value="209" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -466,8 +467,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Retest all methods" />
-    <MESSAGE value="Add evaluate(x) and evaluate(x,y) to EvaluateString" />
     <MESSAGE value="Test evaluate(x,y)" />
     <MESSAGE value="Create DifferentialEquation with constructor" />
     <MESSAGE value="Create getValueAt for DifferentialEquation" />
@@ -491,6 +490,8 @@
     <MESSAGE value="Test FalsePosition and Bisection" />
     <MESSAGE value="Add Secant class to NonLinearEquation" />
     <MESSAGE value="Testing Secant class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing Secant class" />
+    <MESSAGE value="Add Newton-Raphson class to NonLinearEquation" />
+    <MESSAGE value="Test Newton-Raphson class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test Newton-Raphson class" />
   </component>
 </project>
