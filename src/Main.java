@@ -759,7 +759,7 @@ public class Main {
         System.out.println(Polynomial.Horner.getDivideOn(poly, x));*/
 
         //getDiffAt
-        Scanner in = new Scanner(System.in);
+        /*Scanner in = new Scanner(System.in);
         int degree;
         ArrayList<Double> coeffs = new ArrayList<>();
         System.out.print("Enter Polynomial degree : ");
@@ -776,7 +776,7 @@ public class Main {
         int diffDegree = in.nextInt();
         System.out.println("Your Polynomial = " + poly);
         System.out.print("The value of the differentiation at the given x = ");
-        System.out.println(Polynomial.Horner.getDiffAt(poly, x, diffDegree));
+        System.out.println(Polynomial.Horner.getDiffAt(poly, x, diffDegree));   */
 
 
     }

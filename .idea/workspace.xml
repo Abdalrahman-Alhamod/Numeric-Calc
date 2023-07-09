@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add JAVA DOC to NonLinearEquation">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Test Horner methods">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Polynomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polynomial.java" afterDir="false" />
@@ -82,20 +82,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٦٧" summary="Add Trigonometric operators to EvaluateString">
-      <created>1688738469620</created>
-      <option name="number" value="٠٠١٦٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٦٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688738469620</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٦٨" summary="Fix floating-point precision errors in getValueAt">
-      <created>1688739063225</created>
-      <option name="number" value="٠٠١٦٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٦٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688739063225</updated>
     </task>
     <task id="LOCAL؜-٠٠١٦٩" summary="Testing Trigonometric operator">
       <created>1688739080979</created>
@@ -426,7 +412,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688939859231</updated>
     </task>
-    <option name="localTasksCounter" value="216" />
+    <task id="LOCAL؜-٠٠٢١٦" summary="Add Horner class to Polynomial with getValueAt, getDiffAt, getDivideOn">
+      <created>1688943000910</created>
+      <option name="number" value="٠٠٢١٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢١٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688943000910</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢١٧" summary="Test Horner methods">
+      <created>1688943023139</created>
+      <option name="number" value="٠٠٢١٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢١٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688943023139</updated>
+    </task>
+    <option name="localTasksCounter" value="218" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -468,8 +468,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add MidPoint method" />
-    <MESSAGE value="Add ModifiedEuler method" />
     <MESSAGE value="Fix floating-point precision errors in DEQ" />
     <MESSAGE value="Restructure MidPoint class" />
     <MESSAGE value="Testing MidPoint :  Modified Euler / Heun / Raphson" />
@@ -493,6 +491,8 @@
     <MESSAGE value="Restructure NonLinearEquation class" />
     <MESSAGE value="Edit main due to new changes" />
     <MESSAGE value="Add JAVA DOC to NonLinearEquation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add JAVA DOC to NonLinearEquation" />
+    <MESSAGE value="Add Horner class to Polynomial with getValueAt, getDiffAt, getDivideOn" />
+    <MESSAGE value="Test Horner methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test Horner methods" />
   </component>
 </project>

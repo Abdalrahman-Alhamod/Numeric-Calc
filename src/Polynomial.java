@@ -108,8 +108,9 @@ public class Polynomial implements Function {
                 //}
             }
         }
+        // if there is a ' + ' , delete it
         if (sb.charAt(sb.length() - 1) == ' ')
-            sb.delete(sb.length()-3,sb.length()-1);
+            sb.delete(sb.length() - 3, sb.length() - 1);
         return sb.toString(); // Return the final string representation
     }
 
@@ -367,10 +368,19 @@ public class Polynomial implements Function {
         return new PointsFunction(xp, yp);
     }
 
+    /**
+     * The Horner class provides methods for polynomial evaluation, division, and differentiation using Horner's method.
+     */
     public static class Horner {
 
         private static ArrayList<Double> b;
 
+        /**
+         * Calculates the intermediate coefficients of the polynomial using Horner's method.
+         *
+         * @param poly The polynomial to evaluate.
+         * @param x    The value of x for evaluation.
+         */
         private static void calcB(Polynomial poly, double x) {
             ArrayList<Double> a = poly.getCoeffs();
             Collections.reverse(a);
@@ -383,11 +393,25 @@ public class Polynomial implements Function {
             }
         }
 
+        /**
+         * Evaluates the polynomial at the specified value of x using Horner's method.
+         *
+         * @param poly The polynomial to evaluate.
+         * @param x    The value of x for evaluation.
+         * @return The result of evaluating the polynomial at x.
+         */
         public static double getValueAt(Polynomial poly, double x) {
             calcB(poly, x);
             return b.get(b.size() - 1);
         }
 
+        /**
+         * Divides the polynomial by (x - c) using Horner's method and returns the resulting polynomial.
+         *
+         * @param poly The polynomial to divide.
+         * @param x    The value of x in (x - c).
+         * @return The resulting polynomial after division.
+         */
         public static Polynomial getDivideOn(Polynomial poly, double x) {
             calcB(poly, x);
             ArrayList<Double> coeff = new ArrayList<>();
@@ -398,6 +422,14 @@ public class Polynomial implements Function {
             return new Polynomial(coeff);
         }
 
+        /**
+         * Calculates the value of the derivative of the polynomial at the specified value of x and rank using Horner's method.
+         *
+         * @param poly The polynomial to differentiate.
+         * @param x    The value of x for differentiation.
+         * @param rank The rank of the derivative.
+         * @return The value of the derivative at x.
+         */
         public static double getDiffAt(Polynomial poly, double x, int rank) {
             b = new ArrayList<>();
             double bi = x;
