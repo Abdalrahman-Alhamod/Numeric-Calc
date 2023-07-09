@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Testing Halley class">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add JAVA DOC to NonLinearEquation">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NonLinearEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NonLinearEquation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polynomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polynomial.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,8 +50,9 @@
     <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Matrix.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/NonLinearEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/PointsFunction.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -80,41 +82,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٦٢" summary="Testing getDiffAt and getIntegralAt in ExpressionFunction">
-      <created>1688688124772</created>
-      <option name="number" value="٠٠١٦٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٦٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688688124772</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٦٣" summary="Add java doc to Function Interface">
-      <created>1688688830268</created>
-      <option name="number" value="٠٠١٦٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٦٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688688830268</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٦٤" summary="Add java doc to ExpressionFunction">
-      <created>1688689085501</created>
-      <option name="number" value="٠٠١٦٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٦٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688689085501</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٦٥" summary="Add java doc to PointsFunction">
-      <created>1688689313314</created>
-      <option name="number" value="٠٠١٦٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٦٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688689313314</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٦٦" summary="Create tag v1.1.0">
-      <created>1688691439852</created>
-      <option name="number" value="٠٠١٦٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٦٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688691439852</updated>
     </task>
     <task id="LOCAL؜-٠٠١٦٧" summary="Add Trigonometric operators to EvaluateString">
       <created>1688738469620</created>
@@ -424,7 +391,42 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688938034882</updated>
     </task>
-    <option name="localTasksCounter" value="211" />
+    <task id="LOCAL؜-٠٠٢١١" summary="Add FixedPointIteration class to NonLinearEquation">
+      <created>1688938821388</created>
+      <option name="number" value="٠٠٢١١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢١١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688938821388</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢١٢" summary="Testing FixedPointIteration class">
+      <created>1688938834036</created>
+      <option name="number" value="٠٠٢١٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢١٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688938834036</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢١٣" summary="Restructure NonLinearEquation class">
+      <created>1688939039874</created>
+      <option name="number" value="٠٠٢١٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢١٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688939039874</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢١٤" summary="Edit main due to new changes">
+      <created>1688939352532</created>
+      <option name="number" value="٠٠٢١٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢١٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688939352532</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢١٥" summary="Add JAVA DOC to NonLinearEquation">
+      <created>1688939859231</created>
+      <option name="number" value="٠٠٢١٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢١٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688939859231</updated>
+    </task>
+    <option name="localTasksCounter" value="216" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -466,11 +468,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create getValueAt for DifferentialEquation" />
-    <MESSAGE value="Add Euler method to DifferentialEquation" />
-    <MESSAGE value="Test Euler method" />
-    <MESSAGE value="Add Taylor method" />
-    <MESSAGE value="Test Taylor method" />
     <MESSAGE value="Add MidPoint method" />
     <MESSAGE value="Add ModifiedEuler method" />
     <MESSAGE value="Fix floating-point precision errors in DEQ" />
@@ -491,6 +488,11 @@
     <MESSAGE value="Test Newton-Raphson class" />
     <MESSAGE value="Add Halley class to NonLinearEquation" />
     <MESSAGE value="Testing Halley class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing Halley class" />
+    <MESSAGE value="Add FixedPointIteration class to NonLinearEquation" />
+    <MESSAGE value="Testing FixedPointIteration class" />
+    <MESSAGE value="Restructure NonLinearEquation class" />
+    <MESSAGE value="Edit main due to new changes" />
+    <MESSAGE value="Add JAVA DOC to NonLinearEquation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add JAVA DOC to NonLinearEquation" />
   </component>
 </project>

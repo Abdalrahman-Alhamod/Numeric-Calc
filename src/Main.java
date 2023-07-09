@@ -720,6 +720,65 @@ public class Main {
         System.out.println(NonLinearEquation.FixedPointIteration.solve(gx, x0, e));*/
 
 
+        //Test Horner
+
+        // getValueAt
+        /*Scanner in = new Scanner(System.in);
+        int degree;
+        ArrayList<Double> coeffs = new ArrayList<>();
+        System.out.print("Enter Polynomial degree : ");
+        degree = in.nextInt();
+        for (int i = 0; i <= degree; i++) {
+            System.out.print("Enter a" + i + " : ");
+            double a = parseDouble(in.next());
+            coeffs.add(a);
+        }
+        System.out.print("Enter x : ");
+        double x = parseDouble(in.next());
+        Polynomial poly = new Polynomial(coeffs);
+        System.out.println("Your Polynomial = " + poly);
+        System.out.print("The value of given x using Horner = ");
+        System.out.println(Polynomial.Horner.getValueAt(poly, x));*/
+
+        //getDivideOn
+        /*Scanner in = new Scanner(System.in);
+        int degree;
+        ArrayList<Double> coeffs = new ArrayList<>();
+        System.out.print("Enter Polynomial degree : ");
+        degree = in.nextInt();
+        for (int i = 0; i <= degree; i++) {
+            System.out.print("Enter a" + i + " : ");
+            double a = parseDouble(in.next());
+            coeffs.add(a);
+        }
+        System.out.print("Enter x : ");
+        double x = parseDouble(in.next());
+        Polynomial poly = new Polynomial(coeffs);
+        System.out.println("Your Polynomial = " + poly);
+        System.out.print("The result polynomial of dividing your Polynomial on (x - "+x+") using Horner = ");
+        System.out.println(Polynomial.Horner.getDivideOn(poly, x));*/
+
+        //getDiffAt
+        Scanner in = new Scanner(System.in);
+        int degree;
+        ArrayList<Double> coeffs = new ArrayList<>();
+        System.out.print("Enter Polynomial degree : ");
+        degree = in.nextInt();
+        for (int i = 0; i <= degree; i++) {
+            System.out.print("Enter a" + i + " : ");
+            double a = parseDouble(in.next());
+            coeffs.add(a);
+        }
+        System.out.print("Enter x : ");
+        double x = parseDouble(in.next());
+        Polynomial poly = new Polynomial(coeffs);
+        System.out.print("Enter Differentiation degree : ");
+        int diffDegree = in.nextInt();
+        System.out.println("Your Polynomial = " + poly);
+        System.out.print("The value of the differentiation at the given x = ");
+        System.out.println(Polynomial.Horner.getDiffAt(poly, x, diffDegree));
+
+
     }
 
 }
