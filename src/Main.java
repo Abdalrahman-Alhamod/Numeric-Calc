@@ -649,7 +649,7 @@ public class Main {
         System.out.println(NonLinearEquation.FalsePosition.solve(eq, a, b, e));*/
 
         //Secant
-        Scanner in = new Scanner(System.in);
+        /*Scanner in = new Scanner(System.in);
         double x0, x1, e;
         String eqS;
         System.out.print("Enter The Non-Linear Equation (Function Only) : ");
@@ -662,7 +662,26 @@ public class Main {
         System.out.print("Enter e : ");
         e = parseDouble(in.next());
         System.out.print("The solution of the non-linear equation using Secant : ");
-        System.out.println(NonLinearEquation.Secant.solve(eq, x0, x1, e));
+        System.out.println(NonLinearEquation.Secant.solve(eq, x0, x1, e));*/
+
+        //Newton-Raphson
+        Scanner in = new Scanner(System.in);
+        double a, b, e;
+        String fS, dfS;
+        System.out.print("Enter f(x) : ");
+        fS = in.nextLine();
+        ExpressionFunction f = new ExpressionFunction(fS);
+        System.out.print("Enter f'(x) : ");
+        dfS = in.nextLine();
+        ExpressionFunction df = new ExpressionFunction(dfS);
+        System.out.print("Enter a : ");
+        a = parseDouble(in.next());
+        System.out.print("Enter b : ");
+        b = parseDouble(in.next());
+        System.out.print("Enter e : ");
+        e = parseDouble(in.next());
+        System.out.print("The solution of the non-linear equation using Newton-Raphson : ");
+        System.out.println(NonLinearEquation.Newton_Raphson.solveRange(f, df, a, b));
 
 
     }

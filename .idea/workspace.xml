@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Test FalsePosition and Bisection">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Testing Secant class">
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NonLinearEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NonLinearEquation.java" afterDir="false" />
     </list>
@@ -81,20 +80,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٥٦" summary="Init getDiffAt and getIntegralAt in PointsFunction">
-      <created>1688685713535</created>
-      <option name="number" value="٠٠١٥٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٥٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688685713535</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٥٧" summary="Testing getDiffAt and getIntegralAt in PointsFunction">
-      <created>1688686053384</created>
-      <option name="number" value="٠٠١٥٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٥٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688686053384</updated>
     </task>
     <task id="LOCAL؜-٠٠١٥٨" summary="Init getDiffAt and getIntegralAt in ExpressionFunction">
       <created>1688686267414</created>
@@ -425,7 +410,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688933116433</updated>
     </task>
-    <option name="localTasksCounter" value="205" />
+    <task id="LOCAL؜-٠٠٢٠٥" summary="Add Secant class to NonLinearEquation">
+      <created>1688934412705</created>
+      <option name="number" value="٠٠٢٠٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٠٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688934412705</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٠٦" summary="Testing Secant class">
+      <created>1688934425721</created>
+      <option name="number" value="٠٠٢٠٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٠٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688934425721</updated>
+    </task>
+    <option name="localTasksCounter" value="207" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -467,8 +466,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Comment errors in Integral" />
-    <MESSAGE value="Fix floating-point precision errors in Integral" />
     <MESSAGE value="Retest all methods" />
     <MESSAGE value="Add evaluate(x) and evaluate(x,y) to EvaluateString" />
     <MESSAGE value="Test evaluate(x,y)" />
@@ -492,6 +489,8 @@
     <MESSAGE value="Fix EvaluateString bug" />
     <MESSAGE value="Add FalsePosition class to NonLinearEquation" />
     <MESSAGE value="Test FalsePosition and Bisection" />
-    <option name="LAST_COMMIT_MESSAGE" value="Test FalsePosition and Bisection" />
+    <MESSAGE value="Add Secant class to NonLinearEquation" />
+    <MESSAGE value="Testing Secant class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing Secant class" />
   </component>
 </project>
