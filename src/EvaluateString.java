@@ -24,8 +24,14 @@ public abstract class EvaluateString {
         Stack<String> ops = new Stack<>();
 
         for (int i = 0; i < tokens.length; i++) {
+            String preOp = "1";
+            if (i > 0)
+                preOp = Character.toString(tokens[i - 1]);
 
-            if ((i == 0 && tokens[i] == '-') || (tokens[i] == '-' && !Character.isDigit(tokens[i - 1]))) {
+            if ((i == 0 && tokens[i] == '-') ||
+                    i > 0 && (preOp.equals("(") || isExp(preOp) ||
+                            isTrigonometric(preOp) || isLogSqrtExp(preOp) ||
+                            isMulDiv(preOp) || isAddSub(preOp)) && tokens[i] == '-') {
                 i++;
                 StringBuilder sb = new StringBuilder();
 
