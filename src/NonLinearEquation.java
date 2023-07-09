@@ -52,7 +52,6 @@ public class NonLinearEquation {
     public static class FalsePosition {
         public static double solve(NonLinearEquation eq, double a, double b, double e) {
             double fa = eq.getValueAt(a), fb = eq.getValueAt(b);
-            //System.out.println("fa : " + fa + " fb : " + fb );
             double c = a;
             while (Math.abs(a - b) >= e) {
                 c = ((a * fb) - (b * fa)) / (fb - fa);
@@ -72,6 +71,33 @@ public class NonLinearEquation {
                     break;
             }
             return c;
+        }
+
+        public static double solve(NonLinearEquation eq, double a, double b) {
+            return solve(eq, a, b, 0.000000001);
+        }
+    }
+
+    public static class Secant {
+        public static double solve(NonLinearEquation eq, double x0, double x1, double e) {
+            double xi_1 = x0, xi = x1;
+            double fxi_1 = eq.getValueAt(x0), fxi = eq.getValueAt(x1);
+            double xi1 = xi_1;
+            while (true) {
+                xi1 = xi - ((xi - xi_1) / (fxi - fxi_1)) * fxi;
+                //Rounding value back to fix floating-point precision errors
+                xi1 = Math.round(xi1 * 1e10) / 1e10;
+                //System.out.println("xi-1 : " + xi_1 + " xi : " + xi + " xi+1 : " + xi1);
+                double fxi1 = eq.getValueAt(xi1);
+                //System.out.println("f(xi-1) : " + fxi_1 + " f(xi) : " + fxi + " f(xi+1) : " + fxi1);
+                if (Math.abs(xi1 - xi) < e || Math.abs(xi1 - xi) == 0 || fxi1 == 0)
+                    break;
+                xi_1 = xi;
+                fxi_1 = fxi;
+                xi = xi1;
+                fxi = fxi1;
+            }
+            return xi1;
         }
 
         public static double solve(NonLinearEquation eq, double a, double b) {
