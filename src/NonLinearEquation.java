@@ -101,7 +101,47 @@ public class NonLinearEquation {
         }
 
         public static double solve(NonLinearEquation eq, double a, double b) {
-            return solve(eq, a, b, 0.000000001);
+            return solve(eq, a, b, 1E-9);
+        }
+    }
+
+    public static class Newton_Raphson {
+        public static double solve(ExpressionFunction f, ExpressionFunction df, double x0, double e) {
+            double xi = x0;
+            double fxi = f.getValueAt(x0), dfxi = df.getValueAt(x0);
+            double xi1 = xi;
+            while (true) {
+                xi1 = xi - (fxi / dfxi);
+                //Rounding value back to fix floating-point precision errors
+                xi1 = Math.round(xi1 * 1e10) / 1e10;
+                double fxi1 = f.getValueAt(xi1);
+                if (Math.abs(xi1 - xi) < e || Math.abs(xi1 - xi) == 0 || fxi1 == 0)
+                    break;
+                double dfxi1 = df.getValueAt(xi1);
+                xi = xi1;
+                fxi = fxi1;
+                dfxi = dfxi1;
+            }
+            return xi1;
+        }
+
+        public static double solve(ExpressionFunction f, ExpressionFunction df, double x0) {
+            return solve(f, df, x0, 1E-9);
+        }
+
+        public static double solveRange(ExpressionFunction f, ExpressionFunction df, double a, double b, double e) {
+            double fa = f.getValueAt(a), dfa = df.getValueAt(a);
+            double x = a - (fa / dfa);
+            //Rounding value back to fix floating-point precision errors
+            x = Math.round(x * 1e10) / 1e10;
+            if (x >= a && x <= b)
+                return solve(f, df, a, e);
+            else
+                return solve(f, df, b, e);
+        }
+
+        public static double solveRange(ExpressionFunction f, ExpressionFunction df, double a, double b) {
+            return solveRange(f, df, a, b, 1E-9);
         }
     }
 
