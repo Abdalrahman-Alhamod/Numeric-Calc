@@ -526,6 +526,7 @@ public class Main {
         /*String s = "-y +x +1";
         System.out.println(EvaluateString.evaluate(s,5,3));*/
 
+
         //Test DifferentialEquation
 
         //Euler
@@ -614,15 +615,16 @@ public class Main {
         System.out.print("The solution of the differential equation using Runge_Kutta = ");
         System.out.println(DifferentialEquation.Runge_Kutta.solve(eq, x0, y0, h, x));   */
 
+
         //Testing Non-Linear Equations
 
         //Bisection
         /*Scanner in = new Scanner(System.in);
         double a, b, e;
-        String eqS;
-        System.out.print("Enter The Non-Linear Equation (Function Only) : ");
-        eqS = in.nextLine();
-        NonLinearEquation eq = new NonLinearEquation(eqS);
+        String fxS;
+        System.out.print("Enter f(x) : ");
+        fxS = in.nextLine();
+        ExpressionFunction fx = new ExpressionFunction(fxS);
         System.out.print("Enter a : ");
         a = parseDouble(in.next());
         System.out.print("Enter b : ");
@@ -630,15 +632,15 @@ public class Main {
         System.out.print("Enter e : ");
         e = parseDouble(in.next());
         System.out.print("The solution of the non-linear equation using Bisection : ");
-        System.out.println(NonLinearEquation.Bisection.solve(eq, a, b, e));*/
+        System.out.println(NonLinearEquation.Bisection.solve(fx, a, b, e));*/
 
         //False Position
         /*Scanner in = new Scanner(System.in);
         double a, b, e;
-        String eqS;
-        System.out.print("Enter The Non-Linear Equation (Function Only) : ");
-        eqS = in.nextLine();
-        NonLinearEquation eq = new NonLinearEquation(eqS);
+        String fxS;
+        System.out.print("Enter f(x) : ");
+        fxS = in.nextLine();
+        ExpressionFunction fx = new ExpressionFunction(fxS);
         System.out.print("Enter a : ");
         a = parseDouble(in.next());
         System.out.print("Enter b : ");
@@ -646,15 +648,15 @@ public class Main {
         System.out.print("Enter e : ");
         e = parseDouble(in.next());
         System.out.print("The solution of the non-linear equation using Bisection : ");
-        System.out.println(NonLinearEquation.FalsePosition.solve(eq, a, b, e));*/
+        System.out.println(NonLinearEquation.FalsePosition.solve(fx, a, b, e));*/
 
         //Secant
         /*Scanner in = new Scanner(System.in);
         double x0, x1, e;
-        String eqS;
-        System.out.print("Enter The Non-Linear Equation (Function Only) : ");
-        eqS = in.nextLine();
-        NonLinearEquation eq = new NonLinearEquation(eqS);
+        String fxS;
+        System.out.print("Enter f(x) : ");
+        fxS = in.nextLine();
+        ExpressionFunction fx = new ExpressionFunction(fxS);
         System.out.print("Enter x0 : ");
         x0 = parseDouble(in.next());
         System.out.print("Enter x1 : ");
@@ -662,18 +664,18 @@ public class Main {
         System.out.print("Enter e : ");
         e = parseDouble(in.next());
         System.out.print("The solution of the non-linear equation using Secant : ");
-        System.out.println(NonLinearEquation.Secant.solve(eq, x0, x1, e));*/
+        System.out.println(NonLinearEquation.Secant.solve(fx, x0, x1, e));  */
 
         //Newton-Raphson
         /*Scanner in = new Scanner(System.in);
         double a, b, e;
-        String fS, dfS;
+        String fxS, dfxS;
         System.out.print("Enter f(x) : ");
-        fS = in.nextLine();
-        ExpressionFunction f = new ExpressionFunction(fS);
+        fxS = in.nextLine();
+        ExpressionFunction fx = new ExpressionFunction(fxS);
         System.out.print("Enter f'(x) : ");
-        dfS = in.nextLine();
-        ExpressionFunction df = new ExpressionFunction(dfS);
+        dfxS = in.nextLine();
+        ExpressionFunction dfx = new ExpressionFunction(dfxS);
         System.out.print("Enter a : ");
         a = parseDouble(in.next());
         System.out.print("Enter b : ");
@@ -681,30 +683,30 @@ public class Main {
         System.out.print("Enter e : ");
         e = parseDouble(in.next());
         System.out.print("The solution of the non-linear equation using Newton-Raphson : ");
-        System.out.println(NonLinearEquation.Newton_Raphson.solveRange(f, df, a, b));   */
+        System.out.println(NonLinearEquation.Newton_Raphson.solveRange(fx, dfx, a, b));   */
 
         //Hali
         /*Scanner in = new Scanner(System.in);
         double x0, e;
-        String fS, dfS, d2fS;
+        String fxS, dfxS, d2fxS;
         System.out.print("Enter f(x) : ");
-        fS = in.nextLine();
-        ExpressionFunction f = new ExpressionFunction(fS);
+        fxS = in.nextLine();
+        ExpressionFunction fx = new ExpressionFunction(fxS);
         System.out.print("Enter f'(x) : ");
-        dfS = in.nextLine();
-        ExpressionFunction df = new ExpressionFunction(dfS);
+        dfxS = in.nextLine();
+        ExpressionFunction dfx = new ExpressionFunction(dfxS);
         System.out.print("Enter f''(x) : ");
-        d2fS = in.nextLine();
-        ExpressionFunction d2f = new ExpressionFunction(d2fS);
+        d2fxS = in.nextLine();
+        ExpressionFunction d2fx = new ExpressionFunction(d2fxS);
         System.out.print("Enter x0 : ");
         x0 = parseDouble(in.next());
         System.out.print("Enter e : ");
         e = parseDouble(in.next());
         System.out.print("The solution of the non-linear equation using Halley : ");
-        System.out.println(NonLinearEquation.Halley.solve(f, df, d2f, x0, e));*/
+        System.out.println(NonLinearEquation.Halley.solve(fx, dfx, d2fx, x0, e));*/
 
         //Fixed Point Iteration
-        Scanner in = new Scanner(System.in);
+        /*Scanner in = new Scanner(System.in);
         double x0, e;
         String gS;
         System.out.print("Enter g(x) : ");
@@ -715,7 +717,8 @@ public class Main {
         System.out.print("Enter e : ");
         e = parseDouble(in.next());
         System.out.print("The solution of the non-linear equation using Fixed Point Iteration : ");
-        System.out.println(NonLinearEquation.FixedPointIteration.solve(gx, x0, e));
+        System.out.println(NonLinearEquation.FixedPointIteration.solve(gx, x0, e));*/
+
 
     }
 
