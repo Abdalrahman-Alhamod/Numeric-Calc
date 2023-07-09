@@ -614,6 +614,24 @@ public class Main {
         System.out.print("The solution of the differential equation using Runge_Kutta = ");
         System.out.println(DifferentialEquation.Runge_Kutta.solve(eq, x0, y0, h, x));   */
 
+        Scanner in = new Scanner(System.in);
+        double a, b, e;
+        String eqS;
+        System.out.print("Enter The Non-Linear Equation (Function Only) : ");
+        eqS = in.nextLine();
+        NonLinearEquation eq = new NonLinearEquation(eqS);
+        System.out.print("Enter a : ");
+        a = parseDouble(in.next());
+        System.out.print("Enter b : ");
+        b = parseDouble(in.next());
+//        System.out.print("Enter e : ");
+//        e = parseDouble(in.next());
+//        System.out.print("The solution of the non-linear equation using Bisection : ");
+//        System.out.println(NonLinearEquation.Bisection.solve(eq, a, b, e));
+        System.out.print("The solution of the non-linear equation using False Position : ");
+        System.out.println(NonLinearEquation.FalsePosition.solve(eq, a, b));
+
+
     }
 
 }
