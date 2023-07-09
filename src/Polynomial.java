@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Represents a polynomial with real coefficients.
@@ -104,11 +102,14 @@ public class Polynomial implements Function {
                     coeff1 = coeffs.get(i - 1); // Get the prev coefficient
                 //Rounding value back to fix floating-point precision errors
                 coeff1 = Math.round(coeff1 * 1e10) / 1e10;
-                if (i > 0 && coeff1 != 0) {  //If there are more terms
+                //if (i > 0 && coeff1 != 0) {  //If there are more terms
+                if (i > 0)
                     sb.append(" + ");  // Append the addition operator with spacing
-                }
+                //}
             }
         }
+        if (sb.charAt(sb.length() - 1) == ' ')
+            sb.delete(sb.length()-3,sb.length()-1);
         return sb.toString(); // Return the final string representation
     }
 
@@ -364,6 +365,59 @@ public class Polynomial implements Function {
             yp.add(getValueAt(i));
         }
         return new PointsFunction(xp, yp);
+    }
+
+    public static class Horner {
+
+        private static ArrayList<Double> b;
+
+        private static void calcB(Polynomial poly, double x) {
+            ArrayList<Double> a = poly.getCoeffs();
+            Collections.reverse(a);
+            double bi = a.get(0);
+            b = new ArrayList<>();
+            b.add(bi);
+            for (int i = 1; i < a.size(); i++) {
+                bi = x * bi + a.get(i);
+                b.add(bi);
+            }
+        }
+
+        public static double getValueAt(Polynomial poly, double x) {
+            calcB(poly, x);
+            return b.get(b.size() - 1);
+        }
+
+        public static Polynomial getDivideOn(Polynomial poly, double x) {
+            calcB(poly, x);
+            ArrayList<Double> coeff = new ArrayList<>();
+            for (int i = 0; i < b.size() - 1; i++)
+                coeff.add(b.get(i));
+
+            Collections.reverse(coeff);
+            return new Polynomial(coeff);
+        }
+
+        public static double getDiffAt(Polynomial poly, double x, int rank) {
+            b = new ArrayList<>();
+            double bi = x;
+            double factor = 1;
+            for (int i = 0; i <= rank; i++) {
+                if (i > 0 && b.size() == 0) {
+                    bi = 0;
+                    break;
+                }
+                calcB(poly, x);
+                bi = b.get(b.size() - 1);
+                b.remove(b.size() - 1);
+                Collections.reverse(b);
+                poly.coeffs = b;
+                if (i > 0)
+                    factor *= (i);
+            }
+            return bi * factor;
+        }
+
     }
 
 }
