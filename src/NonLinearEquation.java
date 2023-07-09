@@ -1,8 +1,23 @@
-import java.util.Objects;
 
+/**
+ * The NonLinearEquation class provides implementations of various numerical methods for solving non-linear equations.
+ * It includes methods for solving equations using the Bisection, False Position, Secant, Newton-Raphson, Halley,
+ * and Fixed-Point Iteration methods.
+ */
 public abstract class NonLinearEquation {
-
+    /**
+     * The Bisection class provides methods for solving equations using the Bisection method.
+     */
     public static class Bisection {
+        /**
+         * Solves the given equation using the Bisection method within a specified tolerance.
+         *
+         * @param fx The expression function representing the equation.
+         * @param a  The lower bound of the interval.
+         * @param b  The upper bound of the interval.
+         * @param e  The tolerance value.
+         * @return The approximate root of the equation.
+         */
         public static double solve(ExpressionFunction fx, double a, double b, double e) {
             double fa = fx.getValueAt(a), fb = fx.getValueAt(b);
             double c = a;
@@ -25,12 +40,33 @@ public abstract class NonLinearEquation {
             return c;
         }
 
+        /**
+         * Solves the given equation using the Bisection method with a default tolerance value.
+         *
+         * @param fx The expression function representing the equation.
+         * @param a  The lower bound of the interval.
+         * @param b  The upper bound of the interval.
+         * @return The approximate root of the equation.
+         */
+
         public static double solve(ExpressionFunction fx, double a, double b) {
             return solve(fx, a, b, 0.000000001);
         }
     }
 
+    /**
+     * The FalsePosition class provides methods for solving equations using the False Position method.
+     */
     public static class FalsePosition {
+        /**
+         * Solves the given equation using the False Position method within a specified tolerance.
+         *
+         * @param fx The expression function representing the equation.
+         * @param a  The lower bound of the interval.
+         * @param b  The upper bound of the interval.
+         * @param e  The tolerance value.
+         * @return The approximate root of the equation.
+         */
         public static double solve(ExpressionFunction fx, double a, double b, double e) {
             double fa = fx.getValueAt(a), fb = fx.getValueAt(b);
             double c = a;
@@ -54,12 +90,32 @@ public abstract class NonLinearEquation {
             return c;
         }
 
+        /**
+         * Solves the given equation using the False Position method with a default tolerance value.
+         *
+         * @param fx The expression function representing the equation.
+         * @param a  The lower bound of the interval.
+         * @param b  The upper bound of the interval.
+         * @return The approximate root of the equation.
+         */
         public static double solve(ExpressionFunction fx, double a, double b) {
             return solve(fx, a, b, 0.000000001);
         }
     }
 
+    /**
+     * The Secant class provides methods for solving equations using the Secant method.
+     */
     public static class Secant {
+        /**
+         * Solves the given equation using the Secant method within a specified tolerance.
+         *
+         * @param fx The expression function representing the equation.
+         * @param x0 The initial guess for the root.
+         * @param x1 The second guess for the root.
+         * @param e  The tolerance value.
+         * @return The approximate root of the equation.
+         */
         public static double solve(ExpressionFunction fx, double x0, double x1, double e) {
             double xi_1 = x0, xi = x1;
             double fxi_1 = fx.getValueAt(x0), fxi = fx.getValueAt(x1);
@@ -81,12 +137,32 @@ public abstract class NonLinearEquation {
             return xi1;
         }
 
-        public static double solve(ExpressionFunction fx, double a, double b) {
-            return solve(fx, a, b, 1E-9);
+        /**
+         * Solves the given equation using the Secant method with a default tolerance value.
+         *
+         * @param fx The expression function representing the equation.
+         * @param x0 The initial guess for the root.
+         * @param x1 The second guess for the root.
+         * @return The approximate root of the equation.
+         */
+        public static double solve(ExpressionFunction fx, double x0, double x1) {
+            return solve(fx, x0, x1, 1E-9);
         }
     }
 
+    /**
+     * The Newton_Raphson class provides methods for solving equations using the Newton-Raphson method.
+     */
     public static class Newton_Raphson {
+        /**
+         * Solves the given equation using the Newton-Raphson method within a specified tolerance.
+         *
+         * @param fx  The expression function representing the equation.
+         * @param dfx The expression function representing the derivative of the equation.
+         * @param x0  The initial guess for the root.
+         * @param e   The tolerance value.
+         * @return The approximate root of the equation.
+         */
         public static double solve(ExpressionFunction fx, ExpressionFunction dfx, double x0, double e) {
             double xi = x0;
             double fxi = fx.getValueAt(xi), dfxi = dfx.getValueAt(xi);
@@ -106,9 +182,29 @@ public abstract class NonLinearEquation {
             return xi1;
         }
 
+        /**
+         * Solves the given equation using the Newton-Raphson method with a default tolerance value.
+         *
+         * @param fx  The expression function representing the equation.
+         * @param dfx The expression function representing the derivative of the equation.
+         * @param x0  The initial guess for the root.
+         * @return The approximate root of the equation.
+         */
+
         public static double solve(ExpressionFunction fx, ExpressionFunction dfx, double x0) {
             return solve(fx, dfx, x0, 1E-9);
         }
+
+        /**
+         * Solves the given equation using the Newton-Raphson method within a specified range and tolerance.
+         *
+         * @param fx  The expression function representing the equation.
+         * @param dfx The expression function representing the derivative of the equation.
+         * @param a   The lower bound of the interval.
+         * @param b   The upper bound of the interval.
+         * @param e   The tolerance value.
+         * @return The approximate root of the equation within the specified range.
+         */
 
         public static double solveRange(ExpressionFunction fx, ExpressionFunction dfx, double a, double b, double e) {
             double fa = fx.getValueAt(a), dfa = dfx.getValueAt(a);
@@ -121,12 +217,35 @@ public abstract class NonLinearEquation {
                 return solve(fx, dfx, b, e);
         }
 
+        /**
+         * Solves the given equation using the Newton-Raphson method within a specified range and with a default tolerance value.
+         *
+         * @param fx  The expression function representing the equation.
+         * @param dfx The expression function representing the derivative of the equation.
+         * @param a   The lower bound of the interval.
+         * @param b   The upper bound of the interval.
+         * @return The approximate root of the equation within the specified range.
+         */
+
         public static double solveRange(ExpressionFunction fx, ExpressionFunction dfx, double a, double b) {
             return solveRange(fx, dfx, a, b, 1E-9);
         }
     }
 
+    /**
+     * The Halley class provides methods for solving equations using the Halley method.
+     */
     public static class Halley {
+        /**
+         * Solves the given equation using the Halley method within a specified tolerance.
+         *
+         * @param fx   The expression function representing the equation.
+         * @param dfx  The expression function representing the derivative of the equation.
+         * @param d2fx The expression function representing the second derivative of the equation.
+         * @param x0   The initial guess for the root.
+         * @param e    The tolerance value.
+         * @return The approximate root of the equation.
+         */
         public static double solve(ExpressionFunction fx, ExpressionFunction dfx, ExpressionFunction d2fx, double x0, double e) {
             double xi = x0;
             double fxi = fx.getValueAt(xi), dfxi = dfx.getValueAt(xi), d2fxi = d2fx.getValueAt(xi);
@@ -151,7 +270,18 @@ public abstract class NonLinearEquation {
         }
     }
 
+    /**
+     * The FixedPointIteration class provides methods for solving equations using the Fixed-Point Iteration method.
+     */
     public static class FixedPointIteration {
+        /**
+         * Solves the given equation using the Fixed-Point Iteration method within a specified tolerance.
+         *
+         * @param gx The expression function representing the iterative equation.
+         * @param x0 The initial guess for the root.
+         * @param e  The tolerance value.
+         * @return The approximate root of the equation.
+         */
         public static double solve(ExpressionFunction gx, double x0, double e) {
             double xi = x0;
             double gxi = gx.getValueAt(xi);
