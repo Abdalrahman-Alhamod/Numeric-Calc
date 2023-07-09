@@ -108,8 +108,8 @@ public class NonLinearEquation {
     public static class Newton_Raphson {
         public static double solve(ExpressionFunction f, ExpressionFunction df, double x0, double e) {
             double xi = x0;
-            double fxi = f.getValueAt(x0), dfxi = df.getValueAt(x0);
-            double xi1 = xi;
+            double fxi = f.getValueAt(xi), dfxi = df.getValueAt(xi);
+            double xi1;
             while (true) {
                 xi1 = xi - (fxi / dfxi);
                 //Rounding value back to fix floating-point precision errors
@@ -142,6 +142,31 @@ public class NonLinearEquation {
 
         public static double solveRange(ExpressionFunction f, ExpressionFunction df, double a, double b) {
             return solveRange(f, df, a, b, 1E-9);
+        }
+    }
+
+    public static class Halley {
+        public static double solve(ExpressionFunction f, ExpressionFunction df, ExpressionFunction d2f, double x0, double e) {
+            double xi = x0;
+            double fxi = f.getValueAt(xi), dfxi = df.getValueAt(xi), d2fxi = d2f.getValueAt(xi);
+            double xi1;
+            while (true) {
+                //System.out.println("f(xi) : "+fxi+" f'(xi) : "+dfxi+" f''(xi) : "+d2fxi);
+                xi1 = xi - ((fxi) / (dfxi - (((d2fxi) / (2 * dfxi)) * fxi)));
+                //Rounding value back to fix floating-point precision errors
+                xi1 = Math.round(xi1 * 1e10) / 1e10;
+                //System.out.println(" xi : " + xi + " xi+1 : " + xi1);
+                double fxi1 = f.getValueAt(xi1);
+                if (Math.abs(xi1 - xi) < e || Math.abs(xi1 - xi) == 0 || fxi1 == 0)
+                    break;
+                double dfxi1 = df.getValueAt(xi1), d2fxi1 = d2f.getValueAt(xi1);
+                //System.out.println("f(xi+1) : "+fxi1+" f'(xi+1) : "+dfxi1+" f''(xi+1) : "+d2fxi1);
+                xi = xi1;
+                fxi = fxi1;
+                dfxi = dfxi1;
+                d2fxi = d2fxi1;
+            }
+            return xi1;
         }
     }
 
