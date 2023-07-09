@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix EvaluateString bug">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Test FalsePosition and Bisection">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NonLinearEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NonLinearEquation.java" afterDir="false" />
@@ -44,7 +44,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Differentiation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/EvaluateString.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/EvaluateString.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/ExpressionFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Function.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
@@ -81,20 +81,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٥٤" summary="Editing PointsFunction toString method">
-      <created>1688684981279</created>
-      <option name="number" value="٠٠١٥٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٥٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688684981279</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٥٥" summary="Retesting and editing">
-      <created>1688685006135</created>
-      <option name="number" value="٠٠١٥٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٥٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688685006135</updated>
     </task>
     <task id="LOCAL؜-٠٠١٥٦" summary="Init getDiffAt and getIntegralAt in PointsFunction">
       <created>1688685713535</created>
@@ -425,7 +411,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688932663919</updated>
     </task>
-    <option name="localTasksCounter" value="203" />
+    <task id="LOCAL؜-٠٠٢٠٣" summary="Add FalsePosition class to NonLinearEquation">
+      <created>1688933087789</created>
+      <option name="number" value="٠٠٢٠٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٠٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688933087789</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٠٤" summary="Test FalsePosition and Bisection">
+      <created>1688933116432</created>
+      <option name="number" value="٠٠٢٠٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٠٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688933116433</updated>
+    </task>
+    <option name="localTasksCounter" value="205" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -467,8 +467,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix Central Subtraction bug" />
-    <MESSAGE value="Add exception for h in Diff Subtractions and Fix Doc" />
     <MESSAGE value="Comment errors in Integral" />
     <MESSAGE value="Fix floating-point precision errors in Integral" />
     <MESSAGE value="Retest all methods" />
@@ -492,6 +490,8 @@
     <MESSAGE value="Init NonLinearEquation with constructor and getValueAt(x) and getValueAt(x,y)" />
     <MESSAGE value="Add Bisection class to NonLinearEquation" />
     <MESSAGE value="Fix EvaluateString bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix EvaluateString bug" />
+    <MESSAGE value="Add FalsePosition class to NonLinearEquation" />
+    <MESSAGE value="Test FalsePosition and Bisection" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test FalsePosition and Bisection" />
   </component>
 </project>
