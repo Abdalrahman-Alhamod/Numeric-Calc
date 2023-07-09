@@ -106,18 +106,18 @@ public class NonLinearEquation {
     }
 
     public static class Newton_Raphson {
-        public static double solve(ExpressionFunction f, ExpressionFunction df, double x0, double e) {
+        public static double solve(ExpressionFunction fx, ExpressionFunction dfx, double x0, double e) {
             double xi = x0;
-            double fxi = f.getValueAt(xi), dfxi = df.getValueAt(xi);
+            double fxi = fx.getValueAt(xi), dfxi = dfx.getValueAt(xi);
             double xi1;
             while (true) {
                 xi1 = xi - (fxi / dfxi);
                 //Rounding value back to fix floating-point precision errors
                 xi1 = Math.round(xi1 * 1e10) / 1e10;
-                double fxi1 = f.getValueAt(xi1);
+                double fxi1 = fx.getValueAt(xi1);
                 if (Math.abs(xi1 - xi) < e || Math.abs(xi1 - xi) == 0 || fxi1 == 0)
                     break;
-                double dfxi1 = df.getValueAt(xi1);
+                double dfxi1 = dfx.getValueAt(xi1);
                 xi = xi1;
                 fxi = fxi1;
                 dfxi = dfxi1;
@@ -125,30 +125,30 @@ public class NonLinearEquation {
             return xi1;
         }
 
-        public static double solve(ExpressionFunction f, ExpressionFunction df, double x0) {
-            return solve(f, df, x0, 1E-9);
+        public static double solve(ExpressionFunction fx, ExpressionFunction dfx, double x0) {
+            return solve(fx, dfx, x0, 1E-9);
         }
 
-        public static double solveRange(ExpressionFunction f, ExpressionFunction df, double a, double b, double e) {
-            double fa = f.getValueAt(a), dfa = df.getValueAt(a);
+        public static double solveRange(ExpressionFunction fx, ExpressionFunction dfx, double a, double b, double e) {
+            double fa = fx.getValueAt(a), dfa = dfx.getValueAt(a);
             double x = a - (fa / dfa);
             //Rounding value back to fix floating-point precision errors
             x = Math.round(x * 1e10) / 1e10;
             if (x >= a && x <= b)
-                return solve(f, df, a, e);
+                return solve(fx, dfx, a, e);
             else
-                return solve(f, df, b, e);
+                return solve(fx, dfx, b, e);
         }
 
-        public static double solveRange(ExpressionFunction f, ExpressionFunction df, double a, double b) {
-            return solveRange(f, df, a, b, 1E-9);
+        public static double solveRange(ExpressionFunction fx, ExpressionFunction dfx, double a, double b) {
+            return solveRange(fx, dfx, a, b, 1E-9);
         }
     }
 
     public static class Halley {
-        public static double solve(ExpressionFunction f, ExpressionFunction df, ExpressionFunction d2f, double x0, double e) {
+        public static double solve(ExpressionFunction fx, ExpressionFunction dfx, ExpressionFunction d2fx, double x0, double e) {
             double xi = x0;
-            double fxi = f.getValueAt(xi), dfxi = df.getValueAt(xi), d2fxi = d2f.getValueAt(xi);
+            double fxi = fx.getValueAt(xi), dfxi = dfx.getValueAt(xi), d2fxi = d2fx.getValueAt(xi);
             double xi1;
             while (true) {
                 //System.out.println("f(xi) : "+fxi+" f'(xi) : "+dfxi+" f''(xi) : "+d2fxi);
@@ -156,15 +156,36 @@ public class NonLinearEquation {
                 //Rounding value back to fix floating-point precision errors
                 xi1 = Math.round(xi1 * 1e10) / 1e10;
                 //System.out.println(" xi : " + xi + " xi+1 : " + xi1);
-                double fxi1 = f.getValueAt(xi1);
+                double fxi1 = fx.getValueAt(xi1);
                 if (Math.abs(xi1 - xi) < e || Math.abs(xi1 - xi) == 0 || fxi1 == 0)
                     break;
-                double dfxi1 = df.getValueAt(xi1), d2fxi1 = d2f.getValueAt(xi1);
+                double dfxi1 = dfx.getValueAt(xi1), d2fxi1 = d2fx.getValueAt(xi1);
                 //System.out.println("f(xi+1) : "+fxi1+" f'(xi+1) : "+dfxi1+" f''(xi+1) : "+d2fxi1);
                 xi = xi1;
                 fxi = fxi1;
                 dfxi = dfxi1;
                 d2fxi = d2fxi1;
+            }
+            return xi1;
+        }
+    }
+
+    public static class FixedPointIteration {
+        public static double solve(ExpressionFunction gx, double x0, double e) {
+            double xi = x0;
+            double gxi = gx.getValueAt(xi);
+            double xi1;
+            while (true) {
+                xi1 = gxi;
+                //Rounding value back to fix floating-point precision errors
+                xi1 = Math.round(xi1 * 1e10) / 1e10;
+                //System.out.println(" xi : " + xi + " xi+1 : " + xi1);
+                double gxi1 = gx.getValueAt(xi1);
+                //System.out.println("g(xi) : " + xi);
+                if (Math.abs(xi1 - xi) < e || Math.abs(xi1 - xi) == 0 || gxi1 == 0)
+                    break;
+                xi = xi1;
+                gxi = gxi1;
             }
             return xi1;
         }
