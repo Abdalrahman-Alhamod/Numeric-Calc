@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Test System of Non-Linear Equations ; Newton-Raphson">
-      <change beforePath="$PROJECT_DIR$/src/ExpressionFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExpressionFunction.java" afterDir="false" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix floating points in functions">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PointsFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PointsFunction.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,15 +44,16 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Differentiation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/EvaluateString.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/ExpressionFunction.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/EvaluateString.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/ExpressionFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Function.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Matrix.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/NonLinearEquation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/PointsFunction.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/PointsFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/SystemOfNonLinearEquations.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -80,34 +83,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٧٤" summary="Fix accuracy bug in toPointsFunction">
-      <created>1688742383117</created>
-      <option name="number" value="٠٠١٧٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٧٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688742383117</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٧٥" summary="Testing toPointsFunction in ExpressionFunction">
-      <created>1688742511708</created>
-      <option name="number" value="٠٠١٧٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٧٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688742511708</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٧٦" summary="Create tag v1.1.0">
-      <created>1688742668594</created>
-      <option name="number" value="٠٠١٧٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٧٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688742668594</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٧٧" summary="Fix Central Subtraction bug">
-      <created>1688810792055</created>
-      <option name="number" value="٠٠١٧٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٧٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688810792056</updated>
     </task>
     <task id="LOCAL؜-٠٠١٧٨" summary="Add exception for h in Diff Subtractions and Fix Doc">
       <created>1688812399223</created>
@@ -424,7 +399,35 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688984968152</updated>
     </task>
-    <option name="localTasksCounter" value="223" />
+    <task id="LOCAL؜-٠٠٢٢٣" summary="Add JAVA DOC to SystemOfNonLinearEquations and getValueAt(x,y)">
+      <created>1688985279919</created>
+      <option name="number" value="٠٠٢٢٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٢٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688985279919</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٢٤" summary="Fix Polynomial print bug">
+      <created>1688992949753</created>
+      <option name="number" value="٠٠٢٢٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٢٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688992949753</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٢٥" summary="Make SystemOfNonLinearEquations abstract">
+      <created>1688992972635</created>
+      <option name="number" value="٠٠٢٢٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٢٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688992972635</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٢٦" summary="Fix floating points in functions">
+      <created>1688993010815</created>
+      <option name="number" value="٠٠٢٢٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٢٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688993010815</updated>
+    </task>
+    <option name="localTasksCounter" value="227" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -466,10 +469,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Remove printing from Runge_Kutta method" />
-    <MESSAGE value="Testing Runge-Kutta" />
-    <MESSAGE value="Add JAVA DOC to DifferentialEquation" />
-    <MESSAGE value="Init NonLinearEquation with constructor and getValueAt(x) and getValueAt(x,y)" />
     <MESSAGE value="Add Bisection class to NonLinearEquation" />
     <MESSAGE value="Add FalsePosition class to NonLinearEquation" />
     <MESSAGE value="Test FalsePosition and Bisection" />
@@ -491,6 +490,10 @@
     <MESSAGE value="Add getValueAt(x,y) to ExpressionFunction" />
     <MESSAGE value="Add SystemOfNonLinearEquations with Newton-Raphson inner class" />
     <MESSAGE value="Test System of Non-Linear Equations ; Newton-Raphson" />
-    <option name="LAST_COMMIT_MESSAGE" value="Test System of Non-Linear Equations ; Newton-Raphson" />
+    <MESSAGE value="Add JAVA DOC to SystemOfNonLinearEquations and getValueAt(x,y)" />
+    <MESSAGE value="Fix Polynomial print bug" />
+    <MESSAGE value="Make SystemOfNonLinearEquations abstract" />
+    <MESSAGE value="Fix floating points in functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix floating points in functions" />
   </component>
 </project>
