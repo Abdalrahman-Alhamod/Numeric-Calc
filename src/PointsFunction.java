@@ -33,7 +33,12 @@ public class PointsFunction implements Function {
      * @return The value of the function at the given x-coordinate.
      */
     public double getValueAt(double x) {
-        return yp.get(xp.indexOf(x));
+        int decimalPlaces = 9;
+        double powerOf9 = Math.pow(10, decimalPlaces);
+        double truncatedNumber = Math.floor(x * powerOf9) / powerOf9;
+        System.out.println(truncatedNumber);
+        System.out.println(xp.indexOf(truncatedNumber));
+        return yp.get(xp.indexOf(truncatedNumber));
     }
 
     /**
