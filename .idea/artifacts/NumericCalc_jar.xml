@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="NumericCalc:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/NumericCalc_jar</output-path>
+    <root id="archive" name="NumericCalc.jar">
+      <element id="module-output" name="NumericCalc" />
+    </root>
+  </artifact>
+</component>
