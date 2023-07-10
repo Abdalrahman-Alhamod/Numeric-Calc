@@ -778,6 +778,39 @@ public class Main {
         System.out.print("The value of the differentiation at the given x = ");
         System.out.println(Polynomial.Horner.getDiffAt(poly, x, diffDegree));   */
 
+        //Test System of Non-Linear Equations ; Newton-Raphson
+        Scanner in = new Scanner(System.in);
+        String fxS, dfdxS, dfdyS, gxS, dgdxS, dgdyS;
+        System.out.print("Enter fx(x) : ");
+        fxS = in.nextLine();
+        ExpressionFunction fx = new ExpressionFunction(fxS);
+        System.out.print("Enter g(x) : ");
+        gxS = in.nextLine();
+        ExpressionFunction gx = new ExpressionFunction(gxS);
+        System.out.print("Enter df/dx : ");
+        dfdxS = in.nextLine();
+        ExpressionFunction dfdx = new ExpressionFunction(dfdxS);
+        System.out.print("Enter df/dy : ");
+        dfdyS = in.nextLine();
+        ExpressionFunction dfdy = new ExpressionFunction(dfdyS);
+        System.out.print("Enter dg/dx : ");
+        dgdxS = in.nextLine();
+        ExpressionFunction dgdx = new ExpressionFunction(dgdxS);
+        System.out.print("Enter dg/dy : ");
+        dgdyS = in.nextLine();
+        ExpressionFunction dgdy = new ExpressionFunction(dgdyS);
+        System.out.print("Enter x0 : ");
+        double x0 = parseDouble(in.next());
+        System.out.print("Enter y0 : ");
+        double y0 = parseDouble(in.next());
+        System.out.print("Enter number of iterations : ");
+        int iteration = in.nextInt();
+        System.out.println("The solution of the system of non-linear equations using Newton-Raphson : ");
+        ArrayList<ArrayList<Double>> xy = SystemOfNonLinearEquations.Newton_Raphson.solve(fx, dfdx, dfdy, gx, dgdx, dgdy, x0, y0, iteration);
+        for (int i = 0; i < iteration; i++) {
+            System.out.println("x" + (i + 1) + " = " + xy.get(0).get(i) + "\t y" + (i + 1) + " = " + xy.get(1).get(i));
+        }
+
 
     }
 

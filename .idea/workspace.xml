@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Test Horner methods">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add JAVA DOC to Horner class">
+      <change afterPath="$PROJECT_DIR$/src/SystemOfNonLinearEquations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EvaluateString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EvaluateString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExpressionFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExpressionFunction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Polynomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polynomial.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,15 +46,15 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Differentiation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/EvaluateString.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/ExpressionFunction.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/EvaluateString.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/ExpressionFunction.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Function.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Matrix.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/NonLinearEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/PointsFunction.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -82,13 +84,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٦٩" summary="Testing Trigonometric operator">
-      <created>1688739080979</created>
-      <option name="number" value="٠٠١٦٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٦٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688739080979</updated>
     </task>
     <task id="LOCAL؜-٠٠١٧٠" summary="Add getValueAt(string) and toPoints(string) to ExpressionFunction">
       <created>1688739696199</created>
@@ -426,7 +421,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688943023139</updated>
     </task>
-    <option name="localTasksCounter" value="218" />
+    <task id="LOCAL؜-٠٠٢١٨" summary="Add JAVA DOC to Horner class">
+      <created>1688943220509</created>
+      <option name="number" value="٠٠٢١٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢١٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688943220509</updated>
+    </task>
+    <option name="localTasksCounter" value="219" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -468,7 +470,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix floating-point precision errors in DEQ" />
     <MESSAGE value="Restructure MidPoint class" />
     <MESSAGE value="Testing MidPoint :  Modified Euler / Heun / Raphson" />
     <MESSAGE value="Add Runge_Kutta method" />
@@ -493,6 +494,7 @@
     <MESSAGE value="Add JAVA DOC to NonLinearEquation" />
     <MESSAGE value="Add Horner class to Polynomial with getValueAt, getDiffAt, getDivideOn" />
     <MESSAGE value="Test Horner methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="Test Horner methods" />
+    <MESSAGE value="Add JAVA DOC to Horner class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add JAVA DOC to Horner class" />
   </component>
 </project>
