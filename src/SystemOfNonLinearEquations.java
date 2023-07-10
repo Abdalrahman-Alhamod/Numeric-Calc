@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * The SystemOfNonLinearEquations class provides methods for solving a system of nonlinear equations using the Newton-Raphson method.
  */
-public class SystemOfNonLinearEquations {
+public abstract class SystemOfNonLinearEquations {
     /**
      * The Newton_Raphson class provides a method for solving a system of nonlinear equations using the Newton-Raphson method.
      */
