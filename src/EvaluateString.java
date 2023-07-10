@@ -28,10 +28,10 @@ public abstract class EvaluateString {
             if (i > 0)
                 preOp = Character.toString(tokens[i - 1]);
 
-            if ((i == 0 && tokens[i] == '-') ||
-                    i > 0 && (preOp.equals("(") || isExp(preOp) ||
+            if ((i == 0 && tokens[i] == '-')  && Character.isDigit(tokens[i+1])||
+                    i > 0 && tokens[i] == '-' && (preOp.equals("(") || isExp(preOp) ||
                             isTrigonometric(preOp) || isLogSqrtExp(preOp) ||
-                            isMulDiv(preOp) || isAddSub(preOp)) && tokens[i] == '-') {
+                            isMulDiv(preOp) || isAddSub(preOp)) && Character.isDigit(tokens[i+1])) {
                 i++;
                 StringBuilder sb = new StringBuilder();
 
