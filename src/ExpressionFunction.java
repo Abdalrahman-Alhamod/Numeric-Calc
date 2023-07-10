@@ -38,6 +38,14 @@ public class ExpressionFunction implements Function {
         return res;
     }
 
+    /**
+     * Evaluates the value of the function at the given x-value and y-value
+     *
+     * @param x The x-value at which to evaluate the function.
+     * @param y The y-value at which to evaluate the function.
+     * @return The value of the function at the given x-value and y-value.
+     * @throws ArithmeticException If an error occurs during evaluation.
+     */
     public double getValueAt(double x, double y) {
         double res;
         try {
