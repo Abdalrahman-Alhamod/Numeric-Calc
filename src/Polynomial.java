@@ -79,34 +79,57 @@ public class Polynomial implements Function {
             coeff = Math.round(coeff * 1e10) / 1e10;
             if (coeff != 0) { // If the coefficient is nonzero
                 if (i == 0) { // If the term is the constant term
-                    sb.append(getFormattedCoefficient(coeff)); // Append the coefficient
+                    if (sb.isEmpty()) {
+                        sb.append(getFormattedCoefficient(coeff)); // Append the coefficient
+                    } else {
+                        sb.append(getFormattedCoefficient(Math.abs(coeff))); // Append the coefficient
+                    }
                 } else if (i == 1) { // If the term is the linear term
-                    if (coeff == 1) { // If the coefficient is 1
-                        sb.append("x"); // Append the variable symbol
-                    } else if (coeff == -1) { // If the coefficient is -1
-                        sb.append("-x"); // Append the negative variable symbol
-                    } else { // If the coefficient is not 1 or -1
-                        sb.append(getFormattedCoefficient(coeff)).append(" ").append("x"); // Append the coefficient and variable symbol
+                    if (sb.isEmpty()) {
+                        if (coeff == 1) { // If the coefficient is 1 or -1
+                            sb.append("x"); // Append the variable symbol and exponent
+                        } else if (coeff == -1) {
+                            sb.append("-x");
+                        } else { // If the coefficient is not 1 or -1
+                            sb.append(getFormattedCoefficient(coeff)).append(" ").append("x"); // Append the coefficient, variable symbol, and exponent
+                        }
+                    } else {
+                        if (coeff == 1 || coeff == -1) { // If the coefficient is 1 or -1
+                            sb.append("x"); // Append the variable symbol
+                        } else { // If the coefficient is not 1 or -1
+                            sb.append(getFormattedCoefficient(Math.abs(coeff))).append(" ").append("x"); // Append the coefficient and variable symbol
+                        }
                     }
                 } else { // If the term is a higher-order term
-                    if (coeff == 1) { // If the coefficient is 1
-                        sb.append("x^").append(i); // Append the variable symbol and exponent
-                    } else if (coeff == -1) { // If the coefficient is -1
-                        sb.append("-x^").append(i); // Append the negative variable symbol and exponent
-                    } else { // If the coefficient is not 1 or -1
-                        sb.append(getFormattedCoefficient(coeff)).append(" ").append("x^").append(i); // Append the coefficient, variable symbol, and exponent
+                    if (sb.isEmpty()) {
+                        if (coeff == 1) { // If the coefficient is 1 or -1
+                            sb.append("x^").append(i); // Append the variable symbol and exponent
+                        } else if (coeff == -1) {
+                            sb.append("-x^").append(i);
+                        } else { // If the coefficient is not 1 or -1
+                            sb.append(getFormattedCoefficient(coeff)).append(" ").append("x^").append(i); // Append the coefficient, variable symbol, and exponent
+                        }
+                    } else {
+                        if (coeff == 1) { // If the coefficient is 1 or -1
+                            sb.append("x^").append(i); // Append the variable symbol and exponent
+                        } else { // If the coefficient is not 1 or -1
+                            sb.append(getFormattedCoefficient(Math.abs(coeff))).append(" ").append("x^").append(i); // Append the coefficient, variable symbol, and exponent
+                        }
                     }
                 }
-                double coeff1 = 1;
-                if (i > 0)
-                    coeff1 = coeffs.get(i - 1); // Get the prev coefficient
-                //Rounding value back to fix floating-point precision errors
-                coeff1 = Math.round(coeff1 * 1e10) / 1e10;
-                //if (i > 0 && coeff1 != 0) {  //If there are more terms
-                if (i > 0)
-                    sb.append(" + ");  // Append the addition operator with spacing
-                //}
             }
+            double coeff1 = 1;
+            if (i > 0)
+                coeff1 = coeffs.get(i - 1); // Get the prev coefficient
+            //Rounding value back to fix floating-point precision errors
+            coeff1 = Math.round(coeff1 * 1e10) / 1e10;
+            //if (i > 0 && coeff1 != 0) {  //If there are more terms
+            if (i > 0)
+                if (coeff1 > 0)
+                    sb.append(" + ");  // Append the addition operator with spacing
+                else if (coeff1 < 0)
+                    sb.append(" - ");
+            //}
         }
         // if there is a ' + ' , delete it
         if (sb.charAt(sb.length() - 1) == ' ')
