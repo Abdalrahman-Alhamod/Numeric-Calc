@@ -38,6 +38,18 @@ public class ExpressionFunction implements Function {
         return res;
     }
 
+    public double getValueAt(double x, double y) {
+        double res;
+        try {
+            res = EvaluateString.evaluate(func, x, y);
+            //Rounding value back to fix floating-point precision errors
+            res = Math.round(res * 1e10) / 1e10;
+        } catch (Exception e) {
+            throw new ArithmeticException("invalid function");
+        }
+        return res;
+    }
+
     /**
      * Evaluates the value of the function at the given x-coordinate as string
      *
