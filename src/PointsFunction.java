@@ -36,8 +36,6 @@ public class PointsFunction implements Function {
         int decimalPlaces = 9;
         double powerOf9 = Math.pow(10, decimalPlaces);
         double truncatedNumber = Math.floor(x * powerOf9) / powerOf9;
-        System.out.println(truncatedNumber);
-        System.out.println(xp.indexOf(truncatedNumber));
         return yp.get(xp.indexOf(truncatedNumber));
     }
 
