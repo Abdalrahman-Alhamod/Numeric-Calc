@@ -9,12 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix indexOutOfBounds in PointsFunction">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Remove testing code from main">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Differentiation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Differentiation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExpressionFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExpressionFunction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Integral.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Integral.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpolation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,11 +51,12 @@
     <setting file="file://$PROJECT_DIR$/src/EvaluateString.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/ExpressionFunction.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Function.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Main.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Matrix.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/NonLinearEquation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/PointsFunction.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/PointsFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/SystemOfNonLinearEquations.java" root0="SKIP_INSPECTION" />
   </component>
@@ -92,27 +89,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٨٣" summary="Test evaluate(x,y)">
-      <created>1688847140371</created>
-      <option name="number" value="٠٠١٨٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٨٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688847140371</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٨٤" summary="Create DifferentialEquation with constructor">
-      <created>1688848986224</created>
-      <option name="number" value="٠٠١٨٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٨٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688848986224</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٨٥" summary="Create getValueAt for DifferentialEquation">
-      <created>1688849034753</created>
-      <option name="number" value="٠٠١٨٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٨٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688849034753</updated>
     </task>
     <task id="LOCAL؜-٠٠١٨٦" summary="Add Euler method to DifferentialEquation">
       <created>1688849078640</created>
@@ -436,7 +412,28 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689070002488</updated>
     </task>
-    <option name="localTasksCounter" value="232" />
+    <task id="LOCAL؜-٠٠٢٣٢" summary="Make Exceptions more detailed">
+      <created>1689071656915</created>
+      <option name="number" value="٠٠٢٣٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٣٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689071656915</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٣٣" summary="Fix main printing">
+      <created>1689071709700</created>
+      <option name="number" value="٠٠٢٣٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٣٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689071709700</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٣٤" summary="Remove testing code from main">
+      <created>1689071738074</created>
+      <option name="number" value="٠٠٢٣٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٣٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689071738074</updated>
+    </task>
+    <option name="localTasksCounter" value="235" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -478,9 +475,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add Newton-Raphson class to NonLinearEquation" />
-    <MESSAGE value="Test Newton-Raphson class" />
-    <MESSAGE value="Add Halley class to NonLinearEquation" />
     <MESSAGE value="Testing Halley class" />
     <MESSAGE value="Add FixedPointIteration class to NonLinearEquation" />
     <MESSAGE value="Testing FixedPointIteration class" />
@@ -503,6 +497,9 @@
     <MESSAGE value="Create jar" />
     <MESSAGE value="Add jar" />
     <MESSAGE value="Fix indexOutOfBounds in PointsFunction" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix indexOutOfBounds in PointsFunction" />
+    <MESSAGE value="Make Exceptions more detailed" />
+    <MESSAGE value="Fix main printing" />
+    <MESSAGE value="Remove testing code from main" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove testing code from main" />
   </component>
 </project>
