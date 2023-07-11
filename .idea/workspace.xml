@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="NumericCalc:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add a complete switch for all methods in main" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix indexOutOfBounds in PointsFunction">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Differentiation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Differentiation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExpressionFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExpressionFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Integral.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Integral.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpolation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,15 +51,15 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/DifferentialEquation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Differentiation.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Differentiation.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/EvaluateString.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/ExpressionFunction.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/ExpressionFunction.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Function.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Matrix.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/NonLinearEquation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/PointsFunction.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/PointsFunction.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/SystemOfNonLinearEquations.java" root0="SKIP_INSPECTION" />
   </component>
@@ -60,17 +72,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/Test",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/OneDrive/Documents/Idea Projects/Test&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -79,27 +92,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٨٠" summary="Fix floating-point precision errors in Integral">
-      <created>1688846650671</created>
-      <option name="number" value="٠٠١٨٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٨٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688846650671</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٨١" summary="Retest all methods">
-      <created>1688846687883</created>
-      <option name="number" value="٠٠١٨١" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٨١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688846687883</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٨٢" summary="Add evaluate(x) and evaluate(x,y) yo EvaluateString">
-      <created>1688847003484</created>
-      <option name="number" value="٠٠١٨٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٨٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688847003484</updated>
     </task>
     <task id="LOCAL؜-٠٠١٨٣" summary="Test evaluate(x,y)">
       <created>1688847140371</created>
@@ -423,7 +415,28 @@
       <option name="project" value="LOCAL؜" />
       <updated>1688996384771</updated>
     </task>
-    <option name="localTasksCounter" value="229" />
+    <task id="LOCAL؜-٠٠٢٢٩" summary="Create jar">
+      <created>1688996568030</created>
+      <option name="number" value="٠٠٢٢٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٢٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688996568030</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٣٠" summary="Add jar">
+      <created>1688996600682</created>
+      <option name="number" value="٠٠٢٣٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٣٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1688996600682</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٣١" summary="Fix indexOutOfBounds in PointsFunction">
+      <created>1689070002488</created>
+      <option name="number" value="٠٠٢٣١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٣١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689070002488</updated>
+    </task>
+    <option name="localTasksCounter" value="232" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -465,9 +478,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Test FalsePosition and Bisection" />
-    <MESSAGE value="Add Secant class to NonLinearEquation" />
-    <MESSAGE value="Testing Secant class" />
     <MESSAGE value="Add Newton-Raphson class to NonLinearEquation" />
     <MESSAGE value="Test Newton-Raphson class" />
     <MESSAGE value="Add Halley class to NonLinearEquation" />
@@ -490,6 +500,9 @@
     <MESSAGE value="Fix floating points in functions" />
     <MESSAGE value="Remove print from PointsFunction" />
     <MESSAGE value="Add a complete switch for all methods in main" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add a complete switch for all methods in main" />
+    <MESSAGE value="Create jar" />
+    <MESSAGE value="Add jar" />
+    <MESSAGE value="Fix indexOutOfBounds in PointsFunction" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix indexOutOfBounds in PointsFunction" />
   </component>
 </project>

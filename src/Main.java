@@ -335,7 +335,7 @@ public class Main {
                             a = parseDouble(in.next());
                             System.out.print("Enter b : ");
                             b = parseDouble(in.next());
-                            System.out.print("Enter number of points ");
+                            System.out.print("Enter number of points : ");
                             n = parseDouble(in.next());
                             func = expFunc.toPointsFunction(a, b, n);
                             break;
