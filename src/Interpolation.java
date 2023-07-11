@@ -22,7 +22,7 @@ public abstract class Interpolation {
          */
         public static Polynomial getIFAP(PointsFunction func) {
             if (func == null)
-                throw new ArithmeticException("invalid inputs");
+                throw new ArithmeticException("invalid inputs : Function cannot be null");
             // Get x point
             ArrayList<Double> xp = func.getXp();
             // Get y points
@@ -91,7 +91,7 @@ public abstract class Interpolation {
          */
         public static Polynomial getIFAP(PointsFunction func) {
             if (func == null)
-                throw new ArithmeticException("invalid inputs");
+                throw new ArithmeticException("invalid inputs : Function cannot be null");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get y point
@@ -119,7 +119,7 @@ public abstract class Interpolation {
          */
         public static String getIFASNS(PointsFunction func) {
             if (func == null)
-                throw new ArithmeticException("invalid inputs");
+                throw new ArithmeticException("invalid inputs : Function cannot be null");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get y points
@@ -178,7 +178,7 @@ public abstract class Interpolation {
          */
         public static ArrayList<Double> getUDV(PointsFunction func) {
             if (func == null)
-                throw new ArithmeticException("invalid inputs");
+                throw new ArithmeticException("invalid inputs : Function cannot be null");
             //get y points
             ArrayList<Double> yp = func.getYp();
             // initialize result ArrayList (Upper diameter values)
@@ -238,8 +238,10 @@ public abstract class Interpolation {
          * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
          */
         public static Polynomial getIFAP(PointsFunction func, int degree) {
-            if (func == null || degree < 0)
-                throw new ArithmeticException("invalid inputs");
+            if (func == null)
+                throw new ArithmeticException("invalid inputs : Function cannot be null");
+            else if (degree < 0)
+                throw new ArithmeticException("invalid inputs : degree cannot be smaller or equal to zero");
             //get x point
             ArrayList<Double> xp = func.getXp();
             // initialize and calculate h ; h = xi+1 - xi;
@@ -308,8 +310,10 @@ public abstract class Interpolation {
          * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
          */
         public static String getIFASNS(PointsFunction func, int degree) {
-            if (func == null || degree < 0)
-                throw new ArithmeticException("invalid inputs");
+            if (func == null)
+                throw new ArithmeticException("invalid inputs : Function cannot be null");
+            else if (degree < 0)
+                throw new ArithmeticException("invalid inputs : degree cannot be smaller or equal to zero");
             //get x point
             ArrayList<Double> xp = func.getXp();
             // initialize and calculate h ; h = xi+1 - xi;
@@ -390,7 +394,7 @@ public abstract class Interpolation {
          */
         public static ArrayList<Double> getLDV(PointsFunction func) {
             if (func == null)
-                throw new ArithmeticException("invalid inputs");
+                throw new ArithmeticException("invalid inputs : Function cannot be null");
             //get y points
             ArrayList<Double> yp = func.getYp();
             // initialize result ArrayList (Lower diameter values)
@@ -449,8 +453,10 @@ public abstract class Interpolation {
          * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
          */
         public static Polynomial getIFAP(PointsFunction func, int degree) {
-            if (func == null || degree < 0)
-                throw new ArithmeticException("invalid inputs");
+            if (func == null)
+                throw new ArithmeticException("invalid inputs : Function cannot be null");
+            else if (degree < 0)
+                throw new ArithmeticException("invalid inputs : degree cannot be smaller or equal to zero");
             //get x point
             ArrayList<Double> xp = func.getXp();
             // initialize and calculate h ; h = xi+1 - xi;
@@ -519,8 +525,10 @@ public abstract class Interpolation {
          * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
          */
         public static String getIFASNS(PointsFunction func, int degree) {
-            if (func == null || degree < 0)
-                throw new ArithmeticException("invalid inputs");
+            if (func == null)
+                throw new ArithmeticException("invalid inputs : Function cannot be null");
+            else if (degree < 0)
+                throw new ArithmeticException("invalid inputs : degree cannot be smaller or equal to zero");
             //get x point
             ArrayList<Double> xp = func.getXp();
             // initialize and calculate h ; h = xi+1 - xi;
@@ -602,7 +610,7 @@ public abstract class Interpolation {
          */
         public static ArrayList<Double> getUDV(PointsFunction func) {
             if (func == null)
-                throw new ArithmeticException("invalid inputs");
+                throw new ArithmeticException("invalid inputs : Function cannot be null");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get y points
@@ -674,8 +682,10 @@ public abstract class Interpolation {
          * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
          */
         public static Polynomial getIFAP(PointsFunction func, int degree) {
-            if (func == null || degree < 0)
-                throw new ArithmeticException("invalid inputs");
+            if (func == null)
+                throw new ArithmeticException("invalid inputs : Function cannot be null");
+            else if (degree < 0)
+                throw new ArithmeticException("invalid inputs : degree cannot be smaller or equal to zero");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get Newton Divides table values (upper diameter values)
@@ -713,8 +723,10 @@ public abstract class Interpolation {
          * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
          */
         public static String getIFASNS(PointsFunction func, int degree) {
-            if (func == null || degree < 0)
-                throw new ArithmeticException("invalid inputs");
+            if (func == null)
+                throw new ArithmeticException("invalid inputs : Function cannot be null");
+            else if (degree < 0)
+                throw new ArithmeticException("invalid inputs : degree cannot be smaller or equal to zero");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get Newton Divides table values (upper diameter values)
@@ -761,7 +773,7 @@ public abstract class Interpolation {
          */
         public static ArrayList<Double> getLDV(PointsFunction func) {
             if (func == null)
-                throw new ArithmeticException("invalid inputs");
+                throw new ArithmeticException("invalid inputs : Function cannot be null");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get y points
@@ -833,8 +845,10 @@ public abstract class Interpolation {
          * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
          */
         public static Polynomial getIFAP(PointsFunction func, int degree) {
-            if (func == null || degree < 0)
-                throw new ArithmeticException("invalid inputs");
+            if (func == null)
+                throw new ArithmeticException("invalid inputs : Function cannot be null");
+            else if (degree < 0)
+                throw new ArithmeticException("invalid inputs : degree cannot be smaller or equal to zero");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get Newton Divides table values (lower diameter values)
@@ -872,8 +886,10 @@ public abstract class Interpolation {
          * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
          */
         public static String getIFASNS(PointsFunction func, int degree) {
-            if (func == null || degree < 0)
-                throw new ArithmeticException("invalid inputs");
+            if (func == null)
+                throw new ArithmeticException("invalid inputs : Function cannot be null");
+            else if (degree < 0)
+                throw new ArithmeticException("invalid inputs : degree cannot be smaller or equal to zero");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get Newton Divides table values (lower diameter values)
@@ -919,8 +935,10 @@ public abstract class Interpolation {
          * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
          */
         public static Polynomial getIFAP(PointsFunction func, int degree) {
-            if (func == null || degree < 0)
-                throw new ArithmeticException("invalid inputs");
+            if (func == null)
+                throw new ArithmeticException("invalid inputs : Function cannot be null");
+            else if (degree < 0)
+                throw new ArithmeticException("invalid inputs : degree cannot be smaller or equal to zero");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get y point
@@ -974,7 +992,7 @@ public abstract class Interpolation {
          */
         public static ArrayList<Polynomial> getIFAPs(PointsFunction func) {
             if (func == null)
-                throw new ArithmeticException("invalid inputs");
+                throw new ArithmeticException("invalid inputs : Function cannot be null");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get y points

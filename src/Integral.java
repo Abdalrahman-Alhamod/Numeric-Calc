@@ -19,8 +19,12 @@ public abstract class Integral {
      * @throws ArithmeticException if the function is null, a is greater than or equal to b, or n is less than or equal to 0
      */
     public static double getRect(Function func, double a, double b, double n) {
-        if (func == null || a >= b || n <= 0)
-            throw new ArithmeticException("invalid inputs");
+        if (func == null)
+            throw new ArithmeticException("invalid inputs : Function cannot be null");
+        else if (a >= b)
+            throw new ArithmeticException("invalid inputs : a cannot be greater or equal to b");
+        else if (n <= 0)
+            throw new ArithmeticException("invalid inputs : n cannot be smaller or equal to 0");
         double h = (b - a) / n;
         //Rounding value back to fix floating-point precision errors
         h = Math.round(h * 1e10) / 1e10;
@@ -53,8 +57,12 @@ public abstract class Integral {
      * @throws ArithmeticException if the function is null, a is greater than or equal to b, or n is less than or equal to 0
      */
     public static double getTraps(Function func, double a, double b, double n) {
-        if (func == null || a >= b || n <= 0)
-            throw new ArithmeticException("invalid inputs");
+        if (func == null)
+            throw new ArithmeticException("invalid inputs : Function cannot be null");
+        else if (a >= b)
+            throw new ArithmeticException("invalid inputs : a cannot be greater or equal to b");
+        else if (n <= 0)
+            throw new ArithmeticException("invalid inputs : n cannot be smaller or equal to 0");
         double h = (b - a) / n;
         //Rounding value back to fix floating-point precision errors
         h = Math.round(h * 1e10) / 1e10;
@@ -88,8 +96,14 @@ public abstract class Integral {
      * @throws ArithmeticException if the function is null, a is greater than or equal to b, n is less than or equal to 0, or n is not an even number
      */
     public static double getSimpson3(Function func, double a, double b, double n) {
-        if (func == null || a >= b || n <= 0 || n % 2 != 0)
-            throw new ArithmeticException("invalid inputs");
+        if (func == null)
+            throw new ArithmeticException("invalid inputs : Function cannot be null");
+        else if (a >= b)
+            throw new ArithmeticException("invalid inputs : a cannot be greater or equal to b");
+        else if (n <= 0)
+            throw new ArithmeticException("invalid inputs : n cannot be smaller or equal to 0");
+        else if (n % 2 != 0)
+            throw new ArithmeticException("invalid inputs : n is not even");
         double h = (b - a) / n;
         //Rounding value back to fix floating-point precision errors
         h = Math.round(h * 1e10) / 1e10;
@@ -126,8 +140,14 @@ public abstract class Integral {
      * @throws ArithmeticException if the function is null, a is greater than or equal to b, n is less than or equal to 0, or n is not divisible by 3
      */
     public static double getSimpson8(Function func, double a, double b, double n) {
-        if (func == null || a >= b || n <= 0 || n % 3 != 0)
-            throw new ArithmeticException("invalid inputs");
+        if (func == null)
+            throw new ArithmeticException("invalid inputs : Function cannot be null");
+        else if (a >= b)
+            throw new ArithmeticException("invalid inputs : a cannot be greater or equal to b");
+        else if (n <= 0)
+            throw new ArithmeticException("invalid inputs : n cannot be smaller or equal to 0");
+        else if (n % 3 != 0)
+            throw new ArithmeticException("invalid inputs : n is not divisible by 3");
         double h = (b - a) / n;
         //Rounding value back to fix floating-point precision errors
         h = Math.round(h * 1e10) / 1e10;
@@ -164,8 +184,14 @@ public abstract class Integral {
      * @throws ArithmeticException if the function is null, a is greater than or equal to b, n is less than or equal to 0, or n is not divisible by 4
      */
     public static double getPaul(Function func, double a, double b, double n) {
-        if (func == null || a >= b || n <= 0 || n % 4 != 0)
-            throw new ArithmeticException("invalid inputs");
+        if (func == null)
+            throw new ArithmeticException("invalid inputs : Function cannot be null");
+        else if (a >= b)
+            throw new ArithmeticException("invalid inputs : a cannot be greater or equal to b");
+        else if (n <= 0)
+            throw new ArithmeticException("invalid inputs : n cannot be smaller or equal to 0");
+        else if (n % 3 != 0)
+            throw new ArithmeticException("invalid inputs : n is not divisible by 4");
         double h = (b - a) / n;
         //Rounding value back to fix floating-point precision errors
         h = Math.round(h * 1e10) / 1e10;

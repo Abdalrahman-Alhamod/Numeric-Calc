@@ -306,7 +306,7 @@ public class Polynomial implements Function {
      */
     public Polynomial getPolyOf(Polynomial p) {
         if (p == null)
-            throw new ArithmeticException("invalid inputs");
+            throw new ArithmeticException("invalid inputs : p cannot be null");
         // Init res poly with a0 of coeff input
         Polynomial res = new Polynomial(coeffs.get(0));
         for (int i = 1; i < coeffs.size(); i++) {
@@ -370,8 +370,10 @@ public class Polynomial implements Function {
      * @throws ArithmeticException if a>=b or n<=0
      */
     public PointsFunction toPointsFunction(double a, double b, double n) {
-        if (a >= b || n <= 0)
-            throw new ArithmeticException("invalid inputs");
+        if (a >= b)
+            throw new ArithmeticException("invalid inputs : a cannot be greater or equal to b");
+        else if (n <= 0)
+            throw new ArithmeticException("invalid inputs : n cannot be smaller or equal to zero");
         n--;
         //Rounding value back to fix floating-point precision errors
         a = Math.round(a * 1e10) / 1e10;

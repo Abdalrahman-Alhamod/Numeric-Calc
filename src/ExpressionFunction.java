@@ -67,7 +67,7 @@ public class ExpressionFunction implements Function {
      */
     public double getValueAt(String s) {
         if (s == null)
-            throw new ArithmeticException("invalid inputs");
+            throw new ArithmeticException("invalid inputs : s cannot be null");
         s = s.replaceAll("pi", Double.toString(Math.PI));
         double x = EvaluateString.evaluate(s, 0);
         return getValueAt(x);
@@ -137,8 +137,12 @@ public class ExpressionFunction implements Function {
      * @throws ArithmeticException if any of the inputs is null
      */
     public PointsFunction toPointsFunction(String a, String b, String n) {
-        if (a == null || b == null || n == null)
-            throw new ArithmeticException("invalid inputs");
+        if (a == null)
+            throw new ArithmeticException("invalid inputs : a cannot be null");
+        else if (b == null)
+            throw new ArithmeticException("invalid inputs : b cannot be null");
+        else if (n == null)
+            throw new ArithmeticException("invalid inputs : n cannot be null");
         a = a.replaceAll("pi", Double.toString(Math.PI));
         double ad = EvaluateString.evaluate(a, 0);
         b = b.replaceAll("pi", Double.toString(Math.PI));

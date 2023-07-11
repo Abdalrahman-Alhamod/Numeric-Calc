@@ -55,7 +55,7 @@ public abstract class Differentiation {
          */
         public static Polynomial getDFAP(PointsFunction func) {
             if (func == null)
-                throw new ArithmeticException("invalid inputs");
+                throw new ArithmeticException("invalid inputs : Functions cannot be null");
             // get x points
             ArrayList<Double> xp = func.getXp();
             // get y point
@@ -89,7 +89,7 @@ public abstract class Differentiation {
          */
         private static ArrayList<Double> getUDV(PointsFunction func) {
             if (func == null)
-                throw new ArithmeticException("invalid inputs");
+                throw new ArithmeticException("invalid inputs : Functions cannot be null");
             //get y points
             ArrayList<Double> yp = func.getYp();
             // initialize result ArrayList (Upper diameter values)
@@ -150,8 +150,12 @@ public abstract class Differentiation {
          * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
          */
         public static Polynomial getIFAP(PointsFunction func, int degree, int rank) {
-            if (func == null || degree < 0 || rank < 1)
-                throw new ArithmeticException("invalid inputs");
+            if (func == null)
+                throw new ArithmeticException("invalid inputs : Functions cannot be null");
+            else if (degree < 0)
+                throw new ArithmeticException("invalid inputs : degree cannot be smaller than zero");
+            else if (rank < 1)
+                throw new ArithmeticException("invalid inputs : rank cannot be smaller than one");
             //get x point
             ArrayList<Double> xp = func.getXp();
             // initialize and calculate h ; h = xi+1 - xi;
@@ -240,7 +244,7 @@ public abstract class Differentiation {
          */
         public static ArrayList<Double> getLDV(PointsFunction func) {
             if (func == null)
-                throw new ArithmeticException("invalid inputs");
+                throw new ArithmeticException("invalid inputs : Functions cannot be null");
             //get y points
             ArrayList<Double> yp = func.getYp();
             // initialize result ArrayList (Lower diameter values)
@@ -297,11 +301,17 @@ public abstract class Differentiation {
          * @param degree the degree of the required Polynomial
          * @param rank   the rank of the required Differentiation
          * @return the result of Differentiation as {@link Polynomial}
-         * @throws ArithmeticException if the given function is null <b>or</b> degree is smaller than zero
+         * @throws ArithmeticException if the given function is null <br>
+         *                             <b>or</b> degree is smaller than zero <br>
+         *                             <b>or</b> rank is smaller than one
          */
         public static Polynomial getIFAP(PointsFunction func, int degree, int rank) {
-            if (func == null || degree < 0 || rank < 1)
-                throw new ArithmeticException("invalid inputs");
+            if (func == null)
+                throw new ArithmeticException("invalid inputs : Functions cannot be null");
+            else if (degree < 0)
+                throw new ArithmeticException("invalid inputs : degree cannot be smaller than zero");
+            else if (rank < 1)
+                throw new ArithmeticException("invalid inputs : rank cannot be smaller than one");
             //get x point
             ArrayList<Double> xp = func.getXp();
             // initialize and calculate h ; h = xi+1 - xi;
@@ -400,7 +410,7 @@ public abstract class Differentiation {
              */
             public static double getValueAt(PointsFunction func, double x) {
                 if (func == null)
-                    throw new ArithmeticException("invalid inputs");
+                    throw new ArithmeticException("invalid inputs : Functions cannot be null");
                 //get x points
                 ArrayList<Double> xp = func.getXp();
                 // get y point
@@ -421,8 +431,12 @@ public abstract class Differentiation {
                 }
                 //get index
                 int index = xp.indexOf(x);
-                if (index == (xp.size() - 1) || index == 0 || index == -1)
-                    throw new ArithmeticException("invalid inputs");
+                if (index == (xp.size() - 1))
+                    throw new ArithmeticException("invalid inputs : cannot apply to xn");
+                else if (index == 0)
+                    throw new ArithmeticException("invalid inputs : cannot apply to x0");
+                else if (index == -1)
+                    throw new ArithmeticException("invalid inputs : element do not exist");
                 // apply the law : (yi+1 - yi-1) / 2*h
                 double res = (yp.get(index + 1) - yp.get(index - 1)) / (2 * h);
                 //Rounding value back to fix floating-point precision errors
@@ -449,7 +463,7 @@ public abstract class Differentiation {
              */
             public static double getValueAt(PointsFunction func, double x) {
                 if (func == null)
-                    throw new ArithmeticException("invalid inputs");
+                    throw new ArithmeticException("invalid inputs : Functions cannot be null");
                 //get x points
                 ArrayList<Double> xp = func.getXp();
                 // get y point
@@ -470,8 +484,10 @@ public abstract class Differentiation {
                 }
                 //get index
                 int index = xp.indexOf(x);
-                if (index == (xp.size() - 1) || index == -1)
-                    throw new ArithmeticException("invalid inputs");
+                if (index == 0)
+                    throw new ArithmeticException("invalid inputs : cannot apply to x0");
+                else if (index == -1)
+                    throw new ArithmeticException("invalid inputs : element do not exist");
                 // apply the law : (yi+1 - yi) / h
                 double res = (yp.get(index + 1) - yp.get(index)) / h;
                 //Rounding value back to fix floating-point precision errors
@@ -519,8 +535,10 @@ public abstract class Differentiation {
                 }
                 //get index
                 int index = xp.indexOf(x);
-                if (index == 0 || index == -1)
-                    throw new ArithmeticException("invalid inputs");
+                if (index == (xp.size() - 1))
+                    throw new ArithmeticException("invalid inputs : cannot apply to xn");
+                else if (index == -1)
+                    throw new ArithmeticException("invalid inputs : element do not exist");
                 // apply the law : (yi - yi-1) / h
                 double res = (yp.get(index) - yp.get(index - 1)) / h;
                 //Rounding value back to fix floating-point precision errors
