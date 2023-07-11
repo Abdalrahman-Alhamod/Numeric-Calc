@@ -1,3 +1,4 @@
+import javax.swing.plaf.IconUIResource;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -36,6 +37,10 @@ public class PointsFunction implements Function {
         int decimalPlaces = 9;
         double powerOf9 = Math.pow(10, decimalPlaces);
         double truncatedNumber = Math.floor(x * powerOf9) / powerOf9;
+        for (double num : xp) {
+            if (Math.abs(num - truncatedNumber) <= 0.000000001)
+                truncatedNumber = num;
+        }
         return yp.get(xp.indexOf(truncatedNumber));
     }
 

@@ -121,11 +121,8 @@ public class ExpressionFunction implements Function {
         for (double i = a; i <= b + 0.000001; i += h) {
             //Rounding value back to fix floating-point precision errors
             i = Math.round(i * 1e10) / 1e10;
-            int decimalPlaces = 9;
-            double powerOf9 = Math.pow(10, decimalPlaces);
-            double truncatedNumber = Math.floor(i * powerOf9) / powerOf9;
-            xp.add(truncatedNumber);
-            yp.add(getValueAt(truncatedNumber));
+            xp.add(i);
+            yp.add(getValueAt(i));
         }
         return new PointsFunction(xp, yp);
     }
