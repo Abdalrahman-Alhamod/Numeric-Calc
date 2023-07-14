@@ -21,6 +21,7 @@ public class GUI {
     private ImageIcon mainIcon;
     private ImageIcon backIcon;
     private ImageIcon homeIcon;
+    private ImageIcon infoIcon;
 
     private JButton backButton;
     private JButton homeButton;
@@ -52,6 +53,7 @@ public class GUI {
         mainIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/function.png")));
         backIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/left-arrow.png")));
         homeIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/home-button.png")));
+        infoIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/info.png")));
     }
 
     private void initMainFrame() {
@@ -88,8 +90,17 @@ public class GUI {
         homeButton.setIcon(homeIcon);
         homeButton.setFocusPainted(false);
 
-        mainMenuBar.add(backButton,BorderLayout.WEST);
+        JButton infoButton = new JButton();
+        infoButton.addActionListener(e -> {
+            JOptionPane.showConfirmDialog(null,"Created by Abd_HM 💙","About",JOptionPane.DEFAULT_OPTION);
+        });
+        infoButton.setPreferredSize(new Dimension(50, 50));
+        infoButton.setIcon(infoIcon);
+        infoButton.setFocusPainted(false);
+
+        mainMenuBar.add(backButton, BorderLayout.WEST);
         mainMenuBar.add(homeButton);
+        mainMenuBar.add(infoButton, BorderLayout.EAST);
         mainFrame.setJMenuBar(mainMenuBar);
     }
 
