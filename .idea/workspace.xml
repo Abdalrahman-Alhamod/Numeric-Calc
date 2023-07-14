@@ -9,11 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Init GUI class">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NumericCalc.iml" beforeDir="false" afterPath="$PROJECT_DIR$/NumericCalc.iml" afterDir="false" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add nimbus theme&#10;Create res folder&#10;Fix icons path&#10;Test changes gui">
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,12 +74,17 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/Test",
+    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/Minesweeper",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\res\Images" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -91,13 +93,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٨٨" summary="Add Taylor method">
-      <created>1688851422127</created>
-      <option name="number" value="٠٠١٨٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٨٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688851422127</updated>
     </task>
     <task id="LOCAL؜-٠٠١٨٩" summary="Test Taylor method">
       <created>1688851428712</created>
@@ -435,7 +430,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689366723584</updated>
     </task>
-    <option name="localTasksCounter" value="237" />
+    <task id="LOCAL؜-٠٠٢٣٧" summary="Add nimbus theme&#10;Create res folder&#10;Fix icons path&#10;Test changes gui">
+      <created>1689367230872</created>
+      <option name="number" value="٠٠٢٣٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٣٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689367230872</updated>
+    </task>
+    <option name="localTasksCounter" value="238" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -477,7 +479,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Testing FixedPointIteration class" />
     <MESSAGE value="Restructure NonLinearEquation class" />
     <MESSAGE value="Edit main due to new changes" />
     <MESSAGE value="Add JAVA DOC to NonLinearEquation" />
@@ -502,6 +503,7 @@
     <MESSAGE value="Remove testing code from main" />
     <MESSAGE value="Add contact info" />
     <MESSAGE value="Init GUI class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Init GUI class" />
+    <MESSAGE value="Add nimbus theme&#10;Create res folder&#10;Fix icons path&#10;Test changes gui" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add nimbus theme&#10;Create res folder&#10;Fix icons path&#10;Test changes gui" />
   </component>
 </project>

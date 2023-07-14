@@ -85,7 +85,7 @@ public class GUI {
     private void initPanels() {
         initStartPanel();
         initChooseFunctionPanel();
-        //initInterpolationPanel();
+        initInterpolationPanel();
         panelsStack = new Stack<>();
         panelsStack.add(startPanel);
     }
@@ -280,133 +280,150 @@ public class GUI {
     }
 
     private void initInterpolationPanel() {
-        startPanel = new JPanel();
-        startPanel.setName("Interpolation");
-        startPanel.setPreferredSize(mainFrame.getSize());
-        startPanel.setBackground(new Color(100, 100, 100));
+        interpolationPanel = new JPanel();
+        interpolationPanel.setName("Interpolation");
+        interpolationPanel.setPreferredSize(mainFrame.getSize());
+        interpolationPanel.setBackground(new Color(100, 100, 100));
         GridLayout startLayout = new GridLayout(4, 2);
         startLayout.setHgap(5);
         startLayout.setVgap(5);
-        startPanel.setLayout(startLayout);
+        interpolationPanel.setLayout(startLayout);
 
         //***********************************************************************
 
         //init Interpolation Card
         String title = "General Method";
-        String description = "...";
+        String description = "Get the Interpolation Function using" +
+                " the General Method by solving a system of equations using Gaussian elimination ";
         String button = "Enter";
-        ActionListener enterInterpolation = new ActionListener() {
+        ActionListener enterGeneralMethod = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
                 updatePanel();
             }
         };
-        JPanel interpolationCard = createCard(title, description, button, enterInterpolation);
-        startPanel.add(interpolationCard);
+        JPanel generalMethodCard = createCard(title, description, button, enterGeneralMethod);
+        interpolationPanel.add(generalMethodCard);
 
         //***********************************************************************
 
-        //init Integral Card
+        //init General Method Card
         title = "Lagrange";
-        description = "...";
+        description = "Get the Interpolation Function using Lagrange method using Lagrange Polynomials";
         button = "Enter";
-        ActionListener enterIntegral = new ActionListener() {
+        ActionListener enterLagrange = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
                 updatePanel();
             }
         };
-        JPanel integralCard = createCard(title, description, button, enterIntegral);
-        startPanel.add(integralCard);
+        JPanel lagrangeCard = createCard(title, description, button, enterLagrange);
+        interpolationPanel.add(lagrangeCard);
 
         //***********************************************************************
 
-        //init Differentiation Card
-        title = "Newton-Gregory Subtraction";
-        description = "...";
+        //init Newton-Gregory Forward Subtraction Card
+        title = "Newton-Gregory Forward Subtraction";
+        description = "Get the interpolation function using Newton-Gregory Forward Subtractions method\n" +
+                "It also can get Newton-Gregory Forward Subtractions Table values";
         button = "Enter";
-        ActionListener enterDifferentiation = new ActionListener() {
+        ActionListener enterNGFS = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
                 updatePanel();
             }
         };
-        JPanel diffCard = createCard(title, description, button, enterDifferentiation);
-        startPanel.add(diffCard);
+        JPanel NGFSCard = createCard(title, description, button, enterNGFS);
+        interpolationPanel.add(NGFSCard);
 
         //***********************************************************************
 
-        //init Differential Equations Card
-        title = "Newton Divided Subtractions";
-        description = "Solve an entered differential equations using numeric ways";
+        //init Newton-Gregory Backward Subtraction Card
+        title = "Newton-Gregory Backward Subtraction";
+        description = "Get the interpolation function using Newton-Gregory Backward Subtractions method\n" +
+                "It also can get Newton-Gregory Backward Subtractions Table values";
         button = "Enter";
-        ActionListener enterDiffEQ = new ActionListener() {
+        ActionListener enterNGBS = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel NGBSCard = createCard(title, description, button, enterNGBS);
+        interpolationPanel.add(NGBSCard);
+
+        //***********************************************************************
+
+        //init Newton Forward Divided Subtractions Equations Card
+        title = "Newton Forward Divided Subtractions";
+        description = "Get the interpolation function using Newton Forward Divided Subtractions method\n" +
+                "It also can get Newton Forward Divided Subtractions Table values";
+        button = "Enter";
+        ActionListener enterNFDS = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Entered");
             }
         };
-        JPanel diffEQCard = createCard(title, description, button, enterDiffEQ);
-        startPanel.add(diffEQCard);
+        JPanel NFDSCard = createCard(title, description, button, enterNFDS);
+        interpolationPanel.add(NFDSCard);
 
         //***********************************************************************
 
-        //init Non-Linear Equations Card
-        title = "Non-Linear Equations";
-        description = "Solve an entered non-Linear equations using numeric ways";
+        //init Newton Backward Divided Subtractions Equations Card
+        title = "Newton Backward Divided Subtractions";
+        description = "Get the interpolation function using Newton Backward Divided Subtractions method\n" +
+                "It also can get Newton Backward Divided Subtractions Table values";
         button = "Enter";
-        ActionListener enterNonLinEQ = new ActionListener() {
+        ActionListener enterNDBS = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Entered");
             }
         };
-        JPanel nonLinEQCard = createCard(title, description, button, enterNonLinEQ);
-        startPanel.add(nonLinEQCard);
-
+        JPanel NFBSCard = createCard(title, description, button, enterNDBS);
+        interpolationPanel.add(NFBSCard);
 
         //***********************************************************************
 
-        //init System Of Non-Linear Equations Card
-        title = "System Of Non-Linear Equations";
-        description = "Solve an entered system of non-Linear equations using numeric ways";
+        //init Least-Squares Card
+        title = "Least-Squares";
+        description = "Get the interpolation function using Least-Squares method";
         button = "Enter";
-        ActionListener enterSysNonLinEQ = new ActionListener() {
+        ActionListener enterLeastSquares = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Entered");
             }
         };
-        JPanel sysOfNonLinEQCard = createCard(title, description, button, enterSysNonLinEQ);
-        startPanel.add(sysOfNonLinEQCard);
+        JPanel leastSquaresCard = createCard(title, description, button, enterLeastSquares);
+        interpolationPanel.add(leastSquaresCard);
 
 
         //***********************************************************************
 
-        //init Differential Equations Card
-        title = "Polynomials";
-        description = "Do several tasks on an entered polynomial using numeric ways";
+        //init Spline Card
+        title = "Spline";
+        description = "Get the interpolation function using Spline method";
         button = "Enter";
-        ActionListener enterPolys = new ActionListener() {
+        ActionListener enterSpline = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Entered");
             }
         };
-        JPanel polysCard = createCard(title, description, button, enterPolys);
-        startPanel.add(polysCard);
-
-        //***********************************************************************
-
+        JPanel splineCard = createCard(title, description, button, enterSpline);
+        interpolationPanel.add(splineCard);
 
     }
 
     private void updatePanel() {
         mainFrame.getContentPane().removeAll(); // Remove all existing components
-        mainFrame.getContentPane().add(panelsStack.peek()); // Add the newContentPanel
+        mainFrame.getContentPane().add(interpolationPanel); // Add the newContentPanel
         mainFrame.revalidate(); // Revalidate the frame to update the layout
         mainFrame.repaint(); // Repaint the frame to reflect the changes
         if (panelsStack.size() > 1) {
