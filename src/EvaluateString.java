@@ -199,10 +199,7 @@ public abstract class EvaluateString {
         if (Objects.equals(op2, "(") || Objects.equals(op2, ")"))
             return false;
         // Check for precedence rules
-        if (isHigherPrecedence(op1, op2))
-            return false;
-        else
-            return true;
+        return !isHigherPrecedence(op1, op2);
         //return (!isHigherPrecedence(op1, op2)) && (!isSamePrecedence(op1, op2) || !isLeftAssociative(op1));
     }
 
