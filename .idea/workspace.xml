@@ -12,7 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add polynomial to chooseFunction panel" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Change diff and polys panels rows and columns" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,13 +96,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٠٤" summary="Test FalsePosition and Bisection">
-      <created>1688933116432</created>
-      <option name="number" value="٠٠٢٠٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٠٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688933116433</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٠٥" summary="Add Secant class to NonLinearEquation">
       <created>1688934412705</created>
@@ -440,7 +433,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689378185304</updated>
     </task>
-    <option name="localTasksCounter" value="253" />
+    <task id="LOCAL؜-٠٠٢٥٣" summary="Change diff and polys panels rows and columns">
+      <created>1689378357461</created>
+      <option name="number" value="٠٠٢٥٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٥٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689378357461</updated>
+    </task>
+    <option name="localTasksCounter" value="254" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -482,7 +482,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add a complete switch for all methods in main" />
     <MESSAGE value="Create jar" />
     <MESSAGE value="Add jar" />
     <MESSAGE value="Fix indexOutOfBounds in PointsFunction" />
@@ -507,6 +506,7 @@
     <MESSAGE value="Enhance main code" />
     <MESSAGE value="Add info Icon" />
     <MESSAGE value="Add polynomial to chooseFunction panel" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add polynomial to chooseFunction panel" />
+    <MESSAGE value="Change diff and polys panels rows and columns" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change diff and polys panels rows and columns" />
   </component>
 </project>

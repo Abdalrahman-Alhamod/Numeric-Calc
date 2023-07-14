@@ -2,6 +2,8 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.Objects;
 import java.util.Stack;
 
@@ -64,6 +66,7 @@ public class GUI {
         mainFrame.setIconImage(mainIcon.getImage());
         mainFrame.setMinimumSize(new Dimension(940, 620));
         mainFrame.setLocationRelativeTo(null);
+        mainFrame.setResizable(false);
     }
 
     private void initMenuBar() {
