@@ -9,7 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add nimbus theme&#10;Create res folder&#10;Fix icons path&#10;Test changes gui">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Create interpolation Panel and test it">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,13 +94,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٨٩" summary="Test Taylor method">
-      <created>1688851428712</created>
-      <option name="number" value="٠٠١٨٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٨٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688851428712</updated>
     </task>
     <task id="LOCAL؜-٠٠١٩٠" summary="Add MidPoint method">
       <created>1688851981675</created>
@@ -437,7 +431,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689367230872</updated>
     </task>
-    <option name="localTasksCounter" value="238" />
+    <task id="LOCAL؜-٠٠٢٣٨" summary="Create interpolation Panel and test it">
+      <created>1689368187361</created>
+      <option name="number" value="٠٠٢٣٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٣٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689368187361</updated>
+    </task>
+    <option name="localTasksCounter" value="239" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -479,7 +480,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Restructure NonLinearEquation class" />
     <MESSAGE value="Edit main due to new changes" />
     <MESSAGE value="Add JAVA DOC to NonLinearEquation" />
     <MESSAGE value="Add Horner class to Polynomial with getValueAt, getDiffAt, getDivideOn" />
@@ -504,6 +504,7 @@
     <MESSAGE value="Add contact info" />
     <MESSAGE value="Init GUI class" />
     <MESSAGE value="Add nimbus theme&#10;Create res folder&#10;Fix icons path&#10;Test changes gui" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add nimbus theme&#10;Create res folder&#10;Fix icons path&#10;Test changes gui" />
+    <MESSAGE value="Create interpolation Panel and test it" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create interpolation Panel and test it" />
   </component>
 </project>

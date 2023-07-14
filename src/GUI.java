@@ -86,6 +86,7 @@ public class GUI {
         initStartPanel();
         initChooseFunctionPanel();
         initInterpolationPanel();
+        initIntegralPanel();
         panelsStack = new Stack<>();
         panelsStack.add(startPanel);
     }
@@ -291,7 +292,7 @@ public class GUI {
 
         //***********************************************************************
 
-        //init Interpolation Card
+        //init General Method Card
         String title = "General Method";
         String description = "Get the Interpolation Function using" +
                 " the General Method by solving a system of equations using Gaussian elimination ";
@@ -308,7 +309,7 @@ public class GUI {
 
         //***********************************************************************
 
-        //init General Method Card
+        //init Lagrange Card
         title = "Lagrange";
         description = "Get the Interpolation Function using Lagrange method using Lagrange Polynomials";
         button = "Enter";
@@ -421,9 +422,102 @@ public class GUI {
 
     }
 
+    private void initIntegralPanel() {
+        integralPanel = new JPanel();
+        integralPanel.setName("Integral");
+        integralPanel.setPreferredSize(mainFrame.getSize());
+        integralPanel.setBackground(new Color(100, 100, 100));
+        GridLayout startLayout = new GridLayout(4, 2);
+        startLayout.setHgap(5);
+        startLayout.setVgap(5);
+        integralPanel.setLayout(startLayout);
+
+        //***********************************************************************
+
+        //init Rectangular Card
+        String title = "Rectangular";
+        String description = "Calculates the integral using the rectangular method";
+        String button = "Enter";
+        ActionListener enterRect = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel rectCard = createCard(title, description, button, enterRect);
+        integralPanel.add(rectCard);
+
+        //***********************************************************************
+
+        //init Trapezoidal Card
+        title = "Trapezoidal";
+        description = "Calculates the integral using the trapezoidal method";
+        button = "Enter";
+        ActionListener enterTraps = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel trapsCard = createCard(title, description, button, enterTraps);
+        integralPanel.add(trapsCard);
+
+        //***********************************************************************
+
+        //init Simpson 1/3 Card
+        title = "Simpson 1/3";
+        description = "Calculates the integral using Simpson's 1/3 method";
+        button = "Enter";
+        ActionListener enterSimpson3 = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel simpson3Card = createCard(title, description, button, enterSimpson3);
+        integralPanel.add(simpson3Card);
+
+        //***********************************************************************
+
+        //init Simpson 3/8 Card
+        title = "Simpson 3/8";
+        description = "Calculates the integral using Simpson's 3/8 method";
+        button = "Enter";
+        ActionListener enterSimpson8 = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel simpson8Card = createCard(title, description, button, enterSimpson8);
+        integralPanel.add(simpson8Card);
+
+        //***********************************************************************
+
+        //init Paul Card
+        title = "Paul";
+        description = "Calculates the integral using Paul's method";
+        button = "Enter";
+        ActionListener enterPaul = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Entered");
+            }
+        };
+        JPanel paulCard = createCard(title, description, button, enterPaul);
+        integralPanel.add(paulCard);
+
+        //***********************************************************************
+
+    }
+
     private void updatePanel() {
         mainFrame.getContentPane().removeAll(); // Remove all existing components
-        mainFrame.getContentPane().add(interpolationPanel); // Add the newContentPanel
+        mainFrame.getContentPane().add(panelsStack.peek()); // Add the newContentPanel
         mainFrame.revalidate(); // Revalidate the frame to update the layout
         mainFrame.repaint(); // Repaint the frame to reflect the changes
         if (panelsStack.size() > 1) {
