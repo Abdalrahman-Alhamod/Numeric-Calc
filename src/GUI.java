@@ -3,6 +3,7 @@ import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 import java.util.Stack;
 
 public class GUI {
@@ -30,6 +31,14 @@ public class GUI {
     private Stack<JPanel> panelsStack;
 
     public GUI() {
+        //Apply nimbus theme
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (UnsupportedLookAndFeelException | InstantiationException | IllegalAccessException |
+                 ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
         initIcons();
         initMainFrame();
         initMenuBar();
@@ -39,8 +48,8 @@ public class GUI {
     }
 
     private void initIcons() {
-        mainIcon = new ImageIcon("Images/function.png");
-        backIcon = new ImageIcon("Images/left-arrow.png");
+        mainIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/function.png")));
+        backIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/left-arrow.png")));
     }
 
     private void initMainFrame() {

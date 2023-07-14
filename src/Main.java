@@ -28,6 +28,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int choice;
+        /*
+
         while (true) {
             System.out.print("Enter :" +
                     "\n 1- Interpolation" +
@@ -789,6 +791,10 @@ public class Main {
                 }
             }
         }
+
+        */
+
+        new GUI();
 
     }
 
