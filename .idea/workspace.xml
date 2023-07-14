@@ -12,13 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Enhance main code">
-      <change afterPath="$PROJECT_DIR$/res/Icons/info.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/Icons/info1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/Icons/info2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-    </list>
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add polynomial to chooseFunction panel" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,20 +96,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٠٢" summary="Fix EvaluateString bug">
-      <created>1688932663919</created>
-      <option name="number" value="٠٠٢٠٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٠٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688932663919</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٠٣" summary="Add FalsePosition class to NonLinearEquation">
-      <created>1688933087789</created>
-      <option name="number" value="٠٠٢٠٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٠٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688933087789</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٠٤" summary="Test FalsePosition and Bisection">
       <created>1688933116432</created>
@@ -446,7 +426,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689376688743</updated>
     </task>
-    <option name="localTasksCounter" value="251" />
+    <task id="LOCAL؜-٠٠٢٥١" summary="Add info Icon">
+      <created>1689377912005</created>
+      <option name="number" value="٠٠٢٥١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٥١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689377912005</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٥٢" summary="Add polynomial to chooseFunction panel">
+      <created>1689378185304</created>
+      <option name="number" value="٠٠٢٥٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٥٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689378185304</updated>
+    </task>
+    <option name="localTasksCounter" value="253" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -488,8 +482,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix floating points in functions" />
-    <MESSAGE value="Remove print from PointsFunction" />
     <MESSAGE value="Add a complete switch for all methods in main" />
     <MESSAGE value="Create jar" />
     <MESSAGE value="Add jar" />
@@ -513,6 +505,8 @@
     <MESSAGE value="Clean Code : converting to lambda" />
     <MESSAGE value="Clean Code project" />
     <MESSAGE value="Enhance main code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Enhance main code" />
+    <MESSAGE value="Add info Icon" />
+    <MESSAGE value="Add polynomial to chooseFunction panel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add polynomial to chooseFunction panel" />
   </component>
 </project>

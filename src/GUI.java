@@ -475,7 +475,7 @@ public class GUI {
         differentiationPanel.setName("Differential");
         differentiationPanel.setPreferredSize(mainFrame.getSize());
         differentiationPanel.setBackground(new Color(100, 100, 100));
-        GridLayout startLayout = new GridLayout(2, 2);
+        GridLayout startLayout = new GridLayout(4, 1);
         startLayout.setHgap(5);
         startLayout.setVgap(5);
         differentiationPanel.setLayout(startLayout);
@@ -725,7 +725,7 @@ public class GUI {
         polynomialsPanel.setName("Differential Equations");
         polynomialsPanel.setPreferredSize(mainFrame.getSize());
         polynomialsPanel.setBackground(new Color(100, 100, 100));
-        GridLayout startLayout = new GridLayout(2, 2);
+        GridLayout startLayout = new GridLayout(3, 1);
         startLayout.setHgap(5);
         startLayout.setVgap(5);
         polynomialsPanel.setLayout(startLayout);
