@@ -88,6 +88,7 @@ public class GUI {
         initInterpolationPanel();
         initIntegralPanel();
         initDiffPanel();
+        initDiffEQPanel();
         panelsStack = new Stack<>();
         panelsStack.add(startPanel);
     }
@@ -594,9 +595,119 @@ public class GUI {
         //***********************************************************************
     }
 
+    private void initDiffEQPanel() {
+        differentialEquationsPanel = new JPanel();
+        differentialEquationsPanel.setName("Integral");
+        differentialEquationsPanel.setPreferredSize(mainFrame.getSize());
+        differentialEquationsPanel.setBackground(new Color(100, 100, 100));
+        GridLayout startLayout = new GridLayout(3, 2);
+        startLayout.setHgap(5);
+        startLayout.setVgap(5);
+        differentialEquationsPanel.setLayout(startLayout);
+
+        //***********************************************************************
+
+        //init Euler Card
+        String title = "Euler";
+        String description = "Solving a differential equation using the Euler method";
+        String button = "Enter";
+        ActionListener enterEuler = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel eulerCard = createCard(title, description, button, enterEuler);
+        differentialEquationsPanel.add(eulerCard);
+
+        //***********************************************************************
+
+        //init Taylor Card
+        title = "Taylor";
+        description = "Solving a differential equation using the Taylor method";
+        button = "Enter";
+        ActionListener enterTaylor = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel taylorCard = createCard(title, description, button, enterTaylor);
+        differentialEquationsPanel.add(taylorCard);
+
+        //***********************************************************************
+
+        //init Modified Euler Card
+        title = "Modified Euler";
+        description = "Solving a differential equation using the Modified Euler method";
+        button = "Enter";
+        ActionListener enterModifiedEuler = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel modifiedEulerCard = createCard(title, description, button, enterModifiedEuler);
+        differentialEquationsPanel.add(modifiedEulerCard);
+
+
+        //***********************************************************************
+
+        //init Hein Card
+        title = "Hein";
+        description = "Solving a differential equation using the Hein method";
+        button = "Enter";
+        ActionListener enterHein = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel heinCard = createCard(title, description, button, enterHein);
+        differentialEquationsPanel.add(heinCard);
+
+        //***********************************************************************
+
+        //init Ralston Card
+        title = "Ralston";
+        description = "Solving a differential equation using the Ralston method";
+        button = "Enter";
+        ActionListener enterRalston = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel ralstonCard = createCard(title, description, button, enterRalston);
+        differentialEquationsPanel.add(ralstonCard);
+
+        //***********************************************************************
+
+        //init Runge_Kutta Card
+        title = "Runge-Kutta";
+        description = "Solving a differential equation using the Runge-Kutta method";
+        button = "Enter";
+        ActionListener enterRunge_Kutta = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel runge_KuttaCard = createCard(title, description, button, enterRunge_Kutta);
+        differentialEquationsPanel.add(runge_KuttaCard);
+
+        //***********************************************************************
+    }
+
     private void updatePanel() {
         mainFrame.getContentPane().removeAll(); // Remove all existing components
-        mainFrame.getContentPane().add(panelsStack.peek()); // Add the newContentPanel
+        mainFrame.getContentPane().add(differentialEquationsPanel); // Add the newContentPanel
         mainFrame.revalidate(); // Revalidate the frame to update the layout
         mainFrame.repaint(); // Repaint the frame to reflect the changes
         if (panelsStack.size() > 1) {
