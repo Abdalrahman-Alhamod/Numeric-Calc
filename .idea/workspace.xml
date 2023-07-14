@@ -9,7 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Create Non-Lin EQs Panel and test it">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Rename updateMainPanel">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,20 +94,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٩٤" summary="Testing MidPoint :  Modified Euler / Heun / Raphson">
-      <created>1688853787046</created>
-      <option name="number" value="٠٠١٩٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٩٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688853787046</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٩٥" summary="Add Runge_Kutta method">
-      <created>1688854458540</created>
-      <option name="number" value="٠٠١٩٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٩٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688854458540</updated>
     </task>
     <task id="LOCAL؜-٠٠١٩٦" summary="Remove printing from Runge_Kutta method">
       <created>1688854791041</created>
@@ -437,7 +424,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689371502480</updated>
     </task>
-    <option name="localTasksCounter" value="243" />
+    <task id="LOCAL؜-٠٠٢٤٣" summary="Create Polys Panel and test it">
+      <created>1689372110918</created>
+      <option name="number" value="٠٠٢٤٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٤٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689372110918</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٤٤" summary="Rename updateMainPanel">
+      <created>1689372200075</created>
+      <option name="number" value="٠٠٢٤٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٤٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689372200075</updated>
+    </task>
+    <option name="localTasksCounter" value="245" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -479,8 +480,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add JAVA DOC to Horner class" />
-    <MESSAGE value="Fix EvaluateString bug" />
     <MESSAGE value="Add getValueAt(x,y) to ExpressionFunction" />
     <MESSAGE value="Add SystemOfNonLinearEquations with Newton-Raphson inner class" />
     <MESSAGE value="Test System of Non-Linear Equations ; Newton-Raphson" />
@@ -504,6 +503,8 @@
     <MESSAGE value="Create Diff Panel and test it" />
     <MESSAGE value="Create Diff EQs Panel and test it" />
     <MESSAGE value="Create Non-Lin EQs Panel and test it" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create Non-Lin EQs Panel and test it" />
+    <MESSAGE value="Create Polys Panel and test it" />
+    <MESSAGE value="Rename updateMainPanel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rename updateMainPanel" />
   </component>
 </project>

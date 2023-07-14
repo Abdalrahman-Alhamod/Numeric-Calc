@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 import java.util.Stack;
+import java.util.Timer;
 
 public class GUI {
     private JFrame mainFrame;
@@ -877,6 +878,43 @@ public class GUI {
 
         //***********************************************************************
 
+    }
+
+    private void changeColorAnime(Component comp, Color color) {
+        Color srcColor = comp.getBackground();
+
+        int duration = 1000; // Animation duration in milliseconds
+        int steps = 30; // Number of animation steps
+
+        int srcRed = srcColor.getRed();
+        int srcGreen = srcColor.getGreen();
+        int srcBlue = srcColor.getBlue();
+
+        int destRed = color.getRed();
+        int destGreen = color.getGreen();
+        int destBlue = color.getBlue();
+
+        int redStep = (destRed - srcRed) / steps;
+        int greenStep = (destGreen - srcGreen) / steps;
+        int blueStep = (destBlue - srcBlue) / steps;
+
+        final int[] currentStep = {0};
+
+        javax.swing.Timer timer = new javax.swing.Timer(duration / steps, e -> {
+            int newRed = srcRed + redStep * currentStep[0];
+            int newGreen = srcGreen + greenStep * currentStep[0];
+            int newBlue = srcBlue + blueStep * currentStep[0];
+
+            comp.setBackground(new Color(newRed, newGreen, newBlue));
+            mainFrame.repaint();
+
+            currentStep[0]++;
+
+            if (currentStep[0] > steps) {
+                ((javax.swing.Timer) e.getSource()).stop();
+            }
+        });
+        timer.start();
     }
 
     private void updateMainPanel() {
