@@ -92,7 +92,7 @@ public class GUI {
 
         JButton infoButton = new JButton();
         infoButton.addActionListener(e -> {
-            JOptionPane.showConfirmDialog(null,"Created by Abd_HM 💙","About",JOptionPane.DEFAULT_OPTION);
+            JOptionPane.showConfirmDialog(null, "Created by Abd_HM 💙", "About", JOptionPane.DEFAULT_OPTION);
         });
         infoButton.setPreferredSize(new Dimension(50, 50));
         infoButton.setIcon(infoIcon);
@@ -259,7 +259,7 @@ public class GUI {
         chooseFunctionPanel.setName("Choose Function");
         chooseFunctionPanel.setPreferredSize(mainFrame.getSize());
         chooseFunctionPanel.setBackground(new Color(100, 100, 100));
-        GridLayout startLayout = new GridLayout(2, 1);
+        GridLayout startLayout = new GridLayout(3, 1);
         startLayout.setHgap(5);
         startLayout.setVgap(5);
         chooseFunctionPanel.setLayout(startLayout);
@@ -274,9 +274,14 @@ public class GUI {
         JPanel pointsFunctionCard = createCard("Points Function",
                 "Functions like x0=.. y0=.. , x1=.. y1=.. ", "Enter", enterPointsFunction);
 
+        ActionListener enterPolynomialFunction = e -> System.out.println("Enter poly");
+        JPanel polynomialFunctionCard = createCard("Polynomial Function",
+                "Functions like p(x) = a0 + a1*x + a2*x^2 ... ", "Enter", enterPointsFunction);
+
 
         chooseFunctionPanel.add(expressionFunctionCard);
         chooseFunctionPanel.add(pointsFunctionCard);
+        chooseFunctionPanel.add(polynomialFunctionCard);
     }
 
     private void initInterpolationPanel() {
