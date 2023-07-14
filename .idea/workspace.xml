@@ -9,7 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add changeColorAnime method" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Test all Panels">
+      <change afterPath="$PROJECT_DIR$/res/Icons/home-button.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/Icons/home-button1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/Icons/home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/Icons/left-arrow2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,7 +79,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/Minesweeper",
+    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/res/Icons",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2"
@@ -80,6 +87,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\res\Icons" />
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\res\Images" />
     </key>
   </component>
@@ -91,13 +99,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٩٧" summary="Testing Runge-Kutta">
-      <created>1688854802660</created>
-      <option name="number" value="٠٠١٩٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٩٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688854802660</updated>
     </task>
     <task id="LOCAL؜-٠٠١٩٨" summary="Add JAVA DOC to DifferentialEquation">
       <created>1688855387950</created>
@@ -435,7 +436,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689374645039</updated>
     </task>
-    <option name="localTasksCounter" value="246" />
+    <task id="LOCAL؜-٠٠٢٤٦" summary="Test all Panels">
+      <created>1689375005955</created>
+      <option name="number" value="٠٠٢٤٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٤٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689375005955</updated>
+    </task>
+    <option name="localTasksCounter" value="247" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -477,7 +485,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add SystemOfNonLinearEquations with Newton-Raphson inner class" />
     <MESSAGE value="Test System of Non-Linear Equations ; Newton-Raphson" />
     <MESSAGE value="Add JAVA DOC to SystemOfNonLinearEquations and getValueAt(x,y)" />
     <MESSAGE value="Fix Polynomial print bug" />
@@ -502,6 +509,7 @@
     <MESSAGE value="Create Polys Panel and test it" />
     <MESSAGE value="Rename updateMainPanel" />
     <MESSAGE value="Add changeColorAnime method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add changeColorAnime method" />
+    <MESSAGE value="Test all Panels" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test all Panels" />
   </component>
 </project>

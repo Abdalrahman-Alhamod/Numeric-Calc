@@ -22,8 +22,10 @@ public class GUI {
 
     private ImageIcon mainIcon;
     private ImageIcon backIcon;
+    private ImageIcon homeIcon;
 
     private JButton backButton;
+    private JButton homeButton;
 
     private final String mainFont = "Times New Roman";
     private final String secondFont = "Times New Roman";
@@ -51,6 +53,7 @@ public class GUI {
     private void initIcons() {
         mainIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/function.png")));
         backIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/left-arrow.png")));
+        homeIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/home-button.png")));
     }
 
     private void initMainFrame() {
@@ -68,18 +71,27 @@ public class GUI {
         mainMenuBar.setLayout(new BorderLayout());
 
         backButton = new JButton();
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.pop();
-                updateMainPanel();
-            }
+        backButton.addActionListener(e -> {
+            panelsStack.pop();
+            updateMainPanel();
         });
-        backButton.setPreferredSize(new Dimension(30, 30));
+        backButton.setPreferredSize(new Dimension(50, 50));
         backButton.setIcon(backIcon);
         backButton.setFocusPainted(false);
 
-        mainMenuBar.add(backButton, BorderLayout.WEST);
+        homeButton = new JButton();
+        homeButton.addActionListener(e -> {
+            while (panelsStack.size() != 1) {
+                panelsStack.pop();
+            }
+            updateMainPanel();
+        });
+        homeButton.setPreferredSize(new Dimension(50, 50));
+        homeButton.setIcon(homeIcon);
+        homeButton.setFocusPainted(false);
+
+        mainMenuBar.add(backButton,BorderLayout.WEST);
+        mainMenuBar.add(homeButton);
         mainFrame.setJMenuBar(mainMenuBar);
     }
 
@@ -927,6 +939,6 @@ public class GUI {
         mainFrame.revalidate(); // Revalidate the frame to update the layout
         mainFrame.repaint(); // Repaint the frame to reflect the changes
         backButton.setEnabled(panelsStack.size() > 1);
-
+        homeButton.setEnabled(panelsStack.size() > 1);
     }
 }
