@@ -87,6 +87,7 @@ public class GUI {
         initChooseFunctionPanel();
         initInterpolationPanel();
         initIntegralPanel();
+        initDiffPanel();
         panelsStack = new Stack<>();
         panelsStack.add(startPanel);
     }
@@ -427,7 +428,7 @@ public class GUI {
         integralPanel.setName("Integral");
         integralPanel.setPreferredSize(mainFrame.getSize());
         integralPanel.setBackground(new Color(100, 100, 100));
-        GridLayout startLayout = new GridLayout(4, 2);
+        GridLayout startLayout = new GridLayout(3, 2);
         startLayout.setHgap(5);
         startLayout.setVgap(5);
         integralPanel.setLayout(startLayout);
@@ -513,6 +514,84 @@ public class GUI {
 
         //***********************************************************************
 
+    }
+
+    private void initDiffPanel() {
+        differentiationPanel = new JPanel();
+        differentiationPanel.setName("Integral");
+        differentiationPanel.setPreferredSize(mainFrame.getSize());
+        differentiationPanel.setBackground(new Color(100, 100, 100));
+        GridLayout startLayout = new GridLayout(2, 2);
+        startLayout.setHgap(5);
+        startLayout.setVgap(5);
+        differentiationPanel.setLayout(startLayout);
+
+        //***********************************************************************
+
+        //init Lagrange Card
+        String title = "Lagrange";
+        String description = "Get Differential Function As Polynomial using Lagrange";
+        String button = "Enter";
+        ActionListener enterLagrange = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel lagrangeCard = createCard(title, description, button, enterLagrange);
+        differentiationPanel.add(lagrangeCard);
+
+        //***********************************************************************
+
+        //init  Newton-Gregory Forward Subtractions Card
+        title = "Newton-Gregory Forward Subtractions";
+        description = "Get Differential Function As Polynomial using Newton-Gregory Forward Subtractions";
+        button = "Enter";
+        ActionListener enterNGFS = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel NGFSCard = createCard(title, description, button, enterNGFS);
+        differentiationPanel.add(NGFSCard);
+
+        //***********************************************************************
+
+        //init Newton-Gregory Backward Subtractions Card
+        title = "Newton-Gregory Backward Subtractions";
+        description = "Get Differential Function As Polynomial using Newton-Gregory Backward Subtractions";
+        button = "Enter";
+        ActionListener enterNGBS = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel NGBSCard = createCard(title, description, button, enterNGBS);
+        differentiationPanel.add(NGBSCard);
+
+
+        //***********************************************************************
+
+        //init Central,Forward,Backward Subtractions Card
+        title = "Central,Forward,Backward Subtractions";
+        description = "Calculate the differential function of a specified value using Central/Forward/Backward Subtractions";
+        button = "Enter";
+        ActionListener enterCFBS = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel CFBSCard = createCard(title, description, button, enterCFBS);
+        differentiationPanel.add(CFBSCard);
+
+        //***********************************************************************
     }
 
     private void updatePanel() {
