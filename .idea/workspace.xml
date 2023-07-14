@@ -9,10 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Rename updateMainPanel">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-    </list>
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add changeColorAnime method" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,13 +91,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٩٦" summary="Remove printing from Runge_Kutta method">
-      <created>1688854791041</created>
-      <option name="number" value="٠٠١٩٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٩٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688854791041</updated>
     </task>
     <task id="LOCAL؜-٠٠١٩٧" summary="Testing Runge-Kutta">
       <created>1688854802660</created>
@@ -438,7 +428,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689372200075</updated>
     </task>
-    <option name="localTasksCounter" value="245" />
+    <task id="LOCAL؜-٠٠٢٤٥" summary="Add changeColorAnime method">
+      <created>1689374645039</created>
+      <option name="number" value="٠٠٢٤٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٤٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689374645039</updated>
+    </task>
+    <option name="localTasksCounter" value="246" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -480,7 +477,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add getValueAt(x,y) to ExpressionFunction" />
     <MESSAGE value="Add SystemOfNonLinearEquations with Newton-Raphson inner class" />
     <MESSAGE value="Test System of Non-Linear Equations ; Newton-Raphson" />
     <MESSAGE value="Add JAVA DOC to SystemOfNonLinearEquations and getValueAt(x,y)" />
@@ -505,6 +501,7 @@
     <MESSAGE value="Create Non-Lin EQs Panel and test it" />
     <MESSAGE value="Create Polys Panel and test it" />
     <MESSAGE value="Rename updateMainPanel" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rename updateMainPanel" />
+    <MESSAGE value="Add changeColorAnime method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add changeColorAnime method" />
   </component>
 </project>

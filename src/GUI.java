@@ -115,7 +115,7 @@ public class GUI {
         ActionListener enterInterpolation = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
+                panelsStack.add(interpolationPanel);
                 updateMainPanel();
             }
         };
@@ -131,7 +131,7 @@ public class GUI {
         ActionListener enterIntegral = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
+                panelsStack.add(integralPanel);
                 updateMainPanel();
             }
         };
@@ -147,7 +147,7 @@ public class GUI {
         ActionListener enterDifferentiation = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
+                panelsStack.add(differentiationPanel);
                 updateMainPanel();
             }
         };
@@ -163,7 +163,8 @@ public class GUI {
         ActionListener enterDiffEQ = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Entered");
+                panelsStack.add(differentialEquationsPanel);
+                updateMainPanel();
             }
         };
         JPanel diffEQCard = createCard(title, description, button, enterDiffEQ);
@@ -178,7 +179,8 @@ public class GUI {
         ActionListener enterNonLinEQ = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Entered");
+                panelsStack.add(nonLinearEquationsPanel);
+                updateMainPanel();
             }
         };
         JPanel nonLinEQCard = createCard(title, description, button, enterNonLinEQ);
@@ -194,7 +196,8 @@ public class GUI {
         ActionListener enterSysNonLinEQ = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Entered");
+                //panelsStack.add(nonLinearEquationsPanel);
+                //updateMainPanel();
             }
         };
         JPanel sysOfNonLinEQCard = createCard(title, description, button, enterSysNonLinEQ);
@@ -210,7 +213,8 @@ public class GUI {
         ActionListener enterPolys = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Entered");
+                panelsStack.add(polynomialsPanel);
+                updateMainPanel();
             }
         };
         JPanel polysCard = createCard(title, description, button, enterPolys);
@@ -255,7 +259,7 @@ public class GUI {
         chooseFunctionPanel.setName("Choose Function");
         chooseFunctionPanel.setPreferredSize(mainFrame.getSize());
         chooseFunctionPanel.setBackground(new Color(100, 100, 100));
-        GridLayout startLayout = new GridLayout(1, 2);
+        GridLayout startLayout = new GridLayout(2, 1);
         startLayout.setHgap(5);
         startLayout.setVgap(5);
         chooseFunctionPanel.setLayout(startLayout);
