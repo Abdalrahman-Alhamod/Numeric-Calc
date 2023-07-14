@@ -24,9 +24,9 @@ public class GUI {
 
     private JButton backButton;
 
-    private String mainFont = "Times New Roman";
-    private String secondFont = "Times New Roman";
-    private String buttonFont = "Times New Roman";
+    private final String mainFont = "Times New Roman";
+    private final String secondFont = "Times New Roman";
+    private final String buttonFont = "Times New Roman";
 
     private Stack<JPanel> panelsStack;
 
@@ -43,7 +43,7 @@ public class GUI {
         initMainFrame();
         initMenuBar();
         initPanels();
-        updatePanel();
+        updateMainPanel();
         mainFrame.pack();
     }
 
@@ -71,7 +71,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.pop();
-                updatePanel();
+                updateMainPanel();
             }
         });
         backButton.setPreferredSize(new Dimension(30, 30));
@@ -115,7 +115,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel interpolationCard = createCard(title, description, button, enterInterpolation);
@@ -131,7 +131,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel integralCard = createCard(title, description, button, enterIntegral);
@@ -147,7 +147,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel diffCard = createCard(title, description, button, enterDifferentiation);
@@ -305,7 +305,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel generalMethodCard = createCard(title, description, button, enterGeneralMethod);
@@ -321,7 +321,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel lagrangeCard = createCard(title, description, button, enterLagrange);
@@ -338,7 +338,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel NGFSCard = createCard(title, description, button, enterNGFS);
@@ -355,7 +355,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel NGBSCard = createCard(title, description, button, enterNGBS);
@@ -446,7 +446,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel rectCard = createCard(title, description, button, enterRect);
@@ -462,7 +462,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel trapsCard = createCard(title, description, button, enterTraps);
@@ -478,7 +478,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel simpson3Card = createCard(title, description, button, enterSimpson3);
@@ -494,7 +494,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel simpson8Card = createCard(title, description, button, enterSimpson8);
@@ -539,7 +539,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel lagrangeCard = createCard(title, description, button, enterLagrange);
@@ -555,7 +555,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel NGFSCard = createCard(title, description, button, enterNGFS);
@@ -571,7 +571,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel NGBSCard = createCard(title, description, button, enterNGBS);
@@ -588,7 +588,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel CFBSCard = createCard(title, description, button, enterCFBS);
@@ -617,7 +617,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel eulerCard = createCard(title, description, button, enterEuler);
@@ -633,7 +633,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel taylorCard = createCard(title, description, button, enterTaylor);
@@ -649,7 +649,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel modifiedEulerCard = createCard(title, description, button, enterModifiedEuler);
@@ -666,7 +666,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel heinCard = createCard(title, description, button, enterHein);
@@ -682,7 +682,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel ralstonCard = createCard(title, description, button, enterRalston);
@@ -698,7 +698,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel runge_KuttaCard = createCard(title, description, button, enterRunge_Kutta);
@@ -727,7 +727,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel bisectionCard = createCard(title, description, button, enterBisection);
@@ -743,7 +743,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel falsePositionCard = createCard(title, description, button, enterFalsePosition);
@@ -759,7 +759,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel secantCard = createCard(title, description, button, enterSecant);
@@ -776,7 +776,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel newton_RaphsonCard = createCard(title, description, button, enterNewton_Raphson);
@@ -792,7 +792,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel halleyCard = createCard(title, description, button, enterHalley);
@@ -808,7 +808,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel fixedPointIterationCard = createCard(title, description, button, enterFixedPointIteration);
@@ -837,7 +837,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel valueAtCard = createCard(title, description, button, enterValueAt);
@@ -853,7 +853,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel divideOnCard = createCard(title, description, button, enterDivideOn);
@@ -869,7 +869,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelsStack.add(chooseFunctionPanel);
-                updatePanel();
+                updateMainPanel();
             }
         };
         JPanel diffAtCard = createCard(title, description, button, enterDiffAt);
@@ -879,16 +879,12 @@ public class GUI {
 
     }
 
-    private void updatePanel() {
+    private void updateMainPanel() {
         mainFrame.getContentPane().removeAll(); // Remove all existing components
         mainFrame.getContentPane().add(panelsStack.peek()); // Add the newContentPanel
         mainFrame.revalidate(); // Revalidate the frame to update the layout
         mainFrame.repaint(); // Repaint the frame to reflect the changes
-        if (panelsStack.size() > 1) {
-            backButton.setEnabled(true);
-        } else {
-            backButton.setEnabled(false);
-        }
+        backButton.setEnabled(panelsStack.size() > 1);
 
     }
 }
