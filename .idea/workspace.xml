@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Create Diff Panel and test it">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Create Diff EQs Panel and test it">
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,13 +93,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٩٢" summary="Fix floating-point precision errors in DEQ">
-      <created>1688852904437</created>
-      <option name="number" value="٠٠١٩٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٩٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688852904437</updated>
     </task>
     <task id="LOCAL؜-٠٠١٩٣" summary="Restructure MidPoint class">
       <created>1688853756739</created>
@@ -437,7 +430,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689370421142</updated>
     </task>
-    <option name="localTasksCounter" value="241" />
+    <task id="LOCAL؜-٠٠٢٤١" summary="Create Diff EQs Panel and test it">
+      <created>1689370952009</created>
+      <option name="number" value="٠٠٢٤١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٤١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689370952009</updated>
+    </task>
+    <option name="localTasksCounter" value="242" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -479,7 +479,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add Horner class to Polynomial with getValueAt, getDiffAt, getDivideOn" />
     <MESSAGE value="Test Horner methods" />
     <MESSAGE value="Add JAVA DOC to Horner class" />
     <MESSAGE value="Fix EvaluateString bug" />
@@ -504,6 +503,7 @@
     <MESSAGE value="Create interpolation Panel and test it" />
     <MESSAGE value="Create integral Panel and test it" />
     <MESSAGE value="Create Diff Panel and test it" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create Diff Panel and test it" />
+    <MESSAGE value="Create Diff EQs Panel and test it" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create Diff EQs Panel and test it" />
   </component>
 </project>

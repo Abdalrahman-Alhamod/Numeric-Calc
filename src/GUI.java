@@ -89,6 +89,7 @@ public class GUI {
         initIntegralPanel();
         initDiffPanel();
         initDiffEQPanel();
+        initNonLinEQPanel();
         panelsStack = new Stack<>();
         panelsStack.add(startPanel);
     }
@@ -519,7 +520,7 @@ public class GUI {
 
     private void initDiffPanel() {
         differentiationPanel = new JPanel();
-        differentiationPanel.setName("Integral");
+        differentiationPanel.setName("Differential");
         differentiationPanel.setPreferredSize(mainFrame.getSize());
         differentiationPanel.setBackground(new Color(100, 100, 100));
         GridLayout startLayout = new GridLayout(2, 2);
@@ -597,7 +598,7 @@ public class GUI {
 
     private void initDiffEQPanel() {
         differentialEquationsPanel = new JPanel();
-        differentialEquationsPanel.setName("Integral");
+        differentialEquationsPanel.setName("Differential Equations");
         differentialEquationsPanel.setPreferredSize(mainFrame.getSize());
         differentialEquationsPanel.setBackground(new Color(100, 100, 100));
         GridLayout startLayout = new GridLayout(3, 2);
@@ -705,9 +706,121 @@ public class GUI {
         //***********************************************************************
     }
 
+    private void initNonLinEQPanel() {
+        nonLinearEquationsPanel = new JPanel();
+        nonLinearEquationsPanel.setName("Non-Linear Equations");
+        nonLinearEquationsPanel.setPreferredSize(mainFrame.getSize());
+        nonLinearEquationsPanel.setBackground(new Color(100, 100, 100));
+        GridLayout startLayout = new GridLayout(3, 2);
+        startLayout.setHgap(5);
+        startLayout.setVgap(5);
+        nonLinearEquationsPanel.setLayout(startLayout);
+
+        //***********************************************************************
+
+        //init Bisection Card
+        String title = "Bisection";
+        String description = "Solving non-linear equations using the Bisection method";
+        String button = "Enter";
+        ActionListener enterBisection = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel bisectionCard = createCard(title, description, button, enterBisection);
+        nonLinearEquationsPanel.add(bisectionCard);
+
+        //***********************************************************************
+
+        //init False Position Card
+        title = "False Position";
+        description = "Solving non-linear equations using the False Position method";
+        button = "Enter";
+        ActionListener enterFalsePosition = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel falsePositionCard = createCard(title, description, button, enterFalsePosition);
+        nonLinearEquationsPanel.add(falsePositionCard);
+
+        //***********************************************************************
+
+        //init Secant Card
+        title = "Secant";
+        description = "Solving non-linear equations using the Secant method";
+        button = "Enter";
+        ActionListener enterSecant = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel secantCard = createCard(title, description, button, enterSecant);
+        nonLinearEquationsPanel.add(secantCard);
+
+
+        //***********************************************************************
+
+        //init Newton_Raphson Card
+        title = "Newton-Raphson";
+        description = "Solving non-linear equations using the Newton-Raphson method";
+        button = "Enter";
+        ActionListener enterNewton_Raphson = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel newton_RaphsonCard = createCard(title, description, button, enterNewton_Raphson);
+        nonLinearEquationsPanel.add(newton_RaphsonCard);
+
+        //***********************************************************************
+
+        //init Halley Card
+        title = "Halley";
+        description = "Solving non-linear equations using the Halley method";
+        button = "Enter";
+        ActionListener enterHalley = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel halleyCard = createCard(title, description, button, enterHalley);
+        nonLinearEquationsPanel.add(halleyCard);
+
+        //***********************************************************************
+
+        //init Fixed Point Iteration Card
+        title = "Fixed Point Iteration";
+        description = "Solving non-linear equations using the Fixed Point Iteration method";
+        button = "Enter";
+        ActionListener enterFixedPointIteration = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel fixedPointIterationCard = createCard(title, description, button, enterFixedPointIteration);
+        nonLinearEquationsPanel.add(fixedPointIterationCard);
+
+        //***********************************************************************
+    }
+
+
+
     private void updatePanel() {
         mainFrame.getContentPane().removeAll(); // Remove all existing components
-        mainFrame.getContentPane().add(differentialEquationsPanel); // Add the newContentPanel
+        mainFrame.getContentPane().add(nonLinearEquationsPanel); // Add the newContentPanel
         mainFrame.revalidate(); // Revalidate the frame to update the layout
         mainFrame.repaint(); // Repaint the frame to reflect the changes
         if (panelsStack.size() > 1) {
