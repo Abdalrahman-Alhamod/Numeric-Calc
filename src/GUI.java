@@ -1,11 +1,9 @@
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 import java.util.Stack;
-import java.util.Timer;
 
 public class GUI {
     private JFrame mainFrame;
@@ -124,12 +122,9 @@ public class GUI {
         String title = "Interpolation";
         String description = "Interpolate an entered function using numeric interpolation ways";
         String button = "Enter";
-        ActionListener enterInterpolation = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(interpolationPanel);
-                updateMainPanel();
-            }
+        ActionListener enterInterpolation = e -> {
+            panelsStack.add(interpolationPanel);
+            updateMainPanel();
         };
         JPanel interpolationCard = createCard(title, description, button, enterInterpolation);
         startPanel.add(interpolationCard);
@@ -140,12 +135,9 @@ public class GUI {
         title = "Integral";
         description = "Integrate an entered function using numeric integration ways";
         button = "Enter";
-        ActionListener enterIntegral = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(integralPanel);
-                updateMainPanel();
-            }
+        ActionListener enterIntegral = e -> {
+            panelsStack.add(integralPanel);
+            updateMainPanel();
         };
         JPanel integralCard = createCard(title, description, button, enterIntegral);
         startPanel.add(integralCard);
@@ -156,12 +148,9 @@ public class GUI {
         title = "Differentiation";
         description = "Differentiate an entered function using numeric differentiation ways";
         button = "Enter";
-        ActionListener enterDifferentiation = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(differentiationPanel);
-                updateMainPanel();
-            }
+        ActionListener enterDifferentiation = e -> {
+            panelsStack.add(differentiationPanel);
+            updateMainPanel();
         };
         JPanel diffCard = createCard(title, description, button, enterDifferentiation);
         startPanel.add(diffCard);
@@ -172,12 +161,9 @@ public class GUI {
         title = "Differential Equations";
         description = "Solve an entered differential equations using numeric ways";
         button = "Enter";
-        ActionListener enterDiffEQ = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(differentialEquationsPanel);
-                updateMainPanel();
-            }
+        ActionListener enterDiffEQ = e -> {
+            panelsStack.add(differentialEquationsPanel);
+            updateMainPanel();
         };
         JPanel diffEQCard = createCard(title, description, button, enterDiffEQ);
         startPanel.add(diffEQCard);
@@ -188,12 +174,9 @@ public class GUI {
         title = "Non-Linear Equations";
         description = "Solve an entered non-Linear equations using numeric ways";
         button = "Enter";
-        ActionListener enterNonLinEQ = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(nonLinearEquationsPanel);
-                updateMainPanel();
-            }
+        ActionListener enterNonLinEQ = e -> {
+            panelsStack.add(nonLinearEquationsPanel);
+            updateMainPanel();
         };
         JPanel nonLinEQCard = createCard(title, description, button, enterNonLinEQ);
         startPanel.add(nonLinEQCard);
@@ -205,12 +188,9 @@ public class GUI {
         title = "System Of Non-Linear Equations";
         description = "Solve an entered system of non-Linear equations using numeric ways";
         button = "Enter";
-        ActionListener enterSysNonLinEQ = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //panelsStack.add(nonLinearEquationsPanel);
-                //updateMainPanel();
-            }
+        ActionListener enterSysNonLinEQ = e -> {
+            //panelsStack.add(nonLinearEquationsPanel);
+            //updateMainPanel();
         };
         JPanel sysOfNonLinEQCard = createCard(title, description, button, enterSysNonLinEQ);
         startPanel.add(sysOfNonLinEQCard);
@@ -222,12 +202,9 @@ public class GUI {
         title = "Polynomials";
         description = "Do several tasks on an entered polynomial using numeric ways";
         button = "Enter";
-        ActionListener enterPolys = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(polynomialsPanel);
-                updateMainPanel();
-            }
+        ActionListener enterPolys = e -> {
+            panelsStack.add(polynomialsPanel);
+            updateMainPanel();
         };
         JPanel polysCard = createCard(title, description, button, enterPolys);
         startPanel.add(polysCard);
@@ -277,22 +254,12 @@ public class GUI {
         chooseFunctionPanel.setLayout(startLayout);
 
 
-        ActionListener enterExpressionFunction = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Enter expr");
-            }
-        };
+        ActionListener enterExpressionFunction = e -> System.out.println("Enter expr");
         JPanel expressionFunctionCard = createCard("Expression Function",
                 "Functions like x^2+3, sin(x), exp(x) ...", "Enter", enterExpressionFunction);
 
 
-        ActionListener enterPointsFunction = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Enter points");
-            }
-        };
+        ActionListener enterPointsFunction = e -> System.out.println("Enter points");
         JPanel pointsFunctionCard = createCard("Points Function",
                 "Functions like x0=.. y0=.. , x1=.. y1=.. ", "Enter", enterPointsFunction);
 
@@ -318,12 +285,9 @@ public class GUI {
         String description = "Get the Interpolation Function using" +
                 " the General Method by solving a system of equations using Gaussian elimination ";
         String button = "Enter";
-        ActionListener enterGeneralMethod = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterGeneralMethod = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel generalMethodCard = createCard(title, description, button, enterGeneralMethod);
         interpolationPanel.add(generalMethodCard);
@@ -334,12 +298,9 @@ public class GUI {
         title = "Lagrange";
         description = "Get the Interpolation Function using Lagrange method using Lagrange Polynomials";
         button = "Enter";
-        ActionListener enterLagrange = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterLagrange = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel lagrangeCard = createCard(title, description, button, enterLagrange);
         interpolationPanel.add(lagrangeCard);
@@ -351,12 +312,9 @@ public class GUI {
         description = "Get the interpolation function using Newton-Gregory Forward Subtractions method\n" +
                 "It also can get Newton-Gregory Forward Subtractions Table values";
         button = "Enter";
-        ActionListener enterNGFS = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterNGFS = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel NGFSCard = createCard(title, description, button, enterNGFS);
         interpolationPanel.add(NGFSCard);
@@ -368,12 +326,9 @@ public class GUI {
         description = "Get the interpolation function using Newton-Gregory Backward Subtractions method\n" +
                 "It also can get Newton-Gregory Backward Subtractions Table values";
         button = "Enter";
-        ActionListener enterNGBS = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterNGBS = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel NGBSCard = createCard(title, description, button, enterNGBS);
         interpolationPanel.add(NGBSCard);
@@ -385,12 +340,7 @@ public class GUI {
         description = "Get the interpolation function using Newton Forward Divided Subtractions method\n" +
                 "It also can get Newton Forward Divided Subtractions Table values";
         button = "Enter";
-        ActionListener enterNFDS = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Entered");
-            }
-        };
+        ActionListener enterNFDS = e -> System.out.println("Entered");
         JPanel NFDSCard = createCard(title, description, button, enterNFDS);
         interpolationPanel.add(NFDSCard);
 
@@ -401,12 +351,7 @@ public class GUI {
         description = "Get the interpolation function using Newton Backward Divided Subtractions method\n" +
                 "It also can get Newton Backward Divided Subtractions Table values";
         button = "Enter";
-        ActionListener enterNDBS = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Entered");
-            }
-        };
+        ActionListener enterNDBS = e -> System.out.println("Entered");
         JPanel NFBSCard = createCard(title, description, button, enterNDBS);
         interpolationPanel.add(NFBSCard);
 
@@ -416,12 +361,7 @@ public class GUI {
         title = "Least-Squares";
         description = "Get the interpolation function using Least-Squares method";
         button = "Enter";
-        ActionListener enterLeastSquares = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Entered");
-            }
-        };
+        ActionListener enterLeastSquares = e -> System.out.println("Entered");
         JPanel leastSquaresCard = createCard(title, description, button, enterLeastSquares);
         interpolationPanel.add(leastSquaresCard);
 
@@ -432,12 +372,7 @@ public class GUI {
         title = "Spline";
         description = "Get the interpolation function using Spline method";
         button = "Enter";
-        ActionListener enterSpline = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Entered");
-            }
-        };
+        ActionListener enterSpline = e -> System.out.println("Entered");
         JPanel splineCard = createCard(title, description, button, enterSpline);
         interpolationPanel.add(splineCard);
 
@@ -459,12 +394,9 @@ public class GUI {
         String title = "Rectangular";
         String description = "Calculates the integral using the rectangular method";
         String button = "Enter";
-        ActionListener enterRect = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterRect = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel rectCard = createCard(title, description, button, enterRect);
         integralPanel.add(rectCard);
@@ -475,12 +407,9 @@ public class GUI {
         title = "Trapezoidal";
         description = "Calculates the integral using the trapezoidal method";
         button = "Enter";
-        ActionListener enterTraps = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterTraps = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel trapsCard = createCard(title, description, button, enterTraps);
         integralPanel.add(trapsCard);
@@ -491,12 +420,9 @@ public class GUI {
         title = "Simpson 1/3";
         description = "Calculates the integral using Simpson's 1/3 method";
         button = "Enter";
-        ActionListener enterSimpson3 = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterSimpson3 = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel simpson3Card = createCard(title, description, button, enterSimpson3);
         integralPanel.add(simpson3Card);
@@ -507,12 +433,9 @@ public class GUI {
         title = "Simpson 3/8";
         description = "Calculates the integral using Simpson's 3/8 method";
         button = "Enter";
-        ActionListener enterSimpson8 = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterSimpson8 = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel simpson8Card = createCard(title, description, button, enterSimpson8);
         integralPanel.add(simpson8Card);
@@ -523,12 +446,7 @@ public class GUI {
         title = "Paul";
         description = "Calculates the integral using Paul's method";
         button = "Enter";
-        ActionListener enterPaul = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Entered");
-            }
-        };
+        ActionListener enterPaul = e -> System.out.println("Entered");
         JPanel paulCard = createCard(title, description, button, enterPaul);
         integralPanel.add(paulCard);
 
@@ -552,12 +470,9 @@ public class GUI {
         String title = "Lagrange";
         String description = "Get Differential Function As Polynomial using Lagrange";
         String button = "Enter";
-        ActionListener enterLagrange = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterLagrange = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel lagrangeCard = createCard(title, description, button, enterLagrange);
         differentiationPanel.add(lagrangeCard);
@@ -568,12 +483,9 @@ public class GUI {
         title = "Newton-Gregory Forward Subtractions";
         description = "Get Differential Function As Polynomial using Newton-Gregory Forward Subtractions";
         button = "Enter";
-        ActionListener enterNGFS = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterNGFS = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel NGFSCard = createCard(title, description, button, enterNGFS);
         differentiationPanel.add(NGFSCard);
@@ -584,12 +496,9 @@ public class GUI {
         title = "Newton-Gregory Backward Subtractions";
         description = "Get Differential Function As Polynomial using Newton-Gregory Backward Subtractions";
         button = "Enter";
-        ActionListener enterNGBS = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterNGBS = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel NGBSCard = createCard(title, description, button, enterNGBS);
         differentiationPanel.add(NGBSCard);
@@ -601,12 +510,9 @@ public class GUI {
         title = "Central,Forward,Backward Subtractions";
         description = "Calculate the differential function of a specified value using Central/Forward/Backward Subtractions";
         button = "Enter";
-        ActionListener enterCFBS = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterCFBS = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel CFBSCard = createCard(title, description, button, enterCFBS);
         differentiationPanel.add(CFBSCard);
@@ -630,12 +536,9 @@ public class GUI {
         String title = "Euler";
         String description = "Solving a differential equation using the Euler method";
         String button = "Enter";
-        ActionListener enterEuler = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterEuler = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel eulerCard = createCard(title, description, button, enterEuler);
         differentialEquationsPanel.add(eulerCard);
@@ -646,12 +549,9 @@ public class GUI {
         title = "Taylor";
         description = "Solving a differential equation using the Taylor method";
         button = "Enter";
-        ActionListener enterTaylor = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterTaylor = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel taylorCard = createCard(title, description, button, enterTaylor);
         differentialEquationsPanel.add(taylorCard);
@@ -662,12 +562,9 @@ public class GUI {
         title = "Modified Euler";
         description = "Solving a differential equation using the Modified Euler method";
         button = "Enter";
-        ActionListener enterModifiedEuler = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterModifiedEuler = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel modifiedEulerCard = createCard(title, description, button, enterModifiedEuler);
         differentialEquationsPanel.add(modifiedEulerCard);
@@ -679,12 +576,9 @@ public class GUI {
         title = "Hein";
         description = "Solving a differential equation using the Hein method";
         button = "Enter";
-        ActionListener enterHein = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterHein = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel heinCard = createCard(title, description, button, enterHein);
         differentialEquationsPanel.add(heinCard);
@@ -695,12 +589,9 @@ public class GUI {
         title = "Ralston";
         description = "Solving a differential equation using the Ralston method";
         button = "Enter";
-        ActionListener enterRalston = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterRalston = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel ralstonCard = createCard(title, description, button, enterRalston);
         differentialEquationsPanel.add(ralstonCard);
@@ -711,12 +602,9 @@ public class GUI {
         title = "Runge-Kutta";
         description = "Solving a differential equation using the Runge-Kutta method";
         button = "Enter";
-        ActionListener enterRunge_Kutta = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterRunge_Kutta = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel runge_KuttaCard = createCard(title, description, button, enterRunge_Kutta);
         differentialEquationsPanel.add(runge_KuttaCard);
@@ -740,12 +628,9 @@ public class GUI {
         String title = "Bisection";
         String description = "Solving non-linear equations using the Bisection method";
         String button = "Enter";
-        ActionListener enterBisection = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterBisection = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel bisectionCard = createCard(title, description, button, enterBisection);
         nonLinearEquationsPanel.add(bisectionCard);
@@ -756,12 +641,9 @@ public class GUI {
         title = "False Position";
         description = "Solving non-linear equations using the False Position method";
         button = "Enter";
-        ActionListener enterFalsePosition = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterFalsePosition = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel falsePositionCard = createCard(title, description, button, enterFalsePosition);
         nonLinearEquationsPanel.add(falsePositionCard);
@@ -772,12 +654,9 @@ public class GUI {
         title = "Secant";
         description = "Solving non-linear equations using the Secant method";
         button = "Enter";
-        ActionListener enterSecant = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterSecant = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel secantCard = createCard(title, description, button, enterSecant);
         nonLinearEquationsPanel.add(secantCard);
@@ -789,12 +668,9 @@ public class GUI {
         title = "Newton-Raphson";
         description = "Solving non-linear equations using the Newton-Raphson method";
         button = "Enter";
-        ActionListener enterNewton_Raphson = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterNewton_Raphson = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel newton_RaphsonCard = createCard(title, description, button, enterNewton_Raphson);
         nonLinearEquationsPanel.add(newton_RaphsonCard);
@@ -805,12 +681,9 @@ public class GUI {
         title = "Halley";
         description = "Solving non-linear equations using the Halley method";
         button = "Enter";
-        ActionListener enterHalley = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterHalley = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel halleyCard = createCard(title, description, button, enterHalley);
         nonLinearEquationsPanel.add(halleyCard);
@@ -821,12 +694,9 @@ public class GUI {
         title = "Fixed Point Iteration";
         description = "Solving non-linear equations using the Fixed Point Iteration method";
         button = "Enter";
-        ActionListener enterFixedPointIteration = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterFixedPointIteration = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel fixedPointIterationCard = createCard(title, description, button, enterFixedPointIteration);
         nonLinearEquationsPanel.add(fixedPointIterationCard);
@@ -850,12 +720,9 @@ public class GUI {
         String title = "Value At x";
         String description = "Evaluates the polynomial at the specified value of x using Horner's method";
         String button = "Enter";
-        ActionListener enterValueAt = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterValueAt = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel valueAtCard = createCard(title, description, button, enterValueAt);
         polynomialsPanel.add(valueAtCard);
@@ -866,12 +733,9 @@ public class GUI {
         title = "Divide on (x - a)";
         description = "Divides the polynomial by (x - c) using Horner's method and returns the resulting polynomial";
         button = "Enter";
-        ActionListener enterDivideOn = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterDivideOn = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel divideOnCard = createCard(title, description, button, enterDivideOn);
         polynomialsPanel.add(divideOnCard);
@@ -882,12 +746,9 @@ public class GUI {
         title = "Diff at x";
         description = "Calculates the value of the derivative of the polynomial at the specified value of x and rank using Horner's method";
         button = "Enter";
-        ActionListener enterDiffAt = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelsStack.add(chooseFunctionPanel);
-                updateMainPanel();
-            }
+        ActionListener enterDiffAt = e -> {
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
         };
         JPanel diffAtCard = createCard(title, description, button, enterDiffAt);
         polynomialsPanel.add(diffAtCard);
