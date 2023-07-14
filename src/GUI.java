@@ -90,6 +90,7 @@ public class GUI {
         initDiffPanel();
         initDiffEQPanel();
         initNonLinEQPanel();
+        initPolyPanel();
         panelsStack = new Stack<>();
         panelsStack.add(startPanel);
     }
@@ -816,11 +817,71 @@ public class GUI {
         //***********************************************************************
     }
 
+    private void initPolyPanel() {
+        polynomialsPanel = new JPanel();
+        polynomialsPanel.setName("Differential Equations");
+        polynomialsPanel.setPreferredSize(mainFrame.getSize());
+        polynomialsPanel.setBackground(new Color(100, 100, 100));
+        GridLayout startLayout = new GridLayout(2, 2);
+        startLayout.setHgap(5);
+        startLayout.setVgap(5);
+        polynomialsPanel.setLayout(startLayout);
 
+        //***********************************************************************
+
+        //init Value At x Card
+        String title = "Value At x";
+        String description = "Evaluates the polynomial at the specified value of x using Horner's method";
+        String button = "Enter";
+        ActionListener enterValueAt = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel valueAtCard = createCard(title, description, button, enterValueAt);
+        polynomialsPanel.add(valueAtCard);
+
+        //***********************************************************************
+
+        //init Divide on (x - a) Card
+        title = "Divide on (x - a)";
+        description = "Divides the polynomial by (x - c) using Horner's method and returns the resulting polynomial";
+        button = "Enter";
+        ActionListener enterDivideOn = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel divideOnCard = createCard(title, description, button, enterDivideOn);
+        polynomialsPanel.add(divideOnCard);
+
+        //***********************************************************************
+
+        //init Diff at x Card
+        title = "Diff at x";
+        description = "Calculates the value of the derivative of the polynomial at the specified value of x and rank using Horner's method";
+        button = "Enter";
+        ActionListener enterDiffAt = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelsStack.add(chooseFunctionPanel);
+                updatePanel();
+            }
+        };
+        JPanel diffAtCard = createCard(title, description, button, enterDiffAt);
+        polynomialsPanel.add(diffAtCard);
+
+        //***********************************************************************
+
+    }
 
     private void updatePanel() {
         mainFrame.getContentPane().removeAll(); // Remove all existing components
-        mainFrame.getContentPane().add(nonLinearEquationsPanel); // Add the newContentPanel
+        mainFrame.getContentPane().add(panelsStack.peek()); // Add the newContentPanel
         mainFrame.revalidate(); // Revalidate the frame to update the layout
         mainFrame.repaint(); // Repaint the frame to reflect the changes
         if (panelsStack.size() > 1) {

@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Create Diff EQs Panel and test it">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Create Non-Lin EQs Panel and test it">
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,13 +93,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠١٩٣" summary="Restructure MidPoint class">
-      <created>1688853756739</created>
-      <option name="number" value="٠٠١٩٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠١٩٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688853756739</updated>
     </task>
     <task id="LOCAL؜-٠٠١٩٤" summary="Testing MidPoint :  Modified Euler / Heun / Raphson">
       <created>1688853787046</created>
@@ -437,7 +430,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689370952009</updated>
     </task>
-    <option name="localTasksCounter" value="242" />
+    <task id="LOCAL؜-٠٠٢٤٢" summary="Create Non-Lin EQs Panel and test it">
+      <created>1689371502480</created>
+      <option name="number" value="٠٠٢٤٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٤٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689371502480</updated>
+    </task>
+    <option name="localTasksCounter" value="243" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -479,7 +479,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Test Horner methods" />
     <MESSAGE value="Add JAVA DOC to Horner class" />
     <MESSAGE value="Fix EvaluateString bug" />
     <MESSAGE value="Add getValueAt(x,y) to ExpressionFunction" />
@@ -504,6 +503,7 @@
     <MESSAGE value="Create integral Panel and test it" />
     <MESSAGE value="Create Diff Panel and test it" />
     <MESSAGE value="Create Diff EQs Panel and test it" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create Diff EQs Panel and test it" />
+    <MESSAGE value="Create Non-Lin EQs Panel and test it" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create Non-Lin EQs Panel and test it" />
   </component>
 </project>
