@@ -13,23 +13,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Update gitignore">
-      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/ChooseFunctionPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/DifferentialEquationsPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/DifferentiationPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/ExpressionFunctionPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/IntegralPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/InterpolationPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/NonLinearEquationsPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/PointsFunctionPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/PolynomialFunctionPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/PolynomialsPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/StartPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/SystemOfNonLinearEquationsPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/UI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Util/PanelContainer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Util/Tools.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/Icons/solution.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/Icons/solution1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/Icons/solution2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +81,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/src/Numerics",
+    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/res/Icons",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
@@ -102,10 +90,10 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\res\Icons" />
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\src\Numerics" />
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\src\Functions" />
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\src\Util" />
-      <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\res\Icons" />
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\res\Images" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -120,13 +108,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢١١" summary="Add FixedPointIteration class to NonLinearEquation">
-      <created>1688938821388</created>
-      <option name="number" value="٠٠٢١١" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢١١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688938821388</updated>
     </task>
     <task id="LOCAL؜-٠٠٢١٢" summary="Testing FixedPointIteration class">
       <created>1688938834036</created>
@@ -464,7 +445,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689453309353</updated>
     </task>
-    <option name="localTasksCounter" value="260" />
+    <task id="LOCAL؜-٠٠٢٦٠" summary="Update gitignore">
+      <created>1689453645690</created>
+      <option name="number" value="٠٠٢٦٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٦٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689453645690</updated>
+    </task>
+    <option name="localTasksCounter" value="261" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

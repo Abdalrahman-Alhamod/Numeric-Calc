@@ -1,6 +1,7 @@
 import Functions.ExpressionFunction;
 import Functions.PointsFunction;
 import Functions.Polynomial;
+import Numerics.Interpolation;
 import Util.EvaluateString;
 
 import javax.swing.*;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Stack;
+import java.util.function.Consumer;
 
 public class GUI {
     private JFrame mainFrame;
@@ -38,6 +40,7 @@ public class GUI {
     private ImageIcon backIcon;
     private ImageIcon homeIcon;
     private ImageIcon infoIcon;
+    private ImageIcon solutionIcon;
 
     private JButton backButton;
     private JButton homeButton;
@@ -47,6 +50,8 @@ public class GUI {
     private final String buttonFont = "Times New Roman";
 
     private Stack<JPanel> panelsStack;
+    private PointsFunction function;
+    private Consumer<PointsFunction> doAction;
 
     public GUI() {
         //Apply nimbus theme
@@ -70,6 +75,7 @@ public class GUI {
         backIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/left-arrow.png")));
         homeIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/home-button.png")));
         infoIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/info.png")));
+        solutionIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/solution.png")));
     }
 
     private void initMainFrame() {
@@ -331,6 +337,37 @@ public class GUI {
                 " the General Method by solving a system of equations using Gaussian elimination ";
         String button = "Enter";
         ActionListener enterGeneralMethod = e -> {
+            doAction = pointsFunction -> {
+                Polynomial ans = Interpolation.GeneralMethod.getIFAP(pointsFunction);
+                //points card title
+                JLabel interTitle = new JLabel();
+                interTitle.setText("Interpolation answer using General Method : ");
+                interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+
+                //point card area
+                JTextArea polyAns = new JTextArea();
+                polyAns.append("P(x) : ");
+                polyAns.append(ans.toString());
+                polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                polyAns.setEnabled(false);
+                polyAns.setDisabledTextColor(Color.BLACK);
+                JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+                polyAnsScrollPane.setPreferredSize(new Dimension(250, 70));
+
+                JPanel contentPanel = new JPanel(new BorderLayout());
+                contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
+                contentPanel.add(interTitle, BorderLayout.NORTH);
+                contentPanel.add(polyAnsScrollPane, BorderLayout.CENTER);
+
+                String[] response = {"Cancel", "Continue with Polynomial"};
+
+                int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                if (feed == 1) {
+                    panelsStack.add(polynomialsPanel);
+                    updateMainPanel();
+                }
+            };
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
@@ -842,6 +879,7 @@ public class GUI {
             continueButton.setBackground(customGreen);
             continueButton.setForeground(Color.white);  // Set the text color to white for better visibility
             continueButton.setEnabled(false); // Disable the button initially
+            continueButton.addActionListener(e -> doAction.accept(function));
 
             // content panel
             JPanel contentPanel = new JPanel(new BorderLayout());
@@ -963,6 +1001,7 @@ public class GUI {
                     }
                     pointsText.repaint();
                     continueButton.setEnabled(true);
+                    function = pointsFunc;
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -1023,7 +1062,6 @@ public class GUI {
             pointsText.setEnabled(false);
             pointsScrollPane = new JScrollPane(pointsText);
             pointsScrollPane.setPreferredSize(new Dimension(450, 485));
-            pointsScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
             // Continue Button
             continueButton = new JButton("Continue");
@@ -1034,6 +1072,7 @@ public class GUI {
             continueButton.setBackground(customGreen);
             continueButton.setForeground(Color.white);  // Set the text color to white for better visibility
             continueButton.setEnabled(false); // Disable the button initially
+            continueButton.addActionListener(e -> doAction.accept(function));
 
             // content panel
             JPanel contentPanel = new JPanel(new BorderLayout());
@@ -1208,6 +1247,7 @@ public class GUI {
                     }
                     pointsText.repaint();
                     continueButton.setEnabled(true);
+                    function = pointsFunc;
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -1260,7 +1300,6 @@ public class GUI {
             pointsText.setEnabled(false);
             pointsScrollPane = new JScrollPane(pointsText);
             pointsScrollPane.setPreferredSize(new Dimension(450, 485));
-            pointsScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
             // Continue Button
             continueButton = new JButton("Continue");
@@ -1271,6 +1310,10 @@ public class GUI {
             continueButton.setBackground(customGreen);
             continueButton.setForeground(Color.white);  // Set the text color to white for better visibility
             continueButton.setEnabled(false); // Disable the button initially
+            continueButton.addActionListener(e -> {
+                panelsStack.pop();
+                updateMainPanel();
+            });
 
             // content panel
             JPanel contentPanel = new JPanel(new BorderLayout());
@@ -1481,6 +1524,7 @@ public class GUI {
                     }
                     pointsText.repaint();
                     continueButton.setEnabled(true);
+                    function = ptsFunc;
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
