@@ -340,13 +340,12 @@ public class GUI {
             doAction = pointsFunction -> {
                 try {
                     Polynomial ans = Interpolation.GeneralMethod.getIFAP(pointsFunction);
-                    //points card title
+                    //create title
                     JLabel interTitle = new JLabel();
                     interTitle.setText("Interpolation answer using General Method : ");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
-
-                    //point card area
+                    //create ans scrolled
                     JTextArea polyAns = new JTextArea();
                     polyAns.append("P(x) : ");
                     polyAns.append(ans.toString());
@@ -356,6 +355,7 @@ public class GUI {
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(250, 65));
 
+                    //create content panel
                     JPanel contentPanel = new JPanel(new GridLayout(2, 1));
                     contentPanel.add(interTitle);
                     contentPanel.add(polyAnsScrollPane);
@@ -387,13 +387,13 @@ public class GUI {
             doAction = pointsFunction -> {
                 try {
                     Polynomial ans = Interpolation.Lagrange.getIFAP(pointsFunction);
-                    //points card title
+
+                    //create answer title
                     JLabel interTitle = new JLabel();
                     interTitle.setText("Interpolation answer using Lagrange : ");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
-
-                    //point card area
+                    //create answer scrolled
                     JTextArea polyAns = new JTextArea();
                     polyAns.append("P(x) : ");
                     polyAns.append(ans.toString());
@@ -403,13 +403,14 @@ public class GUI {
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
-                    //points card title
+                    //create ans no shorthand title
                     JLabel shortPolyTitle = new JLabel();
                     shortPolyTitle.setText("Interpolation answer with no shorthand : ");
                     shortPolyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     String asnNSH = Interpolation.Lagrange.getIFASNS(pointsFunction);
-                    //point card area
+
+                    //create answer no shorthand scrolled
                     JTextArea polyAnsNSH = new JTextArea();
                     polyAnsNSH.append("P(x) : ");
                     polyAnsNSH.append(asnNSH);
@@ -419,8 +420,8 @@ public class GUI {
                     JScrollPane polyAnsNSHScrollPane = new JScrollPane(polyAnsNSH);
                     polyAnsNSHScrollPane.setPreferredSize(new Dimension(300, 70));
 
-
-                    JPanel contentPanel = new JPanel(new GridLayout(4, 1,0,-20));
+                    //create content panel
+                    JPanel contentPanel = new JPanel(new GridLayout(4, 1, 0, -20));
                     contentPanel.setBorder(BorderFactory.createEmptyBorder(-20, 0, 0, 0));
                     contentPanel.add(interTitle);
                     contentPanel.add(polyAnsScrollPane);
@@ -453,6 +454,80 @@ public class GUI {
                 "It also can get Newton-Gregory Forward Subtractions Table values";
         button = "Enter";
         ActionListener enterNGFS = e -> {
+            doAction = pointsFunction -> {
+                try {
+
+                    int degree = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter degree of the required polynomial : ", "Interpolation", JOptionPane.QUESTION_MESSAGE));
+
+                    ArrayList<Double> values = Interpolation.Newton_GregoryForwardSubtractions.getUDV(function);
+
+                    //create table values title
+                    JLabel tableTitle = new JLabel();
+                    tableTitle.setText("The values of the upper diameter of the Newton-Gregory Forward Subtractions Table : ");
+                    tableTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create table value scrolled
+                    JTextArea tableAns = new JTextArea();
+                    tableAns.append(values.toString());
+                    tableAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    tableAns.setEnabled(false);
+                    tableAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane tableAnsScrollPane = new JScrollPane(tableAns);
+                    tableAnsScrollPane.setPreferredSize(new Dimension(300, 70));
+
+                    Polynomial ans = Interpolation.Newton_GregoryForwardSubtractions.getIFAP(pointsFunction, degree);
+
+                    JLabel interTitle = new JLabel();
+                    interTitle.setText("Interpolation answer using Newton-Gregory Forward Subtraction : ");
+                    interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+
+                    JTextArea polyAns = new JTextArea();
+                    polyAns.append("P(x) : ");
+                    polyAns.append(ans.toString());
+                    polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAns.setEnabled(false);
+                    polyAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
+
+                    JLabel shortPolyTitle = new JLabel();
+                    shortPolyTitle.setText("Interpolation answer with no shorthand : ");
+                    shortPolyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    String asnNSH = Interpolation.Newton_GregoryForwardSubtractions.getIFASNS(pointsFunction, degree);
+
+                    JTextArea polyAnsNSH = new JTextArea();
+                    polyAnsNSH.append("P(x) : ");
+                    polyAnsNSH.append(asnNSH);
+                    polyAnsNSH.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAnsNSH.setEnabled(false);
+                    polyAnsNSH.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsNSHScrollPane = new JScrollPane(polyAnsNSH);
+                    polyAnsNSHScrollPane.setPreferredSize(new Dimension(300, 70));
+
+
+                    JPanel contentPanel = new JPanel(new GridLayout(6, 1, 0, -20));
+                    contentPanel.setBorder(BorderFactory.createEmptyBorder(-20, 0, 0, 0));
+                    contentPanel.add(tableTitle);
+                    contentPanel.add(tableAnsScrollPane);
+                    contentPanel.add(interTitle);
+                    contentPanel.add(polyAnsScrollPane);
+                    contentPanel.add(shortPolyTitle);
+                    contentPanel.add(polyAnsNSHScrollPane);
+
+
+                    String[] response = {"Cancel", "Continue with Polynomial"};
+
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    if (feed == 1) {
+                        panelsStack.add(polynomialsPanel);
+                        updateMainPanel();
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            };
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
@@ -467,6 +542,80 @@ public class GUI {
                 "It also can get Newton-Gregory Backward Subtractions Table values";
         button = "Enter";
         ActionListener enterNGBS = e -> {
+            doAction = pointsFunction -> {
+                try {
+
+                    int degree = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter degree of the required polynomial : ", "Interpolation", JOptionPane.QUESTION_MESSAGE));
+
+                    ArrayList<Double> values = Interpolation.Newton_GregoryBackwardSubtractions.getLDV(function);
+
+                    //create table values title
+                    JLabel tableTitle = new JLabel();
+                    tableTitle.setText("The values of the lower diameter of the Newton-Gregory Backward Subtractions Table : ");
+                    tableTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create table value scrolled
+                    JTextArea tableAns = new JTextArea();
+                    tableAns.append(values.toString());
+                    tableAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    tableAns.setEnabled(false);
+                    tableAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane tableAnsScrollPane = new JScrollPane(tableAns);
+                    tableAnsScrollPane.setPreferredSize(new Dimension(300, 70));
+
+                    Polynomial ans = Interpolation.Newton_GregoryBackwardSubtractions.getIFAP(pointsFunction, degree);
+
+                    JLabel interTitle = new JLabel();
+                    interTitle.setText("Interpolation answer using Newton-Gregory Backward Subtraction : ");
+                    interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+
+                    JTextArea polyAns = new JTextArea();
+                    polyAns.append("P(x) : ");
+                    polyAns.append(ans.toString());
+                    polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAns.setEnabled(false);
+                    polyAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
+
+                    JLabel shortPolyTitle = new JLabel();
+                    shortPolyTitle.setText("Interpolation answer with no shorthand : ");
+                    shortPolyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    String asnNSH = Interpolation.Newton_GregoryBackwardSubtractions.getIFASNS(pointsFunction, degree);
+
+                    JTextArea polyAnsNSH = new JTextArea();
+                    polyAnsNSH.append("P(x) : ");
+                    polyAnsNSH.append(asnNSH);
+                    polyAnsNSH.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAnsNSH.setEnabled(false);
+                    polyAnsNSH.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsNSHScrollPane = new JScrollPane(polyAnsNSH);
+                    polyAnsNSHScrollPane.setPreferredSize(new Dimension(300, 70));
+
+
+                    JPanel contentPanel = new JPanel(new GridLayout(6, 1, 0, -20));
+                    contentPanel.setBorder(BorderFactory.createEmptyBorder(-20, 0, 0, 0));
+                    contentPanel.add(tableTitle);
+                    contentPanel.add(tableAnsScrollPane);
+                    contentPanel.add(interTitle);
+                    contentPanel.add(polyAnsScrollPane);
+                    contentPanel.add(shortPolyTitle);
+                    contentPanel.add(polyAnsNSHScrollPane);
+
+
+                    String[] response = {"Cancel", "Continue with Polynomial"};
+
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    if (feed == 1) {
+                        panelsStack.add(polynomialsPanel);
+                        updateMainPanel();
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            };
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };

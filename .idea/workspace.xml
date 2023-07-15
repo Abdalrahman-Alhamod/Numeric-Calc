@@ -12,7 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add try &amp; catch to general method solution">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add lagrange solution">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
     </list>
@@ -105,13 +105,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢١٤" summary="Edit main due to new changes">
-      <created>1688939352532</created>
-      <option name="number" value="٠٠٢١٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢١٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688939352532</updated>
     </task>
     <task id="LOCAL؜-٠٠٢١٥" summary="Add JAVA DOC to NonLinearEquation">
       <created>1688939859231</created>
@@ -449,7 +442,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689458926722</updated>
     </task>
-    <option name="localTasksCounter" value="263" />
+    <task id="LOCAL؜-٠٠٢٦٣" summary="Add lagrange solution">
+      <created>1689459890044</created>
+      <option name="number" value="٠٠٢٦٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٦٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689459890044</updated>
+    </task>
+    <option name="localTasksCounter" value="264" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -491,7 +491,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add nimbus theme&#10;Create res folder&#10;Fix icons path&#10;Test changes gui" />
     <MESSAGE value="Create interpolation Panel and test it" />
     <MESSAGE value="Create integral Panel and test it" />
     <MESSAGE value="Create Diff Panel and test it" />
@@ -516,6 +515,7 @@
     <MESSAGE value="Update gitignore" />
     <MESSAGE value="Fix continue button&#10;Add solution to General method" />
     <MESSAGE value="Add try &amp; catch to general method solution" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add try &amp; catch to general method solution" />
+    <MESSAGE value="Add lagrange solution" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add lagrange solution" />
   </component>
 </project>
