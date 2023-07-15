@@ -12,7 +12,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Change diff and polys panels rows and columns" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add setResizable false">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExpressionFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExpressionFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,7 +53,7 @@
     <setting file="file://$PROJECT_DIR$/src/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Differentiation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/EvaluateString.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/ExpressionFunction.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/ExpressionFunction.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Function.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="SKIP_INSPECTION" />
@@ -69,19 +73,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/res/Icons&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/Minesweeper",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\res\Icons" />
@@ -96,13 +100,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٠٥" summary="Add Secant class to NonLinearEquation">
-      <created>1688934412705</created>
-      <option name="number" value="٠٠٢٠٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٠٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688934412705</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٠٦" summary="Testing Secant class">
       <created>1688934425721</created>
@@ -440,7 +437,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689378357461</updated>
     </task>
-    <option name="localTasksCounter" value="254" />
+    <task id="LOCAL؜-٠٠٢٥٤" summary="Add setResizable false">
+      <created>1689378850837</created>
+      <option name="number" value="٠٠٢٥٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٥٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689378850837</updated>
+    </task>
+    <option name="localTasksCounter" value="255" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -482,7 +486,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create jar" />
     <MESSAGE value="Add jar" />
     <MESSAGE value="Fix indexOutOfBounds in PointsFunction" />
     <MESSAGE value="Make Exceptions more detailed" />
@@ -507,6 +510,7 @@
     <MESSAGE value="Add info Icon" />
     <MESSAGE value="Add polynomial to chooseFunction panel" />
     <MESSAGE value="Change diff and polys panels rows and columns" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change diff and polys panels rows and columns" />
+    <MESSAGE value="Add setResizable false" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add setResizable false" />
   </component>
 </project>

@@ -149,6 +149,10 @@ public class ExpressionFunction implements Function {
         double bd = EvaluateString.evaluate(b, 0);
         n = n.replaceAll("pi", Double.toString(Math.PI));
         double nd = EvaluateString.evaluate(n, 0);
+        if (ad >= bd)
+            throw new ArithmeticException("invalid inputs : a cannot be greater or equal to b");
+        else if (nd <= 0)
+            throw new ArithmeticException("invalid inputs : n cannot be smaller or equal to 0");
         return toPointsFunction(ad, bd, nd);
     }
 

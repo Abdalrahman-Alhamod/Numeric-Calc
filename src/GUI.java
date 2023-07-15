@@ -1,9 +1,12 @@
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Stack;
 
@@ -19,6 +22,9 @@ public class GUI {
     private JPanel nonLinearEquationsPanel;
     private JPanel systemOfNonLinearEquationsPanel;
     private JPanel polynomialsPanel;
+    private JPanel expressionFunctionPanel;
+    private JPanel pointsFunctionPanel;
+    private JPanel polynomialFunctionPanel;
 
     private ImageIcon mainIcon;
     private ImageIcon backIcon;
@@ -116,6 +122,7 @@ public class GUI {
         initDiffEQPanel();
         initNonLinEQPanel();
         initPolyPanel();
+        initExpFuncPanel();
         panelsStack = new Stack<>();
         panelsStack.add(startPanel);
     }
@@ -268,7 +275,10 @@ public class GUI {
         chooseFunctionPanel.setLayout(startLayout);
 
 
-        ActionListener enterExpressionFunction = e -> System.out.println("Enter expr");
+        ActionListener enterExpressionFunction = e -> {
+            panelsStack.add(expressionFunctionPanel);
+            updateMainPanel();
+        };
         JPanel expressionFunctionCard = createCard("Expression Function",
                 "Functions like x^2+3, sin(x), exp(x) ...", "Enter", enterExpressionFunction);
 
@@ -776,6 +786,185 @@ public class GUI {
 
     }
 
+    private void initExpFuncPanel() {
+        expressionFunctionPanel = new JPanel();
+        expressionFunctionPanel.setName("Expression Function");
+        expressionFunctionPanel.setPreferredSize(mainFrame.getSize());
+        expressionFunctionPanel.setBackground(new Color(100, 100, 100));
+        GridLayout startLayout = new GridLayout(1, 2);
+        startLayout.setHgap(5);
+        startLayout.setVgap(5);
+        expressionFunctionPanel.setLayout(startLayout);
+
+        JPanel pointsCard = new JPanel();
+        JTextArea pointsText;
+        JScrollPane pointsScrollPane;
+        {
+
+            //points card title
+            JPanel titlePanel = new JPanel();
+            JLabel pointsTitle = new JLabel();
+            pointsTitle.setText("Generated Points : ");
+            pointsTitle.setFont(new Font(mainFont, Font.BOLD, 25));
+            titlePanel.add(pointsTitle, BorderLayout.CENTER);
+
+            //point card area
+            pointsText = new JTextArea();
+            //pointsText.setPreferredSize(new Dimension(450, 550));
+            pointsText.setFont(new Font(mainFont, Font.PLAIN, 20));
+            pointsText.setEnabled(false);
+            pointsScrollPane = new JScrollPane(pointsText);
+            pointsScrollPane.setPreferredSize(new Dimension(450, 550));
+            pointsScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+            // content panel
+            JPanel contentPanel = new JPanel(new BorderLayout());
+            contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
+            contentPanel.add(titlePanel, BorderLayout.NORTH);
+            contentPanel.add(pointsScrollPane, BorderLayout.CENTER);
+
+            pointsCard.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+            pointsCard.add(contentPanel, BorderLayout.CENTER);
+
+        }
+
+        JPanel inputCard = new JPanel();
+        {
+            //title
+            JLabel cardTitle = new JLabel();
+            cardTitle.setText("Expression Function");
+            cardTitle.setFont(new Font(mainFont, Font.BOLD, 25));
+
+
+            // description
+            JLabel cardDescription = new JLabel();
+            cardDescription.setText("<html>" +
+                    "Supported Functions : <br>" +
+                    " <b>Polynomials </b> : x^3 + 9*x^2 -5*x +10 <br>" +
+                    " <b>Exponential </b> : exp(x^2) .. exp(1/x) <br>" +
+                    " <b>Binary Logarithm </b> : log(3*x) .. log(-x) <br>" +
+                    " <b>Trigonometric Functions </b> : sin(x),cos(x),tan(x <br>" +
+                    " <b>Inverse Trigonometric Functions </b> : asin(x),acos(x),atan(x) <br>" +
+                    " <b>Hyperbolic Trigonometric Functions </b> : sinh(x),cosh(x),tanh(x) <br>" +
+                    "</html>");
+            cardDescription.setFont(new Font(secondFont, Font.ITALIC, 15));
+            cardDescription.setBackground(inputCard.getBackground());
+
+            //info panel
+            JPanel infoPanel = new JPanel(new GridLayout(2, 1, 0, -20));
+            infoPanel.add(cardTitle);
+            infoPanel.add(cardDescription);
+
+            // inputs : exp
+            JLabel enterExpTitle = new JLabel("Enter Expression Function :");
+
+            JTextField enterExpField = new JTextField();
+            enterExpField.setSize(10, 10);
+            enterExpField.setMaximumSize(new Dimension(100, 10));
+
+            JPanel enterExp = new JPanel();
+            GridLayout inputLayout = new GridLayout(2, 1, 0, -10);
+            enterExp.setLayout(inputLayout);
+            enterExp.add(enterExpTitle);
+            enterExp.add(enterExpField);
+
+            // inputs : a
+            JLabel enterATitle = new JLabel("Enter a – The lower bound of the x-coordinate range :");
+
+            JTextField enterAField = new JTextField();
+            enterExpField.setSize(new Dimension(400, 50));
+
+            JPanel enterA = new JPanel();
+            enterA.setLayout(inputLayout);
+            enterA.add(enterATitle);
+            enterA.add(enterAField);
+
+            // inputs : b
+            JLabel enterBTitle = new JLabel("Enter b – The upper bound of the x-coordinate range :");
+
+            JTextField enterBField = new JTextField();
+            enterExpField.setSize(new Dimension(400, 50));
+
+            JPanel enterB = new JPanel();
+            enterB.setLayout(inputLayout);
+            enterB.add(enterBTitle);
+            enterB.add(enterBField);
+
+            // inputs : n
+            JLabel enterNTitle = new JLabel("Enter n – The number of points to generate (including a and b) :");
+
+            JTextField enterNField = new JTextField();
+            enterExpField.setPreferredSize(new Dimension(400, 50));
+
+            JPanel enterN = new JPanel();
+            enterN.setLayout(inputLayout);
+            enterN.add(enterNTitle);
+            enterN.add(enterNField);
+
+            // inputs panel
+            JPanel inputsPanel = new JPanel(new GridLayout(4, 1, -5, -5));
+            inputsPanel.add(enterExp);
+            inputsPanel.add(enterA);
+            inputsPanel.add(enterB);
+            inputsPanel.add(enterN);
+
+            // Generate Button
+            JButton generateButton = new JButton("Generate");
+            generateButton.setFont(new Font(buttonFont, Font.BOLD, 20));
+            generateButton.setFocusPainted(false);
+            generateButton.setPreferredSize(new Dimension(60, 50));
+            generateButton.setEnabled(false); // Disable the button initially
+            generateButton.addActionListener(e -> {
+                String func = enterExpField.getText();
+                ExpressionFunction expFunc = new ExpressionFunction(func);
+                String a = enterAField.getText();
+                String b = enterBField.getText();
+                String n = enterNField.getText();
+                try {
+                    PointsFunction pointsFunc = expFunc.toPointsFunction(a, b, n);
+                    ArrayList<Double> xp = pointsFunc.getXp();
+                    ArrayList<Double> yp = pointsFunc.getYp();
+                    pointsText.setText("");
+                    for (int i = 0; i < xp.size(); i++) {
+                        String sb = "x" + i + " = " + xp.get(i) +
+                                '\t' +
+                                "y" + i + " = " + yp.get(i);
+                        pointsText.append(sb);
+                        pointsText.append("\n");
+                    }
+                    pointsText.repaint();
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            // Add a DocumentListener to each text field
+            ArrayList<JTextField> fields = new ArrayList<>();
+            fields.add(enterExpField);
+            fields.add(enterAField);
+            fields.add(enterBField);
+            fields.add(enterNField);
+            addDocumentListenerToFields(generateButton, fields);
+
+            JPanel contentPanel = new JPanel(new BorderLayout());
+            contentPanel.setBorder(BorderFactory.createEmptyBorder(-50, 10, 10, 10));
+
+            contentPanel.add(infoPanel, BorderLayout.NORTH);
+            contentPanel.add(inputsPanel, BorderLayout.CENTER);
+            contentPanel.add(generateButton, BorderLayout.SOUTH);
+
+            inputCard.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+            inputCard.add(contentPanel, BorderLayout.CENTER);
+
+        }
+        expressionFunctionPanel.add(inputCard);
+
+
+        expressionFunctionPanel.add(pointsCard);
+
+    }
+
     private void changeColorAnime(Component comp, Color color) {
         Color srcColor = comp.getBackground();
 
@@ -820,5 +1009,40 @@ public class GUI {
         mainFrame.repaint(); // Repaint the frame to reflect the changes
         backButton.setEnabled(panelsStack.size() > 1);
         homeButton.setEnabled(panelsStack.size() > 1);
+    }
+
+    // Update the enabled state of the button based on text fields' content
+    private void updateButtonEnabledState(JButton button, ArrayList<JTextField> textFields) {
+        boolean enabled = true;
+        for (JTextField field : textFields) {
+            if (field.getText().isEmpty()) {
+                enabled = false;
+                break;
+            }
+        }
+        button.setEnabled(enabled);
+    }
+
+    // Add a DocumentListener to each text field
+    private void addDocumentListenerToFields(JButton button, ArrayList<JTextField> textFields) {
+        DocumentListener documentListener = new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateButtonEnabledState(button, textFields);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateButtonEnabledState(button, textFields);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateButtonEnabledState(button, textFields);
+            }
+        };
+        for (JTextField field : textFields) {
+            field.getDocument().addDocumentListener(documentListener);
+        }
     }
 }
