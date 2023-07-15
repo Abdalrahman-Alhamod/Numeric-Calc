@@ -354,12 +354,11 @@ public class GUI {
                     polyAns.setEnabled(false);
                     polyAns.setDisabledTextColor(Color.BLACK);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
-                    polyAnsScrollPane.setPreferredSize(new Dimension(250, 70));
+                    polyAnsScrollPane.setPreferredSize(new Dimension(250, 65));
 
-                    JPanel contentPanel = new JPanel(new BorderLayout());
-                    contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
-                    contentPanel.add(interTitle, BorderLayout.NORTH);
-                    contentPanel.add(polyAnsScrollPane, BorderLayout.CENTER);
+                    JPanel contentPanel = new JPanel(new GridLayout(2, 1));
+                    contentPanel.add(interTitle);
+                    contentPanel.add(polyAnsScrollPane);
 
                     String[] response = {"Cancel", "Continue with Polynomial"};
 
@@ -385,6 +384,61 @@ public class GUI {
         description = "Get the Interpolation Function using Lagrange method using Lagrange Polynomials";
         button = "Enter";
         ActionListener enterLagrange = e -> {
+            doAction = pointsFunction -> {
+                try {
+                    Polynomial ans = Interpolation.Lagrange.getIFAP(pointsFunction);
+                    //points card title
+                    JLabel interTitle = new JLabel();
+                    interTitle.setText("Interpolation answer using Lagrange : ");
+                    interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+
+                    //point card area
+                    JTextArea polyAns = new JTextArea();
+                    polyAns.append("P(x) : ");
+                    polyAns.append(ans.toString());
+                    polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAns.setEnabled(false);
+                    polyAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
+
+                    //points card title
+                    JLabel shortPolyTitle = new JLabel();
+                    shortPolyTitle.setText("Interpolation answer with no shorthand : ");
+                    shortPolyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    String asnNSH = Interpolation.Lagrange.getIFASNS(pointsFunction);
+                    //point card area
+                    JTextArea polyAnsNSH = new JTextArea();
+                    polyAnsNSH.append("P(x) : ");
+                    polyAnsNSH.append(asnNSH);
+                    polyAnsNSH.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAnsNSH.setEnabled(false);
+                    polyAnsNSH.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsNSHScrollPane = new JScrollPane(polyAnsNSH);
+                    polyAnsNSHScrollPane.setPreferredSize(new Dimension(300, 70));
+
+
+                    JPanel contentPanel = new JPanel(new GridLayout(4, 1,0,-20));
+                    contentPanel.setBorder(BorderFactory.createEmptyBorder(-20, 0, 0, 0));
+                    contentPanel.add(interTitle);
+                    contentPanel.add(polyAnsScrollPane);
+                    contentPanel.add(shortPolyTitle);
+                    contentPanel.add(polyAnsNSHScrollPane);
+
+
+                    String[] response = {"Cancel", "Continue with Polynomial"};
+
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    if (feed == 1) {
+                        panelsStack.add(polynomialsPanel);
+                        updateMainPanel();
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            };
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
