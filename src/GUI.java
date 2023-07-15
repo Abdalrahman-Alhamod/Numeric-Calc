@@ -6,7 +6,10 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Stack;
 
@@ -48,7 +51,7 @@ public class GUI {
                  ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
+        Locale.setDefault(Locale.ENGLISH); // fix spinner and text showing arabic symbols
         initIcons();
         initMainFrame();
         initMenuBar();
@@ -123,6 +126,7 @@ public class GUI {
         initNonLinEQPanel();
         initPolyPanel();
         initExpFuncPanel();
+        iniPtsFuncPanel();
         panelsStack = new Stack<>();
         panelsStack.add(startPanel);
     }
@@ -283,7 +287,10 @@ public class GUI {
                 "Functions like x^2+3, sin(x), exp(x) ...", "Enter", enterExpressionFunction);
 
 
-        ActionListener enterPointsFunction = e -> System.out.println("Enter points");
+        ActionListener enterPointsFunction = e -> {
+            panelsStack.add(pointsFunctionPanel);
+            updateMainPanel();
+        };
         JPanel pointsFunctionCard = createCard("Points Function",
                 "Functions like x0=.. y0=.. , x1=.. y1=.. ", "Enter", enterPointsFunction);
 
@@ -815,7 +822,6 @@ public class GUI {
             pointsText.setEnabled(false);
             pointsScrollPane = new JScrollPane(pointsText);
             pointsScrollPane.setPreferredSize(new Dimension(450, 550));
-            pointsScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
             // content panel
             JPanel contentPanel = new JPanel(new BorderLayout());
@@ -859,11 +865,10 @@ public class GUI {
             JLabel enterExpTitle = new JLabel("Enter Expression Function :");
 
             JTextField enterExpField = new JTextField();
-            enterExpField.setSize(10, 10);
-            enterExpField.setMaximumSize(new Dimension(100, 10));
+            //enterExpField.setPreferredSize(new Dimension(100, 50));
 
             JPanel enterExp = new JPanel();
-            GridLayout inputLayout = new GridLayout(2, 1, 0, -10);
+            GridLayout inputLayout = new GridLayout(2, 1, 0, 10);
             enterExp.setLayout(inputLayout);
             enterExp.add(enterExpTitle);
             enterExp.add(enterExpField);
@@ -872,7 +877,7 @@ public class GUI {
             JLabel enterATitle = new JLabel("Enter a – The lower bound of the x-coordinate range :");
 
             JTextField enterAField = new JTextField();
-            enterExpField.setSize(new Dimension(400, 50));
+            //enterAField.setPreferredSize(new Dimension(100, 50));
 
             JPanel enterA = new JPanel();
             enterA.setLayout(inputLayout);
@@ -883,7 +888,7 @@ public class GUI {
             JLabel enterBTitle = new JLabel("Enter b – The upper bound of the x-coordinate range :");
 
             JTextField enterBField = new JTextField();
-            enterExpField.setSize(new Dimension(400, 50));
+            //enterBField.setPreferredSize(new Dimension(100, 50));
 
             JPanel enterB = new JPanel();
             enterB.setLayout(inputLayout);
@@ -891,19 +896,23 @@ public class GUI {
             enterB.add(enterBField);
 
             // inputs : n
-            JLabel enterNTitle = new JLabel("Enter n – The number of points to generate (including a and b) :");
+            JLabel enterNTitle = new JLabel("Enter n – The number of points (including a and b) :");
+            enterNTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
-            JTextField enterNField = new JTextField();
-            enterExpField.setPreferredSize(new Dimension(400, 50));
+            SpinnerNumberModel spinnerModel = new SpinnerNumberModel(2, 2, 1000, 1);
+            JSpinner enterNSp = new JSpinner(spinnerModel);
+            JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterNSp.getEditor();
+            editor.getTextField().setColumns(3); // Adjust the width as needed
 
             JPanel enterN = new JPanel();
-            enterN.setLayout(inputLayout);
-            enterN.add(enterNTitle);
-            enterN.add(enterNField);
+            enterN.setLayout(new FlowLayout(FlowLayout.LEFT));
+            enterN.add(enterNTitle, BorderLayout.WEST);
+            enterN.add(enterNSp, BorderLayout.CENTER);
 
             // inputs panel
-            JPanel inputsPanel = new JPanel(new GridLayout(4, 1, -5, -5));
+            JPanel inputsPanel = new JPanel(new GridLayout(4, 1, -5, 10));
             inputsPanel.add(enterExp);
+            //JOptionPane.showConfirmDialog(null,enterA,"e",JOptionPane.DEFAULT_OPTION);
             inputsPanel.add(enterA);
             inputsPanel.add(enterB);
             inputsPanel.add(enterN);
@@ -919,7 +928,7 @@ public class GUI {
                 ExpressionFunction expFunc = new ExpressionFunction(func);
                 String a = enterAField.getText();
                 String b = enterBField.getText();
-                String n = enterNField.getText();
+                String n = String.valueOf((int) enterNSp.getValue());
                 try {
                     PointsFunction pointsFunc = expFunc.toPointsFunction(a, b, n);
                     ArrayList<Double> xp = pointsFunc.getXp();
@@ -944,7 +953,6 @@ public class GUI {
             fields.add(enterExpField);
             fields.add(enterAField);
             fields.add(enterBField);
-            fields.add(enterNField);
             addDocumentListenerToFields(generateButton, fields);
 
             JPanel contentPanel = new JPanel(new BorderLayout());
@@ -953,6 +961,27 @@ public class GUI {
             contentPanel.add(infoPanel, BorderLayout.NORTH);
             contentPanel.add(inputsPanel, BorderLayout.CENTER);
             contentPanel.add(generateButton, BorderLayout.SOUTH);
+
+//            JPanel contentPanel = new JPanel(new GridBagLayout());
+//            GridBagConstraints gbc = new GridBagConstraints();
+//            gbc.gridx = 0;
+//            gbc.gridy = 0;
+//            gbc.anchor = GridBagConstraints.WEST;
+//
+//
+//            contentPanel.add(enterExp, gbc);
+//
+//            gbc.gridy++;
+//            contentPanel.add(enterA, gbc);
+//
+//            gbc.gridy++;
+//            contentPanel.add(enterB);
+//
+//            gbc.gridy++;
+//            contentPanel.add(enterN, gbc);
+//
+//            gbc.gridy++;
+//            contentPanel.add(generateButton, gbc);
 
             inputCard.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
             inputCard.add(contentPanel, BorderLayout.CENTER);
@@ -963,6 +992,233 @@ public class GUI {
 
         expressionFunctionPanel.add(pointsCard);
 
+    }
+
+    private void iniPtsFuncPanel() {
+        pointsFunctionPanel = new JPanel();
+        pointsFunctionPanel.setName("Points Function");
+        pointsFunctionPanel.setPreferredSize(mainFrame.getSize());
+        pointsFunctionPanel.setBackground(new Color(100, 100, 100));
+        GridLayout startLayout = new GridLayout(1, 2);
+        startLayout.setHgap(5);
+        startLayout.setVgap(5);
+        pointsFunctionPanel.setLayout(startLayout);
+
+        JPanel pointsCard = new JPanel();
+        JTextArea pointsText;
+        JScrollPane pointsScrollPane;
+        {
+
+            //points card title
+            JPanel titlePanel = new JPanel();
+            JLabel pointsTitle = new JLabel();
+            pointsTitle.setText("Generated Points : ");
+            pointsTitle.setFont(new Font(mainFont, Font.BOLD, 25));
+            titlePanel.add(pointsTitle, BorderLayout.CENTER);
+
+            //point card area
+            pointsText = new JTextArea();
+            //pointsText.setPreferredSize(new Dimension(450, 550));
+            pointsText.setFont(new Font(mainFont, Font.PLAIN, 20));
+            pointsText.setEnabled(false);
+            pointsScrollPane = new JScrollPane(pointsText);
+            pointsScrollPane.setPreferredSize(new Dimension(450, 550));
+            pointsScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+            // content panel
+            JPanel contentPanel = new JPanel(new BorderLayout());
+            contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
+            contentPanel.add(titlePanel, BorderLayout.NORTH);
+            contentPanel.add(pointsScrollPane, BorderLayout.CENTER);
+
+            pointsCard.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+            pointsCard.add(contentPanel, BorderLayout.CENTER);
+
+        }
+
+        JPanel inputCard = new JPanel();
+        {
+            //title
+            JLabel cardTitle = new JLabel();
+            cardTitle.setText("Points Function");
+            cardTitle.setFont(new Font(mainFont, Font.BOLD, 25));
+
+
+            // description
+            JLabel cardDescription = new JLabel();
+            cardDescription.setText("<html>" +
+                    "Supported Points Type : <br>" +
+                    " <b>Double </b> : 1.919239 <br>" +
+                    " <b>Integer </b> : 12392 <br>" +
+                    " <b>PI </b> : pi, 2*pi, pi/4 <br>" +
+                    "</html>");
+            cardDescription.setFont(new Font(secondFont, Font.ITALIC, 15));
+            cardDescription.setBackground(inputCard.getBackground());
+
+            //info panel
+            JPanel infoPanel = new JPanel(new GridLayout(2, 1, 0, -10));
+            infoPanel.add(cardTitle);
+            infoPanel.add(cardDescription);
+
+
+            // inputs : n
+            JLabel enterNTitle = new JLabel("Enter n – The number of points (x points) :");
+            enterNTitle.setHorizontalAlignment(SwingConstants.LEFT);
+
+            SpinnerNumberModel spinnerModel = new SpinnerNumberModel(2, 2, 1000, 1);
+            JSpinner enterNSp = new JSpinner(spinnerModel);
+            JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterNSp.getEditor();
+            editor.getTextField().setColumns(3); // Adjust the width as needed
+
+            JButton confirmButton = new JButton("Confirm");
+            confirmButton.setPreferredSize(new Dimension(80, 30));
+
+            JPanel enterN = new JPanel();
+            enterN.setLayout(new FlowLayout(FlowLayout.LEFT));
+            enterN.add(enterNTitle, BorderLayout.WEST);
+            enterN.add(enterNSp, BorderLayout.CENTER);
+            enterN.add(confirmButton, BorderLayout.EAST);
+
+
+            //JOptionPane.showConfirmDialog(null,enterN,"e",JOptionPane.DEFAULT_OPTION);
+
+            // input x and y
+            JLabel enterPointsTitle = new JLabel("Enter x and y points : ");
+            enterPointsTitle.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0)); // Adjust the top and bottom padding
+
+            JScrollPane enterPointsScroll = new JScrollPane();
+            enterPointsScroll.setPreferredSize(new Dimension(450, 300));
+
+
+            // inputs panel
+            JPanel inputsPanel = new JPanel(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.insets = new Insets(5, 0, 5, 0); // Add vertical spacing between components
+
+            inputsPanel.add(enterN, gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy++;
+            gbc.gridwidth = 2;
+            inputsPanel.add(enterPointsTitle, gbc);
+
+            gbc.gridy++;
+            inputsPanel.add(enterPointsScroll, gbc);
+
+            // Generate Button
+            JButton generateButton = new JButton("Generate");
+            generateButton.setFont(new Font(buttonFont, Font.BOLD, 20));
+            generateButton.setFocusPainted(false);
+            generateButton.setPreferredSize(new Dimension(60, 50));
+            generateButton.setEnabled(false); // Disable the button initially
+
+            // add fields to enter points
+            ArrayList<JTextField> xFields = new ArrayList<>();
+            ArrayList<JTextField> yFields = new ArrayList<>();
+            confirmButton.addActionListener(e -> {
+                // Handle confirm button action
+                int n = (int) enterNSp.getValue();
+                JPanel pointsPanel = new JPanel(new GridBagLayout());
+                GridBagConstraints gbc2 = new GridBagConstraints();
+                gbc2.gridx = 0;
+                gbc2.gridy = 0;
+                gbc2.anchor = GridBagConstraints.WEST;
+                gbc2.insets = new Insets(5, 0, 5, 10); // Add spacing between components
+
+                xFields.clear();
+                yFields.clear();
+
+                for (int i = 0; i < n; i++) {
+                    JLabel labelX = new JLabel("x" + i + " = ");
+                    JLabel labelY = new JLabel("y" + i + " = ");
+                    JTextField textFieldX = new JTextField(10);
+                    JTextField textFieldY = new JTextField(10);
+
+                    textFieldX.setName("x" + i);
+                    textFieldY.setName("y" + i);
+
+                    xFields.add(textFieldX);
+                    yFields.add(textFieldY);
+
+                    JPanel componentPanel = new JPanel(new GridBagLayout());
+                    GridBagConstraints gbcComponent = new GridBagConstraints();
+                    gbcComponent.gridx = 0;
+                    gbcComponent.gridy = 0;
+                    gbcComponent.anchor = GridBagConstraints.WEST;
+                    gbcComponent.insets = new Insets(5, 0, 5, 10); // Add spacing between components
+
+                    componentPanel.add(labelX, gbcComponent);
+
+                    gbcComponent.gridx++;
+                    componentPanel.add(textFieldX, gbcComponent);
+
+                    gbcComponent.gridx++;
+                    componentPanel.add(labelY, gbcComponent);
+
+                    gbcComponent.gridx++;
+                    componentPanel.add(textFieldY, gbcComponent);
+
+                    gbc2.gridy++;
+                    pointsPanel.add(componentPanel, gbc2);
+                }
+
+                enterPointsScroll.setViewportView(pointsPanel); // Set the pointsPanel as the viewport's view component
+                enterPointsScroll.revalidate(); // Revalidate the scroll pane to update its content
+
+                // Add a DocumentListener to each text field;
+                ArrayList<JTextField> fields = new ArrayList<>(xFields);
+                fields.addAll(yFields);
+                addDocumentListenerToFields(generateButton, fields);
+            });
+
+            generateButton.addActionListener(e -> {
+                ArrayList<Double> xp = new ArrayList<>();
+                ArrayList<Double> yp = new ArrayList<>();
+                for (JTextField xField : xFields) {
+                    String xFiledContent = xField.getText();
+                    double x = EvaluateString.evaluate(xFiledContent);
+                    xp.add(x);
+                }
+                for (JTextField yField : yFields) {
+                    String yFiledContent = yField.getText();
+                    double y = EvaluateString.evaluate(yFiledContent);
+                    yp.add(y);
+                }
+                try {
+                    PointsFunction pointsFunc = new PointsFunction(xp, yp);
+                    pointsText.setText("");
+                    for (int i = 0; i < xp.size(); i++) {
+                        String sb = "x" + i + " = " + xp.get(i) +
+                                '\t' +
+                                "y" + i + " = " + yp.get(i);
+                        pointsText.append(sb);
+                        pointsText.append("\n");
+                    }
+                    pointsText.repaint();
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            JPanel contentPanel = new JPanel(new BorderLayout());
+            contentPanel.setBorder(BorderFactory.createEmptyBorder(-10, 10, 10, 10));
+
+            contentPanel.add(infoPanel, BorderLayout.NORTH);
+            contentPanel.add(inputsPanel, BorderLayout.CENTER);
+            contentPanel.add(generateButton, BorderLayout.SOUTH);
+
+            inputCard.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+            inputCard.add(contentPanel, BorderLayout.CENTER);
+
+        }
+        pointsFunctionPanel.add(inputCard);
+
+
+        pointsFunctionPanel.add(pointsCard);
     }
 
     private void changeColorAnime(Component comp, Color color) {
@@ -1011,17 +1267,6 @@ public class GUI {
         homeButton.setEnabled(panelsStack.size() > 1);
     }
 
-    // Update the enabled state of the button based on text fields' content
-    private void updateButtonEnabledState(JButton button, ArrayList<JTextField> textFields) {
-        boolean enabled = true;
-        for (JTextField field : textFields) {
-            if (field.getText().isEmpty()) {
-                enabled = false;
-                break;
-            }
-        }
-        button.setEnabled(enabled);
-    }
 
     // Add a DocumentListener to each text field
     private void addDocumentListenerToFields(JButton button, ArrayList<JTextField> textFields) {
@@ -1044,5 +1289,17 @@ public class GUI {
         for (JTextField field : textFields) {
             field.getDocument().addDocumentListener(documentListener);
         }
+    }
+
+    // Update the enabled state of the button based on text fields' content
+    private void updateButtonEnabledState(JButton button, ArrayList<JTextField> textFields) {
+        boolean enabled = true;
+        for (JTextField field : textFields) {
+            if (field.getText().isEmpty()) {
+                enabled = false;
+                break;
+            }
+        }
+        button.setEnabled(enabled);
     }
 }

@@ -12,10 +12,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add setResizable false">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add exp Panel and test it&#10;Add exceptions to exp Functions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExpressionFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExpressionFunction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +79,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/Minesweeper",
+    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/Test",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
@@ -100,13 +100,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٠٦" summary="Testing Secant class">
-      <created>1688934425721</created>
-      <option name="number" value="٠٠٢٠٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٠٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688934425721</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٠٧" summary="Add Newton-Raphson class to NonLinearEquation">
       <created>1688935799718</created>
@@ -444,7 +437,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689378850837</updated>
     </task>
-    <option name="localTasksCounter" value="255" />
+    <task id="LOCAL؜-٠٠٢٥٥" summary="Add exp Panel and test it&#10;Add exceptions to exp Functions">
+      <created>1689427016929</created>
+      <option name="number" value="٠٠٢٥٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٥٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689427016929</updated>
+    </task>
+    <option name="localTasksCounter" value="256" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -486,7 +486,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add jar" />
     <MESSAGE value="Fix indexOutOfBounds in PointsFunction" />
     <MESSAGE value="Make Exceptions more detailed" />
     <MESSAGE value="Fix main printing" />
@@ -511,6 +510,7 @@
     <MESSAGE value="Add polynomial to chooseFunction panel" />
     <MESSAGE value="Change diff and polys panels rows and columns" />
     <MESSAGE value="Add setResizable false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add setResizable false" />
+    <MESSAGE value="Add exp Panel and test it&#10;Add exceptions to exp Functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add exp Panel and test it&#10;Add exceptions to exp Functions" />
   </component>
 </project>
