@@ -629,7 +629,84 @@ public class GUI {
         description = "Get the interpolation function using Newton Forward Divided Subtractions method\n" +
                 "It also can get Newton Forward Divided Subtractions Table values";
         button = "Enter";
-        ActionListener enterNFDS = e -> System.out.println("Entered");
+        ActionListener enterNFDS = e -> {
+            doAction = pointsFunction -> {
+                try {
+
+                    int degree = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter degree of the required polynomial : ", "Interpolation", JOptionPane.QUESTION_MESSAGE));
+
+                    ArrayList<Double> values = Interpolation.NewtonForwardDividedSubtractions.getUDV(function);
+
+                    //create table values title
+                    JLabel tableTitle = new JLabel();
+                    tableTitle.setText("The values of the upper diameter of the Newton Forward Divided Subtractions Table : ");
+                    tableTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create table value scrolled
+                    JTextArea tableAns = new JTextArea();
+                    tableAns.append(values.toString());
+                    tableAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    tableAns.setEnabled(false);
+                    tableAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane tableAnsScrollPane = new JScrollPane(tableAns);
+                    tableAnsScrollPane.setPreferredSize(new Dimension(300, 70));
+
+                    Polynomial ans = Interpolation.NewtonForwardDividedSubtractions.getIFAP(pointsFunction, degree);
+
+                    JLabel interTitle = new JLabel();
+                    interTitle.setText("Interpolation answer using Newton Forward Divided Subtractions : ");
+                    interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+
+                    JTextArea polyAns = new JTextArea();
+                    polyAns.append("P(x) : ");
+                    polyAns.append(ans.toString());
+                    polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAns.setEnabled(false);
+                    polyAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
+
+                    JLabel shortPolyTitle = new JLabel();
+                    shortPolyTitle.setText("Interpolation answer with no shorthand : ");
+                    shortPolyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    String asnNSH = Interpolation.NewtonForwardDividedSubtractions.getIFASNS(pointsFunction, degree);
+
+                    JTextArea polyAnsNSH = new JTextArea();
+                    polyAnsNSH.append("P(x) : ");
+                    polyAnsNSH.append(asnNSH);
+                    polyAnsNSH.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAnsNSH.setEnabled(false);
+                    polyAnsNSH.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsNSHScrollPane = new JScrollPane(polyAnsNSH);
+                    polyAnsNSHScrollPane.setPreferredSize(new Dimension(300, 70));
+
+
+                    JPanel contentPanel = new JPanel(new GridLayout(6, 1, 0, -20));
+                    contentPanel.setBorder(BorderFactory.createEmptyBorder(-20, 0, 0, 0));
+                    contentPanel.add(tableTitle);
+                    contentPanel.add(tableAnsScrollPane);
+                    contentPanel.add(interTitle);
+                    contentPanel.add(polyAnsScrollPane);
+                    contentPanel.add(shortPolyTitle);
+                    contentPanel.add(polyAnsNSHScrollPane);
+
+
+                    String[] response = {"Cancel", "Continue with Polynomial"};
+
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    if (feed == 1) {
+                        panelsStack.add(polynomialsPanel);
+                        updateMainPanel();
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            };
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
+        };
         JPanel NFDSCard = createCard(title, description, button, enterNFDS);
         interpolationPanel.add(NFDSCard);
 
@@ -640,7 +717,84 @@ public class GUI {
         description = "Get the interpolation function using Newton Backward Divided Subtractions method\n" +
                 "It also can get Newton Backward Divided Subtractions Table values";
         button = "Enter";
-        ActionListener enterNDBS = e -> System.out.println("Entered");
+        ActionListener enterNDBS = e -> {
+            doAction = pointsFunction -> {
+                try {
+
+                    int degree = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter degree of the required polynomial : ", "Interpolation", JOptionPane.QUESTION_MESSAGE));
+
+                    ArrayList<Double> values = Interpolation.NewtonBackwardDividedSubtractions.getLDV(function);
+
+                    //create table values title
+                    JLabel tableTitle = new JLabel();
+                    tableTitle.setText("The values of the lower diameter of the Newton Backward Divided Subtractions Table : ");
+                    tableTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create table value scrolled
+                    JTextArea tableAns = new JTextArea();
+                    tableAns.append(values.toString());
+                    tableAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    tableAns.setEnabled(false);
+                    tableAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane tableAnsScrollPane = new JScrollPane(tableAns);
+                    tableAnsScrollPane.setPreferredSize(new Dimension(300, 70));
+
+                    Polynomial ans = Interpolation.NewtonBackwardDividedSubtractions.getIFAP(pointsFunction, degree);
+
+                    JLabel interTitle = new JLabel();
+                    interTitle.setText("Interpolation answer using Newton Backward Divided Subtractions : ");
+                    interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+
+                    JTextArea polyAns = new JTextArea();
+                    polyAns.append("P(x) : ");
+                    polyAns.append(ans.toString());
+                    polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAns.setEnabled(false);
+                    polyAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
+
+                    JLabel shortPolyTitle = new JLabel();
+                    shortPolyTitle.setText("Interpolation answer with no shorthand : ");
+                    shortPolyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    String asnNSH = Interpolation.NewtonForwardDividedSubtractions.getIFASNS(pointsFunction, degree);
+
+                    JTextArea polyAnsNSH = new JTextArea();
+                    polyAnsNSH.append("P(x) : ");
+                    polyAnsNSH.append(asnNSH);
+                    polyAnsNSH.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAnsNSH.setEnabled(false);
+                    polyAnsNSH.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsNSHScrollPane = new JScrollPane(polyAnsNSH);
+                    polyAnsNSHScrollPane.setPreferredSize(new Dimension(300, 70));
+
+
+                    JPanel contentPanel = new JPanel(new GridLayout(6, 1, 0, -20));
+                    contentPanel.setBorder(BorderFactory.createEmptyBorder(-20, 0, 0, 0));
+                    contentPanel.add(tableTitle);
+                    contentPanel.add(tableAnsScrollPane);
+                    contentPanel.add(interTitle);
+                    contentPanel.add(polyAnsScrollPane);
+                    contentPanel.add(shortPolyTitle);
+                    contentPanel.add(polyAnsNSHScrollPane);
+
+
+                    String[] response = {"Cancel", "Continue with Polynomial"};
+
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    if (feed == 1) {
+                        panelsStack.add(polynomialsPanel);
+                        updateMainPanel();
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            };
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
+        };
         JPanel NFBSCard = createCard(title, description, button, enterNDBS);
         interpolationPanel.add(NFBSCard);
 

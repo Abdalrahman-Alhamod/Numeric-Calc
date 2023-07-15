@@ -12,8 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add lagrange solution">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add Newton-Gregory forward &amp; backward solution">
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -105,13 +104,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢١٥" summary="Add JAVA DOC to NonLinearEquation">
-      <created>1688939859231</created>
-      <option name="number" value="٠٠٢١٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢١٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688939859231</updated>
     </task>
     <task id="LOCAL؜-٠٠٢١٦" summary="Add Horner class to Polynomial with getValueAt, getDiffAt, getDivideOn">
       <created>1688943000910</created>
@@ -449,7 +441,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689459890044</updated>
     </task>
-    <option name="localTasksCounter" value="264" />
+    <task id="LOCAL؜-٠٠٢٦٤" summary="Add Newton-Gregory forward &amp; backward solution">
+      <created>1689460922992</created>
+      <option name="number" value="٠٠٢٦٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٦٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689460922992</updated>
+    </task>
+    <option name="localTasksCounter" value="265" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -491,7 +490,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create interpolation Panel and test it" />
     <MESSAGE value="Create integral Panel and test it" />
     <MESSAGE value="Create Diff Panel and test it" />
     <MESSAGE value="Create Diff EQs Panel and test it" />
@@ -516,6 +514,7 @@
     <MESSAGE value="Fix continue button&#10;Add solution to General method" />
     <MESSAGE value="Add try &amp; catch to general method solution" />
     <MESSAGE value="Add lagrange solution" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add lagrange solution" />
+    <MESSAGE value="Add Newton-Gregory forward &amp; backward solution" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Newton-Gregory forward &amp; backward solution" />
   </component>
 </project>
