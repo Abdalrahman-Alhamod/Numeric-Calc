@@ -1,6 +1,7 @@
 package Numerics;
 
 import Functions.Function;
+import Functions.PointsFunction;
 
 /**
  * The Integral class provides methods for numerical integration using various methods.
@@ -22,7 +23,7 @@ public abstract class Integral {
      * @return the calculated integral value
      * @throws ArithmeticException if the function is null, a is greater than or equal to b, or n is less than or equal to 0
      */
-    public static double getRect(Function func, double a, double b, double n) {
+    public static double getRect(PointsFunction func, double a, double b, double n) {
         if (func == null)
             throw new ArithmeticException("invalid inputs : Function cannot be null");
         else if (a >= b)
@@ -35,7 +36,7 @@ public abstract class Integral {
         double sum = 0;
         double value = a;
         for (int i = 0; i <= n - 1; i++) {
-            sum += func.getValueAt(value);
+            sum += func.getValueAt(i);
             //Rounding value back to fix floating-point precision errors
             sum = Math.round(sum * 1e10) / 1e10;
             value += h;
@@ -60,7 +61,7 @@ public abstract class Integral {
      * @return the calculated integral value
      * @throws ArithmeticException if the function is null, a is greater than or equal to b, or n is less than or equal to 0
      */
-    public static double getTraps(Function func, double a, double b, double n) {
+    public static double getTraps(PointsFunction func, double a, double b, double n) {
         if (func == null)
             throw new ArithmeticException("invalid inputs : Function cannot be null");
         else if (a >= b)
@@ -75,7 +76,7 @@ public abstract class Integral {
         double value = a + h;
         value = Math.round(value * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
         for (int i = 1; i <= n - 1; i++) {
-            sum += 2 * func.getValueAt(value);
+            sum += 2 * func.getValueAt(i);
             //Rounding value back to fix floating-point precision errors
             sum = Math.round(sum * 1e10) / 1e10;
             value += h;
@@ -99,7 +100,7 @@ public abstract class Integral {
      * @return the calculated integral value
      * @throws ArithmeticException if the function is null, a is greater than or equal to b, n is less than or equal to 0, or n is not an even number
      */
-    public static double getSimpson3(Function func, double a, double b, double n) {
+    public static double getSimpson3(PointsFunction func, double a, double b, double n) {
         if (func == null)
             throw new ArithmeticException("invalid inputs : Function cannot be null");
         else if (a >= b)
@@ -117,9 +118,9 @@ public abstract class Integral {
         value = Math.round(value * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
         for (int i = 1; i <= n - 1; i++) {
             if (i % 2 == 0)
-                sum += 2 * func.getValueAt(value);
+                sum += 2 * func.getValueAt(i);
             else
-                sum += 4 * func.getValueAt(value);
+                sum += 4 * func.getValueAt(i);
             //Rounding value back to fix floating-point precision errors
             sum = Math.round(sum * 1e10) / 1e10;
             value += h;
@@ -143,7 +144,7 @@ public abstract class Integral {
      * @return the calculated integral value
      * @throws ArithmeticException if the function is null, a is greater than or equal to b, n is less than or equal to 0, or n is not divisible by 3
      */
-    public static double getSimpson8(Function func, double a, double b, double n) {
+    public static double getSimpson8(PointsFunction func, double a, double b, double n) {
         if (func == null)
             throw new ArithmeticException("invalid inputs : Function cannot be null");
         else if (a >= b)
@@ -161,9 +162,9 @@ public abstract class Integral {
         value = Math.round(value * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
         for (int i = 1; i <= n - 1; i++) {
             if (i % 3 == 0)
-                sum += 2 * func.getValueAt(value);
+                sum += 2 * func.getValueAt(i);
             else
-                sum += 3 * func.getValueAt(value);
+                sum += 3 * func.getValueAt(i);
             //Rounding value back to fix floating-point precision errors
             sum = Math.round(sum * 1e10) / 1e10;
             value += h;
@@ -187,14 +188,14 @@ public abstract class Integral {
      * @return the calculated integral value
      * @throws ArithmeticException if the function is null, a is greater than or equal to b, n is less than or equal to 0, or n is not divisible by 4
      */
-    public static double getPaul(Function func, double a, double b, double n) {
+    public static double getPaul(PointsFunction func, double a, double b, double n) {
         if (func == null)
             throw new ArithmeticException("invalid inputs : Function cannot be null");
         else if (a >= b)
             throw new ArithmeticException("invalid inputs : a cannot be greater or equal to b");
         else if (n <= 0)
             throw new ArithmeticException("invalid inputs : n cannot be smaller or equal to 0");
-        else if (n % 3 != 0)
+        else if (n % 4 != 0)
             throw new ArithmeticException("invalid inputs : n is not divisible by 4");
         double h = (b - a) / n;
         //Rounding value back to fix floating-point precision errors
@@ -205,11 +206,11 @@ public abstract class Integral {
         value = Math.round(value * 1e10) / 1e10; //Rounding value back to fix floating-point precision errors
         for (int i = 1; i <= n - 1; i++) {
             if (i % 4 == 0)
-                sum += 14 * func.getValueAt(value);
+                sum += 14 * func.getValueAt(i);
             else if (i % 2 == 0)
-                sum += 12 * func.getValueAt(value);
+                sum += 12 * func.getValueAt(i);
             else
-                sum += 32 * func.getValueAt(value);
+                sum += 32 * func.getValueAt(i);
             //Rounding value back to fix floating-point precision errors
             sum = Math.round(sum * 1e10) / 1e10;
             value += h;
