@@ -12,8 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add continue button">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Update gitignore">
       <change afterPath="$PROJECT_DIR$/src/GUI/Panels/ChooseFunctionPanel.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/GUI/Panels/DifferentialEquationsPanel.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/GUI/Panels/DifferentiationPanel.java" afterDir="false" />
@@ -28,20 +27,9 @@
       <change afterPath="$PROJECT_DIR$/src/GUI/Panels/SystemOfNonLinearEquationsPanel.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/GUI/UI.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/GUI/Util/PanelContainer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Util/Tools.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DifferentialEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Differentiation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/Differentiation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EvaluateString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/EvaluateString.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExpressionFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/ExpressionFunction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Function.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/Function.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Integral.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/Integral.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/Interpolation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/Matrix.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NonLinearEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PointsFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/PointsFunction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Polynomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/Polynomial.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SystemOfNonLinearEquations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/SystemOfNonLinearEquations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,20 +120,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٠٩" summary="Add Halley class to NonLinearEquation">
-      <created>1688938023552</created>
-      <option name="number" value="٠٠٢٠٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٠٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688938023552</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢١٠" summary="Testing Halley class">
-      <created>1688938034882</created>
-      <option name="number" value="٠٠٢١٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢١٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688938034882</updated>
     </task>
     <task id="LOCAL؜-٠٠٢١١" summary="Add FixedPointIteration class to NonLinearEquation">
       <created>1688938821388</created>
@@ -476,7 +450,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689439188583</updated>
     </task>
-    <option name="localTasksCounter" value="258" />
+    <task id="LOCAL؜-٠٠٢٥٨" summary="Restructure the whole project">
+      <created>1689450146270</created>
+      <option name="number" value="٠٠٢٥٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٥٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689450146271</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٥٩" summary="Update gitignore">
+      <created>1689453309353</created>
+      <option name="number" value="٠٠٢٥٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٥٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689453309353</updated>
+    </task>
+    <option name="localTasksCounter" value="260" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -518,8 +506,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix main printing" />
-    <MESSAGE value="Remove testing code from main" />
     <MESSAGE value="Add contact info" />
     <MESSAGE value="Init GUI class" />
     <MESSAGE value="Add nimbus theme&#10;Create res folder&#10;Fix icons path&#10;Test changes gui" />
@@ -543,6 +529,8 @@
     <MESSAGE value="Add exp Panel and test it&#10;Add exceptions to exp Functions" />
     <MESSAGE value="Add initPtsFuncPanel and test it&#10;Fix issues in expFuncPanel ( fields and input n)" />
     <MESSAGE value="Add continue button" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add continue button" />
+    <MESSAGE value="Restructure the whole project" />
+    <MESSAGE value="Update gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update gitignore" />
   </component>
 </project>
