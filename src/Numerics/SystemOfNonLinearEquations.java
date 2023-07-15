@@ -1,3 +1,7 @@
+package Numerics;
+
+import Functions.ExpressionFunction;
+
 import java.util.ArrayList;
 
 /**

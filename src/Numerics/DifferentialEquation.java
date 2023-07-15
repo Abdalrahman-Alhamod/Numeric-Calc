@@ -1,3 +1,7 @@
+package Numerics;
+
+import Util.EvaluateString;
+
 import java.util.ArrayList;
 import java.util.Objects;
 

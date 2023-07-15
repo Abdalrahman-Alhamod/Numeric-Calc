@@ -1,3 +1,8 @@
+import Functions.ExpressionFunction;
+import Functions.PointsFunction;
+import Functions.Polynomial;
+import Util.EvaluateString;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.DocumentEvent;
@@ -127,6 +132,7 @@ public class GUI {
         initPolyPanel();
         initExpFuncPanel();
         iniPtsFuncPanel();
+        initPolyFuncPanel();
         panelsStack = new Stack<>();
         panelsStack.add(startPanel);
     }
@@ -294,9 +300,12 @@ public class GUI {
         JPanel pointsFunctionCard = createCard("Points Function",
                 "Functions like x0=.. y0=.. , x1=.. y1=.. ", "Enter", enterPointsFunction);
 
-        ActionListener enterPolynomialFunction = e -> System.out.println("Enter poly");
+        ActionListener enterPolynomialFunction = e -> {
+            panelsStack.add(polynomialFunctionPanel);
+            updateMainPanel();
+        };
         JPanel polynomialFunctionCard = createCard("Polynomial Function",
-                "Functions like p(x) = a0 + a1*x + a2*x^2 ... ", "Enter", enterPointsFunction);
+                "Functions like p(x) = a0 + a1*x + a2*x^2 ... ", "Enter", enterPolynomialFunction);
 
 
         chooseFunctionPanel.add(expressionFunctionCard);
@@ -924,7 +933,6 @@ public class GUI {
             // inputs panel
             JPanel inputsPanel = new JPanel(new GridLayout(4, 1, -5, 10));
             inputsPanel.add(enterExp);
-            //JOptionPane.showConfirmDialog(null,enterA,"e",JOptionPane.DEFAULT_OPTION);
             inputsPanel.add(enterA);
             inputsPanel.add(enterB);
             inputsPanel.add(enterN);
@@ -1083,8 +1091,6 @@ public class GUI {
             enterN.add(confirmButton, BorderLayout.EAST);
 
 
-            //JOptionPane.showConfirmDialog(null,enterN,"e",JOptionPane.DEFAULT_OPTION);
-
             // input x and y
             JLabel enterPointsTitle = new JLabel("Enter x and y points : ");
             enterPointsTitle.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0)); // Adjust the top and bottom padding
@@ -1223,6 +1229,279 @@ public class GUI {
 
 
         pointsFunctionPanel.add(pointsCard);
+    }
+
+    private void initPolyFuncPanel() {
+        polynomialFunctionPanel = new JPanel();
+        polynomialFunctionPanel.setName("Polynomial Function");
+        polynomialFunctionPanel.setPreferredSize(mainFrame.getSize());
+        polynomialFunctionPanel.setBackground(new Color(100, 100, 100));
+        GridLayout startLayout = new GridLayout(1, 2);
+        startLayout.setHgap(5);
+        startLayout.setVgap(5);
+        polynomialFunctionPanel.setLayout(startLayout);
+
+        JPanel pointsCard = new JPanel();
+        JTextArea pointsText;
+        JScrollPane pointsScrollPane;
+        JButton continueButton;
+        {
+
+            //points card title
+            JPanel titlePanel = new JPanel();
+            JLabel pointsTitle = new JLabel();
+            pointsTitle.setText("Generated Points : ");
+            pointsTitle.setFont(new Font(mainFont, Font.BOLD, 25));
+            titlePanel.add(pointsTitle, BorderLayout.CENTER);
+
+            //point card area
+            pointsText = new JTextArea();
+            pointsText.setFont(new Font(mainFont, Font.PLAIN, 20));
+            pointsText.setEnabled(false);
+            pointsScrollPane = new JScrollPane(pointsText);
+            pointsScrollPane.setPreferredSize(new Dimension(450, 485));
+            pointsScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+            // Continue Button
+            continueButton = new JButton("Continue");
+            continueButton.setFont(new Font(buttonFont, Font.BOLD, 20));
+            continueButton.setFocusPainted(false);
+            continueButton.setPreferredSize(new Dimension(60, 50));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            continueButton.setBackground(customGreen);
+            continueButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            continueButton.setEnabled(false); // Disable the button initially
+
+            // content panel
+            JPanel contentPanel = new JPanel(new BorderLayout());
+            contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
+            contentPanel.add(titlePanel, BorderLayout.NORTH);
+            contentPanel.add(pointsScrollPane, BorderLayout.CENTER);
+            contentPanel.add(continueButton, BorderLayout.SOUTH);
+
+            pointsCard.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+            pointsCard.add(contentPanel, BorderLayout.CENTER);
+
+        }
+
+        JPanel inputCard = new JPanel();
+        {
+            //title
+            JLabel cardTitle = new JLabel();
+            cardTitle.setText("Polynomial Function");
+            cardTitle.setFont(new Font(mainFont, Font.BOLD, 25));
+
+
+            // description
+            JLabel cardDescription = new JLabel();
+            cardDescription.setText("<html>" +
+                    "Supported Coefficients Type : <br>" +
+                    " <b>Double </b> : 1.919239 <br>" +
+                    " <b>Integer </b> : 12392 <br>" +
+                    " <b>PI </b> : pi, 2*pi, pi/4 <br>" +
+                    "</html>");
+            cardDescription.setFont(new Font(secondFont, Font.ITALIC, 15));
+            cardDescription.setBackground(inputCard.getBackground());
+
+            //info panel
+            JPanel infoPanel = new JPanel(new GridLayout(2, 1, 0, -10));
+            infoPanel.add(cardTitle);
+            infoPanel.add(cardDescription);
+
+            // inputs : a
+            JLabel enterATitle = new JLabel("Enter a – The lower bound of the x-coordinate range :");
+
+            JTextField enterAField = new JTextField();
+            //enterAField.setPreferredSize(new Dimension(100, 50));
+
+            JPanel enterA = new JPanel();
+            GridLayout inputLayout = new GridLayout(2, 1, 0, -5);
+            enterA.setLayout(inputLayout);
+            enterA.add(enterATitle);
+            enterA.add(enterAField);
+
+            // inputs : b
+            JLabel enterBTitle = new JLabel("Enter b – The upper bound of the x-coordinate range :");
+
+            JTextField enterBField = new JTextField();
+            //enterBField.setPreferredSize(new Dimension(100, 50));
+
+            JPanel enterB = new JPanel();
+            enterB.setLayout(inputLayout);
+            enterB.add(enterBTitle);
+            enterB.add(enterBField);
+
+            // inputs : n
+            JLabel enterNTitle = new JLabel("Enter n – The number of points (including a and b) :");
+            enterNTitle.setHorizontalAlignment(SwingConstants.LEFT);
+
+            SpinnerNumberModel spinnerModel = new SpinnerNumberModel(2, 2, 1000, 1);
+            JSpinner enterNSp = new JSpinner(spinnerModel);
+            JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterNSp.getEditor();
+            editor.getTextField().setColumns(3); // Adjust the width as needed
+
+            JPanel enterN = new JPanel();
+            enterN.setLayout(new FlowLayout(FlowLayout.LEFT));
+            enterN.add(enterNTitle, BorderLayout.WEST);
+            enterN.add(enterNSp, BorderLayout.CENTER);
+
+            // inputs : degree
+            JLabel enterDegreeTitle = new JLabel("Enter degree of Polynomial :");
+            enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
+
+            spinnerModel = new SpinnerNumberModel(0, 0, 1000, 1);
+            JSpinner enterDegreeSp = new JSpinner(spinnerModel);
+            editor = (JSpinner.NumberEditor) enterDegreeSp.getEditor();
+            editor.getTextField().setColumns(3); // Adjust the width as needed
+
+            JButton confirmButton = new JButton("Confirm");
+            confirmButton.setPreferredSize(new Dimension(80, 30));
+
+            JPanel enterDegree = new JPanel();
+            enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+            enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
+            enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
+            enterDegree.add(confirmButton, BorderLayout.EAST);
+
+
+            //JOptionPane.showConfirmDialog(null,enterN,"e",JOptionPane.DEFAULT_OPTION);
+
+            // input x and y
+            JLabel enterPointsTitle = new JLabel("Enter Coefficients : ");
+            enterPointsTitle.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0)); // Adjust the top and bottom padding
+
+            JScrollPane enterPointsScroll = new JScrollPane();
+            enterPointsScroll.setPreferredSize(new Dimension(220, 150));
+
+
+            JPanel inputsPanel = new JPanel(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.insets = new Insets(5, 0, 5, 0); // Add vertical spacing between components
+
+            gbc.gridy++;
+            inputsPanel.add(enterA, gbc);
+
+            gbc.gridy++;
+            inputsPanel.add(enterB, gbc);
+
+            gbc.gridy++;
+            inputsPanel.add(enterN, gbc);
+            gbc.gridy++;
+            inputsPanel.add(enterDegree, gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy++;
+            gbc.gridwidth = 2;
+            inputsPanel.add(enterPointsTitle, gbc);
+
+            gbc.gridy++;
+            inputsPanel.add(enterPointsScroll, gbc);
+
+            // Generate Button
+            JButton generateButton = new JButton("Generate");
+            generateButton.setFont(new Font(buttonFont, Font.BOLD, 20));
+            generateButton.setFocusPainted(false);
+            generateButton.setPreferredSize(new Dimension(60, 50));
+            generateButton.setEnabled(false); // Disable the button initially
+
+            // add fields to enter points
+            ArrayList<JTextField> coeffsFields = new ArrayList<>();
+            confirmButton.addActionListener(e -> {
+                generateButton.setEnabled(false);
+                // Handle confirm button action
+                int n = (int) enterDegreeSp.getValue();
+                JPanel coeffsPanel = new JPanel(new GridBagLayout());
+                GridBagConstraints gbc2 = new GridBagConstraints();
+                gbc2.gridx = 0;
+                gbc2.gridy = 0;
+                gbc2.anchor = GridBagConstraints.WEST;
+                gbc2.insets = new Insets(5, 0, 5, 10); // Add spacing between components
+
+                coeffsFields.clear();
+
+                for (int i = 0; i <= n; i++) {
+                    JLabel coeffLabel = new JLabel("a" + i + " = ");
+                    JTextField textFieldCoeff = new JTextField(10);
+
+                    textFieldCoeff.setName("a" + i);
+
+                    coeffsFields.add(textFieldCoeff);
+
+                    JPanel componentPanel = new JPanel(new GridBagLayout());
+                    GridBagConstraints gbcComponent = new GridBagConstraints();
+                    gbcComponent.gridx = 0;
+                    gbcComponent.gridy = 0;
+                    gbcComponent.anchor = GridBagConstraints.WEST;
+                    gbcComponent.insets = new Insets(5, 0, 5, 10); // Add spacing between components
+
+                    componentPanel.add(coeffLabel, gbcComponent);
+
+                    gbcComponent.gridx++;
+                    componentPanel.add(textFieldCoeff, gbcComponent);
+
+                    gbc2.gridy++;
+                    coeffsPanel.add(componentPanel, gbc2);
+                }
+
+                enterPointsScroll.setViewportView(coeffsPanel); // Set the pointsPanel as the viewport's view component
+                enterPointsScroll.revalidate(); // Revalidate the scroll pane to update its content
+
+                // Add a DocumentListener to each text field;
+                ArrayList<JTextField> fields = new ArrayList<>(coeffsFields);
+                fields.add(enterAField);
+                fields.add(enterBField);
+                addDocumentListenerToFields(generateButton, fields);
+            });
+
+            generateButton.addActionListener(e -> {
+                ArrayList<Double> coeffs = new ArrayList<>();
+                try {
+                    for (JTextField coeffField : coeffsFields) {
+                        String coeffFiledContent = coeffField.getText();
+                        double coeff = EvaluateString.evaluate(coeffFiledContent);
+                        coeffs.add(coeff);
+                    }
+                    Polynomial poly = new Polynomial(coeffs);
+                    String a = enterAField.getText();
+                    String b = enterBField.getText();
+                    String n = String.valueOf((int) enterNSp.getValue());
+                    PointsFunction ptsFunc = poly.toPointsFunction(a, b, n);
+                    ArrayList<Double> xp = ptsFunc.getXp();
+                    ArrayList<Double> yp = ptsFunc.getYp();
+                    pointsText.setText("");
+                    for (int i = 0; i < xp.size(); i++) {
+                        String sb = "x" + i + " = " + xp.get(i) +
+                                '\t' +
+                                "y" + i + " = " + yp.get(i);
+                        pointsText.append(sb);
+                        pointsText.append("\n");
+                    }
+                    pointsText.repaint();
+                    continueButton.setEnabled(true);
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            JPanel contentPanel = new JPanel(new BorderLayout());
+            contentPanel.setBorder(BorderFactory.createEmptyBorder(-10, 10, 10, 10));
+
+            contentPanel.add(infoPanel, BorderLayout.NORTH);
+            contentPanel.add(inputsPanel, BorderLayout.CENTER);
+            contentPanel.add(generateButton, BorderLayout.SOUTH);
+
+            inputCard.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+            inputCard.add(contentPanel, BorderLayout.CENTER);
+
+        }
+        polynomialFunctionPanel.add(inputCard);
+
+
+        polynomialFunctionPanel.add(pointsCard);
     }
 
     private void changeColorAnime(Component comp, Color color) {

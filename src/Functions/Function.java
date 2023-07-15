@@ -1,3 +1,5 @@
+package Functions;
+
 /**
  * The Function interface represents a mathematical function.
  * It provides methods to evaluate the value, differentiate, integrate,

@@ -1,3 +1,6 @@
+package Numerics;
+
+import Functions.ExpressionFunction;
 
 /**
  * The NonLinearEquation class provides implementations of various numerical methods for solving non-linear equations.

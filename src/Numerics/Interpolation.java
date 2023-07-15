@@ -1,3 +1,9 @@
+package Numerics;
+
+import Functions.PointsFunction;
+import Functions.Polynomial;
+import Util.Matrix;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;

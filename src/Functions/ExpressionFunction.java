@@ -1,3 +1,8 @@
+package Functions;
+
+import Numerics.Interpolation;
+import Util.EvaluateString;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -128,11 +133,11 @@ public class ExpressionFunction implements Function {
     }
 
     /**
-     * Converts the function into a PointsFunction for interpolation.
+     * Converts the function into a PointsFunction .
      *
      * @param a The lower bound of the x-coordinate range as string
      * @param b The upper bound of the x-coordinate range as string
-     * @param n The number of points to generate for interpolation as string
+     * @param n The number of points to generate as string
      * @return The PointsFunction representing the function over the given range.
      * @throws ArithmeticException if any of the inputs is null
      */

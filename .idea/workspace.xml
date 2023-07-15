@@ -12,9 +12,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add initPtsFuncPanel and test it&#10;Fix issues in expFuncPanel ( fields and input n)">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add continue button">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/ChooseFunctionPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/DifferentialEquationsPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/DifferentiationPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/ExpressionFunctionPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/IntegralPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/InterpolationPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/NonLinearEquationsPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/PointsFunctionPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/PolynomialFunctionPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/PolynomialsPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/StartPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Panels/SystemOfNonLinearEquationsPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/UI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Util/PanelContainer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DifferentialEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Differentiation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/Differentiation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EvaluateString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/EvaluateString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExpressionFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/ExpressionFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Function.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/Function.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Integral.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/Integral.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/Interpolation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/Matrix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NonLinearEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PointsFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/PointsFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polynomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/Polynomial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SystemOfNonLinearEquations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/SystemOfNonLinearEquations.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,19 +76,19 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/DifferentialEquation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Differentiation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/EvaluateString.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/ExpressionFunction.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Function.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Integral.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Interpolation.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Functions/ExpressionFunction.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Functions/Function.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Main.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Matrix.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/NonLinearEquation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/PointsFunction.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Polynomial.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/SystemOfNonLinearEquations.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Numerics/Integral.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Numerics/Interpolation.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Numerics/SystemOfNonLinearEquations.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Util/EvaluateString.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Util/Matrix.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -78,7 +105,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/Test",
+    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/src/Numerics",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
@@ -87,8 +114,14 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\src\Numerics" />
+      <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\src\Functions" />
+      <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\src\Util" />
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\res\Icons" />
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\res\Images" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Util" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -99,13 +132,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٠٨" summary="Test Newton-Raphson class">
-      <created>1688935811007</created>
-      <option name="number" value="٠٠٢٠٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٠٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688935811007</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٠٩" summary="Add Halley class to NonLinearEquation">
       <created>1688938023552</created>
@@ -443,7 +469,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689437541388</updated>
     </task>
-    <option name="localTasksCounter" value="257" />
+    <task id="LOCAL؜-٠٠٢٥٧" summary="Add continue button">
+      <created>1689439188583</created>
+      <option name="number" value="٠٠٢٥٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٥٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689439188583</updated>
+    </task>
+    <option name="localTasksCounter" value="258" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -485,7 +518,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Make Exceptions more detailed" />
     <MESSAGE value="Fix main printing" />
     <MESSAGE value="Remove testing code from main" />
     <MESSAGE value="Add contact info" />
@@ -510,6 +542,7 @@
     <MESSAGE value="Add setResizable false" />
     <MESSAGE value="Add exp Panel and test it&#10;Add exceptions to exp Functions" />
     <MESSAGE value="Add initPtsFuncPanel and test it&#10;Fix issues in expFuncPanel ( fields and input n)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add initPtsFuncPanel and test it&#10;Fix issues in expFuncPanel ( fields and input n)" />
+    <MESSAGE value="Add continue button" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add continue button" />
   </component>
 </project>

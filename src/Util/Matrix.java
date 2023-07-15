@@ -1,3 +1,5 @@
+package Util;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
@@ -7,7 +9,7 @@ import java.util.Objects;
  * <p>
  * The matrix is stored as an ArrayList of ArrayLists of Double values.
  */
-class Matrix {
+public class Matrix {
     /**
      * The matrix data is stored as an ArrayList of ArrayLists.
      * Each inner ArrayList represents a row of the matrix.
@@ -267,12 +269,12 @@ class Matrix {
     /**
      * A matrix representing the neutral element for matrix multiplication
      */
-    static Matrix neutral;
+    public static Matrix neutral;
 
     /**
      * Initializes the static neutral matrix to the identity matrix of the given size.
      */
-    static void neutralize() {
+    public static void neutralize() {
         for (int i = 0; i < neutral.n; i++) {
             neutral.getRow(i).set(i, 1.0); // Set diagonal elements of the neutral matrix to 1
         }
@@ -286,7 +288,7 @@ class Matrix {
      * @param p the non-negative integer exponent to raise the matrix to
      * @return the resulting matrix
      */
-    static Matrix power(Matrix A, long p) {
+    public static Matrix power(Matrix A, long p) {
         Matrix ans = neutral;
         while (p > 0) {
             if ((p & 1) == 1) {
@@ -306,7 +308,7 @@ class Matrix {
      * @param k the non-negative integer exponent to sum the powers up to
      * @return the resulting matrix
      */
-    static Matrix sumPow(Matrix A, long k) {
+    public static Matrix sumPow(Matrix A, long k) {
         if (k == 0) {
             return neutral; // If k is zero, return the neutral matrix
         }
@@ -394,7 +396,7 @@ class Matrix {
      * @param xp an ArrayList of x values
      * @return the Vandermonde matrix of the given x values
      */
-    static Matrix getVandermonde(ArrayList<Double> xp) {
+    public static Matrix getVandermonde(ArrayList<Double> xp) {
         ArrayList<ArrayList<Double>> a = new ArrayList<>();
         for (int i = 0; i < xp.size(); i++) {
             ArrayList<Double> v = new ArrayList<>();

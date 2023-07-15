@@ -1,4 +1,10 @@
-import java.util.*;
+package Functions;
+
+import Util.EvaluateString;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Objects;
 
 /**
  * Represents a polynomial with real coefficients.
@@ -191,7 +197,7 @@ public class Polynomial implements Function {
      *
      * @return the list of coefficients representing the polynomial terms, in descending order of degree.
      */
-    ArrayList<Double> getCoeffs() {
+    public ArrayList<Double> getCoeffs() {
         return coeffs;
     }
 
@@ -391,6 +397,35 @@ public class Polynomial implements Function {
             yp.add(getValueAt(i));
         }
         return new PointsFunction(xp, yp);
+    }
+
+    /**
+     * Converts the function into a PointsFunction.
+     *
+     * @param a The lower bound of the x-coordinate range as string
+     * @param b The upper bound of the x-coordinate range as string
+     * @param n The number of points to generate as string
+     * @return The PointsFunction representing the function over the given range.
+     * @throws ArithmeticException if any of the inputs is null
+     */
+    public PointsFunction toPointsFunction(String a, String b, String n) {
+        if (a == null)
+            throw new ArithmeticException("invalid inputs : a cannot be null");
+        else if (b == null)
+            throw new ArithmeticException("invalid inputs : b cannot be null");
+        else if (n == null)
+            throw new ArithmeticException("invalid inputs : n cannot be null");
+        a = a.replaceAll("pi", Double.toString(Math.PI));
+        double ad = EvaluateString.evaluate(a, 0);
+        b = b.replaceAll("pi", Double.toString(Math.PI));
+        double bd = EvaluateString.evaluate(b, 0);
+        n = n.replaceAll("pi", Double.toString(Math.PI));
+        double nd = EvaluateString.evaluate(n, 0);
+        if (ad >= bd)
+            throw new ArithmeticException("invalid inputs : a cannot be greater or equal to b");
+        else if (nd <= 0)
+            throw new ArithmeticException("invalid inputs : n cannot be smaller or equal to 0");
+        return toPointsFunction(ad, bd, nd);
     }
 
     /**

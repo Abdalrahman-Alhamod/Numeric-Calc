@@ -1,4 +1,7 @@
-import javax.swing.plaf.IconUIResource;
+package Functions;
+
+import Numerics.Interpolation;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -84,7 +87,7 @@ public class PointsFunction implements Function {
      *
      * @return The list of x-coordinates.
      */
-    ArrayList<Double> getXp() {
+    public ArrayList<Double> getXp() {
         return xp;
     }
 
@@ -93,7 +96,7 @@ public class PointsFunction implements Function {
      *
      * @return The list of y-coordinates.
      */
-    ArrayList<Double> getYp() {
+    public ArrayList<Double> getYp() {
         return yp;
     }
 

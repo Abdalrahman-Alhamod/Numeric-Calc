@@ -1,3 +1,7 @@
+package Numerics;
+
+import Functions.Function;
+
 /**
  * The Integral class provides methods for numerical integration using various methods.
  * It supports rectangular, trapezoidal, Simpson's 1/3, Simpson's 3/8, and Paul's method.
