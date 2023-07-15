@@ -1,6 +1,7 @@
 import Functions.ExpressionFunction;
 import Functions.PointsFunction;
 import Functions.Polynomial;
+import Numerics.Integral;
 import Numerics.Interpolation;
 import Util.EvaluateString;
 
@@ -880,7 +881,7 @@ public class GUI {
                     polyAnsScrollPane.setPreferredSize(new Dimension(380, 100));
 
                     //create content panel
-                    JPanel contentPanel = new JPanel(new GridLayout(2, 1,0,-20));
+                    JPanel contentPanel = new JPanel(new GridLayout(2, 1, 0, -20));
                     contentPanel.setBorder(BorderFactory.createEmptyBorder(-30, 0, 0, 0));
                     contentPanel.add(interTitle);
                     contentPanel.add(polyAnsScrollPane);
@@ -918,6 +919,42 @@ public class GUI {
         String description = "Calculates the integral using the rectangular method";
         String button = "Enter";
         ActionListener enterRect = e -> {
+            doAction = pointsFunction -> {
+                try {
+
+                    double a = function.getXp().get(0);
+                    double b = function.getXp().get(function.getXp().size() - 1);
+                    double n = function.getXp().size()-1;
+                    double ans = Integral.getRect(function, a, b, n);
+
+                    //create title
+                    JLabel interTitle = new JLabel();
+                    interTitle.setText("Integration answer using Rectangular method : ");
+                    interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea polyAns = new JTextArea();
+                    polyAns.append("Answer : ");
+                    polyAns.append(String.valueOf(ans));
+                    polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAns.setEnabled(false);
+                    polyAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel contentPanel = new JPanel(new GridLayout(2, 1));
+                    contentPanel.add(interTitle);
+                    contentPanel.add(polyAnsScrollPane);
+
+                    String[] response = {"OK"};
+
+                    JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            };
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
@@ -931,6 +968,42 @@ public class GUI {
         description = "Calculates the integral using the trapezoidal method";
         button = "Enter";
         ActionListener enterTraps = e -> {
+            doAction = pointsFunction -> {
+                try {
+
+                    double a = function.getXp().get(0);
+                    double b = function.getXp().get(function.getXp().size() - 1);
+                    double n = function.getXp().size()-1;
+                    double ans = Integral.getTraps(function, a, b, n);
+
+                    //create title
+                    JLabel interTitle = new JLabel();
+                    interTitle.setText("Integration answer using Trapezoidal method : ");
+                    interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea polyAns = new JTextArea();
+                    polyAns.append("Answer : ");
+                    polyAns.append(String.valueOf(ans));
+                    polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAns.setEnabled(false);
+                    polyAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel contentPanel = new JPanel(new GridLayout(2, 1));
+                    contentPanel.add(interTitle);
+                    contentPanel.add(polyAnsScrollPane);
+
+                    String[] response = {"OK"};
+
+                    JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            };
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
@@ -944,6 +1017,42 @@ public class GUI {
         description = "Calculates the integral using Simpson's 1/3 method";
         button = "Enter";
         ActionListener enterSimpson3 = e -> {
+            doAction = pointsFunction -> {
+                try {
+
+                    double a = function.getXp().get(0);
+                    double b = function.getXp().get(function.getXp().size() - 1);
+                    double n = function.getXp().size()-1;
+                    double ans = Integral.getSimpson3(function, a, b, n);
+
+                    //create title
+                    JLabel interTitle = new JLabel();
+                    interTitle.setText("Integration answer using Simpson's 1/3 method : ");
+                    interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea polyAns = new JTextArea();
+                    polyAns.append("Answer : ");
+                    polyAns.append(String.valueOf(ans));
+                    polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAns.setEnabled(false);
+                    polyAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel contentPanel = new JPanel(new GridLayout(2, 1));
+                    contentPanel.add(interTitle);
+                    contentPanel.add(polyAnsScrollPane);
+
+                    String[] response = {"OK"};
+
+                    JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            };
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
@@ -957,6 +1066,42 @@ public class GUI {
         description = "Calculates the integral using Simpson's 3/8 method";
         button = "Enter";
         ActionListener enterSimpson8 = e -> {
+            doAction = pointsFunction -> {
+                try {
+
+                    double a = function.getXp().get(0);
+                    double b = function.getXp().get(function.getXp().size() - 1);
+                    double n = function.getXp().size()-1;
+                    double ans = Integral.getSimpson8(function, a, b, n);
+
+                    //create title
+                    JLabel interTitle = new JLabel();
+                    interTitle.setText("Integration answer using Simpson's 3/8 method : ");
+                    interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea polyAns = new JTextArea();
+                    polyAns.append("Answer : ");
+                    polyAns.append(String.valueOf(ans));
+                    polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAns.setEnabled(false);
+                    polyAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel contentPanel = new JPanel(new GridLayout(2, 1));
+                    contentPanel.add(interTitle);
+                    contentPanel.add(polyAnsScrollPane);
+
+                    String[] response = {"OK"};
+
+                    JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            };
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
@@ -969,7 +1114,46 @@ public class GUI {
         title = "Paul";
         description = "Calculates the integral using Paul's method";
         button = "Enter";
-        ActionListener enterPaul = e -> System.out.println("Entered");
+        ActionListener enterPaul = e -> {
+            doAction = pointsFunction -> {
+                try {
+
+                    double a = function.getXp().get(0);
+                    double b = function.getXp().get(function.getXp().size() - 1);
+                    double n = function.getXp().size()-1;
+                    double ans = Integral.getPaul(function, a, b, n);
+
+                    //create title
+                    JLabel interTitle = new JLabel();
+                    interTitle.setText("Integration answer using Paul's method : ");
+                    interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea polyAns = new JTextArea();
+                    polyAns.append("Answer : ");
+                    polyAns.append(String.valueOf(ans));
+                    polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAns.setEnabled(false);
+                    polyAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel contentPanel = new JPanel(new GridLayout(2, 1));
+                    contentPanel.add(interTitle);
+                    contentPanel.add(polyAnsScrollPane);
+
+                    String[] response = {"OK"};
+
+                    JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            };
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
+        };
         JPanel paulCard = createCard(title, description, button, enterPaul);
         integralPanel.add(paulCard);
 

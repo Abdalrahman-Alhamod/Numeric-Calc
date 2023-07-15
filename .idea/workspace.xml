@@ -12,8 +12,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add Newton Divided forward &amp; backward solution">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix points function bug">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Numerics/Integral.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/Integral.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,12 +52,12 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Functions/ExpressionFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Function.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Main.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Numerics/Integral.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Numerics/Integral.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Interpolation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/SystemOfNonLinearEquations.java" root0="SKIP_INSPECTION" />
@@ -104,20 +106,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢١٧" summary="Test Horner methods">
-      <created>1688943023139</created>
-      <option name="number" value="٠٠٢١٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢١٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688943023139</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢١٨" summary="Add JAVA DOC to Horner class">
-      <created>1688943220509</created>
-      <option name="number" value="٠٠٢١٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢١٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688943220509</updated>
     </task>
     <task id="LOCAL؜-٠٠٢١٩" summary="Fix EvaluateString bug">
       <created>1688984885583</created>
@@ -448,7 +436,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689461229638</updated>
     </task>
-    <option name="localTasksCounter" value="266" />
+    <task id="LOCAL؜-٠٠٢٦٦" summary="Add least squares and spline solution">
+      <created>1689461884620</created>
+      <option name="number" value="٠٠٢٦٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٦٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689461884620</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٦٧" summary="Fix points function bug">
+      <created>1689462584355</created>
+      <option name="number" value="٠٠٢٦٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٦٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689462584355</updated>
+    </task>
+    <option name="localTasksCounter" value="268" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -490,8 +492,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create Diff Panel and test it" />
-    <MESSAGE value="Create Diff EQs Panel and test it" />
     <MESSAGE value="Create Non-Lin EQs Panel and test it" />
     <MESSAGE value="Create Polys Panel and test it" />
     <MESSAGE value="Rename updateMainPanel" />
@@ -515,6 +515,8 @@
     <MESSAGE value="Add lagrange solution" />
     <MESSAGE value="Add Newton-Gregory forward &amp; backward solution" />
     <MESSAGE value="Add Newton Divided forward &amp; backward solution" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Newton Divided forward &amp; backward solution" />
+    <MESSAGE value="Add least squares and spline solution" />
+    <MESSAGE value="Fix points function bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix points function bug" />
   </component>
 </project>
