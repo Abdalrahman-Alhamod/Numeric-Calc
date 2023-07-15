@@ -12,7 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add Newton-Gregory forward &amp; backward solution">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add Newton Divided forward &amp; backward solution">
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,13 +104,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢١٦" summary="Add Horner class to Polynomial with getValueAt, getDiffAt, getDivideOn">
-      <created>1688943000910</created>
-      <option name="number" value="٠٠٢١٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢١٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688943000910</updated>
     </task>
     <task id="LOCAL؜-٠٠٢١٧" summary="Test Horner methods">
       <created>1688943023139</created>
@@ -448,7 +441,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689460922992</updated>
     </task>
-    <option name="localTasksCounter" value="265" />
+    <task id="LOCAL؜-٠٠٢٦٥" summary="Add Newton Divided forward &amp; backward solution">
+      <created>1689461229638</created>
+      <option name="number" value="٠٠٢٦٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٦٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689461229638</updated>
+    </task>
+    <option name="localTasksCounter" value="266" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -490,7 +490,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create integral Panel and test it" />
     <MESSAGE value="Create Diff Panel and test it" />
     <MESSAGE value="Create Diff EQs Panel and test it" />
     <MESSAGE value="Create Non-Lin EQs Panel and test it" />
@@ -515,6 +514,7 @@
     <MESSAGE value="Add try &amp; catch to general method solution" />
     <MESSAGE value="Add lagrange solution" />
     <MESSAGE value="Add Newton-Gregory forward &amp; backward solution" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Newton-Gregory forward &amp; backward solution" />
+    <MESSAGE value="Add Newton Divided forward &amp; backward solution" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Newton Divided forward &amp; backward solution" />
   </component>
 </project>

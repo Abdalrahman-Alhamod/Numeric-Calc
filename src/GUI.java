@@ -804,7 +804,47 @@ public class GUI {
         title = "Least-Squares";
         description = "Get the interpolation function using Least-Squares method";
         button = "Enter";
-        ActionListener enterLeastSquares = e -> System.out.println("Entered");
+        ActionListener enterLeastSquares = e -> {
+            doAction = pointsFunction -> {
+                try {
+                    int degree = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter degree of the required polynomial : ", "Interpolation", JOptionPane.QUESTION_MESSAGE));
+
+                    Polynomial ans = Interpolation.LeastSquares.getIFAP(pointsFunction, degree);
+
+                    //create title
+                    JLabel interTitle = new JLabel();
+                    interTitle.setText("Interpolation answer using Least-Squares : ");
+                    interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea polyAns = new JTextArea();
+                    polyAns.append("P(x) : ");
+                    polyAns.append(ans.toString());
+                    polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAns.setEnabled(false);
+                    polyAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(250, 65));
+
+                    //create content panel
+                    JPanel contentPanel = new JPanel(new GridLayout(2, 1));
+                    contentPanel.add(interTitle);
+                    contentPanel.add(polyAnsScrollPane);
+
+                    String[] response = {"Cancel", "Continue with Polynomial"};
+
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    if (feed == 1) {
+                        panelsStack.add(polynomialsPanel);
+                        updateMainPanel();
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            };
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
+        };
         JPanel leastSquaresCard = createCard(title, description, button, enterLeastSquares);
         interpolationPanel.add(leastSquaresCard);
 
@@ -815,7 +855,47 @@ public class GUI {
         title = "Spline";
         description = "Get the interpolation function using Spline method";
         button = "Enter";
-        ActionListener enterSpline = e -> System.out.println("Entered");
+        ActionListener enterSpline = e -> {
+            doAction = pointsFunction -> {
+                try {
+                    ArrayList<Polynomial> ans = Interpolation.Spline.getIFAPs(pointsFunction);
+                    //create title
+                    JLabel interTitle = new JLabel();
+                    interTitle.setText("Interpolation answer using Spline : ");
+                    interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea polyAns = new JTextArea();
+                    polyAns.append("P(x) : ");
+                    polyAns.append("\n");
+                    for (int i = 0; i < ans.size(); i++) {
+                        polyAns.append("S" + i + "(x) = ");
+                        polyAns.append(ans.get(i).toString());
+                        polyAns.append("\n");
+                    }
+                    polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAns.setEnabled(false);
+                    polyAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(380, 100));
+
+                    //create content panel
+                    JPanel contentPanel = new JPanel(new GridLayout(2, 1,0,-20));
+                    contentPanel.setBorder(BorderFactory.createEmptyBorder(-30, 0, 0, 0));
+                    contentPanel.add(interTitle);
+                    contentPanel.add(polyAnsScrollPane);
+
+                    String[] response = {"OK"};
+
+                    JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            };
+            panelsStack.add(chooseFunctionPanel);
+            updateMainPanel();
+        };
         JPanel splineCard = createCard(title, description, button, enterSpline);
         interpolationPanel.add(splineCard);
 
