@@ -806,6 +806,7 @@ public class GUI {
         JPanel pointsCard = new JPanel();
         JTextArea pointsText;
         JScrollPane pointsScrollPane;
+        JButton continueButton;
         {
 
             //points card title
@@ -821,13 +822,24 @@ public class GUI {
             pointsText.setFont(new Font(mainFont, Font.PLAIN, 20));
             pointsText.setEnabled(false);
             pointsScrollPane = new JScrollPane(pointsText);
-            pointsScrollPane.setPreferredSize(new Dimension(450, 550));
+            pointsScrollPane.setPreferredSize(new Dimension(450, 492));
+
+            // Continue Button
+            continueButton = new JButton("Continue");
+            continueButton.setFont(new Font(buttonFont, Font.BOLD, 20));
+            continueButton.setFocusPainted(false);
+            continueButton.setPreferredSize(new Dimension(60, 50));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            continueButton.setBackground(customGreen);
+            continueButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            continueButton.setEnabled(false); // Disable the button initially
 
             // content panel
             JPanel contentPanel = new JPanel(new BorderLayout());
             contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
             contentPanel.add(titlePanel, BorderLayout.NORTH);
             contentPanel.add(pointsScrollPane, BorderLayout.CENTER);
+            contentPanel.add(continueButton, BorderLayout.SOUTH);
 
             pointsCard.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
             pointsCard.add(contentPanel, BorderLayout.CENTER);
@@ -865,10 +877,10 @@ public class GUI {
             JLabel enterExpTitle = new JLabel("Enter Expression Function :");
 
             JTextField enterExpField = new JTextField();
-            //enterExpField.setPreferredSize(new Dimension(100, 50));
+            enterExpField.setPreferredSize(new Dimension(100, 40));
 
             JPanel enterExp = new JPanel();
-            GridLayout inputLayout = new GridLayout(2, 1, 0, 10);
+            GridLayout inputLayout = new GridLayout(2, 1, 0, -5);
             enterExp.setLayout(inputLayout);
             enterExp.add(enterExpTitle);
             enterExp.add(enterExpField);
@@ -942,6 +954,7 @@ public class GUI {
                         pointsText.append("\n");
                     }
                     pointsText.repaint();
+                    continueButton.setEnabled(true);
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -956,32 +969,11 @@ public class GUI {
             addDocumentListenerToFields(generateButton, fields);
 
             JPanel contentPanel = new JPanel(new BorderLayout());
-            contentPanel.setBorder(BorderFactory.createEmptyBorder(-50, 10, 10, 10));
+            contentPanel.setBorder(BorderFactory.createEmptyBorder(-30, 10, 10, 10));
 
             contentPanel.add(infoPanel, BorderLayout.NORTH);
             contentPanel.add(inputsPanel, BorderLayout.CENTER);
             contentPanel.add(generateButton, BorderLayout.SOUTH);
-
-//            JPanel contentPanel = new JPanel(new GridBagLayout());
-//            GridBagConstraints gbc = new GridBagConstraints();
-//            gbc.gridx = 0;
-//            gbc.gridy = 0;
-//            gbc.anchor = GridBagConstraints.WEST;
-//
-//
-//            contentPanel.add(enterExp, gbc);
-//
-//            gbc.gridy++;
-//            contentPanel.add(enterA, gbc);
-//
-//            gbc.gridy++;
-//            contentPanel.add(enterB);
-//
-//            gbc.gridy++;
-//            contentPanel.add(enterN, gbc);
-//
-//            gbc.gridy++;
-//            contentPanel.add(generateButton, gbc);
 
             inputCard.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
             inputCard.add(contentPanel, BorderLayout.CENTER);
@@ -1007,6 +999,7 @@ public class GUI {
         JPanel pointsCard = new JPanel();
         JTextArea pointsText;
         JScrollPane pointsScrollPane;
+        JButton continueButton;
         {
 
             //points card title
@@ -1018,18 +1011,28 @@ public class GUI {
 
             //point card area
             pointsText = new JTextArea();
-            //pointsText.setPreferredSize(new Dimension(450, 550));
             pointsText.setFont(new Font(mainFont, Font.PLAIN, 20));
             pointsText.setEnabled(false);
             pointsScrollPane = new JScrollPane(pointsText);
-            pointsScrollPane.setPreferredSize(new Dimension(450, 550));
+            pointsScrollPane.setPreferredSize(new Dimension(450, 485));
             pointsScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+            // Continue Button
+            continueButton = new JButton("Continue");
+            continueButton.setFont(new Font(buttonFont, Font.BOLD, 20));
+            continueButton.setFocusPainted(false);
+            continueButton.setPreferredSize(new Dimension(60, 50));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            continueButton.setBackground(customGreen);
+            continueButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            continueButton.setEnabled(false); // Disable the button initially
 
             // content panel
             JPanel contentPanel = new JPanel(new BorderLayout());
             contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
             contentPanel.add(titlePanel, BorderLayout.NORTH);
             contentPanel.add(pointsScrollPane, BorderLayout.CENTER);
+            contentPanel.add(continueButton, BorderLayout.SOUTH);
 
             pointsCard.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
             pointsCard.add(contentPanel, BorderLayout.CENTER);
@@ -1177,17 +1180,17 @@ public class GUI {
             generateButton.addActionListener(e -> {
                 ArrayList<Double> xp = new ArrayList<>();
                 ArrayList<Double> yp = new ArrayList<>();
-                for (JTextField xField : xFields) {
-                    String xFiledContent = xField.getText();
-                    double x = EvaluateString.evaluate(xFiledContent);
-                    xp.add(x);
-                }
-                for (JTextField yField : yFields) {
-                    String yFiledContent = yField.getText();
-                    double y = EvaluateString.evaluate(yFiledContent);
-                    yp.add(y);
-                }
                 try {
+                    for (JTextField xField : xFields) {
+                        String xFiledContent = xField.getText();
+                        double x = EvaluateString.evaluate(xFiledContent);
+                        xp.add(x);
+                    }
+                    for (JTextField yField : yFields) {
+                        String yFiledContent = yField.getText();
+                        double y = EvaluateString.evaluate(yFiledContent);
+                        yp.add(y);
+                    }
                     PointsFunction pointsFunc = new PointsFunction(xp, yp);
                     pointsText.setText("");
                     for (int i = 0; i < xp.size(); i++) {
@@ -1198,6 +1201,7 @@ public class GUI {
                         pointsText.append("\n");
                     }
                     pointsText.repaint();
+                    continueButton.setEnabled(true);
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

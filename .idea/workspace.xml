@@ -12,10 +12,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add exp Panel and test it&#10;Add exceptions to exp Functions">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add initPtsFuncPanel and test it&#10;Fix issues in expFuncPanel ( fields and input n)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,13 +99,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٠٧" summary="Add Newton-Raphson class to NonLinearEquation">
-      <created>1688935799718</created>
-      <option name="number" value="٠٠٢٠٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٠٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688935799718</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٠٨" summary="Test Newton-Raphson class">
       <created>1688935811007</created>
@@ -444,7 +436,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689427016929</updated>
     </task>
-    <option name="localTasksCounter" value="256" />
+    <task id="LOCAL؜-٠٠٢٥٦" summary="Add initPtsFuncPanel and test it&#10;Fix issues in expFuncPanel ( fields and input n)">
+      <created>1689437541388</created>
+      <option name="number" value="٠٠٢٥٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٥٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689437541388</updated>
+    </task>
+    <option name="localTasksCounter" value="257" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -486,7 +485,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix indexOutOfBounds in PointsFunction" />
     <MESSAGE value="Make Exceptions more detailed" />
     <MESSAGE value="Fix main printing" />
     <MESSAGE value="Remove testing code from main" />
@@ -511,6 +509,7 @@
     <MESSAGE value="Change diff and polys panels rows and columns" />
     <MESSAGE value="Add setResizable false" />
     <MESSAGE value="Add exp Panel and test it&#10;Add exceptions to exp Functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add exp Panel and test it&#10;Add exceptions to exp Functions" />
+    <MESSAGE value="Add initPtsFuncPanel and test it&#10;Fix issues in expFuncPanel ( fields and input n)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add initPtsFuncPanel and test it&#10;Fix issues in expFuncPanel ( fields and input n)" />
   </component>
 </project>
