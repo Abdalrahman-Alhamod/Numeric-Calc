@@ -48,6 +48,16 @@ public class PointsFunction implements Function {
     }
 
     /**
+     * Evaluates the value of the function at index of the x-coordinate using interpolation.
+     *
+     * @param index The index of the x-coordinate at which to evaluate the function.
+     * @return The value of the function at index of the x-coordinate using interpolation.
+     */
+    public double getValueAt(int index) {
+        return yp.get(index);
+    }
+
+    /**
      * Adds a new point to the function with the given x and y coordinates.
      *
      * @param x The x-coordinate of the new point.
