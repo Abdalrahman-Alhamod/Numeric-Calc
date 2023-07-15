@@ -338,34 +338,38 @@ public class GUI {
         String button = "Enter";
         ActionListener enterGeneralMethod = e -> {
             doAction = pointsFunction -> {
-                Polynomial ans = Interpolation.GeneralMethod.getIFAP(pointsFunction);
-                //points card title
-                JLabel interTitle = new JLabel();
-                interTitle.setText("Interpolation answer using General Method : ");
-                interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+                try {
+                    Polynomial ans = Interpolation.GeneralMethod.getIFAP(pointsFunction);
+                    //points card title
+                    JLabel interTitle = new JLabel();
+                    interTitle.setText("Interpolation answer using General Method : ");
+                    interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
 
-                //point card area
-                JTextArea polyAns = new JTextArea();
-                polyAns.append("P(x) : ");
-                polyAns.append(ans.toString());
-                polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                polyAns.setEnabled(false);
-                polyAns.setDisabledTextColor(Color.BLACK);
-                JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
-                polyAnsScrollPane.setPreferredSize(new Dimension(250, 70));
+                    //point card area
+                    JTextArea polyAns = new JTextArea();
+                    polyAns.append("P(x) : ");
+                    polyAns.append(ans.toString());
+                    polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAns.setEnabled(false);
+                    polyAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(250, 70));
 
-                JPanel contentPanel = new JPanel(new BorderLayout());
-                contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
-                contentPanel.add(interTitle, BorderLayout.NORTH);
-                contentPanel.add(polyAnsScrollPane, BorderLayout.CENTER);
+                    JPanel contentPanel = new JPanel(new BorderLayout());
+                    contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
+                    contentPanel.add(interTitle, BorderLayout.NORTH);
+                    contentPanel.add(polyAnsScrollPane, BorderLayout.CENTER);
 
-                String[] response = {"Cancel", "Continue with Polynomial"};
+                    String[] response = {"Cancel", "Continue with Polynomial"};
 
-                int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
-                if (feed == 1) {
-                    panelsStack.add(polynomialsPanel);
-                    updateMainPanel();
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    if (feed == 1) {
+                        panelsStack.add(polynomialsPanel);
+                        updateMainPanel();
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             };
             panelsStack.add(chooseFunctionPanel);
