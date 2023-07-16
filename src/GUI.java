@@ -10,7 +10,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
@@ -19,7 +18,6 @@ import java.util.function.Consumer;
 
 public class GUI {
     private JFrame mainFrame;
-    private JMenuBar mainMenuBar;
     private JPanel startPanel;
     private JPanel chooseFunctionPanel;
     private JPanel interpolationPanel;
@@ -92,7 +90,7 @@ public class GUI {
     }
 
     private void initMenuBar() {
-        mainMenuBar = new JMenuBar();
+        JMenuBar mainMenuBar = new JMenuBar();
         mainMenuBar.setLayout(new BorderLayout());
 
         backButton = new JButton();
@@ -461,7 +459,51 @@ public class GUI {
             doAction = pointsFunction -> {
                 try {
 
-                    int degree = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter degree of the required polynomial : ", "Interpolation", JOptionPane.QUESTION_MESSAGE));
+                    // inputs : degree
+                    JLabel enterDegreeTitle = new JLabel("Enter degree of the required polynomial : ");
+                    enterDegreeTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+                    enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
+
+                    SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, 100, 1);
+                    JSpinner enterDegreeSp = new JSpinner(spinnerModel);
+                    JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterDegreeSp.getEditor();
+                    editor.getTextField().setColumns(2); // Adjust the width as needed
+
+                    JPanel enterDegree = new JPanel();
+                    enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                    enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
+                    enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
+                    enterDegree.setBorder(BorderFactory.createEmptyBorder(10, 0, -10, 0));
+
+                    JButton solveButton = new JButton("Solve");
+                    solveButton.setFocusPainted(false);
+                    Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+                    solveButton.setBackground(customGreen);
+                    solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+
+                    JButton cancelButton = new JButton("Cancel");
+                    cancelButton.setFocusPainted(false);
+
+                    Object[] buttons = {cancelButton, solveButton};
+
+                    final boolean[] cancelPressed = {false};
+                    cancelButton.addActionListener(cancel -> {
+                        cancelPressed[0] = true;
+                        Window optionDialog = SwingUtilities.getWindowAncestor(enterDegree);
+                        optionDialog.dispose();
+                    });
+
+                    final int[] degree = {0};
+
+                    solveButton.addActionListener(solve -> {
+                        Window optionDialog = SwingUtilities.getWindowAncestor(enterDegree);
+                        optionDialog.dispose();
+                        degree[0] = (int) enterDegreeSp.getValue();
+                    });
+
+                    JOptionPane.showOptionDialog(null, enterDegree, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
+                    if (cancelPressed[0])
+                        return;
 
                     ArrayList<Double> values = Interpolation.Newton_GregoryForwardSubtractions.getUDV(function);
 
@@ -479,7 +521,7 @@ public class GUI {
                     JScrollPane tableAnsScrollPane = new JScrollPane(tableAns);
                     tableAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
-                    Polynomial ans = Interpolation.Newton_GregoryForwardSubtractions.getIFAP(pointsFunction, degree);
+                    Polynomial ans = Interpolation.Newton_GregoryForwardSubtractions.getIFAP(pointsFunction, degree[0]);
 
                     JLabel interTitle = new JLabel();
                     interTitle.setText("Interpolation answer using Newton-Gregory Forward Subtraction : ");
@@ -499,7 +541,7 @@ public class GUI {
                     shortPolyTitle.setText("Interpolation answer with no shorthand : ");
                     shortPolyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
-                    String asnNSH = Interpolation.Newton_GregoryForwardSubtractions.getIFASNS(pointsFunction, degree);
+                    String asnNSH = Interpolation.Newton_GregoryForwardSubtractions.getIFASNS(pointsFunction, degree[0]);
 
                     JTextArea polyAnsNSH = new JTextArea();
                     polyAnsNSH.append("P(x) : ");
@@ -550,7 +592,52 @@ public class GUI {
             doAction = pointsFunction -> {
                 try {
 
-                    int degree = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter degree of the required polynomial : ", "Interpolation", JOptionPane.QUESTION_MESSAGE));
+                    // inputs : degree
+                    JLabel enterDegreeTitle = new JLabel("Enter degree of the required polynomial : ");
+                    enterDegreeTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+                    enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
+
+                    SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, 100, 1);
+                    JSpinner enterDegreeSp = new JSpinner(spinnerModel);
+                    JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterDegreeSp.getEditor();
+                    editor.getTextField().setColumns(2); // Adjust the width as needed
+
+                    JPanel enterDegree = new JPanel();
+                    enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                    enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
+                    enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
+                    enterDegree.setBorder(BorderFactory.createEmptyBorder(10, 0, -10, 0));
+
+                    JButton solveButton = new JButton("Solve");
+                    solveButton.setFocusPainted(false);
+                    Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+                    solveButton.setBackground(customGreen);
+                    solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+
+                    JButton cancelButton = new JButton("Cancel");
+                    cancelButton.setFocusPainted(false);
+
+                    Object[] buttons = {cancelButton, solveButton};
+
+                    final boolean[] cancelPressed = {false};
+                    cancelButton.addActionListener(cancel -> {
+                        cancelPressed[0] = true;
+                        Window optionDialog = SwingUtilities.getWindowAncestor(enterDegree);
+                        optionDialog.dispose();
+                    });
+
+                    final int[] degree = {0};
+
+                    solveButton.addActionListener(solve -> {
+                        Window optionDialog = SwingUtilities.getWindowAncestor(enterDegree);
+                        optionDialog.dispose();
+                        degree[0] = (int) enterDegreeSp.getValue();
+                    });
+
+                    JOptionPane.showOptionDialog(null, enterDegree, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
+                    if (cancelPressed[0])
+                        return;
+
 
                     ArrayList<Double> values = Interpolation.Newton_GregoryBackwardSubtractions.getLDV(function);
 
@@ -568,7 +655,7 @@ public class GUI {
                     JScrollPane tableAnsScrollPane = new JScrollPane(tableAns);
                     tableAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
-                    Polynomial ans = Interpolation.Newton_GregoryBackwardSubtractions.getIFAP(pointsFunction, degree);
+                    Polynomial ans = Interpolation.Newton_GregoryBackwardSubtractions.getIFAP(pointsFunction, degree[0]);
 
                     JLabel interTitle = new JLabel();
                     interTitle.setText("Interpolation answer using Newton-Gregory Backward Subtraction : ");
@@ -588,7 +675,7 @@ public class GUI {
                     shortPolyTitle.setText("Interpolation answer with no shorthand : ");
                     shortPolyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
-                    String asnNSH = Interpolation.Newton_GregoryBackwardSubtractions.getIFASNS(pointsFunction, degree);
+                    String asnNSH = Interpolation.Newton_GregoryBackwardSubtractions.getIFASNS(pointsFunction, degree[0]);
 
                     JTextArea polyAnsNSH = new JTextArea();
                     polyAnsNSH.append("P(x) : ");
@@ -639,7 +726,52 @@ public class GUI {
             doAction = pointsFunction -> {
                 try {
 
-                    int degree = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter degree of the required polynomial : ", "Interpolation", JOptionPane.QUESTION_MESSAGE));
+                    // inputs : degree
+                    JLabel enterDegreeTitle = new JLabel("Enter degree of the required polynomial : ");
+                    enterDegreeTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+                    enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
+
+                    SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, 100, 1);
+                    JSpinner enterDegreeSp = new JSpinner(spinnerModel);
+                    JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterDegreeSp.getEditor();
+                    editor.getTextField().setColumns(2); // Adjust the width as needed
+
+                    JPanel enterDegree = new JPanel();
+                    enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                    enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
+                    enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
+                    enterDegree.setBorder(BorderFactory.createEmptyBorder(10, 0, -10, 0));
+
+                    JButton solveButton = new JButton("Solve");
+                    solveButton.setFocusPainted(false);
+                    Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+                    solveButton.setBackground(customGreen);
+                    solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+
+                    JButton cancelButton = new JButton("Cancel");
+                    cancelButton.setFocusPainted(false);
+
+                    Object[] buttons = {cancelButton, solveButton};
+
+                    final boolean[] cancelPressed = {false};
+                    cancelButton.addActionListener(cancel -> {
+                        cancelPressed[0] = true;
+                        Window optionDialog = SwingUtilities.getWindowAncestor(enterDegree);
+                        optionDialog.dispose();
+                    });
+
+                    final int[] degree = {0};
+
+                    solveButton.addActionListener(solve -> {
+                        Window optionDialog = SwingUtilities.getWindowAncestor(enterDegree);
+                        optionDialog.dispose();
+                        degree[0] = (int) enterDegreeSp.getValue();
+                    });
+
+                    JOptionPane.showOptionDialog(null, enterDegree, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
+                    if (cancelPressed[0])
+                        return;
+
 
                     ArrayList<Double> values = Interpolation.NewtonForwardDividedSubtractions.getUDV(function);
 
@@ -657,7 +789,7 @@ public class GUI {
                     JScrollPane tableAnsScrollPane = new JScrollPane(tableAns);
                     tableAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
-                    Polynomial ans = Interpolation.NewtonForwardDividedSubtractions.getIFAP(pointsFunction, degree);
+                    Polynomial ans = Interpolation.NewtonForwardDividedSubtractions.getIFAP(pointsFunction, degree[0]);
 
                     JLabel interTitle = new JLabel();
                     interTitle.setText("Interpolation answer using Newton Forward Divided Subtractions : ");
@@ -677,7 +809,7 @@ public class GUI {
                     shortPolyTitle.setText("Interpolation answer with no shorthand : ");
                     shortPolyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
-                    String asnNSH = Interpolation.NewtonForwardDividedSubtractions.getIFASNS(pointsFunction, degree);
+                    String asnNSH = Interpolation.NewtonForwardDividedSubtractions.getIFASNS(pointsFunction, degree[0]);
 
                     JTextArea polyAnsNSH = new JTextArea();
                     polyAnsNSH.append("P(x) : ");
@@ -728,7 +860,52 @@ public class GUI {
             doAction = pointsFunction -> {
                 try {
 
-                    int degree = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter degree of the required polynomial : ", "Interpolation", JOptionPane.QUESTION_MESSAGE));
+                    // inputs : degree
+                    JLabel enterDegreeTitle = new JLabel("Enter degree of the required polynomial : ");
+                    enterDegreeTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+                    enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
+
+                    SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, 100, 1);
+                    JSpinner enterDegreeSp = new JSpinner(spinnerModel);
+                    JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterDegreeSp.getEditor();
+                    editor.getTextField().setColumns(2); // Adjust the width as needed
+
+                    JPanel enterDegree = new JPanel();
+                    enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                    enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
+                    enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
+                    enterDegree.setBorder(BorderFactory.createEmptyBorder(10, 0, -10, 0));
+
+                    JButton solveButton = new JButton("Solve");
+                    solveButton.setFocusPainted(false);
+                    Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+                    solveButton.setBackground(customGreen);
+                    solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+
+                    JButton cancelButton = new JButton("Cancel");
+                    cancelButton.setFocusPainted(false);
+
+                    Object[] buttons = {cancelButton, solveButton};
+
+                    final boolean[] cancelPressed = {false};
+                    cancelButton.addActionListener(cancel -> {
+                        cancelPressed[0] = true;
+                        Window optionDialog = SwingUtilities.getWindowAncestor(enterDegree);
+                        optionDialog.dispose();
+                    });
+
+                    final int[] degree = {0};
+
+                    solveButton.addActionListener(solve -> {
+                        Window optionDialog = SwingUtilities.getWindowAncestor(enterDegree);
+                        optionDialog.dispose();
+                        degree[0] = (int) enterDegreeSp.getValue();
+                    });
+
+                    JOptionPane.showOptionDialog(null, enterDegree, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
+                    if (cancelPressed[0])
+                        return;
+
 
                     ArrayList<Double> values = Interpolation.NewtonBackwardDividedSubtractions.getLDV(function);
 
@@ -746,7 +923,7 @@ public class GUI {
                     JScrollPane tableAnsScrollPane = new JScrollPane(tableAns);
                     tableAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
-                    Polynomial ans = Interpolation.NewtonBackwardDividedSubtractions.getIFAP(pointsFunction, degree);
+                    Polynomial ans = Interpolation.NewtonBackwardDividedSubtractions.getIFAP(pointsFunction, degree[0]);
 
                     JLabel interTitle = new JLabel();
                     interTitle.setText("Interpolation answer using Newton Backward Divided Subtractions : ");
@@ -766,7 +943,7 @@ public class GUI {
                     shortPolyTitle.setText("Interpolation answer with no shorthand : ");
                     shortPolyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
-                    String asnNSH = Interpolation.NewtonForwardDividedSubtractions.getIFASNS(pointsFunction, degree);
+                    String asnNSH = Interpolation.NewtonForwardDividedSubtractions.getIFASNS(pointsFunction, degree[0]);
 
                     JTextArea polyAnsNSH = new JTextArea();
                     polyAnsNSH.append("P(x) : ");
@@ -815,9 +992,55 @@ public class GUI {
         ActionListener enterLeastSquares = e -> {
             doAction = pointsFunction -> {
                 try {
-                    int degree = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter degree of the required polynomial : ", "Interpolation", JOptionPane.QUESTION_MESSAGE));
 
-                    Polynomial ans = Interpolation.LeastSquares.getIFAP(pointsFunction, degree);
+                    // inputs : degree
+                    JLabel enterDegreeTitle = new JLabel("Enter degree of the required polynomial : ");
+                    enterDegreeTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+                    enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
+
+                    SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, 100, 1);
+                    JSpinner enterDegreeSp = new JSpinner(spinnerModel);
+                    JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterDegreeSp.getEditor();
+                    editor.getTextField().setColumns(2); // Adjust the width as needed
+
+                    JPanel enterDegree = new JPanel();
+                    enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                    enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
+                    enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
+                    enterDegree.setBorder(BorderFactory.createEmptyBorder(10, 0, -10, 0));
+
+                    JButton solveButton = new JButton("Solve");
+                    solveButton.setFocusPainted(false);
+                    Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+                    solveButton.setBackground(customGreen);
+                    solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+
+                    JButton cancelButton = new JButton("Cancel");
+                    cancelButton.setFocusPainted(false);
+
+                    Object[] buttons = {cancelButton, solveButton};
+
+                    final boolean[] cancelPressed = {false};
+                    cancelButton.addActionListener(cancel -> {
+                        cancelPressed[0] = true;
+                        Window optionDialog = SwingUtilities.getWindowAncestor(enterDegree);
+                        optionDialog.dispose();
+                    });
+
+                    final int[] degree = {0};
+
+                    solveButton.addActionListener(solve -> {
+                        Window optionDialog = SwingUtilities.getWindowAncestor(enterDegree);
+                        optionDialog.dispose();
+                        degree[0] = (int) enterDegreeSp.getValue();
+                    });
+
+                    JOptionPane.showOptionDialog(null, enterDegree, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
+                    if (cancelPressed[0])
+                        return;
+
+
+                    Polynomial ans = Interpolation.LeastSquares.getIFAP(pointsFunction, degree[0]);
 
                     //create title
                     JLabel interTitle = new JLabel();
@@ -1239,11 +1462,75 @@ public class GUI {
             doAction = pointsFunction -> {
                 try {
 
-                    int degree = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter degree of the required polynomial : ", "Differentiation", JOptionPane.QUESTION_MESSAGE));
+                    // inputs : degree
+                    JLabel enterDegreeTitle = new JLabel("Enter degree of the required polynomial : ");
+                    enterDegreeTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+                    enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
-                    int rank = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter rank of the required differentiation : ", "Differentiation", JOptionPane.QUESTION_MESSAGE));
+                    SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, 100, 1);
+                    JSpinner enterDegreeSp = new JSpinner(spinnerModel);
+                    JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterDegreeSp.getEditor();
+                    editor.getTextField().setColumns(2); // Adjust the width as needed
 
-                    Polynomial ans = Differentiation.Newton_GregoryForwardSubtractions.getIFAP(pointsFunction, degree, rank);
+                    JPanel enterDegree = new JPanel();
+                    enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                    enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
+                    enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
+                    //enterDegree.setBorder(BorderFactory.createEmptyBorder(10,0,-10,0));
+
+                    // inputs : rank
+                    JLabel enterRankTitle = new JLabel("Enter rank of the required differentiation : ");
+                    enterRankTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+                    enterRankTitle.setHorizontalAlignment(SwingConstants.LEFT);
+
+                    SpinnerNumberModel spinnerModelRank = new SpinnerNumberModel(1, 1, 100, 1);
+                    JSpinner enterRankSp = new JSpinner(spinnerModelRank);
+                    JSpinner.NumberEditor editorRank = (JSpinner.NumberEditor) enterRankSp.getEditor();
+                    editorRank.getTextField().setColumns(2); // Adjust the width as needed
+
+                    JPanel enterRank = new JPanel();
+                    enterRank.setLayout(new FlowLayout(FlowLayout.LEFT));
+                    enterRank.add(enterRankTitle, BorderLayout.WEST);
+                    enterRank.add(enterRankSp, BorderLayout.CENTER);
+                    //enterRank.setBorder(BorderFactory.createEmptyBorder(10,0,-10,0));
+
+                    JPanel inputs = new JPanel(new GridLayout(2, 1));
+                    inputs.add(enterDegree);
+                    inputs.add(enterRank);
+
+                    JButton solveButton = new JButton("Solve");
+                    solveButton.setFocusPainted(false);
+                    Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+                    solveButton.setBackground(customGreen);
+                    solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+
+                    JButton cancelButton = new JButton("Cancel");
+                    cancelButton.setFocusPainted(false);
+
+                    Object[] buttons = {cancelButton, solveButton};
+
+                    final boolean[] cancelPressed = {false};
+                    cancelButton.addActionListener(cancel -> {
+                        cancelPressed[0] = true;
+                        Window optionDialog = SwingUtilities.getWindowAncestor(inputs);
+                        optionDialog.dispose();
+                    });
+
+                    final int[] degree = {0};
+                    final int[] rank = {0};
+                    solveButton.addActionListener(solve -> {
+                        Window optionDialog = SwingUtilities.getWindowAncestor(inputs);
+                        optionDialog.dispose();
+                        degree[0] = (int) enterDegreeSp.getValue();
+                        rank[0] = (int) enterRankSp.getValue();
+                    });
+
+                    JOptionPane.showOptionDialog(null, inputs, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
+                    if (cancelPressed[0])
+                        return;
+
+
+                    Polynomial ans = Differentiation.Newton_GregoryForwardSubtractions.getIFAP(pointsFunction, degree[0], rank[0]);
 
                     JLabel interTitle = new JLabel();
                     interTitle.setText("Differentiation answer using Newton-Gregory Forward Subtraction : ");
@@ -1294,11 +1581,75 @@ public class GUI {
             doAction = pointsFunction -> {
                 try {
 
-                    int degree = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter degree of the required polynomial : ", "Differentiation", JOptionPane.QUESTION_MESSAGE));
+                    // inputs : degree
+                    JLabel enterDegreeTitle = new JLabel("Enter degree of the required polynomial : ");
+                    enterDegreeTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+                    enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
-                    int rank = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter rank of the required differentiation : ", "Differentiation", JOptionPane.QUESTION_MESSAGE));
+                    SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, 100, 1);
+                    JSpinner enterDegreeSp = new JSpinner(spinnerModel);
+                    JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterDegreeSp.getEditor();
+                    editor.getTextField().setColumns(2); // Adjust the width as needed
 
-                    Polynomial ans = Differentiation.Newton_GregoryBackwardSubtractions.getIFAP(pointsFunction, degree, rank);
+                    JPanel enterDegree = new JPanel();
+                    enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                    enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
+                    enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
+                    //enterDegree.setBorder(BorderFactory.createEmptyBorder(10,0,-10,0));
+
+                    // inputs : rank
+                    JLabel enterRankTitle = new JLabel("Enter rank of the required differentiation : ");
+                    enterRankTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+                    enterRankTitle.setHorizontalAlignment(SwingConstants.LEFT);
+
+                    SpinnerNumberModel spinnerModelRank = new SpinnerNumberModel(1, 1, 100, 1);
+                    JSpinner enterRankSp = new JSpinner(spinnerModelRank);
+                    JSpinner.NumberEditor editorRank = (JSpinner.NumberEditor) enterRankSp.getEditor();
+                    editorRank.getTextField().setColumns(2); // Adjust the width as needed
+
+                    JPanel enterRank = new JPanel();
+                    enterRank.setLayout(new FlowLayout(FlowLayout.LEFT));
+                    enterRank.add(enterRankTitle, BorderLayout.WEST);
+                    enterRank.add(enterRankSp, BorderLayout.CENTER);
+                    //enterRank.setBorder(BorderFactory.createEmptyBorder(10,0,-10,0));
+
+                    JPanel inputs = new JPanel(new GridLayout(2, 1));
+                    inputs.add(enterDegree);
+                    inputs.add(enterRank);
+
+                    JButton solveButton = new JButton("Solve");
+                    solveButton.setFocusPainted(false);
+                    Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+                    solveButton.setBackground(customGreen);
+                    solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+
+                    JButton cancelButton = new JButton("Cancel");
+                    cancelButton.setFocusPainted(false);
+
+                    Object[] buttons = {cancelButton, solveButton};
+
+                    final boolean[] cancelPressed = {false};
+                    cancelButton.addActionListener(cancel -> {
+                        cancelPressed[0] = true;
+                        Window optionDialog = SwingUtilities.getWindowAncestor(inputs);
+                        optionDialog.dispose();
+                    });
+
+                    final int[] degree = {0};
+                    final int[] rank = {0};
+                    solveButton.addActionListener(solve -> {
+                        Window optionDialog = SwingUtilities.getWindowAncestor(inputs);
+                        optionDialog.dispose();
+                        degree[0] = (int) enterDegreeSp.getValue();
+                        rank[0] = (int) enterRankSp.getValue();
+                    });
+
+                    JOptionPane.showOptionDialog(null, inputs, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
+                    if (cancelPressed[0])
+                        return;
+
+
+                    Polynomial ans = Differentiation.Newton_GregoryBackwardSubtractions.getIFAP(pointsFunction, degree[0], rank[0]);
 
                     JLabel interTitle = new JLabel();
                     interTitle.setText("Differentiation answer using Newton-Gregory Backward Subtraction : ");
@@ -1349,27 +1700,85 @@ public class GUI {
         ActionListener enterCFBS = e -> {
             doAction = pointsFunction -> {
                 try {
-                    String[] inputResponse = {"Backward Subtractions", "Central Subtractions", "Forward Subtractions"};
 
-                    double x = Double.parseDouble(JOptionPane.showInputDialog(null,
-                            "Enter x value to get differentiation at it", "Differentiation", JOptionPane.QUESTION_MESSAGE));
+                    JLabel enterXLabel = new JLabel("Enter x value to get differentiation at it : ");
+                    enterXLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
 
-                    String method = String.valueOf(JOptionPane.showInputDialog(null,
-                            "Choose a method : ", "Differentiation",
-                            JOptionPane.QUESTION_MESSAGE, solutionIcon, inputResponse, inputResponse[1]));
+                    JTextField enterXField = new JTextField();
+                    enterXField.setColumns(25);
+
+                    JLabel enterMethodLabel = new JLabel("Choose a method : ");
+                    enterMethodLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+
+                    JComboBox<String> enterMethodCombo = new JComboBox<>();
+                    enterMethodCombo.addItem("Backward Subtractions");
+                    enterMethodCombo.addItem("Central Subtractions");
+                    enterMethodCombo.addItem("Forward Subtractions");
+
+                    JPanel inputs = new JPanel(new GridBagLayout());
+                    GridBagConstraints gbc = new GridBagConstraints();
+                    gbc.gridx = 0;
+                    gbc.gridy = 0;
+                    gbc.insets = new Insets(5, -22, 5, 5);
+                    inputs.add(enterXLabel, gbc);
+                    gbc.gridy++;
+                    gbc.insets = new Insets(5, 5, 5, 5);
+                    inputs.add(enterXField, gbc);
+                    gbc.gridy++;
+                    gbc.insets = new Insets(5, -150, 5, 5);
+                    inputs.add(enterMethodLabel, gbc);
+                    gbc.gridx++;
+                    inputs.add(enterMethodCombo, gbc);
+
+                    JButton solveButton = new JButton("Solve");
+                    solveButton.setFocusPainted(false);
+                    Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+                    solveButton.setBackground(customGreen);
+                    solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+                    solveButton.setEnabled(false);
+
+                    ArrayList<JTextField> fields = new ArrayList<>();
+                    fields.add(enterXField);
+                    addDocumentListenerToFields(solveButton, fields);
+
+                    JButton cancelButton = new JButton("Cancel");
+                    cancelButton.setFocusPainted(false);
+
+                    Object[] buttons = {cancelButton, solveButton};
+
+                    final boolean[] cancelPressed = {false};
+                    cancelButton.addActionListener(cancel -> {
+                        cancelPressed[0] = true;
+                        Window optionDialog = SwingUtilities.getWindowAncestor(inputs);
+                        optionDialog.dispose();
+                    });
+
+                    final double[] x = {0};
+                    final String[] method = {""};
+                    solveButton.addActionListener(solve -> {
+                        Window optionDialog = SwingUtilities.getWindowAncestor(inputs);
+                        optionDialog.dispose();
+                        x[0] = EvaluateString.evaluate(enterXField.getText());
+                        method[0] = String.valueOf(enterMethodCombo.getSelectedItem());
+                    });
+
+                    JOptionPane.showOptionDialog(null, inputs, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
+                    if (cancelPressed[0])
+                        return;
+
                     double ans;
 
-                    switch (method) {
+                    switch (method[0]) {
                         case "Backward Subtractions": {
-                            ans = Differentiation.Subtractions.Backward.getValueAt(function, x);
+                            ans = Differentiation.Subtractions.Backward.getValueAt(function, x[0]);
                             break;
                         }
                         case "Central Subtractions": {
-                            ans = Differentiation.Subtractions.Central.getValueAt(function, x);
+                            ans = Differentiation.Subtractions.Central.getValueAt(function, x[0]);
                             break;
                         }
                         case "Forward Subtractions": {
-                            ans = Differentiation.Subtractions.Forward.getValueAt(function, x);
+                            ans = Differentiation.Subtractions.Forward.getValueAt(function, x[0]);
                             break;
                         }
                         default: {
@@ -1379,7 +1788,7 @@ public class GUI {
 
 
                     JLabel interTitle = new JLabel();
-                    interTitle.setText("Differentiation answer using " + method + " : ");
+                    interTitle.setText("Differentiation answer using " + method[0] + " : ");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
 

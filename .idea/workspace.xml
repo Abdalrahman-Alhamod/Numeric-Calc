@@ -12,7 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix horner diff bug">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix forward and backward subtraction bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
     </list>
@@ -108,20 +108,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٣٠" summary="Add jar">
-      <created>1688996600682</created>
-      <option name="number" value="٠٠٢٣٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٣٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688996600682</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٣١" summary="Fix indexOutOfBounds in PointsFunction">
-      <created>1689070002488</created>
-      <option name="number" value="٠٠٢٣١" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٣١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689070002488</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٣٢" summary="Make Exceptions more detailed">
       <created>1689071656915</created>
@@ -452,7 +438,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689542569565</updated>
     </task>
-    <option name="localTasksCounter" value="279" />
+    <task id="LOCAL؜-٠٠٢٧٩" summary="Add sysOfNonLinEqs solution&#10;Add polynomials solution">
+      <created>1689543588790</created>
+      <option name="number" value="٠٠٢٧٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٧٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689543588790</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٨٠" summary="Fix forward and backward subtraction bug">
+      <created>1689548213890</created>
+      <option name="number" value="٠٠٢٨٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٨٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689548213890</updated>
+    </task>
+    <option name="localTasksCounter" value="281" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -495,8 +495,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Change diff and polys panels rows and columns" />
-    <MESSAGE value="Add setResizable false" />
     <MESSAGE value="Add exp Panel and test it&#10;Add exceptions to exp Functions" />
     <MESSAGE value="Add initPtsFuncPanel and test it&#10;Fix issues in expFuncPanel ( fields and input n)" />
     <MESSAGE value="Add continue button" />
@@ -520,6 +518,8 @@
     <MESSAGE value="Fix horner bug" />
     <MESSAGE value="Fix horner floating error" />
     <MESSAGE value="Fix horner diff bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix horner diff bug" />
+    <MESSAGE value="Add sysOfNonLinEqs solution&#10;Add polynomials solution" />
+    <MESSAGE value="Fix forward and backward subtraction bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix forward and backward subtraction bug" />
   </component>
 </project>
