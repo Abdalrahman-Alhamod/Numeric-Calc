@@ -442,7 +442,7 @@ public class Polynomial implements Function {
          * @param x    The value of x for evaluation.
          */
         private static void calcB(Polynomial poly, double x) {
-            ArrayList<Double> a = poly.getCoeffs();
+            ArrayList<Double> a = new ArrayList<>(poly.getCoeffs());
             Collections.reverse(a);
             double bi = a.get(0);
             b = new ArrayList<>();
