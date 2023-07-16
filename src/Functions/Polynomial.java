@@ -449,6 +449,8 @@ public class Polynomial implements Function {
             b.add(bi);
             for (int i = 1; i < a.size(); i++) {
                 bi = x * bi + a.get(i);
+                //Rounding value back to fix floating-point precision errors
+                bi = Math.round(bi * 1e10) / 1e10;
                 b.add(bi);
             }
         }
