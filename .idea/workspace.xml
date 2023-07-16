@@ -12,10 +12,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add Terminal class and ove the code to it from the main method">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add keyboard icons">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,13 +67,16 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2S0jw4yAv8pmViLPoHjciy2VUVB" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -106,20 +108,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٢٤" summary="Fix Polynomial print bug">
-      <created>1688992949753</created>
-      <option name="number" value="٠٠٢٢٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٢٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688992949753</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٢٥" summary="Make SystemOfNonLinearEquations abstract">
-      <created>1688992972635</created>
-      <option name="number" value="٠٠٢٢٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٢٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688992972635</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٢٦" summary="Fix floating points in functions">
       <created>1688993010815</created>
@@ -450,7 +438,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689511024194</updated>
     </task>
-    <option name="localTasksCounter" value="273" />
+    <task id="LOCAL؜-٠٠٢٧٣" summary="Add differential equations solution">
+      <created>1689523954359</created>
+      <option name="number" value="٠٠٢٧٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٧٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689523954359</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٧٤" summary="Add keyboard icons">
+      <created>1689523978622</created>
+      <option name="number" value="٠٠٢٧٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٧٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689523978622</updated>
+    </task>
+    <option name="localTasksCounter" value="275" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -492,8 +494,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add home Button" />
-    <MESSAGE value="Clean Code : converting to lambda" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Clean Code project" />
     <MESSAGE value="Enhance main code" />
     <MESSAGE value="Add info Icon" />
@@ -517,6 +518,8 @@
     <MESSAGE value="Add diffs solutions&#10;Fix interpolation and integral dialogs" />
     <MESSAGE value="Enhance , clean up GUI" />
     <MESSAGE value="Add Terminal class and ove the code to it from the main method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Terminal class and ove the code to it from the main method" />
+    <MESSAGE value="Add differential equations solution" />
+    <MESSAGE value="Add keyboard icons" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add keyboard icons" />
   </component>
 </project>

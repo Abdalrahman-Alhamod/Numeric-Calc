@@ -1,10 +1,7 @@
 import Functions.ExpressionFunction;
 import Functions.PointsFunction;
 import Functions.Polynomial;
-import Numerics.DifferentialEquation;
-import Numerics.Differentiation;
-import Numerics.Integral;
-import Numerics.Interpolation;
+import Numerics.*;
 import Util.EvaluateString;
 
 import javax.swing.*;
@@ -1535,7 +1532,7 @@ public class GUI {
                     ansContentPanel.add(polyAnsScrollPane);
 
                     JOptionPane.showConfirmDialog(null, ansContentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
-                    // JOptionPane.showConfirmDialog(null)
+
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -1802,7 +1799,7 @@ public class GUI {
                     ansContentPanel.add(polyAnsScrollPane);
 
                     JOptionPane.showConfirmDialog(null, ansContentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
-                    // JOptionPane.showConfirmDialog(null)
+
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -1942,7 +1939,7 @@ public class GUI {
                     ansContentPanel.add(polyAnsScrollPane);
 
                     JOptionPane.showConfirmDialog(null, ansContentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
-                    // JOptionPane.showConfirmDialog(null)
+
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -2083,7 +2080,7 @@ public class GUI {
                     ansContentPanel.add(polyAnsScrollPane);
 
                     JOptionPane.showConfirmDialog(null, ansContentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
-                    // JOptionPane.showConfirmDialog(null)
+
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -2223,7 +2220,7 @@ public class GUI {
                     ansContentPanel.add(polyAnsScrollPane);
 
                     JOptionPane.showConfirmDialog(null, ansContentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
-                    // JOptionPane.showConfirmDialog(null)
+
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -2258,31 +2255,31 @@ public class GUI {
             JLabel enterYTitle = new JLabel("Enter Y ' : ");
             enterYTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterYField = new JTextField();
-            enterYField.setFont(new Font("Arial", Font.PLAIN, 18));
+            enterYField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterYField.setPreferredSize(new Dimension(200, 50));
 
             JLabel enterX0Title = new JLabel("Enter x0 : ");
             enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterX0Field = new JTextField();
-            enterX0Field.setFont(new Font("Arial", Font.PLAIN, 18));
+            enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterX0Field.setPreferredSize(new Dimension(200, 50));
 
             JLabel enterY0Title = new JLabel("Enter Y0 : ");
             enterY0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterY0Field = new JTextField();
-            enterY0Field.setFont(new Font("Arial", Font.PLAIN, 18));
+            enterY0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterY0Field.setPreferredSize(new Dimension(200, 50));
 
             JLabel enterHTitle = new JLabel("Enter h : ");
             enterHTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterHField = new JTextField();
-            enterHField.setFont(new Font("Arial", Font.PLAIN, 18));
+            enterHField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterHField.setPreferredSize(new Dimension(200, 50));
 
             JLabel enterXTitle = new JLabel("Enter x : ");
             enterXTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterXField = new JTextField();
-            enterXField.setFont(new Font("Arial", Font.PLAIN, 18));
+            enterXField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterXField.setPreferredSize(new Dimension(200, 50));
 
             JPanel contentPanel = new JPanel(new GridLayout(5, 2, -100, 0));
@@ -2363,7 +2360,7 @@ public class GUI {
                     ansContentPanel.add(polyAnsScrollPane);
 
                     JOptionPane.showConfirmDialog(null, ansContentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
-                    // JOptionPane.showConfirmDialog(null)
+
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -2402,8 +2399,125 @@ public class GUI {
         String description = "Solving non-linear equations using the Bisection method";
         String button = "Enter";
         ActionListener enterBisection = e -> {
-            panelsStack.add(chooseFunctionPanel);
-            updateMainPanel();
+            JLabel bisTitleLabel = new JLabel("Bisection Method");
+            bisTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
+            JPanel bisTitle = new JPanel();
+            bisTitle.add(bisTitleLabel);
+            bisTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+
+            JLabel enterFTitle = new JLabel("Enter f(x) : ");
+            enterFTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterFField = new JTextField();
+            enterFField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterFField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterATitle = new JLabel("Enter a : ");
+            enterATitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterAField = new JTextField();
+            enterAField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterAField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterBTitle = new JLabel("Enter b : ");
+            enterBTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterBField = new JTextField();
+            enterBField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterBField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterETitle = new JLabel("Enter e : ");
+            enterETitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterEField = new JTextField();
+            enterEField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterEField.setPreferredSize(new Dimension(200, 50));
+
+
+            JPanel contentPanel = new JPanel(new GridLayout(4, 2, -100, 0));
+            contentPanel.add(enterFTitle);
+            contentPanel.add(enterFField);
+            contentPanel.add(enterATitle);
+            contentPanel.add(enterAField);
+            contentPanel.add(enterBTitle);
+            contentPanel.add(enterBField);
+            contentPanel.add(enterETitle);
+            contentPanel.add(enterEField);
+
+            JPanel showPanel = new JPanel(new BorderLayout());
+            showPanel.add(bisTitle, BorderLayout.NORTH);
+            showPanel.add(contentPanel, BorderLayout.CENTER);
+
+            JButton solveButton = new JButton("Solve");
+            solveButton.setFocusPainted(false);
+            solveButton.setPreferredSize(new Dimension(80, 40));
+            solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            solveButton.setBackground(customGreen);
+            solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            solveButton.setEnabled(false);
+
+            JButton cancelButton = new JButton("Cancel");
+            cancelButton.setFocusPainted(false);
+            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
+
+            Object[] buttons = {cancelButton, solveButton};
+
+            ArrayList<JTextField> fields = new ArrayList<>();
+            fields.add(enterFField);
+            fields.add(enterAField);
+            fields.add(enterBField);
+            fields.add(enterEField);
+            addDocumentListenerToFields(solveButton, fields);
+
+            cancelButton.addActionListener(cancel -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+            });
+
+            solveButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+                try {
+                    String fx = enterFField.getText();
+                    double a = EvaluateString.evaluate(enterAField.getText());
+                    double b = EvaluateString.evaluate(enterBField.getText());
+                    double err = EvaluateString.evaluate(enterEField.getText());
+                    ExpressionFunction func = new ExpressionFunction(fx);
+                    double ans = NonLinearEquation.Bisection.solve(func, a, b, err);
+
+                    //create title
+                    JLabel difeqTitle = new JLabel();
+                    difeqTitle.setText("Non-Linear Equation solution using Bisection method : ");
+                    difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea difeqAns = new JTextArea();
+                    difeqAns.append("Answer : ");
+                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    difeqAns.setEnabled(false);
+                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel ansContentPanel = new JPanel(new GridLayout(2, 1));
+                    ansContentPanel.add(difeqTitle);
+                    ansContentPanel.add(polyAnsScrollPane);
+
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            JOptionPane.showOptionDialog(
+                    null,
+                    showPanel,
+                    "Non-Linear Equations",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    keyboardIcon128,
+                    buttons,
+                    null);
         };
         JPanel bisectionCard = createCard(title, description, button, enterBisection);
         nonLinearEquationsPanel.add(bisectionCard);
@@ -2415,8 +2529,125 @@ public class GUI {
         description = "Solving non-linear equations using the False Position method";
         button = "Enter";
         ActionListener enterFalsePosition = e -> {
-            panelsStack.add(chooseFunctionPanel);
-            updateMainPanel();
+            JLabel flsTitleLabel = new JLabel("False Position Method");
+            flsTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
+            JPanel flsTitle = new JPanel();
+            flsTitle.add(flsTitleLabel);
+            flsTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+
+            JLabel enterFTitle = new JLabel("Enter f(x) : ");
+            enterFTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterFField = new JTextField();
+            enterFField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterFField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterATitle = new JLabel("Enter a : ");
+            enterATitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterAField = new JTextField();
+            enterAField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterAField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterBTitle = new JLabel("Enter b : ");
+            enterBTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterBField = new JTextField();
+            enterBField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterBField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterETitle = new JLabel("Enter e : ");
+            enterETitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterEField = new JTextField();
+            enterEField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterEField.setPreferredSize(new Dimension(200, 50));
+
+
+            JPanel contentPanel = new JPanel(new GridLayout(4, 2, -100, 0));
+            contentPanel.add(enterFTitle);
+            contentPanel.add(enterFField);
+            contentPanel.add(enterATitle);
+            contentPanel.add(enterAField);
+            contentPanel.add(enterBTitle);
+            contentPanel.add(enterBField);
+            contentPanel.add(enterETitle);
+            contentPanel.add(enterEField);
+
+            JPanel showPanel = new JPanel(new BorderLayout());
+            showPanel.add(flsTitle, BorderLayout.NORTH);
+            showPanel.add(contentPanel, BorderLayout.CENTER);
+
+            JButton solveButton = new JButton("Solve");
+            solveButton.setFocusPainted(false);
+            solveButton.setPreferredSize(new Dimension(80, 40));
+            solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            solveButton.setBackground(customGreen);
+            solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            solveButton.setEnabled(false);
+
+            JButton cancelButton = new JButton("Cancel");
+            cancelButton.setFocusPainted(false);
+            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
+
+            Object[] buttons = {cancelButton, solveButton};
+
+            ArrayList<JTextField> fields = new ArrayList<>();
+            fields.add(enterFField);
+            fields.add(enterAField);
+            fields.add(enterBField);
+            fields.add(enterEField);
+            addDocumentListenerToFields(solveButton, fields);
+
+            cancelButton.addActionListener(cancel -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+            });
+
+            solveButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+                try {
+                    String fx = enterFField.getText();
+                    double a = EvaluateString.evaluate(enterAField.getText());
+                    double b = EvaluateString.evaluate(enterBField.getText());
+                    double err = EvaluateString.evaluate(enterEField.getText());
+                    ExpressionFunction func = new ExpressionFunction(fx);
+                    double ans = NonLinearEquation.FalsePosition.solve(func, a, b, err);
+
+                    //create title
+                    JLabel difeqTitle = new JLabel();
+                    difeqTitle.setText("Non-Linear Equation solution using False Position method : ");
+                    difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea difeqAns = new JTextArea();
+                    difeqAns.append("Answer : ");
+                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    difeqAns.setEnabled(false);
+                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel ansContentPanel = new JPanel(new GridLayout(2, 1));
+                    ansContentPanel.add(difeqTitle);
+                    ansContentPanel.add(polyAnsScrollPane);
+
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            JOptionPane.showOptionDialog(
+                    null,
+                    showPanel,
+                    "Non-Linear Equations",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    keyboardIcon128,
+                    buttons,
+                    null);
         };
         JPanel falsePositionCard = createCard(title, description, button, enterFalsePosition);
         nonLinearEquationsPanel.add(falsePositionCard);
@@ -2428,8 +2659,125 @@ public class GUI {
         description = "Solving non-linear equations using the Secant method";
         button = "Enter";
         ActionListener enterSecant = e -> {
-            panelsStack.add(chooseFunctionPanel);
-            updateMainPanel();
+            JLabel secTitleLabel = new JLabel("Secant Method");
+            secTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
+            JPanel secTitle = new JPanel();
+            secTitle.add(secTitleLabel);
+            secTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+
+            JLabel enterFTitle = new JLabel("Enter f(x) : ");
+            enterFTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterFField = new JTextField();
+            enterFField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterFField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterX0Title = new JLabel("Enter X0 : ");
+            enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterX0Field = new JTextField();
+            enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterX0Field.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterX1Title = new JLabel("Enter X1 : ");
+            enterX1Title.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterX1Field = new JTextField();
+            enterX1Field.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterX1Field.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterETitle = new JLabel("Enter e : ");
+            enterETitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterEField = new JTextField();
+            enterEField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterEField.setPreferredSize(new Dimension(200, 50));
+
+
+            JPanel contentPanel = new JPanel(new GridLayout(4, 2, -100, 0));
+            contentPanel.add(enterFTitle);
+            contentPanel.add(enterFField);
+            contentPanel.add(enterX0Title);
+            contentPanel.add(enterX0Field);
+            contentPanel.add(enterX1Title);
+            contentPanel.add(enterX1Field);
+            contentPanel.add(enterETitle);
+            contentPanel.add(enterEField);
+
+            JPanel showPanel = new JPanel(new BorderLayout());
+            showPanel.add(secTitle, BorderLayout.NORTH);
+            showPanel.add(contentPanel, BorderLayout.CENTER);
+
+            JButton solveButton = new JButton("Solve");
+            solveButton.setFocusPainted(false);
+            solveButton.setPreferredSize(new Dimension(80, 40));
+            solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            solveButton.setBackground(customGreen);
+            solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            solveButton.setEnabled(false);
+
+            JButton cancelButton = new JButton("Cancel");
+            cancelButton.setFocusPainted(false);
+            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
+
+            Object[] buttons = {cancelButton, solveButton};
+
+            ArrayList<JTextField> fields = new ArrayList<>();
+            fields.add(enterFField);
+            fields.add(enterX0Field);
+            fields.add(enterX1Field);
+            fields.add(enterEField);
+            addDocumentListenerToFields(solveButton, fields);
+
+            cancelButton.addActionListener(cancel -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+            });
+
+            solveButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+                try {
+                    String fx = enterFField.getText();
+                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    double x1 = EvaluateString.evaluate(enterX1Field.getText());
+                    double err = EvaluateString.evaluate(enterEField.getText());
+                    ExpressionFunction func = new ExpressionFunction(fx);
+                    double ans = NonLinearEquation.Secant.solve(func, x0, x1, err);
+
+                    //create title
+                    JLabel difeqTitle = new JLabel();
+                    difeqTitle.setText("Non-Linear Equation solution using Secant method : ");
+                    difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea difeqAns = new JTextArea();
+                    difeqAns.append("Answer : ");
+                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    difeqAns.setEnabled(false);
+                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel ansContentPanel = new JPanel(new GridLayout(2, 1));
+                    ansContentPanel.add(difeqTitle);
+                    ansContentPanel.add(polyAnsScrollPane);
+
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            JOptionPane.showOptionDialog(
+                    null,
+                    showPanel,
+                    "Non-Linear Equations",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    keyboardIcon128,
+                    buttons,
+                    null);
         };
         JPanel secantCard = createCard(title, description, button, enterSecant);
         nonLinearEquationsPanel.add(secantCard);
@@ -2442,8 +2790,127 @@ public class GUI {
         description = "Solving non-linear equations using the Newton-Raphson method";
         button = "Enter";
         ActionListener enterNewton_Raphson = e -> {
-            panelsStack.add(chooseFunctionPanel);
-            updateMainPanel();
+            JLabel newtTitleLabel = new JLabel("Newton-Raphson Method");
+            newtTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
+            JPanel newtTitle = new JPanel();
+            newtTitle.add(newtTitleLabel);
+            newtTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+
+            JLabel enterFTitle = new JLabel("Enter f(x) : ");
+            enterFTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterFField = new JTextField();
+            enterFField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterFField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterDFTitle = new JLabel("Enter f '(x) : ");
+            enterDFTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterDFField = new JTextField();
+            enterDFField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterDFField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterX0Title = new JLabel("Enter X0 : ");
+            enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterX0Field = new JTextField();
+            enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterX0Field.setPreferredSize(new Dimension(200, 50));
+
+
+            JLabel enterETitle = new JLabel("Enter e : ");
+            enterETitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterEField = new JTextField();
+            enterEField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterEField.setPreferredSize(new Dimension(200, 50));
+
+
+            JPanel contentPanel = new JPanel(new GridLayout(4, 2, -100, 0));
+            contentPanel.add(enterFTitle);
+            contentPanel.add(enterFField);
+            contentPanel.add(enterDFTitle);
+            contentPanel.add(enterDFField);
+            contentPanel.add(enterX0Title);
+            contentPanel.add(enterX0Field);
+            contentPanel.add(enterETitle);
+            contentPanel.add(enterEField);
+
+            JPanel showPanel = new JPanel(new BorderLayout());
+            showPanel.add(newtTitle, BorderLayout.NORTH);
+            showPanel.add(contentPanel, BorderLayout.CENTER);
+
+            JButton solveButton = new JButton("Solve");
+            solveButton.setFocusPainted(false);
+            solveButton.setPreferredSize(new Dimension(80, 40));
+            solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            solveButton.setBackground(customGreen);
+            solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            solveButton.setEnabled(false);
+
+            JButton cancelButton = new JButton("Cancel");
+            cancelButton.setFocusPainted(false);
+            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
+
+            Object[] buttons = {cancelButton, solveButton};
+
+            ArrayList<JTextField> fields = new ArrayList<>();
+            fields.add(enterFField);
+            fields.add(enterDFField);
+            fields.add(enterX0Field);
+            fields.add(enterEField);
+            addDocumentListenerToFields(solveButton, fields);
+
+            cancelButton.addActionListener(cancel -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+            });
+
+            solveButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+                try {
+                    String fx = enterFField.getText();
+                    String dfx = enterDFField.getText();
+                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    double err = EvaluateString.evaluate(enterEField.getText());
+                    ExpressionFunction func = new ExpressionFunction(fx);
+                    ExpressionFunction dfunc = new ExpressionFunction(dfx);
+                    double ans = NonLinearEquation.Newton_Raphson.solve(func, dfunc, x0, err);
+
+                    //create title
+                    JLabel difeqTitle = new JLabel();
+                    difeqTitle.setText("Non-Linear Equation solution using Newton-Raphson method : ");
+                    difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea difeqAns = new JTextArea();
+                    difeqAns.append("Answer : ");
+                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    difeqAns.setEnabled(false);
+                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel ansContentPanel = new JPanel(new GridLayout(2, 1));
+                    ansContentPanel.add(difeqTitle);
+                    ansContentPanel.add(polyAnsScrollPane);
+
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            JOptionPane.showOptionDialog(
+                    null,
+                    showPanel,
+                    "Non-Linear Equations",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    keyboardIcon128,
+                    buttons,
+                    null);
         };
         JPanel newton_RaphsonCard = createCard(title, description, button, enterNewton_Raphson);
         nonLinearEquationsPanel.add(newton_RaphsonCard);
@@ -2455,8 +2922,138 @@ public class GUI {
         description = "Solving non-linear equations using the Halley method";
         button = "Enter";
         ActionListener enterHalley = e -> {
-            panelsStack.add(chooseFunctionPanel);
-            updateMainPanel();
+            JLabel hallTitleLabel = new JLabel("Halley's Method");
+            hallTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
+            JPanel hallTitle = new JPanel();
+            hallTitle.add(hallTitleLabel);
+            hallTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+
+            JLabel enterFTitle = new JLabel("Enter f(x) : ");
+            enterFTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterFField = new JTextField();
+            enterFField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterFField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterDFTitle = new JLabel("Enter f '(x) : ");
+            enterDFTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterDFField = new JTextField();
+            enterDFField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterDFField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterD2FTitle = new JLabel("Enter f ''(x) : ");
+            enterD2FTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterD2FField = new JTextField();
+            enterD2FField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterD2FField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterX0Title = new JLabel("Enter X0 : ");
+            enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterX0Field = new JTextField();
+            enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterX0Field.setPreferredSize(new Dimension(200, 50));
+
+
+            JLabel enterETitle = new JLabel("Enter e : ");
+            enterETitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterEField = new JTextField();
+            enterEField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterEField.setPreferredSize(new Dimension(200, 50));
+
+
+            JPanel contentPanel = new JPanel(new GridLayout(5, 2, -100, 0));
+            contentPanel.add(enterFTitle);
+            contentPanel.add(enterFField);
+            contentPanel.add(enterDFTitle);
+            contentPanel.add(enterDFField);
+            contentPanel.add(enterD2FTitle);
+            contentPanel.add(enterD2FField);
+            contentPanel.add(enterX0Title);
+            contentPanel.add(enterX0Field);
+            contentPanel.add(enterETitle);
+            contentPanel.add(enterEField);
+
+            JPanel showPanel = new JPanel(new BorderLayout());
+            showPanel.add(hallTitle, BorderLayout.NORTH);
+            showPanel.add(contentPanel, BorderLayout.CENTER);
+
+            JButton solveButton = new JButton("Solve");
+            solveButton.setFocusPainted(false);
+            solveButton.setPreferredSize(new Dimension(80, 40));
+            solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            solveButton.setBackground(customGreen);
+            solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            solveButton.setEnabled(false);
+
+            JButton cancelButton = new JButton("Cancel");
+            cancelButton.setFocusPainted(false);
+            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
+
+            Object[] buttons = {cancelButton, solveButton};
+
+            ArrayList<JTextField> fields = new ArrayList<>();
+            fields.add(enterFField);
+            fields.add(enterDFField);
+            fields.add(enterD2FField);
+            fields.add(enterX0Field);
+            fields.add(enterEField);
+            addDocumentListenerToFields(solveButton, fields);
+
+            cancelButton.addActionListener(cancel -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+            });
+
+            solveButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+                try {
+                    String fx = enterFField.getText();
+                    String dfx = enterDFField.getText();
+                    String d2fx = enterD2FField.getText();
+                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    double err = EvaluateString.evaluate(enterEField.getText());
+                    ExpressionFunction func = new ExpressionFunction(fx);
+                    ExpressionFunction dfunc = new ExpressionFunction(dfx);
+                    ExpressionFunction d2func = new ExpressionFunction(d2fx);
+                    double ans = NonLinearEquation.Halley.solve(func, dfunc, d2func, x0, err);
+
+                    //create title
+                    JLabel difeqTitle = new JLabel();
+                    difeqTitle.setText("Non-Linear Equation solution using Halley's method : ");
+                    difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea difeqAns = new JTextArea();
+                    difeqAns.append("Answer : ");
+                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    difeqAns.setEnabled(false);
+                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel ansContentPanel = new JPanel(new GridLayout(2, 1));
+                    ansContentPanel.add(difeqTitle);
+                    ansContentPanel.add(polyAnsScrollPane);
+
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            JOptionPane.showOptionDialog(
+                    null,
+                    showPanel,
+                    "Non-Linear Equations",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    keyboardIcon128,
+                    buttons,
+                    null);
         };
         JPanel halleyCard = createCard(title, description, button, enterHalley);
         nonLinearEquationsPanel.add(halleyCard);
@@ -2468,8 +3065,117 @@ public class GUI {
         description = "Solving non-linear equations using the Fixed Point Iteration method";
         button = "Enter";
         ActionListener enterFixedPointIteration = e -> {
-            panelsStack.add(chooseFunctionPanel);
-            updateMainPanel();
+            JLabel fpiTitleLabel = new JLabel("Fixed Point Iteration Method");
+            fpiTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
+            JPanel fpiTitle = new JPanel();
+            fpiTitle.add(fpiTitleLabel);
+            fpiTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+
+            JLabel enterGTitle = new JLabel("Enter g(x) : ");
+            enterGTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterGField = new JTextField();
+            enterGField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterGField.setPreferredSize(new Dimension(200, 50));
+
+
+            JLabel enterX0Title = new JLabel("Enter X0 : ");
+            enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterX0Field = new JTextField();
+            enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterX0Field.setPreferredSize(new Dimension(200, 50));
+
+
+            JLabel enterETitle = new JLabel("Enter e : ");
+            enterETitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterEField = new JTextField();
+            enterEField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterEField.setPreferredSize(new Dimension(200, 50));
+
+
+            JPanel contentPanel = new JPanel(new GridLayout(3, 2, -100, 0));
+            contentPanel.add(enterGTitle);
+            contentPanel.add(enterGField);
+            contentPanel.add(enterX0Title);
+            contentPanel.add(enterX0Field);
+            contentPanel.add(enterETitle);
+            contentPanel.add(enterEField);
+
+            JPanel showPanel = new JPanel(new BorderLayout());
+            showPanel.add(fpiTitle, BorderLayout.NORTH);
+            showPanel.add(contentPanel, BorderLayout.CENTER);
+
+            JButton solveButton = new JButton("Solve");
+            solveButton.setFocusPainted(false);
+            solveButton.setPreferredSize(new Dimension(80, 40));
+            solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            solveButton.setBackground(customGreen);
+            solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            solveButton.setEnabled(false);
+
+            JButton cancelButton = new JButton("Cancel");
+            cancelButton.setFocusPainted(false);
+            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
+
+            Object[] buttons = {cancelButton, solveButton};
+
+            ArrayList<JTextField> fields = new ArrayList<>();
+            fields.add(enterGField);
+            fields.add(enterX0Field);
+            fields.add(enterEField);
+            addDocumentListenerToFields(solveButton, fields);
+
+            cancelButton.addActionListener(cancel -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+            });
+
+            solveButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+                try {
+                    String gx = enterGField.getText();
+                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    double err = EvaluateString.evaluate(enterEField.getText());
+                    ExpressionFunction func = new ExpressionFunction(gx);
+                    double ans = NonLinearEquation.FixedPointIteration.solve(func, x0, err);
+
+                    //create title
+                    JLabel difeqTitle = new JLabel();
+                    difeqTitle.setText("Non-Linear Equation solution using Fixed Point Iteration method : ");
+                    difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea difeqAns = new JTextArea();
+                    difeqAns.append("Answer : ");
+                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    difeqAns.setEnabled(false);
+                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel ansContentPanel = new JPanel(new GridLayout(2, 1));
+                    ansContentPanel.add(difeqTitle);
+                    ansContentPanel.add(polyAnsScrollPane);
+
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            JOptionPane.showOptionDialog(
+                    null,
+                    showPanel,
+                    "Non-Linear Equations",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    keyboardIcon128,
+                    buttons,
+                    null);
         };
         JPanel fixedPointIterationCard = createCard(title, description, button, enterFixedPointIteration);
         nonLinearEquationsPanel.add(fixedPointIterationCard);
