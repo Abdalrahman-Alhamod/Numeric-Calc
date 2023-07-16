@@ -12,9 +12,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add integrals solutions">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Enhance , clean up GUI">
+      <change afterPath="$PROJECT_DIR$/src/Terminal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,19 +73,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/res/Icons",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/res/Icons&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\res\Icons" />
@@ -105,20 +106,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٢١" summary="Add SystemOfNonLinearEquations with Newton-Raphson inner class">
-      <created>1688984944455</created>
-      <option name="number" value="٠٠٢٢١" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٢١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688984944455</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٢٢" summary="Test System of Non-Linear Equations ; Newton-Raphson">
-      <created>1688984968152</created>
-      <option name="number" value="٠٠٢٢٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٢٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688984968152</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٢٣" summary="Add JAVA DOC to SystemOfNonLinearEquations and getValueAt(x,y)">
       <created>1688985279919</created>
@@ -449,7 +436,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689465103004</updated>
     </task>
-    <option name="localTasksCounter" value="270" />
+    <task id="LOCAL؜-٠٠٢٧٠" summary="Add diffs solutions&#10;Fix interpolation and integral dialogs">
+      <created>1689467467559</created>
+      <option name="number" value="٠٠٢٧٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٧٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689467467559</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٧١" summary="Enhance , clean up GUI">
+      <created>1689467570267</created>
+      <option name="number" value="٠٠٢٧١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٧١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689467570267</updated>
+    </task>
+    <option name="localTasksCounter" value="272" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -491,8 +492,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Rename updateMainPanel" />
-    <MESSAGE value="Add changeColorAnime method" />
     <MESSAGE value="Test all Panels" />
     <MESSAGE value="Add home Button" />
     <MESSAGE value="Clean Code : converting to lambda" />
@@ -516,6 +515,8 @@
     <MESSAGE value="Fix points function bug" />
     <MESSAGE value="Fix integral bug" />
     <MESSAGE value="Add integrals solutions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add integrals solutions" />
+    <MESSAGE value="Add diffs solutions&#10;Fix interpolation and integral dialogs" />
+    <MESSAGE value="Enhance , clean up GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Enhance , clean up GUI" />
   </component>
 </project>
