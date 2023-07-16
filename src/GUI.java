@@ -1,6 +1,7 @@
 import Functions.ExpressionFunction;
 import Functions.PointsFunction;
 import Functions.Polynomial;
+import Numerics.DifferentialEquation;
 import Numerics.Differentiation;
 import Numerics.Integral;
 import Numerics.Interpolation;
@@ -12,6 +13,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
@@ -39,6 +41,8 @@ public class GUI {
     private ImageIcon homeIcon;
     private ImageIcon infoIcon;
     private ImageIcon solutionIcon;
+    private ImageIcon keyboardIcon64;
+    private ImageIcon keyboardIcon128;
 
     private JButton backButton;
     private JButton homeButton;
@@ -74,6 +78,8 @@ public class GUI {
         homeIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/home-button.png")));
         infoIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/info.png")));
         solutionIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/solution.png")));
+        keyboardIcon64 = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/keyboard_64.png")));
+        keyboardIcon128 = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/keyboard_128.png")));
     }
 
     private void initMainFrame() {
@@ -1420,8 +1426,131 @@ public class GUI {
         String description = "Solving a differential equation using the Euler method";
         String button = "Enter";
         ActionListener enterEuler = e -> {
-            panelsStack.add(chooseFunctionPanel);
-            updateMainPanel();
+            JLabel eulerTitle = new JLabel("Euler's Method");
+            eulerTitle.setFont(new Font(mainFont, Font.BOLD, 25));
+
+            JLabel enterYTitle = new JLabel("Enter Y ' : ");
+            enterYTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterYField = new JTextField();
+            enterYField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterYField.setPreferredSize(new Dimension(250, 50));
+
+            JLabel enterX0Title = new JLabel("Enter x0 : ");
+            enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterX0Field = new JTextField();
+            enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterX0Field.setPreferredSize(new Dimension(250, 50));
+
+            JLabel enterY0Title = new JLabel("Enter Y0 : ");
+            enterY0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterY0Field = new JTextField();
+            enterY0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterY0Field.setPreferredSize(new Dimension(250, 50));
+
+            JLabel enterHTitle = new JLabel("Enter h : ");
+            enterHTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterHField = new JTextField();
+            enterHField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterHField.setPreferredSize(new Dimension(250, 50));
+
+            JLabel enterXTitle = new JLabel("Enter x : ");
+            enterXTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterXField = new JTextField();
+            enterXField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterXField.setPreferredSize(new Dimension(250, 50));
+
+            JPanel contentPanel = new JPanel(new GridLayout(6, 2, -150, 0));
+            contentPanel.add(eulerTitle);
+            contentPanel.add(new JPanel());
+            contentPanel.add(enterYTitle);
+            contentPanel.add(enterYField);
+            contentPanel.add(enterX0Title);
+            contentPanel.add(enterX0Field);
+            contentPanel.add(enterY0Title);
+            contentPanel.add(enterY0Field);
+            contentPanel.add(enterHTitle);
+            contentPanel.add(enterHField);
+            contentPanel.add(enterXTitle);
+            contentPanel.add(enterXField);
+
+            JButton solveButton = new JButton("Solve");
+            solveButton.setFocusPainted(false);
+            solveButton.setPreferredSize(new Dimension(80, 40));
+            solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            solveButton.setBackground(customGreen);
+            solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            solveButton.setEnabled(false);
+
+            JButton cancelButton = new JButton("Cancel");
+            cancelButton.setFocusPainted(false);
+            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
+
+            Object[] buttons = {cancelButton, solveButton};
+
+            ArrayList<JTextField> fields = new ArrayList<>();
+            fields.add(enterYField);
+            fields.add(enterX0Field);
+            fields.add(enterY0Field);
+            fields.add(enterHField);
+            fields.add(enterXField);
+            addDocumentListenerToFields(solveButton, fields);
+
+            cancelButton.addActionListener(cancel -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+            });
+
+            solveButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+                try {
+                    String difeq = enterYField.getText();
+                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    double y0 = EvaluateString.evaluate(enterY0Field.getText());
+                    double h = EvaluateString.evaluate(enterHField.getText());
+                    double x = EvaluateString.evaluate(enterXField.getText());
+                    DifferentialEquation eq = new DifferentialEquation(difeq);
+                    double ans = DifferentialEquation.Euler.solve(eq, x0, y0, h, x);
+
+                    //create title
+                    JLabel difeqTitle = new JLabel();
+                    difeqTitle.setText("Differential Equation solution using Euler's method : ");
+                    difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea difeqAns = new JTextArea();
+                    difeqAns.append("Answer : ");
+                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    difeqAns.setEnabled(false);
+                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel ansContentPanel = new JPanel(new GridLayout(2, 1));
+                    ansContentPanel.add(difeqTitle);
+                    ansContentPanel.add(polyAnsScrollPane);
+
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                    // JOptionPane.showConfirmDialog(null)
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            JOptionPane.showOptionDialog(
+                    null,
+                    contentPanel,
+                    "Differential Equations",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    keyboardIcon128,
+                    buttons,
+                    null);
+
         };
         JPanel eulerCard = createCard(title, description, button, enterEuler);
         differentialEquationsPanel.add(eulerCard);
@@ -1433,8 +1562,261 @@ public class GUI {
         description = "Solving a differential equation using the Taylor method";
         button = "Enter";
         ActionListener enterTaylor = e -> {
-            panelsStack.add(chooseFunctionPanel);
-            updateMainPanel();
+            JLabel heinTitleLabel = new JLabel("Taylor's Method");
+            heinTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
+            JPanel heinTitle = new JPanel();
+            heinTitle.add(heinTitleLabel);
+            heinTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+
+            // inputs : n
+            JLabel enterNTitle = new JLabel("Enter n – The number of terms in the Taylor series :");
+            enterNTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            enterNTitle.setHorizontalAlignment(SwingConstants.LEFT);
+
+            SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, 100, 1);
+            JSpinner enterNSp = new JSpinner(spinnerModel);
+            JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterNSp.getEditor();
+            editor.getTextField().setColumns(2); // Adjust the width as needed
+
+            JButton confirmButton = new JButton("Confirm");
+            confirmButton.setPreferredSize(new Dimension(80, 30));
+
+            JPanel enterN = new JPanel();
+            enterN.setLayout(new FlowLayout(FlowLayout.LEFT));
+            enterN.add(enterNTitle, BorderLayout.WEST);
+            enterN.add(enterNSp, BorderLayout.CENTER);
+            enterN.add(confirmButton, BorderLayout.EAST);
+
+
+            // input
+            JLabel enterDivsTitle = new JLabel("Enter Derivatives : ");
+            enterDivsTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            enterDivsTitle.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0)); // Adjust the top and bottom padding
+
+            JScrollPane enterDivsScroll = new JScrollPane();
+            enterDivsScroll.setPreferredSize(new Dimension(500, 100));
+
+
+            // inputs panel
+            JPanel inputsPanel = new JPanel(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.insets = new Insets(5, 0, 5, 0); // Add vertical spacing between components
+
+            inputsPanel.add(enterN, gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy++;
+            gbc.gridwidth = 2;
+            inputsPanel.add(enterDivsTitle, gbc);
+
+            gbc.gridy++;
+            inputsPanel.add(enterDivsScroll, gbc);
+
+
+            JLabel enterX0Title = new JLabel("Enter x0 : ");
+            enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterX0Field = new JTextField();
+            enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterX0Field.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterY0Title = new JLabel("Enter Y0 : ");
+            enterY0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterY0Field = new JTextField();
+            enterY0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterY0Field.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterHTitle = new JLabel("Enter h : ");
+            enterHTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterHField = new JTextField();
+            enterHField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterHField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterXTitle = new JLabel("Enter x : ");
+            enterXTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterXField = new JTextField();
+            enterXField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterXField.setPreferredSize(new Dimension(200, 50));
+
+            JPanel contentPanel = new JPanel();
+            GridBagLayout layout = new GridBagLayout();
+            contentPanel.setLayout(layout);
+
+            GridBagConstraints constraints = new GridBagConstraints();
+            constraints.fill = GridBagConstraints.HORIZONTAL;
+            constraints.insets = new Insets(5, -130, 5, 10); // Adjust the padding as needed
+
+
+            constraints.gridx = 0;
+            constraints.gridy = 0;
+            contentPanel.add(enterX0Title, constraints);
+
+            constraints.gridx = 1;
+            constraints.weightx = 1.0; // Make the text field expand horizontally
+            contentPanel.add(enterX0Field, constraints);
+
+            constraints.gridy++;
+
+            constraints.gridx = 0;
+            contentPanel.add(enterY0Title, constraints);
+
+            constraints.gridx = 1;
+            constraints.weightx = 1.0; // Make the text field expand horizontally
+            contentPanel.add(enterY0Field, constraints);
+
+            constraints.gridy++;
+
+            constraints.gridx = 0;
+            contentPanel.add(enterHTitle, constraints);
+
+            constraints.gridx = 1;
+            constraints.weightx = 1.0; // Make the text field expand horizontally
+            contentPanel.add(enterHField, constraints);
+
+            constraints.gridy++;
+
+            constraints.gridx = 0;
+            contentPanel.add(enterXTitle, constraints);
+
+            constraints.gridx = 1;
+            constraints.weightx = 1.0; // Make the text field expand horizontally
+            contentPanel.add(enterXField, constraints);
+
+            contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50));
+
+            JPanel showPanel = new JPanel(new BorderLayout());
+            showPanel.add(heinTitle, BorderLayout.NORTH);
+            showPanel.add(inputsPanel, BorderLayout.CENTER);
+            showPanel.add(contentPanel, BorderLayout.SOUTH);
+
+            JButton solveButton = new JButton("Solve");
+            solveButton.setFocusPainted(false);
+            solveButton.setPreferredSize(new Dimension(80, 40));
+            solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            solveButton.setBackground(customGreen);
+            solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            solveButton.setEnabled(false);
+
+            ArrayList<JTextField> divsFields = new ArrayList<>();
+            confirmButton.addActionListener(confirm -> {
+                solveButton.setEnabled(false);
+                // Handle confirm button action
+                int n = (int) enterNSp.getValue();
+                JPanel divPanel = new JPanel(new GridBagLayout());
+                GridBagConstraints gbc2 = new GridBagConstraints();
+                gbc2.gridx = 0;
+                gbc2.gridy = 0;
+                gbc2.anchor = GridBagConstraints.WEST;
+                gbc2.insets = new Insets(5, 0, 5, 10); // Add spacing between components
+
+                divsFields.clear();
+
+                for (int i = 1; i <= n; i++) {
+                    JLabel divLabel = new JLabel("y^(" + i + ") = ");
+                    divLabel.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    JTextField textFieldDiv = new JTextField(10);
+                    textFieldDiv.setFont(new Font(secondFont, Font.PLAIN, 20));
+
+                    textFieldDiv.setName("y" + i);
+
+                    divsFields.add(textFieldDiv);
+
+                    JPanel componentPanel = new JPanel(new GridBagLayout());
+                    GridBagConstraints gbcComponent = new GridBagConstraints();
+                    gbcComponent.gridx = 0;
+                    gbcComponent.gridy = 0;
+                    gbcComponent.anchor = GridBagConstraints.WEST;
+                    gbcComponent.insets = new Insets(5, 0, 5, 10); // Add spacing between components
+
+                    componentPanel.add(divLabel, gbcComponent);
+
+                    gbcComponent.gridx++;
+                    componentPanel.add(textFieldDiv, gbcComponent);
+
+                    gbc2.gridy++;
+                    divPanel.add(componentPanel, gbc2);
+                }
+                enterDivsScroll.setViewportView(divPanel); // Set the pointsPanel as the viewport's view component
+                enterDivsScroll.revalidate(); // Revalidate the scroll pane to update its content
+
+                // Add a DocumentListener to each text field;
+                ArrayList<JTextField> fields = new ArrayList<>(divsFields);
+                fields.add(enterX0Field);
+                fields.add(enterY0Field);
+                fields.add(enterHField);
+                fields.add(enterXField);
+                addDocumentListenerToFields(solveButton, fields);
+                addDocumentListenerToFields(solveButton, fields);
+            });
+
+            JButton cancelButton = new JButton("Cancel");
+            cancelButton.setFocusPainted(false);
+            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
+
+            Object[] buttons = {cancelButton, solveButton};
+
+
+            cancelButton.addActionListener(cancel -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+            });
+
+            solveButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+                try {
+                    ArrayList<DifferentialEquation> eqs = new ArrayList<>();
+                    for (JTextField field : divsFields) {
+                        String eqS = field.getText();
+                        DifferentialEquation eq = new DifferentialEquation(eqS);
+                        eqs.add(eq);
+                    }
+                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    double y0 = EvaluateString.evaluate(enterY0Field.getText());
+                    double h = EvaluateString.evaluate(enterHField.getText());
+                    double x = EvaluateString.evaluate(enterXField.getText());
+                    double ans = DifferentialEquation.Taylor.solve(eqs, x0, y0, h, x);
+
+                    //create title
+                    JLabel difeqTitle = new JLabel();
+                    difeqTitle.setText("Differential Equation solution using Hein's method : ");
+                    difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea difeqAns = new JTextArea();
+                    difeqAns.append("Answer : ");
+                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    difeqAns.setEnabled(false);
+                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel ansContentPanel = new JPanel(new GridLayout(2, 1));
+                    ansContentPanel.add(difeqTitle);
+                    ansContentPanel.add(polyAnsScrollPane);
+
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                    // JOptionPane.showConfirmDialog(null)
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            JOptionPane.showOptionDialog(
+                    null,
+                    showPanel,
+                    "Differential Equations",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    keyboardIcon128,
+                    buttons,
+                    null);
         };
         JPanel taylorCard = createCard(title, description, button, enterTaylor);
         differentialEquationsPanel.add(taylorCard);
@@ -1446,8 +1828,135 @@ public class GUI {
         description = "Solving a differential equation using the Modified Euler method";
         button = "Enter";
         ActionListener enterModifiedEuler = e -> {
-            panelsStack.add(chooseFunctionPanel);
-            updateMainPanel();
+            JLabel modEulerTitleLabel = new JLabel("MidPoint : Modified Euler's Method");
+            modEulerTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
+            JPanel modEulerTitle = new JPanel();
+            modEulerTitle.add(modEulerTitleLabel);
+            modEulerTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+
+            JLabel enterYTitle = new JLabel("Enter Y ' : ");
+            enterYTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterYField = new JTextField();
+            enterYField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterYField.setPreferredSize(new Dimension(250, 50));
+
+            JLabel enterX0Title = new JLabel("Enter x0 : ");
+            enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterX0Field = new JTextField();
+            enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterX0Field.setPreferredSize(new Dimension(250, 50));
+
+            JLabel enterY0Title = new JLabel("Enter Y0 : ");
+            enterY0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterY0Field = new JTextField();
+            enterY0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterY0Field.setPreferredSize(new Dimension(250, 50));
+
+            JLabel enterHTitle = new JLabel("Enter h : ");
+            enterHTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterHField = new JTextField();
+            enterHField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterHField.setPreferredSize(new Dimension(250, 50));
+
+            JLabel enterXTitle = new JLabel("Enter x : ");
+            enterXTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterXField = new JTextField();
+            enterXField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterXField.setPreferredSize(new Dimension(250, 50));
+
+            JPanel contentPanel = new JPanel(new GridLayout(5, 2, -180, 0));
+            contentPanel.add(enterYTitle);
+            contentPanel.add(enterYField);
+            contentPanel.add(enterX0Title);
+            contentPanel.add(enterX0Field);
+            contentPanel.add(enterY0Title);
+            contentPanel.add(enterY0Field);
+            contentPanel.add(enterHTitle);
+            contentPanel.add(enterHField);
+            contentPanel.add(enterXTitle);
+            contentPanel.add(enterXField);
+
+            JPanel showPanel = new JPanel(new BorderLayout());
+            showPanel.add(modEulerTitle, BorderLayout.NORTH);
+            showPanel.add(contentPanel, BorderLayout.CENTER);
+
+            JButton solveButton = new JButton("Solve");
+            solveButton.setFocusPainted(false);
+            solveButton.setPreferredSize(new Dimension(80, 40));
+            solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            solveButton.setBackground(customGreen);
+            solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            solveButton.setEnabled(false);
+
+            JButton cancelButton = new JButton("Cancel");
+            cancelButton.setFocusPainted(false);
+            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
+
+            Object[] buttons = {cancelButton, solveButton};
+
+            ArrayList<JTextField> fields = new ArrayList<>();
+            fields.add(enterYField);
+            fields.add(enterX0Field);
+            fields.add(enterY0Field);
+            fields.add(enterHField);
+            fields.add(enterXField);
+            addDocumentListenerToFields(solveButton, fields);
+
+            cancelButton.addActionListener(cancel -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+            });
+
+            solveButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+                try {
+                    String difeq = enterYField.getText();
+                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    double y0 = EvaluateString.evaluate(enterY0Field.getText());
+                    double h = EvaluateString.evaluate(enterHField.getText());
+                    double x = EvaluateString.evaluate(enterXField.getText());
+                    DifferentialEquation eq = new DifferentialEquation(difeq);
+                    double ans = DifferentialEquation.MidPoint.ModifiedEuler.solve(eq, x0, y0, h, x);
+
+                    //create title
+                    JLabel difeqTitle = new JLabel();
+                    difeqTitle.setText("Differential Equation solution using Modified Euler's method : ");
+                    difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea difeqAns = new JTextArea();
+                    difeqAns.append("Answer : ");
+                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    difeqAns.setEnabled(false);
+                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel ansContentPanel = new JPanel(new GridLayout(2, 1));
+                    ansContentPanel.add(difeqTitle);
+                    ansContentPanel.add(polyAnsScrollPane);
+
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                    // JOptionPane.showConfirmDialog(null)
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            JOptionPane.showOptionDialog(
+                    null,
+                    showPanel,
+                    "Differential Equations",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    keyboardIcon128,
+                    buttons,
+                    null);
         };
         JPanel modifiedEulerCard = createCard(title, description, button, enterModifiedEuler);
         differentialEquationsPanel.add(modifiedEulerCard);
@@ -1460,8 +1969,135 @@ public class GUI {
         description = "Solving a differential equation using the Hein method";
         button = "Enter";
         ActionListener enterHein = e -> {
-            panelsStack.add(chooseFunctionPanel);
-            updateMainPanel();
+            JLabel heinTitleLabel = new JLabel("MidPoint : Hein's Method");
+            heinTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
+            JPanel heinTitle = new JPanel();
+            heinTitle.add(heinTitleLabel);
+            heinTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+
+            JLabel enterYTitle = new JLabel("Enter Y ' : ");
+            enterYTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterYField = new JTextField();
+            enterYField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterYField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterX0Title = new JLabel("Enter x0 : ");
+            enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterX0Field = new JTextField();
+            enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterX0Field.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterY0Title = new JLabel("Enter Y0 : ");
+            enterY0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterY0Field = new JTextField();
+            enterY0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterY0Field.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterHTitle = new JLabel("Enter h : ");
+            enterHTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterHField = new JTextField();
+            enterHField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterHField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterXTitle = new JLabel("Enter x : ");
+            enterXTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterXField = new JTextField();
+            enterXField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterXField.setPreferredSize(new Dimension(200, 50));
+
+            JPanel contentPanel = new JPanel(new GridLayout(5, 2, -100, 0));
+            contentPanel.add(enterYTitle);
+            contentPanel.add(enterYField);
+            contentPanel.add(enterX0Title);
+            contentPanel.add(enterX0Field);
+            contentPanel.add(enterY0Title);
+            contentPanel.add(enterY0Field);
+            contentPanel.add(enterHTitle);
+            contentPanel.add(enterHField);
+            contentPanel.add(enterXTitle);
+            contentPanel.add(enterXField);
+
+            JPanel showPanel = new JPanel(new BorderLayout());
+            showPanel.add(heinTitle, BorderLayout.NORTH);
+            showPanel.add(contentPanel, BorderLayout.CENTER);
+
+            JButton solveButton = new JButton("Solve");
+            solveButton.setFocusPainted(false);
+            solveButton.setPreferredSize(new Dimension(80, 40));
+            solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            solveButton.setBackground(customGreen);
+            solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            solveButton.setEnabled(false);
+
+            JButton cancelButton = new JButton("Cancel");
+            cancelButton.setFocusPainted(false);
+            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
+
+            Object[] buttons = {cancelButton, solveButton};
+
+            ArrayList<JTextField> fields = new ArrayList<>();
+            fields.add(enterYField);
+            fields.add(enterX0Field);
+            fields.add(enterY0Field);
+            fields.add(enterHField);
+            fields.add(enterXField);
+            addDocumentListenerToFields(solveButton, fields);
+
+            cancelButton.addActionListener(cancel -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+            });
+
+            solveButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+                try {
+                    String difeq = enterYField.getText();
+                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    double y0 = EvaluateString.evaluate(enterY0Field.getText());
+                    double h = EvaluateString.evaluate(enterHField.getText());
+                    double x = EvaluateString.evaluate(enterXField.getText());
+                    DifferentialEquation eq = new DifferentialEquation(difeq);
+                    double ans = DifferentialEquation.MidPoint.Heun.solve(eq, x0, y0, h, x);
+
+                    //create title
+                    JLabel difeqTitle = new JLabel();
+                    difeqTitle.setText("Differential Equation solution using Hein's method : ");
+                    difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea difeqAns = new JTextArea();
+                    difeqAns.append("Answer : ");
+                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    difeqAns.setEnabled(false);
+                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel ansContentPanel = new JPanel(new GridLayout(2, 1));
+                    ansContentPanel.add(difeqTitle);
+                    ansContentPanel.add(polyAnsScrollPane);
+
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                    // JOptionPane.showConfirmDialog(null)
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            JOptionPane.showOptionDialog(
+                    null,
+                    showPanel,
+                    "Differential Equations",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    keyboardIcon128,
+                    buttons,
+                    null);
         };
         JPanel heinCard = createCard(title, description, button, enterHein);
         differentialEquationsPanel.add(heinCard);
@@ -1473,8 +2109,135 @@ public class GUI {
         description = "Solving a differential equation using the Ralston method";
         button = "Enter";
         ActionListener enterRalston = e -> {
-            panelsStack.add(chooseFunctionPanel);
-            updateMainPanel();
+            JLabel ralstonTitleLabel = new JLabel("MidPoint : Ralston's Method");
+            ralstonTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
+            JPanel ralstonTitle = new JPanel();
+            ralstonTitle.add(ralstonTitleLabel);
+            ralstonTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+
+            JLabel enterYTitle = new JLabel("Enter Y ' : ");
+            enterYTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterYField = new JTextField();
+            enterYField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterYField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterX0Title = new JLabel("Enter x0 : ");
+            enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterX0Field = new JTextField();
+            enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterX0Field.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterY0Title = new JLabel("Enter Y0 : ");
+            enterY0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterY0Field = new JTextField();
+            enterY0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterY0Field.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterHTitle = new JLabel("Enter h : ");
+            enterHTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterHField = new JTextField();
+            enterHField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterHField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterXTitle = new JLabel("Enter x : ");
+            enterXTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterXField = new JTextField();
+            enterXField.setFont(new Font(secondFont, Font.PLAIN, 18));
+            enterXField.setPreferredSize(new Dimension(200, 50));
+
+            JPanel contentPanel = new JPanel(new GridLayout(5, 2, -100, 0));
+            contentPanel.add(enterYTitle);
+            contentPanel.add(enterYField);
+            contentPanel.add(enterX0Title);
+            contentPanel.add(enterX0Field);
+            contentPanel.add(enterY0Title);
+            contentPanel.add(enterY0Field);
+            contentPanel.add(enterHTitle);
+            contentPanel.add(enterHField);
+            contentPanel.add(enterXTitle);
+            contentPanel.add(enterXField);
+
+            JPanel showPanel = new JPanel(new BorderLayout());
+            showPanel.add(ralstonTitle, BorderLayout.NORTH);
+            showPanel.add(contentPanel, BorderLayout.CENTER);
+
+            JButton solveButton = new JButton("Solve");
+            solveButton.setFocusPainted(false);
+            solveButton.setPreferredSize(new Dimension(80, 40));
+            solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            solveButton.setBackground(customGreen);
+            solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            solveButton.setEnabled(false);
+
+            JButton cancelButton = new JButton("Cancel");
+            cancelButton.setFocusPainted(false);
+            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
+
+            Object[] buttons = {cancelButton, solveButton};
+
+            ArrayList<JTextField> fields = new ArrayList<>();
+            fields.add(enterYField);
+            fields.add(enterX0Field);
+            fields.add(enterY0Field);
+            fields.add(enterHField);
+            fields.add(enterXField);
+            addDocumentListenerToFields(solveButton, fields);
+
+            cancelButton.addActionListener(cancel -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+            });
+
+            solveButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+                try {
+                    String difeq = enterYField.getText();
+                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    double y0 = EvaluateString.evaluate(enterY0Field.getText());
+                    double h = EvaluateString.evaluate(enterHField.getText());
+                    double x = EvaluateString.evaluate(enterXField.getText());
+                    DifferentialEquation eq = new DifferentialEquation(difeq);
+                    double ans = DifferentialEquation.MidPoint.Ralston.solve(eq, x0, y0, h, x);
+
+                    //create title
+                    JLabel difeqTitle = new JLabel();
+                    difeqTitle.setText("Differential Equation solution using Ralston's method : ");
+                    difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea difeqAns = new JTextArea();
+                    difeqAns.append("Answer : ");
+                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    difeqAns.setEnabled(false);
+                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel ansContentPanel = new JPanel(new GridLayout(2, 1));
+                    ansContentPanel.add(difeqTitle);
+                    ansContentPanel.add(polyAnsScrollPane);
+
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                    // JOptionPane.showConfirmDialog(null)
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            JOptionPane.showOptionDialog(
+                    null,
+                    showPanel,
+                    "Differential Equations",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    keyboardIcon128,
+                    buttons,
+                    null);
         };
         JPanel ralstonCard = createCard(title, description, button, enterRalston);
         differentialEquationsPanel.add(ralstonCard);
@@ -1486,8 +2249,135 @@ public class GUI {
         description = "Solving a differential equation using the Runge-Kutta method";
         button = "Enter";
         ActionListener enterRunge_Kutta = e -> {
-            panelsStack.add(chooseFunctionPanel);
-            updateMainPanel();
+            JLabel rangeTitleLabel = new JLabel("Runge-Kutta Method");
+            rangeTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
+            JPanel rangeTitle = new JPanel();
+            rangeTitle.add(rangeTitleLabel);
+            rangeTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+
+            JLabel enterYTitle = new JLabel("Enter Y ' : ");
+            enterYTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterYField = new JTextField();
+            enterYField.setFont(new Font("Arial", Font.PLAIN, 18));
+            enterYField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterX0Title = new JLabel("Enter x0 : ");
+            enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterX0Field = new JTextField();
+            enterX0Field.setFont(new Font("Arial", Font.PLAIN, 18));
+            enterX0Field.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterY0Title = new JLabel("Enter Y0 : ");
+            enterY0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterY0Field = new JTextField();
+            enterY0Field.setFont(new Font("Arial", Font.PLAIN, 18));
+            enterY0Field.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterHTitle = new JLabel("Enter h : ");
+            enterHTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterHField = new JTextField();
+            enterHField.setFont(new Font("Arial", Font.PLAIN, 18));
+            enterHField.setPreferredSize(new Dimension(200, 50));
+
+            JLabel enterXTitle = new JLabel("Enter x : ");
+            enterXTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+            JTextField enterXField = new JTextField();
+            enterXField.setFont(new Font("Arial", Font.PLAIN, 18));
+            enterXField.setPreferredSize(new Dimension(200, 50));
+
+            JPanel contentPanel = new JPanel(new GridLayout(5, 2, -100, 0));
+            contentPanel.add(enterYTitle);
+            contentPanel.add(enterYField);
+            contentPanel.add(enterX0Title);
+            contentPanel.add(enterX0Field);
+            contentPanel.add(enterY0Title);
+            contentPanel.add(enterY0Field);
+            contentPanel.add(enterHTitle);
+            contentPanel.add(enterHField);
+            contentPanel.add(enterXTitle);
+            contentPanel.add(enterXField);
+
+            JPanel showPanel = new JPanel(new BorderLayout());
+            showPanel.add(rangeTitle, BorderLayout.NORTH);
+            showPanel.add(contentPanel, BorderLayout.CENTER);
+
+            JButton solveButton = new JButton("Solve");
+            solveButton.setFocusPainted(false);
+            solveButton.setPreferredSize(new Dimension(80, 40));
+            solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            solveButton.setBackground(customGreen);
+            solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            solveButton.setEnabled(false);
+
+            JButton cancelButton = new JButton("Cancel");
+            cancelButton.setFocusPainted(false);
+            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
+
+            Object[] buttons = {cancelButton, solveButton};
+
+            ArrayList<JTextField> fields = new ArrayList<>();
+            fields.add(enterYField);
+            fields.add(enterX0Field);
+            fields.add(enterY0Field);
+            fields.add(enterHField);
+            fields.add(enterXField);
+            addDocumentListenerToFields(solveButton, fields);
+
+            cancelButton.addActionListener(cancel -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+            });
+
+            solveButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+                try {
+                    String difeq = enterYField.getText();
+                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    double y0 = EvaluateString.evaluate(enterY0Field.getText());
+                    double h = EvaluateString.evaluate(enterHField.getText());
+                    double x = EvaluateString.evaluate(enterXField.getText());
+                    DifferentialEquation eq = new DifferentialEquation(difeq);
+                    double ans = DifferentialEquation.Runge_Kutta.solve(eq, x0, y0, h, x);
+
+                    //create title
+                    JLabel difeqTitle = new JLabel();
+                    difeqTitle.setText("Differential Equation solution using Runge-Kutta method : ");
+                    difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea difeqAns = new JTextArea();
+                    difeqAns.append("Answer : ");
+                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    difeqAns.setEnabled(false);
+                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel ansContentPanel = new JPanel(new GridLayout(2, 1));
+                    ansContentPanel.add(difeqTitle);
+                    ansContentPanel.add(polyAnsScrollPane);
+
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                    // JOptionPane.showConfirmDialog(null)
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            JOptionPane.showOptionDialog(
+                    null,
+                    showPanel,
+                    "Differential Equations",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    keyboardIcon128,
+                    buttons,
+                    null);
         };
         JPanel runge_KuttaCard = createCard(title, description, button, enterRunge_Kutta);
         differentialEquationsPanel.add(runge_KuttaCard);
@@ -2348,6 +3238,7 @@ public class GUI {
 
         polynomialFunctionPanel.add(pointsCard);
     }
+
 
     private void changeColorAnime(Component comp, Color color) {
         Color srcColor = comp.getBackground();
