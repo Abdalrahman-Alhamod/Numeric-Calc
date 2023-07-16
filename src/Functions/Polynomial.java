@@ -138,7 +138,7 @@ public class Polynomial implements Function {
             //}
         }
         // if there is a ' + ' , delete it
-        if (sb.charAt(sb.length() - 1) == ' ')
+        if (sb.length() > 3 && sb.charAt(sb.length() - 1) == ' ')
             sb.delete(sb.length() - 3, sb.length() - 1);
         return sb.toString(); // Return the final string representation
     }
@@ -494,6 +494,7 @@ public class Polynomial implements Function {
          */
         public static double getDiffAt(Polynomial poly, double x, int rank) {
             b = new ArrayList<>();
+            Polynomial tempPoly = new Polynomial(poly.getCoeffs());
             double bi = x;
             double factor = 1;
             for (int i = 0; i <= rank; i++) {
@@ -501,11 +502,11 @@ public class Polynomial implements Function {
                     bi = 0;
                     break;
                 }
-                calcB(poly, x);
+                calcB(tempPoly, x);
                 bi = b.get(b.size() - 1);
                 b.remove(b.size() - 1);
                 Collections.reverse(b);
-                poly.coeffs = b;
+                tempPoly.coeffs = b;
                 if (i > 0)
                     factor *= (i);
             }
