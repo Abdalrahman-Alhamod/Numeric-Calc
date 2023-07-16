@@ -12,7 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add keyboard icons">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix horner diff bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
     </list>
@@ -52,7 +52,7 @@
     <setting file="file://$PROJECT_DIR$/src/Functions/ExpressionFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Function.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Main.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
@@ -108,34 +108,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٢٦" summary="Fix floating points in functions">
-      <created>1688993010815</created>
-      <option name="number" value="٠٠٢٢٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٢٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688993010815</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٢٧" summary="Remove print from PointsFunction">
-      <created>1688996354283</created>
-      <option name="number" value="٠٠٢٢٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٢٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688996354283</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٢٨" summary="Add a complete switch for all methods in main">
-      <created>1688996384771</created>
-      <option name="number" value="٠٠٢٢٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٢٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688996384771</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٢٩" summary="Create jar">
-      <created>1688996568030</created>
-      <option name="number" value="٠٠٢٢٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٢٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688996568030</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٣٠" summary="Add jar">
       <created>1688996600682</created>
@@ -452,7 +424,35 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689523978622</updated>
     </task>
-    <option name="localTasksCounter" value="275" />
+    <task id="LOCAL؜-٠٠٢٧٥" summary="Add nin-linear equations solution">
+      <created>1689528905808</created>
+      <option name="number" value="٠٠٢٧٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٧٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689528905808</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٧٦" summary="Fix horner bug">
+      <created>1689539787029</created>
+      <option name="number" value="٠٠٢٧٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٧٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689539787029</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٧٧" summary="Fix horner floating error">
+      <created>1689540129084</created>
+      <option name="number" value="٠٠٢٧٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٧٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689540129084</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٧٨" summary="Fix horner diff bug">
+      <created>1689542569565</created>
+      <option name="number" value="٠٠٢٧٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٧٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689542569565</updated>
+    </task>
+    <option name="localTasksCounter" value="279" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -495,10 +495,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Clean Code project" />
-    <MESSAGE value="Enhance main code" />
-    <MESSAGE value="Add info Icon" />
-    <MESSAGE value="Add polynomial to chooseFunction panel" />
     <MESSAGE value="Change diff and polys panels rows and columns" />
     <MESSAGE value="Add setResizable false" />
     <MESSAGE value="Add exp Panel and test it&#10;Add exceptions to exp Functions" />
@@ -520,6 +516,10 @@
     <MESSAGE value="Add Terminal class and ove the code to it from the main method" />
     <MESSAGE value="Add differential equations solution" />
     <MESSAGE value="Add keyboard icons" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add keyboard icons" />
+    <MESSAGE value="Add nin-linear equations solution" />
+    <MESSAGE value="Fix horner bug" />
+    <MESSAGE value="Fix horner floating error" />
+    <MESSAGE value="Fix horner diff bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix horner diff bug" />
   </component>
 </project>

@@ -50,6 +50,7 @@ public class GUI {
 
     private Stack<JPanel> panelsStack;
     private PointsFunction function;
+    private Polynomial polynomial;
     private Consumer<PointsFunction> doAction;
 
     public GUI() {
@@ -138,6 +139,7 @@ public class GUI {
         initExpFuncPanel();
         iniPtsFuncPanel();
         initPolyFuncPanel();
+        initSysNonLinEqPanel();
         panelsStack = new Stack<>();
         panelsStack.add(startPanel);
     }
@@ -225,8 +227,8 @@ public class GUI {
         description = "Solve an entered system of non-Linear equations using numeric ways";
         button = "Enter";
         ActionListener enterSysNonLinEQ = e -> {
-            //panelsStack.add(nonLinearEquationsPanel);
-            //updateMainPanel();
+            panelsStack.add(systemOfNonLinearEquationsPanel);
+            updateMainPanel();
         };
         JPanel sysOfNonLinEQCard = createCard(title, description, button, enterSysNonLinEQ);
         startPanel.add(sysOfNonLinEQCard);
@@ -239,6 +241,7 @@ public class GUI {
         description = "Do several tasks on an entered polynomial using numeric ways";
         button = "Enter";
         ActionListener enterPolys = e -> {
+            polynomial = null;
             panelsStack.add(polynomialsPanel);
             updateMainPanel();
         };
@@ -363,6 +366,7 @@ public class GUI {
 
                     int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
+                        polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
@@ -432,6 +436,7 @@ public class GUI {
 
                     int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
+                        polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
@@ -520,6 +525,7 @@ public class GUI {
 
                     int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
+                        polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
@@ -608,6 +614,7 @@ public class GUI {
 
                     int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
+                        polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
@@ -696,6 +703,7 @@ public class GUI {
 
                     int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
+                        polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
@@ -784,6 +792,7 @@ public class GUI {
 
                     int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
+                        polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
@@ -834,6 +843,7 @@ public class GUI {
 
                     int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
+                        polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
@@ -1205,6 +1215,7 @@ public class GUI {
 
                     int feed = JOptionPane.showOptionDialog(null, contentPanel, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
+                        polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
@@ -1259,6 +1270,7 @@ public class GUI {
 
                     int feed = JOptionPane.showOptionDialog(null, contentPanel, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
+                        polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
@@ -1313,6 +1325,7 @@ public class GUI {
 
                     int feed = JOptionPane.showOptionDialog(null, contentPanel, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
+                        polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
@@ -1386,13 +1399,10 @@ public class GUI {
                     contentPanel.add(polyAnsScrollPane);
 
 
-                    String[] response = {"Cancel", "Continue with Polynomial"};
+                    String[] response = {"OK"};
 
-                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
-                    if (feed == 1) {
-                        panelsStack.add(polynomialsPanel);
-                        updateMainPanel();
-                    }
+                    JOptionPane.showOptionDialog(null, contentPanel, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, null);
+
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -3200,8 +3210,260 @@ public class GUI {
         String description = "Evaluates the polynomial at the specified value of x using Horner's method";
         String button = "Enter";
         ActionListener enterValueAt = e -> {
-            panelsStack.add(chooseFunctionPanel);
-            updateMainPanel();
+            JLabel enterPolyLabel = new JLabel("Enter Polynomials : ");
+            enterPolyLabel.setFont(new Font(mainFont, Font.BOLD, 25));
+            JPanel enterPoly = new JPanel();
+            enterPoly.add(enterPolyLabel);
+
+
+            // inputs : degree
+            JLabel enterDegreeTitle = new JLabel("Enter degree of Polynomial :");
+            enterDegreeTitle.setFont(new Font(secondFont, Font.PLAIN, 20));
+            enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
+
+            SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, 1000, 1);
+            JSpinner enterDegreeSp = new JSpinner(spinnerModel);
+            JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterDegreeSp.getEditor();
+            editor.getTextField().setColumns(3); // Adjust the width as needed
+
+            JButton confirmButton = new JButton("Confirm");
+            confirmButton.setPreferredSize(new Dimension(80, 30));
+
+            JPanel enterDegree = new JPanel();
+            enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+            enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
+            enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
+            enterDegree.add(confirmButton, BorderLayout.EAST);
+
+
+            // input coeffs
+            JLabel enterCoeffsTitle = new JLabel("Enter Coefficients : ");
+            enterCoeffsTitle.setFont(new Font(secondFont, Font.PLAIN, 20));
+            enterCoeffsTitle.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0)); // Adjust the top and bottom padding
+
+            JScrollPane enterCoeffsScroll = new JScrollPane();
+            enterCoeffsScroll.setPreferredSize(new Dimension(220, 150));
+
+            JPanel inputsPanel = new JPanel(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.insets = new Insets(5, 0, 5, 0); // Add vertical spacing between components
+
+            inputsPanel.add(enterPoly, gbc);
+
+            gbc.gridy++;
+            inputsPanel.add(enterDegree, gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy++;
+            gbc.insets = new Insets(0, 5, 10, 0);
+            inputsPanel.add(enterCoeffsTitle, gbc);
+
+            gbc.gridy++;
+            inputsPanel.add(enterCoeffsScroll, gbc);
+
+            JButton continueButton = new JButton("Continue");
+            continueButton.setFocusPainted(false);
+            continueButton.setPreferredSize(new Dimension(100, 40));
+            continueButton.setFont(new Font("Arial", Font.PLAIN, 17));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            continueButton.setBackground(customGreen);
+            continueButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            continueButton.setEnabled(false);
+
+            ArrayList<JTextField> coeffsFields = new ArrayList<>();
+            confirmButton.addActionListener(confirm -> {
+                // Handle confirm button action
+                int n = (int) enterDegreeSp.getValue();
+                JPanel coeffsPanel = new JPanel(new GridBagLayout());
+                GridBagConstraints gbc2 = new GridBagConstraints();
+                gbc2.gridx = 0;
+                gbc2.gridy = 0;
+                gbc2.anchor = GridBagConstraints.WEST;
+                gbc2.insets = new Insets(5, 0, 5, 10); // Add spacing between components
+
+                coeffsFields.clear();
+
+                for (int i = 0; i <= n; i++) {
+                    JLabel coeffLabel = new JLabel("a" + i + " = ");
+                    JTextField textFieldCoeff = new JTextField(10);
+
+                    textFieldCoeff.setName("a" + i);
+
+                    coeffsFields.add(textFieldCoeff);
+
+                    JPanel componentPanel = new JPanel(new GridBagLayout());
+                    GridBagConstraints gbcComponent = new GridBagConstraints();
+                    gbcComponent.gridx = 0;
+                    gbcComponent.gridy = 0;
+                    gbcComponent.anchor = GridBagConstraints.WEST;
+                    gbcComponent.insets = new Insets(5, 0, 5, 10); // Add spacing between components
+
+                    componentPanel.add(coeffLabel, gbcComponent);
+
+                    gbcComponent.gridx++;
+                    componentPanel.add(textFieldCoeff, gbcComponent);
+
+                    gbc2.gridy++;
+                    coeffsPanel.add(componentPanel, gbc2);
+                }
+
+                enterCoeffsScroll.setViewportView(coeffsPanel); // Set the pointsPanel as the viewport's view component
+                enterCoeffsScroll.revalidate(); // Revalidate the scroll pane to update its content
+
+                // Add a DocumentListener to each text field;
+                ArrayList<JTextField> fields = new ArrayList<>(coeffsFields);
+                addDocumentListenerToFields(continueButton, fields);
+            });
+
+            JButton cancelButton = new JButton("Cancel");
+            cancelButton.setFocusPainted(false);
+            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
+
+            Object[] buttons = {cancelButton, continueButton};
+
+            final boolean[] cancelPressed = {false};
+            cancelButton.addActionListener(cancel -> {
+                try {
+                    cancelPressed[0] = true;
+                    Window optionDialog = SwingUtilities.getWindowAncestor(inputsPanel);
+                    optionDialog.dispose();
+                } catch (Exception ignored) {
+                }
+            });
+
+            continueButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(inputsPanel);
+                optionDialog.dispose();
+                try {
+                    ArrayList<Double> coeffs = new ArrayList<>();
+                    for (JTextField field : coeffsFields) {
+                        double coeff = EvaluateString.evaluate(field.getText());
+                        coeffs.add(coeff);
+                    }
+                    polynomial = new Polynomial(coeffs);
+                    System.out.println(polynomial);
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+            if (polynomial == null) {
+                JOptionPane.showOptionDialog(null, inputsPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
+                if (cancelPressed[0])
+                    return;
+            }
+
+            JLabel horTitleLabel = new JLabel("Horner's Method");
+            horTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
+            JPanel hornerTitle = new JPanel();
+            hornerTitle.add(horTitleLabel);
+
+            //create title
+            JLabel polyTitle = new JLabel();
+            polyTitle.setText("Your Polynomial : ");
+            polyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+            //create ans scrolled
+            JTextArea polyAns = new JTextArea();
+            polyAns.append("P(x) : ");
+            if (polynomial != null)
+                polyAns.append(polynomial.toString());
+            polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+            polyAns.setEnabled(false);
+            polyAns.setDisabledTextColor(Color.BLACK);
+            JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+            polyAnsScrollPane.setPreferredSize(new Dimension(250, 65));
+
+            // inter x label
+            JLabel enterXLabel = new JLabel("Enter x : ");
+            enterXLabel.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+            // inter x field
+            JTextField enterXField = new JTextField();
+            enterXField.setColumns(10);
+
+            //create content panel
+            JPanel contentPanel = new JPanel(new GridBagLayout());
+            gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.insets = new Insets(10, 0, 10, 0);
+
+            contentPanel.add(hornerTitle, gbc);
+            gbc.gridy++;
+            contentPanel.add(polyTitle, gbc);
+            gbc.gridy++;
+            contentPanel.add(polyAnsScrollPane, gbc);
+            gbc.gridy++;
+            contentPanel.add(enterXLabel, gbc);
+            gbc.insets = new Insets(10, -150, 10, 0);
+            gbc.gridx++;
+            contentPanel.add(enterXField, gbc);
+
+            JButton solveButton = new JButton("Solve");
+            solveButton.setFocusPainted(false);
+            solveButton.setPreferredSize(new Dimension(100, 40));
+            solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
+            solveButton.setBackground(customGreen);
+            solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            solveButton.setEnabled(false);
+
+            ArrayList<JTextField> fields = new ArrayList<>();
+            fields.add(enterXField);
+            addDocumentListenerToFields(solveButton, fields);
+
+            cancelButton.addActionListener(cancel -> {
+                try {
+                    Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                    optionDialog.dispose();
+                } catch (Exception ignored) {
+                }
+            });
+
+            solveButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+                try {
+                    double x = EvaluateString.evaluate(enterXField.getText());
+                    double ans = Polynomial.Horner.getValueAt(polynomial, x);
+
+                    //create title
+                    JLabel solTitle = new JLabel();
+                    solTitle.setText("Value at x using Horner's Method : ");
+                    solTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea solAns = new JTextArea();
+                    solAns.append("Answer : ");
+                    solAns.append(String.valueOf(ans));
+                    solAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    solAns.setEnabled(false);
+                    solAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane solAnsScrollPane = new JScrollPane(solAns);
+                    solAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel solContentPanel = new JPanel(new GridLayout(2, 1));
+                    solContentPanel.add(solTitle);
+                    solContentPanel.add(solAnsScrollPane);
+
+                    String[] response = {"OK"};
+
+                    JOptionPane.showOptionDialog(null, solContentPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            Object[] solvedButtons = {cancelButton, solveButton};
+
+            JOptionPane.showOptionDialog(null, contentPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, solvedButtons, null);
         };
         JPanel valueAtCard = createCard(title, description, button, enterValueAt);
         polynomialsPanel.add(valueAtCard);
@@ -3210,11 +3472,266 @@ public class GUI {
 
         //init Divide on (x - a) Card
         title = "Divide on (x - a)";
-        description = "Divides the polynomial by (x - c) using Horner's method and returns the resulting polynomial";
+        description = "Divides the polynomial by (x - a) using Horner's method and returns the resulting polynomial";
         button = "Enter";
         ActionListener enterDivideOn = e -> {
-            panelsStack.add(chooseFunctionPanel);
-            updateMainPanel();
+            JLabel enterPolyLabel = new JLabel("Enter Polynomials : ");
+            enterPolyLabel.setFont(new Font(mainFont, Font.BOLD, 25));
+            JPanel enterPoly = new JPanel();
+            enterPoly.add(enterPolyLabel);
+
+
+            // inputs : degree
+            JLabel enterDegreeTitle = new JLabel("Enter degree of Polynomial :");
+            enterDegreeTitle.setFont(new Font(secondFont, Font.PLAIN, 20));
+            enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
+
+            SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, 1000, 1);
+            JSpinner enterDegreeSp = new JSpinner(spinnerModel);
+            JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterDegreeSp.getEditor();
+            editor.getTextField().setColumns(3); // Adjust the width as needed
+
+            JButton confirmButton = new JButton("Confirm");
+            confirmButton.setPreferredSize(new Dimension(80, 30));
+
+            JPanel enterDegree = new JPanel();
+            enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+            enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
+            enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
+            enterDegree.add(confirmButton, BorderLayout.EAST);
+
+
+            // input coeffs
+            JLabel enterCoeffsTitle = new JLabel("Enter Coefficients : ");
+            enterCoeffsTitle.setFont(new Font(secondFont, Font.PLAIN, 20));
+            enterCoeffsTitle.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0)); // Adjust the top and bottom padding
+
+            JScrollPane enterCoeffsScroll = new JScrollPane();
+            enterCoeffsScroll.setPreferredSize(new Dimension(220, 150));
+
+            JPanel inputsPanel = new JPanel(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.insets = new Insets(5, 0, 5, 0); // Add vertical spacing between components
+
+            inputsPanel.add(enterPoly, gbc);
+
+            gbc.gridy++;
+            inputsPanel.add(enterDegree, gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy++;
+            gbc.insets = new Insets(0, 5, 10, 0);
+            inputsPanel.add(enterCoeffsTitle, gbc);
+
+            gbc.gridy++;
+            inputsPanel.add(enterCoeffsScroll, gbc);
+
+            JButton continueButton = new JButton("Continue");
+            continueButton.setFocusPainted(false);
+            continueButton.setPreferredSize(new Dimension(100, 40));
+            continueButton.setFont(new Font("Arial", Font.PLAIN, 17));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            continueButton.setBackground(customGreen);
+            continueButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            continueButton.setEnabled(false);
+
+            ArrayList<JTextField> coeffsFields = new ArrayList<>();
+            confirmButton.addActionListener(confirm -> {
+                // Handle confirm button action
+                int n = (int) enterDegreeSp.getValue();
+                JPanel coeffsPanel = new JPanel(new GridBagLayout());
+                GridBagConstraints gbc2 = new GridBagConstraints();
+                gbc2.gridx = 0;
+                gbc2.gridy = 0;
+                gbc2.anchor = GridBagConstraints.WEST;
+                gbc2.insets = new Insets(5, 0, 5, 10); // Add spacing between components
+
+                coeffsFields.clear();
+
+                for (int i = 0; i <= n; i++) {
+                    JLabel coeffLabel = new JLabel("a" + i + " = ");
+                    JTextField textFieldCoeff = new JTextField(10);
+
+                    textFieldCoeff.setName("a" + i);
+
+                    coeffsFields.add(textFieldCoeff);
+
+                    JPanel componentPanel = new JPanel(new GridBagLayout());
+                    GridBagConstraints gbcComponent = new GridBagConstraints();
+                    gbcComponent.gridx = 0;
+                    gbcComponent.gridy = 0;
+                    gbcComponent.anchor = GridBagConstraints.WEST;
+                    gbcComponent.insets = new Insets(5, 0, 5, 10); // Add spacing between components
+
+                    componentPanel.add(coeffLabel, gbcComponent);
+
+                    gbcComponent.gridx++;
+                    componentPanel.add(textFieldCoeff, gbcComponent);
+
+                    gbc2.gridy++;
+                    coeffsPanel.add(componentPanel, gbc2);
+                }
+
+                enterCoeffsScroll.setViewportView(coeffsPanel); // Set the pointsPanel as the viewport's view component
+                enterCoeffsScroll.revalidate(); // Revalidate the scroll pane to update its content
+
+                // Add a DocumentListener to each text field;
+                ArrayList<JTextField> fields = new ArrayList<>(coeffsFields);
+                addDocumentListenerToFields(continueButton, fields);
+            });
+
+            JButton cancelButton = new JButton("Cancel");
+            cancelButton.setFocusPainted(false);
+            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
+
+            Object[] buttons = {cancelButton, continueButton};
+
+            final boolean[] cancelPressed = {false};
+            cancelButton.addActionListener(cancel -> {
+                try {
+                    cancelPressed[0] = true;
+                    Window optionDialog = SwingUtilities.getWindowAncestor(inputsPanel);
+                    optionDialog.dispose();
+                } catch (Exception ignored) {
+                }
+            });
+
+            continueButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(inputsPanel);
+                optionDialog.dispose();
+                try {
+                    ArrayList<Double> coeffs = new ArrayList<>();
+                    for (JTextField field : coeffsFields) {
+                        double coeff = EvaluateString.evaluate(field.getText());
+                        coeffs.add(coeff);
+                    }
+                    polynomial = new Polynomial(coeffs);
+                    System.out.println(polynomial);
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+            if (polynomial == null) {
+                JOptionPane.showOptionDialog(null, inputsPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
+                if (cancelPressed[0])
+                    return;
+            }
+
+            JLabel horTitleLabel = new JLabel("Horner's Method");
+            horTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
+            JPanel hornerTitle = new JPanel();
+            hornerTitle.add(horTitleLabel);
+
+            //create title
+            JLabel polyTitle = new JLabel();
+            polyTitle.setText("Your Polynomial : ");
+            polyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+            //create ans scrolled
+            JTextArea polyAns = new JTextArea();
+            polyAns.append("P(x) : ");
+            if (polynomial != null)
+                polyAns.append(polynomial.toString());
+            polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+            polyAns.setEnabled(false);
+            polyAns.setDisabledTextColor(Color.BLACK);
+            JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+            polyAnsScrollPane.setPreferredSize(new Dimension(250, 65));
+
+            // inter a label
+            JLabel enterALabel = new JLabel("Enter a : ");
+            enterALabel.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+            // inter a field
+            JTextField enterAField = new JTextField();
+            enterAField.setColumns(10);
+
+            //create content panel
+            JPanel contentPanel = new JPanel(new GridBagLayout());
+            gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.insets = new Insets(10, 0, 10, 0);
+
+            contentPanel.add(hornerTitle, gbc);
+            gbc.gridy++;
+            contentPanel.add(polyTitle, gbc);
+            gbc.gridy++;
+            contentPanel.add(polyAnsScrollPane, gbc);
+            gbc.gridy++;
+            contentPanel.add(enterALabel, gbc);
+            gbc.insets = new Insets(10, -150, 10, 0);
+            gbc.gridx++;
+            contentPanel.add(enterAField, gbc);
+
+            JButton solveButton = new JButton("Solve");
+            solveButton.setFocusPainted(false);
+            solveButton.setPreferredSize(new Dimension(100, 40));
+            solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
+            solveButton.setBackground(customGreen);
+            solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            solveButton.setEnabled(false);
+
+            ArrayList<JTextField> fields = new ArrayList<>();
+            fields.add(enterAField);
+            addDocumentListenerToFields(solveButton, fields);
+
+            cancelButton.addActionListener(cancel -> {
+                try {
+                    Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                    optionDialog.dispose();
+                } catch (Exception ignored) {
+                }
+            });
+
+            solveButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+                try {
+                    double a = EvaluateString.evaluate(enterAField.getText());
+                    Polynomial ans = Polynomial.Horner.getDivideOn(polynomial, a);
+
+                    //create title
+                    JLabel solTitle = new JLabel();
+                    solTitle.setText("<html>" +
+                            "The result Polynomial by dividing on (x-a) <br>" +
+                            "using Horner's Method : " +
+                            "</html>");
+                    solTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea solAns = new JTextArea();
+                    solAns.append("P(x) : ");
+                    solAns.append(String.valueOf(ans));
+                    solAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    solAns.setEnabled(false);
+                    solAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane solAnsScrollPane = new JScrollPane(solAns);
+                    solAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel solContentPanel = new JPanel(new GridLayout(2, 1));
+                    solContentPanel.add(solTitle);
+                    solContentPanel.add(solAnsScrollPane);
+
+                    String[] response = {"OK"};
+
+                    JOptionPane.showOptionDialog(null, solContentPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            Object[] solvedButtons = {cancelButton, solveButton};
+
+            JOptionPane.showOptionDialog(null, contentPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, solvedButtons, null);
         };
         JPanel divideOnCard = createCard(title, description, button, enterDivideOn);
         polynomialsPanel.add(divideOnCard);
@@ -3226,8 +3743,284 @@ public class GUI {
         description = "Calculates the value of the derivative of the polynomial at the specified value of x and rank using Horner's method";
         button = "Enter";
         ActionListener enterDiffAt = e -> {
-            panelsStack.add(chooseFunctionPanel);
-            updateMainPanel();
+            JLabel enterPolyLabel = new JLabel("Enter Polynomials : ");
+            enterPolyLabel.setFont(new Font(mainFont, Font.BOLD, 25));
+            JPanel enterPoly = new JPanel();
+            enterPoly.add(enterPolyLabel);
+
+
+            // inputs : degree
+            JLabel enterDegreeTitle = new JLabel("Enter degree of Polynomial :");
+            enterDegreeTitle.setFont(new Font(secondFont, Font.PLAIN, 20));
+            enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
+
+            SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, 1000, 1);
+            JSpinner enterDegreeSp = new JSpinner(spinnerModel);
+            JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterDegreeSp.getEditor();
+            editor.getTextField().setColumns(3); // Adjust the width as needed
+
+            JButton confirmButton = new JButton("Confirm");
+            confirmButton.setPreferredSize(new Dimension(80, 30));
+
+            JPanel enterDegree = new JPanel();
+            enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+            enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
+            enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
+            enterDegree.add(confirmButton, BorderLayout.EAST);
+
+
+            // input coeffs
+            JLabel enterCoeffsTitle = new JLabel("Enter Coefficients : ");
+            enterCoeffsTitle.setFont(new Font(secondFont, Font.PLAIN, 20));
+            enterCoeffsTitle.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0)); // Adjust the top and bottom padding
+
+            JScrollPane enterCoeffsScroll = new JScrollPane();
+            enterCoeffsScroll.setPreferredSize(new Dimension(220, 150));
+
+            JPanel inputsPanel = new JPanel(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.insets = new Insets(5, 0, 5, 0); // Add vertical spacing between components
+
+            inputsPanel.add(enterPoly, gbc);
+
+            gbc.gridy++;
+            inputsPanel.add(enterDegree, gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy++;
+            gbc.insets = new Insets(0, 5, 10, 0);
+            inputsPanel.add(enterCoeffsTitle, gbc);
+
+            gbc.gridy++;
+            inputsPanel.add(enterCoeffsScroll, gbc);
+
+            JButton continueButton = new JButton("Continue");
+            continueButton.setFocusPainted(false);
+            continueButton.setPreferredSize(new Dimension(100, 40));
+            continueButton.setFont(new Font("Arial", Font.PLAIN, 17));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            continueButton.setBackground(customGreen);
+            continueButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            continueButton.setEnabled(false);
+
+            ArrayList<JTextField> coeffsFields = new ArrayList<>();
+            confirmButton.addActionListener(confirm -> {
+                // Handle confirm button action
+                int n = (int) enterDegreeSp.getValue();
+                JPanel coeffsPanel = new JPanel(new GridBagLayout());
+                GridBagConstraints gbc2 = new GridBagConstraints();
+                gbc2.gridx = 0;
+                gbc2.gridy = 0;
+                gbc2.anchor = GridBagConstraints.WEST;
+                gbc2.insets = new Insets(5, 0, 5, 10); // Add spacing between components
+
+                coeffsFields.clear();
+
+                for (int i = 0; i <= n; i++) {
+                    JLabel coeffLabel = new JLabel("a" + i + " = ");
+                    JTextField textFieldCoeff = new JTextField(10);
+
+                    textFieldCoeff.setName("a" + i);
+
+                    coeffsFields.add(textFieldCoeff);
+
+                    JPanel componentPanel = new JPanel(new GridBagLayout());
+                    GridBagConstraints gbcComponent = new GridBagConstraints();
+                    gbcComponent.gridx = 0;
+                    gbcComponent.gridy = 0;
+                    gbcComponent.anchor = GridBagConstraints.WEST;
+                    gbcComponent.insets = new Insets(5, 0, 5, 10); // Add spacing between components
+
+                    componentPanel.add(coeffLabel, gbcComponent);
+
+                    gbcComponent.gridx++;
+                    componentPanel.add(textFieldCoeff, gbcComponent);
+
+                    gbc2.gridy++;
+                    coeffsPanel.add(componentPanel, gbc2);
+                }
+
+                enterCoeffsScroll.setViewportView(coeffsPanel); // Set the pointsPanel as the viewport's view component
+                enterCoeffsScroll.revalidate(); // Revalidate the scroll pane to update its content
+
+                // Add a DocumentListener to each text field;
+                ArrayList<JTextField> fields = new ArrayList<>(coeffsFields);
+                addDocumentListenerToFields(continueButton, fields);
+            });
+
+            JButton cancelButton = new JButton("Cancel");
+            cancelButton.setFocusPainted(false);
+            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
+
+            Object[] buttons = {cancelButton, continueButton};
+
+            final boolean[] cancelPressed = {false};
+            cancelButton.addActionListener(cancel -> {
+                try {
+                    cancelPressed[0] = true;
+                    Window optionDialog = SwingUtilities.getWindowAncestor(inputsPanel);
+                    optionDialog.dispose();
+                } catch (Exception ignored) {
+                }
+            });
+
+            continueButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(inputsPanel);
+                optionDialog.dispose();
+                try {
+                    ArrayList<Double> coeffs = new ArrayList<>();
+                    for (JTextField field : coeffsFields) {
+                        double coeff = EvaluateString.evaluate(field.getText());
+                        coeffs.add(coeff);
+                    }
+                    polynomial = new Polynomial(coeffs);
+                    System.out.println(polynomial);
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+            if (polynomial == null) {
+                JOptionPane.showOptionDialog(null, inputsPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
+                if (cancelPressed[0])
+                    return;
+            }
+
+            JLabel horTitleLabel = new JLabel("Horner's Method");
+            horTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
+            JPanel hornerTitle = new JPanel();
+            hornerTitle.add(horTitleLabel);
+
+            //create title
+            JLabel polyTitle = new JLabel();
+            polyTitle.setText("Your Polynomial : ");
+            polyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+            //create ans scrolled
+            JTextArea polyAns = new JTextArea();
+            polyAns.append("P(x) : ");
+            if (polynomial != null)
+                polyAns.append(polynomial.toString());
+            polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+            polyAns.setEnabled(false);
+            polyAns.setDisabledTextColor(Color.BLACK);
+            JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+            polyAnsScrollPane.setPreferredSize(new Dimension(250, 65));
+
+            // inter x label
+            JLabel enterXLabel = new JLabel("Enter x : ");
+            enterXLabel.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+            // inter x field
+            JTextField enterXField = new JTextField();
+            enterXField.setColumns(10);
+
+            // inputs : degree
+            JLabel enterDiffDegreeTitle = new JLabel("Enter degree of Differentiation :");
+            enterDiffDegreeTitle.setFont(new Font(secondFont, Font.PLAIN, 20));
+            enterDiffDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
+
+            SpinnerNumberModel spinnerModelDiff = new SpinnerNumberModel(0, 0, 100, 1);
+            JSpinner enterDiffDegreeSp = new JSpinner(spinnerModelDiff);
+            JSpinner.NumberEditor editorDiff = (JSpinner.NumberEditor) enterDiffDegreeSp.getEditor();
+            editorDiff.getTextField().setColumns(2); // Adjust the width as needed
+
+            JPanel enterDiffDegree = new JPanel();
+            enterDiffDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+            enterDiffDegree.add(enterDiffDegreeTitle, BorderLayout.WEST);
+            enterDiffDegree.add(enterDiffDegreeSp, BorderLayout.CENTER);
+            enterDiffDegree.setBorder(BorderFactory.createEmptyBorder(0, -5, 0, 0));
+
+            //create content panel
+            JPanel contentPanel = new JPanel(new GridBagLayout());
+            gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.insets = new Insets(10, 0, 10, 0);
+
+            contentPanel.add(hornerTitle, gbc);
+            gbc.gridy++;
+            contentPanel.add(polyTitle, gbc);
+            gbc.gridy++;
+            contentPanel.add(polyAnsScrollPane, gbc);
+            gbc.gridy++;
+            contentPanel.add(enterXLabel, gbc);
+            gbc.insets = new Insets(10, -220, 10, 0);
+            gbc.gridx++;
+            contentPanel.add(enterXField, gbc);
+            gbc.gridx = 0;
+            gbc.gridy++;
+            gbc.insets = new Insets(10, 0, 10, 0);
+            contentPanel.add(enterDiffDegree, gbc);
+
+            JButton solveButton = new JButton("Solve");
+            solveButton.setFocusPainted(false);
+            solveButton.setPreferredSize(new Dimension(100, 40));
+            solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
+            solveButton.setBackground(customGreen);
+            solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            solveButton.setEnabled(false);
+
+            ArrayList<JTextField> fields = new ArrayList<>();
+            fields.add(enterXField);
+            addDocumentListenerToFields(solveButton, fields);
+
+            cancelButton.addActionListener(cancel -> {
+                try {
+                    Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                    optionDialog.dispose();
+                } catch (Exception ignored) {
+                }
+            });
+
+            solveButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
+                optionDialog.dispose();
+                try {
+                    double x = EvaluateString.evaluate(enterXField.getText());
+                    int diffDegree = (int) enterDiffDegreeSp.getValue();
+                    double ans = Polynomial.Horner.getDiffAt(polynomial, x, diffDegree);
+
+                    //create title
+                    JLabel solTitle = new JLabel();
+                    solTitle.setText("<html> " +
+                            "Derivative Polynomial answer at x <br>" +
+                            "using Horner's Method : " +
+                            "</html>");
+                    solTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create ans scrolled
+                    JTextArea solAns = new JTextArea();
+                    solAns.append("Ans : ");
+                    solAns.append(String.valueOf(ans));
+                    solAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    solAns.setEnabled(false);
+                    solAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane solAnsScrollPane = new JScrollPane(solAns);
+                    solAnsScrollPane.setPreferredSize(new Dimension(100, 50));
+
+                    //create content panel
+                    JPanel solContentPanel = new JPanel(new GridLayout(2, 1));
+                    solContentPanel.add(solTitle);
+                    solContentPanel.add(solAnsScrollPane);
+
+                    String[] response = {"OK"};
+
+                    JOptionPane.showOptionDialog(null, solContentPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            Object[] solvedButtons = {cancelButton, solveButton};
+
+            JOptionPane.showOptionDialog(null, contentPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, solvedButtons, null);
         };
         JPanel diffAtCard = createCard(title, description, button, enterDiffAt);
         polynomialsPanel.add(diffAtCard);
@@ -3305,7 +4098,7 @@ public class GUI {
                     " <b>Polynomials </b> : x^3 + 9*x^2 -5*x +10 <br>" +
                     " <b>Exponential </b> : exp(x^2) .. exp(1/x) <br>" +
                     " <b>Binary Logarithm </b> : log(3*x) .. log(-x) <br>" +
-                    " <b>Trigonometric Functions </b> : sin(x),cos(x),tan(x <br>" +
+                    " <b>Trigonometric Functions </b> : sin(x),cos(x),tan(x) <br>" +
                     " <b>Inverse Trigonometric Functions </b> : asin(x),acos(x),atan(x) <br>" +
                     " <b>Hyperbolic Trigonometric Functions </b> : sinh(x),cosh(x),tanh(x) <br>" +
                     "</html>");
@@ -3804,14 +4597,12 @@ public class GUI {
             enterDegree.add(confirmButton, BorderLayout.EAST);
 
 
-            //JOptionPane.showConfirmDialog(null,enterN,"e",JOptionPane.DEFAULT_OPTION);
+            // input coeffs
+            JLabel enterCoeffsTitle = new JLabel("Enter Coefficients : ");
+            enterCoeffsTitle.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0)); // Adjust the top and bottom padding
 
-            // input x and y
-            JLabel enterPointsTitle = new JLabel("Enter Coefficients : ");
-            enterPointsTitle.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0)); // Adjust the top and bottom padding
-
-            JScrollPane enterPointsScroll = new JScrollPane();
-            enterPointsScroll.setPreferredSize(new Dimension(220, 150));
+            JScrollPane enterCoeffsScroll = new JScrollPane();
+            enterCoeffsScroll.setPreferredSize(new Dimension(220, 150));
 
 
             JPanel inputsPanel = new JPanel(new GridBagLayout());
@@ -3835,10 +4626,10 @@ public class GUI {
             gbc.gridx = 0;
             gbc.gridy++;
             gbc.gridwidth = 2;
-            inputsPanel.add(enterPointsTitle, gbc);
+            inputsPanel.add(enterCoeffsTitle, gbc);
 
             gbc.gridy++;
-            inputsPanel.add(enterPointsScroll, gbc);
+            inputsPanel.add(enterCoeffsScroll, gbc);
 
             // Generate Button
             JButton generateButton = new JButton("Generate");
@@ -3886,8 +4677,8 @@ public class GUI {
                     coeffsPanel.add(componentPanel, gbc2);
                 }
 
-                enterPointsScroll.setViewportView(coeffsPanel); // Set the pointsPanel as the viewport's view component
-                enterPointsScroll.revalidate(); // Revalidate the scroll pane to update its content
+                enterCoeffsScroll.setViewportView(coeffsPanel); // Set the pointsPanel as the viewport's view component
+                enterCoeffsScroll.revalidate(); // Revalidate the scroll pane to update its content
 
                 // Add a DocumentListener to each text field;
                 ArrayList<JTextField> fields = new ArrayList<>(coeffsFields);
@@ -3945,6 +4736,254 @@ public class GUI {
         polynomialFunctionPanel.add(pointsCard);
     }
 
+    private void initSysNonLinEqPanel() {
+        systemOfNonLinearEquationsPanel = new JPanel();
+        systemOfNonLinearEquationsPanel.setName("System of Non-Linear Equations");
+        systemOfNonLinearEquationsPanel.setPreferredSize(mainFrame.getSize());
+        systemOfNonLinearEquationsPanel.setBackground(new Color(100, 100, 100));
+        GridLayout startLayout = new GridLayout(1, 2);
+        startLayout.setHgap(5);
+        startLayout.setVgap(5);
+        systemOfNonLinearEquationsPanel.setLayout(startLayout);
+
+        JPanel pointsCard = new JPanel();
+        JTextArea pointsText;
+        JScrollPane pointsScrollPane;
+        JSpinner enterNSp;
+        JButton solveButton;
+        {
+
+            //points card title
+            JPanel titlePanel = new JPanel(new BorderLayout());
+            JLabel pointsTitle = new JLabel();
+            pointsTitle.setText("Solution Approximations : ");
+            pointsTitle.setFont(new Font(mainFont, Font.BOLD, 25));
+            titlePanel.add(pointsTitle, BorderLayout.NORTH);
+
+            // inputs : n
+            JLabel enterNTitle = new JLabel("Enter n – The number of iterations :");
+            enterNTitle.setHorizontalAlignment(SwingConstants.LEFT);
+
+            SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, 1000, 1);
+            enterNSp = new JSpinner(spinnerModel);
+            JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterNSp.getEditor();
+            editor.getTextField().setColumns(3); // Adjust the width as needed
+
+            JPanel enterN = new JPanel();
+            enterN.setLayout(new FlowLayout(FlowLayout.LEFT));
+            enterN.add(enterNTitle, BorderLayout.WEST);
+            enterN.add(enterNSp, BorderLayout.CENTER);
+
+            titlePanel.add(enterN, BorderLayout.CENTER);
+
+            //point card area
+            pointsText = new JTextArea();
+            //pointsText.setPreferredSize(new Dimension(450, 550));
+            pointsText.setFont(new Font(mainFont, Font.PLAIN, 20));
+            pointsText.setEnabled(false);
+            pointsScrollPane = new JScrollPane(pointsText);
+            pointsScrollPane.setPreferredSize(new Dimension(450, 480));
+
+            // Continue Button
+            solveButton = new JButton("Solve");
+            solveButton.setFont(new Font(buttonFont, Font.BOLD, 20));
+            solveButton.setFocusPainted(false);
+            solveButton.setPreferredSize(new Dimension(60, 50));
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            solveButton.setBackground(customGreen);
+            solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
+            solveButton.setEnabled(false); // Disable the button initially
+
+            // content panel
+            JPanel contentPanel = new JPanel(new BorderLayout());
+            contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
+            contentPanel.add(titlePanel, BorderLayout.NORTH);
+            contentPanel.add(pointsScrollPane, BorderLayout.CENTER);
+            contentPanel.add(solveButton, BorderLayout.SOUTH);
+
+            pointsCard.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+            pointsCard.add(contentPanel, BorderLayout.CENTER);
+
+        }
+
+        JPanel inputCard = new JPanel();
+        {
+            //title
+            JLabel cardTitle = new JLabel();
+            cardTitle.setText("<html>" +
+                    "System of Non-Linear Equations <br>" +
+                    "Newton-Raphson Method <br> " +
+                    "</html>");
+            cardTitle.setFont(new Font(mainFont, Font.BOLD, 25));
+
+            //info panel
+            JPanel infoPanel = new JPanel(new GridLayout(1, 1, 0, -30));
+            infoPanel.add(cardTitle);
+
+            // inputs : fx
+            JLabel enterFxTitle = new JLabel("Enter f(x,y) :");
+
+            JTextField enterFxField = new JTextField();
+            enterFxField.setPreferredSize(new Dimension(100, 40));
+
+            JPanel enterFx = new JPanel();
+            GridLayout inputLayout = new GridLayout(2, 1, 0, -5);
+            enterFx.setLayout(inputLayout);
+            enterFx.add(enterFxTitle);
+            enterFx.add(enterFxField);
+
+            // inputs : gx
+            JLabel enterGxTitle = new JLabel("Enter g(x,y) :");
+
+            JTextField enterGxField = new JTextField();
+            enterGxField.setPreferredSize(new Dimension(100, 40));
+
+            JPanel enterGx = new JPanel();
+            enterGx.setLayout(inputLayout);
+            enterGx.add(enterGxTitle);
+            enterGx.add(enterGxField);
+
+            // inputs : dfdx
+            JLabel enterDfdxTitle = new JLabel("Enter dfdx :");
+
+            JTextField enterDfdxField = new JTextField();
+            //enterAField.setPreferredSize(new Dimension(100, 50));
+
+            JPanel enterDfdx = new JPanel();
+            enterDfdx.setLayout(inputLayout);
+            enterDfdx.add(enterDfdxTitle);
+            enterDfdx.add(enterDfdxField);
+
+            // inputs : dfdy
+            JLabel enterDfdyTitle = new JLabel("Enter dfdy :");
+
+            JTextField enterDfdyField = new JTextField();
+            //enterAField.setPreferredSize(new Dimension(100, 50));
+
+            JPanel enterDfdy = new JPanel();
+            enterDfdy.setLayout(inputLayout);
+            enterDfdy.add(enterDfdyTitle);
+            enterDfdy.add(enterDfdyField);
+
+            // inputs : dgdx
+            JLabel enterDgdxTitle = new JLabel("Enter dgdx :");
+
+            JTextField enterDgdxField = new JTextField();
+            //enterBField.setPreferredSize(new Dimension(100, 50));
+
+            JPanel enterDgdx = new JPanel();
+            enterDgdx.setLayout(inputLayout);
+            enterDgdx.add(enterDgdxTitle);
+            enterDgdx.add(enterDgdxField);
+
+            // inputs : dgdy
+            JLabel enterDgdyTitle = new JLabel("Enter dgdy :");
+
+            JTextField enterDgdyField = new JTextField();
+            //enterBField.setPreferredSize(new Dimension(100, 50));
+
+            JPanel enterDgdy = new JPanel();
+            enterDgdy.setLayout(inputLayout);
+            enterDgdy.add(enterDgdyTitle);
+            enterDgdy.add(enterDgdyField);
+
+            // inputs : x0
+            JLabel enterX0Title = new JLabel("Enter X0 :");
+
+            JTextField enterX0Field = new JTextField();
+            //enterBField.setPreferredSize(new Dimension(100, 50));
+
+            JPanel enterX0 = new JPanel();
+            enterX0.setLayout(inputLayout);
+            enterX0.add(enterX0Title);
+            enterX0.add(enterX0Field);
+
+            // inputs : y0
+            JLabel enterY0Title = new JLabel("Enter Y0 :");
+
+            JTextField enterY0Field = new JTextField();
+            //enterBField.setPreferredSize(new Dimension(100, 50));
+
+            JPanel enterY0 = new JPanel();
+            enterY0.setLayout(inputLayout);
+            enterY0.add(enterY0Title);
+            enterY0.add(enterY0Field);
+
+
+            // inputs panel
+            JPanel inputsPanel = new JPanel(new GridLayout(8, 1, -5, -10));
+            inputsPanel.add(enterFx);
+            inputsPanel.add(enterGx);
+            inputsPanel.add(enterDfdx);
+            inputsPanel.add(enterDfdy);
+            inputsPanel.add(enterDgdx);
+            inputsPanel.add(enterDgdy);
+            inputsPanel.add(enterX0);
+            inputsPanel.add(enterY0);
+
+            // solve button action
+            solveButton.addActionListener(e -> {
+                String fxS = enterFxField.getText();
+                ExpressionFunction fx = new ExpressionFunction(fxS);
+                String gxS = enterGxField.getText();
+                ExpressionFunction gx = new ExpressionFunction(gxS);
+                String dfdxS = enterDfdxField.getText();
+                ExpressionFunction dfdx = new ExpressionFunction(dfdxS);
+                String dfdyS = enterDfdyField.getText();
+                ExpressionFunction dfdy = new ExpressionFunction(dfdyS);
+                String dgdxS = enterDgdxField.getText();
+                ExpressionFunction dgdx = new ExpressionFunction(dgdxS);
+                String dgdyS = enterDgdyField.getText();
+                ExpressionFunction dgdy = new ExpressionFunction(dgdyS);
+                double x0 = EvaluateString.evaluate(enterX0Field.getText());
+                double y0 = EvaluateString.evaluate(enterY0Field.getText());
+                int n = (int) enterNSp.getValue();
+                try {
+                    ArrayList<ArrayList<Double>> points = SystemOfNonLinearEquations.Newton_Raphson.solve(fx, dfdx, dfdy, gx, dgdx, dgdy, x0, y0, n);
+                    ArrayList<Double> xp = points.get(0);
+                    ArrayList<Double> yp = points.get(1);
+                    pointsText.setText("");
+                    for (int i = 0; i < xp.size(); i++) {
+                        String sb = "x" + (i + 1) + " = " + xp.get(i) +
+                                '\t' +
+                                "y" + (i + 1) + " = " + yp.get(i);
+                        pointsText.append(sb);
+                        pointsText.append("\n");
+                    }
+                    pointsText.repaint();
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            // Add a DocumentListener to each text field
+            ArrayList<JTextField> fields = new ArrayList<>();
+            fields.add(enterFxField);
+            fields.add(enterGxField);
+            fields.add(enterDfdxField);
+            fields.add(enterDfdyField);
+            fields.add(enterDgdxField);
+            fields.add(enterDgdyField);
+            fields.add(enterX0Field);
+            fields.add(enterY0Field);
+            addDocumentListenerToFields(solveButton, fields);
+
+            JPanel contentPanel = new JPanel(new BorderLayout());
+            contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
+
+            contentPanel.add(infoPanel, BorderLayout.NORTH);
+            contentPanel.add(inputsPanel, BorderLayout.CENTER);
+
+            inputCard.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+            inputCard.add(contentPanel, BorderLayout.CENTER);
+
+        }
+        systemOfNonLinearEquationsPanel.add(inputCard);
+
+
+        systemOfNonLinearEquationsPanel.add(pointsCard);
+    }
 
     private void changeColorAnime(Component comp, Color color) {
         Color srcColor = comp.getBackground();
