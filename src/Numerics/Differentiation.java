@@ -462,7 +462,7 @@ public abstract class Differentiation {
              * @param x    the value of the required element to get the differentiation at
              * @return the result of the differentiation
              * @throws ArithmeticException if func is null <br>
-             *                             <b>OR</b> index of x = 0 <br>
+             *                             <b>OR</b> index of x = n <br>
              *                             <b>OR</b> x do not exist <br>
              *                             <b>OR</b>  step h is not static
              */
@@ -489,8 +489,8 @@ public abstract class Differentiation {
                 }
                 //get index
                 int index = xp.indexOf(x);
-                if (index == 0)
-                    throw new ArithmeticException("invalid inputs : cannot apply to x0");
+                if (index == (xp.size() - 1))
+                    throw new ArithmeticException("invalid inputs : cannot apply to xn");
                 else if (index == -1)
                     throw new ArithmeticException("invalid inputs : element do not exist");
                 // apply the law : (yi+1 - yi) / h
@@ -513,7 +513,7 @@ public abstract class Differentiation {
              * @param x    the value of the required element to get the differentiation at
              * @return the result of the differentiation
              * @throws ArithmeticException if func is null <br>
-             *                             <b>OR</b> index of x = n <br>
+             *                             <b>OR</b> index of x = 0 <br>
              *                             <b>OR</b> x do not exist <br>
              *                             <b>OR</b>  step h is not static
              */
@@ -540,8 +540,8 @@ public abstract class Differentiation {
                 }
                 //get index
                 int index = xp.indexOf(x);
-                if (index == (xp.size() - 1))
-                    throw new ArithmeticException("invalid inputs : cannot apply to xn");
+                if (index == 0)
+                    throw new ArithmeticException("invalid inputs : cannot apply to x0");
                 else if (index == -1)
                     throw new ArithmeticException("invalid inputs : element do not exist");
                 // apply the law : (yi - yi-1) / h
