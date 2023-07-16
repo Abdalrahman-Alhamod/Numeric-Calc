@@ -12,10 +12,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix points function bug">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add integrals solutions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Numerics/Integral.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/Integral.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,12 +51,12 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Functions/ExpressionFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Function.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Main.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Numerics/Integral.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Numerics/Integral.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Interpolation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/SystemOfNonLinearEquations.java" root0="SKIP_INSPECTION" />
@@ -106,20 +105,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢١٩" summary="Fix EvaluateString bug">
-      <created>1688984885583</created>
-      <option name="number" value="٠٠٢١٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢١٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688984885583</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٢٠" summary="Add getValueAt(x,y) to ExpressionFunction">
-      <created>1688984901449</created>
-      <option name="number" value="٠٠٢٢٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٢٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1688984901449</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٢١" summary="Add SystemOfNonLinearEquations with Newton-Raphson inner class">
       <created>1688984944455</created>
@@ -450,7 +435,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689462584355</updated>
     </task>
-    <option name="localTasksCounter" value="268" />
+    <task id="LOCAL؜-٠٠٢٦٨" summary="Fix integral bug">
+      <created>1689465091237</created>
+      <option name="number" value="٠٠٢٦٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٦٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689465091237</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٦٩" summary="Add integrals solutions">
+      <created>1689465103004</created>
+      <option name="number" value="٠٠٢٦٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٦٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689465103004</updated>
+    </task>
+    <option name="localTasksCounter" value="270" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -492,8 +491,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create Non-Lin EQs Panel and test it" />
-    <MESSAGE value="Create Polys Panel and test it" />
     <MESSAGE value="Rename updateMainPanel" />
     <MESSAGE value="Add changeColorAnime method" />
     <MESSAGE value="Test all Panels" />
@@ -517,6 +514,8 @@
     <MESSAGE value="Add Newton Divided forward &amp; backward solution" />
     <MESSAGE value="Add least squares and spline solution" />
     <MESSAGE value="Fix points function bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix points function bug" />
+    <MESSAGE value="Fix integral bug" />
+    <MESSAGE value="Add integrals solutions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add integrals solutions" />
   </component>
 </project>

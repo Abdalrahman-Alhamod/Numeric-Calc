@@ -1,6 +1,7 @@
 import Functions.ExpressionFunction;
 import Functions.PointsFunction;
 import Functions.Polynomial;
+import Numerics.Differentiation;
 import Numerics.Integral;
 import Numerics.Interpolation;
 import Util.EvaluateString;
@@ -924,7 +925,7 @@ public class GUI {
 
                     double a = function.getXp().get(0);
                     double b = function.getXp().get(function.getXp().size() - 1);
-                    double n = function.getXp().size()-1;
+                    double n = function.getXp().size() - 1;
                     double ans = Integral.getRect(function, a, b, n);
 
                     //create title
@@ -949,7 +950,7 @@ public class GUI {
 
                     String[] response = {"OK"};
 
-                    JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+                    JOptionPane.showOptionDialog(null, contentPanel, "Integration", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -973,7 +974,7 @@ public class GUI {
 
                     double a = function.getXp().get(0);
                     double b = function.getXp().get(function.getXp().size() - 1);
-                    double n = function.getXp().size()-1;
+                    double n = function.getXp().size() - 1;
                     double ans = Integral.getTraps(function, a, b, n);
 
                     //create title
@@ -998,7 +999,7 @@ public class GUI {
 
                     String[] response = {"OK"};
 
-                    JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+                    JOptionPane.showOptionDialog(null, contentPanel, "Integration", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -1022,7 +1023,7 @@ public class GUI {
 
                     double a = function.getXp().get(0);
                     double b = function.getXp().get(function.getXp().size() - 1);
-                    double n = function.getXp().size()-1;
+                    double n = function.getXp().size() - 1;
                     double ans = Integral.getSimpson3(function, a, b, n);
 
                     //create title
@@ -1047,7 +1048,7 @@ public class GUI {
 
                     String[] response = {"OK"};
 
-                    JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+                    JOptionPane.showOptionDialog(null, contentPanel, "Integration", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -1071,7 +1072,7 @@ public class GUI {
 
                     double a = function.getXp().get(0);
                     double b = function.getXp().get(function.getXp().size() - 1);
-                    double n = function.getXp().size()-1;
+                    double n = function.getXp().size() - 1;
                     double ans = Integral.getSimpson8(function, a, b, n);
 
                     //create title
@@ -1096,7 +1097,7 @@ public class GUI {
 
                     String[] response = {"OK"};
 
-                    JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+                    JOptionPane.showOptionDialog(null, contentPanel, "Integration", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -1120,7 +1121,7 @@ public class GUI {
 
                     double a = function.getXp().get(0);
                     double b = function.getXp().get(function.getXp().size() - 1);
-                    double n = function.getXp().size()-1;
+                    double n = function.getXp().size() - 1;
                     double ans = Integral.getPaul(function, a, b, n);
 
                     //create title
@@ -1145,7 +1146,7 @@ public class GUI {
 
                     String[] response = {"OK"};
 
-                    JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+                    JOptionPane.showOptionDialog(null, contentPanel, "Integration", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -1178,6 +1179,42 @@ public class GUI {
         String description = "Get Differential Function As Polynomial using Lagrange";
         String button = "Enter";
         ActionListener enterLagrange = e -> {
+            doAction = pointsFunction -> {
+                try {
+                    Polynomial ans = Differentiation.Lagrange.getDFAP(pointsFunction);
+
+                    //create answer title
+                    JLabel interTitle = new JLabel();
+                    interTitle.setText("Differentiation answer using Lagrange : ");
+                    interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+                    //create answer scrolled
+                    JTextArea polyAns = new JTextArea();
+                    polyAns.append("P(x) : ");
+                    polyAns.append(ans.toString());
+                    polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAns.setEnabled(false);
+                    polyAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
+
+                    //create content panel
+                    JPanel contentPanel = new JPanel(new GridLayout(2, 1, 0, -20));
+                    contentPanel.setBorder(BorderFactory.createEmptyBorder(-20, 0, 0, 0));
+                    contentPanel.add(interTitle);
+                    contentPanel.add(polyAnsScrollPane);
+
+                    String[] response = {"Cancel", "Continue with Polynomial"};
+
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    if (feed == 1) {
+                        panelsStack.add(polynomialsPanel);
+                        updateMainPanel();
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            };
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
@@ -1191,6 +1228,47 @@ public class GUI {
         description = "Get Differential Function As Polynomial using Newton-Gregory Forward Subtractions";
         button = "Enter";
         ActionListener enterNGFS = e -> {
+            doAction = pointsFunction -> {
+                try {
+
+                    int degree = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter degree of the required polynomial : ", "Differentiation", JOptionPane.QUESTION_MESSAGE));
+
+                    int rank = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter rank of the required differentiation : ", "Differentiation", JOptionPane.QUESTION_MESSAGE));
+
+                    Polynomial ans = Differentiation.Newton_GregoryForwardSubtractions.getIFAP(pointsFunction, degree, rank);
+
+                    JLabel interTitle = new JLabel();
+                    interTitle.setText("Differentiation answer using Newton-Gregory Forward Subtraction : ");
+                    interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+
+                    JTextArea polyAns = new JTextArea();
+                    polyAns.append("P(x) : ");
+                    polyAns.append(ans.toString());
+                    polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAns.setEnabled(false);
+                    polyAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
+
+
+                    JPanel contentPanel = new JPanel(new GridLayout(2, 1, 0, -20));
+                    contentPanel.setBorder(BorderFactory.createEmptyBorder(-20, 0, 0, 0));
+                    contentPanel.add(interTitle);
+                    contentPanel.add(polyAnsScrollPane);
+
+
+                    String[] response = {"Cancel", "Continue with Polynomial"};
+
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    if (feed == 1) {
+                        panelsStack.add(polynomialsPanel);
+                        updateMainPanel();
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            };
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
@@ -1204,6 +1282,47 @@ public class GUI {
         description = "Get Differential Function As Polynomial using Newton-Gregory Backward Subtractions";
         button = "Enter";
         ActionListener enterNGBS = e -> {
+            doAction = pointsFunction -> {
+                try {
+
+                    int degree = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter degree of the required polynomial : ", "Differentiation", JOptionPane.QUESTION_MESSAGE));
+
+                    int rank = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter rank of the required differentiation : ", "Differentiation", JOptionPane.QUESTION_MESSAGE));
+
+                    Polynomial ans = Differentiation.Newton_GregoryBackwardSubtractions.getIFAP(pointsFunction, degree, rank);
+
+                    JLabel interTitle = new JLabel();
+                    interTitle.setText("Differentiation answer using Newton-Gregory Backward Subtraction : ");
+                    interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+
+                    JTextArea polyAns = new JTextArea();
+                    polyAns.append("P(x) : ");
+                    polyAns.append(ans.toString());
+                    polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAns.setEnabled(false);
+                    polyAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
+
+
+                    JPanel contentPanel = new JPanel(new GridLayout(2, 1, 0, -20));
+                    contentPanel.setBorder(BorderFactory.createEmptyBorder(-20, 0, 0, 0));
+                    contentPanel.add(interTitle);
+                    contentPanel.add(polyAnsScrollPane);
+
+
+                    String[] response = {"Cancel", "Continue with Polynomial"};
+
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    if (feed == 1) {
+                        panelsStack.add(polynomialsPanel);
+                        updateMainPanel();
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            };
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
@@ -1218,6 +1337,69 @@ public class GUI {
         description = "Calculate the differential function of a specified value using Central/Forward/Backward Subtractions";
         button = "Enter";
         ActionListener enterCFBS = e -> {
+            doAction = pointsFunction -> {
+                try {
+                    String[] inputResponse = {"Backward Subtractions", "Central Subtractions", "Forward Subtractions"};
+
+                    double x = Double.parseDouble(JOptionPane.showInputDialog(null,
+                            "Enter x value to get differentiation at it", "Differentiation", JOptionPane.QUESTION_MESSAGE));
+
+                    String method = String.valueOf(JOptionPane.showInputDialog(null,
+                            "Choose a method : ", "Differentiation",
+                            JOptionPane.QUESTION_MESSAGE, solutionIcon, inputResponse, inputResponse[1]));
+                    double ans;
+
+                    switch (method) {
+                        case "Backward Subtractions": {
+                            ans = Differentiation.Subtractions.Backward.getValueAt(function, x);
+                            break;
+                        }
+                        case "Central Subtractions": {
+                            ans = Differentiation.Subtractions.Central.getValueAt(function, x);
+                            break;
+                        }
+                        case "Forward Subtractions": {
+                            ans = Differentiation.Subtractions.Forward.getValueAt(function, x);
+                            break;
+                        }
+                        default: {
+                            throw new Exception("invalid input");
+                        }
+                    }
+
+
+                    JLabel interTitle = new JLabel();
+                    interTitle.setText("Differentiation answer using " + method + " : ");
+                    interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
+
+
+                    JTextArea polyAns = new JTextArea();
+                    polyAns.append("Answer : ");
+                    polyAns.append(String.valueOf(ans));
+                    polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
+                    polyAns.setEnabled(false);
+                    polyAns.setDisabledTextColor(Color.BLACK);
+                    JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
+                    polyAnsScrollPane.setPreferredSize(new Dimension(100, 70));
+
+
+                    JPanel contentPanel = new JPanel(new GridLayout(2, 1, 0, -20));
+                    contentPanel.setBorder(BorderFactory.createEmptyBorder(-20, 0, 0, 0));
+                    contentPanel.add(interTitle);
+                    contentPanel.add(polyAnsScrollPane);
+
+
+                    String[] response = {"Cancel", "Continue with Polynomial"};
+
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    if (feed == 1) {
+                        panelsStack.add(polynomialsPanel);
+                        updateMainPanel();
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            };
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
