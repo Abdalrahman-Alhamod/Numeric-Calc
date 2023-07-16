@@ -12,10 +12,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
@@ -116,9 +112,7 @@ public class GUI {
         homeButton.setFocusPainted(false);
 
         JButton infoButton = new JButton();
-        infoButton.addActionListener(e -> {
-            JOptionPane.showConfirmDialog(null, "Created by Abd_HM 💙", "About", JOptionPane.DEFAULT_OPTION);
-        });
+        infoButton.addActionListener(e -> JOptionPane.showConfirmDialog(null, "Created by Abd_HM 💙", "About", JOptionPane.DEFAULT_OPTION));
         infoButton.setPreferredSize(new Dimension(50, 50));
         infoButton.setIcon(infoIcon);
         infoButton.setFocusPainted(false);
