@@ -1163,7 +1163,7 @@ public class GUI {
                     shortPolyTitle.setText("Interpolation answer with no shorthand : ");
                     shortPolyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
-                    String asnNSH = Interpolation.NewtonForwardDividedSubtractions.getIFASNS(pointsFunction, degree[0]);
+                    String asnNSH = Interpolation.NewtonBackwardDividedSubtractions.getIFASNS(pointsFunction, degree[0]);
 
                     JTextArea polyAnsNSH = new JTextArea();
                     polyAnsNSH.append("P(x) : ");
@@ -1317,7 +1317,7 @@ public class GUI {
 
                     //create ans scrolled
                     JTextArea polyAns = new JTextArea();
-                    polyAns.append("P(x) : ");
+                    polyAns.append("S(x) : ");
                     polyAns.append("\n");
                     for (int i = 0; i < ans.size(); i++) {
                         polyAns.append("S" + i + "(x) = ");

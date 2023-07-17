@@ -12,7 +12,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add exception handling to gui constructor" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Build jar">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,7 +66,7 @@
     <setting file="file://$PROJECT_DIR$/src/Functions/Function.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Main.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
@@ -120,13 +123,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٣٦" summary="Init GUI class">
-      <created>1689366723584</created>
-      <option name="number" value="٠٠٢٣٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٣٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689366723584</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٣٧" summary="Add nimbus theme&#10;Create res folder&#10;Fix icons path&#10;Test changes gui">
       <created>1689367230872</created>
@@ -464,7 +460,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689553717731</updated>
     </task>
-    <option name="localTasksCounter" value="285" />
+    <task id="LOCAL؜-٠٠٢٨٥" summary="Build jar">
+      <created>1689553837543</created>
+      <option name="number" value="٠٠٢٨٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٨٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689553837543</updated>
+    </task>
+    <option name="localTasksCounter" value="286" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -507,7 +510,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Update gitignore" />
     <MESSAGE value="Fix continue button&#10;Add solution to General method" />
     <MESSAGE value="Add try &amp; catch to general method solution" />
     <MESSAGE value="Add lagrange solution" />
@@ -532,6 +534,7 @@
     <MESSAGE value="Add about &amp; JAVA DOC to GUI" />
     <MESSAGE value="Completing JAVA DOC to GUI and Terminal" />
     <MESSAGE value="Add exception handling to gui constructor" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add exception handling to gui constructor" />
+    <MESSAGE value="Build jar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Build jar" />
   </component>
 </project>
