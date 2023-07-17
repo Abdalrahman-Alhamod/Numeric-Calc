@@ -12,12 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix and enhance interpolation and diff inputs">
-      <change afterPath="$PROJECT_DIR$/res/Icons/innovation.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add about &amp; JAVA DOC to GUI" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,6 +50,7 @@
     <setting file="file://$PROJECT_DIR$/src/Functions/Function.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Main.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
@@ -111,13 +107,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٣٣" summary="Fix main printing">
-      <created>1689071709700</created>
-      <option name="number" value="٠٠٢٣٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٣٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689071709700</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٣٤" summary="Remove testing code from main">
       <created>1689071738074</created>
@@ -455,7 +444,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689548719698</updated>
     </task>
-    <option name="localTasksCounter" value="282" />
+    <task id="LOCAL؜-٠٠٢٨٢" summary="Add about &amp; JAVA DOC to GUI">
+      <created>1689552844213</created>
+      <option name="number" value="٠٠٢٨٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٨٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689552844213</updated>
+    </task>
+    <option name="localTasksCounter" value="283" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -498,7 +494,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add initPtsFuncPanel and test it&#10;Fix issues in expFuncPanel ( fields and input n)" />
     <MESSAGE value="Add continue button" />
     <MESSAGE value="Restructure the whole project" />
     <MESSAGE value="Update gitignore" />
@@ -523,6 +518,7 @@
     <MESSAGE value="Add sysOfNonLinEqs solution&#10;Add polynomials solution" />
     <MESSAGE value="Fix forward and backward subtraction bug" />
     <MESSAGE value="Fix and enhance interpolation and diff inputs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix and enhance interpolation and diff inputs" />
+    <MESSAGE value="Add about &amp; JAVA DOC to GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add about &amp; JAVA DOC to GUI" />
   </component>
 </project>

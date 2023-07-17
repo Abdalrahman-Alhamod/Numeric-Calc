@@ -17,41 +17,163 @@ import java.util.Objects;
 import java.util.Stack;
 import java.util.function.Consumer;
 
+/**
+ * GUI Class
+ * <p>
+ * This class represents the graphical user interface of the application. It provides
+ * a visual interface for the user to interact with and perform various mathematical
+ * operations such as interpolation, integration, differentiation, solving equations, etc.
+ */
 public class GUI {
-    private JFrame mainFrame; // The main frame of the application
-    private JPanel startPanel; // The panel displayed at the start of the application
-    private JPanel chooseFunctionPanel; // The panel for choosing a function type
-    private JPanel interpolationPanel; // The panel for performing interpolation
-    private JPanel integralPanel; // The panel for performing integration
-    private JPanel differentiationPanel; // The panel for performing differentiation
-    private JPanel differentialEquationsPanel; // The panel for solving differential equations
-    private JPanel nonLinearEquationsPanel; // The panel for solving non-linear equations
-    private JPanel systemOfNonLinearEquationsPanel; // The panel for solving systems of non-linear equations
-    private JPanel polynomialsPanel; // The panel for polynomial operations
-    private JPanel expressionFunctionPanel; // The panel for entering expression functions
-    private JPanel pointsFunctionPanel; // The panel for entering points functions
-    private JPanel polynomialFunctionPanel; // The panel for entering polynomial functions
+    /**
+     * The main frame of the application.
+     */
+    private JFrame mainFrame;
 
-    private ImageIcon mainIcon; // The main application icon
-    private ImageIcon backIcon; // The icon for the back button
-    private ImageIcon homeIcon; // The icon for the home button
-    private ImageIcon infoIcon; // The icon for the information button
-    private ImageIcon solutionIcon; // The icon for the solution message
-    private ImageIcon keyboardIcon64; // The icon for the keyboard (size 64x64)
-    private ImageIcon keyboardIcon128; // The icon for the keyboard (size 128x128)
-    private ImageIcon innovationIcon; // The icon for the innovation image
+    /**
+     * The panel displayed at the start of the application.
+     */
+    private JPanel startPanel;
 
-    private JButton backButton; // The back button for navigation
-    private JButton homeButton; // The home button for navigation
+    /**
+     * The panel for choosing a function type.
+     */
+    private JPanel chooseFunctionPanel;
 
-    private final String mainFont = "Times New Roman"; // The main font used in the GUI
-    private final String secondFont = "Times New Roman"; // The secondary font used in the GUI
-    private final String buttonFont = "Times New Roman"; // The font used for buttons
+    /**
+     * The panel for performing interpolation.
+     */
+    private JPanel interpolationPanel;
 
-    private Stack<JPanel> panelsStack; // A stack to manage the panel navigation
-    private PointsFunction function; // The current points function
-    private Polynomial polynomial; // The current polynomial
-    private Consumer<PointsFunction> doAction; // The action to perform on the points function
+    /**
+     * The panel for performing integration.
+     */
+    private JPanel integralPanel;
+
+    /**
+     * The panel for performing differentiation.
+     */
+    private JPanel differentiationPanel;
+
+    /**
+     * The panel for solving differential equations.
+     */
+    private JPanel differentialEquationsPanel;
+
+    /**
+     * The panel for solving non-linear equations.
+     */
+    private JPanel nonLinearEquationsPanel;
+
+    /**
+     * The panel for solving systems of non-linear equations.
+     */
+    private JPanel systemOfNonLinearEquationsPanel;
+
+    /**
+     * The panel for polynomial operations.
+     */
+    private JPanel polynomialsPanel;
+
+    /**
+     * The panel for entering expression functions.
+     */
+    private JPanel expressionFunctionPanel;
+
+    /**
+     * The panel for entering points functions.
+     */
+    private JPanel pointsFunctionPanel;
+
+    /**
+     * The panel for entering polynomial functions.
+     */
+    private JPanel polynomialFunctionPanel;
+
+    /**
+     * The main application icon.
+     */
+    private ImageIcon mainIcon;
+
+    /**
+     * The icon for the back button.
+     */
+    private ImageIcon backIcon;
+
+    /**
+     * The icon for the home button.
+     */
+    private ImageIcon homeIcon;
+
+    /**
+     * The icon for the information button.
+     */
+    private ImageIcon infoIcon;
+
+    /**
+     * The icon for the solution message.
+     */
+    private ImageIcon solutionIcon;
+
+    /**
+     * The icon for the keyboard (size 64x64).
+     */
+    private ImageIcon keyboardIcon64;
+
+    /**
+     * The icon for the keyboard (size 128x128).
+     */
+    private ImageIcon keyboardIcon128;
+
+    /**
+     * The icon for the innovation image.
+     */
+    private ImageIcon innovationIcon;
+
+    /**
+     * The back button for navigation.
+     */
+    private JButton backButton;
+
+    /**
+     * The home button for navigation.
+     */
+    private JButton homeButton;
+
+    /**
+     * The main font used in the GUI.
+     */
+    private final String mainFont = "Times New Roman";
+
+    /**
+     * The secondary font used in the GUI.
+     */
+    private final String secondFont = "Times New Roman";
+
+    /**
+     * The font used for buttons.
+     */
+    private final String buttonFont = "Times New Roman";
+
+    /**
+     * A stack to manage the panel navigation.
+     */
+    private Stack<JPanel> panelsStack;
+
+    /**
+     * The current points function.
+     */
+    private PointsFunction function;
+
+    /**
+     * The current polynomial.
+     */
+    private Polynomial polynomial;
+
+    /**
+     * The action to perform on the points function.
+     */
+    private Consumer<PointsFunction> doAction;
 
     /**
      * Constructs a new instance of the GUI class.
@@ -145,10 +267,7 @@ public class GUI {
         JPanel panel = new JPanel(new GridLayout(0, 1, 0, 0));
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        JLabel aboutLabel = new JLabel("<html>" +
-                "Created by Abd_HM  ;) <br>" +
-                "Full program documentation on my github : <br>" +
-                "</html>");
+        JLabel aboutLabel = new JLabel("<html>" + "Created by Abd_HM  ;) <br>" + "Full program documentation on my github : <br>" + "</html>");
         aboutLabel.setFont(new Font(Font.SERIF, Font.BOLD, 15));
         JLabel contactLabel = new JLabel("Contact me : ");
         contactLabel.setFont(new Font(Font.SERIF, Font.BOLD, 15));
@@ -184,9 +303,7 @@ public class GUI {
         // Show the custom option dialog
         infoButton.addActionListener(e -> {
 
-            JOptionPane.showOptionDialog(null, panel,
-                    "About", JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.INFORMATION_MESSAGE, innovationIcon, new Object[]{}, null);
+            JOptionPane.showOptionDialog(null, panel, "About", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, innovationIcon, new Object[]{}, null);
 
             //JOptionPane.showConfirmDialog(null, "Created by Abd_HM ©️", "About", JOptionPane.DEFAULT_OPTION)
         });
@@ -400,23 +517,20 @@ public class GUI {
             panelsStack.add(expressionFunctionPanel);
             updateMainPanel();
         };
-        JPanel expressionFunctionCard = createCard("Expression Function",
-                "Functions like x^2+3, sin(x), exp(x) ...", "Enter", enterExpressionFunction);
+        JPanel expressionFunctionCard = createCard("Expression Function", "Functions like x^2+3, sin(x), exp(x) ...", "Enter", enterExpressionFunction);
 
 
         ActionListener enterPointsFunction = e -> {
             panelsStack.add(pointsFunctionPanel);
             updateMainPanel();
         };
-        JPanel pointsFunctionCard = createCard("Points Function",
-                "Functions like x0=.. y0=.. , x1=.. y1=.. ", "Enter", enterPointsFunction);
+        JPanel pointsFunctionCard = createCard("Points Function", "Functions like x0=.. y0=.. , x1=.. y1=.. ", "Enter", enterPointsFunction);
 
         ActionListener enterPolynomialFunction = e -> {
             panelsStack.add(polynomialFunctionPanel);
             updateMainPanel();
         };
-        JPanel polynomialFunctionCard = createCard("Polynomial Function",
-                "Functions like p(x) = a0 + a1*x + a2*x^2 ... ", "Enter", enterPolynomialFunction);
+        JPanel polynomialFunctionCard = createCard("Polynomial Function", "Functions like p(x) = a0 + a1*x + a2*x^2 ... ", "Enter", enterPolynomialFunction);
 
 
         chooseFunctionPanel.add(expressionFunctionCard);
@@ -444,8 +558,7 @@ public class GUI {
 
         //init General Method Card
         String title = "General Method";
-        String description = "Get the Interpolation Function using" +
-                " the General Method by solving a system of equations using Gaussian elimination ";
+        String description = "Get the Interpolation Function using" + " the General Method by solving a system of equations using Gaussian elimination ";
         String button = "Enter";
         ActionListener enterGeneralMethod = e -> {
             doAction = pointsFunction -> {
@@ -563,8 +676,7 @@ public class GUI {
 
         //init Newton-Gregory Forward Subtraction Card
         title = "Newton-Gregory Forward Subtraction";
-        description = "Get the interpolation function using Newton-Gregory Forward Subtractions method\n" +
-                "It also can get Newton-Gregory Forward Subtractions Table values";
+        description = "Get the interpolation function using Newton-Gregory Forward Subtractions method\n" + "It also can get Newton-Gregory Forward Subtractions Table values";
         button = "Enter";
         ActionListener enterNGFS = e -> {
             doAction = pointsFunction -> {
@@ -613,8 +725,7 @@ public class GUI {
                     });
 
                     JOptionPane.showOptionDialog(null, enterDegree, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
-                    if (cancelPressed[0])
-                        return;
+                    if (cancelPressed[0]) return;
 
                     ArrayList<Double> values = Interpolation.Newton_GregoryForwardSubtractions.getUDV(function);
 
@@ -696,8 +807,7 @@ public class GUI {
 
         //init Newton-Gregory Backward Subtraction Card
         title = "Newton-Gregory Backward Subtraction";
-        description = "Get the interpolation function using Newton-Gregory Backward Subtractions method\n" +
-                "It also can get Newton-Gregory Backward Subtractions Table values";
+        description = "Get the interpolation function using Newton-Gregory Backward Subtractions method\n" + "It also can get Newton-Gregory Backward Subtractions Table values";
         button = "Enter";
         ActionListener enterNGBS = e -> {
             doAction = pointsFunction -> {
@@ -746,8 +856,7 @@ public class GUI {
                     });
 
                     JOptionPane.showOptionDialog(null, enterDegree, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
-                    if (cancelPressed[0])
-                        return;
+                    if (cancelPressed[0]) return;
 
 
                     ArrayList<Double> values = Interpolation.Newton_GregoryBackwardSubtractions.getLDV(function);
@@ -830,8 +939,7 @@ public class GUI {
 
         //init Newton Forward Divided Subtractions Equations Card
         title = "Newton Forward Divided Subtractions";
-        description = "Get the interpolation function using Newton Forward Divided Subtractions method\n" +
-                "It also can get Newton Forward Divided Subtractions Table values";
+        description = "Get the interpolation function using Newton Forward Divided Subtractions method\n" + "It also can get Newton Forward Divided Subtractions Table values";
         button = "Enter";
         ActionListener enterNFDS = e -> {
             doAction = pointsFunction -> {
@@ -880,8 +988,7 @@ public class GUI {
                     });
 
                     JOptionPane.showOptionDialog(null, enterDegree, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
-                    if (cancelPressed[0])
-                        return;
+                    if (cancelPressed[0]) return;
 
 
                     ArrayList<Double> values = Interpolation.NewtonForwardDividedSubtractions.getUDV(function);
@@ -964,8 +1071,7 @@ public class GUI {
 
         //init Newton Backward Divided Subtractions Equations Card
         title = "Newton Backward Divided Subtractions";
-        description = "Get the interpolation function using Newton Backward Divided Subtractions method\n" +
-                "It also can get Newton Backward Divided Subtractions Table values";
+        description = "Get the interpolation function using Newton Backward Divided Subtractions method\n" + "It also can get Newton Backward Divided Subtractions Table values";
         button = "Enter";
         ActionListener enterNDBS = e -> {
             doAction = pointsFunction -> {
@@ -1014,8 +1120,7 @@ public class GUI {
                     });
 
                     JOptionPane.showOptionDialog(null, enterDegree, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
-                    if (cancelPressed[0])
-                        return;
+                    if (cancelPressed[0]) return;
 
 
                     ArrayList<Double> values = Interpolation.NewtonBackwardDividedSubtractions.getLDV(function);
@@ -1147,8 +1252,7 @@ public class GUI {
                     });
 
                     JOptionPane.showOptionDialog(null, enterDegree, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
-                    if (cancelPressed[0])
-                        return;
+                    if (cancelPressed[0]) return;
 
 
                     Polynomial ans = Interpolation.LeastSquares.getIFAP(pointsFunction, degree[0]);
@@ -1649,8 +1753,7 @@ public class GUI {
                     });
 
                     JOptionPane.showOptionDialog(null, inputs, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
-                    if (cancelPressed[0])
-                        return;
+                    if (cancelPressed[0]) return;
 
 
                     Polynomial ans = Differentiation.Newton_GregoryForwardSubtractions.getIFAP(pointsFunction, degree[0], rank[0]);
@@ -1768,8 +1871,7 @@ public class GUI {
                     });
 
                     JOptionPane.showOptionDialog(null, inputs, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
-                    if (cancelPressed[0])
-                        return;
+                    if (cancelPressed[0]) return;
 
 
                     Polynomial ans = Differentiation.Newton_GregoryBackwardSubtractions.getIFAP(pointsFunction, degree[0], rank[0]);
@@ -1886,8 +1988,7 @@ public class GUI {
                     });
 
                     JOptionPane.showOptionDialog(null, inputs, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
-                    if (cancelPressed[0])
-                        return;
+                    if (cancelPressed[0]) return;
 
                     double ans;
 
@@ -2086,15 +2187,7 @@ public class GUI {
                 }
             });
 
-            JOptionPane.showOptionDialog(
-                    null,
-                    contentPanel,
-                    "Differential Equations",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    keyboardIcon128,
-                    buttons,
-                    null);
+            JOptionPane.showOptionDialog(null, contentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
 
         };
         JPanel eulerCard = createCard(title, description, button, enterEuler);
@@ -2353,15 +2446,7 @@ public class GUI {
                 }
             });
 
-            JOptionPane.showOptionDialog(
-                    null,
-                    showPanel,
-                    "Differential Equations",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    keyboardIcon128,
-                    buttons,
-                    null);
+            JOptionPane.showOptionDialog(null, showPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel taylorCard = createCard(title, description, button, enterTaylor);
         differentialEquationsPanel.add(taylorCard);
@@ -2493,15 +2578,7 @@ public class GUI {
                 }
             });
 
-            JOptionPane.showOptionDialog(
-                    null,
-                    showPanel,
-                    "Differential Equations",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    keyboardIcon128,
-                    buttons,
-                    null);
+            JOptionPane.showOptionDialog(null, showPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel modifiedEulerCard = createCard(title, description, button, enterModifiedEuler);
         differentialEquationsPanel.add(modifiedEulerCard);
@@ -2634,15 +2711,7 @@ public class GUI {
                 }
             });
 
-            JOptionPane.showOptionDialog(
-                    null,
-                    showPanel,
-                    "Differential Equations",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    keyboardIcon128,
-                    buttons,
-                    null);
+            JOptionPane.showOptionDialog(null, showPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel heinCard = createCard(title, description, button, enterHein);
         differentialEquationsPanel.add(heinCard);
@@ -2774,15 +2843,7 @@ public class GUI {
                 }
             });
 
-            JOptionPane.showOptionDialog(
-                    null,
-                    showPanel,
-                    "Differential Equations",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    keyboardIcon128,
-                    buttons,
-                    null);
+            JOptionPane.showOptionDialog(null, showPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel ralstonCard = createCard(title, description, button, enterRalston);
         differentialEquationsPanel.add(ralstonCard);
@@ -2914,15 +2975,7 @@ public class GUI {
                 }
             });
 
-            JOptionPane.showOptionDialog(
-                    null,
-                    showPanel,
-                    "Differential Equations",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    keyboardIcon128,
-                    buttons,
-                    null);
+            JOptionPane.showOptionDialog(null, showPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel runge_KuttaCard = createCard(title, description, button, enterRunge_Kutta);
         differentialEquationsPanel.add(runge_KuttaCard);
@@ -3063,15 +3116,7 @@ public class GUI {
                 }
             });
 
-            JOptionPane.showOptionDialog(
-                    null,
-                    showPanel,
-                    "Non-Linear Equations",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    keyboardIcon128,
-                    buttons,
-                    null);
+            JOptionPane.showOptionDialog(null, showPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel bisectionCard = createCard(title, description, button, enterBisection);
         nonLinearEquationsPanel.add(bisectionCard);
@@ -3193,15 +3238,7 @@ public class GUI {
                 }
             });
 
-            JOptionPane.showOptionDialog(
-                    null,
-                    showPanel,
-                    "Non-Linear Equations",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    keyboardIcon128,
-                    buttons,
-                    null);
+            JOptionPane.showOptionDialog(null, showPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel falsePositionCard = createCard(title, description, button, enterFalsePosition);
         nonLinearEquationsPanel.add(falsePositionCard);
@@ -3323,15 +3360,7 @@ public class GUI {
                 }
             });
 
-            JOptionPane.showOptionDialog(
-                    null,
-                    showPanel,
-                    "Non-Linear Equations",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    keyboardIcon128,
-                    buttons,
-                    null);
+            JOptionPane.showOptionDialog(null, showPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel secantCard = createCard(title, description, button, enterSecant);
         nonLinearEquationsPanel.add(secantCard);
@@ -3456,15 +3485,7 @@ public class GUI {
                 }
             });
 
-            JOptionPane.showOptionDialog(
-                    null,
-                    showPanel,
-                    "Non-Linear Equations",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    keyboardIcon128,
-                    buttons,
-                    null);
+            JOptionPane.showOptionDialog(null, showPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel newton_RaphsonCard = createCard(title, description, button, enterNewton_Raphson);
         nonLinearEquationsPanel.add(newton_RaphsonCard);
@@ -3599,15 +3620,7 @@ public class GUI {
                 }
             });
 
-            JOptionPane.showOptionDialog(
-                    null,
-                    showPanel,
-                    "Non-Linear Equations",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    keyboardIcon128,
-                    buttons,
-                    null);
+            JOptionPane.showOptionDialog(null, showPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel halleyCard = createCard(title, description, button, enterHalley);
         nonLinearEquationsPanel.add(halleyCard);
@@ -3721,15 +3734,7 @@ public class GUI {
                 }
             });
 
-            JOptionPane.showOptionDialog(
-                    null,
-                    showPanel,
-                    "Non-Linear Equations",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    keyboardIcon128,
-                    buttons,
-                    null);
+            JOptionPane.showOptionDialog(null, showPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel fixedPointIterationCard = createCard(title, description, button, enterFixedPointIteration);
         nonLinearEquationsPanel.add(fixedPointIterationCard);
@@ -3903,8 +3908,7 @@ public class GUI {
             });
             if (polynomial == null) {
                 JOptionPane.showOptionDialog(null, inputsPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
-                if (cancelPressed[0])
-                    return;
+                if (cancelPressed[0]) return;
             }
 
             JLabel horTitleLabel = new JLabel("Horner's Method");
@@ -3920,8 +3924,7 @@ public class GUI {
             //create ans scrolled
             JTextArea polyAns = new JTextArea();
             polyAns.append("P(x) : ");
-            if (polynomial != null)
-                polyAns.append(polynomial.toString());
+            if (polynomial != null) polyAns.append(polynomial.toString());
             polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
             polyAns.setEnabled(false);
             polyAns.setDisabledTextColor(Color.BLACK);
@@ -4168,8 +4171,7 @@ public class GUI {
             });
             if (polynomial == null) {
                 JOptionPane.showOptionDialog(null, inputsPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
-                if (cancelPressed[0])
-                    return;
+                if (cancelPressed[0]) return;
             }
 
             JLabel horTitleLabel = new JLabel("Horner's Method");
@@ -4185,8 +4187,7 @@ public class GUI {
             //create ans scrolled
             JTextArea polyAns = new JTextArea();
             polyAns.append("P(x) : ");
-            if (polynomial != null)
-                polyAns.append(polynomial.toString());
+            if (polynomial != null) polyAns.append(polynomial.toString());
             polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
             polyAns.setEnabled(false);
             polyAns.setDisabledTextColor(Color.BLACK);
@@ -4249,10 +4250,7 @@ public class GUI {
 
                     //create title
                     JLabel solTitle = new JLabel();
-                    solTitle.setText("<html>" +
-                            "The result Polynomial by dividing on (x-a) <br>" +
-                            "using Horner's Method : " +
-                            "</html>");
+                    solTitle.setText("<html>" + "The result Polynomial by dividing on (x-a) <br>" + "using Horner's Method : " + "</html>");
                     solTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
@@ -4436,8 +4434,7 @@ public class GUI {
             });
             if (polynomial == null) {
                 JOptionPane.showOptionDialog(null, inputsPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
-                if (cancelPressed[0])
-                    return;
+                if (cancelPressed[0]) return;
             }
 
             JLabel horTitleLabel = new JLabel("Horner's Method");
@@ -4453,8 +4450,7 @@ public class GUI {
             //create ans scrolled
             JTextArea polyAns = new JTextArea();
             polyAns.append("P(x) : ");
-            if (polynomial != null)
-                polyAns.append(polynomial.toString());
+            if (polynomial != null) polyAns.append(polynomial.toString());
             polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
             polyAns.setEnabled(false);
             polyAns.setDisabledTextColor(Color.BLACK);
@@ -4538,10 +4534,7 @@ public class GUI {
 
                     //create title
                     JLabel solTitle = new JLabel();
-                    solTitle.setText("<html> " +
-                            "Derivative Polynomial answer at x <br>" +
-                            "using Horner's Method : " +
-                            "</html>");
+                    solTitle.setText("<html> " + "Derivative Polynomial answer at x <br>" + "using Horner's Method : " + "</html>");
                     solTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
@@ -4649,15 +4642,7 @@ public class GUI {
 
             // description
             JLabel cardDescription = new JLabel();
-            cardDescription.setText("<html>" +
-                    "Supported Functions : <br>" +
-                    " <b>Polynomials </b> : x^3 + 9*x^2 -5*x +10 <br>" +
-                    " <b>Exponential </b> : exp(x^2) .. exp(1/x) <br>" +
-                    " <b>Binary Logarithm </b> : log(3*x) .. log(-x) <br>" +
-                    " <b>Trigonometric Functions </b> : sin(x),cos(x),tan(x) <br>" +
-                    " <b>Inverse Trigonometric Functions </b> : asin(x),acos(x),atan(x) <br>" +
-                    " <b>Hyperbolic Trigonometric Functions </b> : sinh(x),cosh(x),tanh(x) <br>" +
-                    "</html>");
+            cardDescription.setText("<html>" + "Supported Functions : <br>" + " <b>Polynomials </b> : x^3 + 9*x^2 -5*x +10 <br>" + " <b>Exponential </b> : exp(x^2) .. exp(1/x) <br>" + " <b>Binary Logarithm </b> : log(3*x) .. log(-x) <br>" + " <b>Trigonometric Functions </b> : sin(x),cos(x),tan(x) <br>" + " <b>Inverse Trigonometric Functions </b> : asin(x),acos(x),atan(x) <br>" + " <b>Hyperbolic Trigonometric Functions </b> : sinh(x),cosh(x),tanh(x) <br>" + "</html>");
             cardDescription.setFont(new Font(secondFont, Font.ITALIC, 15));
             cardDescription.setBackground(inputCard.getBackground());
 
@@ -4739,9 +4724,7 @@ public class GUI {
                     ArrayList<Double> yp = pointsFunc.getYp();
                     pointsText.setText("");
                     for (int i = 0; i < xp.size(); i++) {
-                        String sb = "x" + i + " = " + xp.get(i) +
-                                '\t' +
-                                "y" + i + " = " + yp.get(i);
+                        String sb = "x" + i + " = " + xp.get(i) + '\t' + "y" + i + " = " + yp.get(i);
                         pointsText.append(sb);
                         pointsText.append("\n");
                     }
@@ -4848,12 +4831,7 @@ public class GUI {
 
             // description
             JLabel cardDescription = new JLabel();
-            cardDescription.setText("<html>" +
-                    "Supported Points Type : <br>" +
-                    " <b>Double </b> : 1.919239 <br>" +
-                    " <b>Integer </b> : 12392 <br>" +
-                    " <b>PI </b> : pi, 2*pi, pi/4 <br>" +
-                    "</html>");
+            cardDescription.setText("<html>" + "Supported Points Type : <br>" + " <b>Double </b> : 1.919239 <br>" + " <b>Integer </b> : 12392 <br>" + " <b>PI </b> : pi, 2*pi, pi/4 <br>" + "</html>");
             cardDescription.setFont(new Font(secondFont, Font.ITALIC, 15));
             cardDescription.setBackground(inputCard.getBackground());
 
@@ -4991,9 +4969,7 @@ public class GUI {
                     PointsFunction pointsFunc = new PointsFunction(xp, yp);
                     pointsText.setText("");
                     for (int i = 0; i < xp.size(); i++) {
-                        String sb = "x" + i + " = " + xp.get(i) +
-                                '\t' +
-                                "y" + i + " = " + yp.get(i);
+                        String sb = "x" + i + " = " + xp.get(i) + '\t' + "y" + i + " = " + yp.get(i);
                         pointsText.append(sb);
                         pointsText.append("\n");
                     }
@@ -5095,12 +5071,7 @@ public class GUI {
 
             // description
             JLabel cardDescription = new JLabel();
-            cardDescription.setText("<html>" +
-                    "Supported Coefficients Type : <br>" +
-                    " <b>Double </b> : 1.919239 <br>" +
-                    " <b>Integer </b> : 12392 <br>" +
-                    " <b>PI </b> : pi, 2*pi, pi/4 <br>" +
-                    "</html>");
+            cardDescription.setText("<html>" + "Supported Coefficients Type : <br>" + " <b>Double </b> : 1.919239 <br>" + " <b>Integer </b> : 12392 <br>" + " <b>PI </b> : pi, 2*pi, pi/4 <br>" + "</html>");
             cardDescription.setFont(new Font(secondFont, Font.ITALIC, 15));
             cardDescription.setBackground(inputCard.getBackground());
 
@@ -5272,9 +5243,7 @@ public class GUI {
                     ArrayList<Double> yp = ptsFunc.getYp();
                     pointsText.setText("");
                     for (int i = 0; i < xp.size(); i++) {
-                        String sb = "x" + i + " = " + xp.get(i) +
-                                '\t' +
-                                "y" + i + " = " + yp.get(i);
+                        String sb = "x" + i + " = " + xp.get(i) + '\t' + "y" + i + " = " + yp.get(i);
                         pointsText.append(sb);
                         pointsText.append("\n");
                     }
@@ -5384,10 +5353,7 @@ public class GUI {
         {
             //title
             JLabel cardTitle = new JLabel();
-            cardTitle.setText("<html>" +
-                    "System of Non-Linear Equations <br>" +
-                    "Newton-Raphson Method <br> " +
-                    "</html>");
+            cardTitle.setText("<html>" + "System of Non-Linear Equations <br>" + "Newton-Raphson Method <br> " + "</html>");
             cardTitle.setFont(new Font(mainFont, Font.BOLD, 25));
 
             //info panel
@@ -5518,9 +5484,7 @@ public class GUI {
                     ArrayList<Double> yp = points.get(1);
                     pointsText.setText("");
                     for (int i = 0; i < xp.size(); i++) {
-                        String sb = "x" + (i + 1) + " = " + xp.get(i) +
-                                '\t' +
-                                "y" + (i + 1) + " = " + yp.get(i);
+                        String sb = "x" + (i + 1) + " = " + xp.get(i) + '\t' + "y" + (i + 1) + " = " + yp.get(i);
                         pointsText.append(sb);
                         pointsText.append("\n");
                     }

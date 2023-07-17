@@ -7,7 +7,17 @@ import java.util.Scanner;
 
 import static java.lang.Double.parseDouble;
 
+/**
+ * Terminal Class
+ * <p>
+ * This class provides a command-line interface for interacting with the project.
+ * It handles input and output on the command line and executes the necessary
+ * operations based on user commands.
+ */
 public class Terminal {
+    /**
+     * Constructs a new instance of the Terminal class.
+     */
     public Terminal() {
         Scanner in = new Scanner(System.in);
         int choice;
