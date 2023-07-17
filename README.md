@@ -92,7 +92,8 @@ Perform operations on polynomials using _Horner's Method_  including :
 
 > Get the direvative at x
 
-- ### **Expression Functions**: Evaluate functions based on expressions , supported function :
+- ### **Expression Functions**:
+Evaluate functions based on expressions , supported function :
 
 > Polynomials : e.g. x^3 + 3*x - 5
 
@@ -131,7 +132,7 @@ Perform operations on polynomials using _Horner's Method_  including :
 
 
 ## Installation
-This project comes with two installer ,one for Windows and one for Unix system
+This project comes with two installer .One for Windows and one for Unix system :
 
 > [Windows Installer](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/v2.0.0/Numerical_Analysis_Calculator_Windows_Installer.exe)
 
