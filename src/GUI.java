@@ -227,7 +227,7 @@ public class GUI {
     private void initMainFrame() {
         mainFrame = new JFrame();
         mainFrame.setVisible(true);
-        mainFrame.setTitle("Numeric Calculator");
+        mainFrame.setTitle("Numerical Analysis Calculator");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setIconImage(mainIcon.getImage());
         mainFrame.setMinimumSize(new Dimension(940, 620));
