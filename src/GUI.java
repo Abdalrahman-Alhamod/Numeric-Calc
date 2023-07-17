@@ -186,13 +186,17 @@ public class GUI {
                  ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        Locale.setDefault(Locale.ENGLISH); // fix spinner and text showing arabic symbols
-        initIcons();
-        initMainFrame();
-        initMenuBar();
-        initPanels();
-        updateMainPanel();
-        mainFrame.pack();
+        try {
+            Locale.setDefault(Locale.ENGLISH); // fix spinner and text showing arabic symbols
+            initIcons();
+            initMainFrame();
+            initMenuBar();
+            initPanels();
+            updateMainPanel();
+            mainFrame.pack();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
