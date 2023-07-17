@@ -1,5 +1,6 @@
-# Numerical Analysis Calculator
-Numerical Analysis Calculator is calculator and math solver for different types of math operations using numeric analysis . This Java-based project empowers you to perform a wide range of math operations, including interpolation, integration, differentiation, solving linear and non-linear equations, and handling differential equations .
+# Numerical Analysis Calculator  ![function](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/assets/137921143/972b0760-690b-41b7-acd6-b4cb9ed9a317)
+
+Numerical Analysis Calculator is math solver for different types of math operations using numeric analysis . This Java-based project empowers you to perform a wide range of math operations, including interpolation, integration, differentiation, solving linear and non-linear equations, and handling differential equations .
 
 ## Table of Contents
 - [Features](#features)
