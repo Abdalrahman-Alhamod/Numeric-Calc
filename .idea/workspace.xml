@@ -12,7 +12,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Testing all methods&#10;Fix bugs" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Update jar">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/NumericCalc_jar/NumericCalc.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/NumericCalc_jar/NumericCalc.jar" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,11 +48,11 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -86,20 +89,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/res/Icons",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/res/Icons&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\res\Icons" />
@@ -120,13 +123,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٣٨" summary="Create interpolation Panel and test it">
-      <created>1689368187361</created>
-      <option name="number" value="٠٠٢٣٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٣٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689368187361</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٣٩" summary="Create integral Panel and test it">
       <created>1689369670226</created>
@@ -464,7 +460,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689557837721</updated>
     </task>
-    <option name="localTasksCounter" value="287" />
+    <task id="LOCAL؜-٠٠٢٨٧" summary="Update jar">
+      <created>1689558448143</created>
+      <option name="number" value="٠٠٢٨٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٨٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689558448143</updated>
+    </task>
+    <option name="localTasksCounter" value="288" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -507,7 +510,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add try &amp; catch to general method solution" />
     <MESSAGE value="Add lagrange solution" />
     <MESSAGE value="Add Newton-Gregory forward &amp; backward solution" />
     <MESSAGE value="Add Newton Divided forward &amp; backward solution" />
@@ -532,6 +534,7 @@
     <MESSAGE value="Add exception handling to gui constructor" />
     <MESSAGE value="Build jar" />
     <MESSAGE value="Testing all methods&#10;Fix bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing all methods&#10;Fix bugs" />
+    <MESSAGE value="Update jar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update jar" />
   </component>
 </project>
