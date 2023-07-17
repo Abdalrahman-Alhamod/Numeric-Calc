@@ -116,7 +116,7 @@ Perform operations on polynomials using _Horner's Method_  including :
 > PI Number : e.g. pi ,2*pi ,pi/2
 
 ## Usage
-> Numerical Analysis Calculator provides a user-friendly and intuitive interface for interacting with the application ,Examples :
+> Numerical Analysis Calculator provides a user-friendly and intuitive interface for interacting with the application Examples :
 
 > ![Screenshot 2023-07-17 163527](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/assets/137921143/76a6b8e5-1018-44b7-ad06-44d91a5a4c40)
 
