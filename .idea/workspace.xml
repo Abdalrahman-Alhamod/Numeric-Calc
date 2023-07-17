@@ -12,7 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Update jar" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Update frame title" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -120,13 +120,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٤٠" summary="Create Diff Panel and test it">
-      <created>1689370421142</created>
-      <option name="number" value="٠٠٢٤٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٤٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689370421142</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٤١" summary="Create Diff EQs Panel and test it">
       <created>1689370952009</created>
@@ -464,7 +457,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689590351791</updated>
     </task>
-    <option name="localTasksCounter" value="289" />
+    <task id="LOCAL؜-٠٠٢٨٩" summary="Update frame title">
+      <created>1689595799894</created>
+      <option name="number" value="٠٠٢٨٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٨٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689595799894</updated>
+    </task>
+    <option name="localTasksCounter" value="290" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -507,7 +507,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add lagrange solution" />
     <MESSAGE value="Add Newton-Gregory forward &amp; backward solution" />
     <MESSAGE value="Add Newton Divided forward &amp; backward solution" />
     <MESSAGE value="Add least squares and spline solution" />
@@ -532,6 +531,7 @@
     <MESSAGE value="Build jar" />
     <MESSAGE value="Testing all methods&#10;Fix bugs" />
     <MESSAGE value="Update jar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update jar" />
+    <MESSAGE value="Update frame title" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update frame title" />
   </component>
 </project>
