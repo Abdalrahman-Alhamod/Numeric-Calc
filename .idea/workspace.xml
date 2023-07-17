@@ -12,9 +12,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix forward and backward subtraction bug">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix and enhance interpolation and diff inputs">
+      <change afterPath="$PROJECT_DIR$/res/Icons/innovation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +54,7 @@
     <setting file="file://$PROJECT_DIR$/src/Functions/ExpressionFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Function.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Main.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
@@ -60,6 +62,7 @@
     <setting file="file://$PROJECT_DIR$/src/Numerics/Interpolation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/SystemOfNonLinearEquations.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Terminal.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Util/EvaluateString.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Util/Matrix.java" root0="SKIP_INSPECTION" />
   </component>
@@ -108,13 +111,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٣٢" summary="Make Exceptions more detailed">
-      <created>1689071656915</created>
-      <option name="number" value="٠٠٢٣٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٣٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689071656915</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٣٣" summary="Fix main printing">
       <created>1689071709700</created>
@@ -452,7 +448,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689548213890</updated>
     </task>
-    <option name="localTasksCounter" value="281" />
+    <task id="LOCAL؜-٠٠٢٨١" summary="Fix and enhance interpolation and diff inputs">
+      <created>1689548719698</created>
+      <option name="number" value="٠٠٢٨١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٨١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689548719698</updated>
+    </task>
+    <option name="localTasksCounter" value="282" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -495,7 +498,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add exp Panel and test it&#10;Add exceptions to exp Functions" />
     <MESSAGE value="Add initPtsFuncPanel and test it&#10;Fix issues in expFuncPanel ( fields and input n)" />
     <MESSAGE value="Add continue button" />
     <MESSAGE value="Restructure the whole project" />
@@ -520,6 +522,7 @@
     <MESSAGE value="Fix horner diff bug" />
     <MESSAGE value="Add sysOfNonLinEqs solution&#10;Add polynomials solution" />
     <MESSAGE value="Fix forward and backward subtraction bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix forward and backward subtraction bug" />
+    <MESSAGE value="Fix and enhance interpolation and diff inputs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix and enhance interpolation and diff inputs" />
   </component>
 </project>

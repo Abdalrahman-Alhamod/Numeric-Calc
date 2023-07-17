@@ -10,6 +10,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
@@ -17,40 +18,44 @@ import java.util.Stack;
 import java.util.function.Consumer;
 
 public class GUI {
-    private JFrame mainFrame;
-    private JPanel startPanel;
-    private JPanel chooseFunctionPanel;
-    private JPanel interpolationPanel;
-    private JPanel integralPanel;
-    private JPanel differentiationPanel;
-    private JPanel differentialEquationsPanel;
-    private JPanel nonLinearEquationsPanel;
-    private JPanel systemOfNonLinearEquationsPanel;
-    private JPanel polynomialsPanel;
-    private JPanel expressionFunctionPanel;
-    private JPanel pointsFunctionPanel;
-    private JPanel polynomialFunctionPanel;
+    private JFrame mainFrame; // The main frame of the application
+    private JPanel startPanel; // The panel displayed at the start of the application
+    private JPanel chooseFunctionPanel; // The panel for choosing a function type
+    private JPanel interpolationPanel; // The panel for performing interpolation
+    private JPanel integralPanel; // The panel for performing integration
+    private JPanel differentiationPanel; // The panel for performing differentiation
+    private JPanel differentialEquationsPanel; // The panel for solving differential equations
+    private JPanel nonLinearEquationsPanel; // The panel for solving non-linear equations
+    private JPanel systemOfNonLinearEquationsPanel; // The panel for solving systems of non-linear equations
+    private JPanel polynomialsPanel; // The panel for polynomial operations
+    private JPanel expressionFunctionPanel; // The panel for entering expression functions
+    private JPanel pointsFunctionPanel; // The panel for entering points functions
+    private JPanel polynomialFunctionPanel; // The panel for entering polynomial functions
 
-    private ImageIcon mainIcon;
-    private ImageIcon backIcon;
-    private ImageIcon homeIcon;
-    private ImageIcon infoIcon;
-    private ImageIcon solutionIcon;
-    private ImageIcon keyboardIcon64;
-    private ImageIcon keyboardIcon128;
+    private ImageIcon mainIcon; // The main application icon
+    private ImageIcon backIcon; // The icon for the back button
+    private ImageIcon homeIcon; // The icon for the home button
+    private ImageIcon infoIcon; // The icon for the information button
+    private ImageIcon solutionIcon; // The icon for the solution message
+    private ImageIcon keyboardIcon64; // The icon for the keyboard (size 64x64)
+    private ImageIcon keyboardIcon128; // The icon for the keyboard (size 128x128)
+    private ImageIcon innovationIcon; // The icon for the innovation image
 
-    private JButton backButton;
-    private JButton homeButton;
+    private JButton backButton; // The back button for navigation
+    private JButton homeButton; // The home button for navigation
 
-    private final String mainFont = "Times New Roman";
-    private final String secondFont = "Times New Roman";
-    private final String buttonFont = "Times New Roman";
+    private final String mainFont = "Times New Roman"; // The main font used in the GUI
+    private final String secondFont = "Times New Roman"; // The secondary font used in the GUI
+    private final String buttonFont = "Times New Roman"; // The font used for buttons
 
-    private Stack<JPanel> panelsStack;
-    private PointsFunction function;
-    private Polynomial polynomial;
-    private Consumer<PointsFunction> doAction;
+    private Stack<JPanel> panelsStack; // A stack to manage the panel navigation
+    private PointsFunction function; // The current points function
+    private Polynomial polynomial; // The current polynomial
+    private Consumer<PointsFunction> doAction; // The action to perform on the points function
 
+    /**
+     * Constructs a new instance of the GUI class.
+     */
     public GUI() {
         //Apply nimbus theme
         try {
@@ -68,16 +73,31 @@ public class GUI {
         mainFrame.pack();
     }
 
+    /**
+     * Initializes the icons used in the GUI.
+     * Loads the required image resources and creates ImageIcon instances.
+     * Uses best practices for handling resource loading and exception handling.
+     */
     private void initIcons() {
-        mainIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/function.png")));
-        backIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/left-arrow.png")));
-        homeIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/home-button.png")));
-        infoIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/info.png")));
-        solutionIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/solution.png")));
-        keyboardIcon64 = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/keyboard_64.png")));
-        keyboardIcon128 = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/keyboard_128.png")));
+        try {
+            mainIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/function.png")));
+            backIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/left-arrow.png")));
+            homeIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/home-button.png")));
+            infoIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/info.png")));
+            solutionIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/solution.png")));
+            keyboardIcon64 = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/keyboard_64.png")));
+            keyboardIcon128 = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/keyboard_128.png")));
+            innovationIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/innovation.png")));
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
+    /**
+     * Initializes the main frame of the GUI.
+     * Configures various properties of the main frame, such as title, icon, size, and behavior.
+     * Follows best practices for setting up a JFrame and ensures a consistent user experience.
+     */
     private void initMainFrame() {
         mainFrame = new JFrame();
         mainFrame.setVisible(true);
@@ -89,6 +109,12 @@ public class GUI {
         mainFrame.setResizable(false);
     }
 
+    /**
+     * Initializes the menu bar of the main frame.
+     * Configures the back, home, and info buttons, and their respective actions.
+     * Creates a custom option dialog with clickable links for about and contact information.
+     * Follows best practices for setting up a menu bar and creating interactive components.
+     */
     private void initMenuBar() {
         JMenuBar mainMenuBar = new JMenuBar();
         mainMenuBar.setLayout(new BorderLayout());
@@ -114,7 +140,56 @@ public class GUI {
         homeButton.setFocusPainted(false);
 
         JButton infoButton = new JButton();
-        infoButton.addActionListener(e -> JOptionPane.showConfirmDialog(null, "Created by Abd_HM 💙", "About", JOptionPane.DEFAULT_OPTION));
+
+        // Create a custom JPanel for the option dialog
+        JPanel panel = new JPanel(new GridLayout(0, 1, 0, 0));
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        JLabel aboutLabel = new JLabel("<html>" +
+                "Created by Abd_HM  ;) <br>" +
+                "Full program documentation on my github : <br>" +
+                "</html>");
+        aboutLabel.setFont(new Font(Font.SERIF, Font.BOLD, 15));
+        JLabel contactLabel = new JLabel("Contact me : ");
+        contactLabel.setFont(new Font(Font.SERIF, Font.BOLD, 15));
+        // Create JLabels with hyperlink functionality for each link
+        JButton docLabel = createHyperlinkButton("Github.com/Abdalrahman-Alhamod/Numeric-Calc", "https://github.com/Abdalrahman-Alhamod/Numeric-Calc");
+        docLabel.setBackground(new Color(0, 102, 204)); // Set color to light blue
+
+        JButton emailLabel = createHyperlinkButton("E-mail", "mailto:abd.alrrahman.alhamod@gmail.com");
+        emailLabel.setBackground(new Color(204, 0, 0)); // Set color to dark red
+
+        JButton githubLabel = createHyperlinkButton("Github", "https://github.com/Abdalrahman-Alhamod");
+        githubLabel.setBackground(new Color(0, 153, 0)); // Set color to light green
+
+        JButton linkedInLabel = createHyperlinkButton("LinkedIn", "https://www.linkedin.com/in/abd-alrrahman-alhamod/");
+        linkedInLabel.setBackground(new Color(0, 102, 153)); // Set color to dark blue
+
+        JButton facebookLabel = createHyperlinkButton("Facebook", "https://www.facebook.com/profile.php?id=100011427430343");
+        facebookLabel.setBackground(new Color(59, 89, 152)); // Set color to Facebook blue
+
+
+        JPanel links = new JPanel(new GridLayout(2, 2));
+        links.add(emailLabel);
+        links.add(githubLabel);
+        links.add(linkedInLabel);
+        links.add(facebookLabel);
+
+        // Add the labels to the panel
+        panel.add(aboutLabel);
+        panel.add(docLabel);
+        panel.add(contactLabel);
+        panel.add(links);
+
+        // Show the custom option dialog
+        infoButton.addActionListener(e -> {
+
+            JOptionPane.showOptionDialog(null, panel,
+                    "About", JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE, innovationIcon, new Object[]{}, null);
+
+            //JOptionPane.showConfirmDialog(null, "Created by Abd_HM ©️", "About", JOptionPane.DEFAULT_OPTION)
+        });
         infoButton.setPreferredSize(new Dimension(50, 50));
         infoButton.setIcon(infoIcon);
         infoButton.setFocusPainted(false);
@@ -125,6 +200,13 @@ public class GUI {
         mainFrame.setJMenuBar(mainMenuBar);
     }
 
+    /**
+     * Initializes the panels used in the GUI.
+     * Calls individual methods to initialize each panel.
+     * Creates a stack to keep track of the panels in the GUI.
+     * Sets the start panel as the initial panel in the stack.
+     * Follows best practices for initializing panels and managing panel stack.
+     */
     private void initPanels() {
         initStartPanel();
         initChooseFunctionPanel();
@@ -142,6 +224,14 @@ public class GUI {
         panelsStack.add(startPanel);
     }
 
+    /**
+     * Initializes the start panel in the GUI.
+     * Sets the name, size, and background color of the panel.
+     * Defines the layout for the panel and adds cards for different functionalities.
+     * Each card represents a specific functionality with a title, description, and enter button.
+     * Adds action listeners to the enter buttons to handle panel navigation.
+     * Follows best practices for initializing panels and adding components.
+     */
     private void initStartPanel() {
         startPanel = new JPanel();
         startPanel.setName("Start");
@@ -250,6 +340,15 @@ public class GUI {
 
     }
 
+    /**
+     * Creates a card panel with customizable title, description, and action button.
+     *
+     * @param title       The title of the card panel.
+     * @param description The description of the card panel.
+     * @param button      The text for the action button.
+     * @param doAction    The ActionListener for the action button.
+     * @return The created card panel.
+     */
     private JPanel createCard(String title, String description, String button, ActionListener doAction) {
         JPanel card = new JPanel();
         card.setLayout(new BorderLayout());
@@ -280,6 +379,12 @@ public class GUI {
         return card;
     }
 
+    /**
+     * Initializes the Choose Function panel.
+     * Sets the name, size, and background color of the panel.
+     * Creates cards for different function types with corresponding action listeners.
+     * Adds the cards to the panel.
+     */
     private void initChooseFunctionPanel() {
         chooseFunctionPanel = new JPanel();
         chooseFunctionPanel.setName("Choose Function");
@@ -319,6 +424,12 @@ public class GUI {
         chooseFunctionPanel.add(polynomialFunctionCard);
     }
 
+    /**
+     * Initializes the Interpolation panel.
+     * Sets the name, size, and background color of the panel.
+     * Creates cards for Interpolation methods with corresponding action listeners.
+     * Adds the cards to the panel.
+     */
     private void initInterpolationPanel() {
         interpolationPanel = new JPanel();
         interpolationPanel.setName("Interpolation");
@@ -1133,6 +1244,12 @@ public class GUI {
 
     }
 
+    /**
+     * Initializes the Integral panel.
+     * Sets the name, size, and background color of the panel.
+     * Creates cards for different integration methods with corresponding action listeners.
+     * Adds the cards to the panel.
+     */
     private void initIntegralPanel() {
         integralPanel = new JPanel();
         integralPanel.setName("Integral");
@@ -1392,6 +1509,12 @@ public class GUI {
 
     }
 
+    /**
+     * Initializes the Differentiation panel.
+     * Sets the name, size, and background color of the panel.
+     * Creates cards for Differentiation methods with corresponding action listeners.
+     * Adds the cards to the panel.
+     */
     private void initDiffPanel() {
         differentiationPanel = new JPanel();
         differentiationPanel.setName("Differential");
@@ -1825,6 +1948,12 @@ public class GUI {
         //***********************************************************************
     }
 
+    /**
+     * Initializes the Differential Equations panel.
+     * Sets the name, size, and background color of the panel.
+     * Creates cards for Differential Equations methods with corresponding action listeners.
+     * Adds the cards to the panel.
+     */
     private void initDiffEQPanel() {
         differentialEquationsPanel = new JPanel();
         differentialEquationsPanel.setName("Differential Equations");
@@ -2801,6 +2930,12 @@ public class GUI {
         //***********************************************************************
     }
 
+    /**
+     * Initializes the Non-Linear Equations panel.
+     * Sets the name, size, and background color of the panel.
+     * Creates cards for Non-Linear Equations methods with corresponding action listeners.
+     * Adds the cards to the panel.
+     */
     private void initNonLinEQPanel() {
         nonLinearEquationsPanel = new JPanel();
         nonLinearEquationsPanel.setName("Non-Linear Equations");
@@ -3602,6 +3737,12 @@ public class GUI {
         //***********************************************************************
     }
 
+    /**
+     * Initializes the Polynomials panel.
+     * Sets the name, size, and background color of the panel.
+     * Creates cards for Polynomials methods with corresponding action listeners.
+     * Adds the cards to the panel.
+     */
     private void initPolyPanel() {
         polynomialsPanel = new JPanel();
         polynomialsPanel.setName("Differential Equations");
@@ -4438,6 +4579,12 @@ public class GUI {
 
     }
 
+    /**
+     * Initializes the Expression Function panel.
+     * Sets the name, size, and background color of the panel.
+     * Creates input and points cards for generating points from an expression function.
+     * Adds the cards to the panel.
+     */
     private void initExpFuncPanel() {
         expressionFunctionPanel = new JPanel();
         expressionFunctionPanel.setName("Expression Function");
@@ -4632,6 +4779,12 @@ public class GUI {
 
     }
 
+    /**
+     * Initializes the Points Function panel.
+     * Sets the name, size, and background color of the panel.
+     * Creates input and points cards for generating points from x and y coordinates.
+     * Adds the cards to the panel.
+     */
     private void iniPtsFuncPanel() {
         pointsFunctionPanel = new JPanel();
         pointsFunctionPanel.setName("Points Function");
@@ -4870,6 +5023,12 @@ public class GUI {
         pointsFunctionPanel.add(pointsCard);
     }
 
+    /**
+     * Initializes the Polynomial Function panel.
+     * Sets the name, size, and background color of the panel.
+     * Creates input and points cards for generating points from a polynomial function.
+     * Adds the cards to the panel.
+     */
     private void initPolyFuncPanel() {
         polynomialFunctionPanel = new JPanel();
         polynomialFunctionPanel.setName("Polynomial Function");
@@ -5145,6 +5304,12 @@ public class GUI {
         polynomialFunctionPanel.add(pointsCard);
     }
 
+    /**
+     * Initializes the System of Non-Linear Equations panel.
+     * Sets the name, size, and background color of the panel.
+     * Creates input and points cards for solving a system of non-linear equations using the Newton-Raphson method.
+     * Adds the cards to the panel.
+     */
     private void initSysNonLinEqPanel() {
         systemOfNonLinearEquationsPanel = new JPanel();
         systemOfNonLinearEquationsPanel.setName("System of Non-Linear Equations");
@@ -5394,6 +5559,12 @@ public class GUI {
         systemOfNonLinearEquationsPanel.add(pointsCard);
     }
 
+    /**
+     * Animates a color change for the given component.
+     *
+     * @param comp  The component to change the color of.
+     * @param color The target color to animate to.
+     */
     private void changeColorAnime(Component comp, Color color) {
         Color srcColor = comp.getBackground();
 
@@ -5431,6 +5602,10 @@ public class GUI {
         timer.start();
     }
 
+    /**
+     * Updates the main panel of the main frame with the top panel from the panels stack.
+     * Enables/disables the back and home buttons based on the size of the panels stack.
+     */
     private void updateMainPanel() {
         mainFrame.getContentPane().removeAll(); // Remove all existing components
         mainFrame.getContentPane().add(panelsStack.peek()); // Add the newContentPanel
@@ -5440,8 +5615,13 @@ public class GUI {
         homeButton.setEnabled(panelsStack.size() > 1);
     }
 
-
-    // Add a DocumentListener to each text field
+    /**
+     * Adds a DocumentListener to the specified text fields and associates it with the given button.
+     * The DocumentListener updates the enabled state of the button based on changes in the text fields.
+     *
+     * @param button     the button to enable/disable based on the text field changes
+     * @param textFields the list of text fields to attach the DocumentListener to
+     */
     private void addDocumentListenerToFields(JButton button, ArrayList<JTextField> textFields) {
         DocumentListener documentListener = new DocumentListener() {
             @Override
@@ -5464,7 +5644,13 @@ public class GUI {
         }
     }
 
-    // Update the enabled state of the button based on text fields' content
+    /**
+     * Updates the enabled state of the specified button based on the content of the text fields.
+     * The button will be enabled if all text fields are non-empty; otherwise, it will be disabled.
+     *
+     * @param button     the button to update the enabled state
+     * @param textFields the list of text fields to check for content
+     */
     private void updateButtonEnabledState(JButton button, ArrayList<JTextField> textFields) {
         boolean enabled = true;
         for (JTextField field : textFields) {
@@ -5475,4 +5661,31 @@ public class GUI {
         }
         button.setEnabled(enabled);
     }
+
+    /**
+     * Creates a JButton with a hyperlink-like appearance.
+     * When clicked, it opens the specified link in the default web browser.
+     *
+     * @param text the text to display on the button
+     * @param link the URL or URI to open when the button is clicked
+     * @return the created hyperlink button
+     */
+    private static JButton createHyperlinkButton(String text, String link) {
+        JButton button = new JButton();
+        button.setText("<html><a href=\"" + link + "\"><b><font color=\"white\">" + text + "</font></b></a></html>");
+        button.setFocusPainted(false);
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        // Add an action listener to handle the button click event
+        button.addActionListener(e -> {
+            try {
+                Desktop.getDesktop().browse(new URI(link));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        return button;
+    }
+
 }
