@@ -4,14 +4,28 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DarkMode{
+/**
+ * DarkMode is a utility class that allows enabling and disabling a dark mode theme
+ * for Swing-based Java applications. It provides a collection of color constants
+ * to create a dark mode look and feel, along with methods to enable or disable
+ * the dark mode in the application.
+ */
+public class DarkMode {
     private static HashMap<String, Color> darkModeColors;
     private static HashMap<String, Color> lightModeColors;
 
+    /**
+     * Default constructor for the DarkMode class. Initializes the darkModeColors and
+     * lightModeColors hash maps with their respective color values.
+     */
     public DarkMode() {
         initDarkModeColors();
         initLightModeColors();
     }
+
+    /**
+     * Initializes the darkModeColors map with the color values for the dark mode theme.
+     */
 
     private void initDarkModeColors() {
         darkModeColors = new HashMap<>();
@@ -65,6 +79,11 @@ public class DarkMode{
         darkModeColors.put("TabbedPane.borderHightlightColor", new Color(30, 40, 60));
     }
 
+    /**
+     * Initializes the lightModeColors map with the color values from the default UIManager
+     * theme, which represents the light mode theme.
+     */
+
     private void initLightModeColors() {
         lightModeColors = new HashMap<>();
         // Iterate over the keys and values in the original UIManager code
@@ -78,6 +97,11 @@ public class DarkMode{
         }
     }
 
+    /**
+     * Enables the dark mode theme by setting the color values from the darkModeColors map
+     * as the defaults in the UIManager and updates the UI components accordingly.
+     */
+
     public static void enableDarkMode() {
         try {
             setNewColors(darkModeColors);
@@ -86,6 +110,11 @@ public class DarkMode{
             e.printStackTrace();
         }
     }
+
+    /**
+     * Disables the dark mode theme by restoring the original light mode color values
+     * from the lightModeColors map to the UIManager and updates the UI components accordingly.
+     */
 
     public static void disableDarkMode() {
         try {
@@ -96,6 +125,10 @@ public class DarkMode{
         }
     }
 
+    /**
+     * Updates the UI components to reflect the changes made to the UIManager.
+     */
+
     private static void updateUIComponents() {
         for (Window window : Window.getWindows()) {
             SwingUtilities.updateComponentTreeUI(window);
@@ -104,6 +137,12 @@ public class DarkMode{
             }
         }
     }
+
+    /**
+     * Sets the new color values in the UIManager by iterating over the HashMap of colors.
+     *
+     * @param newColors A HashMap containing color keys and their corresponding Color values.
+     */
 
     private static void setNewColors(HashMap<String, Color> newColors) {
         // Now, to set the default colors in UIManager, use the lightThemeColors HashMap
