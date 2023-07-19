@@ -1,3 +1,4 @@
+import javax.swing.*;
 
 /**
  * Author :
@@ -23,8 +24,7 @@
 public class Main {
     public static void main(String[] args) {
         // new Terminal();
-        new GUI();
-
+        SwingUtilities.invokeLater(GUI::new);
     }
 
 }

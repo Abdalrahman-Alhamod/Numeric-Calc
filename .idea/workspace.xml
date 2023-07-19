@@ -12,7 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Update jar">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix freezing , move setVisible to last">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -122,13 +122,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٤٢" summary="Create Non-Lin EQs Panel and test it">
-      <created>1689371502480</created>
-      <option name="number" value="٠٠٢٤٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٤٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689371502480</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٤٣" summary="Create Polys Panel and test it">
       <created>1689372110918</created>
@@ -466,7 +459,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689595883635</updated>
     </task>
-    <option name="localTasksCounter" value="291" />
+    <task id="LOCAL؜-٠٠٢٩١" summary="Fix freezing , move setVisible to last">
+      <created>1689784362310</created>
+      <option name="number" value="٠٠٢٩١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٩١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689784362310</updated>
+    </task>
+    <option name="localTasksCounter" value="292" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -509,7 +509,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add Newton-Gregory forward &amp; backward solution" />
     <MESSAGE value="Add Newton Divided forward &amp; backward solution" />
     <MESSAGE value="Add least squares and spline solution" />
     <MESSAGE value="Fix points function bug" />
@@ -534,6 +533,7 @@
     <MESSAGE value="Testing all methods&#10;Fix bugs" />
     <MESSAGE value="Update frame title" />
     <MESSAGE value="Update jar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update jar" />
+    <MESSAGE value="Fix freezing , move setVisible to last" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix freezing , move setVisible to last" />
   </component>
 </project>
