@@ -12,8 +12,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix freezing , move setVisible to last">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add SwingUtilities.invokeLater for thread safety">
+      <change afterPath="$PROJECT_DIR$/res/Icons/arabic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/Icons/moon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DarkMode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,8 +70,8 @@
     <setting file="file://$PROJECT_DIR$/src/Functions/Function.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Main.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Main.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Integral.java" root0="SKIP_INSPECTION" />
@@ -88,20 +93,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/res/Icons&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/res/Icons",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\res\Icons" />
@@ -122,13 +127,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٤٣" summary="Create Polys Panel and test it">
-      <created>1689372110918</created>
-      <option name="number" value="٠٠٢٤٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٤٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689372110918</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٤٤" summary="Rename updateMainPanel">
       <created>1689372200075</created>
@@ -466,7 +464,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689784362310</updated>
     </task>
-    <option name="localTasksCounter" value="292" />
+    <task id="LOCAL؜-٠٠٢٩٢" summary="Add SwingUtilities.invokeLater for thread safety">
+      <created>1689796241342</created>
+      <option name="number" value="٠٠٢٩٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٩٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689796241342</updated>
+    </task>
+    <option name="localTasksCounter" value="293" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -509,7 +514,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add Newton Divided forward &amp; backward solution" />
     <MESSAGE value="Add least squares and spline solution" />
     <MESSAGE value="Fix points function bug" />
     <MESSAGE value="Fix integral bug" />
@@ -534,6 +538,7 @@
     <MESSAGE value="Update frame title" />
     <MESSAGE value="Update jar" />
     <MESSAGE value="Fix freezing , move setVisible to last" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix freezing , move setVisible to last" />
+    <MESSAGE value="Add SwingUtilities.invokeLater for thread safety" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add SwingUtilities.invokeLater for thread safety" />
   </component>
 </project>

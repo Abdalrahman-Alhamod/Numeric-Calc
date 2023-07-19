@@ -129,6 +129,14 @@ public class GUI {
      * The icon for the innovation image.
      */
     private ImageIcon innovationIcon;
+    /**
+     * The icon for the Dark Mode image.
+     */
+    private ImageIcon moonIcon;
+    /**
+     * The icon for the Translation image.
+     */
+    private ImageIcon translateIcon;
 
     /**
      * The back button for navigation.
@@ -176,6 +184,11 @@ public class GUI {
     private Consumer<PointsFunction> doAction;
 
     /**
+     * A boolean representing the current theme
+     */
+    boolean darkModeEnabled;
+
+    /**
      * Constructs a new instance of the GUI class.
      */
     public GUI() {
@@ -187,6 +200,7 @@ public class GUI {
             throw new RuntimeException(e);
         }
         try {
+            new DarkMode();
             Locale.setDefault(Locale.ENGLISH); // fix spinner and text showing arabic symbols
             initIcons();
             initMainFrame();
@@ -215,6 +229,8 @@ public class GUI {
             keyboardIcon64 = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/keyboard_64.png")));
             keyboardIcon128 = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/keyboard_128.png")));
             innovationIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/innovation.png")));
+            moonIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/moon.png")));
+            translateIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/arabic.png")));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -309,15 +325,38 @@ public class GUI {
 
             JOptionPane.showOptionDialog(null, panel, "About", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, innovationIcon, new Object[]{}, null);
 
-            //JOptionPane.showConfirmDialog(null, "Created by Abd_HM ©️", "About", JOptionPane.DEFAULT_OPTION)
         });
         infoButton.setPreferredSize(new Dimension(50, 50));
         infoButton.setIcon(infoIcon);
         infoButton.setFocusPainted(false);
 
-        mainMenuBar.add(backButton, BorderLayout.WEST);
+        JButton darkModeButton = new JButton();
+        darkModeButton.setPreferredSize(new Dimension(50, 50));
+        darkModeButton.setIcon(moonIcon);
+        darkModeButton.setFocusPainted(false);
+        darkModeButton.addActionListener(e -> {
+            if (darkModeEnabled) {
+                DarkMode.disableDarkMode();
+            } else {
+                DarkMode.enableDarkMode();
+            }
+            darkModeEnabled = !darkModeEnabled; // Toggle the dark mode state
+        });
+
+        JButton translateButton = new JButton();
+        translateButton.setPreferredSize(new Dimension(50, 50));
+        translateButton.setIcon(translateIcon);
+        translateButton.setFocusPainted(false);
+
+        JPanel leftButtons = new JPanel();
+        leftButtons.add(backButton);
+        leftButtons.add(translateButton);
+        mainMenuBar.add(leftButtons, BorderLayout.WEST);
         mainMenuBar.add(homeButton);
-        mainMenuBar.add(infoButton, BorderLayout.EAST);
+        JPanel rightButton = new JPanel();
+        rightButton.add(darkModeButton);
+        rightButton.add(infoButton);
+        mainMenuBar.add(rightButton, BorderLayout.EAST);
         mainFrame.setJMenuBar(mainMenuBar);
     }
 
@@ -3904,7 +3943,6 @@ public class GUI {
                         coeffs.add(coeff);
                     }
                     polynomial = new Polynomial(coeffs);
-                    System.out.println(polynomial);
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -4167,7 +4205,6 @@ public class GUI {
                         coeffs.add(coeff);
                     }
                     polynomial = new Polynomial(coeffs);
-                    System.out.println(polynomial);
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -4430,7 +4467,6 @@ public class GUI {
                         coeffs.add(coeff);
                     }
                     polynomial = new Polynomial(coeffs);
-                    System.out.println(polynomial);
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
