@@ -12,13 +12,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add SwingUtilities.invokeLater for thread safety">
-      <change afterPath="$PROJECT_DIR$/res/Icons/arabic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/Icons/moon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DarkMode.java" afterDir="false" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add JAVA DOC to Dark Mode class">
+      <change afterPath="$PROJECT_DIR$/src/Language.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,12 +63,13 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/DarkMode.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/ExpressionFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Function.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Main.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Main.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Integral.java" root0="SKIP_INSPECTION" />
@@ -127,20 +125,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٤٤" summary="Rename updateMainPanel">
-      <created>1689372200075</created>
-      <option name="number" value="٠٠٢٤٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٤٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689372200075</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٤٥" summary="Add changeColorAnime method">
-      <created>1689374645039</created>
-      <option name="number" value="٠٠٢٤٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٤٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689374645039</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٤٦" summary="Test all Panels">
       <created>1689375005955</created>
@@ -471,7 +455,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689796241342</updated>
     </task>
-    <option name="localTasksCounter" value="293" />
+    <task id="LOCAL؜-٠٠٢٩٣" summary="Add Dark Mode">
+      <created>1689806963825</created>
+      <option name="number" value="٠٠٢٩٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٩٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689806963825</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٢٩٤" summary="Add JAVA DOC to Dark Mode class">
+      <created>1689807168296</created>
+      <option name="number" value="٠٠٢٩٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٩٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689807168296</updated>
+    </task>
+    <option name="localTasksCounter" value="295" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -514,8 +512,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add least squares and spline solution" />
-    <MESSAGE value="Fix points function bug" />
     <MESSAGE value="Fix integral bug" />
     <MESSAGE value="Add integrals solutions" />
     <MESSAGE value="Add diffs solutions&#10;Fix interpolation and integral dialogs" />
@@ -539,6 +535,8 @@
     <MESSAGE value="Update jar" />
     <MESSAGE value="Fix freezing , move setVisible to last" />
     <MESSAGE value="Add SwingUtilities.invokeLater for thread safety" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add SwingUtilities.invokeLater for thread safety" />
+    <MESSAGE value="Add Dark Mode" />
+    <MESSAGE value="Add JAVA DOC to Dark Mode class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add JAVA DOC to Dark Mode class" />
   </component>
 </project>

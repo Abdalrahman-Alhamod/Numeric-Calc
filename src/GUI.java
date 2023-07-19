@@ -189,6 +189,11 @@ public class GUI {
     boolean darkModeEnabled;
 
     /**
+     * A boolean representing the current Language
+     */
+    boolean isArabicSelected;
+
+    /**
      * Constructs a new instance of the GUI class.
      */
     public GUI() {
@@ -347,6 +352,10 @@ public class GUI {
         translateButton.setPreferredSize(new Dimension(50, 50));
         translateButton.setIcon(translateIcon);
         translateButton.setFocusPainted(false);
+        translateButton.addActionListener(e -> {
+            isArabicSelected = !isArabicSelected;
+            mainFrame.repaint();
+        });
 
         JPanel leftButtons = new JPanel();
         leftButtons.add(backButton);
