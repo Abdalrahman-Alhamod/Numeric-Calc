@@ -194,6 +194,7 @@ public class GUI {
             initPanels();
             updateMainPanel();
             mainFrame.pack();
+            mainFrame.setVisible(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -226,7 +227,6 @@ public class GUI {
      */
     private void initMainFrame() {
         mainFrame = new JFrame();
-        mainFrame.setVisible(true);
         mainFrame.setTitle("Numerical Analysis Calculator");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setIconImage(mainIcon.getImage());
