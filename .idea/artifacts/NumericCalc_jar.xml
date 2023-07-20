@@ -3,6 +3,8 @@
     <output-path>$PROJECT_DIR$/out/artifacts/NumericCalc_jar</output-path>
     <root id="archive" name="NumericCalc.jar">
       <element id="module-output" name="NumericCalc" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/flatlaf-3.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/flatlaf-intellij-themes-3.1.1.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

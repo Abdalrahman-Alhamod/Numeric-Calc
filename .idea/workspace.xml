@@ -12,8 +12,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add theme button &#10;Add dark theme Flatlaf&#10;Removing non-usable elements">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Update JAR">
+      <change afterPath="$PROJECT_DIR$/res/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/NumericCalc_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/NumericCalc_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/NumericCalc_jar/NumericCalc.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/NumericCalc_jar/NumericCalc.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +99,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/res/Icons",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "run.code.analysis.last.selected.profile": "pProject Default"
@@ -122,13 +125,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٤٨" summary="Clean Code : converting to lambda">
-      <created>1689376576350</created>
-      <option name="number" value="٠٠٢٤٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٤٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689376576350</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٤٩" summary="Clean Code project">
       <created>1689376644008</created>
@@ -466,7 +462,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689869777101</updated>
     </task>
-    <option name="localTasksCounter" value="297" />
+    <task id="LOCAL؜-٠٠٢٩٧" summary="Update JAR">
+      <created>1689869999734</created>
+      <option name="number" value="٠٠٢٩٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٩٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689869999734</updated>
+    </task>
+    <option name="localTasksCounter" value="298" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -509,7 +512,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add diffs solutions&#10;Fix interpolation and integral dialogs" />
     <MESSAGE value="Enhance , clean up GUI" />
     <MESSAGE value="Add Terminal class and ove the code to it from the main method" />
     <MESSAGE value="Add differential equations solution" />
@@ -534,6 +536,7 @@
     <MESSAGE value="Add JAVA DOC to Dark Mode class" />
     <MESSAGE value="Testing translation" />
     <MESSAGE value="Add theme button &#10;Add dark theme Flatlaf&#10;Removing non-usable elements" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add theme button &#10;Add dark theme Flatlaf&#10;Removing non-usable elements" />
+    <MESSAGE value="Update JAR" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update JAR" />
   </component>
 </project>
