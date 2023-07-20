@@ -5031,7 +5031,7 @@ public class GUI {
             pointsText.setFont(new Font(mainFont, Font.PLAIN, 20));
             pointsText.setEnabled(false);
             pointsScrollPane = new JScrollPane(pointsText);
-            pointsScrollPane.setPreferredSize(new Dimension(450, 485));
+            pointsScrollPane.setPreferredSize(new Dimension(450, 482));
 
             // Continue Button
             continueButton = new JButton("Continue");
@@ -5042,10 +5042,7 @@ public class GUI {
             continueButton.setBackground(customGreen);
             continueButton.setForeground(Color.white);  // Set the text color to white for better visibility
             continueButton.setEnabled(false); // Disable the button initially
-            continueButton.addActionListener(e -> {
-                panelsStack.pop();
-                updateMainPanel();
-            });
+            continueButton.addActionListener(e -> doAction.accept(function));
 
             // content panel
             JPanel contentPanel = new JPanel(new BorderLayout());
