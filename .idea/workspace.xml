@@ -12,10 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix JAR">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-    </list>
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix polynomials function" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,7 +63,7 @@
     <setting file="file://$PROJECT_DIR$/src/Functions/Function.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Main.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
@@ -123,13 +120,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٥٠" summary="Enhance main code">
-      <created>1689376688743</created>
-      <option name="number" value="٠٠٢٥٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٥٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689376688743</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٥١" summary="Add info Icon">
       <created>1689377912005</created>
@@ -467,7 +457,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689871575322</updated>
     </task>
-    <option name="localTasksCounter" value="299" />
+    <task id="LOCAL؜-٠٠٢٩٩" summary="Fix polynomials function">
+      <created>1689878137867</created>
+      <option name="number" value="٠٠٢٩٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠٢٩٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689878137867</updated>
+    </task>
+    <option name="localTasksCounter" value="300" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -510,7 +507,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add Terminal class and ove the code to it from the main method" />
     <MESSAGE value="Add differential equations solution" />
     <MESSAGE value="Add keyboard icons" />
     <MESSAGE value="Add nin-linear equations solution" />
@@ -535,6 +531,7 @@
     <MESSAGE value="Add theme button &#10;Add dark theme Flatlaf&#10;Removing non-usable elements" />
     <MESSAGE value="Update JAR" />
     <MESSAGE value="Fix JAR" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix JAR" />
+    <MESSAGE value="Fix polynomials function" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix polynomials function" />
   </component>
 </project>
