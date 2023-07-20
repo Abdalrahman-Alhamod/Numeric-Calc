@@ -3,6 +3,8 @@ import Functions.PointsFunction;
 import Functions.Polynomial;
 import Numerics.*;
 import Util.EvaluateString;
+import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.intellijthemes.*;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -133,10 +135,6 @@ public class GUI {
      * The icon for the Dark Mode image.
      */
     private ImageIcon moonIcon;
-    /**
-     * The icon for the Translation image.
-     */
-    private ImageIcon translateIcon;
 
     /**
      * The back button for navigation.
@@ -189,23 +187,16 @@ public class GUI {
     boolean darkModeEnabled;
 
     /**
-     * A boolean representing the current Language
-     */
-    boolean isArabicSelected;
-
-    /**
      * Constructs a new instance of the GUI class.
      */
     public GUI() {
         //Apply nimbus theme
         try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (UnsupportedLookAndFeelException | InstantiationException | IllegalAccessException |
-                 ClassNotFoundException e) {
+            FlatLightLaf.setup();
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         try {
-            new DarkMode();
             Locale.setDefault(Locale.ENGLISH); // fix spinner and text showing arabic symbols
             initIcons();
             initMainFrame();
@@ -235,7 +226,6 @@ public class GUI {
             keyboardIcon128 = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/keyboard_128.png")));
             innovationIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/innovation.png")));
             moonIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/moon.png")));
-            translateIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/arabic.png")));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -250,7 +240,7 @@ public class GUI {
         mainFrame = new JFrame();
         mainFrame.setTitle("Numerical Analysis Calculator");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setIconImage(mainIcon.getImage());
+        //mainFrame.setIconImage(mainIcon.getImage());
         mainFrame.setMinimumSize(new Dimension(940, 620));
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setResizable(false);
@@ -326,11 +316,7 @@ public class GUI {
         panel.add(links);
 
         // Show the custom option dialog
-        infoButton.addActionListener(e -> {
-
-            JOptionPane.showOptionDialog(null, panel, "About", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, innovationIcon, new Object[]{}, null);
-
-        });
+        infoButton.addActionListener(e -> JOptionPane.showOptionDialog(null, panel, "About", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, innovationIcon, new Object[]{}, null));
         infoButton.setPreferredSize(new Dimension(50, 50));
         infoButton.setIcon(infoIcon);
         infoButton.setFocusPainted(false);
@@ -340,28 +326,34 @@ public class GUI {
         darkModeButton.setIcon(moonIcon);
         darkModeButton.setFocusPainted(false);
         darkModeButton.addActionListener(e -> {
-            if (darkModeEnabled) {
-                DarkMode.disableDarkMode();
-            } else {
-                DarkMode.enableDarkMode();
+            try {
+                darkModeEnabled = !darkModeEnabled; // Toggle the dark mode state
+                if (darkModeEnabled) {
+                    FlatOneDarkIJTheme.setup();
+                } else {
+                    FlatLightLaf.setup();
+                }
+                SwingUtilities.updateComponentTreeUI(mainFrame); // Replace "yourMainFrame" with your top-level JFrame or JDialog
+                mainFrame.revalidate();
+                mainFrame.repaint();
+                for (JPanel jpanel : getPanels()) {
+                    updatePanelUI(jpanel);
+                    jpanel.revalidate();
+                    jpanel.repaint();
+                }
+            } catch (Exception ex) {
+                // Log the error instead of showing a dialog in the event handler
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-            darkModeEnabled = !darkModeEnabled; // Toggle the dark mode state
-        });
-
-        JButton translateButton = new JButton();
-        translateButton.setPreferredSize(new Dimension(50, 50));
-        translateButton.setIcon(translateIcon);
-        translateButton.setFocusPainted(false);
-        translateButton.addActionListener(e -> {
-            isArabicSelected = !isArabicSelected;
-            mainFrame.repaint();
         });
 
         JPanel leftButtons = new JPanel();
+        JLabel mainIconLabel = new JLabel();
+        mainIconLabel.setIcon(mainIcon);
+        leftButtons.add(mainIconLabel);
         leftButtons.add(backButton);
-        leftButtons.add(translateButton);
+        leftButtons.add(homeButton);
         mainMenuBar.add(leftButtons, BorderLayout.WEST);
-        mainMenuBar.add(homeButton);
         JPanel rightButton = new JPanel();
         rightButton.add(darkModeButton);
         rightButton.add(infoButton);
@@ -626,8 +618,7 @@ public class GUI {
                     polyAns.append("P(x) : ");
                     polyAns.append(ans.toString());
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAns.setEnabled(false);
-                    polyAns.setDisabledTextColor(Color.BLACK);
+                    polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(250, 65));
 
@@ -675,8 +666,7 @@ public class GUI {
                     polyAns.append("P(x) : ");
                     polyAns.append(ans.toString());
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAns.setEnabled(false);
-                    polyAns.setDisabledTextColor(Color.BLACK);
+                    polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
@@ -692,8 +682,7 @@ public class GUI {
                     polyAnsNSH.append("P(x) : ");
                     polyAnsNSH.append(asnNSH);
                     polyAnsNSH.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAnsNSH.setEnabled(false);
-                    polyAnsNSH.setDisabledTextColor(Color.BLACK);
+                    polyAnsNSH.setEditable(false);
                     JScrollPane polyAnsNSHScrollPane = new JScrollPane(polyAnsNSH);
                     polyAnsNSHScrollPane.setPreferredSize(new Dimension(300, 70));
 
@@ -790,8 +779,7 @@ public class GUI {
                     JTextArea tableAns = new JTextArea();
                     tableAns.append(values.toString());
                     tableAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    tableAns.setEnabled(false);
-                    tableAns.setDisabledTextColor(Color.BLACK);
+                    tableAns.setEditable(false);
                     JScrollPane tableAnsScrollPane = new JScrollPane(tableAns);
                     tableAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
@@ -806,8 +794,7 @@ public class GUI {
                     polyAns.append("P(x) : ");
                     polyAns.append(ans.toString());
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAns.setEnabled(false);
-                    polyAns.setDisabledTextColor(Color.BLACK);
+                    polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
@@ -821,8 +808,7 @@ public class GUI {
                     polyAnsNSH.append("P(x) : ");
                     polyAnsNSH.append(asnNSH);
                     polyAnsNSH.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAnsNSH.setEnabled(false);
-                    polyAnsNSH.setDisabledTextColor(Color.BLACK);
+                    polyAnsNSH.setEditable(false);
                     JScrollPane polyAnsNSHScrollPane = new JScrollPane(polyAnsNSH);
                     polyAnsNSHScrollPane.setPreferredSize(new Dimension(300, 70));
 
@@ -922,8 +908,7 @@ public class GUI {
                     JTextArea tableAns = new JTextArea();
                     tableAns.append(values.toString());
                     tableAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    tableAns.setEnabled(false);
-                    tableAns.setDisabledTextColor(Color.BLACK);
+                    tableAns.setEditable(false);
                     JScrollPane tableAnsScrollPane = new JScrollPane(tableAns);
                     tableAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
@@ -938,8 +923,7 @@ public class GUI {
                     polyAns.append("P(x) : ");
                     polyAns.append(ans.toString());
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAns.setEnabled(false);
-                    polyAns.setDisabledTextColor(Color.BLACK);
+                    polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
@@ -953,8 +937,7 @@ public class GUI {
                     polyAnsNSH.append("P(x) : ");
                     polyAnsNSH.append(asnNSH);
                     polyAnsNSH.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAnsNSH.setEnabled(false);
-                    polyAnsNSH.setDisabledTextColor(Color.BLACK);
+                    polyAnsNSH.setEditable(false);
                     JScrollPane polyAnsNSHScrollPane = new JScrollPane(polyAnsNSH);
                     polyAnsNSHScrollPane.setPreferredSize(new Dimension(300, 70));
 
@@ -1054,7 +1037,7 @@ public class GUI {
                     JTextArea tableAns = new JTextArea();
                     tableAns.append(values.toString());
                     tableAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    tableAns.setEnabled(false);
+                    tableAns.setEditable(false);
                     tableAns.setDisabledTextColor(Color.BLACK);
                     JScrollPane tableAnsScrollPane = new JScrollPane(tableAns);
                     tableAnsScrollPane.setPreferredSize(new Dimension(300, 70));
@@ -1070,8 +1053,7 @@ public class GUI {
                     polyAns.append("P(x) : ");
                     polyAns.append(ans.toString());
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAns.setEnabled(false);
-                    polyAns.setDisabledTextColor(Color.BLACK);
+                    polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
@@ -1085,8 +1067,7 @@ public class GUI {
                     polyAnsNSH.append("P(x) : ");
                     polyAnsNSH.append(asnNSH);
                     polyAnsNSH.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAnsNSH.setEnabled(false);
-                    polyAnsNSH.setDisabledTextColor(Color.BLACK);
+                    polyAnsNSH.setEditable(false);
                     JScrollPane polyAnsNSHScrollPane = new JScrollPane(polyAnsNSH);
                     polyAnsNSHScrollPane.setPreferredSize(new Dimension(300, 70));
 
@@ -1186,8 +1167,7 @@ public class GUI {
                     JTextArea tableAns = new JTextArea();
                     tableAns.append(values.toString());
                     tableAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    tableAns.setEnabled(false);
-                    tableAns.setDisabledTextColor(Color.BLACK);
+                    tableAns.setEditable(false);
                     JScrollPane tableAnsScrollPane = new JScrollPane(tableAns);
                     tableAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
@@ -1202,8 +1182,7 @@ public class GUI {
                     polyAns.append("P(x) : ");
                     polyAns.append(ans.toString());
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAns.setEnabled(false);
-                    polyAns.setDisabledTextColor(Color.BLACK);
+                    polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
@@ -1217,8 +1196,7 @@ public class GUI {
                     polyAnsNSH.append("P(x) : ");
                     polyAnsNSH.append(asnNSH);
                     polyAnsNSH.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAnsNSH.setEnabled(false);
-                    polyAnsNSH.setDisabledTextColor(Color.BLACK);
+                    polyAnsNSH.setEditable(false);
                     JScrollPane polyAnsNSHScrollPane = new JScrollPane(polyAnsNSH);
                     polyAnsNSHScrollPane.setPreferredSize(new Dimension(300, 70));
 
@@ -1319,8 +1297,7 @@ public class GUI {
                     polyAns.append("P(x) : ");
                     polyAns.append(ans.toString());
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAns.setEnabled(false);
-                    polyAns.setDisabledTextColor(Color.BLACK);
+                    polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(250, 65));
 
@@ -1373,8 +1350,7 @@ public class GUI {
                         polyAns.append("\n");
                     }
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAns.setEnabled(false);
-                    polyAns.setDisabledTextColor(Color.BLACK);
+                    polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(380, 100));
 
@@ -1441,8 +1417,7 @@ public class GUI {
                     polyAns.append("Answer : ");
                     polyAns.append(String.valueOf(ans));
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAns.setEnabled(false);
-                    polyAns.setDisabledTextColor(Color.BLACK);
+                    polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -1490,8 +1465,7 @@ public class GUI {
                     polyAns.append("Answer : ");
                     polyAns.append(String.valueOf(ans));
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAns.setEnabled(false);
-                    polyAns.setDisabledTextColor(Color.BLACK);
+                    polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -1539,8 +1513,7 @@ public class GUI {
                     polyAns.append("Answer : ");
                     polyAns.append(String.valueOf(ans));
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAns.setEnabled(false);
-                    polyAns.setDisabledTextColor(Color.BLACK);
+                    polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -1588,8 +1561,7 @@ public class GUI {
                     polyAns.append("Answer : ");
                     polyAns.append(String.valueOf(ans));
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAns.setEnabled(false);
-                    polyAns.setDisabledTextColor(Color.BLACK);
+                    polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -1637,8 +1609,7 @@ public class GUI {
                     polyAns.append("Answer : ");
                     polyAns.append(String.valueOf(ans));
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAns.setEnabled(false);
-                    polyAns.setDisabledTextColor(Color.BLACK);
+                    polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -1702,8 +1673,7 @@ public class GUI {
                     polyAns.append("P(x) : ");
                     polyAns.append(ans.toString());
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAns.setEnabled(false);
-                    polyAns.setDisabledTextColor(Color.BLACK);
+                    polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
@@ -1819,8 +1789,7 @@ public class GUI {
                     polyAns.append("P(x) : ");
                     polyAns.append(ans.toString());
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAns.setEnabled(false);
-                    polyAns.setDisabledTextColor(Color.BLACK);
+                    polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
@@ -1937,8 +1906,7 @@ public class GUI {
                     polyAns.append("P(x) : ");
                     polyAns.append(ans.toString());
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAns.setEnabled(false);
-                    polyAns.setDisabledTextColor(Color.BLACK);
+                    polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
@@ -2072,8 +2040,7 @@ public class GUI {
                     polyAns.append("Answer : ");
                     polyAns.append(String.valueOf(ans));
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    polyAns.setEnabled(false);
-                    polyAns.setDisabledTextColor(Color.BLACK);
+                    polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(100, 70));
 
@@ -2182,7 +2149,7 @@ public class GUI {
 
             JButton cancelButton = new JButton("Cancel");
             cancelButton.setFocusPainted(false);
-            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
 
             Object[] buttons = {cancelButton, solveButton};
@@ -2222,8 +2189,7 @@ public class GUI {
                     difeqAns.append("Answer : ");
                     difeqAns.append(String.valueOf(ans));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    difeqAns.setEnabled(false);
-                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -2444,7 +2410,7 @@ public class GUI {
 
             JButton cancelButton = new JButton("Cancel");
             cancelButton.setFocusPainted(false);
-            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
 
             Object[] buttons = {cancelButton, solveButton};
@@ -2473,7 +2439,7 @@ public class GUI {
 
                     //create title
                     JLabel difeqTitle = new JLabel();
-                    difeqTitle.setText("Differential Equation solution using Hein's method : ");
+                    difeqTitle.setText("Differential Equation solution using Taylor's method : ");
                     difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
@@ -2481,8 +2447,7 @@ public class GUI {
                     difeqAns.append("Answer : ");
                     difeqAns.append(String.valueOf(ans));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    difeqAns.setEnabled(false);
-                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -2573,7 +2538,7 @@ public class GUI {
 
             JButton cancelButton = new JButton("Cancel");
             cancelButton.setFocusPainted(false);
-            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
 
             Object[] buttons = {cancelButton, solveButton};
@@ -2613,8 +2578,7 @@ public class GUI {
                     difeqAns.append("Answer : ");
                     difeqAns.append(String.valueOf(ans));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    difeqAns.setEnabled(false);
-                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -2706,7 +2670,7 @@ public class GUI {
 
             JButton cancelButton = new JButton("Cancel");
             cancelButton.setFocusPainted(false);
-            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
 
             Object[] buttons = {cancelButton, solveButton};
@@ -2746,8 +2710,7 @@ public class GUI {
                     difeqAns.append("Answer : ");
                     difeqAns.append(String.valueOf(ans));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    difeqAns.setEnabled(false);
-                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -2838,7 +2801,7 @@ public class GUI {
 
             JButton cancelButton = new JButton("Cancel");
             cancelButton.setFocusPainted(false);
-            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
 
             Object[] buttons = {cancelButton, solveButton};
@@ -2878,8 +2841,7 @@ public class GUI {
                     difeqAns.append("Answer : ");
                     difeqAns.append(String.valueOf(ans));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    difeqAns.setEnabled(false);
-                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -2970,7 +2932,7 @@ public class GUI {
 
             JButton cancelButton = new JButton("Cancel");
             cancelButton.setFocusPainted(false);
-            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
 
             Object[] buttons = {cancelButton, solveButton};
@@ -3010,8 +2972,7 @@ public class GUI {
                     difeqAns.append("Answer : ");
                     difeqAns.append(String.valueOf(ans));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    difeqAns.setEnabled(false);
-                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -3114,7 +3075,7 @@ public class GUI {
 
             JButton cancelButton = new JButton("Cancel");
             cancelButton.setFocusPainted(false);
-            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
 
             Object[] buttons = {cancelButton, solveButton};
@@ -3152,8 +3113,7 @@ public class GUI {
                     difeqAns.append("Answer : ");
                     difeqAns.append(String.valueOf(ans));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    difeqAns.setEnabled(false);
-                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -3236,7 +3196,7 @@ public class GUI {
 
             JButton cancelButton = new JButton("Cancel");
             cancelButton.setFocusPainted(false);
-            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
 
             Object[] buttons = {cancelButton, solveButton};
@@ -3274,8 +3234,7 @@ public class GUI {
                     difeqAns.append("Answer : ");
                     difeqAns.append(String.valueOf(ans));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    difeqAns.setEnabled(false);
-                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -3358,7 +3317,7 @@ public class GUI {
 
             JButton cancelButton = new JButton("Cancel");
             cancelButton.setFocusPainted(false);
-            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
 
             Object[] buttons = {cancelButton, solveButton};
@@ -3396,8 +3355,7 @@ public class GUI {
                     difeqAns.append("Answer : ");
                     difeqAns.append(String.valueOf(ans));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    difeqAns.setEnabled(false);
-                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -3482,7 +3440,7 @@ public class GUI {
 
             JButton cancelButton = new JButton("Cancel");
             cancelButton.setFocusPainted(false);
-            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
 
             Object[] buttons = {cancelButton, solveButton};
@@ -3521,8 +3479,7 @@ public class GUI {
                     difeqAns.append("Answer : ");
                     difeqAns.append(String.valueOf(ans));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    difeqAns.setEnabled(false);
-                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -3614,7 +3571,7 @@ public class GUI {
 
             JButton cancelButton = new JButton("Cancel");
             cancelButton.setFocusPainted(false);
-            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
 
             Object[] buttons = {cancelButton, solveButton};
@@ -3656,8 +3613,7 @@ public class GUI {
                     difeqAns.append("Answer : ");
                     difeqAns.append(String.valueOf(ans));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    difeqAns.setEnabled(false);
-                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -3734,7 +3690,7 @@ public class GUI {
 
             JButton cancelButton = new JButton("Cancel");
             cancelButton.setFocusPainted(false);
-            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
 
             Object[] buttons = {cancelButton, solveButton};
@@ -3770,8 +3726,7 @@ public class GUI {
                     difeqAns.append("Answer : ");
                     difeqAns.append(String.valueOf(ans));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    difeqAns.setEnabled(false);
-                    difeqAns.setDisabledTextColor(Color.BLACK);
+                    difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
                     polyAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -3927,7 +3882,7 @@ public class GUI {
 
             JButton cancelButton = new JButton("Cancel");
             cancelButton.setFocusPainted(false);
-            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
 
             Object[] buttons = {cancelButton, continueButton};
@@ -3977,8 +3932,7 @@ public class GUI {
             polyAns.append("P(x) : ");
             if (polynomial != null) polyAns.append(polynomial.toString());
             polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-            polyAns.setEnabled(false);
-            polyAns.setDisabledTextColor(Color.BLACK);
+            polyAns.setEditable(false);
             JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
             polyAnsScrollPane.setPreferredSize(new Dimension(250, 65));
 
@@ -4046,8 +4000,7 @@ public class GUI {
                     solAns.append("Answer : ");
                     solAns.append(String.valueOf(ans));
                     solAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    solAns.setEnabled(false);
-                    solAns.setDisabledTextColor(Color.BLACK);
+                    solAns.setEditable(false);
                     JScrollPane solAnsScrollPane = new JScrollPane(solAns);
                     solAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -4189,7 +4142,7 @@ public class GUI {
 
             JButton cancelButton = new JButton("Cancel");
             cancelButton.setFocusPainted(false);
-            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
 
             Object[] buttons = {cancelButton, continueButton};
@@ -4239,8 +4192,7 @@ public class GUI {
             polyAns.append("P(x) : ");
             if (polynomial != null) polyAns.append(polynomial.toString());
             polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-            polyAns.setEnabled(false);
-            polyAns.setDisabledTextColor(Color.BLACK);
+            polyAns.setEditable(false);
             JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
             polyAnsScrollPane.setPreferredSize(new Dimension(250, 65));
 
@@ -4308,8 +4260,7 @@ public class GUI {
                     solAns.append("P(x) : ");
                     solAns.append(String.valueOf(ans));
                     solAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    solAns.setEnabled(false);
-                    solAns.setDisabledTextColor(Color.BLACK);
+                    solAns.setEditable(false);
                     JScrollPane solAnsScrollPane = new JScrollPane(solAns);
                     solAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -4451,7 +4402,7 @@ public class GUI {
 
             JButton cancelButton = new JButton("Cancel");
             cancelButton.setFocusPainted(false);
-            cancelButton.setPreferredSize(new Dimension(80, 40));
+            cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
 
             Object[] buttons = {cancelButton, continueButton};
@@ -4501,8 +4452,7 @@ public class GUI {
             polyAns.append("P(x) : ");
             if (polynomial != null) polyAns.append(polynomial.toString());
             polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-            polyAns.setEnabled(false);
-            polyAns.setDisabledTextColor(Color.BLACK);
+            polyAns.setEditable(false);
             JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
             polyAnsScrollPane.setPreferredSize(new Dimension(250, 65));
 
@@ -4591,8 +4541,7 @@ public class GUI {
                     solAns.append("Ans : ");
                     solAns.append(String.valueOf(ans));
                     solAns.setFont(new Font(mainFont, Font.PLAIN, 20));
-                    solAns.setEnabled(false);
-                    solAns.setDisabledTextColor(Color.BLACK);
+                    solAns.setEditable(false);
                     JScrollPane solAnsScrollPane = new JScrollPane(solAns);
                     solAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
@@ -5372,7 +5321,7 @@ public class GUI {
             pointsText = new JTextArea();
             //pointsText.setPreferredSize(new Dimension(450, 550));
             pointsText.setFont(new Font(mainFont, Font.PLAIN, 20));
-            pointsText.setEnabled(false);
+            pointsText.setEditable(false);
             pointsScrollPane = new JScrollPane(pointsText);
             pointsScrollPane.setPreferredSize(new Dimension(450, 480));
 
@@ -5573,49 +5522,6 @@ public class GUI {
     }
 
     /**
-     * Animates a color change for the given component.
-     *
-     * @param comp  The component to change the color of.
-     * @param color The target color to animate to.
-     */
-    private void changeColorAnime(Component comp, Color color) {
-        Color srcColor = comp.getBackground();
-
-        int duration = 1000; // Animation duration in milliseconds
-        int steps = 30; // Number of animation steps
-
-        int srcRed = srcColor.getRed();
-        int srcGreen = srcColor.getGreen();
-        int srcBlue = srcColor.getBlue();
-
-        int destRed = color.getRed();
-        int destGreen = color.getGreen();
-        int destBlue = color.getBlue();
-
-        int redStep = (destRed - srcRed) / steps;
-        int greenStep = (destGreen - srcGreen) / steps;
-        int blueStep = (destBlue - srcBlue) / steps;
-
-        final int[] currentStep = {0};
-
-        javax.swing.Timer timer = new javax.swing.Timer(duration / steps, e -> {
-            int newRed = srcRed + redStep * currentStep[0];
-            int newGreen = srcGreen + greenStep * currentStep[0];
-            int newBlue = srcBlue + blueStep * currentStep[0];
-
-            comp.setBackground(new Color(newRed, newGreen, newBlue));
-            mainFrame.repaint();
-
-            currentStep[0]++;
-
-            if (currentStep[0] > steps) {
-                ((javax.swing.Timer) e.getSource()).stop();
-            }
-        });
-        timer.start();
-    }
-
-    /**
      * Updates the main panel of the main frame with the top panel from the panels stack.
      * Enables/disables the back and home buttons based on the size of the panels stack.
      */
@@ -5699,6 +5605,51 @@ public class GUI {
         });
 
         return button;
+    }
+
+    /**
+     * Recursively updates the look and feel of Swing components within the given container and its child components.
+     * <p>
+     * This method traverses the component hierarchy and applies the appropriate UI updates to all components in the
+     * container and its nested containers. It should be called after changing the look and feel of the Swing application
+     * to apply the changes to all components and their children.
+     *
+     * @param container The Container object that contains the components to update. It can be a JPanel, JFrame, or any
+     *                  other Swing container.
+     */
+    private void updatePanelUI(Container container) {
+        for (Component component : container.getComponents()) {
+            SwingUtilities.updateComponentTreeUI(component);
+            if (component instanceof Container) {
+                updatePanelUI((Container) component);
+            }
+        }
+    }
+
+    /**
+     * Returns an ArrayList containing multiple JPanel objects representing different panels in the application.
+     * <p>
+     * This method provides a convenient way to obtain references to various panels used in the application. The returned
+     * ArrayList includes all the panels defined in the application, such as startPanel, chooseFunctionPanel,
+     * interpolationPanel, integralPanel, and so on.
+     *
+     * @return An ArrayList of JPanel objects representing different panels in the application.
+     */
+    public ArrayList<JPanel> getPanels() {
+        ArrayList<JPanel> panels = new ArrayList<>();
+        panels.add(startPanel);
+        panels.add(chooseFunctionPanel);
+        panels.add(interpolationPanel);
+        panels.add(integralPanel);
+        panels.add(differentiationPanel);
+        panels.add(differentialEquationsPanel);
+        panels.add(nonLinearEquationsPanel);
+        panels.add(systemOfNonLinearEquationsPanel);
+        panels.add(polynomialsPanel);
+        panels.add(expressionFunctionPanel);
+        panels.add(pointsFunctionPanel);
+        panels.add(polynomialFunctionPanel);
+        return panels;
     }
 
 }
