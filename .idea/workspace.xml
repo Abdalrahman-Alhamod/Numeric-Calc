@@ -12,7 +12,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix polynomials function" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Update JAR">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -86,20 +88,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/res/Icons&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/Test",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\res\Icons" />
@@ -120,13 +122,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٥١" summary="Add info Icon">
-      <created>1689377912005</created>
-      <option name="number" value="٠٠٢٥١" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٥١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689377912005</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٥٢" summary="Add polynomial to chooseFunction panel">
       <created>1689378185304</created>
@@ -464,7 +459,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689878137867</updated>
     </task>
-    <option name="localTasksCounter" value="300" />
+    <task id="LOCAL؜-٠٠٣٠٠" summary="Update JAR">
+      <created>1689878202673</created>
+      <option name="number" value="٠٠٣٠٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٠٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689878202673</updated>
+    </task>
+    <option name="localTasksCounter" value="301" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -529,9 +531,9 @@
     <MESSAGE value="Add JAVA DOC to Dark Mode class" />
     <MESSAGE value="Testing translation" />
     <MESSAGE value="Add theme button &#10;Add dark theme Flatlaf&#10;Removing non-usable elements" />
-    <MESSAGE value="Update JAR" />
     <MESSAGE value="Fix JAR" />
     <MESSAGE value="Fix polynomials function" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix polynomials function" />
+    <MESSAGE value="Update JAR" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update JAR" />
   </component>
 </project>
