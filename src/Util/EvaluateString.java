@@ -1,5 +1,7 @@
 package Util;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 import java.util.Stack;
 
@@ -15,13 +17,13 @@ public abstract class EvaluateString {
      * @param expression The mathematical expression to evaluate.
      * @return The result of the evaluation.
      */
-    public static double evaluate(String expression) {
+    public static BigDecimal evaluate(String expression) {
         expression = expression.replaceAll("pi", Double.toString(Math.PI)); // replace string Pi with its value
         expression = expression.replaceAll("\\s", ""); // Remove all whitespace characters from the expression
         char[] tokens = expression.toCharArray();
 
         // Stack for numbers: 'values'
-        Stack<Double> values = new Stack<>();
+        Stack<BigDecimal> values = new Stack<>();
         // Stack for Operators: 'ops'
         Stack<String> ops = new Stack<>();
 
@@ -40,7 +42,7 @@ public abstract class EvaluateString {
                 // Extract the whole number or decimal part
                 while (i < tokens.length && (Character.isDigit(tokens[i]) || tokens[i] == '.'))
                     sb.append(tokens[i++]);
-                values.push(-1 * Double.parseDouble(sb.toString()));
+                values.push(new BigDecimal(sb.toString()).multiply(new BigDecimal(-1)));
                 // Right now the 'i' points to the character next to the number,
                 // Since the for loop also increases 'i', we need to decrease the value of 'i' by 1 to correct the offset.
                 i--;
@@ -52,7 +54,7 @@ public abstract class EvaluateString {
                 // Extract the whole number or decimal part
                 while (i < tokens.length && (Character.isDigit(tokens[i]) || tokens[i] == '.'))
                     sb.append(tokens[i++]);
-                values.push(Double.parseDouble(sb.toString()));
+                values.push(new BigDecimal(sb.toString()));
 
                 // Right now the 'i' points to the character next to the number,
                 // Since the for loop also increases 'i', we need to decrease the value of 'i' by 1 to correct the offset.
@@ -68,7 +70,7 @@ public abstract class EvaluateString {
                 while (!Objects.equals(ops.peek(), "(")) {
                     String op = ops.peek();
                     if (isLogSqrtExp(op) || isTrigonometric(op))
-                        values.push(applyOp(ops.pop(), values.pop(), 0));
+                        values.push(applyOp(ops.pop(), values.pop(), new BigDecimal(0)));
                     else
                         values.push(applyOp(ops.pop(), values.pop(), values.pop()));
                 }
@@ -119,21 +121,6 @@ public abstract class EvaluateString {
                 ops.push("atan");
                 i += 3;
             }
-            // Handle the sinh operator
-            else if (tokens[i] == 's' && i + 3 < tokens.length && tokens[i + 1] == 'i' && tokens[i + 2] == 'n' && tokens[i + 3] == 'h') {
-                ops.push("sinh");
-                i += 3;
-            }
-            // Handle the cosh operator
-            else if (tokens[i] == 'c' && i + 3 < tokens.length && tokens[i + 1] == 'o' && tokens[i + 2] == 's' && tokens[i + 3] == 'h') {
-                ops.push("cosh");
-                i += 3;
-            }
-            // Handle the tanh operator
-            else if (tokens[i] == 't' && i + 3 < tokens.length && tokens[i + 1] == 'a' && tokens[i + 2] == 'n' && tokens[i + 3] == 'h') {
-                ops.push("tanh");
-                i += 3;
-            }
             // Current token is an operator
             else if (tokens[i] == '+' || tokens[i] == '-' || tokens[i] == '*' || tokens[i] == '/' || tokens[i] == '^') {
                 // While the top of 'ops' has the same or greater precedence to the current token, which is an operator.
@@ -141,7 +128,7 @@ public abstract class EvaluateString {
                 while (!ops.empty() && hasPrecedence(String.valueOf(tokens[i]), ops.peek())) {
                     String op = ops.peek();
                     if (isLogSqrtExp(op) || isTrigonometric(op))
-                        values.push(applyOp(ops.pop(), values.pop(), 0));
+                        values.push(applyOp(ops.pop(), values.pop(), new BigDecimal(0)));
                     else
                         values.push(applyOp(ops.pop(), values.pop(), values.pop()));
                 }
@@ -153,7 +140,7 @@ public abstract class EvaluateString {
         while (!ops.empty()) {
             String op = ops.peek();
             if (isLogSqrtExp(op) || isTrigonometric(op))
-                values.push(applyOp(ops.pop(), values.pop(), 0));
+                values.push(applyOp(ops.pop(), values.pop(), new BigDecimal(0)));
             else
                 values.push(applyOp(ops.pop(), values.pop(), values.pop()));
         }
@@ -169,9 +156,9 @@ public abstract class EvaluateString {
      * @param x          the value to evaluate with
      * @return The result of the evaluation.
      */
-    public static double evaluate(String expression, double x) {
+    public static BigDecimal evaluate(String expression, BigDecimal x) {
         // replace x with its given value
-        expression = expression.replaceAll("(?<!\\w)x(?!\\w)", Double.toString(x));
+        expression = expression.replaceAll("(?<!\\w)x(?!\\w)", String.valueOf(x));
         return evaluate(expression);
     }
 
@@ -183,9 +170,9 @@ public abstract class EvaluateString {
      * @param y          the value to evaluate with instead of 'y'
      * @return The result of the evaluation.
      */
-    public static double evaluate(String expression, double x, double y) {
+    public static BigDecimal evaluate(String expression, BigDecimal x, BigDecimal y) {
         // replace y with its value
-        expression = expression.replaceAll("y", Double.toString(y));
+        expression = expression.replaceAll("y", String.valueOf(x));
         return evaluate(expression, x);
     }
 
@@ -299,45 +286,39 @@ public abstract class EvaluateString {
      * @return The result of applying the operator on operands a and b.
      * @throws UnsupportedOperationException If division by zero is encountered.
      */
-    private static double applyOp(String op, double b, double a) {
+    private static BigDecimal applyOp(String op, BigDecimal b, BigDecimal a) {
         switch (op) {
             case "+":
-                return a + b;
+                return a.add(b);
             case "-":
-                return a - b;
+                return a.subtract(b);
             case "*":
-                return a * b;
+                return a.multiply(b);
             case "/":
-                if (b == 0.0)
+                if (b.equals(new BigDecimal(0)))
                     throw new UnsupportedOperationException("Cannot divide by zero");
-                return a / b;
+                return a.divide(b, RoundingMode.HALF_UP);
             case "log":
-                return Math.log(b);
+                return BigDecimalUtil.ln(b, Accuracy.getValue());
             case "sqrt":
-                return Math.sqrt(b);
+                return BigDecimalUtil.sqrt(b);
             case "exp":
-                return Math.exp(b);
+                return BigDecimalUtil.exp(b, Accuracy.getValue());
             case "^":
-                return Math.pow(a, b);
+                return BigDecimalUtil.pow(a, b);
             case "sin":
-                return Math.sin(b);
+                return BigDecimalUtil.sine(b);
             case "cos":
-                return Math.cos(b);
+                return BigDecimalUtil.cosine(b);
             case "tan":
-                return Math.tan(b);
+                return BigDecimalUtil.tangent(b);
             case "asin":
-                return Math.asin(b);
+                return BigDecimalUtil.asin(b);
             case "acos":
-                return Math.acos(b);
+                return BigDecimalUtil.acos(b);
             case "atan":
-                return Math.atan(b);
-            case "sinh":
-                return Math.sinh(b);
-            case "cosh":
-                return Math.cosh(b);
-            case "tanh":
-                return Math.tanh(b);
+                return BigDecimalUtil.atan(b);
         }
-        return 0;
+        return new BigDecimal(0);
     }
 }

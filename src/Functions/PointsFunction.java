@@ -2,6 +2,7 @@ package Functions;
 
 import Numerics.Interpolation;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -11,8 +12,8 @@ import java.util.Objects;
  * and manipulate the function.
  */
 public class PointsFunction implements Function {
-    private final ArrayList<Double> xp;
-    private final ArrayList<Double> yp;
+    private final ArrayList<BigDecimal> xp;
+    private final ArrayList<BigDecimal> yp;
 
     /**
      * Constructs a PointsFunction with the given x and y coordinate lists.
@@ -22,7 +23,7 @@ public class PointsFunction implements Function {
      * @throws NullPointerException If xp or yp is null.
      * @throws ArithmeticException  If the number of x and y coordinates does not match.
      */
-    public PointsFunction(ArrayList<Double> xp, ArrayList<Double> yp) {
+    public PointsFunction(ArrayList<BigDecimal> xp, ArrayList<BigDecimal> yp) {
         this.xp = Objects.requireNonNull(xp, "xp cannot be null");
         this.yp = Objects.requireNonNull(yp, "yp cannot be null");
         if (xp.size() != yp.size()) {
@@ -36,15 +37,8 @@ public class PointsFunction implements Function {
      * @param x The x-coordinate at which to evaluate the function.
      * @return The value of the function at the given x-coordinate.
      */
-    public double getValueAt(double x) {
-        int decimalPlaces = 9;
-        double powerOf9 = Math.pow(10, decimalPlaces);
-        double truncatedNumber = Math.floor(x * powerOf9) / powerOf9;
-        for (double num : xp) {
-            if (Math.abs(num - truncatedNumber) <= 0.000000001)
-                truncatedNumber = num;
-        }
-        return yp.get(xp.indexOf(truncatedNumber));
+    public BigDecimal getValueAt(BigDecimal x) {
+        return yp.get(xp.indexOf(x));
     }
 
     /**
@@ -53,7 +47,7 @@ public class PointsFunction implements Function {
      * @param index The index of the x-coordinate at which to evaluate the function.
      * @return The value of the function at index of the x-coordinate using interpolation.
      */
-    public double getValueAt(int index) {
+    public BigDecimal getValueAt(int index) {
         return yp.get(index);
     }
 
@@ -63,7 +57,7 @@ public class PointsFunction implements Function {
      * @param x The x-coordinate of the new point.
      * @param y The y-coordinate of the new point.
      */
-    public void addPoint(double x, double y) {
+    public void addPoint(BigDecimal x, BigDecimal y) {
         xp.add(x);
         yp.add(y);
     }
@@ -75,7 +69,7 @@ public class PointsFunction implements Function {
      * @param rank The order of the derivative (e.g., 1 for first derivative, 2 for second derivative, and so on).
      * @return The value of the derivative of the function at the given x-coordinate.
      */
-    public double getDiffAt(double x, int rank) {
+    public BigDecimal getDiffAt(BigDecimal x, int rank) {
         Polynomial poly = Interpolation.NewtonForwardDividedSubtractions.getIFAP(this, xp.size() - 1);
         return poly.getDiffAt(x, rank);
     }
@@ -87,7 +81,7 @@ public class PointsFunction implements Function {
      * @param rank The order of the integral (e.g., 1 for first integral, 2 for second integral, and so on).
      * @return The value of the integral of the function at the given x-coordinate.
      */
-    public double getIntegralAt(double x, int rank) {
+    public BigDecimal getIntegralAt(BigDecimal x, int rank) {
         Polynomial poly = Interpolation.NewtonForwardDividedSubtractions.getIFAP(this, xp.size() - 1);
         return poly.getIntegralAt(x, rank);
     }
@@ -97,7 +91,7 @@ public class PointsFunction implements Function {
      *
      * @return The list of x-coordinates.
      */
-    public ArrayList<Double> getXp() {
+    public ArrayList<BigDecimal> getXp() {
         return xp;
     }
 
@@ -106,7 +100,7 @@ public class PointsFunction implements Function {
      *
      * @return The list of y-coordinates.
      */
-    public ArrayList<Double> getYp() {
+    public ArrayList<BigDecimal> getYp() {
         return yp;
     }
 
