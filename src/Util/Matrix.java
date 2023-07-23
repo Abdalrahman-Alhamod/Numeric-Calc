@@ -1,20 +1,22 @@
 package Util;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 
 /**
- * This class represents a matrix of double values and provides various operations on matrices.
+ * This class represents a matrix of BigDecimal values and provides various operations on matrices.
  * <p>
- * The matrix is stored as an ArrayList of ArrayLists of Double values.
+ * The matrix is stored as an ArrayList of ArrayLists of BigDecimal values.
  */
 public class Matrix {
     /**
      * The matrix data is stored as an ArrayList of ArrayLists.
      * Each inner ArrayList represents a row of the matrix.
      */
-    private ArrayList<ArrayList<Double>> a; // ArrayList of ArrayLists to represent the matrix
+    private ArrayList<ArrayList<BigDecimal>> a; // ArrayList of ArrayLists to represent the matrix
     /**
      * The number of rows in the matrix.
      */
@@ -35,9 +37,9 @@ public class Matrix {
         m = columns;
         a = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            ArrayList<Double> row = new ArrayList<>();
+            ArrayList<BigDecimal> row = new ArrayList<>();
             for (int j = 0; j < m; j++) {
-                row.add(0.0);
+                row.add(new BigDecimal(0));
             }
             a.add(row);
         }
@@ -50,10 +52,10 @@ public class Matrix {
      * @throws NullPointerException if the data is null
      * @throws ArithmeticException  if the rows in the data have different sizes
      */
-    public Matrix(ArrayList<ArrayList<Double>> data) {
+    public Matrix(ArrayList<ArrayList<BigDecimal>> data) {
         this.a = Objects.requireNonNull(data, "a cannot be null");
         int size = a.get(0).size();
-        for (ArrayList<Double> row : a) {
+        for (ArrayList<BigDecimal> row : a) {
             if (row.size() != size)
                 throw new ArithmeticException("rows size is not identical");
         }
@@ -72,9 +74,9 @@ public class Matrix {
         m = columns;
         a = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            ArrayList<Double> row = new ArrayList<>();
+            ArrayList<BigDecimal> row = new ArrayList<>();
             for (int j = 0; j < m; j++) {
-                row.add(0.0);
+                row.add(new BigDecimal(0));
             }
             a.add(row);
         }
@@ -86,7 +88,7 @@ public class Matrix {
      * @param index the row index
      * @return the row at the specified index
      */
-    public ArrayList<Double> getRow(int index) {
+    public ArrayList<BigDecimal> getRow(int index) {
         return a.get(index);
     }
 
@@ -96,7 +98,7 @@ public class Matrix {
      * @param index the row index
      * @param row   the new row
      */
-    public void setRow(int index, ArrayList<Double> row) {
+    public void setRow(int index, ArrayList<BigDecimal> row) {
         a.set(index, row);
     }
 
@@ -105,7 +107,7 @@ public class Matrix {
      *
      * @return the matrix data
      */
-    public ArrayList<ArrayList<Double>> getData() {
+    public ArrayList<ArrayList<BigDecimal>> getData() {
         return a;
     }
 
@@ -120,8 +122,8 @@ public class Matrix {
         if (n != other.n || m != other.m)
             throw new ArithmeticException("Matrices dimensions mismatch");
         for (int i = 0; i < n; i++) {
-            ArrayList<Double> row = a.get(i);
-            ArrayList<Double> otherRow = other.getRow(i);
+            ArrayList<BigDecimal> row = a.get(i);
+            ArrayList<BigDecimal> otherRow = other.getRow(i);
             for (int j = 0; j < m; j++) {
                 row.set(j, otherRow.get(j));
             }
@@ -135,9 +137,9 @@ public class Matrix {
      * @param c the constant value to assign
      * @return this matrix after assigning the constant value
      */
-    public Matrix assign(double c) {
+    public Matrix assign(BigDecimal c) {
         for (int i = 0; i < n; i++) {
-            ArrayList<Double> row = a.get(i);
+            ArrayList<BigDecimal> row = a.get(i);
             Collections.fill(row, c);
         }
         return this;
@@ -155,11 +157,11 @@ public class Matrix {
             throw new ArithmeticException("Matrices dimensions mismatch");
         Matrix sum = new Matrix(n, m);
         for (int i = 0; i < n; i++) {
-            ArrayList<Double> row = a.get(i);
-            ArrayList<Double> otherRow = other.getRow(i);
-            ArrayList<Double> sumRow = sum.getRow(i);
+            ArrayList<BigDecimal> row = a.get(i);
+            ArrayList<BigDecimal> otherRow = other.getRow(i);
+            ArrayList<BigDecimal> sumRow = sum.getRow(i);
             for (int j = 0; j < m; j++) {
-                sumRow.set(j, (row.get(j) + otherRow.get(j))); // Perform modulo arithmetic while adding elements
+                sumRow.set(j, (row.get(j).add(otherRow.get(j)))); // Perform modulo arithmetic while adding elements
             }
         }
         return sum;
@@ -171,13 +173,13 @@ public class Matrix {
      * @param c the constant value to Add
      * @return sum matrix after Adding the constant value
      */
-    public Matrix add(double c) {
+    public Matrix add(BigDecimal c) {
         Matrix sum = new Matrix(n, m);
         for (int i = 0; i < n; i++) {
-            ArrayList<Double> row = a.get(i);
-            ArrayList<Double> sumRow = sum.getRow(i);
+            ArrayList<BigDecimal> row = a.get(i);
+            ArrayList<BigDecimal> sumRow = sum.getRow(i);
             for (int j = 0; j < m; j++) {
-                sumRow.set(j, (row.get(j) + c)); // Perform modulo arithmetic while adding constant value
+                sumRow.set(j, (row.get(j).add(c))); // Perform modulo arithmetic while adding constant value
             }
         }
         return sum;
@@ -195,11 +197,11 @@ public class Matrix {
             throw new ArithmeticException("Matrices dimensions mismatch");
         Matrix sub = new Matrix(n, m);
         for (int i = 0; i < n; i++) {
-            ArrayList<Double> row = a.get(i);
-            ArrayList<Double> otherRow = other.getRow(i);
-            ArrayList<Double> subRow = sub.getRow(i);
+            ArrayList<BigDecimal> row = a.get(i);
+            ArrayList<BigDecimal> otherRow = other.getRow(i);
+            ArrayList<BigDecimal> subRow = sub.getRow(i);
             for (int j = 0; j < m; j++) {
-                subRow.set(j, row.get(j) - otherRow.get(j)); // Perform modulo arithmetic while subtracting elements
+                subRow.set(j, row.get(j).subtract(otherRow.get(j))); // Perform modulo arithmetic while subtracting elements
             }
         }
         return sub;
@@ -211,13 +213,13 @@ public class Matrix {
      * @param c the constant value to Subtract
      * @return sub matrix after Subtracting the constant value
      */
-    public Matrix subtract(double c) {
+    public Matrix subtract(BigDecimal c) {
         Matrix sub = new Matrix(n, m);
         for (int i = 0; i < n; i++) {
-            ArrayList<Double> row = a.get(i);
-            ArrayList<Double> subRow = sub.getRow(i);
+            ArrayList<BigDecimal> row = a.get(i);
+            ArrayList<BigDecimal> subRow = sub.getRow(i);
             for (int j = 0; j < m; j++) {
-                subRow.set(j, row.get(j) - c); // Perform modulo arithmetic while subtracting constant value
+                subRow.set(j, row.get(j).subtract(c)); // Perform modulo arithmetic while subtracting constant value
             }
         }
         return sub;
@@ -236,12 +238,12 @@ public class Matrix {
         }
         Matrix product = new Matrix(n, other.m);
         for (int i = 0; i < n; i++) {
-            ArrayList<Double> row = a.get(i);
-            ArrayList<ArrayList<Double>> otherData = other.getData();
-            ArrayList<Double> productRow = product.getRow(i);
+            ArrayList<BigDecimal> row = a.get(i);
+            ArrayList<ArrayList<BigDecimal>> otherData = other.getData();
+            ArrayList<BigDecimal> productRow = product.getRow(i);
             for (int j = 0; j < other.m; j++) {
                 for (int k = 0; k < m; k++) {
-                    productRow.set(j, productRow.get(j) + (row.get(k) * otherData.get(k).get(j)));
+                    productRow.set(j, productRow.get(j).add(row.get(k).multiply(otherData.get(k).get(j))));
                 }
             }
         }
@@ -254,13 +256,13 @@ public class Matrix {
      * @param scalar the scalar to multiply by
      * @return a new matrix that is the result of multiplying this matrix by the scalar
      */
-    public Matrix multiply(double scalar) {
+    public Matrix multiply(BigDecimal scalar) {
         Matrix product = new Matrix(n, m);
         for (int i = 0; i < n; i++) {
-            ArrayList<Double> row = a.get(i);
-            ArrayList<Double> productRow = product.getRow(i);
+            ArrayList<BigDecimal> row = a.get(i);
+            ArrayList<BigDecimal> productRow = product.getRow(i);
             for (int j = 0; j < m; j++) {
-                productRow.set(j, row.get(j) * scalar);
+                productRow.set(j, row.get(j).multiply(scalar));
             }
         }
         return product;
@@ -276,7 +278,7 @@ public class Matrix {
      */
     public static void neutralize() {
         for (int i = 0; i < neutral.n; i++) {
-            neutral.getRow(i).set(i, 1.0); // Set diagonal elements of the neutral matrix to 1
+            neutral.getRow(i).set(i, new BigDecimal(1)); // Set diagonal elements of the neutral matrix to 1
         }
     }
 
@@ -327,7 +329,7 @@ public class Matrix {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (ArrayList<Double> row : a) {
+        for (ArrayList<BigDecimal> row : a) {
             sb.append(row.toString());
             sb.append('\n');
         }
@@ -341,7 +343,7 @@ public class Matrix {
      *
      * @return an ArrayList of solutions to the system of equations, or null if there is no unique solution
      */
-    public ArrayList<Double> solve() {
+    public ArrayList<BigDecimal> solve() {
         int rowCount = n;
         int colCount = m;
 
@@ -350,7 +352,7 @@ public class Matrix {
             if (lead >= colCount)
                 break;
             int i = r;
-            while (a.get(i).get(lead) == 0) {
+            while (a.get(i).get(lead).equals(new BigDecimal(0))) {
                 i++;
                 if (i == rowCount) {
                     i = r;
@@ -361,19 +363,19 @@ public class Matrix {
             }
 
             // Swap rows i and r
-            ArrayList<Double> temp = a.get(i);
+            ArrayList<BigDecimal> temp = a.get(i);
             a.set(i, a.get(r));
             a.set(r, temp);
 
-            double lv = a.get(r).get(lead);
+            BigDecimal lv = a.get(r).get(lead);
             for (int j = 0; j < colCount; j++)
-                a.get(r).set(j, a.get(r).get(j) / lv);
+                a.get(r).set(j, a.get(r).get(j).divide(lv, Accuracy.getValue(), RoundingMode.HALF_UP));
 
             for (i = 0; i < rowCount; i++) {
                 if (i != r) {
-                    double lv2 = a.get(i).get(lead);
+                    BigDecimal lv2 = a.get(i).get(lead);
                     for (int j = 0; j < colCount; j++)
-                        a.get(i).set(j, a.get(i).get(j) - a.get(r).get(j) * lv2);
+                        a.get(i).set(j, a.get(i).get(j).subtract(a.get(r).get(j).multiply(lv2)));
                 }
             }
 
@@ -381,9 +383,9 @@ public class Matrix {
         }
         //System.out.println(a);
         // Extract the solution from the transformed matrix
-        ArrayList<Double> solution = new ArrayList<>();
+        ArrayList<BigDecimal> solution = new ArrayList<>();
         for (int i = 0; i < rowCount; i++) {
-            double val = (i < colCount) ? a.get(i).get(colCount - 1) : 0.0;
+            BigDecimal val = (i < colCount) ? a.get(i).get(colCount - 1) : new BigDecimal(0);
             solution.add(val);
         }
 
@@ -396,13 +398,13 @@ public class Matrix {
      * @param xp an ArrayList of x values
      * @return the Vandermonde matrix of the given x values
      */
-    public static Matrix getVandermonde(ArrayList<Double> xp) {
-        ArrayList<ArrayList<Double>> a = new ArrayList<>();
+    public static Matrix getVandermonde(ArrayList<BigDecimal> xp) {
+        ArrayList<ArrayList<BigDecimal>> a = new ArrayList<>();
         for (int i = 0; i < xp.size(); i++) {
-            ArrayList<Double> v = new ArrayList<>();
-            double x = xp.get(i);
+            ArrayList<BigDecimal> v = new ArrayList<>();
+            BigDecimal x = xp.get(i);
             for (int j = 0; j < xp.size(); j++) {
-                v.add(Math.pow(x, j));
+                v.add(BigDecimalUtil.pow(x, new BigDecimal(j)));
             }
             a.add(v);
         }
