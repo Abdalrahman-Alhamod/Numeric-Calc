@@ -207,64 +207,63 @@ public class DifferentialEquation {
             }
         }
 
+    }
+
+    /**
+     * The Runge_Kutta class provides a method for solving a differential equation using the Runge-Kutta method.
+     */
+    public static class Runge_Kutta {
         /**
-         * The Runge_Kutta class provides a method for solving a differential equation using the Runge-Kutta method.
+         * Solves the differential equation using the Runge-Kutta method.
+         *
+         * @param eq The differential equation to solve.
+         * @param x0 The initial value of x.
+         * @param y0 The initial value of y.
+         * @param h  The step size.
+         * @param x  The target value of x.
+         * @return The approximate value of y at x.
          */
-        public static class Runge_Kutta {
-            /**
-             * Solves the differential equation using the Runge-Kutta method.
-             *
-             * @param eq The differential equation to solve.
-             * @param x0 The initial value of x.
-             * @param y0 The initial value of y.
-             * @param h  The step size.
-             * @param x  The target value of x.
-             * @return The approximate value of y at x.
-             */
-            public static BigDecimal solve(DifferentialEquation eq, BigDecimal x0, BigDecimal y0, BigDecimal h, BigDecimal x) {
-                // init yi = y0 , xi = x0,  yi+1 = 0
-                BigDecimal yi = new BigDecimal(y0.toString()), xi = new BigDecimal(x0.toString()), yi1 = new BigDecimal(0);
-                while (!xi.equals(x)) {
-                    // update k1 = f(xi,yi)
-                    BigDecimal k1 = eq.getValueAt(xi, yi);
+        public static BigDecimal solve(DifferentialEquation eq, BigDecimal x0, BigDecimal y0, BigDecimal h, BigDecimal x) {
+            // init yi = y0 , xi = x0,  yi+1 = 0
+            BigDecimal yi = new BigDecimal(y0.toString()), xi = new BigDecimal(x0.toString()), yi1 = new BigDecimal(0);
+            while (!xi.equals(x)) {
+                // update k1 = f(xi,yi)
+                BigDecimal k1 = eq.getValueAt(xi, yi);
 
-                    //System.out.println("k1 = " + k1);
+                //System.out.println("k1 = " + k1);
 
-                    // update k2 = f(xi + (1/2)h , yi + (1/2)k1 )
-                    BigDecimal xi0_5h = xi.add(h.multiply(new BigDecimal("0.5")));
-                    BigDecimal k2 = eq.getValueAt(xi0_5h, yi.add(k1.multiply(new BigDecimal("0.5"))));
+                // update k2 = f(xi + (1/2)h , yi + (1/2)k1 )
+                BigDecimal xi0_5h = xi.add(h.multiply(new BigDecimal("0.5")));
+                BigDecimal k2 = eq.getValueAt(xi0_5h, yi.add(k1.multiply(new BigDecimal("0.5"))));
 
-                    //System.out.println("k2 = " + k2);
+                //System.out.println("k2 = " + k2);
 
-                    // update k3 = f(xi + (1/2)h , yi + (1/2)k2 )
-                    BigDecimal k3 = eq.getValueAt(xi0_5h, yi.add(k2.multiply(new BigDecimal("0.5"))));
+                // update k3 = f(xi + (1/2)h , yi + (1/2)k2 )
+                BigDecimal k3 = eq.getValueAt(xi0_5h, yi.add(k2.multiply(new BigDecimal("0.5"))));
 
-                    //System.out.println("k3 = " + k3);
+                //System.out.println("k3 = " + k3);
 
-                    // update k4 = f(xi + h , yi + k3 )
-                    BigDecimal k4 = eq.getValueAt(xi.add(h), yi.add(k3));
+                // update k4 = f(xi + h , yi + k3 )
+                BigDecimal k4 = eq.getValueAt(xi.add(h), yi.add(k3));
 
-                    //System.out.println("k4 = " + k4);
+                //System.out.println("k4 = " + k4);
 
-                    // update yi+1 = yi + (h/6) [ k1 + 2k2 + 2k3 + k4 ]
-                    yi1 = yi.add(
-                            h.divide(new BigDecimal(6), Accuracy.getValue(), RoundingMode.HALF_UP)).multiply(
-                            k1.add(
-                                    k2.multiply(new BigDecimal(2)).add(
-                                            k3.multiply(new BigDecimal(2)).add(
-                                                    k4))));
+                // update yi+1 = yi + (h/6) [ k1 + 2k2 + 2k3 + k4 ]
+                yi1 = yi.add(
+                        h.divide(new BigDecimal(6), Accuracy.getValue(), RoundingMode.HALF_UP)).multiply(
+                        k1.add(
+                                k2.multiply(new BigDecimal(2)).add(
+                                        k3.multiply(new BigDecimal(2)).add(
+                                                k4))));
 
-                    // System.out.println("yi+1 = " + yi1);
+                // System.out.println("yi+1 = " + yi1);
 
-                    //update xi
-                    xi = xi.add(h);
-                    // update yi
-                    yi = yi1;
-                }
-                return yi1;
+                //update xi
+                xi = xi.add(h);
+                // update yi
+                yi = yi1;
             }
+            return yi1;
         }
-
-
     }
 }
