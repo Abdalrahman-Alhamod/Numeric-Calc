@@ -7,6 +7,7 @@ import Util.BigDecimalUtil;
 import Util.Matrix;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -84,7 +85,9 @@ public abstract class Interpolation {
             // Divide the multiplied polynomials ( (x - x0 ) * (x - x1) .. (x - xj) * (x - xj+1) ..)
             // on scalar ( (xj - x0 ) * (xj - x1 ) ... (xj - xj-1) * (xj - xj+1)..)
             // which is Lagrange Polynomial
-            lag = lag.multiply(new BigDecimal(1).divide(scalar, Accuracy.getValue(), RoundingMode.HALF_UP));
+            scalar = new BigDecimal(1).divide(scalar, Accuracy.getValue() + 1, RoundingMode.HALF_UP);
+            scalar = scalar.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
+            lag = lag.multiply(scalar);
             return lag;
         }
 
@@ -142,11 +145,12 @@ public abstract class Interpolation {
                     }
                 }
                 // to divide on the scalar => make 1/scalar and multiply with it
-                scalar = new BigDecimal(1).divide(scalar, Accuracy.getValue(), RoundingMode.HALF_UP);
+                scalar = new BigDecimal(1).divide(scalar, Accuracy.getValue() + 1, RoundingMode.UP);
                 // divide yi on scalar ( (xj - x0 ) * (xj - x1 ) ... (xj - xj-1) * (xj - xj+1) )
                 scalar = scalar.multiply(yp.get(i));
+                scalar = scalar.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
                 // if scalar = 1.0 don't append it => don't make (1.0 x +..) do (x + ...)
-                if (scalar.compareTo(new BigDecimal(1))!=0) {
+                if (scalar.compareTo(new BigDecimal(1)) != 0) {
                     sb.append(scalar.stripTrailingZeros());
                     sb.append(" ");
                 }
@@ -212,7 +216,7 @@ public abstract class Interpolation {
                 // reaching first element of the current columns ( upper diameter element)
                 if (i == 0) {
                     // reaching zeros ; no more terms
-                    if (temp.compareTo(new BigDecimal(0))==0)
+                    if (temp.compareTo(new BigDecimal(0)) == 0)
                         break;
                     // add the current element to result
                     res.add(temp);
@@ -254,7 +258,7 @@ public abstract class Interpolation {
                 // get the temporary value of xi+1 - xi
                 BigDecimal temp = (xp.get(i + 1).subtract(xp.get(i)));
                 // if the temporary value do not equal h => the step is invalid
-                if (temp.compareTo(h)!=0) {
+                if (temp.compareTo(h) != 0) {
                     throw new ArithmeticException("step h is not static");
                 }
             }
@@ -322,7 +326,7 @@ public abstract class Interpolation {
                 // get the temporary value of xi+1 - xi
                 BigDecimal temp = (xp.get(i + 1).subtract(xp.get(i)));
                 // if the temporary value do not equal h => the step is invalid
-                if (temp.compareTo(h)!=0) {
+                if (temp.compareTo(h) != 0) {
                     throw new ArithmeticException("step h is not static");
                 }
             }
@@ -331,7 +335,7 @@ public abstract class Interpolation {
             //Getting Newton Gregory Forward Table values (Upper diameter values)
             ArrayList<BigDecimal> df0 = getUDV(func);
             // if the y0 != 0
-            if (df0.get(0).compareTo(new BigDecimal(0))!=0) {
+            if (df0.get(0).compareTo(new BigDecimal(0)) != 0) {
                 // Adding f0 with formatted string value ; if y0 = 1.0 => append 1
                 sb.append(df0.get(0).stripTrailingZeros());
             }
@@ -352,7 +356,7 @@ public abstract class Interpolation {
                 // init a temporary value with the answer of dividing df0 on n!
                 BigDecimal temp = df0.get(i).multiply(new BigDecimal(1).divide(factorial, Accuracy.getValue(), RoundingMode.HALF_UP));
                 // reaching zeros
-                if (temp.compareTo(new BigDecimal(0))==0)
+                if (temp.compareTo(new BigDecimal(0)) == 0)
                     break;
                     // if it is the start of the result , do not append ' + '
                 else if (!sb.isEmpty())
@@ -418,7 +422,7 @@ public abstract class Interpolation {
                 // reaching last element of the current columns ( Lower diameter element)
                 if (i == n - 2) {
                     // reaching zeros ; no more terms
-                    if (temp.compareTo(new BigDecimal(0))==0)
+                    if (temp.compareTo(new BigDecimal(0)) == 0)
                         break;
                     // add the current element to result
                     res.add(temp);
@@ -459,7 +463,7 @@ public abstract class Interpolation {
                 // get the temporary value of xi+1 - xi
                 BigDecimal temp = (xp.get(i + 1).subtract(xp.get(i)));
                 // if the temporary value do not equal h => the step is invalid
-                if (temp.compareTo(h)!=0) {
+                if (temp.compareTo(h) != 0) {
                     throw new ArithmeticException("step h is not static");
                 }
             }
@@ -527,7 +531,7 @@ public abstract class Interpolation {
                 // get the temporary value of xi+1 - xi
                 BigDecimal temp = (xp.get(i + 1).subtract(xp.get(i)));
                 // if the temporary value do not equal h => the step is invalid
-                if (temp.compareTo(h)!=0) {
+                if (temp.compareTo(h) != 0) {
                     throw new ArithmeticException("step h is not static");
                 }
             }
@@ -536,7 +540,7 @@ public abstract class Interpolation {
             //Getting Newton Gregory Backward Table values (Lower diameter values)
             ArrayList<BigDecimal> dfn = getLDV(func);
             // if yn != 0
-            if (dfn.get(0).compareTo(new BigDecimal(0))!=0) {
+            if (dfn.get(0).compareTo(new BigDecimal(0)) != 0) {
                 // Adding yn with formatted string value ; if y0 = 1.0 => append 1
                 sb.append(dfn.get(0).stripTrailingZeros());
             }
@@ -557,7 +561,7 @@ public abstract class Interpolation {
                 // init a temporary value with the answer of dividing dfn on n!
                 BigDecimal temp = dfn.get(i).multiply(new BigDecimal(1).divide(factorial, Accuracy.getValue(), RoundingMode.HALF_UP));
                 //reaching zeros
-                if (temp.compareTo(new BigDecimal(0))==0)
+                if (temp.compareTo(new BigDecimal(0)) == 0)
                     break;
                     // if it is the start of the result , do not append ' + '
                 else if (!sb.isEmpty())
@@ -634,7 +638,7 @@ public abstract class Interpolation {
                 // reaching the start of the column c
                 if (i == 0) {
                     // reaching zeros ; no more terms => end while -> return result
-                    if (temp.compareTo(new BigDecimal(0))==0)
+                    if (temp.compareTo(new BigDecimal(0)) == 0)
                         break;
                     // add this value to result
                     res.add(temp);
@@ -795,7 +799,7 @@ public abstract class Interpolation {
                 // reaching the end of the column c
                 if (i == n - 2) {
                     // reaching zeros ; no more terms => end while -> return result
-                    if (temp.compareTo(new BigDecimal(0))==0)
+                    if (temp.compareTo(new BigDecimal(0)) == 0)
                         break;
                     // add this value to result
                     res.add(temp);
