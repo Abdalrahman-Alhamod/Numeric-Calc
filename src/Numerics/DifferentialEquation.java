@@ -58,7 +58,7 @@ public class DifferentialEquation {
                 yi1 = yi.add(eq.getValueAt(xi, yi).multiply(h));
                 //System.out.println("yi+1 = " + yi1);
                 // update xi
-                xi = x.add(h);
+                xi = xi.add(h);
                 // update yi
                 yi = yi1;
             }
