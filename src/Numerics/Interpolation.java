@@ -147,7 +147,7 @@ public abstract class Interpolation {
                 scalar = scalar.multiply(yp.get(i));
                 // if scalar = 1.0 don't append it => don't make (1.0 x +..) do (x + ...)
                 if (scalar.compareTo(new BigDecimal(1))!=0) {
-                    sb.append(scalar);
+                    sb.append(scalar.stripTrailingZeros());
                     sb.append(" ");
                 }
                 for (int j = 0; j < xp.size(); j++) {
@@ -333,7 +333,7 @@ public abstract class Interpolation {
             // if the y0 != 0
             if (df0.get(0).compareTo(new BigDecimal(0))!=0) {
                 // Adding f0 with formatted string value ; if y0 = 1.0 => append 1
-                sb.append(df0.get(0));
+                sb.append(df0.get(0).stripTrailingZeros());
             }
             // Creating P Polynomial with a0 = -x0 and a1 = 1 ; x - x0
             Polynomial P = new Polynomial(xp.get(0).multiply(new BigDecimal(-1)), new BigDecimal(1));
@@ -358,7 +358,7 @@ public abstract class Interpolation {
                 else if (!sb.isEmpty())
                     sb.append(" + ");
                 // append the temporary value to result ; df0/n!
-                sb.append(temp);
+                sb.append(temp.stripTrailingZeros());
                 // append P with practices ; (x-x0/h)
                 sb.append(" ");
                 sb.append('(');
@@ -538,7 +538,7 @@ public abstract class Interpolation {
             // if yn != 0
             if (dfn.get(0).compareTo(new BigDecimal(0))!=0) {
                 // Adding yn with formatted string value ; if y0 = 1.0 => append 1
-                sb.append(dfn.get(0));
+                sb.append(dfn.get(0).stripTrailingZeros());
             }
             // Creating S Polynomial with a0 = -xn and a1 = 1 ; x - xn
             Polynomial S = new Polynomial(xp.get(xp.size() - 1).multiply(new BigDecimal(-1)), new BigDecimal(1));
@@ -563,7 +563,7 @@ public abstract class Interpolation {
                 else if (!sb.isEmpty())
                     sb.append(" + ");
                 // append the temporary value to result ; dfn/n!
-                sb.append(temp);
+                sb.append(temp.stripTrailingZeros());
                 // append S with practices ; (x-xn/h)
                 sb.append(" ");
                 sb.append('(');
@@ -719,7 +719,7 @@ public abstract class Interpolation {
             // the answer of interpolation by Newton Divides Forward
             StringBuilder sb = new StringBuilder();
             // append y0 to answer
-            sb.append(f0.get(0));
+            sb.append(f0.get(0).stripTrailingZeros());
             for (int i = 1; i <= degree; i++) {
                 // reaching zeros
                 if (i >= f0.size())
@@ -727,7 +727,7 @@ public abstract class Interpolation {
                 // append ' + ' to make .. + ..
                 sb.append(" + ");
                 // append f0i to answer
-                sb.append(f0.get(i));
+                sb.append(f0.get(i).stripTrailingZeros());
                 sb.append(" ");
                 for (int j = 0; j < i; j++) {
                     //init the current poly with the values
@@ -880,7 +880,7 @@ public abstract class Interpolation {
             // the answer of interpolation by Newton Divides Forward
             StringBuilder sb = new StringBuilder();
             // append yn to answer
-            sb.append(fn.get(0));
+            sb.append(fn.get(0).stripTrailingZeros());
             for (int i = 1; i <= degree; i++) {
                 // reaching zeros
                 if (i >= fn.size())
@@ -888,7 +888,7 @@ public abstract class Interpolation {
                 // append ' + ' to make .. + ..
                 sb.append(" + ");
                 // append fni to answer
-                sb.append(fn.get(i));
+                sb.append(fn.get(i).stripTrailingZeros());
                 sb.append(" ");
                 for (int j = 0; j < i; j++) {
                     //init the current poly with the values

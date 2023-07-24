@@ -86,9 +86,9 @@ public class Polynomial implements Function {
             if (coeff.compareTo(new BigDecimal(0)) != 0) { // If the coefficient is nonzero
                 if (i == 0) { // If the term is the constant term
                     if (sb.isEmpty()) {
-                        sb.append(coeff); // Append the coefficient
+                        sb.append(coeff.stripTrailingZeros()); // Append the coefficient
                     } else {
-                        sb.append(coeff.abs()); // Append the coefficient
+                        sb.append(coeff.abs().stripTrailingZeros()); // Append the coefficient
                     }
                 } else if (i == 1) { // If the term is the linear term
                     if (sb.isEmpty()) {
@@ -97,13 +97,13 @@ public class Polynomial implements Function {
                         } else if (coeff.compareTo(new BigDecimal(-1)) == 0) {
                             sb.append("-x");
                         } else { // If the coefficient is not 1 or -1
-                            sb.append(coeff).append(" ").append("x"); // Append the coefficient, variable symbol, and exponent
+                            sb.append(coeff.stripTrailingZeros()).append(" ").append("x"); // Append the coefficient, variable symbol, and exponent
                         }
                     } else {
                         if (coeff.compareTo(new BigDecimal(1)) == 0 || coeff.compareTo(new BigDecimal(-1)) == 0) { // If the coefficient is 1 or -1
                             sb.append("x"); // Append the variable symbol
                         } else { // If the coefficient is not 1 or -1
-                            sb.append(coeff.abs()).append(" ").append("x"); // Append the coefficient and variable symbol
+                            sb.append(coeff.abs().stripTrailingZeros()).append(" ").append("x"); // Append the coefficient and variable symbol
                         }
                     }
                 } else { // If the term is a higher-order term
@@ -113,13 +113,13 @@ public class Polynomial implements Function {
                         } else if (coeff.compareTo(new BigDecimal(-1)) == 0) {
                             sb.append("-x^").append(i);
                         } else { // If the coefficient is not 1 or -1
-                            sb.append(coeff).append(" ").append("x^").append(i); // Append the coefficient, variable symbol, and exponent
+                            sb.append(coeff.stripTrailingZeros()).append(" ").append("x^").append(i); // Append the coefficient, variable symbol, and exponent
                         }
                     } else {
                         if (coeff.compareTo(new BigDecimal(1)) == 0) { // If the coefficient is 1 or -1
                             sb.append("x^").append(i); // Append the variable symbol and exponent
                         } else { // If the coefficient is not 1 or -1
-                            sb.append(coeff.abs()).append(" ").append("x^").append(i); // Append the coefficient, variable symbol, and exponent
+                            sb.append(coeff.abs().stripTrailingZeros()).append(" ").append("x^").append(i); // Append the coefficient, variable symbol, and exponent
                         }
                     }
                 }

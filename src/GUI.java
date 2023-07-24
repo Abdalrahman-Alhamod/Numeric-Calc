@@ -1416,7 +1416,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea polyAns = new JTextArea();
                     polyAns.append("Answer : ");
-                    polyAns.append(String.valueOf(ans));
+                    polyAns.append(String.valueOf(ans.stripTrailingZeros()));
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
@@ -1464,7 +1464,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea polyAns = new JTextArea();
                     polyAns.append("Answer : ");
-                    polyAns.append(String.valueOf(ans));
+                    polyAns.append(String.valueOf(ans.stripTrailingZeros()));
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
@@ -1512,7 +1512,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea polyAns = new JTextArea();
                     polyAns.append("Answer : ");
-                    polyAns.append(String.valueOf(ans));
+                    polyAns.append(String.valueOf(ans.stripTrailingZeros()));
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
@@ -1560,7 +1560,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea polyAns = new JTextArea();
                     polyAns.append("Answer : ");
-                    polyAns.append(String.valueOf(ans));
+                    polyAns.append(String.valueOf(ans.stripTrailingZeros()));
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
@@ -1608,7 +1608,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea polyAns = new JTextArea();
                     polyAns.append("Answer : ");
-                    polyAns.append(String.valueOf(ans));
+                    polyAns.append(String.valueOf(ans.stripTrailingZeros()));
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
@@ -2039,7 +2039,7 @@ public class GUI {
 
                     JTextArea polyAns = new JTextArea();
                     polyAns.append("Answer : ");
-                    polyAns.append(String.valueOf(ans));
+                    polyAns.append(String.valueOf(ans.stripTrailingZeros()));
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     polyAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(polyAns);
@@ -2188,7 +2188,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
                     difeqAns.append("Answer : ");
-                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.append(String.valueOf(ans.stripTrailingZeros()));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
@@ -2446,7 +2446,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
                     difeqAns.append("Answer : ");
-                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.append(String.valueOf(ans.stripTrailingZeros()));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
@@ -2577,7 +2577,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
                     difeqAns.append("Answer : ");
-                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.append(String.valueOf(ans.stripTrailingZeros()));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
@@ -2709,7 +2709,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
                     difeqAns.append("Answer : ");
-                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.append(String.valueOf(ans.stripTrailingZeros()));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
@@ -2840,7 +2840,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
                     difeqAns.append("Answer : ");
-                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.append(String.valueOf(ans.stripTrailingZeros()));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
@@ -2971,7 +2971,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
                     difeqAns.append("Answer : ");
-                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.append(String.valueOf(ans.stripTrailingZeros()));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
@@ -3112,7 +3112,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
                     difeqAns.append("Answer : ");
-                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.append(String.valueOf(ans.stripTrailingZeros()));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
@@ -3233,7 +3233,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
                     difeqAns.append("Answer : ");
-                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.append(String.valueOf(ans.stripTrailingZeros()));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
@@ -3354,7 +3354,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
                     difeqAns.append("Answer : ");
-                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.append(String.valueOf(ans.stripTrailingZeros()));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
@@ -3478,7 +3478,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
                     difeqAns.append("Answer : ");
-                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.append(String.valueOf(ans.stripTrailingZeros()));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
@@ -3612,7 +3612,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
                     difeqAns.append("Answer : ");
-                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.append(String.valueOf(ans.stripTrailingZeros()));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
@@ -3725,7 +3725,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
                     difeqAns.append("Answer : ");
-                    difeqAns.append(String.valueOf(ans));
+                    difeqAns.append(String.valueOf(ans.stripTrailingZeros()));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
                     JScrollPane polyAnsScrollPane = new JScrollPane(difeqAns);
@@ -3999,7 +3999,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea solAns = new JTextArea();
                     solAns.append("Answer : ");
-                    solAns.append(String.valueOf(ans));
+                    solAns.append(String.valueOf(ans.stripTrailingZeros()));
                     solAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     solAns.setEditable(false);
                     JScrollPane solAnsScrollPane = new JScrollPane(solAns);
@@ -4259,7 +4259,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea solAns = new JTextArea();
                     solAns.append("P(x) : ");
-                    solAns.append(String.valueOf(ans));
+                    solAns.append(ans.toString());
                     solAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     solAns.setEditable(false);
                     JScrollPane solAnsScrollPane = new JScrollPane(solAns);
@@ -4540,7 +4540,7 @@ public class GUI {
                     //create ans scrolled
                     JTextArea solAns = new JTextArea();
                     solAns.append("Ans : ");
-                    solAns.append(String.valueOf(ans));
+                    solAns.append(String.valueOf(ans.stripTrailingZeros()));
                     solAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     solAns.setEditable(false);
                     JScrollPane solAnsScrollPane = new JScrollPane(solAns);
@@ -4723,7 +4723,7 @@ public class GUI {
                     ArrayList<BigDecimal> yp = pointsFunc.getYp();
                     pointsText.setText("");
                     for (int i = 0; i < xp.size(); i++) {
-                        String sb = "x" + i + " = " + xp.get(i) + '\t' + "y" + i + " = " + yp.get(i);
+                        String sb = "x" + i + " = " + xp.get(i).stripTrailingZeros() + '\t' + "y" + i + " = " + yp.get(i).stripTrailingZeros();
                         pointsText.append(sb);
                         pointsText.append("\n");
                     }
@@ -4968,7 +4968,7 @@ public class GUI {
                     PointsFunction pointsFunc = new PointsFunction(xp, yp);
                     pointsText.setText("");
                     for (int i = 0; i < xp.size(); i++) {
-                        String sb = "x" + i + " = " + xp.get(i) + '\t' + "y" + i + " = " + yp.get(i);
+                        String sb = "x" + i + " = " + xp.get(i).stripTrailingZeros() + '\t' + "y" + i + " = " + yp.get(i).stripTrailingZeros();
                         pointsText.append(sb);
                         pointsText.append("\n");
                     }
@@ -5239,7 +5239,7 @@ public class GUI {
                     ArrayList<BigDecimal> yp = ptsFunc.getYp();
                     pointsText.setText("");
                     for (int i = 0; i < xp.size(); i++) {
-                        String sb = "x" + i + " = " + xp.get(i) + '\t' + "y" + i + " = " + yp.get(i);
+                        String sb = "x" + i + " = " + xp.get(i).stripTrailingZeros() + '\t' + "y" + i + " = " + yp.get(i).stripTrailingZeros();
                         pointsText.append(sb);
                         pointsText.append("\n");
                     }
@@ -5480,7 +5480,7 @@ public class GUI {
                     ArrayList<BigDecimal> yp = points.get(1);
                     pointsText.setText("");
                     for (int i = 0; i < xp.size(); i++) {
-                        String sb = "x" + (i + 1) + " = " + xp.get(i) + '\t' + "y" + (i + 1) + " = " + yp.get(i);
+                        String sb = "x" + (i + 1) + " = " + xp.get(i).stripTrailingZeros() + '\t' + "y" + (i + 1) + " = " + yp.get(i).stripTrailingZeros();
                         pointsText.append(sb);
                         pointsText.append("\n");
                     }
