@@ -129,7 +129,7 @@ public class Polynomial implements Function {
                 coeff1 = coeffs.get(i - 1); // Get the prev coefficient
             //if (i > 0 && coeff1 != 0) {  //If there are more terms
             if (i > 0)
-                if (coeff1.compareTo(new BigDecimal(0)) > 0)
+                if (coeff1.compareTo(new BigDecimal(0)) > 0 && !sb.isEmpty())
                     sb.append(" + ");  // Append the addition operator with spacing
                 else if (coeff1.compareTo(new BigDecimal(0)) < 0)
                     sb.append(" - ");
