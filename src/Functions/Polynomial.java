@@ -83,7 +83,7 @@ public class Polynomial implements Function {
         int n = coeffs.size() - 1; // Get the degree of the polynomial (the size of the coefficient ArrayList minus one)
         for (int i = n; i >= 0; i--) { // Loop over each coefficient from the constant term to the highest-order term
             BigDecimal coeff = coeffs.get(i); // Get the current coefficient
-            if (!coeff.equals(new BigDecimal(0))) { // If the coefficient is nonzero
+            if (coeff.compareTo(new BigDecimal(0)) != 0) { // If the coefficient is nonzero
                 if (i == 0) { // If the term is the constant term
                     if (sb.isEmpty()) {
                         sb.append(coeff); // Append the coefficient
@@ -92,15 +92,15 @@ public class Polynomial implements Function {
                     }
                 } else if (i == 1) { // If the term is the linear term
                     if (sb.isEmpty()) {
-                        if (coeff.equals(new BigDecimal(1))) { // If the coefficient is 1 or -1
+                        if (coeff.compareTo(new BigDecimal(1)) == 0) { // If the coefficient is 1 or -1
                             sb.append("x"); // Append the variable symbol and exponent
-                        } else if (coeff.equals(new BigDecimal(-1))) {
+                        } else if (coeff.compareTo(new BigDecimal(-1)) == 0) {
                             sb.append("-x");
                         } else { // If the coefficient is not 1 or -1
                             sb.append(coeff).append(" ").append("x"); // Append the coefficient, variable symbol, and exponent
                         }
                     } else {
-                        if (coeff.equals(new BigDecimal(1)) || coeff.equals(new BigDecimal(-1))) { // If the coefficient is 1 or -1
+                        if (coeff.compareTo(new BigDecimal(1)) == 0 || coeff.compareTo(new BigDecimal(-1)) == 0) { // If the coefficient is 1 or -1
                             sb.append("x"); // Append the variable symbol
                         } else { // If the coefficient is not 1 or -1
                             sb.append(coeff.abs()).append(" ").append("x"); // Append the coefficient and variable symbol
@@ -108,15 +108,15 @@ public class Polynomial implements Function {
                     }
                 } else { // If the term is a higher-order term
                     if (sb.isEmpty()) {
-                        if (coeff.equals(new BigDecimal(1))) { // If the coefficient is 1 or -1
+                        if (coeff.compareTo(new BigDecimal(1)) == 0) { // If the coefficient is 1 or -1
                             sb.append("x^").append(i); // Append the variable symbol and exponent
-                        } else if (coeff.equals(new BigDecimal(-1))) {
+                        } else if (coeff.compareTo(new BigDecimal(-1)) == 0) {
                             sb.append("-x^").append(i);
                         } else { // If the coefficient is not 1 or -1
                             sb.append(coeff).append(" ").append("x^").append(i); // Append the coefficient, variable symbol, and exponent
                         }
                     } else {
-                        if (coeff.equals(new BigDecimal(1))) { // If the coefficient is 1 or -1
+                        if (coeff.compareTo(new BigDecimal(1)) == 0) { // If the coefficient is 1 or -1
                             sb.append("x^").append(i); // Append the variable symbol and exponent
                         } else { // If the coefficient is not 1 or -1
                             sb.append(coeff.abs()).append(" ").append("x^").append(i); // Append the coefficient, variable symbol, and exponent

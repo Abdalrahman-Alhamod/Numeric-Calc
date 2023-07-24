@@ -352,7 +352,7 @@ public class Matrix {
             if (lead >= colCount)
                 break;
             int i = r;
-            while (a.get(i).get(lead).equals(new BigDecimal(0))) {
+            while (a.get(i).get(lead).compareTo(new BigDecimal(0)) == 0) {
                 i++;
                 if (i == rowCount) {
                     i = r;

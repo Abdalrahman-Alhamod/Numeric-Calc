@@ -53,7 +53,7 @@ public class DifferentialEquation {
         public static BigDecimal solve(DifferentialEquation eq, BigDecimal x0, BigDecimal y0, BigDecimal h, BigDecimal x) {
             // init yi = y0 , xi = x0,  yi+1 = 0
             BigDecimal yi = new BigDecimal(y0.toString()), xi = new BigDecimal(x0.toString()), yi1 = new BigDecimal(0);
-            while (!xi.equals(x)) {//if current value xi != x => continue
+            while (xi.compareTo(x) != 0) {//if current value xi != x => continue
                 // get yi+1 = yi + yi' * h
                 yi1 = yi.add(eq.getValueAt(xi, yi).multiply(h));
                 //System.out.println("yi+1 = " + yi1);
@@ -83,7 +83,7 @@ public class DifferentialEquation {
         public static BigDecimal solve(ArrayList<DifferentialEquation> eqs, BigDecimal x0, BigDecimal y0, BigDecimal h, BigDecimal x) {
             // init yi = y0 , xi = x0,  yi+1 = 0
             BigDecimal yi = new BigDecimal(y0.toString()), xi = new BigDecimal(x0.toString()), yi1 = new BigDecimal(0);
-            while (!xi.equals(x)) {//if current value xi != x => continue
+            while (xi.compareTo(x) != 0) {//if current value xi != x => continue
                 // init factorial = 1, sum = yi
                 BigDecimal factor = new BigDecimal(1), sum = yi;
                 for (int i = 0; i < eqs.size(); i++) {// for every Differential Equation
@@ -129,7 +129,7 @@ public class DifferentialEquation {
             BigDecimal p = new BigDecimal(1).divide(a2.multiply(new BigDecimal(2)), Accuracy.getValue(), RoundingMode.HALF_UP), q = new BigDecimal(1).divide(a2.multiply(new BigDecimal(2)), Accuracy.getValue(), RoundingMode.HALF_UP);
             // init yi = y0 , xi = x0,  yi+1 = 0
             BigDecimal yi = new BigDecimal(y0.toString()), xi = new BigDecimal(x0.toString()), yi1 = new BigDecimal(0);
-            while (!xi.equals(x)) {
+            while (xi.compareTo(x) != 0) {
                 // update k1 = f(xi,yi)
                 BigDecimal k1 = eq.getValueAt(xi, yi);
                 //System.out.println("k1 = " + k1);
@@ -226,7 +226,7 @@ public class DifferentialEquation {
         public static BigDecimal solve(DifferentialEquation eq, BigDecimal x0, BigDecimal y0, BigDecimal h, BigDecimal x) {
             // init yi = y0 , xi = x0,  yi+1 = 0
             BigDecimal yi = new BigDecimal(y0.toString()), xi = new BigDecimal(x0.toString()), yi1 = new BigDecimal(0);
-            while (!xi.equals(x)) {
+            while (xi.compareTo(x) != 0) {
                 // update k1 = f(xi,yi)
                 BigDecimal k1 = eq.getValueAt(xi, yi);
 

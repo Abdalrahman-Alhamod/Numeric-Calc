@@ -122,7 +122,7 @@ public abstract class Differentiation {
                 // reaching first element of the current columns ( upper diameter element)
                 if (i == 0) {
                     // reaching zeros ; no more terms
-                    if (temp.equals(new BigDecimal(0)))
+                    if (temp.compareTo(new BigDecimal(0))==0)
                         break;
                     // add the current element to result
                     res.add(temp);
@@ -167,7 +167,7 @@ public abstract class Differentiation {
                 // get the temporary value of xi+1 - xi
                 BigDecimal temp = (xp.get(i + 1).subtract(xp.get(i)));
                 // if the temporary value do not equal h => the step is invalid
-                if (!temp.equals(h)) {
+                if (temp.compareTo(h)!=0) {
                     throw new ArithmeticException("step h is not static");
                 }
             }
@@ -271,7 +271,7 @@ public abstract class Differentiation {
                 // reaching last element of the current columns ( Lower diameter element)
                 if (i == n - 2) {
                     // reaching zeros ; no more terms
-                    if (temp.equals(new BigDecimal(0)))
+                    if (temp.compareTo(new BigDecimal(0))!=0)
                         break;
                     // add the current element to result
                     res.add(temp);
@@ -317,7 +317,7 @@ public abstract class Differentiation {
                 // get the temporary value of xi+1 - xi
                 BigDecimal temp = (xp.get(i + 1).subtract(xp.get(i)));
                 // if the temporary value do not equal h => the step is invalid
-                if (!temp.equals(h)) {
+                if (temp.compareTo(h)!=0) {
                     throw new ArithmeticException("step h is not static");
                 }
             }
@@ -414,7 +414,7 @@ public abstract class Differentiation {
                     // get the temporary value of xi+1 - xi
                     BigDecimal temp = (xp.get(i + 1).subtract(xp.get(i)));
                     // if the temporary value do not equal h => the step is invalid
-                    if (!temp.equals(h)) {
+                    if (temp.compareTo(h)!=0) {
                         throw new ArithmeticException("step h is not static");
                     }
                 }
@@ -461,7 +461,7 @@ public abstract class Differentiation {
                     // get the temporary value of xi+1 - xi
                     BigDecimal temp = (xp.get(i + 1).subtract(xp.get(i)));
                     // if the temporary value do not equal h => the step is invalid
-                    if (!temp.equals(h)) {
+                    if (temp.compareTo(h)!=0) {
                         throw new ArithmeticException("step h is not static");
                     }
                 }
@@ -506,7 +506,7 @@ public abstract class Differentiation {
                     // get the temporary value of xi+1 - xi
                     BigDecimal temp = (xp.get(i + 1).subtract(xp.get(i)));
                     // if the temporary value do not equal h => the step is invalid
-                    if (!temp.equals(h)) {
+                    if (temp.compareTo(h)!=0) {
                         throw new ArithmeticException("step h is not static");
                     }
                 }

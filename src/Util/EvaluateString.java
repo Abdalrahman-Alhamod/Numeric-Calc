@@ -295,7 +295,7 @@ public abstract class EvaluateString {
             case "*":
                 return a.multiply(b);
             case "/":
-                if (b.equals(new BigDecimal(0)))
+                if (b.compareTo(new BigDecimal(0))==0)
                     throw new UnsupportedOperationException("Cannot divide by zero");
                 return a.divide(b, RoundingMode.HALF_UP);
             case "log":

@@ -39,7 +39,7 @@ public abstract class NonLinearEquation {
                     a = c;
                     fa = fc;
                 }
-                if ((a.subtract(b)).abs().equals(new BigDecimal(0)))
+                if ((a.subtract(b)).abs().compareTo(new BigDecimal(0)) == 0)
                     break;
             }
             return c;
@@ -87,7 +87,7 @@ public abstract class NonLinearEquation {
                     a = c;
                     fa = fc;
                 }
-                if ((a.subtract(b)).abs().compareTo(e) < 0 || (a.subtract(b)).abs().equals(new BigDecimal(0)) || fc.equals(new BigDecimal(0)))
+                if ((a.subtract(b)).abs().compareTo(e) < 0 || (a.subtract(b)).abs().compareTo(new BigDecimal(0)) == 0 || fc.compareTo(new BigDecimal(0)) == 0)
                     break;
             }
             return c;
@@ -128,7 +128,7 @@ public abstract class NonLinearEquation {
                 //System.out.println("xi-1 : " + xi_1 + " xi : " + xi + " xi+1 : " + xi1);
                 BigDecimal fxi1 = fx.getValueAt(xi1);
                 //System.out.println("f(xi-1) : " + fxi_1 + " f(xi) : " + fxi + " f(xi+1) : " + fxi1);
-                if ((xi1.subtract(xi)).abs().compareTo(e) < 0 || (xi1.subtract(xi)).abs().equals(new BigDecimal(0)) || fxi1.equals(new BigDecimal(0)))
+                if ((xi1.subtract(xi)).abs().compareTo(e) < 0 || (xi1.subtract(xi)).abs().compareTo(new BigDecimal(0)) == 0 || fxi1.compareTo(new BigDecimal(0)) == 0)
                     break;
                 xi_1 = xi;
                 fxi_1 = fxi;
@@ -171,7 +171,7 @@ public abstract class NonLinearEquation {
             while (true) {
                 xi1 = xi.subtract(fxi.divide(dfxi, Accuracy.getValue(), RoundingMode.HALF_UP));
                 BigDecimal fxi1 = fx.getValueAt(xi1);
-                if ((xi1.subtract(xi)).abs().compareTo(e) < 0 || (xi1.subtract(xi)).abs().equals(new BigDecimal(0)) || fxi1.equals(new BigDecimal(0)))
+                if ((xi1.subtract(xi)).abs().compareTo(e) < 0 || (xi1.subtract(xi)).abs().compareTo(new BigDecimal(0)) == 0 || fxi1.compareTo(new BigDecimal(0)) == 0)
                     break;
                 BigDecimal dfxi1 = dfx.getValueAt(xi1);
                 xi = xi1;
@@ -266,7 +266,7 @@ public abstract class NonLinearEquation {
                 );
                 //System.out.println(" xi : " + xi + " xi+1 : " + xi1);
                 BigDecimal fxi1 = fx.getValueAt(xi1);
-                if ((xi1.subtract(xi)).abs().compareTo(e) < 0 || (xi1.subtract(xi)).abs().equals(new BigDecimal(0)) || fxi1.equals(new BigDecimal(0)))
+                if ((xi1.subtract(xi)).abs().compareTo(e) < 0 || (xi1.subtract(xi)).abs().compareTo(new BigDecimal(0)) == 0 || fxi1.compareTo(new BigDecimal(0)) == 0)
                     break;
                 BigDecimal dfxi1 = dfx.getValueAt(xi1), d2fxi1 = d2fx.getValueAt(xi1);
                 //System.out.println("f(xi+1) : "+fxi1+" f'(xi+1) : "+dfxi1+" f''(xi+1) : "+d2fxi1);
@@ -300,7 +300,7 @@ public abstract class NonLinearEquation {
                 //System.out.println(" xi : " + xi + " xi+1 : " + xi1);
                 BigDecimal gxi1 = gx.getValueAt(xi1);
                 //System.out.println("g(xi) : " + xi);
-                if ((xi1.subtract(xi)).abs().compareTo(e) < 0 || (xi1.subtract(xi)).equals(new BigDecimal(0)) || gxi1.equals(new BigDecimal(0)))
+                if ((xi1.subtract(xi)).abs().compareTo(e) < 0 || (xi1.subtract(xi)).compareTo(new BigDecimal(0)) == 0 || gxi1.compareTo(new BigDecimal(0)) == 0)
                     break;
                 xi = xi1;
                 gxi = gxi1;
