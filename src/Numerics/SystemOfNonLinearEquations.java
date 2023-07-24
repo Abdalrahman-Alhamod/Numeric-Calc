@@ -1,7 +1,10 @@
 package Numerics;
 
 import Functions.ExpressionFunction;
+import Util.Accuracy;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 /**
@@ -26,33 +29,58 @@ public abstract class SystemOfNonLinearEquations {
          * @param iterations The number of iterations to perform.
          * @return A list of lists containing the values of x and y at each iteration.
          */
-        public static ArrayList<ArrayList<Double>> solve(ExpressionFunction fx, ExpressionFunction dfdx, ExpressionFunction dfdy, ExpressionFunction gx, ExpressionFunction dgdx, ExpressionFunction dgdy, double x0, double y0, int iterations) {
-            double xi = x0, yi = y0;
-            ArrayList<Double> xip = new ArrayList<>();
-            ArrayList<Double> yip = new ArrayList<>();
+        public static ArrayList<ArrayList<BigDecimal>> solve(ExpressionFunction fx, ExpressionFunction dfdx, ExpressionFunction dfdy, ExpressionFunction gx, ExpressionFunction dgdx, ExpressionFunction dgdy, BigDecimal x0, BigDecimal y0, int iterations) {
+            BigDecimal xi = x0, yi = y0;
+            ArrayList<BigDecimal> xip = new ArrayList<>();
+            ArrayList<BigDecimal> yip = new ArrayList<>();
             while (iterations > 0) {
 
-                double fx_xi_yi = fx.getValueAt(xi, yi), gx_xi_yi = gx.getValueAt(xi, yi);
+                BigDecimal fx_xi_yi = fx.getValueAt(xi, yi), gx_xi_yi = gx.getValueAt(xi, yi);
                 //System.out.println("f(xi,yi) : " + fx_xi_yi + " g(xi,yi) : " + gx_xi_yi);
 
-                double dfdx_xi_yi = dfdx.getValueAt(xi, yi), dfdy_xi_yi = dfdy.getValueAt(xi, yi);
+                BigDecimal dfdx_xi_yi = dfdx.getValueAt(xi, yi), dfdy_xi_yi = dfdy.getValueAt(xi, yi);
                 //System.out.println("df(xi,yi)/dx : " + dfdx_xi_yi + " df(xi,yi)/dy : " + dfdy_xi_yi);
 
-                double dgdx_xi_yi = dgdx.getValueAt(xi, yi), dgdy_xi_yi = dgdy.getValueAt(xi, yi);
+                BigDecimal dgdx_xi_yi = dgdx.getValueAt(xi, yi), dgdy_xi_yi = dgdy.getValueAt(xi, yi);
                 //System.out.println("dg(xi,yi)/dx : " + dgdx_xi_yi + " dg(xi,yi)/dy : " + dgdy_xi_yi);
 
-                double j = (dfdx_xi_yi * dgdy_xi_yi) - (dgdx_xi_yi * dfdy_xi_yi);
+                BigDecimal j = (dfdx_xi_yi.multiply(dgdy_xi_yi)).subtract(dgdx_xi_yi.multiply(dfdy_xi_yi));
                 //System.out.println("j : " + j);
 
-                double xi1 = xi - (1 / j) * ((fx_xi_yi * dgdy_xi_yi) - (gx_xi_yi * dfdy_xi_yi));
-                //Rounding value back to fix floating-point precision errors
-                xi1 = Math.round(xi1 * 1e10) / 1e10;
+                BigDecimal xi1 = xi.subtract(
+                        new BigDecimal(1).divide(
+                                j
+                                , Accuracy.getValue(), RoundingMode.HALF_UP)
+                ).multiply(
+                        (
+                                fx_xi_yi.multiply(
+                                        dgdy_xi_yi
+                                )
+                        ).subtract(
+                                gx_xi_yi.multiply(
+                                        dfdy_xi_yi
+                                )
+                        )
+                );
                 //System.out.println("xi+1 : " + xi1);
                 xip.add(xi1);
 
-                double yi1 = yi + (1 / j) * ((fx_xi_yi * dgdx_xi_yi) - (gx_xi_yi * dfdx_xi_yi));
-                //Rounding value back to fix floating-point precision errors
-                yi1 = Math.round(yi1 * 1e10) / 1e10;
+                BigDecimal yi1 = yi.add(
+                        new BigDecimal(1).divide(
+                                j
+                                , Accuracy.getValue(), RoundingMode.HALF_UP
+                        )
+                ).multiply(
+                        (
+                                fx_xi_yi.multiply(
+                                        dgdx_xi_yi
+                                )
+                        ).subtract(
+                                gx_xi_yi.multiply(
+                                        dfdx_xi_yi
+                                )
+                        )
+                );
                 ///System.out.println("yi+1 : " + yi1);
                 yip.add(yi1);
 
@@ -62,7 +90,7 @@ public abstract class SystemOfNonLinearEquations {
                 iterations--;
 
             }
-            ArrayList<ArrayList<Double>> xy = new ArrayList<>();
+            ArrayList<ArrayList<BigDecimal>> xy = new ArrayList<>();
             xy.add(xip);
             xy.add(yip);
             return xy;
