@@ -404,7 +404,10 @@ public class Matrix {
             ArrayList<BigDecimal> v = new ArrayList<>();
             BigDecimal x = xp.get(i);
             for (int j = 0; j < xp.size(); j++) {
-                v.add(BigDecimalUtil.pow(x, new BigDecimal(j)));
+                if (x.compareTo(new BigDecimal(0)) != 0)
+                    v.add(BigDecimalUtil.pow(x, new BigDecimal(j)));
+                else
+                    v.add(new BigDecimal(0));
             }
             a.add(v);
         }
