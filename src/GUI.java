@@ -12,6 +12,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -768,7 +769,7 @@ public class GUI {
                     JOptionPane.showOptionDialog(null, enterDegree, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
                     if (cancelPressed[0]) return;
 
-                    ArrayList<Double> values = Interpolation.Newton_GregoryForwardSubtractions.getUDV(function);
+                    ArrayList<BigDecimal> values = Interpolation.Newton_GregoryForwardSubtractions.getUDV(function);
 
                     //create table values title
                     JLabel tableTitle = new JLabel();
@@ -897,7 +898,7 @@ public class GUI {
                     if (cancelPressed[0]) return;
 
 
-                    ArrayList<Double> values = Interpolation.Newton_GregoryBackwardSubtractions.getLDV(function);
+                    ArrayList<BigDecimal> values = Interpolation.Newton_GregoryBackwardSubtractions.getLDV(function);
 
                     //create table values title
                     JLabel tableTitle = new JLabel();
@@ -1026,7 +1027,7 @@ public class GUI {
                     if (cancelPressed[0]) return;
 
 
-                    ArrayList<Double> values = Interpolation.NewtonForwardDividedSubtractions.getUDV(function);
+                    ArrayList<BigDecimal> values = Interpolation.NewtonForwardDividedSubtractions.getUDV(function);
 
                     //create table values title
                     JLabel tableTitle = new JLabel();
@@ -1156,7 +1157,7 @@ public class GUI {
                     if (cancelPressed[0]) return;
 
 
-                    ArrayList<Double> values = Interpolation.NewtonBackwardDividedSubtractions.getLDV(function);
+                    ArrayList<BigDecimal> values = Interpolation.NewtonBackwardDividedSubtractions.getLDV(function);
 
                     //create table values title
                     JLabel tableTitle = new JLabel();
@@ -1402,10 +1403,10 @@ public class GUI {
             doAction = pointsFunction -> {
                 try {
 
-                    double a = function.getXp().get(0);
-                    double b = function.getXp().get(function.getXp().size() - 1);
-                    double n = function.getXp().size() - 1;
-                    double ans = Integral.getRect(function, a, b, n);
+                    BigDecimal a = function.getXp().get(0);
+                    BigDecimal b = function.getXp().get(function.getXp().size() - 1);
+                    int n = function.getXp().size() - 1;
+                    BigDecimal ans = Integral.getRect(function, a, b, n);
 
                     //create title
                     JLabel interTitle = new JLabel();
@@ -1450,10 +1451,10 @@ public class GUI {
             doAction = pointsFunction -> {
                 try {
 
-                    double a = function.getXp().get(0);
-                    double b = function.getXp().get(function.getXp().size() - 1);
-                    double n = function.getXp().size() - 1;
-                    double ans = Integral.getTraps(function, a, b, n);
+                    BigDecimal a = function.getXp().get(0);
+                    BigDecimal b = function.getXp().get(function.getXp().size() - 1);
+                    int n = function.getXp().size() - 1;
+                    BigDecimal ans = Integral.getTraps(function, a, b, n);
 
                     //create title
                     JLabel interTitle = new JLabel();
@@ -1498,10 +1499,10 @@ public class GUI {
             doAction = pointsFunction -> {
                 try {
 
-                    double a = function.getXp().get(0);
-                    double b = function.getXp().get(function.getXp().size() - 1);
-                    double n = function.getXp().size() - 1;
-                    double ans = Integral.getSimpson3(function, a, b, n);
+                    BigDecimal a = function.getXp().get(0);
+                    BigDecimal b = function.getXp().get(function.getXp().size() - 1);
+                    int n = function.getXp().size() - 1;
+                    BigDecimal ans = Integral.getSimpson3(function, a, b, n);
 
                     //create title
                     JLabel interTitle = new JLabel();
@@ -1546,10 +1547,10 @@ public class GUI {
             doAction = pointsFunction -> {
                 try {
 
-                    double a = function.getXp().get(0);
-                    double b = function.getXp().get(function.getXp().size() - 1);
-                    double n = function.getXp().size() - 1;
-                    double ans = Integral.getSimpson8(function, a, b, n);
+                    BigDecimal a = function.getXp().get(0);
+                    BigDecimal b = function.getXp().get(function.getXp().size() - 1);
+                    int n = function.getXp().size() - 1;
+                    BigDecimal ans = Integral.getSimpson8(function, a, b, n);
 
                     //create title
                     JLabel interTitle = new JLabel();
@@ -1594,10 +1595,10 @@ public class GUI {
             doAction = pointsFunction -> {
                 try {
 
-                    double a = function.getXp().get(0);
-                    double b = function.getXp().get(function.getXp().size() - 1);
-                    double n = function.getXp().size() - 1;
-                    double ans = Integral.getPaul(function, a, b, n);
+                    BigDecimal a = function.getXp().get(0);
+                    BigDecimal b = function.getXp().get(function.getXp().size() - 1);
+                    int n = function.getXp().size() - 1;
+                    BigDecimal ans = Integral.getPaul(function, a, b, n);
 
                     //create title
                     JLabel interTitle = new JLabel();
@@ -1998,7 +1999,7 @@ public class GUI {
                         optionDialog.dispose();
                     });
 
-                    final double[] x = {0};
+                    final BigDecimal[] x = {new BigDecimal(0)};
                     final String[] method = {""};
                     solveButton.addActionListener(solve -> {
                         Window optionDialog = SwingUtilities.getWindowAncestor(inputs);
@@ -2010,7 +2011,7 @@ public class GUI {
                     JOptionPane.showOptionDialog(null, inputs, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
                     if (cancelPressed[0]) return;
 
-                    double ans;
+                    BigDecimal ans;
 
                     switch (method[0]) {
                         case "Backward Subtractions": {
@@ -2172,12 +2173,12 @@ public class GUI {
                 optionDialog.dispose();
                 try {
                     String difeq = enterYField.getText();
-                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
-                    double y0 = EvaluateString.evaluate(enterY0Field.getText());
-                    double h = EvaluateString.evaluate(enterHField.getText());
-                    double x = EvaluateString.evaluate(enterXField.getText());
+                    BigDecimal x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    BigDecimal y0 = EvaluateString.evaluate(enterY0Field.getText());
+                    BigDecimal h = EvaluateString.evaluate(enterHField.getText());
+                    BigDecimal x = EvaluateString.evaluate(enterXField.getText());
                     DifferentialEquation eq = new DifferentialEquation(difeq);
-                    double ans = DifferentialEquation.Euler.solve(eq, x0, y0, h, x);
+                    BigDecimal ans = DifferentialEquation.Euler.solve(eq, x0, y0, h, x);
 
                     //create title
                     JLabel difeqTitle = new JLabel();
@@ -2431,11 +2432,11 @@ public class GUI {
                         DifferentialEquation eq = new DifferentialEquation(eqS);
                         eqs.add(eq);
                     }
-                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
-                    double y0 = EvaluateString.evaluate(enterY0Field.getText());
-                    double h = EvaluateString.evaluate(enterHField.getText());
-                    double x = EvaluateString.evaluate(enterXField.getText());
-                    double ans = DifferentialEquation.Taylor.solve(eqs, x0, y0, h, x);
+                    BigDecimal x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    BigDecimal y0 = EvaluateString.evaluate(enterY0Field.getText());
+                    BigDecimal h = EvaluateString.evaluate(enterHField.getText());
+                    BigDecimal x = EvaluateString.evaluate(enterXField.getText());
+                    BigDecimal ans = DifferentialEquation.Taylor.solve(eqs, x0, y0, h, x);
 
                     //create title
                     JLabel difeqTitle = new JLabel();
@@ -2561,12 +2562,12 @@ public class GUI {
                 optionDialog.dispose();
                 try {
                     String difeq = enterYField.getText();
-                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
-                    double y0 = EvaluateString.evaluate(enterY0Field.getText());
-                    double h = EvaluateString.evaluate(enterHField.getText());
-                    double x = EvaluateString.evaluate(enterXField.getText());
+                    BigDecimal x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    BigDecimal y0 = EvaluateString.evaluate(enterY0Field.getText());
+                    BigDecimal h = EvaluateString.evaluate(enterHField.getText());
+                    BigDecimal x = EvaluateString.evaluate(enterXField.getText());
                     DifferentialEquation eq = new DifferentialEquation(difeq);
-                    double ans = DifferentialEquation.MidPoint.ModifiedEuler.solve(eq, x0, y0, h, x);
+                    BigDecimal ans = DifferentialEquation.MidPoint.ModifiedEuler.solve(eq, x0, y0, h, x);
 
                     //create title
                     JLabel difeqTitle = new JLabel();
@@ -2693,12 +2694,12 @@ public class GUI {
                 optionDialog.dispose();
                 try {
                     String difeq = enterYField.getText();
-                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
-                    double y0 = EvaluateString.evaluate(enterY0Field.getText());
-                    double h = EvaluateString.evaluate(enterHField.getText());
-                    double x = EvaluateString.evaluate(enterXField.getText());
+                    BigDecimal x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    BigDecimal y0 = EvaluateString.evaluate(enterY0Field.getText());
+                    BigDecimal h = EvaluateString.evaluate(enterHField.getText());
+                    BigDecimal x = EvaluateString.evaluate(enterXField.getText());
                     DifferentialEquation eq = new DifferentialEquation(difeq);
-                    double ans = DifferentialEquation.MidPoint.Heun.solve(eq, x0, y0, h, x);
+                    BigDecimal ans = DifferentialEquation.MidPoint.Heun.solve(eq, x0, y0, h, x);
 
                     //create title
                     JLabel difeqTitle = new JLabel();
@@ -2824,12 +2825,12 @@ public class GUI {
                 optionDialog.dispose();
                 try {
                     String difeq = enterYField.getText();
-                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
-                    double y0 = EvaluateString.evaluate(enterY0Field.getText());
-                    double h = EvaluateString.evaluate(enterHField.getText());
-                    double x = EvaluateString.evaluate(enterXField.getText());
+                    BigDecimal x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    BigDecimal y0 = EvaluateString.evaluate(enterY0Field.getText());
+                    BigDecimal h = EvaluateString.evaluate(enterHField.getText());
+                    BigDecimal x = EvaluateString.evaluate(enterXField.getText());
                     DifferentialEquation eq = new DifferentialEquation(difeq);
-                    double ans = DifferentialEquation.MidPoint.Ralston.solve(eq, x0, y0, h, x);
+                    BigDecimal ans = DifferentialEquation.MidPoint.Ralston.solve(eq, x0, y0, h, x);
 
                     //create title
                     JLabel difeqTitle = new JLabel();
@@ -2955,12 +2956,12 @@ public class GUI {
                 optionDialog.dispose();
                 try {
                     String difeq = enterYField.getText();
-                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
-                    double y0 = EvaluateString.evaluate(enterY0Field.getText());
-                    double h = EvaluateString.evaluate(enterHField.getText());
-                    double x = EvaluateString.evaluate(enterXField.getText());
+                    BigDecimal x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    BigDecimal y0 = EvaluateString.evaluate(enterY0Field.getText());
+                    BigDecimal h = EvaluateString.evaluate(enterHField.getText());
+                    BigDecimal x = EvaluateString.evaluate(enterXField.getText());
                     DifferentialEquation eq = new DifferentialEquation(difeq);
-                    double ans = DifferentialEquation.Runge_Kutta.solve(eq, x0, y0, h, x);
+                    BigDecimal ans = DifferentialEquation.Runge_Kutta.solve(eq, x0, y0, h, x);
 
                     //create title
                     JLabel difeqTitle = new JLabel();
@@ -3097,11 +3098,11 @@ public class GUI {
                 optionDialog.dispose();
                 try {
                     String fx = enterFField.getText();
-                    double a = EvaluateString.evaluate(enterAField.getText());
-                    double b = EvaluateString.evaluate(enterBField.getText());
-                    double err = EvaluateString.evaluate(enterEField.getText());
+                    BigDecimal a = EvaluateString.evaluate(enterAField.getText());
+                    BigDecimal b = EvaluateString.evaluate(enterBField.getText());
+                    BigDecimal err = EvaluateString.evaluate(enterEField.getText());
                     ExpressionFunction func = new ExpressionFunction(fx);
-                    double ans = NonLinearEquation.Bisection.solve(func, a, b, err);
+                    BigDecimal ans = NonLinearEquation.Bisection.solve(func, a, b, err);
 
                     //create title
                     JLabel difeqTitle = new JLabel();
@@ -3218,11 +3219,11 @@ public class GUI {
                 optionDialog.dispose();
                 try {
                     String fx = enterFField.getText();
-                    double a = EvaluateString.evaluate(enterAField.getText());
-                    double b = EvaluateString.evaluate(enterBField.getText());
-                    double err = EvaluateString.evaluate(enterEField.getText());
+                    BigDecimal a = EvaluateString.evaluate(enterAField.getText());
+                    BigDecimal b = EvaluateString.evaluate(enterBField.getText());
+                    BigDecimal err = EvaluateString.evaluate(enterEField.getText());
                     ExpressionFunction func = new ExpressionFunction(fx);
-                    double ans = NonLinearEquation.FalsePosition.solve(func, a, b, err);
+                    BigDecimal ans = NonLinearEquation.FalsePosition.solve(func, a, b, err);
 
                     //create title
                     JLabel difeqTitle = new JLabel();
@@ -3339,11 +3340,11 @@ public class GUI {
                 optionDialog.dispose();
                 try {
                     String fx = enterFField.getText();
-                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
-                    double x1 = EvaluateString.evaluate(enterX1Field.getText());
-                    double err = EvaluateString.evaluate(enterEField.getText());
+                    BigDecimal x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    BigDecimal x1 = EvaluateString.evaluate(enterX1Field.getText());
+                    BigDecimal err = EvaluateString.evaluate(enterEField.getText());
                     ExpressionFunction func = new ExpressionFunction(fx);
-                    double ans = NonLinearEquation.Secant.solve(func, x0, x1, err);
+                    BigDecimal ans = NonLinearEquation.Secant.solve(func, x0, x1, err);
 
                     //create title
                     JLabel difeqTitle = new JLabel();
@@ -3463,11 +3464,11 @@ public class GUI {
                 try {
                     String fx = enterFField.getText();
                     String dfx = enterDFField.getText();
-                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
-                    double err = EvaluateString.evaluate(enterEField.getText());
+                    BigDecimal x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    BigDecimal err = EvaluateString.evaluate(enterEField.getText());
                     ExpressionFunction func = new ExpressionFunction(fx);
                     ExpressionFunction dfunc = new ExpressionFunction(dfx);
-                    double ans = NonLinearEquation.Newton_Raphson.solve(func, dfunc, x0, err);
+                    BigDecimal ans = NonLinearEquation.Newton_Raphson.solve(func, dfunc, x0, err);
 
                     //create title
                     JLabel difeqTitle = new JLabel();
@@ -3596,12 +3597,12 @@ public class GUI {
                     String fx = enterFField.getText();
                     String dfx = enterDFField.getText();
                     String d2fx = enterD2FField.getText();
-                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
-                    double err = EvaluateString.evaluate(enterEField.getText());
+                    BigDecimal x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    BigDecimal err = EvaluateString.evaluate(enterEField.getText());
                     ExpressionFunction func = new ExpressionFunction(fx);
                     ExpressionFunction dfunc = new ExpressionFunction(dfx);
                     ExpressionFunction d2func = new ExpressionFunction(d2fx);
-                    double ans = NonLinearEquation.Halley.solve(func, dfunc, d2func, x0, err);
+                    BigDecimal ans = NonLinearEquation.Halley.solve(func, dfunc, d2func, x0, err);
 
                     //create title
                     JLabel difeqTitle = new JLabel();
@@ -3711,10 +3712,10 @@ public class GUI {
                 optionDialog.dispose();
                 try {
                     String gx = enterGField.getText();
-                    double x0 = EvaluateString.evaluate(enterX0Field.getText());
-                    double err = EvaluateString.evaluate(enterEField.getText());
+                    BigDecimal x0 = EvaluateString.evaluate(enterX0Field.getText());
+                    BigDecimal err = EvaluateString.evaluate(enterEField.getText());
                     ExpressionFunction func = new ExpressionFunction(gx);
-                    double ans = NonLinearEquation.FixedPointIteration.solve(func, x0, err);
+                    BigDecimal ans = NonLinearEquation.FixedPointIteration.solve(func, x0, err);
 
                     //create title
                     JLabel difeqTitle = new JLabel();
@@ -3901,9 +3902,9 @@ public class GUI {
                 Window optionDialog = SwingUtilities.getWindowAncestor(inputsPanel);
                 optionDialog.dispose();
                 try {
-                    ArrayList<Double> coeffs = new ArrayList<>();
+                    ArrayList<BigDecimal> coeffs = new ArrayList<>();
                     for (JTextField field : coeffsFields) {
-                        double coeff = EvaluateString.evaluate(field.getText());
+                        BigDecimal coeff = EvaluateString.evaluate(field.getText());
                         coeffs.add(coeff);
                     }
                     polynomial = new Polynomial(coeffs);
@@ -3987,8 +3988,8 @@ public class GUI {
                 Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
                 optionDialog.dispose();
                 try {
-                    double x = EvaluateString.evaluate(enterXField.getText());
-                    double ans = Polynomial.Horner.getValueAt(polynomial, x);
+                    BigDecimal x = EvaluateString.evaluate(enterXField.getText());
+                    BigDecimal ans = Polynomial.Horner.getValueAt(polynomial, x);
 
                     //create title
                     JLabel solTitle = new JLabel();
@@ -4161,9 +4162,9 @@ public class GUI {
                 Window optionDialog = SwingUtilities.getWindowAncestor(inputsPanel);
                 optionDialog.dispose();
                 try {
-                    ArrayList<Double> coeffs = new ArrayList<>();
+                    ArrayList<BigDecimal> coeffs = new ArrayList<>();
                     for (JTextField field : coeffsFields) {
-                        double coeff = EvaluateString.evaluate(field.getText());
+                        BigDecimal coeff = EvaluateString.evaluate(field.getText());
                         coeffs.add(coeff);
                     }
                     polynomial = new Polynomial(coeffs);
@@ -4247,7 +4248,7 @@ public class GUI {
                 Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
                 optionDialog.dispose();
                 try {
-                    double a = EvaluateString.evaluate(enterAField.getText());
+                    BigDecimal a = EvaluateString.evaluate(enterAField.getText());
                     Polynomial ans = Polynomial.Horner.getDivideOn(polynomial, a);
 
                     //create title
@@ -4421,9 +4422,9 @@ public class GUI {
                 Window optionDialog = SwingUtilities.getWindowAncestor(inputsPanel);
                 optionDialog.dispose();
                 try {
-                    ArrayList<Double> coeffs = new ArrayList<>();
+                    ArrayList<BigDecimal> coeffs = new ArrayList<>();
                     for (JTextField field : coeffsFields) {
-                        double coeff = EvaluateString.evaluate(field.getText());
+                        BigDecimal coeff = EvaluateString.evaluate(field.getText());
                         coeffs.add(coeff);
                     }
                     polynomial = new Polynomial(coeffs);
@@ -4527,9 +4528,9 @@ public class GUI {
                 Window optionDialog = SwingUtilities.getWindowAncestor(contentPanel);
                 optionDialog.dispose();
                 try {
-                    double x = EvaluateString.evaluate(enterXField.getText());
+                    BigDecimal x = EvaluateString.evaluate(enterXField.getText());
                     int diffDegree = (int) enterDiffDegreeSp.getValue();
-                    double ans = Polynomial.Horner.getDiffAt(polynomial, x, diffDegree);
+                    BigDecimal ans = Polynomial.Horner.getDiffAt(polynomial, x, diffDegree);
 
                     //create title
                     JLabel solTitle = new JLabel();
@@ -4715,11 +4716,11 @@ public class GUI {
                 ExpressionFunction expFunc = new ExpressionFunction(func);
                 String a = enterAField.getText();
                 String b = enterBField.getText();
-                String n = String.valueOf((int) enterNSp.getValue());
+                int n = (int) enterNSp.getValue();
                 try {
                     PointsFunction pointsFunc = expFunc.toPointsFunction(a, b, n);
-                    ArrayList<Double> xp = pointsFunc.getXp();
-                    ArrayList<Double> yp = pointsFunc.getYp();
+                    ArrayList<BigDecimal> xp = pointsFunc.getXp();
+                    ArrayList<BigDecimal> yp = pointsFunc.getYp();
                     pointsText.setText("");
                     for (int i = 0; i < xp.size(); i++) {
                         String sb = "x" + i + " = " + xp.get(i) + '\t' + "y" + i + " = " + yp.get(i);
@@ -4829,7 +4830,7 @@ public class GUI {
 
             // description
             JLabel cardDescription = new JLabel();
-            cardDescription.setText("<html>" + "Supported Points Type : <br>" + " <b>Double </b> : 1.919239 <br>" + " <b>Integer </b> : 12392 <br>" + " <b>PI </b> : pi, 2*pi, pi/4 <br>" + "</html>");
+            cardDescription.setText("<html>" + "Supported Points Type : <br>" + " <b>BigDecimal </b> : 1.919239 <br>" + " <b>Integer </b> : 12392 <br>" + " <b>PI </b> : pi, 2*pi, pi/4 <br>" + "</html>");
             cardDescription.setFont(new Font(secondFont, Font.ITALIC, 15));
             cardDescription.setBackground(inputCard.getBackground());
 
@@ -4951,17 +4952,17 @@ public class GUI {
             });
 
             generateButton.addActionListener(e -> {
-                ArrayList<Double> xp = new ArrayList<>();
-                ArrayList<Double> yp = new ArrayList<>();
+                ArrayList<BigDecimal> xp = new ArrayList<>();
+                ArrayList<BigDecimal> yp = new ArrayList<>();
                 try {
                     for (JTextField xField : xFields) {
                         String xFiledContent = xField.getText();
-                        double x = EvaluateString.evaluate(xFiledContent);
+                        BigDecimal x = EvaluateString.evaluate(xFiledContent);
                         xp.add(x);
                     }
                     for (JTextField yField : yFields) {
                         String yFiledContent = yField.getText();
-                        double y = EvaluateString.evaluate(yFiledContent);
+                        BigDecimal y = EvaluateString.evaluate(yFiledContent);
                         yp.add(y);
                     }
                     PointsFunction pointsFunc = new PointsFunction(xp, yp);
@@ -5066,7 +5067,7 @@ public class GUI {
 
             // description
             JLabel cardDescription = new JLabel();
-            cardDescription.setText("<html>" + "Supported Coefficients Type : <br>" + " <b>Double </b> : 1.919239 <br>" + " <b>Integer </b> : 12392 <br>" + " <b>PI </b> : pi, 2*pi, pi/4 <br>" + "</html>");
+            cardDescription.setText("<html>" + "Supported Coefficients Type : <br>" + " <b>BigDecimal </b> : 1.919239 <br>" + " <b>Integer </b> : 12392 <br>" + " <b>PI </b> : pi, 2*pi, pi/4 <br>" + "</html>");
             cardDescription.setFont(new Font(secondFont, Font.ITALIC, 15));
             cardDescription.setBackground(inputCard.getBackground());
 
@@ -5222,20 +5223,20 @@ public class GUI {
             });
 
             generateButton.addActionListener(e -> {
-                ArrayList<Double> coeffs = new ArrayList<>();
+                ArrayList<BigDecimal> coeffs = new ArrayList<>();
                 try {
                     for (JTextField coeffField : coeffsFields) {
                         String coeffFiledContent = coeffField.getText();
-                        double coeff = EvaluateString.evaluate(coeffFiledContent);
+                        BigDecimal coeff = EvaluateString.evaluate(coeffFiledContent);
                         coeffs.add(coeff);
                     }
                     Polynomial poly = new Polynomial(coeffs);
                     String a = enterAField.getText();
                     String b = enterBField.getText();
-                    String n = String.valueOf((int) enterNSp.getValue());
+                    int n = (int) enterNSp.getValue();
                     PointsFunction ptsFunc = poly.toPointsFunction(a, b, n);
-                    ArrayList<Double> xp = ptsFunc.getXp();
-                    ArrayList<Double> yp = ptsFunc.getYp();
+                    ArrayList<BigDecimal> xp = ptsFunc.getXp();
+                    ArrayList<BigDecimal> yp = ptsFunc.getYp();
                     pointsText.setText("");
                     for (int i = 0; i < xp.size(); i++) {
                         String sb = "x" + i + " = " + xp.get(i) + '\t' + "y" + i + " = " + yp.get(i);
@@ -5470,13 +5471,13 @@ public class GUI {
                 ExpressionFunction dgdx = new ExpressionFunction(dgdxS);
                 String dgdyS = enterDgdyField.getText();
                 ExpressionFunction dgdy = new ExpressionFunction(dgdyS);
-                double x0 = EvaluateString.evaluate(enterX0Field.getText());
-                double y0 = EvaluateString.evaluate(enterY0Field.getText());
+                BigDecimal x0 = EvaluateString.evaluate(enterX0Field.getText());
+                BigDecimal y0 = EvaluateString.evaluate(enterY0Field.getText());
                 int n = (int) enterNSp.getValue();
                 try {
-                    ArrayList<ArrayList<Double>> points = SystemOfNonLinearEquations.Newton_Raphson.solve(fx, dfdx, dfdy, gx, dgdx, dgdy, x0, y0, n);
-                    ArrayList<Double> xp = points.get(0);
-                    ArrayList<Double> yp = points.get(1);
+                    ArrayList<ArrayList<BigDecimal>> points = SystemOfNonLinearEquations.Newton_Raphson.solve(fx, dfdx, dfdy, gx, dgdx, dgdy, x0, y0, n);
+                    ArrayList<BigDecimal> xp = points.get(0);
+                    ArrayList<BigDecimal> yp = points.get(1);
                     pointsText.setText("");
                     for (int i = 0; i < xp.size(); i++) {
                         String sb = "x" + (i + 1) + " = " + xp.get(i) + '\t' + "y" + (i + 1) + " = " + yp.get(i);
