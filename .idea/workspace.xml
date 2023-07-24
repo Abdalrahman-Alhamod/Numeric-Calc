@@ -12,8 +12,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Update JAR">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix Accuracy in Lagrange short Hand Polynomial">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Terminal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Terminal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Util/Accuracy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/Accuracy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Util/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/Matrix.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,16 +70,17 @@
     <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Main.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Main.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Integral.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Numerics/Interpolation.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Numerics/Interpolation.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/SystemOfNonLinearEquations.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Terminal.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Terminal.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Util/BigDecimalUtil.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Util/EvaluateString.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Util/Matrix.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Util/Matrix.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -88,20 +93,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/Test",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/OneDrive/Documents/Idea Projects/Test&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\res\Icons" />
@@ -122,125 +127,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٥٢" summary="Add polynomial to chooseFunction panel">
-      <created>1689378185304</created>
-      <option name="number" value="٠٠٢٥٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٥٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689378185304</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٥٣" summary="Change diff and polys panels rows and columns">
-      <created>1689378357461</created>
-      <option name="number" value="٠٠٢٥٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٥٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689378357461</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٥٤" summary="Add setResizable false">
-      <created>1689378850837</created>
-      <option name="number" value="٠٠٢٥٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٥٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689378850837</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٥٥" summary="Add exp Panel and test it&#10;Add exceptions to exp Functions">
-      <created>1689427016929</created>
-      <option name="number" value="٠٠٢٥٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٥٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689427016929</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٥٦" summary="Add initPtsFuncPanel and test it&#10;Fix issues in expFuncPanel ( fields and input n)">
-      <created>1689437541388</created>
-      <option name="number" value="٠٠٢٥٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٥٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689437541388</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٥٧" summary="Add continue button">
-      <created>1689439188583</created>
-      <option name="number" value="٠٠٢٥٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٥٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689439188583</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٥٨" summary="Restructure the whole project">
-      <created>1689450146270</created>
-      <option name="number" value="٠٠٢٥٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٥٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689450146271</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٥٩" summary="Update gitignore">
-      <created>1689453309353</created>
-      <option name="number" value="٠٠٢٥٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٥٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689453309353</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٦٠" summary="Update gitignore">
-      <created>1689453645690</created>
-      <option name="number" value="٠٠٢٦٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٦٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689453645690</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٦١" summary="Fix continue button&#10;Add solution to General method">
-      <created>1689458820610</created>
-      <option name="number" value="٠٠٢٦١" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٦١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689458820610</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٦٢" summary="Add try &amp; catch to general method solution">
-      <created>1689458926722</created>
-      <option name="number" value="٠٠٢٦٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٦٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689458926722</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٦٣" summary="Add lagrange solution">
-      <created>1689459890044</created>
-      <option name="number" value="٠٠٢٦٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٦٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689459890044</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٦٤" summary="Add Newton-Gregory forward &amp; backward solution">
-      <created>1689460922992</created>
-      <option name="number" value="٠٠٢٦٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٦٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689460922992</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٦٥" summary="Add Newton Divided forward &amp; backward solution">
-      <created>1689461229638</created>
-      <option name="number" value="٠٠٢٦٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٦٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689461229638</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٦٦" summary="Add least squares and spline solution">
-      <created>1689461884620</created>
-      <option name="number" value="٠٠٢٦٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٦٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689461884620</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٦٧" summary="Fix points function bug">
-      <created>1689462584355</created>
-      <option name="number" value="٠٠٢٦٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٦٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689462584355</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٦٨" summary="Fix integral bug">
-      <created>1689465091237</created>
-      <option name="number" value="٠٠٢٦٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٦٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689465091237</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٦٩" summary="Add integrals solutions">
       <created>1689465103004</created>
@@ -466,7 +352,126 @@
       <option name="project" value="LOCAL؜" />
       <updated>1689878202673</updated>
     </task>
-    <option name="localTasksCounter" value="301" />
+    <task id="LOCAL؜-٠٠٣٠١" summary="PreTesting BigDecimal">
+      <created>1689979070022</created>
+      <option name="number" value="٠٠٣٠١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٠١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689979070022</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٠٢" summary="Add BigDecimalUtil &amp; Accuracy classes">
+      <created>1689984999256</created>
+      <option name="number" value="٠٠٣٠٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٠٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689984999256</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٠٣" summary="Convert double to BigDecimal in Functions and EvaluateString">
+      <created>1689985054527</created>
+      <option name="number" value="٠٠٣٠٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٠٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1689985054527</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٠٤" summary="Convert double to BigDecimal in Polynomial">
+      <created>1690152522215</created>
+      <option name="number" value="٠٠٣٠٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٠٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690152522215</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٠٥" summary="Convert double to BigDecimal in Matrix">
+      <created>1690152906302</created>
+      <option name="number" value="٠٠٣٠٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٠٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690152906302</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٠٦" summary="Convert double to BigDecimal in Integral">
+      <created>1690154336429</created>
+      <option name="number" value="٠٠٣٠٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٠٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690154336429</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٠٧" summary="Convert double to BigDecimal in Interpolation">
+      <created>1690202031036</created>
+      <option name="number" value="٠٠٣٠٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٠٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690202031036</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٠٨" summary="Convert double to BigDecimal in Differentiation">
+      <created>1690202769061</created>
+      <option name="number" value="٠٠٣٠٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٠٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690202769061</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٠٩" summary="Convert double to BigDecimal in DifferentialEquation">
+      <created>1690204174192</created>
+      <option name="number" value="٠٠٣٠٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٠٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690204174192</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣١٠" summary="Convert double to BigDecimal in NonLinearEquation">
+      <created>1690205167698</created>
+      <option name="number" value="٠٠٣١٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣١٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690205167698</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣١١" summary="Convert double to BigDecimal in SystemOfNonLinearEquations">
+      <created>1690205550585</created>
+      <option name="number" value="٠٠٣١١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣١١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690205550586</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣١٢" summary="Convert double to BigDecimal in GUI">
+      <created>1690205804314</created>
+      <option name="number" value="٠٠٣١٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣١٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690205804314</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣١٣" summary="Fix Runge_Kutta class">
+      <created>1690205824812</created>
+      <option name="number" value="٠٠٣١٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣١٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690205824812</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣١٤" summary="Fix equals bug">
+      <created>1690207138084</created>
+      <option name="number" value="٠٠٣١٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣١٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690207138084</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣١٥" summary="Fix printing ' + ' in Polynomial">
+      <created>1690207487512</created>
+      <option name="number" value="٠٠٣١٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣١٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690207487512</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣١٦" summary="Fix showing trailing zeros">
+      <created>1690208774959</created>
+      <option name="number" value="٠٠٣١٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣١٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690208774959</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣١٧" summary="Fix Accuracy in Lagrange short Hand Polynomial">
+      <created>1690210293795</created>
+      <option name="number" value="٠٠٣١٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣١٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690210293795</updated>
+    </task>
+    <option name="localTasksCounter" value="318" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -509,23 +514,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add differential equations solution" />
-    <MESSAGE value="Add keyboard icons" />
-    <MESSAGE value="Add nin-linear equations solution" />
-    <MESSAGE value="Fix horner bug" />
-    <MESSAGE value="Fix horner floating error" />
-    <MESSAGE value="Fix horner diff bug" />
-    <MESSAGE value="Add sysOfNonLinEqs solution&#10;Add polynomials solution" />
-    <MESSAGE value="Fix forward and backward subtraction bug" />
-    <MESSAGE value="Fix and enhance interpolation and diff inputs" />
-    <MESSAGE value="Add about &amp; JAVA DOC to GUI" />
-    <MESSAGE value="Completing JAVA DOC to GUI and Terminal" />
-    <MESSAGE value="Add exception handling to gui constructor" />
-    <MESSAGE value="Build jar" />
-    <MESSAGE value="Testing all methods&#10;Fix bugs" />
-    <MESSAGE value="Update frame title" />
-    <MESSAGE value="Update jar" />
-    <MESSAGE value="Fix freezing , move setVisible to last" />
     <MESSAGE value="Add SwingUtilities.invokeLater for thread safety" />
     <MESSAGE value="Add Dark Mode" />
     <MESSAGE value="Add JAVA DOC to Dark Mode class" />
@@ -534,6 +522,23 @@
     <MESSAGE value="Fix JAR" />
     <MESSAGE value="Fix polynomials function" />
     <MESSAGE value="Update JAR" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update JAR" />
+    <MESSAGE value="PreTesting BigDecimal" />
+    <MESSAGE value="Add BigDecimalUtil &amp; Accuracy classes" />
+    <MESSAGE value="Convert double to BigDecimal in Functions and EvaluateString" />
+    <MESSAGE value="Convert double to BigDecimal in Polynomial" />
+    <MESSAGE value="Convert double to BigDecimal in Matrix" />
+    <MESSAGE value="Convert double to BigDecimal in Integral" />
+    <MESSAGE value="Convert double to BigDecimal in Interpolation" />
+    <MESSAGE value="Convert double to BigDecimal in Differentiation" />
+    <MESSAGE value="Convert double to BigDecimal in DifferentialEquation" />
+    <MESSAGE value="Convert double to BigDecimal in NonLinearEquation" />
+    <MESSAGE value="Convert double to BigDecimal in SystemOfNonLinearEquations" />
+    <MESSAGE value="Convert double to BigDecimal in GUI" />
+    <MESSAGE value="Fix Runge_Kutta class" />
+    <MESSAGE value="Fix equals bug" />
+    <MESSAGE value="Fix printing ' + ' in Polynomial" />
+    <MESSAGE value="Fix showing trailing zeros" />
+    <MESSAGE value="Fix Accuracy in Lagrange short Hand Polynomial" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix Accuracy in Lagrange short Hand Polynomial" />
   </component>
 </project>

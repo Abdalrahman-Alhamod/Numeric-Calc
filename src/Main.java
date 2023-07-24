@@ -1,7 +1,5 @@
+
 import javax.swing.*;
-import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Author :
@@ -29,5 +27,4 @@ public class Main {
         // new Terminal();
         SwingUtilities.invokeLater(GUI::new);
     }
-
 }
