@@ -1,6 +1,10 @@
 package Numerics;
 
 import Functions.ExpressionFunction;
+import Util.Accuracy;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * The NonLinearEquation class provides implementations of various numerical methods for solving non-linear equations.
@@ -21,23 +25,21 @@ public abstract class NonLinearEquation {
          * @param e  The tolerance value.
          * @return The approximate root of the equation.
          */
-        public static double solve(ExpressionFunction fx, double a, double b, double e) {
-            double fa = fx.getValueAt(a), fb = fx.getValueAt(b);
-            double c = a;
-            while (Math.abs(a - b) >= e) {
+        public static BigDecimal solve(ExpressionFunction fx, BigDecimal a, BigDecimal b, BigDecimal e) {
+            BigDecimal fa = fx.getValueAt(a), fb = fx.getValueAt(b);
+            BigDecimal c = a;
+            while ((a.subtract(b)).abs().compareTo(e) >= 0) {
                 //System.out.println("a : " + a + " b : " + b + " c : " + c);
-                c = (a + b) / 2;
-                //Rounding value back to fix floating-point precision errors
-                c = Math.round(c * 1e10) / 1e10;
-                double fc = fx.getValueAt(c);
-                if (fc * fa < 0) {
+                c = (a.add(b)).divide(new BigDecimal(2), Accuracy.getValue(), RoundingMode.HALF_UP);
+                BigDecimal fc = fx.getValueAt(c);
+                if (fc.multiply(fa).compareTo(new BigDecimal(0)) < 0) {
                     b = c;
                     fb = fc;
-                } else if (fc * fb < 0) {
+                } else if (fc.multiply(fb).compareTo(new BigDecimal(0)) < 0) {
                     a = c;
                     fa = fc;
                 }
-                if (Math.abs(a - b) == 0)
+                if ((a.subtract(b)).abs().equals(new BigDecimal(0)))
                     break;
             }
             return c;
@@ -52,8 +54,8 @@ public abstract class NonLinearEquation {
          * @return The approximate root of the equation.
          */
 
-        public static double solve(ExpressionFunction fx, double a, double b) {
-            return solve(fx, a, b, 0.000000001);
+        public static BigDecimal solve(ExpressionFunction fx, BigDecimal a, BigDecimal b) {
+            return solve(fx, a, b, new BigDecimal(0));
         }
     }
 
@@ -70,24 +72,22 @@ public abstract class NonLinearEquation {
          * @param e  The tolerance value.
          * @return The approximate root of the equation.
          */
-        public static double solve(ExpressionFunction fx, double a, double b, double e) {
-            double fa = fx.getValueAt(a), fb = fx.getValueAt(b);
-            double c = a;
-            while (Math.abs(a - b) >= e) {
-                c = ((a * fb) - (b * fa)) / (fb - fa);
-                //Rounding value back to fix floating-point precision errors
-                c = Math.round(c * 1e10) / 1e10;
+        public static BigDecimal solve(ExpressionFunction fx, BigDecimal a, BigDecimal b, BigDecimal e) {
+            BigDecimal fa = fx.getValueAt(a), fb = fx.getValueAt(b);
+            BigDecimal c = a;
+            while ((a.subtract(b)).abs().compareTo(e) >= 0) {
+                c = ((a.multiply(fb)).subtract(b.multiply(fa))).divide(fb.subtract(fa), Accuracy.getValue(), RoundingMode.HALF_UP);
                 //System.out.println("a : " + a + " b : " + b + " c : " + c);
-                double fc = fx.getValueAt(c);
+                BigDecimal fc = fx.getValueAt(c);
                 //System.out.println("fa : " + fa + " fb : " + fb + " fc : " + fc);
-                if (fc * fa < 0) {
+                if (fc.multiply(fa).compareTo(new BigDecimal(0)) < 0) {
                     b = c;
                     fb = fc;
-                } else if (fc * fb < 0) {
+                } else if (fc.multiply(fb).compareTo(new BigDecimal(0)) < 0) {
                     a = c;
                     fa = fc;
                 }
-                if (Math.abs(a - b) < e || Math.abs(a - b) == 0 || fc == 0)
+                if ((a.subtract(b)).abs().compareTo(e) < 0 || (a.subtract(b)).abs().equals(new BigDecimal(0)) || fc.equals(new BigDecimal(0)))
                     break;
             }
             return c;
@@ -101,8 +101,8 @@ public abstract class NonLinearEquation {
          * @param b  The upper bound of the interval.
          * @return The approximate root of the equation.
          */
-        public static double solve(ExpressionFunction fx, double a, double b) {
-            return solve(fx, a, b, 0.000000001);
+        public static BigDecimal solve(ExpressionFunction fx, BigDecimal a, BigDecimal b) {
+            return solve(fx, a, b, new BigDecimal(0));
         }
     }
 
@@ -119,18 +119,16 @@ public abstract class NonLinearEquation {
          * @param e  The tolerance value.
          * @return The approximate root of the equation.
          */
-        public static double solve(ExpressionFunction fx, double x0, double x1, double e) {
-            double xi_1 = x0, xi = x1;
-            double fxi_1 = fx.getValueAt(x0), fxi = fx.getValueAt(x1);
-            double xi1 = xi_1;
+        public static BigDecimal solve(ExpressionFunction fx, BigDecimal x0, BigDecimal x1, BigDecimal e) {
+            BigDecimal xi_1 = x0, xi = x1;
+            BigDecimal fxi_1 = fx.getValueAt(x0), fxi = fx.getValueAt(x1);
+            BigDecimal xi1 = xi_1;
             while (true) {
-                xi1 = xi - ((xi - xi_1) / (fxi - fxi_1)) * fxi;
-                //Rounding value back to fix floating-point precision errors
-                xi1 = Math.round(xi1 * 1e10) / 1e10;
+                xi1 = xi.subtract((xi.subtract(xi_1)).divide(fxi.subtract(fxi_1), Accuracy.getValue(), RoundingMode.HALF_UP)).multiply(fxi);
                 //System.out.println("xi-1 : " + xi_1 + " xi : " + xi + " xi+1 : " + xi1);
-                double fxi1 = fx.getValueAt(xi1);
+                BigDecimal fxi1 = fx.getValueAt(xi1);
                 //System.out.println("f(xi-1) : " + fxi_1 + " f(xi) : " + fxi + " f(xi+1) : " + fxi1);
-                if (Math.abs(xi1 - xi) < e || Math.abs(xi1 - xi) == 0 || fxi1 == 0)
+                if ((xi1.subtract(xi)).abs().compareTo(e) < 0 || (xi1.subtract(xi)).abs().equals(new BigDecimal(0)) || fxi1.equals(new BigDecimal(0)))
                     break;
                 xi_1 = xi;
                 fxi_1 = fxi;
@@ -148,8 +146,8 @@ public abstract class NonLinearEquation {
          * @param x1 The second guess for the root.
          * @return The approximate root of the equation.
          */
-        public static double solve(ExpressionFunction fx, double x0, double x1) {
-            return solve(fx, x0, x1, 1E-9);
+        public static BigDecimal solve(ExpressionFunction fx, BigDecimal x0, BigDecimal x1) {
+            return solve(fx, x0, x1, new BigDecimal(0));
         }
     }
 
@@ -166,18 +164,16 @@ public abstract class NonLinearEquation {
          * @param e   The tolerance value.
          * @return The approximate root of the equation.
          */
-        public static double solve(ExpressionFunction fx, ExpressionFunction dfx, double x0, double e) {
-            double xi = x0;
-            double fxi = fx.getValueAt(xi), dfxi = dfx.getValueAt(xi);
-            double xi1;
+        public static BigDecimal solve(ExpressionFunction fx, ExpressionFunction dfx, BigDecimal x0, BigDecimal e) {
+            BigDecimal xi = x0;
+            BigDecimal fxi = fx.getValueAt(xi), dfxi = dfx.getValueAt(xi);
+            BigDecimal xi1;
             while (true) {
-                xi1 = xi - (fxi / dfxi);
-                //Rounding value back to fix floating-point precision errors
-                xi1 = Math.round(xi1 * 1e10) / 1e10;
-                double fxi1 = fx.getValueAt(xi1);
-                if (Math.abs(xi1 - xi) < e || Math.abs(xi1 - xi) == 0 || fxi1 == 0)
+                xi1 = xi.subtract(fxi.divide(dfxi, Accuracy.getValue(), RoundingMode.HALF_UP));
+                BigDecimal fxi1 = fx.getValueAt(xi1);
+                if ((xi1.subtract(xi)).abs().compareTo(e) < 0 || (xi1.subtract(xi)).abs().equals(new BigDecimal(0)) || fxi1.equals(new BigDecimal(0)))
                     break;
-                double dfxi1 = dfx.getValueAt(xi1);
+                BigDecimal dfxi1 = dfx.getValueAt(xi1);
                 xi = xi1;
                 fxi = fxi1;
                 dfxi = dfxi1;
@@ -194,8 +190,8 @@ public abstract class NonLinearEquation {
          * @return The approximate root of the equation.
          */
 
-        public static double solve(ExpressionFunction fx, ExpressionFunction dfx, double x0) {
-            return solve(fx, dfx, x0, 1E-9);
+        public static BigDecimal solve(ExpressionFunction fx, ExpressionFunction dfx, BigDecimal x0) {
+            return solve(fx, dfx, x0, new BigDecimal(0));
         }
 
         /**
@@ -209,12 +205,10 @@ public abstract class NonLinearEquation {
          * @return The approximate root of the equation within the specified range.
          */
 
-        public static double solveRange(ExpressionFunction fx, ExpressionFunction dfx, double a, double b, double e) {
-            double fa = fx.getValueAt(a), dfa = dfx.getValueAt(a);
-            double x = a - (fa / dfa);
-            //Rounding value back to fix floating-point precision errors
-            x = Math.round(x * 1e10) / 1e10;
-            if (x >= a && x <= b)
+        public static BigDecimal solveRange(ExpressionFunction fx, ExpressionFunction dfx, BigDecimal a, BigDecimal b, BigDecimal e) {
+            BigDecimal fa = fx.getValueAt(a), dfa = dfx.getValueAt(a);
+            BigDecimal x = a.subtract(fa.divide(dfa, Accuracy.getValue(), RoundingMode.HALF_UP));
+            if (x.compareTo(a) >= 0 && x.compareTo(b) <= 0)
                 return solve(fx, dfx, a, e);
             else
                 return solve(fx, dfx, b, e);
@@ -230,8 +224,8 @@ public abstract class NonLinearEquation {
          * @return The approximate root of the equation within the specified range.
          */
 
-        public static double solveRange(ExpressionFunction fx, ExpressionFunction dfx, double a, double b) {
-            return solveRange(fx, dfx, a, b, 1E-9);
+        public static BigDecimal solveRange(ExpressionFunction fx, ExpressionFunction dfx, BigDecimal a, BigDecimal b) {
+            return solveRange(fx, dfx, a, b, new BigDecimal(0));
         }
     }
 
@@ -249,20 +243,32 @@ public abstract class NonLinearEquation {
          * @param e    The tolerance value.
          * @return The approximate root of the equation.
          */
-        public static double solve(ExpressionFunction fx, ExpressionFunction dfx, ExpressionFunction d2fx, double x0, double e) {
-            double xi = x0;
-            double fxi = fx.getValueAt(xi), dfxi = dfx.getValueAt(xi), d2fxi = d2fx.getValueAt(xi);
-            double xi1;
+        public static BigDecimal solve(ExpressionFunction fx, ExpressionFunction dfx, ExpressionFunction d2fx, BigDecimal x0, BigDecimal e) {
+            BigDecimal xi = x0;
+            BigDecimal fxi = fx.getValueAt(xi), dfxi = dfx.getValueAt(xi), d2fxi = d2fx.getValueAt(xi);
+            BigDecimal xi1;
             while (true) {
                 //System.out.println("f(xi) : "+fxi+" f'(xi) : "+dfxi+" f''(xi) : "+d2fxi);
-                xi1 = xi - ((fxi) / (dfxi - (((d2fxi) / (2 * dfxi)) * fxi)));
-                //Rounding value back to fix floating-point precision errors
-                xi1 = Math.round(xi1 * 1e10) / 1e10;
+                xi1 = xi.subtract(
+                        (fxi).divide(
+                                dfxi.subtract(
+                                        (
+                                                (d2fxi).divide(
+                                                        dfxi.multiply(
+                                                                new BigDecimal(2)
+                                                        )
+                                                        , Accuracy.getValue(), RoundingMode.HALF_UP
+                                                )
+                                        ).multiply(
+                                                fxi
+                                        )
+                                ), Accuracy.getValue(), RoundingMode.HALF_UP)
+                );
                 //System.out.println(" xi : " + xi + " xi+1 : " + xi1);
-                double fxi1 = fx.getValueAt(xi1);
-                if (Math.abs(xi1 - xi) < e || Math.abs(xi1 - xi) == 0 || fxi1 == 0)
+                BigDecimal fxi1 = fx.getValueAt(xi1);
+                if ((xi1.subtract(xi)).abs().compareTo(e) < 0 || (xi1.subtract(xi)).abs().equals(new BigDecimal(0)) || fxi1.equals(new BigDecimal(0)))
                     break;
-                double dfxi1 = dfx.getValueAt(xi1), d2fxi1 = d2fx.getValueAt(xi1);
+                BigDecimal dfxi1 = dfx.getValueAt(xi1), d2fxi1 = d2fx.getValueAt(xi1);
                 //System.out.println("f(xi+1) : "+fxi1+" f'(xi+1) : "+dfxi1+" f''(xi+1) : "+d2fxi1);
                 xi = xi1;
                 fxi = fxi1;
@@ -285,18 +291,16 @@ public abstract class NonLinearEquation {
          * @param e  The tolerance value.
          * @return The approximate root of the equation.
          */
-        public static double solve(ExpressionFunction gx, double x0, double e) {
-            double xi = x0;
-            double gxi = gx.getValueAt(xi);
-            double xi1;
+        public static BigDecimal solve(ExpressionFunction gx, BigDecimal x0, BigDecimal e) {
+            BigDecimal xi = x0;
+            BigDecimal gxi = gx.getValueAt(xi);
+            BigDecimal xi1;
             while (true) {
                 xi1 = gxi;
-                //Rounding value back to fix floating-point precision errors
-                xi1 = Math.round(xi1 * 1e10) / 1e10;
                 //System.out.println(" xi : " + xi + " xi+1 : " + xi1);
-                double gxi1 = gx.getValueAt(xi1);
+                BigDecimal gxi1 = gx.getValueAt(xi1);
                 //System.out.println("g(xi) : " + xi);
-                if (Math.abs(xi1 - xi) < e || Math.abs(xi1 - xi) == 0 || gxi1 == 0)
+                if ((xi1.subtract(xi)).abs().compareTo(e) < 0 || (xi1.subtract(xi)).equals(new BigDecimal(0)) || gxi1.equals(new BigDecimal(0)))
                     break;
                 xi = xi1;
                 gxi = gxi1;
