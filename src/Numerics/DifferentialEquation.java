@@ -1,7 +1,11 @@
 package Numerics;
 
+import Util.Accuracy;
+import Util.BigDecimalUtil;
 import Util.EvaluateString;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -27,10 +31,8 @@ public class DifferentialEquation {
      * @param y The value of y.
      * @return The value of the differential equation at (x, y).
      */
-    public double getValueAt(double x, double y) {
-        double ans = EvaluateString.evaluate(dy, x, y);
-        //Rounding value back to fix floating-point precision errors
-        ans = Math.round(ans * 1e10) / 1e10;
+    public BigDecimal getValueAt(BigDecimal x, BigDecimal y) {
+        BigDecimal ans = EvaluateString.evaluate(dy, x, y);
         return ans;
     }
 
@@ -48,19 +50,15 @@ public class DifferentialEquation {
          * @param x  The target value of x.
          * @return The approximate value of y at x.
          */
-        public static double solve(DifferentialEquation eq, double x0, double y0, double h, double x) {
+        public static BigDecimal solve(DifferentialEquation eq, BigDecimal x0, BigDecimal y0, BigDecimal h, BigDecimal x) {
             // init yi = y0 , xi = x0,  yi+1 = 0
-            double yi = y0, xi = x0, yi1 = 0;
-            while (xi != x) {//if current value xi != x => continue
+            BigDecimal yi = new BigDecimal(y0.toString()), xi = new BigDecimal(x0.toString()), yi1 = new BigDecimal(0);
+            while (!xi.equals(x)) {//if current value xi != x => continue
                 // get yi+1 = yi + yi' * h
-                yi1 = yi + eq.getValueAt(xi, yi) * h;
-                //Rounding value back to fix floating-point precision errors
-                yi1 = Math.round(yi1 * 1e10) / 1e10;
+                yi1 = yi.add(eq.getValueAt(xi, yi).multiply(h));
                 //System.out.println("yi+1 = " + yi1);
                 // update xi
-                xi = xi + h;
-                //Rounding value back to fix floating-point precision errors
-                xi = Math.round(xi * 1e10) / 1e10;
+                xi = x.add(h);
                 // update yi
                 yi = yi1;
             }
@@ -82,29 +80,27 @@ public class DifferentialEquation {
          * @param x   The target value of x.
          * @return The approximate value of y at x.
          */
-        public static double solve(ArrayList<DifferentialEquation> eqs, double x0, double y0, double h, double x) {
+        public static BigDecimal solve(ArrayList<DifferentialEquation> eqs, BigDecimal x0, BigDecimal y0, BigDecimal h, BigDecimal x) {
             // init yi = y0 , xi = x0,  yi+1 = 0
-            double yi = y0, xi = x0, yi1 = 0;
-            while (xi != x) {//if current value xi != x => continue
+            BigDecimal yi = new BigDecimal(y0.toString()), xi = new BigDecimal(x0.toString()), yi1 = new BigDecimal(0);
+            while (!xi.equals(x)) {//if current value xi != x => continue
                 // init factorial = 1, sum = yi
-                double factor = 1, sum = yi;
+                BigDecimal factor = new BigDecimal(1), sum = yi;
                 for (int i = 0; i < eqs.size(); i++) {// for every Differential Equation
                     // update factorial = 1 * 2 * 3 ... * n = n!
-                    factor *= (i + 1);
-                    //Rounding value back to fix floating-point precision errors
-                    factor = Math.round(factor * 1e10) / 1e10;
+                    factor = factor.multiply(new BigDecimal(i + 1));
                     // update ans = yi + ( yi'* h ) / 1! + ( yi'' * h^2 ) / 2! + ( yi''' * h^3 ) / 3! ...
-                    sum += eqs.get(i).getValueAt(xi, yi) * Math.pow(h, i + 1) * (1 / factor);
-                    //Rounding value back to fix floating-point precision errors
-                    sum = Math.round(sum * 1e10) / 1e10;
+                    sum = sum.add(
+                            eqs.get(i).getValueAt(xi, yi).multiply(
+                                    BigDecimalUtil.pow(h, new BigDecimal(i + 1)).multiply(
+                                            new BigDecimal(1).divide(
+                                                    factor, Accuracy.getValue(), RoundingMode.HALF_UP))));
                 }
                 // update yi+1
                 yi1 = sum;
                 //System.out.println("yi+1 = " + yi1);
                 //update xi
-                xi = xi + h;
-                //Rounding value back to fix floating-point precision errors
-                xi = Math.round(xi * 1e10) / 1e10;
+                xi = xi.add(h);
                 // update yi
                 yi = yi1;
             }
@@ -128,33 +124,25 @@ public class DifferentialEquation {
          * @param a2 The coefficient for the Midpoint method.
          * @return The approximate value of y at x.
          */
-        private static double solve(DifferentialEquation eq, double x0, double y0, double h, double x, double a2) {
-            double a1 = 1 - a2;
-            double p = 1 / (2 * a2), q = 1 / (2 * a2);
+        private static BigDecimal solve(DifferentialEquation eq, BigDecimal x0, BigDecimal y0, BigDecimal h, BigDecimal x, BigDecimal a2) {
+            BigDecimal a1 = new BigDecimal(new BigDecimal(1).subtract(a2).toString());
+            BigDecimal p = new BigDecimal(1).divide(a2.multiply(new BigDecimal(2)), Accuracy.getValue(), RoundingMode.HALF_UP), q = new BigDecimal(1).divide(a2.multiply(new BigDecimal(2)), Accuracy.getValue(), RoundingMode.HALF_UP);
             // init yi = y0 , xi = x0,  yi+1 = 0
-            double yi = y0, xi = x0, yi1 = 0;
-            while (xi != x) {
+            BigDecimal yi = new BigDecimal(y0.toString()), xi = new BigDecimal(x0.toString()), yi1 = new BigDecimal(0);
+            while (!xi.equals(x)) {
                 // update k1 = f(xi,yi)
-                double k1 = eq.getValueAt(xi, yi);
-                //Rounding value back to fix floating-point precision errors
-                k1 = Math.round(k1 * 1e10) / 1e10;
+                BigDecimal k1 = eq.getValueAt(xi, yi);
                 //System.out.println("k1 = " + k1);
                 // update k2 = f(xi + p*h , yi +q*h*k1 )
-                double k2 = eq.getValueAt(xi + p * h, yi + q * h * k1);
-                //Rounding value back to fix floating-point precision errors
-                k2 = Math.round(k2 * 1e10) / 1e10;
+                BigDecimal k2 = eq.getValueAt(xi.add(p.multiply(h)), yi.add(q.multiply(h.multiply(k1))));
                 //System.out.println("k2 = " + k2);
                 // update yi+1 = yi + h[ ai * k1 + a2 * k2 ]
-                yi1 = yi + h * (a1 * k1 + a2 * k2);
-                //Rounding value back to fix floating-point precision errors
-                yi1 = Math.round(yi1 * 1e10) / 1e10;
+                yi1 = yi.add(h.multiply(a1.multiply(k1).add(a2.multiply(k2))));
 
                 //System.out.println("yi+1 = " + yi1);
 
                 //update xi
-                xi = xi + h;
-                //Rounding value back to fix floating-point precision errors
-                xi = Math.round(xi * 1e10) / 1e10;
+                xi = xi.add(h);
                 // update yi
                 yi = yi1;
             }
@@ -175,8 +163,8 @@ public class DifferentialEquation {
              * @param x  The target value of x.
              * @return The approximate value of y at x.
              */
-            public static double solve(DifferentialEquation eq, double x0, double y0, double h, double x) {
-                return MidPoint.solve(eq, x0, y0, h, x, 1);
+            public static BigDecimal solve(DifferentialEquation eq, BigDecimal x0, BigDecimal y0, BigDecimal h, BigDecimal x) {
+                return MidPoint.solve(eq, x0, y0, h, x, new BigDecimal(1));
             }
         }
 
@@ -194,8 +182,8 @@ public class DifferentialEquation {
              * @param x  The target value of x.
              * @return The approximate value of y at x.
              */
-            public static double solve(DifferentialEquation eq, double x0, double y0, double h, double x) {
-                return MidPoint.solve(eq, x0, y0, h, x, 0.5);
+            public static BigDecimal solve(DifferentialEquation eq, BigDecimal x0, BigDecimal y0, BigDecimal h, BigDecimal x) {
+                return MidPoint.solve(eq, x0, y0, h, x, new BigDecimal("0.5"));
             }
         }
 
@@ -213,75 +201,70 @@ public class DifferentialEquation {
              * @param x  The target value of x.
              * @return The approximate value of y at x.
              */
-            public static double solve(DifferentialEquation eq, double x0, double y0, double h, double x) {
-                return MidPoint.solve(eq, x0, y0, h, x, ((double) 2 / 3));
+            public static BigDecimal solve(DifferentialEquation eq, BigDecimal x0, BigDecimal y0, BigDecimal h, BigDecimal x) {
+                return MidPoint.solve(eq, x0, y0, h, x, (new BigDecimal(2).divide(new BigDecimal(3), Accuracy.getValue(), RoundingMode.HALF_UP)));
+
             }
         }
-    }
 
-    /**
-     * The Runge_Kutta class provides a method for solving a differential equation using the Runge-Kutta method.
-     */
-    public static class Runge_Kutta {
         /**
-         * Solves the differential equation using the Runge-Kutta method.
-         *
-         * @param eq The differential equation to solve.
-         * @param x0 The initial value of x.
-         * @param y0 The initial value of y.
-         * @param h  The step size.
-         * @param x  The target value of x.
-         * @return The approximate value of y at x.
+         * The Runge_Kutta class provides a method for solving a differential equation using the Runge-Kutta method.
          */
-        public static double solve(DifferentialEquation eq, double x0, double y0, double h, double x) {
-            // init yi = y0 , xi = x0,  yi+1 = 0
-            double yi = y0, xi = x0, yi1 = 0;
-            while (xi != x) {
-                // update k1 = f(xi,yi)
-                double k1 = eq.getValueAt(xi, yi);
-                //Rounding value back to fix floating-point precision errors
-                k1 = Math.round(k1 * 1e10) / 1e10;
+        public static class Runge_Kutta {
+            /**
+             * Solves the differential equation using the Runge-Kutta method.
+             *
+             * @param eq The differential equation to solve.
+             * @param x0 The initial value of x.
+             * @param y0 The initial value of y.
+             * @param h  The step size.
+             * @param x  The target value of x.
+             * @return The approximate value of y at x.
+             */
+            public static BigDecimal solve(DifferentialEquation eq, BigDecimal x0, BigDecimal y0, BigDecimal h, BigDecimal x) {
+                // init yi = y0 , xi = x0,  yi+1 = 0
+                BigDecimal yi = new BigDecimal(y0.toString()), xi = new BigDecimal(x0.toString()), yi1 = new BigDecimal(0);
+                while (!xi.equals(x)) {
+                    // update k1 = f(xi,yi)
+                    BigDecimal k1 = eq.getValueAt(xi, yi);
 
-                //System.out.println("k1 = " + k1);
+                    //System.out.println("k1 = " + k1);
 
-                // update k2 = f(xi + (1/2)h , yi + (1/2)k1 )
-                double k2 = eq.getValueAt(xi + (0.5) * h, yi + (0.5) * k1);
-                //Rounding value back to fix floating-point precision errors
-                k2 = Math.round(k2 * 1e10) / 1e10;
+                    // update k2 = f(xi + (1/2)h , yi + (1/2)k1 )
+                    BigDecimal xi0_5h = xi.add(h.multiply(new BigDecimal("0.5")));
+                    BigDecimal k2 = eq.getValueAt(xi0_5h, yi.add(k1.multiply(new BigDecimal("0.5"))));
 
-                //System.out.println("k2 = " + k2);
+                    //System.out.println("k2 = " + k2);
 
-                // update k3 = f(xi + (1/2)h , yi + (1/2)k2 )
-                double k3 = eq.getValueAt(xi + (0.5) * h, yi + (0.5) * k2);
-                //Rounding value back to fix floating-point precision errors
-                k3 = Math.round(k3 * 1e10) / 1e10;
+                    // update k3 = f(xi + (1/2)h , yi + (1/2)k2 )
+                    BigDecimal k3 = eq.getValueAt(xi0_5h, yi.add(k2.multiply(new BigDecimal("0.5"))));
 
-                //System.out.println("k3 = " + k3);
+                    //System.out.println("k3 = " + k3);
 
-                // update k4 = f(xi + h , yi + k3 )
-                double k4 = eq.getValueAt(xi + h, yi + k3);
-                //Rounding value back to fix floating-point precision errors
-                k4 = Math.round(k4 * 1e10) / 1e10;
+                    // update k4 = f(xi + h , yi + k3 )
+                    BigDecimal k4 = eq.getValueAt(xi.add(h), yi.add(k3));
 
-                //System.out.println("k4 = " + k4);
+                    //System.out.println("k4 = " + k4);
 
-                // update yi+1 = yi + (h/6) [ k1 + 2k2 + 2k3 + k4 ]
-                yi1 = yi + (h / 6) * (k1 + 2 * k2 + 2 * k3 + k4);
-                //Rounding value back to fix floating-point precision errors
-                yi1 = Math.round(yi1 * 1e10) / 1e10;
+                    // update yi+1 = yi + (h/6) [ k1 + 2k2 + 2k3 + k4 ]
+                    yi1 = yi.add(
+                            h.divide(new BigDecimal(6), Accuracy.getValue(), RoundingMode.HALF_UP)).multiply(
+                            k1.add(
+                                    k2.multiply(new BigDecimal(2)).add(
+                                            k3.multiply(new BigDecimal(2)).add(
+                                                    k4))));
 
-                //System.out.println("yi+1 = " + yi1);
+                    // System.out.println("yi+1 = " + yi1);
 
-                //update xi
-                xi = xi + h;
-                //Rounding value back to fix floating-point precision errors
-                xi = Math.round(xi * 1e10) / 1e10;
-                // update yi
-                yi = yi1;
+                    //update xi
+                    xi = xi.add(h);
+                    // update yi
+                    yi = yi1;
+                }
+                return yi1;
             }
-            return yi1;
         }
+
+
     }
-
-
 }
