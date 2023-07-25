@@ -639,7 +639,7 @@ public abstract class Interpolation {
                     if (temp.compareTo(new BigDecimal(0)) == 0)
                         break;
                     // add this value to result
-                    res.add(temp);
+                    res.add(fixAccuracy(temp));
                 }
                 // i = i+1 the index of the second element to the next iteration
                 i++;
@@ -800,7 +800,7 @@ public abstract class Interpolation {
                     if (temp.compareTo(new BigDecimal(0)) == 0)
                         break;
                     // add this value to result
-                    res.add(temp);
+                    res.add(fixAccuracy(temp));
                 }
                 // i = i+1 the index of the second element to the next iteration
                 i++;
