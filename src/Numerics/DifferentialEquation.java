@@ -5,6 +5,7 @@ import Util.BigDecimalUtil;
 import Util.EvaluateString;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -248,18 +249,30 @@ public class DifferentialEquation {
 
                 //System.out.println("k4 = " + k4);
 
+                BigDecimal h_6 = h.divide(new BigDecimal(6), Accuracy.getValue() + 3, RoundingMode.HALF_UP);
+
+                k2 = k2.multiply(new BigDecimal(2));
+
+                k3 = k3.multiply(new BigDecimal(2));
+
                 // update yi+1 = yi + (h/6) [ k1 + 2k2 + 2k3 + k4 ]
                 yi1 = yi.add(
-                        h.divide(new BigDecimal(6), Accuracy.getValue() + 3, RoundingMode.HALF_UP)).multiply(
-                        k1.add(
-                                k2.multiply(new BigDecimal(2)).add(
-                                        k3.multiply(new BigDecimal(2)).add(
-                                                k4))));
+                        h_6.multiply(
+                                k1.add(
+                                        k2.add(
+                                                k3.add(k4)
+                                        )
+                                )
+                        )
+                );
 
-                // System.out.println("yi+1 = " + yi1);
+                yi1 = yi1.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
+
+               // System.out.println("yi+1 = " + yi1);
 
                 //update xi
                 xi = xi.add(h);
+
                 // update yi
                 yi = yi1;
             }
