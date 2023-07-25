@@ -172,7 +172,7 @@ public abstract class EvaluateString {
      */
     public static BigDecimal evaluate(String expression, BigDecimal x, BigDecimal y) {
         // replace y with its value
-        expression = expression.replaceAll("y", String.valueOf(x));
+        expression = expression.replaceAll("y", String.valueOf(y));
         return evaluate(expression, x);
     }
 
@@ -295,9 +295,9 @@ public abstract class EvaluateString {
             case "*":
                 return a.multiply(b);
             case "/":
-                if (b.compareTo(new BigDecimal(0))==0)
+                if (b.compareTo(new BigDecimal(0)) == 0)
                     throw new UnsupportedOperationException("Cannot divide by zero");
-                return a.divide(b, RoundingMode.HALF_UP);
+                return a.divide(b, Accuracy.getValue(), RoundingMode.HALF_UP);
             case "log":
                 return BigDecimalUtil.ln(b, Accuracy.getValue());
             case "sqrt":
