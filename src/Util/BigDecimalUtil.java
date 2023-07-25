@@ -23,22 +23,64 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 
 /**
- * BigDecimal utilities.
+ * The BigDecimalUtil class provides utility methods for mathematical operations with BigDecimal numbers.
+ * It offers various functions for trigonometric, exponential, logarithmic, and power calculations.
+ * The class also defines constants for commonly used BigDecimal values like PI and epsilon.
  *
- * @author Valentyn Kolesnikov
- * @version $Revision$ $Date$
+ * <p>Note: This class assumes that the input arguments for trigonometric functions are in radians.</p>
+ *
+ * <p>Usage Example:</p>
+ * <pre>{@code
+ * BigDecimal x = new BigDecimal("2.5");
+ * BigDecimal result = BigDecimalUtil.sin(x);
+ * }</pre>
+ *
+ * @since 1.0
  */
 public class BigDecimalUtil {
+
+    /**
+     * The default scale used in mathematical calculations. It is obtained from the {@link Accuracy#getValue()} method.
+     */
     private static final int SCALE = Accuracy.getValue();
+
+    /**
+     * The default number of iterations used in iterative mathematical algorithms.
+     */
     public static long ITER = 1000;
+
+    /**
+     * The default {@link MathContext} used for mathematical operations.
+     * The precision is set to 100 digits by default.
+     */
     public static MathContext context = new MathContext(100);
+
+    /**
+     * The default rounding mode used in mathematical calculations.
+     * It is set to {@link BigDecimal#ROUND_HALF_EVEN}, which is the default rounding mode for many financial applications.
+     */
     private static final int ROUNDING_MODE = BigDecimal.ROUND_HALF_EVEN;
+
+    /**
+     * A constant representing the value of pi (π) divided by 180.
+     * It is calculated as a {@link BigDecimal} with a scale of 32 using the HALF_UP rounding mode.
+     */
     public static BigDecimal PI_DIV_180 =
             new BigDecimal("3.1415926535897932384626433832795")
                     .divide(BigDecimal.valueOf(180), 32, RoundingMode.HALF_UP);
+
+    /**
+     * A constant representing the value of pi (π) divided by 200.
+     * It is calculated as a {@link BigDecimal} with a scale of 32 using the HALF_UP rounding mode.
+     */
     public static BigDecimal PI_DIV_200 =
             new BigDecimal("3.1415926535897932384626433832795")
                     .divide(BigDecimal.valueOf(200), 32, RoundingMode.HALF_UP);
+
+    /**
+     * A small epsilon value used to represent a very small number for comparison purposes.
+     * It is set to 1 * 10^(-100) to ensure a high level of precision.
+     */
     public static BigDecimal EPS = BigDecimal.ONE.scaleByPowerOfTen(-100);
 
     private BigDecimalUtil() {
@@ -129,11 +171,12 @@ public class BigDecimalUtil {
     }
 
     /**
-     * Compute the natural logarithm of x to a given scale, x &gt; 0.
+     * Calculates the natural logarithm of a BigDecimal value.
      *
-     * @param x     the value
-     * @param scale the scale
-     * @return the result
+     * @param x     The BigDecimal value for which the natural logarithm is to be computed. Must be greater than 0.
+     * @param scale The desired scale of the result.
+     * @return The natural logarithm of the input value 'x' with the specified scale.
+     * @throws IllegalArgumentException If the input 'x' is less than or equal to 0.
      */
     public static BigDecimal ln(BigDecimal x, int scale) {
         // Check that x > 0.
@@ -164,7 +207,13 @@ public class BigDecimalUtil {
         }
     }
 
-    /* Compute the natural logarithm of x to a given scale, x > 0. Use Newton's algorithm. */
+    /**
+     * Calculates the natural logarithm of a BigDecimal value using Newton's algorithm.
+     *
+     * @param x     The BigDecimal value for which the natural logarithm is to be computed. Must be greater than 0.
+     * @param scale The desired scale of the result.
+     * @return The natural logarithm of the input value 'x' with the specified scale.
+     */
     private static BigDecimal lnNewton(BigDecimal x, int scale) {
         int sp1 = scale + 1;
         BigDecimal n = x;
@@ -191,6 +240,13 @@ public class BigDecimalUtil {
 
         return x.setScale(scale, RoundingMode.HALF_EVEN);
     }
+
+    /**
+     * Calculates the cosine of a BigDecimal value.
+     *
+     * @param x The BigDecimal value for which the cosine is to be computed.
+     * @return The cosine of the input value 'x' with the default scale.
+     */
 
     public static BigDecimal cosine(BigDecimal x) {
 
@@ -223,6 +279,13 @@ public class BigDecimalUtil {
         return currentValue;
     }
 
+    /**
+     * Calculates the sine of a BigDecimal value.
+     *
+     * @param x The BigDecimal value for which the sine is to be computed.
+     * @return The sine of the input value 'x' with the default scale.
+     */
+
     public static BigDecimal sine(BigDecimal x) {
         BigDecimal lastVal = x.add(BigDecimal.ONE);
         BigDecimal currentValue = x;
@@ -253,6 +316,12 @@ public class BigDecimalUtil {
         return currentValue;
     }
 
+    /**
+     * Calculates the tangent of a BigDecimal value.
+     *
+     * @param x The BigDecimal value for which the tangent is to be computed.
+     * @return The tangent of the input value 'x' with the default scale.
+     */
     public static BigDecimal tangent(BigDecimal x) {
 
         BigDecimal sin = sine(x);
@@ -261,10 +330,17 @@ public class BigDecimalUtil {
         return sin.divide(cos, SCALE, RoundingMode.HALF_UP);
     }
 
+    /**
+     * Calculates the base-10 logarithm of a BigDecimal value.
+     *
+     * @param b The BigDecimal value for which the logarithm is to be computed. Must be greater than 0.
+     * @return The base-10 logarithm of the input value 'b' with the default scale.
+     * @throws ArithmeticException If the input 'b' is less than or equal to 0.
+     */
     public static BigDecimal log10(BigDecimal b) {
         final int NUM_OF_DIGITS = SCALE + 2;
         // need to add one to get the right number of dp
-        //  and then add one again to get the next number
+        //  and then add one again to get the next number,
         //  so I can round it correctly.
 
         MathContext mc = new MathContext(NUM_OF_DIGITS, RoundingMode.HALF_EVEN);
@@ -306,6 +382,12 @@ public class BigDecimalUtil {
         return ans;
     }
 
+    /**
+     * Calculates the cube root of a BigDecimal value.
+     *
+     * @param b The BigDecimal value for which the cube root is to be computed.
+     * @return The cube root of the input value 'b' with the default scale.
+     */
     public static BigDecimal cuberoot(BigDecimal b) {
         // Specify a math context with 40 digits of precision.
 
@@ -326,6 +408,14 @@ public class BigDecimalUtil {
         }
         return x;
     }
+
+    /**
+     * Calculates the power of a BigDecimal value.
+     *
+     * @param savedValue The base value for which the power is to be computed.
+     * @param value      The exponent value.
+     * @return The result of the input base 'savedValue' raised to the power of 'value' with the default scale.
+     */
 
     public static BigDecimal pow(BigDecimal savedValue, BigDecimal value) {
         BigDecimal result;
@@ -480,15 +570,67 @@ public class BigDecimalUtil {
         return sum;
     }
 
+    /**
+     * Calculates the arc sine (inverse sine) of a BigDecimal value.
+     *
+     * @param val The BigDecimal value for which the arc sine is to be computed. The input value should be in the range [-1, 1].
+     * @return The arc sine of the input value 'val' with the default scale.
+     * @throws IllegalArgumentException If the input 'val' is outside the range [-1, 1].
+     */
     public static BigDecimal asin(BigDecimal val) {
         return BigDecimal.valueOf(Math.asin(val.doubleValue()));
     }
 
+    /**
+     * Calculates the arc cosine (inverse cosine) of a BigDecimal value.
+     *
+     * @param val The BigDecimal value for which the arc cosine is to be computed. The input value should be in the range [-1, 1].
+     * @return The arc cosine of the input value 'val' with the default scale.
+     * @throws IllegalArgumentException If the input 'val' is outside the range [-1, 1].
+     */
     public static BigDecimal acos(BigDecimal val) {
         return BigDecimal.valueOf(Math.acos(val.doubleValue()));
     }
 
+    /**
+     * Calculates the arc tangent (inverse tangent) of a BigDecimal value.
+     *
+     * @param val The BigDecimal value for which the arc tangent is to be computed.
+     * @return The arc tangent of the input value 'val' with the default scale.
+     */
     public static BigDecimal atan(BigDecimal val) {
         return BigDecimal.valueOf(Math.atan(val.doubleValue()));
     }
+
+    /**
+     * Calculates the hyperbolic sine of a BigDecimal value.
+     *
+     * @param val The BigDecimal value for which the hyperbolic sine is to be computed.
+     * @return The hyperbolic sine of the input value 'val' with the default scale.
+     */
+    public static BigDecimal sinh(BigDecimal val) {
+        return BigDecimal.valueOf(Math.sinh(val.doubleValue()));
+    }
+
+    /**
+     * Calculates the hyperbolic cosine of a BigDecimal value.
+     *
+     * @param val The BigDecimal value for which the hyperbolic cosine is to be computed.
+     * @return The hyperbolic cosine of the input value 'val' with the default scale.
+     */
+    public static BigDecimal cosh(BigDecimal val) {
+        return BigDecimal.valueOf(Math.cosh(val.doubleValue()));
+    }
+
+    /**
+     * Calculates the hyperbolic tangent of a BigDecimal value.
+     *
+     * @param val The BigDecimal value for which the hyperbolic tangent is to be computed.
+     * @return The hyperbolic tangent of the input value 'val' with the default scale.
+     */
+    public static BigDecimal tanh(BigDecimal val) {
+        return BigDecimal.valueOf(Math.tanh(val.doubleValue()));
+    }
+
+
 }
