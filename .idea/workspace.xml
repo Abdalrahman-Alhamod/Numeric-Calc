@@ -12,9 +12,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix Integral wrong answer">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix Runge_Kutta wrong answer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,11 +68,11 @@
     <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Main.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Integral.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Interpolation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/SystemOfNonLinearEquations.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Util/BigDecimalUtil.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Util/EvaluateString.java" root0="SKIP_INSPECTION" />
@@ -123,13 +123,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٧٧" summary="Fix horner floating error">
-      <created>1689540129084</created>
-      <option name="number" value="٠٠٢٧٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٧٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689540129084</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٧٨" summary="Fix horner diff bug">
       <created>1689542569565</created>
@@ -467,7 +460,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1690304186432</updated>
     </task>
-    <option name="localTasksCounter" value="326" />
+    <task id="LOCAL؜-٠٠٣٢٦" summary="Fix Runge_Kutta wrong answer">
+      <created>1690305005213</created>
+      <option name="number" value="٠٠٣٢٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٢٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690305005213</updated>
+    </task>
+    <option name="localTasksCounter" value="327" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -510,7 +510,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="PreTesting BigDecimal" />
     <MESSAGE value="Add BigDecimalUtil &amp; Accuracy classes" />
     <MESSAGE value="Convert double to BigDecimal in Functions and EvaluateString" />
     <MESSAGE value="Convert double to BigDecimal in Polynomial" />
@@ -535,6 +534,7 @@
     <MESSAGE value="Fix Accuracy bug" />
     <MESSAGE value="Fix Accuracy bug in Newton Divided Subtractions" />
     <MESSAGE value="Fix Integral wrong answer" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Integral wrong answer" />
+    <MESSAGE value="Fix Runge_Kutta wrong answer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix Runge_Kutta wrong answer" />
   </component>
 </project>

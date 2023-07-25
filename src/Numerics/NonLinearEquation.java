@@ -4,6 +4,7 @@ import Functions.ExpressionFunction;
 import Util.Accuracy;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 
 /**
@@ -12,6 +13,8 @@ import java.math.RoundingMode;
  * and Fixed-Point Iteration methods.
  */
 public abstract class NonLinearEquation {
+    private static final int loopTime = 1000;
+
     /**
      * The Bisection class provides methods for solving equations using the Bisection method.
      */
@@ -26,6 +29,7 @@ public abstract class NonLinearEquation {
          * @return The approximate root of the equation.
          */
         public static BigDecimal solve(ExpressionFunction fx, BigDecimal a, BigDecimal b, BigDecimal e) {
+            long startTime = System.currentTimeMillis();
             BigDecimal fa = fx.getValueAt(a), fb = fx.getValueAt(b);
             BigDecimal c = a;
             while ((a.subtract(b)).abs().compareTo(e) >= 0) {
@@ -41,6 +45,11 @@ public abstract class NonLinearEquation {
                 }
                 if ((a.subtract(b)).abs().compareTo(new BigDecimal(0)) == 0)
                     break;
+
+                long currentTime = System.currentTimeMillis();
+                if (currentTime - startTime >= loopTime) {
+                    break;
+                }
             }
             return c;
         }
@@ -73,6 +82,7 @@ public abstract class NonLinearEquation {
          * @return The approximate root of the equation.
          */
         public static BigDecimal solve(ExpressionFunction fx, BigDecimal a, BigDecimal b, BigDecimal e) {
+            long startTime = System.currentTimeMillis();
             BigDecimal fa = fx.getValueAt(a), fb = fx.getValueAt(b);
             BigDecimal c = a;
             while ((a.subtract(b)).abs().compareTo(e) >= 0) {
@@ -89,6 +99,11 @@ public abstract class NonLinearEquation {
                 }
                 if ((a.subtract(b)).abs().compareTo(e) < 0 || (a.subtract(b)).abs().compareTo(new BigDecimal(0)) == 0 || fc.compareTo(new BigDecimal(0)) == 0)
                     break;
+
+                long currentTime = System.currentTimeMillis();
+                if (currentTime - startTime >= loopTime) {
+                    break;
+                }
             }
             return c;
         }
@@ -120,20 +135,38 @@ public abstract class NonLinearEquation {
          * @return The approximate root of the equation.
          */
         public static BigDecimal solve(ExpressionFunction fx, BigDecimal x0, BigDecimal x1, BigDecimal e) {
+            long startTime = System.currentTimeMillis();
             BigDecimal xi_1 = x0, xi = x1;
             BigDecimal fxi_1 = fx.getValueAt(x0), fxi = fx.getValueAt(x1);
-            BigDecimal xi1 = xi_1;
+            BigDecimal xi1;
             while (true) {
-                xi1 = xi.subtract((xi.subtract(xi_1)).divide(fxi.subtract(fxi_1), Accuracy.getValue() + 3, RoundingMode.HALF_UP)).multiply(fxi);
+                xi1 = xi.subtract(
+                        (
+                                (
+                                        xi.subtract(xi_1)
+                                ).divide(
+                                        fxi.subtract(fxi_1), Accuracy.getValue() + 3, RoundingMode.HALF_UP
+                                )
+                        ).multiply(fxi)
+                );
                 //System.out.println("xi-1 : " + xi_1 + " xi : " + xi + " xi+1 : " + xi1);
                 BigDecimal fxi1 = fx.getValueAt(xi1);
                 //System.out.println("f(xi-1) : " + fxi_1 + " f(xi) : " + fxi + " f(xi+1) : " + fxi1);
                 if ((xi1.subtract(xi)).abs().compareTo(e) < 0 || (xi1.subtract(xi)).abs().compareTo(new BigDecimal(0)) == 0 || fxi1.compareTo(new BigDecimal(0)) == 0)
                     break;
                 xi_1 = xi;
+                xi_1 = xi_1.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
                 fxi_1 = fxi;
+                fxi_1 = fxi_1.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
                 xi = xi1;
+                xi = xi.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
                 fxi = fxi1;
+                fxi = fxi.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
+
+                long currentTime = System.currentTimeMillis();
+                if (currentTime - startTime >= loopTime) {
+                    break;
+                }
             }
             return xi1;
         }
@@ -165,18 +198,31 @@ public abstract class NonLinearEquation {
          * @return The approximate root of the equation.
          */
         public static BigDecimal solve(ExpressionFunction fx, ExpressionFunction dfx, BigDecimal x0, BigDecimal e) {
+            long startTime = System.currentTimeMillis();
             BigDecimal xi = x0;
             BigDecimal fxi = fx.getValueAt(xi), dfxi = dfx.getValueAt(xi);
             BigDecimal xi1;
             while (true) {
-                xi1 = xi.subtract(fxi.divide(dfxi, Accuracy.getValue() + 3, RoundingMode.HALF_UP));
+                xi1 = xi.subtract(
+                        fxi.divide(
+                                dfxi, Accuracy.getValue() + 3, RoundingMode.HALF_UP
+                        )
+                );
                 BigDecimal fxi1 = fx.getValueAt(xi1);
                 if ((xi1.subtract(xi)).abs().compareTo(e) < 0 || (xi1.subtract(xi)).abs().compareTo(new BigDecimal(0)) == 0 || fxi1.compareTo(new BigDecimal(0)) == 0)
                     break;
                 BigDecimal dfxi1 = dfx.getValueAt(xi1);
                 xi = xi1;
+                xi = xi.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
                 fxi = fxi1;
+                fxi = fxi.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
                 dfxi = dfxi1;
+                dfxi = dfxi.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
+
+                long currentTime = System.currentTimeMillis();
+                if (currentTime - startTime >= loopTime) {
+                    break;
+                }
             }
             return xi1;
         }
@@ -244,6 +290,7 @@ public abstract class NonLinearEquation {
          * @return The approximate root of the equation.
          */
         public static BigDecimal solve(ExpressionFunction fx, ExpressionFunction dfx, ExpressionFunction d2fx, BigDecimal x0, BigDecimal e) {
+            long startTime = System.currentTimeMillis();
             BigDecimal xi = x0;
             BigDecimal fxi = fx.getValueAt(xi), dfxi = dfx.getValueAt(xi), d2fxi = d2fx.getValueAt(xi);
             BigDecimal xi1;
@@ -271,9 +318,18 @@ public abstract class NonLinearEquation {
                 BigDecimal dfxi1 = dfx.getValueAt(xi1), d2fxi1 = d2fx.getValueAt(xi1);
                 //System.out.println("f(xi+1) : "+fxi1+" f'(xi+1) : "+dfxi1+" f''(xi+1) : "+d2fxi1);
                 xi = xi1;
+                xi = xi.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
                 fxi = fxi1;
+                fxi = fxi.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
                 dfxi = dfxi1;
+                dfxi = dfxi.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
                 d2fxi = d2fxi1;
+                d2fxi = d2fxi.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
+
+                long currentTime = System.currentTimeMillis();
+                if (currentTime - startTime >= loopTime) {
+                    break;
+                }
             }
             return xi1;
         }
@@ -292,6 +348,7 @@ public abstract class NonLinearEquation {
          * @return The approximate root of the equation.
          */
         public static BigDecimal solve(ExpressionFunction gx, BigDecimal x0, BigDecimal e) {
+            long startTime = System.currentTimeMillis();
             BigDecimal xi = x0;
             BigDecimal gxi = gx.getValueAt(xi);
             BigDecimal xi1;
@@ -303,7 +360,14 @@ public abstract class NonLinearEquation {
                 if ((xi1.subtract(xi)).abs().compareTo(e) < 0 || (xi1.subtract(xi)).compareTo(new BigDecimal(0)) == 0 || gxi1.compareTo(new BigDecimal(0)) == 0)
                     break;
                 xi = xi1;
+                xi = xi.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
                 gxi = gxi1;
+                gxi = gxi.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
+
+                long currentTime = System.currentTimeMillis();
+                if (currentTime - startTime >= loopTime) {
+                    break;
+                }
             }
             return xi1;
         }
