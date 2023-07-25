@@ -12,9 +12,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix Runge_Kutta wrong answer">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix SystemOfNonLinearEquations wrong answer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Util/EvaluateString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/EvaluateString.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,15 +67,15 @@
     <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Main.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Main.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Integral.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Interpolation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/SystemOfNonLinearEquations.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Util/BigDecimalUtil.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Util/EvaluateString.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Util/EvaluateString.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Util/Matrix.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -123,27 +123,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٧٨" summary="Fix horner diff bug">
-      <created>1689542569565</created>
-      <option name="number" value="٠٠٢٧٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٧٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689542569565</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٧٩" summary="Add sysOfNonLinEqs solution&#10;Add polynomials solution">
-      <created>1689543588790</created>
-      <option name="number" value="٠٠٢٧٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٧٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689543588790</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٨٠" summary="Fix forward and backward subtraction bug">
-      <created>1689548213890</created>
-      <option name="number" value="٠٠٢٨٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٨٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689548213890</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٨١" summary="Fix and enhance interpolation and diff inputs">
       <created>1689548719698</created>
@@ -467,7 +446,28 @@
       <option name="project" value="LOCAL؜" />
       <updated>1690305005213</updated>
     </task>
-    <option name="localTasksCounter" value="327" />
+    <task id="LOCAL؜-٠٠٣٢٧" summary="Fix NonLinearEquation wrong answer and set time to loops">
+      <created>1690308330337</created>
+      <option name="number" value="٠٠٣٢٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٢٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690308330337</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٢٨" summary="Fix SystemOfNonLinearEquations wrong answer">
+      <created>1690311309440</created>
+      <option name="number" value="٠٠٣٢٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٢٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690311309440</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٢٩" summary="Fix SystemOfNonLinearEquations wrong answer">
+      <created>1690311669175</created>
+      <option name="number" value="٠٠٣٢٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٢٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690311669175</updated>
+    </task>
+    <option name="localTasksCounter" value="330" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -510,8 +510,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add BigDecimalUtil &amp; Accuracy classes" />
-    <MESSAGE value="Convert double to BigDecimal in Functions and EvaluateString" />
     <MESSAGE value="Convert double to BigDecimal in Polynomial" />
     <MESSAGE value="Convert double to BigDecimal in Matrix" />
     <MESSAGE value="Convert double to BigDecimal in Integral" />
@@ -535,6 +533,8 @@
     <MESSAGE value="Fix Accuracy bug in Newton Divided Subtractions" />
     <MESSAGE value="Fix Integral wrong answer" />
     <MESSAGE value="Fix Runge_Kutta wrong answer" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Runge_Kutta wrong answer" />
+    <MESSAGE value="Fix NonLinearEquation wrong answer and set time to loops" />
+    <MESSAGE value="Fix SystemOfNonLinearEquations wrong answer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix SystemOfNonLinearEquations wrong answer" />
   </component>
 </project>

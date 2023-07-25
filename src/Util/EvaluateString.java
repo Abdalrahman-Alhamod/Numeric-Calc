@@ -2,6 +2,7 @@ package Util;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Stack;
 
@@ -20,40 +21,28 @@ public abstract class EvaluateString {
     public static BigDecimal evaluate(String expression) {
         expression = expression.replaceAll("pi", Double.toString(Math.PI)); // replace string Pi with its value
         expression = expression.replaceAll("\\s", ""); // Remove all whitespace characters from the expression
-        char[] tokens = expression.toCharArray();
+        ArrayList<Character> tokens = stringToCharArrayList(expression);
 
         // Stack for numbers: 'values'
         Stack<BigDecimal> values = new Stack<>();
         // Stack for Operators: 'ops'
         Stack<String> ops = new Stack<>();
 
-        for (int i = 0; i < tokens.length; i++) {
-            String preOp = "1";
-            if (i > 0)
-                preOp = Character.toString(tokens[i - 1]);
-
-            if ((i == 0 && tokens[i] == '-') && Character.isDigit(tokens[i + 1]) ||
-                    i > 0 && tokens[i] == '-' && (preOp.equals("(") || isExp(preOp) ||
-                            isTrigonometric(preOp) || isLogSqrtExp(preOp) ||
-                            isMulDiv(preOp) || isAddSub(preOp)) && Character.isDigit(tokens[i + 1])) {
-                i++;
-                StringBuilder sb = new StringBuilder();
-
-                // Extract the whole number or decimal part
-                while (i < tokens.length && (Character.isDigit(tokens[i]) || tokens[i] == '.'))
-                    sb.append(tokens[i++]);
-                values.push(new BigDecimal(sb.toString()).multiply(new BigDecimal(-1)));
-                // Right now the 'i' points to the character next to the number,
-                // Since the for loop also increases 'i', we need to decrease the value of 'i' by 1 to correct the offset.
+        for (int i = 0; i < tokens.size(); i++) {
+            if (i == 0 && tokens.get(i) == '-') {
+                tokens.add(0, '0');
+                i--;
+            } else if (i > 0 && tokens.get(i) == '-' && !Character.isDigit(tokens.get(i - 1))) {
+                tokens.add(i, '0');
                 i--;
             }
             // Current token is a number, push it to stack for numbers
-            else if (Character.isDigit(tokens[i]) || tokens[i] == '.') {
+            else if (Character.isDigit(tokens.get(i)) || tokens.get(i) == '.') {
                 StringBuilder sb = new StringBuilder();
 
                 // Extract the whole number or decimal part
-                while (i < tokens.length && (Character.isDigit(tokens[i]) || tokens[i] == '.'))
-                    sb.append(tokens[i++]);
+                while (i < tokens.size() && (Character.isDigit(tokens.get(i)) || tokens.get(i) == '.'))
+                    sb.append(tokens.get(i++));
                 values.push(new BigDecimal(sb.toString()));
 
                 // Right now the 'i' points to the character next to the number,
@@ -62,11 +51,11 @@ public abstract class EvaluateString {
             }
 
             // Current token is an opening brace, push it to 'ops'
-            else if (tokens[i] == '(')
-                ops.push(String.valueOf(tokens[i]));
+            else if (tokens.get(i) == '(')
+                ops.push(String.valueOf(tokens.get(i)));
 
                 // Closing brace encountered, solve the entire brace
-            else if (tokens[i] == ')') {
+            else if (tokens.get(i) == ')') {
                 while (!Objects.equals(ops.peek(), "(")) {
                     String op = ops.peek();
                     if (isLogSqrtExp(op) || isTrigonometric(op))
@@ -77,55 +66,55 @@ public abstract class EvaluateString {
                 ops.pop();
             }
             // Handle the log operator
-            else if (tokens[i] == 'l' && i + 2 < tokens.length && tokens[i + 1] == 'o' && tokens[i + 2] == 'g') {
+            else if (tokens.get(i) == 'l' && i + 2 < tokens.size() && tokens.get(i + 1) == 'o' && tokens.get(i + 2) == 'g') {
                 ops.push("log");
                 i += 2;
             }
             // Handle the sqrt operator
-            else if (tokens[i] == 's' && i + 3 < tokens.length && tokens[i + 1] == 'q' && tokens[i + 2] == 'r' && tokens[i + 3] == 't') {
+            else if (tokens.get(i) == 's' && i + 3 < tokens.size() && tokens.get(i + 1) == 'q' && tokens.get(i + 2) == 'r' && tokens.get(i + 3) == 't') {
                 ops.push("sqrt");
                 i += 3;
             }
             // Handle the exp operator
-            else if (tokens[i] == 'e' && i + 2 < tokens.length && tokens[i + 1] == 'x' && tokens[i + 2] == 'p') {
+            else if (tokens.get(i) == 'e' && i + 2 < tokens.size() && tokens.get(i + 1) == 'x' && tokens.get(i + 2) == 'p') {
                 ops.push("exp");
                 i += 2;
             }
             // Handle the sin operator
-            else if (tokens[i] == 's' && i + 2 < tokens.length && tokens[i + 1] == 'i' && tokens[i + 2] == 'n') {
+            else if (tokens.get(i) == 's' && i + 2 < tokens.size() && tokens.get(i + 1) == 'i' && tokens.get(i + 2) == 'n') {
                 ops.push("sin");
                 i += 2;
             }
             // Handle the cos operator
-            else if (tokens[i] == 'c' && i + 2 < tokens.length && tokens[i + 1] == 'o' && tokens[i + 2] == 's') {
+            else if (tokens.get(i) == 'c' && i + 2 < tokens.size() && tokens.get(i + 1) == 'o' && tokens.get(i + 2) == 's') {
                 ops.push("cos");
                 i += 2;
             }
             // Handle the tan operator
-            else if (tokens[i] == 't' && i + 2 < tokens.length && tokens[i + 1] == 'a' && tokens[i + 2] == 'n') {
+            else if (tokens.get(i) == 't' && i + 2 < tokens.size() && tokens.get(i + 1) == 'a' && tokens.get(i + 2) == 'n') {
                 ops.push("tan");
                 i += 2;
             }
             // Handle the asin operator
-            else if (tokens[i] == 'a' && i + 3 < tokens.length && tokens[i + 1] == 's' && tokens[i + 2] == 'i' && tokens[i + 3] == 'n') {
+            else if (tokens.get(i) == 'a' && i + 3 < tokens.size() && tokens.get(i + 1) == 's' && tokens.get(i + 2) == 'i' && tokens.get(i + 3) == 'n') {
                 ops.push("asin");
                 i += 3;
             }
             // Handle the acos operator
-            else if (tokens[i] == 'a' && i + 3 < tokens.length && tokens[i + 1] == 'c' && tokens[i + 2] == 'o' && tokens[i + 3] == 's') {
+            else if (tokens.get(i) == 'a' && i + 3 < tokens.size() && tokens.get(i + 1) == 'c' && tokens.get(i + 2) == 'o' && tokens.get(i + 3) == 's') {
                 ops.push("acos");
                 i += 3;
             }
             // Handle the atan operator
-            else if (tokens[i] == 'a' && i + 3 < tokens.length && tokens[i + 1] == 't' && tokens[i + 2] == 'a' && tokens[i + 3] == 'n') {
+            else if (tokens.get(i) == 'a' && i + 3 < tokens.size() && tokens.get(i + 1) == 't' && tokens.get(i + 2) == 'a' && tokens.get(i + 3) == 'n') {
                 ops.push("atan");
                 i += 3;
             }
             // Current token is an operator
-            else if (tokens[i] == '+' || tokens[i] == '-' || tokens[i] == '*' || tokens[i] == '/' || tokens[i] == '^') {
+            else if (tokens.get(i) == '+' || tokens.get(i) == '-' || tokens.get(i) == '*' || tokens.get(i) == '/' || tokens.get(i) == '^') {
                 // While the top of 'ops' has the same or greater precedence to the current token, which is an operator.
                 // Apply the operator on top of 'ops' to the top two elements in the values stack
-                while (!ops.empty() && hasPrecedence(String.valueOf(tokens[i]), ops.peek())) {
+                while (!ops.empty() && hasPrecedence(String.valueOf(tokens.get(i)), ops.peek())) {
                     String op = ops.peek();
                     if (isLogSqrtExp(op) || isTrigonometric(op))
                         values.push(applyOp(ops.pop(), values.pop(), new BigDecimal(0)));
@@ -133,7 +122,7 @@ public abstract class EvaluateString {
                         values.push(applyOp(ops.pop(), values.pop(), values.pop()));
                 }
                 // Push the current token to 'ops'
-                ops.push(String.valueOf(tokens[i]));
+                ops.push(String.valueOf(tokens.get(i)));
             }
         }
         // Entire expression has been parsed at this point, apply remaining ops to remaining values
@@ -202,27 +191,6 @@ public abstract class EvaluateString {
     private static boolean isHigherPrecedence(String op1, String op2) {
         return (isLogSqrtExp(op1) && !isLogSqrtExp(op2)) || isTrigonometric(op1) && !isTrigonometric(op2) ||
                 (isExp(op1) && !isLogSqrtExp(op2)) || (isMulDiv(op1) && isAddSub(op2));
-    }
-
-    /**
-     * Checks if op1 and op2 have the same precedence.
-     *
-     * @param op1 The first operator.
-     * @param op2 The second operator.
-     * @return True if op1 and op2 have the same precedence, false otherwise.
-     */
-    private static boolean isSamePrecedence(String op1, String op2) {
-        return (isMulDiv(op1) && isMulDiv(op2)) || (isAddSub(op1) && isAddSub(op2)) || (isExp(op1) && isExp(op2));
-    }
-
-    /**
-     * Checks if op is left associative.
-     *
-     * @param op The operator.
-     * @return True if op is left associative, false otherwise.
-     */
-    private static boolean isLeftAssociative(String op) {
-        return isAddSub(op) || isMulDiv(op) || isExp(op);
     }
 
     /**
@@ -320,5 +288,24 @@ public abstract class EvaluateString {
                 return BigDecimalUtil.atan(b);
         }
         return new BigDecimal(0);
+    }
+
+    /**
+     * Converts a given string into an ArrayList of Characters.
+     * <p>
+     * This method takes a String as input and returns an ArrayList of Characters. Each character in the string is
+     * added as an individual element to the ArrayList. The order of characters in the ArrayList will be the same as
+     * their appearance in the original string.
+     *
+     * @param inputString The string to be converted into an ArrayList of Characters.
+     * @return An ArrayList containing individual characters from the input string.
+     * @throws NullPointerException If the inputString is null.
+     */
+    private static ArrayList<Character> stringToCharArrayList(String inputString) {
+        ArrayList<Character> charList = new ArrayList<>();
+        for (char c : inputString.toCharArray()) {
+            charList.add(c);
+        }
+        return charList;
     }
 }
