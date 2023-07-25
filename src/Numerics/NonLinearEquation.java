@@ -30,7 +30,7 @@ public abstract class NonLinearEquation {
             BigDecimal c = a;
             while ((a.subtract(b)).abs().compareTo(e) >= 0) {
                 //System.out.println("a : " + a + " b : " + b + " c : " + c);
-                c = (a.add(b)).divide(new BigDecimal(2), Accuracy.getValue(), RoundingMode.HALF_UP);
+                c = (a.add(b)).divide(new BigDecimal(2), Accuracy.getValue() + 3, RoundingMode.HALF_UP);
                 BigDecimal fc = fx.getValueAt(c);
                 if (fc.multiply(fa).compareTo(new BigDecimal(0)) < 0) {
                     b = c;
@@ -76,7 +76,7 @@ public abstract class NonLinearEquation {
             BigDecimal fa = fx.getValueAt(a), fb = fx.getValueAt(b);
             BigDecimal c = a;
             while ((a.subtract(b)).abs().compareTo(e) >= 0) {
-                c = ((a.multiply(fb)).subtract(b.multiply(fa))).divide(fb.subtract(fa), Accuracy.getValue(), RoundingMode.HALF_UP);
+                c = ((a.multiply(fb)).subtract(b.multiply(fa))).divide(fb.subtract(fa), Accuracy.getValue() + 3, RoundingMode.HALF_UP);
                 //System.out.println("a : " + a + " b : " + b + " c : " + c);
                 BigDecimal fc = fx.getValueAt(c);
                 //System.out.println("fa : " + fa + " fb : " + fb + " fc : " + fc);
@@ -124,7 +124,7 @@ public abstract class NonLinearEquation {
             BigDecimal fxi_1 = fx.getValueAt(x0), fxi = fx.getValueAt(x1);
             BigDecimal xi1 = xi_1;
             while (true) {
-                xi1 = xi.subtract((xi.subtract(xi_1)).divide(fxi.subtract(fxi_1), Accuracy.getValue(), RoundingMode.HALF_UP)).multiply(fxi);
+                xi1 = xi.subtract((xi.subtract(xi_1)).divide(fxi.subtract(fxi_1), Accuracy.getValue() + 3, RoundingMode.HALF_UP)).multiply(fxi);
                 //System.out.println("xi-1 : " + xi_1 + " xi : " + xi + " xi+1 : " + xi1);
                 BigDecimal fxi1 = fx.getValueAt(xi1);
                 //System.out.println("f(xi-1) : " + fxi_1 + " f(xi) : " + fxi + " f(xi+1) : " + fxi1);
@@ -169,7 +169,7 @@ public abstract class NonLinearEquation {
             BigDecimal fxi = fx.getValueAt(xi), dfxi = dfx.getValueAt(xi);
             BigDecimal xi1;
             while (true) {
-                xi1 = xi.subtract(fxi.divide(dfxi, Accuracy.getValue(), RoundingMode.HALF_UP));
+                xi1 = xi.subtract(fxi.divide(dfxi, Accuracy.getValue() + 3, RoundingMode.HALF_UP));
                 BigDecimal fxi1 = fx.getValueAt(xi1);
                 if ((xi1.subtract(xi)).abs().compareTo(e) < 0 || (xi1.subtract(xi)).abs().compareTo(new BigDecimal(0)) == 0 || fxi1.compareTo(new BigDecimal(0)) == 0)
                     break;
@@ -207,7 +207,7 @@ public abstract class NonLinearEquation {
 
         public static BigDecimal solveRange(ExpressionFunction fx, ExpressionFunction dfx, BigDecimal a, BigDecimal b, BigDecimal e) {
             BigDecimal fa = fx.getValueAt(a), dfa = dfx.getValueAt(a);
-            BigDecimal x = a.subtract(fa.divide(dfa, Accuracy.getValue(), RoundingMode.HALF_UP));
+            BigDecimal x = a.subtract(fa.divide(dfa, Accuracy.getValue() + 3, RoundingMode.HALF_UP));
             if (x.compareTo(a) >= 0 && x.compareTo(b) <= 0)
                 return solve(fx, dfx, a, e);
             else
@@ -257,12 +257,12 @@ public abstract class NonLinearEquation {
                                                         dfxi.multiply(
                                                                 new BigDecimal(2)
                                                         )
-                                                        , Accuracy.getValue(), RoundingMode.HALF_UP
+                                                        , Accuracy.getValue() + 3, RoundingMode.HALF_UP
                                                 )
                                         ).multiply(
                                                 fxi
                                         )
-                                ), Accuracy.getValue(), RoundingMode.HALF_UP)
+                                ), Accuracy.getValue() + 3, RoundingMode.HALF_UP)
                 );
                 //System.out.println(" xi : " + xi + " xi+1 : " + xi1);
                 BigDecimal fxi1 = fx.getValueAt(xi1);

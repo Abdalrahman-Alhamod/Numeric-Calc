@@ -47,7 +47,7 @@ public abstract class Differentiation {
             // Divide the multiplied polynomials ( (x - x0 ) * (x - x1) .. (x - xj) * (x - xj+1) ..)
             // on scalar ( (xj - x0 ) * (xj - x1 ) ... (xj - xj-1) * (xj - xj+1)..)
             // which is Lagrange Polynomial
-            lag = lag.multiply(new BigDecimal(1).divide(scalar, Accuracy.getValue(), RoundingMode.HALF_UP));
+            lag = lag.multiply(new BigDecimal(1).divide(scalar, Accuracy.getValue() + 3, RoundingMode.HALF_UP));
             return lag.getDerivative();
         }
 
@@ -122,7 +122,7 @@ public abstract class Differentiation {
                 // reaching first element of the current columns ( upper diameter element)
                 if (i == 0) {
                     // reaching zeros ; no more terms
-                    if (temp.compareTo(new BigDecimal(0))==0)
+                    if (temp.compareTo(new BigDecimal(0)) == 0)
                         break;
                     // add the current element to result
                     res.add(temp);
@@ -167,14 +167,14 @@ public abstract class Differentiation {
                 // get the temporary value of xi+1 - xi
                 BigDecimal temp = (xp.get(i + 1).subtract(xp.get(i)));
                 // if the temporary value do not equal h => the step is invalid
-                if (temp.compareTo(h)!=0) {
+                if (temp.compareTo(h) != 0) {
                     throw new ArithmeticException("step h is not static");
                 }
             }
             // Creating P Polynomial with a0 = -x0 and a1 = 1 ; x - x0
             Polynomial P = new Polynomial(xp.get(0).multiply(new BigDecimal(-1)), new BigDecimal(1));
             // Dividing P on h
-            P = P.multiply(new BigDecimal(1).divide(h, Accuracy.getValue(), RoundingMode.HALF_UP));
+            P = P.multiply(new BigDecimal(1).divide(h, Accuracy.getValue() + 3, RoundingMode.HALF_UP));
             // Initialize the result Polynomial (Differentiation Polynomial by Newton-Gregory Forward)
             // with 0 to add it to other Polynomials
             Polynomial res = new Polynomial(new BigDecimal(0));
@@ -220,11 +220,11 @@ public abstract class Differentiation {
                     factorial = factorial.multiply(new BigDecimal(j));
                 }
                 // Dividing Newton-Gregory Forward Polynomial by n!
-                NGFPoly = NGFPoly.multiply(new BigDecimal(1).divide(factorial, Accuracy.getValue(), RoundingMode.HALF_UP));
+                NGFPoly = NGFPoly.multiply(new BigDecimal(1).divide(factorial, Accuracy.getValue() + 3, RoundingMode.HALF_UP));
                 // add this Newton-Gregory Forward Polynomial to result
                 res = res.add(NGFPoly);
             }
-            res = res.multiply(new BigDecimal(1).divide(BigDecimalUtil.pow(h, new BigDecimal(rank)), Accuracy.getValue(), RoundingMode.HALF_UP));
+            res = res.multiply(new BigDecimal(1).divide(BigDecimalUtil.pow(h, new BigDecimal(rank)), Accuracy.getValue() + 3, RoundingMode.HALF_UP));
             return res;
         }
     }
@@ -271,7 +271,7 @@ public abstract class Differentiation {
                 // reaching last element of the current columns ( Lower diameter element)
                 if (i == n - 2) {
                     // reaching zeros ; no more terms
-                    if (temp.compareTo(new BigDecimal(0))!=0)
+                    if (temp.compareTo(new BigDecimal(0)) != 0)
                         break;
                     // add the current element to result
                     res.add(temp);
@@ -317,14 +317,14 @@ public abstract class Differentiation {
                 // get the temporary value of xi+1 - xi
                 BigDecimal temp = (xp.get(i + 1).subtract(xp.get(i)));
                 // if the temporary value do not equal h => the step is invalid
-                if (temp.compareTo(h)!=0) {
+                if (temp.compareTo(h) != 0) {
                     throw new ArithmeticException("step h is not static");
                 }
             }
             // Creating S Polynomial with a0 = -xn and a1 = 1 ; x - xn
             Polynomial S = new Polynomial(xp.get(xp.size() - 1).multiply(new BigDecimal(-1)), new BigDecimal(1));
             // Dividing S on h
-            S = S.multiply(new BigDecimal(1).divide(h, Accuracy.getValue(), RoundingMode.HALF_UP));
+            S = S.multiply(new BigDecimal(1).divide(h, Accuracy.getValue() + 3, RoundingMode.HALF_UP));
             // Initialize the result Polynomial (Differentiation Polynomial by Newton-Gregory Backward)
             // with 0 to add it to other Polynomials
             Polynomial res = new Polynomial(new BigDecimal(0));
@@ -370,11 +370,11 @@ public abstract class Differentiation {
                     factorial = factorial.multiply(new BigDecimal(j));
                 }
                 // Dividing Newton-Gregory Backward Polynomial by n!
-                NGBPoly = NGBPoly.multiply(new BigDecimal(1).divide(factorial, Accuracy.getValue(), RoundingMode.HALF_UP));
+                NGBPoly = NGBPoly.multiply(new BigDecimal(1).divide(factorial, Accuracy.getValue() + 3, RoundingMode.HALF_UP));
                 // add this Newton-Gregory Backward Polynomial to result
                 res = res.add(NGBPoly);
             }
-            res = res.multiply(new BigDecimal(1).divide(BigDecimalUtil.pow(h, new BigDecimal(rank)), Accuracy.getValue(), RoundingMode.HALF_UP));
+            res = res.multiply(new BigDecimal(1).divide(BigDecimalUtil.pow(h, new BigDecimal(rank)), Accuracy.getValue() + 3, RoundingMode.HALF_UP));
             return res;
         }
     }
@@ -414,7 +414,7 @@ public abstract class Differentiation {
                     // get the temporary value of xi+1 - xi
                     BigDecimal temp = (xp.get(i + 1).subtract(xp.get(i)));
                     // if the temporary value do not equal h => the step is invalid
-                    if (temp.compareTo(h)!=0) {
+                    if (temp.compareTo(h) != 0) {
                         throw new ArithmeticException("step h is not static");
                     }
                 }
@@ -427,7 +427,7 @@ public abstract class Differentiation {
                 else if (index == -1)
                     throw new ArithmeticException("invalid inputs : element do not exist");
                 // apply the law : (yi+1 - yi-1) / 2*h
-                BigDecimal res = (yp.get(index + 1).subtract(yp.get(index - 1))).divide(h.multiply(new BigDecimal(2)), Accuracy.getValue(), RoundingMode.HALF_UP);
+                BigDecimal res = (yp.get(index + 1).subtract(yp.get(index - 1))).divide(h.multiply(new BigDecimal(2)), Accuracy.getValue() + 3, RoundingMode.HALF_UP);
                 return res;
             }
         }
@@ -461,7 +461,7 @@ public abstract class Differentiation {
                     // get the temporary value of xi+1 - xi
                     BigDecimal temp = (xp.get(i + 1).subtract(xp.get(i)));
                     // if the temporary value do not equal h => the step is invalid
-                    if (temp.compareTo(h)!=0) {
+                    if (temp.compareTo(h) != 0) {
                         throw new ArithmeticException("step h is not static");
                     }
                 }
@@ -472,7 +472,7 @@ public abstract class Differentiation {
                 else if (index == -1)
                     throw new ArithmeticException("invalid inputs : element do not exist");
                 // apply the law : (yi+1 - yi) / h
-                BigDecimal res = (yp.get(index + 1).subtract(yp.get(index))).divide(h, Accuracy.getValue(), RoundingMode.HALF_UP);
+                BigDecimal res = (yp.get(index + 1).subtract(yp.get(index))).divide(h, Accuracy.getValue() + 3, RoundingMode.HALF_UP);
                 return res;
             }
         }
@@ -506,7 +506,7 @@ public abstract class Differentiation {
                     // get the temporary value of xi+1 - xi
                     BigDecimal temp = (xp.get(i + 1).subtract(xp.get(i)));
                     // if the temporary value do not equal h => the step is invalid
-                    if (temp.compareTo(h)!=0) {
+                    if (temp.compareTo(h) != 0) {
                         throw new ArithmeticException("step h is not static");
                     }
                 }
@@ -517,7 +517,7 @@ public abstract class Differentiation {
                 else if (index == -1)
                     throw new ArithmeticException("invalid inputs : element do not exist");
                 // apply the law : (yi - yi-1) / h
-                BigDecimal res = (yp.get(index).subtract(yp.get(index - 1))).divide(h, Accuracy.getValue(), RoundingMode.HALF_UP);
+                BigDecimal res = (yp.get(index).subtract(yp.get(index - 1))).divide(h, Accuracy.getValue() + 3, RoundingMode.HALF_UP);
                 return res;
             }
         }

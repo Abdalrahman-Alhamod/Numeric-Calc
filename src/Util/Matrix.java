@@ -369,7 +369,7 @@ public class Matrix {
 
             BigDecimal lv = a.get(r).get(lead);
             for (int j = 0; j < colCount; j++)
-                a.get(r).set(j, a.get(r).get(j).divide(lv, Accuracy.getValue(), RoundingMode.HALF_UP));
+                a.get(r).set(j, a.get(r).get(j).divide(lv, Accuracy.getValue() + 3, RoundingMode.HALF_UP));
 
             for (i = 0; i < rowCount; i++) {
                 if (i != r) {

@@ -5,6 +5,7 @@ import Util.BigDecimalUtil;
 import Util.EvaluateString;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -86,9 +87,9 @@ public class Polynomial implements Function {
             if (coeff.compareTo(new BigDecimal(0)) != 0) { // If the coefficient is nonzero
                 if (i == 0) { // If the term is the constant term
                     if (sb.isEmpty()) {
-                        sb.append(coeff.stripTrailingZeros()); // Append the coefficient
+                        sb.append(fixAccuracy(coeff)); // Append the coefficient
                     } else {
-                        sb.append(coeff.abs().stripTrailingZeros()); // Append the coefficient
+                        sb.append(fixAccuracy(coeff.abs())); // Append the coefficient
                     }
                 } else if (i == 1) { // If the term is the linear term
                     if (sb.isEmpty()) {
@@ -97,13 +98,13 @@ public class Polynomial implements Function {
                         } else if (coeff.compareTo(new BigDecimal(-1)) == 0) {
                             sb.append("-x");
                         } else { // If the coefficient is not 1 or -1
-                            sb.append(coeff.stripTrailingZeros()).append(" ").append("x"); // Append the coefficient, variable symbol, and exponent
+                            sb.append(fixAccuracy(coeff)).append(" ").append("x"); // Append the coefficient, variable symbol, and exponent
                         }
                     } else {
                         if (coeff.compareTo(new BigDecimal(1)) == 0 || coeff.compareTo(new BigDecimal(-1)) == 0) { // If the coefficient is 1 or -1
                             sb.append("x"); // Append the variable symbol
                         } else { // If the coefficient is not 1 or -1
-                            sb.append(coeff.abs().stripTrailingZeros()).append(" ").append("x"); // Append the coefficient and variable symbol
+                            sb.append(fixAccuracy(coeff.abs())).append(" ").append("x"); // Append the coefficient and variable symbol
                         }
                     }
                 } else { // If the term is a higher-order term
@@ -113,13 +114,13 @@ public class Polynomial implements Function {
                         } else if (coeff.compareTo(new BigDecimal(-1)) == 0) {
                             sb.append("-x^").append(i);
                         } else { // If the coefficient is not 1 or -1
-                            sb.append(coeff.stripTrailingZeros()).append(" ").append("x^").append(i); // Append the coefficient, variable symbol, and exponent
+                            sb.append(fixAccuracy(coeff)).append(" ").append("x^").append(i); // Append the coefficient, variable symbol, and exponent
                         }
                     } else {
                         if (coeff.compareTo(new BigDecimal(1)) == 0) { // If the coefficient is 1 or -1
                             sb.append("x^").append(i); // Append the variable symbol and exponent
                         } else { // If the coefficient is not 1 or -1
-                            sb.append(coeff.abs().stripTrailingZeros()).append(" ").append("x^").append(i); // Append the coefficient, variable symbol, and exponent
+                            sb.append(fixAccuracy(coeff.abs())).append(" ").append("x^").append(i); // Append the coefficient, variable symbol, and exponent
                         }
                     }
                 }
@@ -171,7 +172,10 @@ public class Polynomial implements Function {
 
         for (int i = 0; i < n; i++) { // Iterate through the coefficient list
             BigDecimal coeff = coeffs.get(i); // Get the coefficient at index i in the original polynomial
-            integralCoeffs.add(coeff.divide(new BigDecimal(i + 1), Accuracy.getValue(), RoundingMode.HALF_UP)); // Divide the coefficient by (i + 1) and add it to the integral coefficient list
+            // Divide the coefficient by (i + 1) and add it to the integral coefficient list
+            BigDecimal newCoeff = coeff.divide(new BigDecimal(i + 1), Accuracy.getValue() + 3, RoundingMode.HALF_UP);
+            newCoeff = newCoeff.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
+            integralCoeffs.add(newCoeff);
         }
 
         return new Polynomial(integralCoeffs); // Create a new Polynomial object using the integral coefficient list and return it
@@ -366,7 +370,8 @@ public class Polynomial implements Function {
         else if (n <= 0)
             throw new ArithmeticException("invalid inputs : n cannot be smaller or equal to zero");
         n--;
-        BigDecimal h = (b.subtract(a)).divide(new BigDecimal(n), Accuracy.getValue(), RoundingMode.HALF_UP);
+        BigDecimal h = (b.subtract(a)).divide(new BigDecimal(n), Accuracy.getValue() + 3, RoundingMode.HALF_UP);
+        h = h.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
         ArrayList<BigDecimal> xp = new ArrayList<>();
         ArrayList<BigDecimal> yp = new ArrayList<>();
         BigDecimal curr = new BigDecimal(a.toString());
@@ -482,6 +487,15 @@ public class Polynomial implements Function {
             return bi.multiply(factor);
         }
 
+    }
+
+    /**
+     * Fix the Accuracy to its main value
+     * @param num the number to fix its precision
+     * @return a new BigDecimal representing the fixed number's precision stripped from trailing zeros
+     */
+    private BigDecimal fixAccuracy(BigDecimal num) {
+        return num.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP)).stripTrailingZeros();
     }
 
 }

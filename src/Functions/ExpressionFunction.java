@@ -5,6 +5,7 @@ import Util.Accuracy;
 import Util.EvaluateString;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -113,7 +114,8 @@ public class ExpressionFunction implements Function {
      */
     public PointsFunction toPointsFunction(BigDecimal a, BigDecimal b, int n) {
         n--;
-        BigDecimal h = (b.subtract(a)).divide(new BigDecimal(n), Accuracy.getValue(), RoundingMode.HALF_UP);
+        BigDecimal h = (b.subtract(a)).divide(new BigDecimal(n), Accuracy.getValue() + 3, RoundingMode.HALF_UP);
+        h = h.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
         ArrayList<BigDecimal> xp = new ArrayList<>();
         ArrayList<BigDecimal> yp = new ArrayList<>();
         BigDecimal curr = new BigDecimal(a.toString());

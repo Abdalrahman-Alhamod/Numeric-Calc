@@ -94,7 +94,7 @@ public class DifferentialEquation {
                             eqs.get(i).getValueAt(xi, yi).multiply(
                                     BigDecimalUtil.pow(h, new BigDecimal(i + 1)).multiply(
                                             new BigDecimal(1).divide(
-                                                    factor, Accuracy.getValue(), RoundingMode.HALF_UP))));
+                                                    factor, Accuracy.getValue() + 3, RoundingMode.HALF_UP))));
                 }
                 // update yi+1
                 yi1 = sum;
@@ -126,7 +126,7 @@ public class DifferentialEquation {
          */
         private static BigDecimal solve(DifferentialEquation eq, BigDecimal x0, BigDecimal y0, BigDecimal h, BigDecimal x, BigDecimal a2) {
             BigDecimal a1 = new BigDecimal(new BigDecimal(1).subtract(a2).toString());
-            BigDecimal p = new BigDecimal(1).divide(a2.multiply(new BigDecimal(2)), Accuracy.getValue(), RoundingMode.HALF_UP), q = new BigDecimal(1).divide(a2.multiply(new BigDecimal(2)), Accuracy.getValue(), RoundingMode.HALF_UP);
+            BigDecimal p = new BigDecimal(1).divide(a2.multiply(new BigDecimal(2)), Accuracy.getValue() + 3, RoundingMode.HALF_UP), q = new BigDecimal(1).divide(a2.multiply(new BigDecimal(2)), Accuracy.getValue() + 3, RoundingMode.HALF_UP);
             // init yi = y0 , xi = x0,  yi+1 = 0
             BigDecimal yi = new BigDecimal(y0.toString()), xi = new BigDecimal(x0.toString()), yi1 = new BigDecimal(0);
             while (xi.compareTo(x) != 0) {
@@ -202,7 +202,7 @@ public class DifferentialEquation {
              * @return The approximate value of y at x.
              */
             public static BigDecimal solve(DifferentialEquation eq, BigDecimal x0, BigDecimal y0, BigDecimal h, BigDecimal x) {
-                return MidPoint.solve(eq, x0, y0, h, x, (new BigDecimal(2).divide(new BigDecimal(3), Accuracy.getValue(), RoundingMode.HALF_UP)));
+                return MidPoint.solve(eq, x0, y0, h, x, (new BigDecimal(2).divide(new BigDecimal(3), Accuracy.getValue() + 3, RoundingMode.HALF_UP)));
 
             }
         }
@@ -250,7 +250,7 @@ public class DifferentialEquation {
 
                 // update yi+1 = yi + (h/6) [ k1 + 2k2 + 2k3 + k4 ]
                 yi1 = yi.add(
-                        h.divide(new BigDecimal(6), Accuracy.getValue(), RoundingMode.HALF_UP)).multiply(
+                        h.divide(new BigDecimal(6), Accuracy.getValue() + 3, RoundingMode.HALF_UP)).multiply(
                         k1.add(
                                 k2.multiply(new BigDecimal(2)).add(
                                         k3.multiply(new BigDecimal(2)).add(

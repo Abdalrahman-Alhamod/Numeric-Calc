@@ -50,7 +50,7 @@ public abstract class SystemOfNonLinearEquations {
                 BigDecimal xi1 = xi.subtract(
                         new BigDecimal(1).divide(
                                 j
-                                , Accuracy.getValue(), RoundingMode.HALF_UP)
+                                , Accuracy.getValue() + 3, RoundingMode.HALF_UP)
                 ).multiply(
                         (
                                 fx_xi_yi.multiply(
@@ -68,7 +68,7 @@ public abstract class SystemOfNonLinearEquations {
                 BigDecimal yi1 = yi.add(
                         new BigDecimal(1).divide(
                                 j
-                                , Accuracy.getValue(), RoundingMode.HALF_UP
+                                , Accuracy.getValue() + 3, RoundingMode.HALF_UP
                         )
                 ).multiply(
                         (

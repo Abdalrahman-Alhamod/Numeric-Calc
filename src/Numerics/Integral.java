@@ -33,7 +33,7 @@ public abstract class Integral {
             throw new ArithmeticException("invalid inputs : a cannot be greater or equal to b");
         else if (n <= 0)
             throw new ArithmeticException("invalid inputs : n cannot be smaller or equal to 0");
-        BigDecimal h = (b.subtract(a)).divide(new BigDecimal(n), Accuracy.getValue(), RoundingMode.HALF_UP);
+        BigDecimal h = (b.subtract(a)).divide(new BigDecimal(n), Accuracy.getValue() + 3, RoundingMode.HALF_UP);
         BigDecimal sum = new BigDecimal(0);
         BigDecimal value = a;
         for (int i = 0; i <= n - 1; i++) {
@@ -63,7 +63,7 @@ public abstract class Integral {
             throw new ArithmeticException("invalid inputs : a cannot be greater or equal to b");
         else if (n <= 0)
             throw new ArithmeticException("invalid inputs : n cannot be smaller or equal to 0");
-        BigDecimal h = (b.subtract(a)).divide(new BigDecimal(n), Accuracy.getValue(), RoundingMode.HALF_UP);
+        BigDecimal h = (b.subtract(a)).divide(new BigDecimal(n), Accuracy.getValue() + 3, RoundingMode.HALF_UP);
         BigDecimal sum = new BigDecimal(0);
         sum = sum.add(func.getValueAt(a).add(func.getValueAt(b)));
         BigDecimal value = a.add(h);
@@ -73,7 +73,7 @@ public abstract class Integral {
         }
         //Calculating Error
         //e = ((b - a) / 12) * Math.pow(h, 2) * (Math.max(func.getDiffAt(a, 2), func.getDiffAt(b, 2)));
-        sum = sum.multiply(h.divide(new BigDecimal(2), Accuracy.getValue(), RoundingMode.HALF_UP));
+        sum = sum.multiply(h.divide(new BigDecimal(2), Accuracy.getValue() + 3, RoundingMode.HALF_UP));
         return sum;
     }
 
@@ -96,7 +96,7 @@ public abstract class Integral {
             throw new ArithmeticException("invalid inputs : n cannot be smaller or equal to 0");
         else if (n % 2 != 0)
             throw new ArithmeticException("invalid inputs : n is not even");
-        BigDecimal h = (b.subtract(a)).divide(new BigDecimal(n), Accuracy.getValue(), RoundingMode.HALF_UP);
+        BigDecimal h = (b.subtract(a)).divide(new BigDecimal(n), Accuracy.getValue() + 3, RoundingMode.HALF_UP);
         BigDecimal sum = new BigDecimal(0);
         sum = sum.add(func.getValueAt(a).add(func.getValueAt(b)));
         BigDecimal value = a.add(h);
@@ -109,7 +109,7 @@ public abstract class Integral {
         }
         //Calculating Error
         //e = ((b - a) / 180) * Math.pow(h, 4) * (Math.max(func.getDiffAt(a, 4), func.getDiffAt(b, 4)));
-        sum = sum.multiply(h.divide(new BigDecimal(3), Accuracy.getValue(), RoundingMode.HALF_UP));
+        sum = sum.multiply(h.divide(new BigDecimal(3), Accuracy.getValue() + 3, RoundingMode.HALF_UP));
         return sum;
     }
 
@@ -132,7 +132,7 @@ public abstract class Integral {
             throw new ArithmeticException("invalid inputs : n cannot be smaller or equal to 0");
         else if (n % 3 != 0)
             throw new ArithmeticException("invalid inputs : n is not divisible by 3");
-        BigDecimal h = (b.subtract(a)).divide(new BigDecimal(n), Accuracy.getValue(), RoundingMode.HALF_UP);
+        BigDecimal h = (b.subtract(a)).divide(new BigDecimal(n), Accuracy.getValue() + 3, RoundingMode.HALF_UP);
         BigDecimal sum = new BigDecimal(0);
         sum = sum.add(func.getValueAt(a).add(func.getValueAt(b)));
         BigDecimal value = a.add(h);
@@ -145,7 +145,7 @@ public abstract class Integral {
         }
         //Calculating Error
         //e = ((b - a) / 80) * Math.pow(h, 4) * (Math.max(func.getDiffAt(a, 4), func.getDiffAt(b, 4)));
-        sum = sum.multiply(h.divide(new BigDecimal(8), Accuracy.getValue(), RoundingMode.HALF_UP)).multiply(new BigDecimal(3));
+        sum = sum.multiply(h.divide(new BigDecimal(8), Accuracy.getValue() + 3, RoundingMode.HALF_UP)).multiply(new BigDecimal(3));
         return sum;
     }
 
@@ -168,7 +168,7 @@ public abstract class Integral {
             throw new ArithmeticException("invalid inputs : n cannot be smaller or equal to 0");
         else if (n % 4 != 0)
             throw new ArithmeticException("invalid inputs : n is not divisible by 4");
-        BigDecimal h = (b.subtract(a)).divide(new BigDecimal(n), Accuracy.getValue(), RoundingMode.HALF_UP);
+        BigDecimal h = (b.subtract(a)).divide(new BigDecimal(n), Accuracy.getValue() + 3, RoundingMode.HALF_UP);
         BigDecimal sum = new BigDecimal(0);
         sum = sum.add(func.getValueAt(a).multiply(new BigDecimal(7)).add(func.getValueAt(b).multiply(new BigDecimal(7))));
         BigDecimal value = a.add(h);
@@ -183,7 +183,7 @@ public abstract class Integral {
         }
         //Calculating Error
         //e = (2 * (b - a) / 945) * Math.pow(h, 6) * (Math.max(func.getDiffAt(a, 6), func.getDiffAt(b, 6)));
-        sum = sum.multiply(h.divide(new BigDecimal(45), Accuracy.getValue(), RoundingMode.HALF_UP)).multiply(new BigDecimal(2));
+        sum = sum.multiply(h.divide(new BigDecimal(45), Accuracy.getValue() + 3, RoundingMode.HALF_UP)).multiply(new BigDecimal(2));
         return sum;
     }
 

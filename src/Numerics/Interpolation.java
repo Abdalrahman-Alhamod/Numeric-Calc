@@ -85,8 +85,7 @@ public abstract class Interpolation {
             // Divide the multiplied polynomials ( (x - x0 ) * (x - x1) .. (x - xj) * (x - xj+1) ..)
             // on scalar ( (xj - x0 ) * (xj - x1 ) ... (xj - xj-1) * (xj - xj+1)..)
             // which is Lagrange Polynomial
-            scalar = new BigDecimal(1).divide(scalar, Accuracy.getValue() + 1, RoundingMode.HALF_UP);
-            scalar = scalar.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
+            scalar = new BigDecimal(1).divide(scalar, Accuracy.getValue() + 3, RoundingMode.HALF_UP);
             lag = lag.multiply(scalar);
             return lag;
         }
@@ -145,13 +144,12 @@ public abstract class Interpolation {
                     }
                 }
                 // to divide on the scalar => make 1/scalar and multiply with it
-                scalar = new BigDecimal(1).divide(scalar, Accuracy.getValue() + 1, RoundingMode.UP);
+                scalar = new BigDecimal(1).divide(scalar, Accuracy.getValue() + 3, RoundingMode.UP);
                 // divide yi on scalar ( (xj - x0 ) * (xj - x1 ) ... (xj - xj-1) * (xj - xj+1) )
                 scalar = scalar.multiply(yp.get(i));
-                scalar = scalar.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
                 // if scalar = 1.0 don't append it => don't make (1.0 x +..) do (x + ...)
                 if (scalar.compareTo(new BigDecimal(1)) != 0) {
-                    sb.append(scalar.stripTrailingZeros());
+                    sb.append(fixAccuracy(scalar));
                     sb.append(" ");
                 }
                 for (int j = 0; j < xp.size(); j++) {
@@ -265,7 +263,7 @@ public abstract class Interpolation {
             // Creating P Polynomial with a0 = -x0 and a1 = 1 ; x - x0
             Polynomial P = new Polynomial(new BigDecimal(-1).multiply(xp.get(0)), new BigDecimal(1));
             // Dividing P on h
-            P = P.multiply(new BigDecimal(1).divide(h, Accuracy.getValue(), RoundingMode.HALF_UP));
+            P = P.multiply(new BigDecimal(1).divide(h, Accuracy.getValue() + 3, RoundingMode.HALF_UP));
             // Initialize the result Polynomial (Interpolation Polynomial by Newton-Gregory Forward)
             // with 0 to add it to other Polynomials
             Polynomial res = new Polynomial(new BigDecimal(0));
@@ -298,7 +296,7 @@ public abstract class Interpolation {
                     factorial = factorial.multiply(new BigDecimal(j));
                 }
                 // Dividing Newton-Gregory Forward Polynomial by n!
-                NGFPoly = NGFPoly.multiply(new BigDecimal(1).divide(factorial, Accuracy.getValue(), RoundingMode.HALF_UP));
+                NGFPoly = NGFPoly.multiply(new BigDecimal(1).divide(factorial, Accuracy.getValue() + 3, RoundingMode.HALF_UP));
                 // add this Newton-Gregory Forward Polynomial to result
                 res = res.add(NGFPoly);
             }
@@ -337,12 +335,12 @@ public abstract class Interpolation {
             // if the y0 != 0
             if (df0.get(0).compareTo(new BigDecimal(0)) != 0) {
                 // Adding f0 with formatted string value ; if y0 = 1.0 => append 1
-                sb.append(df0.get(0).stripTrailingZeros());
+                sb.append(fixAccuracy(df0.get(0)));
             }
             // Creating P Polynomial with a0 = -x0 and a1 = 1 ; x - x0
             Polynomial P = new Polynomial(xp.get(0).multiply(new BigDecimal(-1)), new BigDecimal(1));
             // Dividing P on h
-            P = P.multiply(new BigDecimal(1).divide(h, Accuracy.getValue(), RoundingMode.HALF_UP));
+            P = P.multiply(new BigDecimal(1).divide(h, Accuracy.getValue() + 3, RoundingMode.HALF_UP));
             for (int i = 1; i <= degree; i++) {
                 // reaching zeros in the upper diameter values
                 if (i >= df0.size())
@@ -354,7 +352,7 @@ public abstract class Interpolation {
                     factorial = factorial.multiply(new BigDecimal(j));
                 }
                 // init a temporary value with the answer of dividing df0 on n!
-                BigDecimal temp = df0.get(i).multiply(new BigDecimal(1).divide(factorial, Accuracy.getValue(), RoundingMode.HALF_UP));
+                BigDecimal temp = df0.get(i).multiply(new BigDecimal(1).divide(factorial, Accuracy.getValue() + 3, RoundingMode.HALF_UP));
                 // reaching zeros
                 if (temp.compareTo(new BigDecimal(0)) == 0)
                     break;
@@ -362,7 +360,7 @@ public abstract class Interpolation {
                 else if (!sb.isEmpty())
                     sb.append(" + ");
                 // append the temporary value to result ; df0/n!
-                sb.append(temp.stripTrailingZeros());
+                sb.append(fixAccuracy(temp));
                 // append P with practices ; (x-x0/h)
                 sb.append(" ");
                 sb.append('(');
@@ -470,7 +468,7 @@ public abstract class Interpolation {
             // Creating S Polynomial with a0 = -xn and a1 = 1 ; x - xn
             Polynomial S = new Polynomial(xp.get(xp.size() - 1).multiply(new BigDecimal(-1)), new BigDecimal(1)); // Creating S Polynomial
             // Dividing S on h
-            S = S.multiply(new BigDecimal(1).divide(h, Accuracy.getValue(), RoundingMode.HALF_UP));
+            S = S.multiply(new BigDecimal(1).divide(h, Accuracy.getValue() + 3, RoundingMode.HALF_UP));
             // Initialize the result Polynomial (Interpolation Polynomial by Newton-Gregory Backward)
             // with 0 to add it to other Polynomials
             Polynomial res = new Polynomial(new BigDecimal(0));
@@ -503,7 +501,7 @@ public abstract class Interpolation {
                     factorial = factorial.multiply(new BigDecimal(j));
                 }
                 // Dividing Newton-Gregory Backward Polynomial by n!
-                NGBPoly = NGBPoly.multiply(new BigDecimal(1).divide(factorial, Accuracy.getValue(), RoundingMode.HALF_UP));
+                NGBPoly = NGBPoly.multiply(new BigDecimal(1).divide(factorial, Accuracy.getValue() + 3, RoundingMode.HALF_UP));
                 // add this Newton-Gregory Backward Polynomial to result
                 res = res.add(NGBPoly);
             }
@@ -542,12 +540,12 @@ public abstract class Interpolation {
             // if yn != 0
             if (dfn.get(0).compareTo(new BigDecimal(0)) != 0) {
                 // Adding yn with formatted string value ; if y0 = 1.0 => append 1
-                sb.append(dfn.get(0).stripTrailingZeros());
+                sb.append(fixAccuracy(dfn.get(0)));
             }
             // Creating S Polynomial with a0 = -xn and a1 = 1 ; x - xn
             Polynomial S = new Polynomial(xp.get(xp.size() - 1).multiply(new BigDecimal(-1)), new BigDecimal(1));
             // Dividing S on h
-            S = S.multiply(new BigDecimal(1).divide(h, Accuracy.getValue(), RoundingMode.HALF_UP));
+            S = S.multiply(new BigDecimal(1).divide(h, Accuracy.getValue() + 3, RoundingMode.HALF_UP));
             for (int i = 1; i <= degree; i++) {
                 // reaching zeros ; no more terms
                 if (i >= dfn.size())
@@ -559,7 +557,7 @@ public abstract class Interpolation {
                     factorial = factorial.multiply(new BigDecimal(j));
                 }
                 // init a temporary value with the answer of dividing dfn on n!
-                BigDecimal temp = dfn.get(i).multiply(new BigDecimal(1).divide(factorial, Accuracy.getValue(), RoundingMode.HALF_UP));
+                BigDecimal temp = dfn.get(i).multiply(new BigDecimal(1).divide(factorial, Accuracy.getValue() + 3, RoundingMode.HALF_UP));
                 //reaching zeros
                 if (temp.compareTo(new BigDecimal(0)) == 0)
                     break;
@@ -567,7 +565,7 @@ public abstract class Interpolation {
                 else if (!sb.isEmpty())
                     sb.append(" + ");
                 // append the temporary value to result ; dfn/n!
-                sb.append(temp.stripTrailingZeros());
+                sb.append(fixAccuracy(temp));
                 // append S with practices ; (x-xn/h)
                 sb.append(" ");
                 sb.append('(');
@@ -632,7 +630,7 @@ public abstract class Interpolation {
                 // get xi+j value
                 xi1 = xp.get(i + j);
                 // get current element result
-                temp = (yi1.subtract(yi)).divide(xi1.subtract(xi), Accuracy.getValue(), RoundingMode.HALF_UP);
+                temp = (yi1.subtract(yi)).divide(xi1.subtract(xi), Accuracy.getValue() + 3, RoundingMode.HALF_UP);
                 // add the current element to the queue
                 q.add(temp);
                 // reaching the start of the column c
@@ -723,7 +721,7 @@ public abstract class Interpolation {
             // the answer of interpolation by Newton Divides Forward
             StringBuilder sb = new StringBuilder();
             // append y0 to answer
-            sb.append(f0.get(0).stripTrailingZeros());
+            sb.append(fixAccuracy(f0.get(0)));
             for (int i = 1; i <= degree; i++) {
                 // reaching zeros
                 if (i >= f0.size())
@@ -731,7 +729,7 @@ public abstract class Interpolation {
                 // append ' + ' to make .. + ..
                 sb.append(" + ");
                 // append f0i to answer
-                sb.append(f0.get(i).stripTrailingZeros());
+                sb.append(fixAccuracy(f0.get(i)));
                 sb.append(" ");
                 for (int j = 0; j < i; j++) {
                     //init the current poly with the values
@@ -793,7 +791,7 @@ public abstract class Interpolation {
                 // get xi+j value
                 xi1 = xp.get(i + add);
                 // get current element result
-                temp = (yi1.subtract(yi)).divide(xi1.subtract(xi), Accuracy.getValue(), RoundingMode.HALF_UP);
+                temp = (yi1.subtract(yi)).divide(xi1.subtract(xi), Accuracy.getValue() + 3, RoundingMode.HALF_UP);
                 // add the current element to the queue
                 q.add(temp);
                 // reaching the end of the column c
@@ -884,7 +882,7 @@ public abstract class Interpolation {
             // the answer of interpolation by Newton Divides Forward
             StringBuilder sb = new StringBuilder();
             // append yn to answer
-            sb.append(fn.get(0).stripTrailingZeros());
+            sb.append(fixAccuracy(fn.get(0)));
             for (int i = 1; i <= degree; i++) {
                 // reaching zeros
                 if (i >= fn.size())
@@ -892,7 +890,7 @@ public abstract class Interpolation {
                 // append ' + ' to make .. + ..
                 sb.append(" + ");
                 // append fni to answer
-                sb.append(fn.get(i).stripTrailingZeros());
+                sb.append(fixAccuracy(fn.get(i)));
                 sb.append(" ");
                 for (int j = 0; j < i; j++) {
                     //init the current poly with the values
@@ -984,7 +982,7 @@ public abstract class Interpolation {
             ArrayList<Polynomial> S = new ArrayList<>(yp.size() - 1);
             for (int i = 0; i < yp.size() - 1; i++) {
                 // init a scalar for the result of : (yi+1 - yi) / (xi+1 - xi)
-                BigDecimal scalar = (yp.get(i + 1).subtract(yp.get(i))).divide(xp.get(i + 1).subtract(xp.get(i)), Accuracy.getValue(), RoundingMode.HALF_UP);
+                BigDecimal scalar = (yp.get(i + 1).subtract(yp.get(i))).divide(xp.get(i + 1).subtract(xp.get(i)), Accuracy.getValue() + 3, RoundingMode.HALF_UP);
                 // init curr Polynomial with a0 = -xi , a1 = 1 ; x - xi
                 Polynomial curr = new Polynomial(xp.get(i).multiply(new BigDecimal(-1)), new BigDecimal(1));
                 // multiply the curr Polynomial by scalar value
@@ -1000,5 +998,13 @@ public abstract class Interpolation {
         }
     }
 
+    /**
+     * Fix the Accuracy to its main value
+     * @param num the number to fix its precision
+     * @return a new BigDecimal representing the fixed number's precision stripped from trailing zeros
+     */
+    private static BigDecimal fixAccuracy(BigDecimal num) {
+        return num.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP)).stripTrailingZeros();
+    }
 
 }

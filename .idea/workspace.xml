@@ -12,11 +12,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix Accuracy in Lagrange short Hand Polynomial">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix EvaluateString bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Functions/ExpressionFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/ExpressionFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Functions/Polynomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/Polynomial.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Terminal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Terminal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Util/Accuracy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/Accuracy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Numerics/Differentiation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/Differentiation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Numerics/Integral.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/Integral.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Numerics/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/Interpolation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Numerics/SystemOfNonLinearEquations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/SystemOfNonLinearEquations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Util/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/Matrix.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,19 +74,19 @@
     <setting file="file://$PROJECT_DIR$/src/Functions/ExpressionFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Function.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Main.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Integral.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Numerics/Interpolation.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Numerics/Interpolation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/SystemOfNonLinearEquations.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Terminal.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Util/BigDecimalUtil.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Util/BigDecimalUtil.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Util/EvaluateString.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Util/Matrix.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Util/Matrix.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -127,41 +133,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٦٩" summary="Add integrals solutions">
-      <created>1689465103004</created>
-      <option name="number" value="٠٠٢٦٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٦٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689465103004</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٧٠" summary="Add diffs solutions&#10;Fix interpolation and integral dialogs">
-      <created>1689467467559</created>
-      <option name="number" value="٠٠٢٧٠" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٧٠" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689467467559</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٧١" summary="Enhance , clean up GUI">
-      <created>1689467570267</created>
-      <option name="number" value="٠٠٢٧١" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٧١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689467570267</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٧٢" summary="Add Terminal class and ove the code to it from the main method">
-      <created>1689511024194</created>
-      <option name="number" value="٠٠٢٧٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٧٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689511024194</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٧٣" summary="Add differential equations solution">
-      <created>1689523954359</created>
-      <option name="number" value="٠٠٢٧٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٧٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689523954359</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٧٤" summary="Add keyboard icons">
       <created>1689523978622</created>
@@ -471,7 +442,42 @@
       <option name="project" value="LOCAL؜" />
       <updated>1690210293795</updated>
     </task>
-    <option name="localTasksCounter" value="318" />
+    <task id="LOCAL؜-٠٠٣١٨" summary="Fix Matrix 0^j exception">
+      <created>1690212689865</created>
+      <option name="number" value="٠٠٣١٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣١٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690212689865</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣١٩" summary="Testing new changes">
+      <created>1690212746541</created>
+      <option name="number" value="٠٠٣١٩" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣١٩" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690212746541</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٢٠" summary="Fix Euler bug">
+      <created>1690214524783</created>
+      <option name="number" value="٠٠٣٢٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٢٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690214524783</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٢١" summary="Fix pow in BigDecimalUtil">
+      <created>1690297686260</created>
+      <option name="number" value="٠٠٣٢١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٢١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690297686262</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٢٢" summary="Fix EvaluateString bugs">
+      <created>1690297777801</created>
+      <option name="number" value="٠٠٣٢٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٢٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690297777801</updated>
+    </task>
+    <option name="localTasksCounter" value="323" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -514,11 +520,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add SwingUtilities.invokeLater for thread safety" />
-    <MESSAGE value="Add Dark Mode" />
-    <MESSAGE value="Add JAVA DOC to Dark Mode class" />
-    <MESSAGE value="Testing translation" />
-    <MESSAGE value="Add theme button &#10;Add dark theme Flatlaf&#10;Removing non-usable elements" />
     <MESSAGE value="Fix JAR" />
     <MESSAGE value="Fix polynomials function" />
     <MESSAGE value="Update JAR" />
@@ -539,6 +540,11 @@
     <MESSAGE value="Fix printing ' + ' in Polynomial" />
     <MESSAGE value="Fix showing trailing zeros" />
     <MESSAGE value="Fix Accuracy in Lagrange short Hand Polynomial" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Accuracy in Lagrange short Hand Polynomial" />
+    <MESSAGE value="Fix Matrix 0^j exception" />
+    <MESSAGE value="Testing new changes" />
+    <MESSAGE value="Fix Euler bug" />
+    <MESSAGE value="Fix pow in BigDecimalUtil" />
+    <MESSAGE value="Fix EvaluateString bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix EvaluateString bugs" />
   </component>
 </project>
