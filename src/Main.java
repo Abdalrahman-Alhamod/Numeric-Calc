@@ -1,8 +1,5 @@
-
-import Util.BigDecimalUtil;
-
 import javax.swing.*;
-import java.math.BigDecimal;
+
 
 /**
  * Author :
@@ -27,7 +24,6 @@ import java.math.BigDecimal;
  */
 public class Main {
     public static void main(String[] args) {
-        // new Terminal();
         SwingUtilities.invokeLater(GUI::new);
     }
 }

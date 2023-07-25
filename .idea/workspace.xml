@@ -12,18 +12,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix EvaluateString bugs">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix Accuracy bug in Newton Divided Subtractions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Functions/ExpressionFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/ExpressionFunction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Functions/Polynomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/Polynomial.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Numerics/Differentiation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/Differentiation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Numerics/Integral.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/Integral.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Numerics/Interpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/Interpolation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Numerics/SystemOfNonLinearEquations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numerics/SystemOfNonLinearEquations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Util/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/Matrix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Terminal.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,14 +69,13 @@
     <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Main.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Main.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Numerics/Integral.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Numerics/Integral.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Interpolation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/SystemOfNonLinearEquations.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Terminal.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Util/BigDecimalUtil.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Util/EvaluateString.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Util/Matrix.java" root0="SKIP_INSPECTION" />
@@ -133,20 +125,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٧٤" summary="Add keyboard icons">
-      <created>1689523978622</created>
-      <option name="number" value="٠٠٢٧٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٧٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689523978622</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٧٥" summary="Add nin-linear equations solution">
-      <created>1689528905808</created>
-      <option name="number" value="٠٠٢٧٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٧٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689528905808</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٧٦" summary="Fix horner bug">
       <created>1689539787029</created>
@@ -477,7 +455,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1690297777801</updated>
     </task>
-    <option name="localTasksCounter" value="323" />
+    <task id="LOCAL؜-٠٠٣٢٣" summary="Fix Accuracy bug">
+      <created>1690300502858</created>
+      <option name="number" value="٠٠٣٢٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٢٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690300502858</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٢٤" summary="Fix Accuracy bug in Newton Divided Subtractions">
+      <created>1690301761746</created>
+      <option name="number" value="٠٠٣٢٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٢٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690301761746</updated>
+    </task>
+    <option name="localTasksCounter" value="325" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -520,8 +512,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fix JAR" />
-    <MESSAGE value="Fix polynomials function" />
     <MESSAGE value="Update JAR" />
     <MESSAGE value="PreTesting BigDecimal" />
     <MESSAGE value="Add BigDecimalUtil &amp; Accuracy classes" />
@@ -545,6 +535,8 @@
     <MESSAGE value="Fix Euler bug" />
     <MESSAGE value="Fix pow in BigDecimalUtil" />
     <MESSAGE value="Fix EvaluateString bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix EvaluateString bugs" />
+    <MESSAGE value="Fix Accuracy bug" />
+    <MESSAGE value="Fix Accuracy bug in Newton Divided Subtractions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix Accuracy bug in Newton Divided Subtractions" />
   </component>
 </project>

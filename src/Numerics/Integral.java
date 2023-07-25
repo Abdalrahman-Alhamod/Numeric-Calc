@@ -42,7 +42,7 @@ public abstract class Integral {
         }
         //Calculating Error
         //e = ((b - a) / 2) * h * (Math.max(func.getDiffAt(a, 1), func.getDiffAt(b, 1)));
-        sum = sum.add(h);
+        sum = sum.multiply(h);
         return sum;
     }
 
