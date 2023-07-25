@@ -80,6 +80,21 @@ public abstract class EvaluateString {
                 ops.push("exp");
                 i += 2;
             }
+            // Handle the sinh operator
+            else if (tokens.get(i) == 's' && i + 3 < tokens.size() && tokens.get(i + 1) == 'i' && tokens.get(i + 2) == 'n' && tokens.get(i + 3) == 'h') {
+                ops.push("sinh");
+                i += 3;
+            }
+            // Handle the cosh operator
+            else if (tokens.get(i) == 'c' && i + 3 < tokens.size() && tokens.get(i + 1) == 'o' && tokens.get(i + 2) == 's' && tokens.get(i + 3) == 'h') {
+                ops.push("cosh");
+                i += 3;
+            }
+            // Handle the tanh operator
+            else if (tokens.get(i) == 't' && i + 3 < tokens.size() && tokens.get(i + 1) == 'a' && tokens.get(i + 2) == 'n' && tokens.get(i + 3) == 'h') {
+                ops.push("tanh");
+                i += 3;
+            }
             // Handle the sin operator
             else if (tokens.get(i) == 's' && i + 2 < tokens.size() && tokens.get(i + 1) == 'i' && tokens.get(i + 2) == 'n') {
                 ops.push("sin");
@@ -286,6 +301,12 @@ public abstract class EvaluateString {
                 return BigDecimalUtil.acos(b);
             case "atan":
                 return BigDecimalUtil.atan(b);
+            case "sinh":
+                return BigDecimalUtil.sinh(b);
+            case "cosh":
+                return BigDecimalUtil.cosh(b);
+            case "tanh":
+                return BigDecimalUtil.tanh(b);
         }
         return new BigDecimal(0);
     }
