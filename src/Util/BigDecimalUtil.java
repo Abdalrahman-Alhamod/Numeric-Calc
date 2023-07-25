@@ -328,8 +328,23 @@ public class BigDecimalUtil {
     }
 
     public static BigDecimal pow(BigDecimal savedValue, BigDecimal value) {
-        BigDecimal result = null;
-        result = exp(ln(savedValue, 32).multiply(value), 32);
+        BigDecimal result;
+        // x^y : if x==0 and y>0 => answer = 0
+        if (savedValue.compareTo(new BigDecimal(0)) == 0 && value.compareTo(new BigDecimal(0)) > 0)
+            result = new BigDecimal(0);
+            // x^y : if x==0 and y==0 => answer = 1
+        else if (savedValue.compareTo(new BigDecimal(0)) == 0 && value.compareTo(new BigDecimal(0)) == 0)
+            result = new BigDecimal(1);
+            // x^y : if x==0 and y<0 => answer = -Infinity mean -1E10
+        else if (savedValue.compareTo(new BigDecimal(0)) == 0 && value.compareTo(new BigDecimal(0)) < 0)
+            result = BigDecimal.valueOf(-1E10);
+            // x^y : if x<0 => answer = |x|^y * -1^y
+        else if (savedValue.compareTo(new BigDecimal(0)) < 0) {
+            int sign = (int) Math.pow(-1, Double.parseDouble(value.toString()));
+            savedValue = savedValue.multiply(new BigDecimal(-1));
+            result = exp(ln(savedValue, 32).multiply(value), 32).multiply(new BigDecimal(sign));
+        } else
+            result = exp(ln(savedValue, 32).multiply(value), 32);
         return result;
     }
 
