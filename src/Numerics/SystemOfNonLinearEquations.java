@@ -51,8 +51,7 @@ public abstract class SystemOfNonLinearEquations {
                 BigDecimal xi1 = xi.subtract(
                         (
                                 new BigDecimal(1).divide(
-                                        j
-                                        , Accuracy.getValue() + 3, RoundingMode.HALF_UP)
+                                        j, Accuracy.getValue() + 3, RoundingMode.HALF_UP)
                         ).multiply(
                                 (
                                         fx_xi_yi.multiply(
@@ -66,14 +65,13 @@ public abstract class SystemOfNonLinearEquations {
                         )
                 );
                 xi1 = xi1.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
-                System.out.println("xi+1 : " + xi1);
+                //System.out.println("xi+1 : " + xi1);
                 xip.add(xi1);
 
                 BigDecimal yi1 = yi.add(
                         (
                                 new BigDecimal(1).divide(
-                                        j
-                                        , Accuracy.getValue() + 3, RoundingMode.HALF_UP
+                                        j, Accuracy.getValue() + 3, RoundingMode.HALF_UP
                                 )
                         ).multiply(
                                 (
@@ -88,7 +86,7 @@ public abstract class SystemOfNonLinearEquations {
                         )
                 );
                 yi1 = yi1.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
-                System.out.println("yi+1 : " + yi1);
+                //System.out.println("yi+1 : " + yi1);
                 yip.add(yi1);
 
                 xi = xi1;
