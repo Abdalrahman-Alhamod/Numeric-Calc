@@ -4,6 +4,7 @@ import Functions.ExpressionFunction;
 import Util.Accuracy;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 
@@ -48,40 +49,46 @@ public abstract class SystemOfNonLinearEquations {
                 //System.out.println("j : " + j);
 
                 BigDecimal xi1 = xi.subtract(
-                        new BigDecimal(1).divide(
-                                j
-                                , Accuracy.getValue() + 3, RoundingMode.HALF_UP)
-                ).multiply(
                         (
-                                fx_xi_yi.multiply(
-                                        dgdy_xi_yi
-                                )
-                        ).subtract(
-                                gx_xi_yi.multiply(
-                                        dfdy_xi_yi
+                                new BigDecimal(1).divide(
+                                        j
+                                        , Accuracy.getValue() + 3, RoundingMode.HALF_UP)
+                        ).multiply(
+                                (
+                                        fx_xi_yi.multiply(
+                                                dgdy_xi_yi
+                                        )
+                                ).subtract(
+                                        gx_xi_yi.multiply(
+                                                dfdy_xi_yi
+                                        )
                                 )
                         )
                 );
-                //System.out.println("xi+1 : " + xi1);
+                xi1 = xi1.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
+                System.out.println("xi+1 : " + xi1);
                 xip.add(xi1);
 
                 BigDecimal yi1 = yi.add(
-                        new BigDecimal(1).divide(
-                                j
-                                , Accuracy.getValue() + 3, RoundingMode.HALF_UP
-                        )
-                ).multiply(
                         (
-                                fx_xi_yi.multiply(
-                                        dgdx_xi_yi
+                                new BigDecimal(1).divide(
+                                        j
+                                        , Accuracy.getValue() + 3, RoundingMode.HALF_UP
                                 )
-                        ).subtract(
-                                gx_xi_yi.multiply(
-                                        dfdx_xi_yi
+                        ).multiply(
+                                (
+                                        fx_xi_yi.multiply(
+                                                dgdx_xi_yi
+                                        )
+                                ).subtract(
+                                        gx_xi_yi.multiply(
+                                                dfdx_xi_yi
+                                        )
                                 )
                         )
                 );
-                ///System.out.println("yi+1 : " + yi1);
+                yi1 = yi1.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP));
+                System.out.println("yi+1 : " + yi1);
                 yip.add(yi1);
 
                 xi = xi1;
