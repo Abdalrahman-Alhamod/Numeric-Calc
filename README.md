@@ -119,27 +119,23 @@ Evaluate functions based on expressions , supported function :
 ## Usage
 > Numerical Analysis Calculator provides a user-friendly and intuitive interface for interacting with the application Examples :
 
-> ![Screenshot 2023-07-17 163527](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/assets/137921143/76a6b8e5-1018-44b7-ad06-44d91a5a4c40)
+> ![Screenshot 2023-07-26 054849](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/assets/137921143/3fa1a77a-f696-4b84-a125-5de038b3999d)
 
-> ![Screenshot 2023-07-17 163601](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/assets/137921143/a1eeb5c5-0bfb-425d-97db-755d9a585de7)
+> ![Screenshot 2023-07-26 055021](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/assets/137921143/0374db70-14b9-4148-bd76-61649d93fd1f)
 
-> ![Screenshot 2023-07-17 163634](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/assets/137921143/a90c670f-f647-4fd0-adac-c4812661546f)
+> ![Screenshot 2023-07-26 055128](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/assets/137921143/55b4eaf8-33dc-45c7-9a82-cdcfb76f08bc)
 
-> ![Screenshot 2023-07-17 163751](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/assets/137921143/c8f424d8-df9a-4146-956c-a7179302aadd)
+> ![Screenshot 2023-07-26 055228](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/assets/137921143/4be42e0c-73e3-4a92-9d21-1880053099b7)
 
-> ![Screenshot 2023-07-17 163759](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/assets/137921143/38ef1101-177c-46ae-b3fd-b0f458cf67c0)
+
+
 
 
 
 ## Installation
-- This project comes with two installer .One for Windows and one for Unix system :
+- This project comes with two installer. One for Windows and one for Unix system :
 
-> [Windows Installer](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/v2.0.0/Numerical_Analysis_Calculator_Windows_Installer.exe)
+> [Windows Installer](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/3.0.0/Numerical_Analysis_Calculator_Windows_Installer.exe)
 
-> [Unix Installer](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/v2.0.0/Numerical_Analysis_Calculator_Unix_Installer.sh)
+> [Unix Installer](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/3.0.0/Numerical_Analysis_Calculator_Unix_Installer.sh)
 
-- New Version with updated Theme and Dark Mode
-
-> [Windows Installer](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/v2.3.0/Numerical_Analysis_Calculator_Unix_Installer.sh)
-
-> [Unix Installer](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/v2.3.0/Numerical_Analysis_Calculator_Unix_Installer.sh)
