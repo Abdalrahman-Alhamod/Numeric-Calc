@@ -4,8 +4,11 @@ import Functions.Polynomial;
 import Numerics.*;
 import Util.Accuracy;
 import Util.EvaluateString;
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.intellijthemes.*;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightIJTheme;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -30,107 +33,104 @@ import java.util.function.Consumer;
  * a visual interface for the user to interact with and perform various mathematical
  * operations such as interpolation, integration, differentiation, solving equations, etc.
  */
+@SuppressWarnings("all")
 public class GUI {
+    /**
+     * The main font used in the GUI.
+     */
+    private final String mainFont = "Times New Roman";
+    /**
+     * The secondary font used in the GUI.
+     */
+    private final String secondFont = "Times New Roman";
+    /**
+     * The font used for buttons.
+     */
+    private final String buttonFont = "Times New Roman";
+    /**
+     * A boolean representing the current theme
+     */
+    boolean darkModeEnabled;
     /**
      * The main frame of the application.
      */
     private JFrame mainFrame;
-
     /**
      * The panel displayed at the start of the application.
      */
     private JPanel startPanel;
-
     /**
      * The panel for choosing a function type.
      */
     private JPanel chooseFunctionPanel;
-
     /**
      * The panel for performing interpolation.
      */
     private JPanel interpolationPanel;
-
     /**
      * The panel for performing integration.
      */
     private JPanel integralPanel;
-
     /**
      * The panel for performing differentiation.
      */
     private JPanel differentiationPanel;
-
     /**
      * The panel for solving differential equations.
      */
     private JPanel differentialEquationsPanel;
-
     /**
      * The panel for solving non-linear equations.
      */
     private JPanel nonLinearEquationsPanel;
-
     /**
      * The panel for solving systems of non-linear equations.
      */
     private JPanel systemOfNonLinearEquationsPanel;
-
     /**
      * The panel for polynomial operations.
      */
     private JPanel polynomialsPanel;
-
     /**
      * The panel for entering expression functions.
      */
     private JPanel expressionFunctionPanel;
-
     /**
      * The panel for entering points functions.
      */
     private JPanel pointsFunctionPanel;
-
     /**
      * The panel for entering polynomial functions.
      */
     private JPanel polynomialFunctionPanel;
-
     /**
      * The main application icon.
      */
     private ImageIcon mainIcon;
-
     /**
      * The icon for the back button.
      */
     private ImageIcon backIcon;
-
     /**
      * The icon for the home button.
      */
     private ImageIcon homeIcon;
-
     /**
      * The icon for the information button.
      */
     private ImageIcon infoIcon;
-
     /**
      * The icon for the solution message.
      */
     private ImageIcon solutionIcon;
-
     /**
      * The icon for the keyboard (size 64x64).
      */
     private ImageIcon keyboardIcon64;
-
     /**
      * The icon for the keyboard (size 128x128).
      */
     private ImageIcon keyboardIcon128;
-
     /**
      * The icon for the innovation image.
      */
@@ -139,56 +139,66 @@ public class GUI {
      * The icon for the Dark Mode image.
      */
     private ImageIcon moonIcon;
-
+    /**
+     * The icon for the setting.
+     */
+    private ImageIcon settingsIcon;
+    /**
+     * The icon for the setting.
+     */
+    private ImageIcon settingsKeyIcon;
+    /**
+     * The icon for the bulb Image.
+     */
+    private ImageIcon bulbIcon;
     /**
      * The back button for navigation.
      */
     private JButton backButton;
-
     /**
      * The home button for navigation.
      */
     private JButton homeButton;
-
-    /**
-     * The main font used in the GUI.
-     */
-    private final String mainFont = "Times New Roman";
-
-    /**
-     * The secondary font used in the GUI.
-     */
-    private final String secondFont = "Times New Roman";
-
-    /**
-     * The font used for buttons.
-     */
-    private final String buttonFont = "Times New Roman";
-
     /**
      * A stack to manage the panel navigation.
      */
     private Stack<JPanel> panelsStack;
-
     /**
      * The current points function.
      */
     private PointsFunction function;
-
     /**
      * The current polynomial.
      */
     private Polynomial polynomial;
-
     /**
      * The action to perform on the points function.
      */
     private Consumer<PointsFunction> doAction;
-
     /**
-     * A boolean representing the current theme
+     * The main light theme selected by the user.
+     * The available light theme options are:
+     * "Light Flat", "Arc Light", "Arc Orange", "Cyan Light", "Solarized Light", "Gray", "Atom One Light".
+     * By default, it is set to "Light Flat".
      */
-    boolean darkModeEnabled;
+    private String mainLightTheme = "Light Flat";
+    /**
+     * The main dark theme selected by the user.
+     * The available dark theme options are:
+     * "One Dark", "Arc Dark", "Arc Dark Orange", "Carbon", "Dark Flat", "Dark Purple", "Dracula", "Atom One Dark".
+     * By default, it is set to "One Dark".
+     */
+    private String mainDarkTheme = "One Dark";
+    /**
+     * A consumer function used to update the theme.
+     * It takes a FlatLaf instance as a parameter to set the theme accordingly.
+     * The theme can be either a light or dark theme based on the user's selection.
+     * This function is responsible for applying the selected theme throughout the application.
+     * It is typically passed to UI components for dynamic theme updates when the user changes the theme.
+     * The specific theme setup methods (e.g., FlatLightLaf.setup(), FlatOneDarkIJTheme.setup(), etc.) can be called
+     * using this consumer to change the theme at runtime.
+     */
+    private Consumer<FlatLaf> updateTheme;
 
     /**
      * Constructs a new instance of the GUI class.
@@ -215,6 +225,32 @@ public class GUI {
     }
 
     /**
+     * Creates a JButton with a hyperlink-like appearance.
+     * When clicked, it opens the specified link in the default web browser.
+     *
+     * @param text the text to display on the button
+     * @param link the URL or URI to open when the button is clicked
+     * @return the created hyperlink button
+     */
+    private static JButton createHyperlinkButton(String text, String link) {
+        JButton button = new JButton();
+        button.setText("<html><a href=\"" + link + "\"><b><font color=\"white\">" + text + "</font></b></a></html>");
+        button.setFocusPainted(false);
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        // Add an action listener to handle the button click event
+        button.addActionListener(e -> {
+            try {
+                Desktop.getDesktop().browse(new URI(link));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        return button;
+    }
+
+    /**
      * Initializes the icons used in the GUI.
      * Loads the required image resources and creates ImageIcon instances.
      * Uses best practices for handling resource loading and exception handling.
@@ -230,6 +266,9 @@ public class GUI {
             keyboardIcon128 = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/keyboard_128.png")));
             innovationIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/innovation.png")));
             moonIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/moon.png")));
+            settingsIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/settings.png")));
+            settingsKeyIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/settingsKey.png")));
+            bulbIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/bulb.png")));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -244,7 +283,6 @@ public class GUI {
         mainFrame = new JFrame();
         mainFrame.setTitle("Numerical Analysis Calculator");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //mainFrame.setIconImage(mainIcon.getImage());
         mainFrame.setMinimumSize(new Dimension(940, 620));
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setResizable(false);
@@ -253,12 +291,12 @@ public class GUI {
     /**
      * Initializes the menu bar of the main frame.
      * Configures the back, home, and info buttons, and their respective actions.
-     * Creates a custom option dialog with clickable links for about and contact information.
+     * Create a custom option dialog with clickable links for about and contact information.
      * Follows best practices for setting up a menu bar and creating interactive components.
      */
     private void initMenuBar() {
         JMenuBar mainMenuBar = new JMenuBar();
-        mainMenuBar.setLayout(new BorderLayout());
+        mainMenuBar.setLayout(new FlowLayout());
 
         backButton = new JButton();
         backButton.addActionListener(e -> {
@@ -288,6 +326,7 @@ public class GUI {
 
         JLabel aboutLabel = new JLabel("<html>" + "Created by Abd_HM  ;) <br>" + "Full program documentation on my github : <br>" + "</html>");
         aboutLabel.setFont(new Font(Font.SERIF, Font.BOLD, 15));
+        aboutLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         JLabel contactLabel = new JLabel("Contact me : ");
         contactLabel.setFont(new Font(Font.SERIF, Font.BOLD, 15));
         // Create JLabels with hyperlink functionality for each link
@@ -329,13 +368,16 @@ public class GUI {
         darkModeButton.setPreferredSize(new Dimension(50, 50));
         darkModeButton.setIcon(moonIcon);
         darkModeButton.setFocusPainted(false);
-        darkModeButton.addActionListener(e -> {
+        updateTheme = theme -> {
             try {
-                darkModeEnabled = !darkModeEnabled; // Toggle the dark mode state
-                if (darkModeEnabled) {
-                    FlatOneDarkIJTheme.setup();
+                if (!darkModeEnabled) {
+                    setLightTheme();
+                    aboutLabel.setForeground(UIManager.getColor("Label.foreground"));
+                    contactLabel.setForeground(UIManager.getColor("Label.foreground"));
                 } else {
-                    FlatLightLaf.setup();
+                    setDarkTheme();
+                    aboutLabel.setForeground(UIManager.getColor("Label.foreground"));
+                    contactLabel.setForeground(UIManager.getColor("Label.foreground"));
                 }
                 SwingUtilities.updateComponentTreeUI(mainFrame); // Replace "yourMainFrame" with your top-level JFrame or JDialog
                 mainFrame.revalidate();
@@ -349,19 +391,135 @@ public class GUI {
                 // Log the error instead of showing a dialog in the event handler
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
+        };
+
+        darkModeButton.addActionListener(e -> {
+            darkModeEnabled = !darkModeEnabled; // Toggle the dark mode state
+            updateTheme.accept(new FlatLightLaf());
         });
 
-        JPanel leftButtons = new JPanel();
+        JButton settingsButton = new JButton();
+        settingsButton.setPreferredSize(new Dimension(50, 50));
+        settingsButton.setIcon(settingsIcon);
+        settingsButton.setFocusPainted(false);
+        settingsButton.addActionListener(settings -> {
+            // inputs : degree
+            JLabel enterAccuracyTitle = new JLabel("Set Accuracy ( the number of digit after the comma ) : ");
+            enterAccuracyTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+            enterAccuracyTitle.setHorizontalAlignment(SwingConstants.LEFT);
+
+            SpinnerNumberModel spinnerModel = new SpinnerNumberModel(Accuracy.getValue(), 1, 30, 1);
+            JSpinner enterAccuracySp = new JSpinner(spinnerModel);
+            JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterAccuracySp.getEditor();
+            editor.getTextField().setColumns(2); // Adjust the width as needed
+
+            JPanel enterAccuracy = new JPanel();
+            enterAccuracy.setLayout(new FlowLayout(FlowLayout.LEFT));
+            enterAccuracy.add(enterAccuracyTitle, BorderLayout.WEST);
+            enterAccuracy.add(enterAccuracySp, BorderLayout.CENTER);
+            //enterAccuracy.setBorder(BorderFactory.createEmptyBorder(10, 0, -10, 0));
+
+            JLabel lightThemeLabel = new JLabel("Set Light Theme ");
+            lightThemeLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+            lightThemeLabel.setHorizontalAlignment(SwingConstants.LEFT);
+
+            JComboBox<String> lightThemeCombo = new JComboBox<>();
+            lightThemeCombo.addItem("Light Flat");
+            lightThemeCombo.addItem("Arc Light");
+            lightThemeCombo.addItem("Arc Orange");
+            lightThemeCombo.addItem("Cyan Light");
+            lightThemeCombo.addItem("Solarized Light");
+            lightThemeCombo.addItem("Gray");
+            lightThemeCombo.addItem("Atom One Light");
+            lightThemeCombo.setSelectedItem(mainLightTheme);
+
+            JPanel lightThemePanel = new JPanel(new FlowLayout());
+            lightThemePanel.add(lightThemeLabel);
+            lightThemePanel.add(lightThemeCombo);
+
+            JLabel darkThemeLabel = new JLabel("Set Dark Theme ");
+            darkThemeLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+            darkThemeLabel.setHorizontalAlignment(SwingConstants.LEFT);
+
+            JComboBox<String> darkThemeCombo = new JComboBox<>();
+            darkThemeCombo.addItem("One Dark");
+            darkThemeCombo.addItem("Arc Dark");
+            darkThemeCombo.addItem("Arc Dark Orange");
+            darkThemeCombo.addItem("Carbon");
+            darkThemeCombo.addItem("Dark Flat");
+            darkThemeCombo.addItem("Dark Purple");
+            darkThemeCombo.addItem("Dracula");
+            darkThemeCombo.addItem("Atom One Dark");
+            darkThemeCombo.setSelectedItem(mainDarkTheme);
+
+            JPanel darkThemePanel = new JPanel(new FlowLayout());
+            darkThemePanel.add(darkThemeLabel);
+            darkThemePanel.add(darkThemeCombo);
+
+            JPanel settingsPanel = new JPanel(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.insets = new Insets(5, 5, 5, 5);
+            settingsPanel.add(enterAccuracy, gbc);
+            gbc.gridy++;
+            gbc.insets = new Insets(5, -180, 5, 5);
+            settingsPanel.add(lightThemePanel, gbc);
+            gbc.insets = new Insets(5, -178, 5, 5);
+            gbc.gridy++;
+            settingsPanel.add(darkThemePanel, gbc);
+
+            JButton confirmButton = new JButton("Confirm");
+            confirmButton.setFocusPainted(false);
+            Color customGreen = new Color(34, 139, 34);  // RGB values for green color
+            confirmButton.setBackground(customGreen);
+            confirmButton.setForeground(Color.white);  // Set the text color to white for better visibility
+
+            JButton defaultButton = new JButton("Default");
+            defaultButton.setFocusPainted(false);
+            defaultButton.setBackground(Color.lightGray);
+            defaultButton.setForeground(Color.black);  // Set the text color to white for better visibility
+
+            JButton cancelButton = new JButton("Cancel");
+            cancelButton.setFocusPainted(false);
+
+            Object[] buttons = {cancelButton, defaultButton, confirmButton};
+
+            cancelButton.addActionListener(cancel -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(enterAccuracy);
+                optionDialog.dispose();
+            });
+            confirmButton.addActionListener(solve -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(enterAccuracy);
+                optionDialog.dispose();
+                int newAccuracy = (int) enterAccuracySp.getValue();
+                Accuracy.setValue(newAccuracy);
+                mainLightTheme = String.valueOf(lightThemeCombo.getSelectedItem());
+                mainDarkTheme = String.valueOf(darkThemeCombo.getSelectedItem());
+                updateTheme.accept(new FlatLightLaf());
+            });
+
+            defaultButton.addActionListener(defaultSettings -> {
+                Window optionDialog = SwingUtilities.getWindowAncestor(enterAccuracy);
+                optionDialog.dispose();
+                Accuracy.setValue(10);
+                mainLightTheme = "Light Flat";
+                mainDarkTheme = "One Dark";
+                updateTheme.accept(new FlatLightLaf());
+            });
+            JOptionPane.showOptionDialog(null, settingsPanel, "Settings", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, settingsKeyIcon, buttons, null);
+
+        });
+
         JLabel mainIconLabel = new JLabel();
         mainIconLabel.setIcon(mainIcon);
-        leftButtons.add(mainIconLabel);
-        leftButtons.add(backButton);
-        leftButtons.add(homeButton);
-        mainMenuBar.add(leftButtons, BorderLayout.WEST);
-        JPanel rightButton = new JPanel();
-        rightButton.add(darkModeButton);
-        rightButton.add(infoButton);
-        mainMenuBar.add(rightButton, BorderLayout.EAST);
+
+        mainMenuBar.add(mainIconLabel);
+        mainMenuBar.add(backButton);
+        mainMenuBar.add(homeButton);
+        mainMenuBar.add(darkModeButton);
+        mainMenuBar.add(settingsButton);
+        mainMenuBar.add(infoButton);
         mainFrame.setJMenuBar(mainMenuBar);
     }
 
@@ -369,7 +527,7 @@ public class GUI {
      * Initializes the panels used in the GUI.
      * Calls individual methods to initialize each panel.
      * Creates a stack to keep track of the panels in the GUI.
-     * Sets the start panel as the initial panel in the stack.
+     * Set the start panel as the initial panel in the stack.
      * Follows best practices for initializing panels and managing panel stack.
      */
     private void initPanels() {
@@ -402,24 +560,22 @@ public class GUI {
         startPanel.setName("Start");
         startPanel.setPreferredSize(mainFrame.getSize());
         startPanel.setBackground(new Color(100, 100, 100));
-        GridLayout startLayout = new GridLayout(4, 2);
-        startLayout.setHgap(5);
-        startLayout.setVgap(5);
-        startPanel.setLayout(startLayout);
-
+        startPanel.setLayout(new BorderLayout(10, 5));
+        GridLayout startLayout = new GridLayout(3, 2, 5, 5);
+        JPanel cardsPanel = new JPanel(startLayout);
+        cardsPanel.setBackground(new Color(100, 100, 100));
         //***********************************************************************
 
         //init Interpolation Card
         String title = "Interpolation";
-        String description = "Interpolate an entered function using numeric interpolation ways";
+        String description = "Interpolate an entered function using numeric interpolation ways like General Method," + " Lagrange, Newton-Gregory, Least-Squares";
         String button = "Enter";
         ActionListener enterInterpolation = e -> {
             panelsStack.add(interpolationPanel);
             updateMainPanel();
         };
         JPanel interpolationCard = createCard(title, description, button, enterInterpolation);
-        startPanel.add(interpolationCard);
-
+        startPanel.add(interpolationCard, BorderLayout.NORTH);
         //***********************************************************************
 
         //init Integral Card
@@ -431,7 +587,7 @@ public class GUI {
             updateMainPanel();
         };
         JPanel integralCard = createCard(title, description, button, enterIntegral);
-        startPanel.add(integralCard);
+        cardsPanel.add(integralCard);
 
         //***********************************************************************
 
@@ -444,7 +600,7 @@ public class GUI {
             updateMainPanel();
         };
         JPanel diffCard = createCard(title, description, button, enterDifferentiation);
-        startPanel.add(diffCard);
+        cardsPanel.add(diffCard);
 
         //***********************************************************************
 
@@ -457,7 +613,7 @@ public class GUI {
             updateMainPanel();
         };
         JPanel diffEQCard = createCard(title, description, button, enterDiffEQ);
-        startPanel.add(diffEQCard);
+        cardsPanel.add(diffEQCard);
 
         //***********************************************************************
 
@@ -470,7 +626,7 @@ public class GUI {
             updateMainPanel();
         };
         JPanel nonLinEQCard = createCard(title, description, button, enterNonLinEQ);
-        startPanel.add(nonLinEQCard);
+        cardsPanel.add(nonLinEQCard);
 
 
         //***********************************************************************
@@ -484,7 +640,7 @@ public class GUI {
             updateMainPanel();
         };
         JPanel sysOfNonLinEQCard = createCard(title, description, button, enterSysNonLinEQ);
-        startPanel.add(sysOfNonLinEQCard);
+        cardsPanel.add(sysOfNonLinEQCard);
 
 
         //***********************************************************************
@@ -499,49 +655,12 @@ public class GUI {
             updateMainPanel();
         };
         JPanel polysCard = createCard(title, description, button, enterPolys);
-        startPanel.add(polysCard);
+        cardsPanel.add(polysCard);
 
         //***********************************************************************
 
-    }
+        startPanel.add(cardsPanel, BorderLayout.CENTER);
 
-    /**
-     * Creates a card panel with customizable title, description, and action button.
-     *
-     * @param title       The title of the card panel.
-     * @param description The description of the card panel.
-     * @param button      The text for the action button.
-     * @param doAction    The ActionListener for the action button.
-     * @return The created card panel.
-     */
-    private JPanel createCard(String title, String description, String button, ActionListener doAction) {
-        JPanel card = new JPanel();
-        card.setLayout(new BorderLayout());
-
-        JLabel cardTitle = new JLabel();
-        cardTitle.setText(title);
-        cardTitle.setFont(new Font(mainFont, Font.BOLD, 25));
-
-        JLabel cardDescription = new JLabel();
-        cardDescription.setText(description);
-        cardDescription.setFont(new Font(secondFont, Font.ITALIC, 15));
-
-        JButton cardButton = new JButton(button);
-        cardButton.setFont(new Font(buttonFont, Font.BOLD, 20));
-        cardButton.setFocusPainted(false);
-        cardButton.setPreferredSize(new Dimension(60, 50));
-        cardButton.addActionListener(doAction);
-
-        JPanel contentPanel = new JPanel(new BorderLayout());
-        contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-        contentPanel.add(cardTitle, BorderLayout.NORTH);
-        contentPanel.add(cardDescription, BorderLayout.CENTER);
-        contentPanel.add(cardButton, BorderLayout.SOUTH);
-
-        card.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-        card.add(contentPanel, BorderLayout.CENTER);
-        return card;
     }
 
     /**
@@ -646,7 +765,7 @@ public class GUI {
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
-        JPanel generalMethodCard = createCard(title, description, button, enterGeneralMethod);
+        JPanel generalMethodCard = createCard(title, button, enterGeneralMethod, description);
         interpolationPanel.add(generalMethodCard);
 
         //***********************************************************************
@@ -714,7 +833,7 @@ public class GUI {
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
-        JPanel lagrangeCard = createCard(title, description, button, enterLagrange);
+        JPanel lagrangeCard = createCard(title, button, enterLagrange, description);
         interpolationPanel.add(lagrangeCard);
 
         //***********************************************************************
@@ -842,7 +961,7 @@ public class GUI {
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
-        JPanel NGFSCard = createCard(title, description, button, enterNGFS);
+        JPanel NGFSCard = createCard(title, button, enterNGFS, description);
         interpolationPanel.add(NGFSCard);
 
         //***********************************************************************
@@ -971,7 +1090,7 @@ public class GUI {
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
-        JPanel NGBSCard = createCard(title, description, button, enterNGBS);
+        JPanel NGBSCard = createCard(title, button, enterNGBS, description);
         interpolationPanel.add(NGBSCard);
 
         //***********************************************************************
@@ -1101,7 +1220,7 @@ public class GUI {
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
-        JPanel NFDSCard = createCard(title, description, button, enterNFDS);
+        JPanel NFDSCard = createCard(title, button, enterNFDS, description);
         interpolationPanel.add(NFDSCard);
 
         //***********************************************************************
@@ -1230,7 +1349,7 @@ public class GUI {
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
-        JPanel NFBSCard = createCard(title, description, button, enterNDBS);
+        JPanel NFBSCard = createCard(title, button, enterNDBS, description);
         interpolationPanel.add(NFBSCard);
 
         //***********************************************************************
@@ -1325,7 +1444,7 @@ public class GUI {
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
-        JPanel leastSquaresCard = createCard(title, description, button, enterLeastSquares);
+        JPanel leastSquaresCard = createCard(title, button, enterLeastSquares, description);
         interpolationPanel.add(leastSquaresCard);
 
 
@@ -1375,7 +1494,7 @@ public class GUI {
             panelsStack.add(chooseFunctionPanel);
             updateMainPanel();
         };
-        JPanel splineCard = createCard(title, description, button, enterSpline);
+        JPanel splineCard = createCard(title, button, enterSpline, description);
         interpolationPanel.add(splineCard);
 
     }
@@ -1391,11 +1510,10 @@ public class GUI {
         integralPanel.setName("Integral");
         integralPanel.setPreferredSize(mainFrame.getSize());
         integralPanel.setBackground(new Color(100, 100, 100));
-        GridLayout startLayout = new GridLayout(3, 2);
-        startLayout.setHgap(5);
-        startLayout.setVgap(5);
-        integralPanel.setLayout(startLayout);
-
+        integralPanel.setLayout(new BorderLayout());
+        GridLayout startLayout = new GridLayout(2, 2, 5, 5);
+        JPanel cardsPanel = new JPanel(startLayout);
+        cardsPanel.setBackground(new Color(100, 100, 100));
         //***********************************************************************
 
         //init Rectangular Card
@@ -1442,7 +1560,7 @@ public class GUI {
             updateMainPanel();
         };
         JPanel rectCard = createCard(title, description, button, enterRect);
-        integralPanel.add(rectCard);
+        cardsPanel.add(rectCard);
 
         //***********************************************************************
 
@@ -1490,7 +1608,7 @@ public class GUI {
             updateMainPanel();
         };
         JPanel trapsCard = createCard(title, description, button, enterTraps);
-        integralPanel.add(trapsCard);
+        cardsPanel.add(trapsCard);
 
         //***********************************************************************
 
@@ -1538,7 +1656,7 @@ public class GUI {
             updateMainPanel();
         };
         JPanel simpson3Card = createCard(title, description, button, enterSimpson3);
-        integralPanel.add(simpson3Card);
+        cardsPanel.add(simpson3Card);
 
         //***********************************************************************
 
@@ -1586,7 +1704,7 @@ public class GUI {
             updateMainPanel();
         };
         JPanel simpson8Card = createCard(title, description, button, enterSimpson8);
-        integralPanel.add(simpson8Card);
+        cardsPanel.add(simpson8Card);
 
         //***********************************************************************
 
@@ -1634,9 +1752,11 @@ public class GUI {
             updateMainPanel();
         };
         JPanel paulCard = createCard(title, description, button, enterPaul);
-        integralPanel.add(paulCard);
+        integralPanel.add(paulCard, BorderLayout.SOUTH);
 
         //***********************************************************************
+
+        integralPanel.add(cardsPanel, BorderLayout.CENTER);
 
     }
 
@@ -5536,6 +5656,93 @@ public class GUI {
     }
 
     /**
+     * Creates a card panel with customizable title, description, and action button.
+     *
+     * @param title       The title of the card panel.
+     * @param description The description of the card panel.
+     * @param button      The text for the action button.
+     * @param doAction    The ActionListener for the action button.
+     * @return The created card panel.
+     */
+    private JPanel createCard(String title, String description, String button, ActionListener doAction) {
+        JPanel card = new JPanel();
+        card.setLayout(new BorderLayout());
+
+        JLabel cardTitle = new JLabel();
+        cardTitle.setText(title);
+        cardTitle.setFont(new Font(mainFont, Font.BOLD, 25));
+        cardTitle.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JLabel cardDescription = new JLabel();
+        cardDescription.setText(description);
+        cardDescription.setFont(new Font(secondFont, Font.ITALIC, 15));
+        cardDescription.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JButton cardButton = new JButton(button);
+        cardButton.setFont(new Font(buttonFont, Font.BOLD, 20));
+        cardButton.setFocusPainted(false);
+        cardButton.setPreferredSize(new Dimension(60, 50));
+        cardButton.addActionListener(doAction);
+
+        JPanel contentPanel = new JPanel(new GridLayout(3, 1));
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        contentPanel.add(cardTitle);
+        contentPanel.add(cardDescription);
+        contentPanel.add(cardButton);
+
+        card.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        card.add(contentPanel, BorderLayout.CENTER);
+        return card;
+    }
+
+    /**
+     * Creates a card panel with customizable title, description, and action button.
+     *
+     * @param title         The title of the card panel.
+     * @param button        The text for the action button.
+     * @param doAction      The ActionListener for the action button.
+     * @param toolTipString The description of the card panel.
+     * @return The created card panel.
+     */
+    private JPanel createCard(String title, String button, ActionListener doAction, String toolTipString) {
+        JPanel card = new JPanel();
+        card.setLayout(new BorderLayout());
+
+        JLabel cardTitle = new JLabel();
+        cardTitle.setText(title);
+        cardTitle.setFont(new Font(mainFont, Font.BOLD, 25));
+        cardTitle.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JLabel cardDescription = new JLabel();
+        cardDescription.setText(toolTipString);
+        cardDescription.setFont(new Font(secondFont, Font.ITALIC, 15));
+        cardDescription.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JLabel tipLabel = new JLabel("More info");
+        tipLabel.setIcon(bulbIcon);
+        tipLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        tipLabel.setToolTipText(toolTipString);
+
+        JButton cardButton = new JButton(button);
+        cardButton.setFont(new Font(buttonFont, Font.BOLD, 20));
+        cardButton.setFocusPainted(false);
+        cardButton.setPreferredSize(new Dimension(60, 50));
+        cardButton.addActionListener(doAction);
+
+        JPanel contentPanel = new JPanel(new GridLayout(3, 1));
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        contentPanel.add(cardTitle);
+        contentPanel.add(tipLabel);
+        contentPanel.add(cardButton);
+
+        card.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        card.add(contentPanel, BorderLayout.CENTER);
+        return card;
+    }
+
+    /**
      * Adds a DocumentListener to the specified text fields and associates it with the given button.
      * The DocumentListener updates the enabled state of the button based on changes in the text fields.
      *
@@ -5580,32 +5787,6 @@ public class GUI {
             }
         }
         button.setEnabled(enabled);
-    }
-
-    /**
-     * Creates a JButton with a hyperlink-like appearance.
-     * When clicked, it opens the specified link in the default web browser.
-     *
-     * @param text the text to display on the button
-     * @param link the URL or URI to open when the button is clicked
-     * @return the created hyperlink button
-     */
-    private static JButton createHyperlinkButton(String text, String link) {
-        JButton button = new JButton();
-        button.setText("<html><a href=\"" + link + "\"><b><font color=\"white\">" + text + "</font></b></a></html>");
-        button.setFocusPainted(false);
-        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-        // Add an action listener to handle the button click event
-        button.addActionListener(e -> {
-            try {
-                Desktop.getDesktop().browse(new URI(link));
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
-
-        return button;
     }
 
     /**
@@ -5655,6 +5836,7 @@ public class GUI {
 
     /**
      * Fix the Accuracy to its main value
+     *
      * @param num the number to fix its precision
      * @return a new BigDecimal representing the fixed number's precision stripped from trailing zeros
      */
@@ -5662,4 +5844,94 @@ public class GUI {
         return num.round(new MathContext(Accuracy.getValue(), RoundingMode.HALF_UP)).stripTrailingZeros();
     }
 
+    /**
+     * Sets the light theme based on the selected theme name.
+     * The available light theme options are:
+     * "Light Flat", "Arc Light", "Arc Orange", "Cyan Light", "Solarized Light", "Gray", "Atom One Light".
+     * If an unknown theme name is provided, it falls back to "Light Flat" as the default theme.
+     */
+    private void setLightTheme() {
+        switch (mainLightTheme) {
+            case "Light Flat": {
+                FlatLightLaf.setup();
+                break;
+            }
+            case "Arc Light": {
+                FlatArcIJTheme.setup();
+                break;
+            }
+            case "Arc Orange": {
+                FlatArcOrangeIJTheme.setup();
+                break;
+            }
+            case "Cyan Light": {
+                FlatCyanLightIJTheme.setup();
+                break;
+            }
+            case "Solarized Light": {
+                FlatSolarizedLightIJTheme.setup();
+                break;
+            }
+            case "Gray": {
+                FlatGrayIJTheme.setup();
+                break;
+            }
+            case "Atom One Light": {
+                FlatAtomOneLightIJTheme.setup();
+                break;
+            }
+            default: {
+                FlatLightLaf.setup();
+                break;
+            }
+        }
+    }
+
+    /**
+     * Sets the dark theme based on the selected theme name.
+     * The available dark theme options are:
+     * "One Dark", "Arc Dark", "Arc Dark Orange", "Carbon", "Dark Flat", "Dark Purple", "Dracula", "Atom One Dark".
+     * If an unknown theme name is provided, it falls back to "One Dark" as the default theme.
+     */
+    private void setDarkTheme() {
+
+        switch (mainDarkTheme) {
+            case "One Dark": {
+                FlatOneDarkIJTheme.setup();
+                break;
+            }
+            case "Arc Dark": {
+                FlatArcDarkIJTheme.setup();
+                break;
+            }
+            case "Arc Dark Orange": {
+                FlatArcDarkOrangeIJTheme.setup();
+                break;
+            }
+            case "Carbon": {
+                FlatCarbonIJTheme.setup();
+                break;
+            }
+            case "Dark Flat": {
+                FlatDarkFlatIJTheme.setup();
+                break;
+            }
+            case "Dark Purple": {
+                FlatDarkPurpleIJTheme.setup();
+                break;
+            }
+            case "Dracula": {
+                FlatDraculaIJTheme.setup();
+                break;
+            }
+            case "Atom One Dark": {
+                FlatAtomOneDarkIJTheme.setup();
+                break;
+            }
+            default: {
+                FlatOneDarkIJTheme.setup();
+                break;
+            }
+        }
+    }
 }

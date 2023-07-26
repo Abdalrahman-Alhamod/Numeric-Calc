@@ -12,9 +12,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Fix SystemOfNonLinearEquations wrong answer">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add sinh,cosh,tanh to EvaluateString">
+      <change afterPath="$PROJECT_DIR$/res/Icons/bulb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/Icons/settings.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/Icons/settingsKey.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/flatlaf_3_1_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Util/EvaluateString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/EvaluateString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Util/Accuracy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/Accuracy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,17 +70,18 @@
     <setting file="file://$PROJECT_DIR$/src/Functions/ExpressionFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Function.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Main.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Numerics/Integral.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Numerics/Integral.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Interpolation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/NonLinearEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/SystemOfNonLinearEquations.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/Util/BigDecimalUtil.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Util/EvaluateString.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Util/Accuracy.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Util/BigDecimalUtil.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Util/EvaluateString.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Util/Matrix.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -89,20 +95,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/OneDrive/Documents/Idea Projects/Test&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/lib/flatlaf-3.1.1.jar",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\res\Icons" />
@@ -123,27 +129,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٨١" summary="Fix and enhance interpolation and diff inputs">
-      <created>1689548719698</created>
-      <option name="number" value="٠٠٢٨١" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٨١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689548719698</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٨٢" summary="Add about &amp; JAVA DOC to GUI">
-      <created>1689552844213</created>
-      <option name="number" value="٠٠٢٨٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٨٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689552844213</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٨٣" summary="Completing JAVA DOC to GUI and Terminal">
-      <created>1689553458256</created>
-      <option name="number" value="٠٠٢٨٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٨٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689553458256</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٨٤" summary="Add exception handling to gui constructor">
       <created>1689553717731</created>
@@ -467,7 +452,28 @@
       <option name="project" value="LOCAL؜" />
       <updated>1690311669175</updated>
     </task>
-    <option name="localTasksCounter" value="330" />
+    <task id="LOCAL؜-٠٠٣٣٠" summary="Fix EvaluateString minus bug">
+      <created>1690312209339</created>
+      <option name="number" value="٠٠٣٣٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٣٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690312209339</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٣١" summary="Add JAVA DOC to BigDecimalUtil and fix its bugs">
+      <created>1690324242933</created>
+      <option name="number" value="٠٠٣٣١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٣١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690324242933</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٣٢" summary="Add sinh,cosh,tanh to EvaluateString">
+      <created>1690324351622</created>
+      <option name="number" value="٠٠٣٣٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٣٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690324351622</updated>
+    </task>
+    <option name="localTasksCounter" value="333" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -510,9 +516,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Convert double to BigDecimal in Polynomial" />
-    <MESSAGE value="Convert double to BigDecimal in Matrix" />
-    <MESSAGE value="Convert double to BigDecimal in Integral" />
     <MESSAGE value="Convert double to BigDecimal in Interpolation" />
     <MESSAGE value="Convert double to BigDecimal in Differentiation" />
     <MESSAGE value="Convert double to BigDecimal in DifferentialEquation" />
@@ -535,6 +538,9 @@
     <MESSAGE value="Fix Runge_Kutta wrong answer" />
     <MESSAGE value="Fix NonLinearEquation wrong answer and set time to loops" />
     <MESSAGE value="Fix SystemOfNonLinearEquations wrong answer" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix SystemOfNonLinearEquations wrong answer" />
+    <MESSAGE value="Fix EvaluateString minus bug" />
+    <MESSAGE value="Add JAVA DOC to BigDecimalUtil and fix its bugs" />
+    <MESSAGE value="Add sinh,cosh,tanh to EvaluateString" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add sinh,cosh,tanh to EvaluateString" />
   </component>
 </project>
