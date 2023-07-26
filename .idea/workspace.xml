@@ -12,10 +12,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add SuppressWarnings to classes">
-      <change afterPath="$PROJECT_DIR$/src/Util/SettingsManager.java" afterDir="false" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add JAVA DOC to SettingsManager">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +66,7 @@
     <setting file="file://$PROJECT_DIR$/src/Functions/Function.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Main.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
@@ -79,6 +78,7 @@
     <setting file="file://$PROJECT_DIR$/src/Util/BigDecimalUtil.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Util/EvaluateString.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Util/Matrix.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Util/SettingsManager.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -125,20 +125,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٨٦" summary="Testing all methods&#10;Fix bugs">
-      <created>1689557837721</created>
-      <option name="number" value="٠٠٢٨٦" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٨٦" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689557837721</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٨٧" summary="Update jar">
-      <created>1689558448143</created>
-      <option name="number" value="٠٠٢٨٧" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٨٧" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689558448143</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٨٨" summary="Update jar">
       <created>1689590351791</created>
@@ -469,7 +455,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1690333979478</updated>
     </task>
-    <option name="localTasksCounter" value="335" />
+    <task id="LOCAL؜-٠٠٣٣٥" summary="Add settings Saving">
+      <created>1690335998959</created>
+      <option name="number" value="٠٠٣٣٥" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٣٥" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690335998959</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٣٦" summary="Add JAVA DOC to SettingsManager">
+      <created>1690336286184</created>
+      <option name="number" value="٠٠٣٣٦" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٣٦" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690336286184</updated>
+    </task>
+    <option name="localTasksCounter" value="337" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -512,8 +512,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Convert double to BigDecimal in DifferentialEquation" />
-    <MESSAGE value="Convert double to BigDecimal in NonLinearEquation" />
     <MESSAGE value="Convert double to BigDecimal in SystemOfNonLinearEquations" />
     <MESSAGE value="Convert double to BigDecimal in GUI" />
     <MESSAGE value="Fix Runge_Kutta class" />
@@ -537,6 +535,8 @@
     <MESSAGE value="Add sinh,cosh,tanh to EvaluateString" />
     <MESSAGE value="Add settings (Accuracy and Theme)&#10;Enhance Panels Look" />
     <MESSAGE value="Add SuppressWarnings to classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add SuppressWarnings to classes" />
+    <MESSAGE value="Add settings Saving" />
+    <MESSAGE value="Add JAVA DOC to SettingsManager" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add JAVA DOC to SettingsManager" />
   </component>
 </project>
