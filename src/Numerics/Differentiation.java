@@ -16,6 +16,7 @@ import java.util.Queue;
  * with multiple methods such as <b>Lagrange</b>, <b>Newton_Gregory Forward Subtractions</b>,
  * <b>Newton_Gregory Backward Subtractions</b> and <b>Central,Forward,Backward Subtractions</b>
  */
+@SuppressWarnings("all")
 public abstract class Differentiation {
     /**
      * The Lagrange class provides methods to get the Differential Function using <b>Lagrange</b> method

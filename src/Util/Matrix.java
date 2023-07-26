@@ -11,6 +11,7 @@ import java.util.Objects;
  * <p>
  * The matrix is stored as an ArrayList of ArrayLists of BigDecimal values.
  */
+@SuppressWarnings("all")
 public class Matrix {
     /**
      * The matrix data is stored as an ArrayList of ArrayLists.

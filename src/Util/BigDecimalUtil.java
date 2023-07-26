@@ -37,6 +37,7 @@ import java.math.RoundingMode;
  *
  * @since 1.0
  */
+@SuppressWarnings("all")
 public class BigDecimalUtil {
 
     /**

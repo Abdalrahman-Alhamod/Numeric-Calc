@@ -10,6 +10,7 @@ import java.util.Stack;
  * The EvaluateString class provides a method to evaluate mathematical expressions given as a string.
  * It supports basic arithmetic operations, logarithm, square root, exponentiation, and parentheses.
  */
+@SuppressWarnings("all")
 public abstract class EvaluateString {
 
     /**
@@ -20,7 +21,7 @@ public abstract class EvaluateString {
      */
     public static BigDecimal evaluate(String expression) {
         expression = expression.replaceAll("pi", Double.toString(Math.PI)); // replace string Pi with its value
-        expression = expression.replaceAll("\\s", ""); // Remove all whitespace characters from the expression
+        expression = expression.replaceAll("\\s", ""); // Remove all space characters from the expression
         ArrayList<Character> tokens = stringToCharArrayList(expression);
 
         // Stack for numbers: 'values'

@@ -12,6 +12,7 @@ import java.math.RoundingMode;
  * It includes methods for solving equations using the Bisection, False Position, Secant, Newton-Raphson, Halley,
  * and Fixed-Point Iteration methods.
  */
+@SuppressWarnings("all")
 public abstract class NonLinearEquation {
     private static final int loopTime = 1000;
 

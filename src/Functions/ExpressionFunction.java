@@ -15,6 +15,7 @@ import java.util.Objects;
  * It implements the {@link Function} interface and provides methods to evaluate the value, differentiate, integrate,
  * and convert the function into a PointsFunction .
  */
+@SuppressWarnings("all")
 public class ExpressionFunction implements Function {
 
     private final String func;

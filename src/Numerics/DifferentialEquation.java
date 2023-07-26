@@ -13,6 +13,7 @@ import java.util.Objects;
 /**
  * The DifferentialEquation class represents a differential equation and provides methods for solving it numerically.
  */
+@SuppressWarnings("all")
 public class DifferentialEquation {
     private final String dy;
 

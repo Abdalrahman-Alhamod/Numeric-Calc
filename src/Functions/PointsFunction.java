@@ -11,6 +11,7 @@ import java.util.Objects;
  * It implements the {@link Function} interface and provides methods to evaluate the value, differentiate, integrate,
  * and manipulate the function.
  */
+@SuppressWarnings("all")
 public class PointsFunction implements Function {
     private final ArrayList<BigDecimal> xp;
     private final ArrayList<BigDecimal> yp;
