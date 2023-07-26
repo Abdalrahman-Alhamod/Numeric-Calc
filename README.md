@@ -132,8 +132,14 @@ Evaluate functions based on expressions , supported function :
 
 
 ## Installation
-This project comes with two installer .One for Windows and one for Unix system :
+- This project comes with two installer .One for Windows and one for Unix system :
 
 > [Windows Installer](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/v2.0.0/Numerical_Analysis_Calculator_Windows_Installer.exe)
 
 > [Unix Installer](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/v2.0.0/Numerical_Analysis_Calculator_Unix_Installer.sh)
+
+- New Version with updated Theme and Dark Mode
+
+> [Windows Installer](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/v2.3.0/Numerical_Analysis_Calculator_Unix_Installer.sh)
+
+> [Unix Installer](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/v2.3.0/Numerical_Analysis_Calculator_Unix_Installer.sh)
