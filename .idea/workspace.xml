@@ -12,14 +12,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add sinh,cosh,tanh to EvaluateString">
-      <change afterPath="$PROJECT_DIR$/res/Icons/bulb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/Icons/settings.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/Icons/settingsKey.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/flatlaf_3_1_1.xml" beforeDir="false" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add SuppressWarnings to classes">
+      <change afterPath="$PROJECT_DIR$/src/Util/SettingsManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Util/Accuracy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/Accuracy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +68,7 @@
     <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Main.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Main.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Integral.java" root0="SKIP_INSPECTION" />
@@ -129,20 +125,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٨٤" summary="Add exception handling to gui constructor">
-      <created>1689553717731</created>
-      <option name="number" value="٠٠٢٨٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٨٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689553717731</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٨٥" summary="Build jar">
-      <created>1689553837543</created>
-      <option name="number" value="٠٠٢٨٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٨٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689553837543</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٨٦" summary="Testing all methods&#10;Fix bugs">
       <created>1689557837721</created>
@@ -473,7 +455,21 @@
       <option name="project" value="LOCAL؜" />
       <updated>1690324351622</updated>
     </task>
-    <option name="localTasksCounter" value="333" />
+    <task id="LOCAL؜-٠٠٣٣٣" summary="Add settings (Accuracy and Theme)&#10;Enhance Panels Look">
+      <created>1690333960676</created>
+      <option name="number" value="٠٠٣٣٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٣٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690333960676</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٣٤" summary="Add SuppressWarnings to classes">
+      <created>1690333979478</created>
+      <option name="number" value="٠٠٣٣٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٣٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690333979478</updated>
+    </task>
+    <option name="localTasksCounter" value="335" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -516,8 +512,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Convert double to BigDecimal in Interpolation" />
-    <MESSAGE value="Convert double to BigDecimal in Differentiation" />
     <MESSAGE value="Convert double to BigDecimal in DifferentialEquation" />
     <MESSAGE value="Convert double to BigDecimal in NonLinearEquation" />
     <MESSAGE value="Convert double to BigDecimal in SystemOfNonLinearEquations" />
@@ -541,6 +535,8 @@
     <MESSAGE value="Fix EvaluateString minus bug" />
     <MESSAGE value="Add JAVA DOC to BigDecimalUtil and fix its bugs" />
     <MESSAGE value="Add sinh,cosh,tanh to EvaluateString" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add sinh,cosh,tanh to EvaluateString" />
+    <MESSAGE value="Add settings (Accuracy and Theme)&#10;Enhance Panels Look" />
+    <MESSAGE value="Add SuppressWarnings to classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add SuppressWarnings to classes" />
   </component>
 </project>

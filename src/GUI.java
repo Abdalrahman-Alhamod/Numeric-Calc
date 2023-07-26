@@ -4,6 +4,7 @@ import Functions.Polynomial;
 import Numerics.*;
 import Util.Accuracy;
 import Util.EvaluateString;
+import Util.SettingsManager;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.intellijthemes.*;
@@ -16,6 +17,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -51,6 +54,7 @@ public class GUI {
      * A boolean representing the current theme
      */
     boolean darkModeEnabled;
+    SettingsManager settings;
     /**
      * The main frame of the application.
      */
@@ -204,13 +208,12 @@ public class GUI {
      * Constructs a new instance of the GUI class.
      */
     public GUI() {
-        //Apply nimbus theme
         try {
-            FlatLightLaf.setup();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        try {
+            settings = new SettingsManager();
+            mainLightTheme = settings.getLightTheme();
+            mainDarkTheme = settings.getDarkTheme();
+            Accuracy.setValue(settings.getAccuracy());
+            setLightTheme();
             Locale.setDefault(Locale.ENGLISH); // fix spinner and text showing arabic symbols
             initIcons();
             initMainFrame();
@@ -282,10 +285,23 @@ public class GUI {
     private void initMainFrame() {
         mainFrame = new JFrame();
         mainFrame.setTitle("Numerical Analysis Calculator");
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setMinimumSize(new Dimension(940, 620));
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setResizable(false);
+        mainFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Save settings when the main frame is closed
+                settings.setAccuracy(Accuracy.getValue());
+                settings.setLightTheme(mainLightTheme);
+                settings.setDarkTheme(mainDarkTheme);
+                settings.saveSettings();
+                // Then exit the application
+                System.exit(0);
+            }
+        });
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 
     /**
