@@ -12,7 +12,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Add JAVA DOC to SettingsManager">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Rebuild JAR file">
+      <change afterPath="$PROJECT_DIR$/res/Bundles/language_ar.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/Bundles/language_en.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config.properties" afterDir="false" />
     </list>
@@ -91,20 +93,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/lib/flatlaf-3.1.1.jar",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/lib/flatlaf-3.1.1.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\res\Icons" />
@@ -112,6 +114,9 @@
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\src\Numerics" />
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\src\Functions" />
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\src\Util" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\res\Bundles" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="Util" />
@@ -125,13 +130,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٨٨" summary="Update jar">
-      <created>1689590351791</created>
-      <option name="number" value="٠٠٢٨٨" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٨٨" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689590351791</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٨٩" summary="Update frame title">
       <created>1689595799894</created>
@@ -469,7 +467,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1690336286184</updated>
     </task>
-    <option name="localTasksCounter" value="337" />
+    <task id="LOCAL؜-٠٠٣٣٧" summary="Rebuild JAR file">
+      <created>1690336394402</created>
+      <option name="number" value="٠٠٣٣٧" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٣٧" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1690336394402</updated>
+    </task>
+    <option name="localTasksCounter" value="338" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -512,7 +517,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Convert double to BigDecimal in SystemOfNonLinearEquations" />
     <MESSAGE value="Convert double to BigDecimal in GUI" />
     <MESSAGE value="Fix Runge_Kutta class" />
     <MESSAGE value="Fix equals bug" />
@@ -537,6 +541,7 @@
     <MESSAGE value="Add SuppressWarnings to classes" />
     <MESSAGE value="Add settings Saving" />
     <MESSAGE value="Add JAVA DOC to SettingsManager" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add JAVA DOC to SettingsManager" />
+    <MESSAGE value="Rebuild JAR file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rebuild JAR file" />
   </component>
 </project>
