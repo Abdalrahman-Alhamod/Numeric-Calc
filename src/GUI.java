@@ -2166,7 +2166,7 @@ public class GUI {
                             break;
                         }
                         default: {
-                            throw new Exception("invalid input");
+                            throw new Exception("Invalid Inputs");
                         }
                     }
 
@@ -3897,7 +3897,7 @@ public class GUI {
      */
     private void initPolyPanel() {
         polynomialsPanel = new JPanel();
-        polynomialsPanel.setName("Differential Equations");
+        polynomialsPanel.setName("Polynomial");
         polynomialsPanel.setPreferredSize(mainFrame.getSize());
         polynomialsPanel.setBackground(new Color(100, 100, 100));
         GridLayout startLayout = new GridLayout(3, 1);

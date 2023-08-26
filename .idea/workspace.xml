@@ -12,11 +12,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Rebuild JAR file">
-      <change afterPath="$PROJECT_DIR$/res/Bundles/language_ar.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/Bundles/language_en.properties" afterDir="false" />
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Initialize Bundles &amp; Language class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Bundles/language_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/res/Bundles/language_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +67,7 @@
     <setting file="file://$PROJECT_DIR$/src/Functions/Function.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/PointsFunction.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Functions/Polynomial.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/GUI.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Main.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/DifferentialEquation.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/Numerics/Differentiation.java" root0="SKIP_INSPECTION" />
@@ -130,13 +129,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٨٩" summary="Update frame title">
-      <created>1689595799894</created>
-      <option name="number" value="٠٠٢٨٩" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٨٩" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689595799894</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٩٠" summary="Update jar">
       <created>1689595883635</created>
@@ -474,7 +466,14 @@
       <option name="project" value="LOCAL؜" />
       <updated>1690336394402</updated>
     </task>
-    <option name="localTasksCounter" value="338" />
+    <task id="LOCAL؜-٠٠٣٣٨" summary="Initialize Bundles &amp; Language class">
+      <created>1692886526788</created>
+      <option name="number" value="٠٠٣٣٨" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٣٨" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1692886526788</updated>
+    </task>
+    <option name="localTasksCounter" value="339" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -517,7 +516,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Convert double to BigDecimal in GUI" />
     <MESSAGE value="Fix Runge_Kutta class" />
     <MESSAGE value="Fix equals bug" />
     <MESSAGE value="Fix printing ' + ' in Polynomial" />
@@ -542,6 +540,7 @@
     <MESSAGE value="Add settings Saving" />
     <MESSAGE value="Add JAVA DOC to SettingsManager" />
     <MESSAGE value="Rebuild JAR file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rebuild JAR file" />
+    <MESSAGE value="Initialize Bundles &amp; Language class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initialize Bundles &amp; Language class" />
   </component>
 </project>
