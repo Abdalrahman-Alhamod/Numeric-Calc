@@ -1,6 +1,7 @@
 package Util;
 
 import java.io.*;
+import java.net.URL;
 import java.util.Properties;
 
 /**
@@ -27,6 +28,7 @@ public class SettingsManager {
                 properties.setProperty("lightTheme", "Light Flat");
                 properties.setProperty("darkTheme", "One Dark");
                 properties.setProperty("accuracy", "10");
+                properties.setProperty("lang","ar");
                 saveSettings();
             }
 
@@ -49,6 +51,7 @@ public class SettingsManager {
             outputStream.close();
         } catch (IOException e) {
             // Handle file not found or other exceptions
+            e.printStackTrace();
         }
     }
 
@@ -104,5 +107,23 @@ public class SettingsManager {
      */
     public void setAccuracy(int accuracy) {
         properties.setProperty("accuracy", Integer.toString(accuracy));
+    }
+
+    /**
+     * Sets the language setting in the properties file.
+     *
+     * @param langauge The language code to set (e.g., "en" for English, "ar" for Arabic).
+     */
+    public void setLangauge(String langauge){
+        properties.setProperty("lang", langauge);
+    }
+
+    /**
+     * Gets the currently set language setting.
+     *
+     * @return The language code currently set, or a default value if not set.
+     */
+    public String getLanguage(){
+        return properties.getProperty("lang");
     }
 }
