@@ -23,10 +23,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Stack;
+import java.util.*;
 import java.util.function.Consumer;
 
 /**
@@ -38,23 +35,44 @@ import java.util.function.Consumer;
  */
 @SuppressWarnings("all")
 public class GUI {
+
+    /**
+     * The font used for displaying text in Arabic.
+     */
+    private final String arabicFont = "Segoe UI";
+
+    /**
+     * The font used for displaying text in English.
+     */
+    private final String englishFont = "Calibri";
+
+    /**
+     * A boolean representing whether the dark mode theme is enabled or not.
+     * If set to true, the application is in dark mode; otherwise, it's in light mode.
+     */
+    private boolean darkModeEnabled;
+
+    /**
+     * The settings manager responsible for managing application settings.
+     */
+    private SettingsManager settings;
+
+    /**
+     * The text and layout orientation of the component, such as left-to-right or right-to-left.
+     */
+    private ComponentOrientation orientation;
     /**
      * The main font used in the GUI.
      */
-    private final String mainFont = "Times New Roman";
+    private String mainFont;
     /**
      * The secondary font used in the GUI.
      */
-    private final String secondFont = "Times New Roman";
+    private String secondFont;
     /**
      * The font used for buttons.
      */
-    private final String buttonFont = "Times New Roman";
-    /**
-     * A boolean representing the current theme
-     */
-    boolean darkModeEnabled;
-    SettingsManager settings;
+    private String buttonFont;
     /**
      * The main frame of the application.
      */
@@ -205,16 +223,78 @@ public class GUI {
     private Consumer<FlatLaf> updateTheme;
 
     /**
+     * The user's selected locale for language.
+     */
+    private Locale local;
+
+    /**
+     * ResourceBundle for language-related strings and messages.
+     */
+    private ResourceBundle languageBundle;
+
+    /**
+     * The message displayed for invalid inputs.
+     */
+    private String invalidInputs;
+
+    /**
+     * The error message.
+     */
+    private String error;
+
+    /**
+     * The label text for a cancel action.
+     */
+    private String cancel;
+
+    /**
+     * The label text for a continue action.
+     */
+    private String Continue;
+
+    /**
+     * The label text for a confirm action.
+     */
+    private String Confirm;
+
+    /**
+     * The label text for an enter action.
+     */
+    private String enter;
+
+    /**
+     * The label text for an OK action.
+     */
+    private String OK;
+
+    /**
+     * The label text for a solve action.
+     */
+    private String Solve;
+
+    /**
+     * The label text for a generate action.
+     */
+    private String Generate;
+
+    /**
+     * The prompt text for entering degree requirements for a polynomial.
+     */
+    private String enterDegreeReqPoly;
+
+    /**
+     * The prompt text for continuing with polynomial settings.
+     */
+    private String continueWithPoly;
+
+    /**
      * Constructs a new instance of the GUI class.
      */
     public GUI() {
         try {
-            settings = new SettingsManager();
-            mainLightTheme = settings.getLightTheme();
-            mainDarkTheme = settings.getDarkTheme();
-            Accuracy.setValue(settings.getAccuracy());
+            loadSettings();
+            initStrings();
             setLightTheme();
-            Locale.setDefault(Locale.ENGLISH); // fix spinner and text showing arabic symbols
             initIcons();
             initMainFrame();
             initMenuBar();
@@ -223,7 +303,8 @@ public class GUI {
             mainFrame.pack();
             mainFrame.setVisible(true);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            throw ex;
+            //JOptionPane.showMessageDialog(null, ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -254,6 +335,25 @@ public class GUI {
     }
 
     /**
+     * Initializes various strings used in the application by retrieving them from the language bundle.
+     * These strings include messages, button labels, and user prompts.
+     * The retrieved strings are formatted as HTML for proper display in UI components.
+     */
+    private void initStrings() {
+        invalidInputs = "<html>" + languageBundle.getString("invalidInputs") + "</html>";
+        error = "<html>" + languageBundle.getString("error") + "</html>";
+        cancel = "<html>" + languageBundle.getString("cancelButton") + "</html>";
+        enter = "<html>" + languageBundle.getString("enterButton") + "</html>";
+        Continue = languageBundle.getString("continueButton");
+        Confirm = "<html>" + languageBundle.getString("confirmButton") + "</html>";
+        continueWithPoly = "<html>" + languageBundle.getString("continueWithPolyButton") + "</html>";
+        OK = "<html>" + languageBundle.getString("okButton") + "</html>";
+        Solve = "<html>" + languageBundle.getString("solveButton") + "</html>";
+        Generate = languageBundle.getString("generateButton");
+        enterDegreeReqPoly = "<html>" + languageBundle.getString("enterDegreeReqPoly") + "</html>";
+    }
+
+    /**
      * Initializes the icons used in the GUI.
      * Loads the required image resources and creates ImageIcon instances.
      * Uses best practices for handling resource loading and exception handling.
@@ -273,7 +373,7 @@ public class GUI {
             settingsKeyIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/settingsKey.png")));
             bulbIcon = new ImageIcon(Objects.requireNonNull(GUI.class.getClassLoader().getResource("Icons/bulb.png")));
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -287,15 +387,12 @@ public class GUI {
         mainFrame.setTitle("Numerical Analysis Calculator");
         mainFrame.setMinimumSize(new Dimension(940, 620));
         mainFrame.setLocationRelativeTo(null);
-        mainFrame.setResizable(false);
+        // mainFrame.setResizable(false);
         mainFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 // Save settings when the main frame is closed
-                settings.setAccuracy(Accuracy.getValue());
-                settings.setLightTheme(mainLightTheme);
-                settings.setDarkTheme(mainDarkTheme);
-                settings.saveSettings();
+                saveSettings();
                 // Then exit the application
                 System.exit(0);
             }
@@ -339,12 +436,28 @@ public class GUI {
         // Create a custom JPanel for the option dialog
         JPanel panel = new JPanel(new GridLayout(0, 1, 0, 0));
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        panel.setComponentOrientation(orientation);
 
-        JLabel aboutLabel = new JLabel("<html>" + "Created by Abd_HM  ;) <br>" + "Full program documentation on my github : <br>" + "</html>");
-        aboutLabel.setFont(new Font(Font.SERIF, Font.BOLD, 15));
+        JPanel aboutPanel = new JPanel();
+        if (local.getLanguage().equals("en"))
+            aboutPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        else
+            aboutPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        JLabel aboutLabel = new JLabel(languageBundle.getString("aboutDescription"));
+        aboutLabel.setComponentOrientation(orientation);
+        aboutLabel.setFont(new Font(mainFont, Font.BOLD, 15));
         aboutLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-        JLabel contactLabel = new JLabel("Contact me : ");
-        contactLabel.setFont(new Font(Font.SERIF, Font.BOLD, 15));
+        aboutPanel.add(aboutLabel);
+        JPanel contactPanel = new JPanel();
+        if (local.getLanguage().equals("en"))
+            contactPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        else
+            contactPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        JLabel contactLabel = new JLabel("<html>" + languageBundle.getString("contact") + " : " + "</html>");
+        contactLabel.setComponentOrientation(orientation);
+        contactLabel.setFont(new Font(mainFont, Font.BOLD, 15));
+        contactLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+        contactPanel.add(contactLabel);
         // Create JLabels with hyperlink functionality for each link
         JButton docLabel = createHyperlinkButton("Github.com/Abdalrahman-Alhamod/Numeric-Calc", "https://github.com/Abdalrahman-Alhamod/Numeric-Calc");
         docLabel.setBackground(new Color(0, 102, 204)); // Set color to light blue
@@ -358,24 +471,26 @@ public class GUI {
         JButton linkedInLabel = createHyperlinkButton("LinkedIn", "https://www.linkedin.com/in/abd-alrrahman-alhamod/");
         linkedInLabel.setBackground(new Color(0, 102, 153)); // Set color to dark blue
 
-        JButton facebookLabel = createHyperlinkButton("Facebook", "https://www.facebook.com/profile.php?id=100011427430343");
-        facebookLabel.setBackground(new Color(59, 89, 152)); // Set color to Facebook blue
+        JButton telegramLabel = createHyperlinkButton("Telegram", "https://t.me/Abd_Alrhman_Alhamod");
+        telegramLabel.setBackground(new Color(30, 87, 153)); // Set color to a Telegram-like blue
 
 
         JPanel links = new JPanel(new GridLayout(2, 2));
+        links.setComponentOrientation(orientation);
         links.add(emailLabel);
         links.add(githubLabel);
         links.add(linkedInLabel);
-        links.add(facebookLabel);
+        links.add(telegramLabel);
 
         // Add the labels to the panel
-        panel.add(aboutLabel);
+        panel.add(aboutPanel);
         panel.add(docLabel);
-        panel.add(contactLabel);
+        panel.add(contactPanel);
         panel.add(links);
 
         // Show the custom option dialog
-        infoButton.addActionListener(e -> JOptionPane.showOptionDialog(null, panel, "About", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, innovationIcon, new Object[]{}, null));
+        String aboutTitle = "<html>" + languageBundle.getString("aboutTitle") + "</html>";
+        infoButton.addActionListener(e -> JOptionPane.showOptionDialog(null, panel, aboutTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, innovationIcon, new Object[]{}, null));
         infoButton.setPreferredSize(new Dimension(50, 50));
         infoButton.setIcon(infoIcon);
         infoButton.setFocusPainted(false);
@@ -405,7 +520,7 @@ public class GUI {
                 }
             } catch (Exception ex) {
                 // Log the error instead of showing a dialog in the event handler
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
             }
         };
 
@@ -420,8 +535,9 @@ public class GUI {
         settingsButton.setFocusPainted(false);
         settingsButton.addActionListener(settings -> {
             // inputs : degree
-            JLabel enterAccuracyTitle = new JLabel("Set Accuracy ( the number of digit after the comma ) : ");
-            enterAccuracyTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+            JLabel enterAccuracyTitle = new JLabel("<html>" + languageBundle.getString("setAccuracy") + " : " + "</html>");
+            enterAccuracyTitle.setComponentOrientation(orientation);
+            enterAccuracyTitle.setFont(new Font(mainFont, Font.PLAIN, 15));
             enterAccuracyTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
             SpinnerNumberModel spinnerModel = new SpinnerNumberModel(Accuracy.getValue(), 1, 30, 1);
@@ -430,13 +546,20 @@ public class GUI {
             editor.getTextField().setColumns(2); // Adjust the width as needed
 
             JPanel enterAccuracy = new JPanel();
-            enterAccuracy.setLayout(new FlowLayout(FlowLayout.LEFT));
-            enterAccuracy.add(enterAccuracyTitle, BorderLayout.WEST);
-            enterAccuracy.add(enterAccuracySp, BorderLayout.CENTER);
+            if (local.getLanguage().equals("en")) {
+                enterAccuracy.setLayout(new FlowLayout(FlowLayout.LEFT));
+                enterAccuracy.add(enterAccuracyTitle);
+                enterAccuracy.add(enterAccuracySp);
+            } else {
+                enterAccuracy.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                enterAccuracy.add(enterAccuracySp);
+                enterAccuracy.add(enterAccuracyTitle);
+            }
             //enterAccuracy.setBorder(BorderFactory.createEmptyBorder(10, 0, -10, 0));
 
-            JLabel lightThemeLabel = new JLabel("Set Light Theme ");
-            lightThemeLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+            JLabel lightThemeLabel = new JLabel("<html>" + languageBundle.getString("setLightTheme") + " : " + "</html>");
+            lightThemeLabel.setComponentOrientation(orientation);
+            lightThemeLabel.setFont(new Font(mainFont, Font.PLAIN, 15));
             lightThemeLabel.setHorizontalAlignment(SwingConstants.LEFT);
 
             JComboBox<String> lightThemeCombo = new JComboBox<>();
@@ -449,12 +572,20 @@ public class GUI {
             lightThemeCombo.addItem("Atom One Light");
             lightThemeCombo.setSelectedItem(mainLightTheme);
 
-            JPanel lightThemePanel = new JPanel(new FlowLayout());
-            lightThemePanel.add(lightThemeLabel);
-            lightThemePanel.add(lightThemeCombo);
+            JPanel lightThemePanel;
+            if (local.getLanguage().equals("en")) {
+                lightThemePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+                lightThemePanel.add(lightThemeLabel);
+                lightThemePanel.add(lightThemeCombo);
+            } else {
+                lightThemePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+                lightThemePanel.add(lightThemeCombo);
+                lightThemePanel.add(lightThemeLabel);
+            }
 
-            JLabel darkThemeLabel = new JLabel("Set Dark Theme ");
-            darkThemeLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+            JLabel darkThemeLabel = new JLabel("<html>" + languageBundle.getString("setDarkTheme") + " : " + "</html>");
+            darkThemeLabel.setComponentOrientation(orientation);
+            darkThemeLabel.setFont(new Font(mainFont, Font.PLAIN, 15));
             darkThemeLabel.setHorizontalAlignment(SwingConstants.LEFT);
 
             JComboBox<String> darkThemeCombo = new JComboBox<>();
@@ -468,35 +599,86 @@ public class GUI {
             darkThemeCombo.addItem("Atom One Dark");
             darkThemeCombo.setSelectedItem(mainDarkTheme);
 
-            JPanel darkThemePanel = new JPanel(new FlowLayout());
-            darkThemePanel.add(darkThemeLabel);
-            darkThemePanel.add(darkThemeCombo);
+            JPanel darkThemePanel;
+            if (local.getLanguage().equals("en")) {
+                darkThemePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+                darkThemePanel.add(darkThemeLabel);
+                darkThemePanel.add(darkThemeCombo);
+            } else {
+                darkThemePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+                darkThemePanel.add(darkThemeCombo);
+                darkThemePanel.add(darkThemeLabel);
+            }
+
+            JLabel languageLabel = new JLabel("<html>" + languageBundle.getString("language") + " : " + "</html>");
+            languageLabel.setComponentOrientation(orientation);
+            languageLabel.setFont(new Font(mainFont, Font.PLAIN, 15));
+            languageLabel.setHorizontalAlignment(SwingConstants.LEFT);
+
+            JComboBox<String> languageCombo = new JComboBox<>();
+            languageCombo.addItem("English - الإنكليزية");
+            languageCombo.addItem("Arabic - العربية");
+            String selectedLanguage;
+            if (local.getLanguage().equals("en"))
+                selectedLanguage = "English - الإنكليزية";
+            else
+                selectedLanguage = "Arabic - العربية";
+            languageCombo.setSelectedItem(selectedLanguage);
+            boolean[] isLangaugeChanged = {false};
+            languageCombo.addActionListener(action -> {
+                isLangaugeChanged[0] = true;
+            });
+
+            JPanel languagePanel;
+            if (local.getLanguage().equals("en")) {
+                languagePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+                languagePanel.add(languageLabel);
+                languagePanel.add(languageCombo);
+            } else {
+                languagePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+                languagePanel.add(languageCombo);
+                languagePanel.add(languageLabel);
+            }
 
             JPanel settingsPanel = new JPanel(new GridBagLayout());
+            settingsPanel.setComponentOrientation(orientation);
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
             gbc.insets = new Insets(5, 5, 5, 5);
             settingsPanel.add(enterAccuracy, gbc);
             gbc.gridy++;
-            gbc.insets = new Insets(5, -180, 5, 5);
+            if (local.getLanguage().equals("en"))
+                gbc.insets = new Insets(5, -163, 5, 5);
+            else
+                gbc.insets = new Insets(5, 20, 5, -27);
             settingsPanel.add(lightThemePanel, gbc);
-            gbc.insets = new Insets(5, -178, 5, 5);
+            if (local.getLanguage().equals("en"))
+                gbc.insets = new Insets(5, -162, 5, 5);
+            else
+                gbc.insets = new Insets(5, 20, 5, -25);
             gbc.gridy++;
             settingsPanel.add(darkThemePanel, gbc);
+            if (local.getLanguage().equals("en"))
+                gbc.insets = new Insets(5, -195, 5, 5);
+            else
+                gbc.insets = new Insets(5, 20, 5, -125);
+            gbc.gridy++;
+            settingsPanel.add(languagePanel, gbc);
 
-            JButton confirmButton = new JButton("Confirm");
+            JButton confirmButton = new JButton(Confirm);
             confirmButton.setFocusPainted(false);
             Color customGreen = new Color(34, 139, 34);  // RGB values for green color
             confirmButton.setBackground(customGreen);
             confirmButton.setForeground(Color.white);  // Set the text color to white for better visibility
 
-            JButton defaultButton = new JButton("Default");
+            JButton defaultButton = new JButton("<html>" + languageBundle.getString("defaultButton") + "</html>");
             defaultButton.setFocusPainted(false);
             defaultButton.setBackground(Color.lightGray);
             defaultButton.setForeground(Color.black);  // Set the text color to white for better visibility
 
-            JButton cancelButton = new JButton("Cancel");
+            String settingsTitle = "<html>" + languageBundle.getString("settingTitle") + "</html>";
+            JButton cancelButton = new JButton(cancel);
             cancelButton.setFocusPainted(false);
 
             Object[] buttons = {cancelButton, defaultButton, confirmButton};
@@ -507,12 +689,30 @@ public class GUI {
             });
             confirmButton.addActionListener(solve -> {
                 Window optionDialog = SwingUtilities.getWindowAncestor(enterAccuracy);
-                optionDialog.dispose();
                 int newAccuracy = (int) enterAccuracySp.getValue();
                 Accuracy.setValue(newAccuracy);
                 mainLightTheme = String.valueOf(lightThemeCombo.getSelectedItem());
                 mainDarkTheme = String.valueOf(darkThemeCombo.getSelectedItem());
-                updateTheme.accept(new FlatLightLaf());
+                if (isLangaugeChanged[0]) {
+                    String restartMessage = "<html><div style='padding: 10px;'>" + languageBundle.getString("restartMessage") + "</div></html>";
+                    Object[] options = {OK, cancel};
+                    int result = JOptionPane.showOptionDialog(null, restartMessage, settingsTitle, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                    if (result == 0) {
+                        String lang;
+                        if (languageCombo.getSelectedItem().equals("English - الإنكليزية"))
+                            lang = "en";
+                        else
+                            lang = "ar";
+                        local = new Locale(lang);
+                        optionDialog.dispose();
+                        saveSettings();
+                        mainFrame.dispose();
+                        SwingUtilities.invokeLater(GUI::new);
+                    }
+                } else {
+                    optionDialog.dispose();
+                    updateTheme.accept(new FlatLightLaf());
+                }
             });
 
             defaultButton.addActionListener(defaultSettings -> {
@@ -523,7 +723,7 @@ public class GUI {
                 mainDarkTheme = "One Dark";
                 updateTheme.accept(new FlatLightLaf());
             });
-            JOptionPane.showOptionDialog(null, settingsPanel, "Settings", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, settingsKeyIcon, buttons, null);
+            JOptionPane.showOptionDialog(null, settingsPanel, settingsTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, settingsKeyIcon, buttons, null);
 
         });
 
@@ -580,12 +780,13 @@ public class GUI {
         GridLayout startLayout = new GridLayout(3, 2, 5, 5);
         JPanel cardsPanel = new JPanel(startLayout);
         cardsPanel.setBackground(new Color(100, 100, 100));
+        cardsPanel.setComponentOrientation(orientation);
         //***********************************************************************
 
         //init Interpolation Card
-        String title = "Interpolation";
-        String description = "Interpolate an entered function using numeric interpolation ways like General Method," + " Lagrange, Newton-Gregory, Least-Squares";
-        String button = "Enter";
+        String title = "<html>" + languageBundle.getString("interpolationTitle") + "</html>";
+        String description = "<html>" + languageBundle.getString("interpolationDescription") + "</html>";
+        String button = "<html>" + languageBundle.getString("enterButton") + "</html>";
         ActionListener enterInterpolation = e -> {
             panelsStack.add(interpolationPanel);
             updateMainPanel();
@@ -595,9 +796,8 @@ public class GUI {
         //***********************************************************************
 
         //init Integral Card
-        title = "Integral";
-        description = "Integrate an entered function using numeric integration ways";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("integralTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("integralDescription") + "</html>";
         ActionListener enterIntegral = e -> {
             panelsStack.add(integralPanel);
             updateMainPanel();
@@ -608,9 +808,9 @@ public class GUI {
         //***********************************************************************
 
         //init Differentiation Card
-        title = "Differentiation";
-        description = "Differentiate an entered function using numeric differentiation ways";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("differentiationTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("differentiationDescription") + "</html>";
+        ;
         ActionListener enterDifferentiation = e -> {
             panelsStack.add(differentiationPanel);
             updateMainPanel();
@@ -621,9 +821,8 @@ public class GUI {
         //***********************************************************************
 
         //init Differential Equations Card
-        title = "Differential Equations";
-        description = "Solve an entered differential equations using numeric ways";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("differentialTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("differentialDescription") + "</html>";
         ActionListener enterDiffEQ = e -> {
             panelsStack.add(differentialEquationsPanel);
             updateMainPanel();
@@ -634,9 +833,8 @@ public class GUI {
         //***********************************************************************
 
         //init Non-Linear Equations Card
-        title = "Non-Linear Equations";
-        description = "Solve an entered non-Linear equations using numeric ways";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("nonLinearEquationsTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("nonLinearEquationsDescription") + "</html>";
         ActionListener enterNonLinEQ = e -> {
             panelsStack.add(nonLinearEquationsPanel);
             updateMainPanel();
@@ -648,9 +846,8 @@ public class GUI {
         //***********************************************************************
 
         //init System Of Non-Linear Equations Card
-        title = "System Of Non-Linear Equations";
-        description = "Solve an entered system of non-Linear equations using numeric ways";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("systemOfNonLinearEquationsTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("systemOfNonLinearEquationsDescription") + "</html>";
         ActionListener enterSysNonLinEQ = e -> {
             panelsStack.add(systemOfNonLinearEquationsPanel);
             updateMainPanel();
@@ -662,9 +859,8 @@ public class GUI {
         //***********************************************************************
 
         //init Differential Equations Card
-        title = "Polynomials";
-        description = "Do several tasks on an entered polynomial using numeric ways";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("polynomialsTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("polynomialsDescription") + "</html>";
         ActionListener enterPolys = e -> {
             polynomial = null;
             panelsStack.add(polynomialsPanel);
@@ -700,20 +896,27 @@ public class GUI {
             panelsStack.add(expressionFunctionPanel);
             updateMainPanel();
         };
-        JPanel expressionFunctionCard = createCard("Expression Function", "Functions like x^2+3, sin(x), exp(x) ...", "Enter", enterExpressionFunction);
+        String title = "<html>" + languageBundle.getString("expressionFunctionTitle") + "</html>";
+        String description = "<html>" + languageBundle.getString("expressionFunctionDescription") + "</html>";
+        String button = "<html>" + languageBundle.getString("enterButton") + "</html>";
+        JPanel expressionFunctionCard = createCard(title, description, button, enterExpressionFunction);
 
 
         ActionListener enterPointsFunction = e -> {
             panelsStack.add(pointsFunctionPanel);
             updateMainPanel();
         };
-        JPanel pointsFunctionCard = createCard("Points Function", "Functions like x0=.. y0=.. , x1=.. y1=.. ", "Enter", enterPointsFunction);
+        title = "<html>" + languageBundle.getString("pointsFunctionTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("pointsFunctionDescription") + "</html>";
+        JPanel pointsFunctionCard = createCard(title, description, button, enterPointsFunction);
 
         ActionListener enterPolynomialFunction = e -> {
             panelsStack.add(polynomialFunctionPanel);
             updateMainPanel();
         };
-        JPanel polynomialFunctionCard = createCard("Polynomial Function", "Functions like p(x) = a0 + a1*x + a2*x^2 ... ", "Enter", enterPolynomialFunction);
+        title = "<html>" + languageBundle.getString("polynomialFunctionTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("polynomialFunctionDescription") + "</html>";
+        JPanel polynomialFunctionCard = createCard(title, description, button, enterPolynomialFunction);
 
 
         chooseFunctionPanel.add(expressionFunctionCard);
@@ -736,20 +939,24 @@ public class GUI {
         startLayout.setHgap(5);
         startLayout.setVgap(5);
         interpolationPanel.setLayout(startLayout);
+        interpolationPanel.setComponentOrientation(orientation);
+        String interpolationTitle = "<html>" + languageBundle.getString("interpolationTitle") + "</html>";
+        String interpolationNSH = "<html>" + languageBundle.getString("interpolationAnswerNoSH") + " : " + "</html>";
 
         //***********************************************************************
 
         //init General Method Card
-        String title = "General Method";
-        String description = "Get the Interpolation Function using" + " the General Method by solving a system of equations using Gaussian elimination ";
-        String button = "Enter";
+        String title = "<html>" + languageBundle.getString("generalMethodTitle") + "</html>";
+        String description = "<html>" + languageBundle.getString("generalMethodDescription") + "</html>";
+        String button = "<html>" + languageBundle.getString("enterButton") + "</html>";
+
         ActionListener enterGeneralMethod = e -> {
             doAction = pointsFunction -> {
                 try {
                     Polynomial ans = Interpolation.GeneralMethod.getIFAP(pointsFunction);
                     //create title
                     JLabel interTitle = new JLabel();
-                    interTitle.setText("Interpolation answer using General Method : ");
+                    interTitle.setText("<html>" + languageBundle.getString("interpolationAnswer") + " " + languageBundle.getString("generalMethodTitle") + " : " + "</html>");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
@@ -765,17 +972,16 @@ public class GUI {
                     JPanel contentPanel = new JPanel(new GridLayout(2, 1));
                     contentPanel.add(interTitle);
                     contentPanel.add(polyAnsScrollPane);
+                    String[] response = {cancel, continueWithPoly};
 
-                    String[] response = {"Cancel", "Continue with Polynomial"};
-
-                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, interpolationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
                         polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             };
             panelsStack.add(chooseFunctionPanel);
@@ -787,9 +993,8 @@ public class GUI {
         //***********************************************************************
 
         //init Lagrange Card
-        title = "Lagrange";
-        description = "Get the Interpolation Function using Lagrange method using Lagrange Polynomials";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("lagrangeTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("lagrangeDescription") + "</html>";
         ActionListener enterLagrange = e -> {
             doAction = pointsFunction -> {
                 try {
@@ -797,7 +1002,7 @@ public class GUI {
 
                     //create answer title
                     JLabel interTitle = new JLabel();
-                    interTitle.setText("Interpolation answer using Lagrange : ");
+                    interTitle.setText("<html>" + languageBundle.getString("interpolationAnswer") + " " + languageBundle.getString("lagrangeTitle") + " : " + "</html>");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create answer scrolled
@@ -811,7 +1016,7 @@ public class GUI {
 
                     //create ans no shorthand title
                     JLabel shortPolyTitle = new JLabel();
-                    shortPolyTitle.setText("Interpolation answer with no shorthand : ");
+                    shortPolyTitle.setText(interpolationNSH);
                     shortPolyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     String asnNSH = Interpolation.Lagrange.getIFASNS(pointsFunction);
@@ -834,16 +1039,16 @@ public class GUI {
                     contentPanel.add(polyAnsNSHScrollPane);
 
 
-                    String[] response = {"Cancel", "Continue with Polynomial"};
+                    String[] response = {cancel, continueWithPoly};
 
-                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, interpolationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
                         polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             };
             panelsStack.add(chooseFunctionPanel);
@@ -855,15 +1060,14 @@ public class GUI {
         //***********************************************************************
 
         //init Newton-Gregory Forward Subtraction Card
-        title = "Newton-Gregory Forward Subtraction";
-        description = "Get the interpolation function using Newton-Gregory Forward Subtractions method\n" + "It also can get Newton-Gregory Forward Subtractions Table values";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("NGFSTitle") + "</html>";
+        description = languageBundle.getString("NGFSDescription");
         ActionListener enterNGFS = e -> {
             doAction = pointsFunction -> {
                 try {
 
                     // inputs : degree
-                    JLabel enterDegreeTitle = new JLabel("Enter degree of the required polynomial : ");
+                    JLabel enterDegreeTitle = new JLabel(enterDegreeReqPoly);
                     enterDegreeTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
                     enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
@@ -873,18 +1077,24 @@ public class GUI {
                     editor.getTextField().setColumns(2); // Adjust the width as needed
 
                     JPanel enterDegree = new JPanel();
-                    enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
-                    enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
-                    enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
+                    if (local.getLanguage().equals("en")) {
+                        enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                        enterDegree.add(enterDegreeTitle);
+                        enterDegree.add(enterDegreeSp);
+                    } else {
+                        enterDegree.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                        enterDegree.add(enterDegreeSp);
+                        enterDegree.add(enterDegreeTitle);
+                    }
                     enterDegree.setBorder(BorderFactory.createEmptyBorder(10, 0, -10, 0));
 
-                    JButton solveButton = new JButton("Solve");
+                    JButton solveButton = new JButton(Solve);
                     solveButton.setFocusPainted(false);
                     Color customGreen = new Color(34, 139, 34);  // RGB values for green color
                     solveButton.setBackground(customGreen);
                     solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
 
-                    JButton cancelButton = new JButton("Cancel");
+                    JButton cancelButton = new JButton(cancel);
                     cancelButton.setFocusPainted(false);
 
                     Object[] buttons = {cancelButton, solveButton};
@@ -904,14 +1114,14 @@ public class GUI {
                         degree[0] = (int) enterDegreeSp.getValue();
                     });
 
-                    JOptionPane.showOptionDialog(null, enterDegree, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
+                    JOptionPane.showOptionDialog(null, enterDegree, interpolationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
                     if (cancelPressed[0]) return;
 
                     ArrayList<BigDecimal> values = Interpolation.Newton_GregoryForwardSubtractions.getUDV(function);
 
                     //create table values title
                     JLabel tableTitle = new JLabel();
-                    tableTitle.setText("The values of the upper diameter of the Newton-Gregory Forward Subtractions Table : ");
+                    tableTitle.setText("<html>" + languageBundle.getString("NFGSUDT") + " : " + "</html>");
                     tableTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create table value scrolled
@@ -925,7 +1135,7 @@ public class GUI {
                     Polynomial ans = Interpolation.Newton_GregoryForwardSubtractions.getIFAP(pointsFunction, degree[0]);
 
                     JLabel interTitle = new JLabel();
-                    interTitle.setText("Interpolation answer using Newton-Gregory Forward Subtraction : ");
+                    interTitle.setText("<html>" + languageBundle.getString("interpolationAnswer") + " " + languageBundle.getString("NGFSTitle") + " : " + "</html>");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
 
@@ -938,7 +1148,7 @@ public class GUI {
                     polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
                     JLabel shortPolyTitle = new JLabel();
-                    shortPolyTitle.setText("Interpolation answer with no shorthand : ");
+                    shortPolyTitle.setText(interpolationNSH);
                     shortPolyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     String asnNSH = Interpolation.Newton_GregoryForwardSubtractions.getIFASNS(pointsFunction, degree[0]);
@@ -962,16 +1172,16 @@ public class GUI {
                     contentPanel.add(polyAnsNSHScrollPane);
 
 
-                    String[] response = {"Cancel", "Continue with Polynomial"};
+                    String[] response = {cancel, continueWithPoly};
 
-                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, interpolationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
                         polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             };
             panelsStack.add(chooseFunctionPanel);
@@ -983,15 +1193,14 @@ public class GUI {
         //***********************************************************************
 
         //init Newton-Gregory Backward Subtraction Card
-        title = "Newton-Gregory Backward Subtraction";
-        description = "Get the interpolation function using Newton-Gregory Backward Subtractions method\n" + "It also can get Newton-Gregory Backward Subtractions Table values";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("NGBSTitle") + "</html>";
+        description = languageBundle.getString("NGBSDescription");
         ActionListener enterNGBS = e -> {
             doAction = pointsFunction -> {
                 try {
 
                     // inputs : degree
-                    JLabel enterDegreeTitle = new JLabel("Enter degree of the required polynomial : ");
+                    JLabel enterDegreeTitle = new JLabel(enterDegreeReqPoly);
                     enterDegreeTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
                     enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
@@ -1001,18 +1210,24 @@ public class GUI {
                     editor.getTextField().setColumns(2); // Adjust the width as needed
 
                     JPanel enterDegree = new JPanel();
-                    enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
-                    enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
-                    enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
+                    if (local.getLanguage().equals("en")) {
+                        enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                        enterDegree.add(enterDegreeTitle);
+                        enterDegree.add(enterDegreeSp);
+                    } else {
+                        enterDegree.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                        enterDegree.add(enterDegreeSp);
+                        enterDegree.add(enterDegreeTitle);
+                    }
                     enterDegree.setBorder(BorderFactory.createEmptyBorder(10, 0, -10, 0));
 
-                    JButton solveButton = new JButton("Solve");
+                    JButton solveButton = new JButton(Solve);
                     solveButton.setFocusPainted(false);
                     Color customGreen = new Color(34, 139, 34);  // RGB values for green color
                     solveButton.setBackground(customGreen);
                     solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
 
-                    JButton cancelButton = new JButton("Cancel");
+                    JButton cancelButton = new JButton(cancel);
                     cancelButton.setFocusPainted(false);
 
                     Object[] buttons = {cancelButton, solveButton};
@@ -1032,7 +1247,7 @@ public class GUI {
                         degree[0] = (int) enterDegreeSp.getValue();
                     });
 
-                    JOptionPane.showOptionDialog(null, enterDegree, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
+                    JOptionPane.showOptionDialog(null, enterDegree, interpolationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
                     if (cancelPressed[0]) return;
 
 
@@ -1040,7 +1255,7 @@ public class GUI {
 
                     //create table values title
                     JLabel tableTitle = new JLabel();
-                    tableTitle.setText("The values of the lower diameter of the Newton-Gregory Backward Subtractions Table : ");
+                    tableTitle.setText("<html>" + languageBundle.getString("NGBSLDT") + " : " + "</html>");
                     tableTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create table value scrolled
@@ -1054,7 +1269,7 @@ public class GUI {
                     Polynomial ans = Interpolation.Newton_GregoryBackwardSubtractions.getIFAP(pointsFunction, degree[0]);
 
                     JLabel interTitle = new JLabel();
-                    interTitle.setText("Interpolation answer using Newton-Gregory Backward Subtraction : ");
+                    interTitle.setText("<html>" + languageBundle.getString("interpolationAnswer") + " " + languageBundle.getString("NGBSTitle") + " : " + "</html>");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
 
@@ -1067,7 +1282,7 @@ public class GUI {
                     polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
                     JLabel shortPolyTitle = new JLabel();
-                    shortPolyTitle.setText("Interpolation answer with no shorthand : ");
+                    shortPolyTitle.setText(interpolationNSH);
                     shortPolyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     String asnNSH = Interpolation.Newton_GregoryBackwardSubtractions.getIFASNS(pointsFunction, degree[0]);
@@ -1091,16 +1306,16 @@ public class GUI {
                     contentPanel.add(polyAnsNSHScrollPane);
 
 
-                    String[] response = {"Cancel", "Continue with Polynomial"};
+                    String[] response = {cancel, continueWithPoly};
 
-                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, interpolationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
                         polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             };
             panelsStack.add(chooseFunctionPanel);
@@ -1112,15 +1327,14 @@ public class GUI {
         //***********************************************************************
 
         //init Newton Forward Divided Subtractions Equations Card
-        title = "Newton Forward Divided Subtractions";
-        description = "Get the interpolation function using Newton Forward Divided Subtractions method\n" + "It also can get Newton Forward Divided Subtractions Table values";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("NFDSTitle") + "</html>";
+        description = languageBundle.getString("NFDSDescription");
         ActionListener enterNFDS = e -> {
             doAction = pointsFunction -> {
                 try {
 
                     // inputs : degree
-                    JLabel enterDegreeTitle = new JLabel("Enter degree of the required polynomial : ");
+                    JLabel enterDegreeTitle = new JLabel(enterDegreeReqPoly);
                     enterDegreeTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
                     enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
@@ -1130,18 +1344,24 @@ public class GUI {
                     editor.getTextField().setColumns(2); // Adjust the width as needed
 
                     JPanel enterDegree = new JPanel();
-                    enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
-                    enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
-                    enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
+                    if (local.getLanguage().equals("en")) {
+                        enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                        enterDegree.add(enterDegreeTitle);
+                        enterDegree.add(enterDegreeSp);
+                    } else {
+                        enterDegree.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                        enterDegree.add(enterDegreeSp);
+                        enterDegree.add(enterDegreeTitle);
+                    }
                     enterDegree.setBorder(BorderFactory.createEmptyBorder(10, 0, -10, 0));
 
-                    JButton solveButton = new JButton("Solve");
+                    JButton solveButton = new JButton(Solve);
                     solveButton.setFocusPainted(false);
                     Color customGreen = new Color(34, 139, 34);  // RGB values for green color
                     solveButton.setBackground(customGreen);
                     solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
 
-                    JButton cancelButton = new JButton("Cancel");
+                    JButton cancelButton = new JButton(cancel);
                     cancelButton.setFocusPainted(false);
 
                     Object[] buttons = {cancelButton, solveButton};
@@ -1161,7 +1381,7 @@ public class GUI {
                         degree[0] = (int) enterDegreeSp.getValue();
                     });
 
-                    JOptionPane.showOptionDialog(null, enterDegree, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
+                    JOptionPane.showOptionDialog(null, enterDegree, interpolationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
                     if (cancelPressed[0]) return;
 
 
@@ -1169,7 +1389,7 @@ public class GUI {
 
                     //create table values title
                     JLabel tableTitle = new JLabel();
-                    tableTitle.setText("The values of the upper diameter of the Newton Forward Divided Subtractions Table : ");
+                    tableTitle.setText("<html>" + languageBundle.getString("NFDSUDT") + " : " + "</html>");
                     tableTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create table value scrolled
@@ -1184,7 +1404,7 @@ public class GUI {
                     Polynomial ans = Interpolation.NewtonForwardDividedSubtractions.getIFAP(pointsFunction, degree[0]);
 
                     JLabel interTitle = new JLabel();
-                    interTitle.setText("Interpolation answer using Newton Forward Divided Subtractions : ");
+                    interTitle.setText("<html>" + languageBundle.getString("interpolationAnswer") + " " + languageBundle.getString("NFDSTitle") + " : " + "</html>");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
 
@@ -1197,7 +1417,7 @@ public class GUI {
                     polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
                     JLabel shortPolyTitle = new JLabel();
-                    shortPolyTitle.setText("Interpolation answer with no shorthand : ");
+                    shortPolyTitle.setText(interpolationNSH);
                     shortPolyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     String asnNSH = Interpolation.NewtonForwardDividedSubtractions.getIFASNS(pointsFunction, degree[0]);
@@ -1221,16 +1441,16 @@ public class GUI {
                     contentPanel.add(polyAnsNSHScrollPane);
 
 
-                    String[] response = {"Cancel", "Continue with Polynomial"};
+                    String[] response = {cancel, continueWithPoly};
 
-                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, interpolationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
                         polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             };
             panelsStack.add(chooseFunctionPanel);
@@ -1242,15 +1462,14 @@ public class GUI {
         //***********************************************************************
 
         //init Newton Backward Divided Subtractions Equations Card
-        title = "Newton Backward Divided Subtractions";
-        description = "Get the interpolation function using Newton Backward Divided Subtractions method\n" + "It also can get Newton Backward Divided Subtractions Table values";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("NBDSTitle") + "</html>";
+        description = languageBundle.getString("NBDSDescription");
         ActionListener enterNDBS = e -> {
             doAction = pointsFunction -> {
                 try {
 
                     // inputs : degree
-                    JLabel enterDegreeTitle = new JLabel("Enter degree of the required polynomial : ");
+                    JLabel enterDegreeTitle = new JLabel(enterDegreeReqPoly);
                     enterDegreeTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
                     enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
@@ -1260,18 +1479,24 @@ public class GUI {
                     editor.getTextField().setColumns(2); // Adjust the width as needed
 
                     JPanel enterDegree = new JPanel();
-                    enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
-                    enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
-                    enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
+                    if (local.getLanguage().equals("en")) {
+                        enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                        enterDegree.add(enterDegreeTitle);
+                        enterDegree.add(enterDegreeSp);
+                    } else {
+                        enterDegree.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                        enterDegree.add(enterDegreeSp);
+                        enterDegree.add(enterDegreeTitle);
+                    }
                     enterDegree.setBorder(BorderFactory.createEmptyBorder(10, 0, -10, 0));
 
-                    JButton solveButton = new JButton("Solve");
+                    JButton solveButton = new JButton(Solve);
                     solveButton.setFocusPainted(false);
                     Color customGreen = new Color(34, 139, 34);  // RGB values for green color
                     solveButton.setBackground(customGreen);
                     solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
 
-                    JButton cancelButton = new JButton("Cancel");
+                    JButton cancelButton = new JButton(cancel);
                     cancelButton.setFocusPainted(false);
 
                     Object[] buttons = {cancelButton, solveButton};
@@ -1291,7 +1516,7 @@ public class GUI {
                         degree[0] = (int) enterDegreeSp.getValue();
                     });
 
-                    JOptionPane.showOptionDialog(null, enterDegree, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
+                    JOptionPane.showOptionDialog(null, enterDegree, interpolationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
                     if (cancelPressed[0]) return;
 
 
@@ -1299,7 +1524,7 @@ public class GUI {
 
                     //create table values title
                     JLabel tableTitle = new JLabel();
-                    tableTitle.setText("The values of the lower diameter of the Newton Backward Divided Subtractions Table : ");
+                    tableTitle.setText("<html>" + languageBundle.getString("NBDSLDT") + " : " + "</html>");
                     tableTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create table value scrolled
@@ -1313,7 +1538,7 @@ public class GUI {
                     Polynomial ans = Interpolation.NewtonBackwardDividedSubtractions.getIFAP(pointsFunction, degree[0]);
 
                     JLabel interTitle = new JLabel();
-                    interTitle.setText("Interpolation answer using Newton Backward Divided Subtractions : ");
+                    interTitle.setText("<html>" + languageBundle.getString("interpolationAnswer") + " " + languageBundle.getString("NBDSTitle") + " : " + "</html>");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
 
@@ -1326,7 +1551,7 @@ public class GUI {
                     polyAnsScrollPane.setPreferredSize(new Dimension(300, 70));
 
                     JLabel shortPolyTitle = new JLabel();
-                    shortPolyTitle.setText("Interpolation answer with no shorthand : ");
+                    shortPolyTitle.setText(interpolationNSH);
                     shortPolyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     String asnNSH = Interpolation.NewtonBackwardDividedSubtractions.getIFASNS(pointsFunction, degree[0]);
@@ -1350,16 +1575,16 @@ public class GUI {
                     contentPanel.add(polyAnsNSHScrollPane);
 
 
-                    String[] response = {"Cancel", "Continue with Polynomial"};
+                    String[] response = {cancel, continueWithPoly};
 
-                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, interpolationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
                         polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             };
             panelsStack.add(chooseFunctionPanel);
@@ -1371,15 +1596,14 @@ public class GUI {
         //***********************************************************************
 
         //init Least-Squares Card
-        title = "Least-Squares";
-        description = "Get the interpolation function using Least-Squares method";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("leastSquaresTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("leastSquaresDescription") + "</html>";
         ActionListener enterLeastSquares = e -> {
             doAction = pointsFunction -> {
                 try {
 
                     // inputs : degree
-                    JLabel enterDegreeTitle = new JLabel("Enter degree of the required polynomial : ");
+                    JLabel enterDegreeTitle = new JLabel(enterDegreeReqPoly);
                     enterDegreeTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
                     enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
@@ -1389,18 +1613,24 @@ public class GUI {
                     editor.getTextField().setColumns(2); // Adjust the width as needed
 
                     JPanel enterDegree = new JPanel();
-                    enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
-                    enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
-                    enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
+                    if (local.getLanguage().equals("en")) {
+                        enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                        enterDegree.add(enterDegreeTitle);
+                        enterDegree.add(enterDegreeSp);
+                    } else {
+                        enterDegree.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                        enterDegree.add(enterDegreeSp);
+                        enterDegree.add(enterDegreeTitle);
+                    }
                     enterDegree.setBorder(BorderFactory.createEmptyBorder(10, 0, -10, 0));
 
-                    JButton solveButton = new JButton("Solve");
+                    JButton solveButton = new JButton(Solve);
                     solveButton.setFocusPainted(false);
                     Color customGreen = new Color(34, 139, 34);  // RGB values for green color
                     solveButton.setBackground(customGreen);
                     solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
 
-                    JButton cancelButton = new JButton("Cancel");
+                    JButton cancelButton = new JButton(cancel);
                     cancelButton.setFocusPainted(false);
 
                     Object[] buttons = {cancelButton, solveButton};
@@ -1420,7 +1650,7 @@ public class GUI {
                         degree[0] = (int) enterDegreeSp.getValue();
                     });
 
-                    JOptionPane.showOptionDialog(null, enterDegree, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
+                    JOptionPane.showOptionDialog(null, enterDegree, interpolationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
                     if (cancelPressed[0]) return;
 
 
@@ -1428,7 +1658,7 @@ public class GUI {
 
                     //create title
                     JLabel interTitle = new JLabel();
-                    interTitle.setText("Interpolation answer using Least-Squares : ");
+                    interTitle.setText("<html>" + languageBundle.getString("interpolationAnswer") + " " + languageBundle.getString("leastSquaresTitle") + " : " + "</html>");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
@@ -1445,16 +1675,16 @@ public class GUI {
                     contentPanel.add(interTitle);
                     contentPanel.add(polyAnsScrollPane);
 
-                    String[] response = {"Cancel", "Continue with Polynomial"};
+                    String[] response = {cancel, continueWithPoly};
 
-                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, interpolationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
                         polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             };
             panelsStack.add(chooseFunctionPanel);
@@ -1467,16 +1697,15 @@ public class GUI {
         //***********************************************************************
 
         //init Spline Card
-        title = "Spline";
-        description = "Get the interpolation function using Spline method";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("splineTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("splineDescription") + "</html>";
         ActionListener enterSpline = e -> {
             doAction = pointsFunction -> {
                 try {
                     ArrayList<Polynomial> ans = Interpolation.Spline.getIFAPs(pointsFunction);
                     //create title
                     JLabel interTitle = new JLabel();
-                    interTitle.setText("Interpolation answer using Spline : ");
+                    interTitle.setText("<html>" + languageBundle.getString("interpolationAnswer") + " " + languageBundle.getString("splineTitle") + " : " + "</html>");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
@@ -1499,12 +1728,12 @@ public class GUI {
                     contentPanel.add(interTitle);
                     contentPanel.add(polyAnsScrollPane);
 
-                    String[] response = {"OK"};
+                    String[] response = {OK};
 
-                    JOptionPane.showOptionDialog(null, contentPanel, "Interpolation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+                    JOptionPane.showOptionDialog(null, contentPanel, interpolationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             };
             panelsStack.add(chooseFunctionPanel);
@@ -1529,13 +1758,15 @@ public class GUI {
         integralPanel.setLayout(new BorderLayout());
         GridLayout startLayout = new GridLayout(2, 2, 5, 5);
         JPanel cardsPanel = new JPanel(startLayout);
+        cardsPanel.setComponentOrientation(orientation);
         cardsPanel.setBackground(new Color(100, 100, 100));
+        String integralTitle = "<html>" + languageBundle.getString("integralTitle") + "</html>";
         //***********************************************************************
 
         //init Rectangular Card
-        String title = "Rectangular";
-        String description = "Calculates the integral using the rectangular method";
-        String button = "Enter";
+        String title = "<html>" + languageBundle.getString("rectangularTitle") + "</html>";
+        String description = "<html>" + languageBundle.getString("rectangularDescription") + "</html>";
+        String button = enter;
         ActionListener enterRect = e -> {
             doAction = pointsFunction -> {
                 try {
@@ -1547,12 +1778,12 @@ public class GUI {
 
                     //create title
                     JLabel interTitle = new JLabel();
-                    interTitle.setText("Integration answer using Rectangular method : ");
+                    interTitle.setText("<html>" + languageBundle.getString("integrationAnswer") + " " + languageBundle.getString("rectangularTitle") + " : " + "</html>");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea polyAns = new JTextArea();
-                    polyAns.append("Answer : ");
+                    polyAns.append("Answer = ");
                     polyAns.append(String.valueOf(fixAccuracy(ans)));
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     polyAns.setEditable(false);
@@ -1564,12 +1795,12 @@ public class GUI {
                     contentPanel.add(interTitle);
                     contentPanel.add(polyAnsScrollPane);
 
-                    String[] response = {"OK"};
+                    String[] response = {OK};
 
-                    JOptionPane.showOptionDialog(null, contentPanel, "Integration", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+                    JOptionPane.showOptionDialog(null, contentPanel, integralTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             };
             panelsStack.add(chooseFunctionPanel);
@@ -1581,9 +1812,9 @@ public class GUI {
         //***********************************************************************
 
         //init Trapezoidal Card
-        title = "Trapezoidal";
-        description = "Calculates the integral using the trapezoidal method";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("trapezoidalTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("trapezoidalDescription") + "</html>";
+        button = enter;
         ActionListener enterTraps = e -> {
             doAction = pointsFunction -> {
                 try {
@@ -1595,12 +1826,12 @@ public class GUI {
 
                     //create title
                     JLabel interTitle = new JLabel();
-                    interTitle.setText("Integration answer using Trapezoidal method : ");
+                    interTitle.setText("<html>" + languageBundle.getString("integrationAnswer") + " " + languageBundle.getString("trapezoidalTitle") + " : " + "</html>");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea polyAns = new JTextArea();
-                    polyAns.append("Answer : ");
+                    polyAns.append("Answer = ");
                     polyAns.append(String.valueOf(fixAccuracy(ans)));
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     polyAns.setEditable(false);
@@ -1612,12 +1843,12 @@ public class GUI {
                     contentPanel.add(interTitle);
                     contentPanel.add(polyAnsScrollPane);
 
-                    String[] response = {"OK"};
+                    String[] response = {OK};
 
-                    JOptionPane.showOptionDialog(null, contentPanel, "Integration", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+                    JOptionPane.showOptionDialog(null, contentPanel, integralTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             };
             panelsStack.add(chooseFunctionPanel);
@@ -1629,9 +1860,9 @@ public class GUI {
         //***********************************************************************
 
         //init Simpson 1/3 Card
-        title = "Simpson 1/3";
-        description = "Calculates the integral using Simpson's 1/3 method";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("simpson3Title") + "</html>";
+        description = "<html>" + languageBundle.getString("simpson3Description") + "</html>";
+        button = enter;
         ActionListener enterSimpson3 = e -> {
             doAction = pointsFunction -> {
                 try {
@@ -1643,12 +1874,12 @@ public class GUI {
 
                     //create title
                     JLabel interTitle = new JLabel();
-                    interTitle.setText("Integration answer using Simpson's 1/3 method : ");
+                    interTitle.setText("<html>" + languageBundle.getString("integrationAnswer") + " " + languageBundle.getString("simpson3Title") + " : " + "</html>");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea polyAns = new JTextArea();
-                    polyAns.append("Answer : ");
+                    polyAns.append("Answer = ");
                     polyAns.append(String.valueOf(fixAccuracy(ans)));
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     polyAns.setEditable(false);
@@ -1660,12 +1891,12 @@ public class GUI {
                     contentPanel.add(interTitle);
                     contentPanel.add(polyAnsScrollPane);
 
-                    String[] response = {"OK"};
+                    String[] response = {OK};
 
-                    JOptionPane.showOptionDialog(null, contentPanel, "Integration", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+                    JOptionPane.showOptionDialog(null, contentPanel, integralTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             };
             panelsStack.add(chooseFunctionPanel);
@@ -1677,9 +1908,9 @@ public class GUI {
         //***********************************************************************
 
         //init Simpson 3/8 Card
-        title = "Simpson 3/8";
-        description = "Calculates the integral using Simpson's 3/8 method";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("simpson8Title") + "</html>";
+        description = "<html>" + languageBundle.getString("simpson8Description") + "</html>";
+        button = enter;
         ActionListener enterSimpson8 = e -> {
             doAction = pointsFunction -> {
                 try {
@@ -1691,12 +1922,12 @@ public class GUI {
 
                     //create title
                     JLabel interTitle = new JLabel();
-                    interTitle.setText("Integration answer using Simpson's 3/8 method : ");
+                    interTitle.setText("<html>" + languageBundle.getString("integrationAnswer") + " " + languageBundle.getString("simpson8Title") + " : " + "</html>");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea polyAns = new JTextArea();
-                    polyAns.append("Answer : ");
+                    polyAns.append("Answer = ");
                     polyAns.append(String.valueOf(fixAccuracy(ans)));
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     polyAns.setEditable(false);
@@ -1708,12 +1939,12 @@ public class GUI {
                     contentPanel.add(interTitle);
                     contentPanel.add(polyAnsScrollPane);
 
-                    String[] response = {"OK"};
+                    String[] response = {OK};
 
-                    JOptionPane.showOptionDialog(null, contentPanel, "Integration", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+                    JOptionPane.showOptionDialog(null, contentPanel, integralTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             };
             panelsStack.add(chooseFunctionPanel);
@@ -1725,9 +1956,9 @@ public class GUI {
         //***********************************************************************
 
         //init Paul Card
-        title = "Paul";
-        description = "Calculates the integral using Paul's method";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("paulTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("paulDescription") + "</html>";
+        button = enter;
         ActionListener enterPaul = e -> {
             doAction = pointsFunction -> {
                 try {
@@ -1739,12 +1970,12 @@ public class GUI {
 
                     //create title
                     JLabel interTitle = new JLabel();
-                    interTitle.setText("Integration answer using Paul's method : ");
+                    interTitle.setText("<html>" + languageBundle.getString("integrationAnswer") + " " + languageBundle.getString("paulTitle") + " : " + "</html>");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea polyAns = new JTextArea();
-                    polyAns.append("Answer : ");
+                    polyAns.append("Answer = ");
                     polyAns.append(String.valueOf(fixAccuracy(ans)));
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     polyAns.setEditable(false);
@@ -1756,12 +1987,12 @@ public class GUI {
                     contentPanel.add(interTitle);
                     contentPanel.add(polyAnsScrollPane);
 
-                    String[] response = {"OK"};
+                    String[] response = {OK};
 
-                    JOptionPane.showOptionDialog(null, contentPanel, "Integration", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+                    JOptionPane.showOptionDialog(null, contentPanel, integralTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             };
             panelsStack.add(chooseFunctionPanel);
@@ -1791,13 +2022,16 @@ public class GUI {
         startLayout.setHgap(5);
         startLayout.setVgap(5);
         differentiationPanel.setLayout(startLayout);
+        differentiationPanel.setComponentOrientation(orientation);
+        String differentiationTitle = "<html>" + languageBundle.getString("differentiationTitle") + "</html>";
+        String enterRankDiff = "<html>" + languageBundle.getString("enterRankDiff") + "</html>";
 
         //***********************************************************************
 
         //init Lagrange Card
-        String title = "Lagrange";
-        String description = "Get Differential Function As Polynomial using Lagrange";
-        String button = "Enter";
+        String title = "<html>" + languageBundle.getString("lagrangeDiffTitle") + "</html>";
+        String description = "<html>" + languageBundle.getString("lagrangeDiffDescription") + "</html>";
+        String button = enter;
         ActionListener enterLagrange = e -> {
             doAction = pointsFunction -> {
                 try {
@@ -1805,7 +2039,7 @@ public class GUI {
 
                     //create answer title
                     JLabel interTitle = new JLabel();
-                    interTitle.setText("Differentiation answer using Lagrange : ");
+                    interTitle.setText("<html>" + languageBundle.getString("differentialAnswer") + " " + languageBundle.getString("lagrangeDiffTitle") + " : " + "</html>");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create answer scrolled
@@ -1823,16 +2057,16 @@ public class GUI {
                     contentPanel.add(interTitle);
                     contentPanel.add(polyAnsScrollPane);
 
-                    String[] response = {"Cancel", "Continue with Polynomial"};
+                    String[] response = {cancel, continueWithPoly};
 
-                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, differentiationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
                         polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             };
             panelsStack.add(chooseFunctionPanel);
@@ -1844,15 +2078,15 @@ public class GUI {
         //***********************************************************************
 
         //init  Newton-Gregory Forward Subtractions Card
-        title = "Newton-Gregory Forward Subtractions";
-        description = "Get Differential Function As Polynomial using Newton-Gregory Forward Subtractions";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("NGFSDiffTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("NGFSDiffDescription") + "</html>";
+        button = enter;
         ActionListener enterNGFS = e -> {
             doAction = pointsFunction -> {
                 try {
 
                     // inputs : degree
-                    JLabel enterDegreeTitle = new JLabel("Enter degree of the required polynomial : ");
+                    JLabel enterDegreeTitle = new JLabel(enterDegreeReqPoly);
                     enterDegreeTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
                     enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
@@ -1862,13 +2096,19 @@ public class GUI {
                     editor.getTextField().setColumns(2); // Adjust the width as needed
 
                     JPanel enterDegree = new JPanel();
-                    enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
-                    enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
-                    enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
+                    if (local.getLanguage().equals("en")) {
+                        enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                        enterDegree.add(enterDegreeTitle);
+                        enterDegree.add(enterDegreeSp);
+                    } else {
+                        enterDegree.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                        enterDegree.add(enterDegreeSp);
+                        enterDegree.add(enterDegreeTitle);
+                    }
                     //enterDegree.setBorder(BorderFactory.createEmptyBorder(10,0,-10,0));
 
                     // inputs : rank
-                    JLabel enterRankTitle = new JLabel("Enter rank of the required differentiation : ");
+                    JLabel enterRankTitle = new JLabel(enterRankDiff);
                     enterRankTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
                     enterRankTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
@@ -1878,22 +2118,28 @@ public class GUI {
                     editorRank.getTextField().setColumns(2); // Adjust the width as needed
 
                     JPanel enterRank = new JPanel();
-                    enterRank.setLayout(new FlowLayout(FlowLayout.LEFT));
-                    enterRank.add(enterRankTitle, BorderLayout.WEST);
-                    enterRank.add(enterRankSp, BorderLayout.CENTER);
+                    if (local.getLanguage().equals("en")) {
+                        enterRank.setLayout(new FlowLayout(FlowLayout.LEFT));
+                        enterRank.add(enterRankTitle);
+                        enterRank.add(enterRankSp);
+                    } else {
+                        enterRank.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                        enterRank.add(enterRankSp);
+                        enterRank.add(enterRankTitle);
+                    }
                     //enterRank.setBorder(BorderFactory.createEmptyBorder(10,0,-10,0));
 
                     JPanel inputs = new JPanel(new GridLayout(2, 1));
                     inputs.add(enterDegree);
                     inputs.add(enterRank);
 
-                    JButton solveButton = new JButton("Solve");
+                    JButton solveButton = new JButton(Solve);
                     solveButton.setFocusPainted(false);
                     Color customGreen = new Color(34, 139, 34);  // RGB values for green color
                     solveButton.setBackground(customGreen);
                     solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
 
-                    JButton cancelButton = new JButton("Cancel");
+                    JButton cancelButton = new JButton(cancel);
                     cancelButton.setFocusPainted(false);
 
                     Object[] buttons = {cancelButton, solveButton};
@@ -1914,14 +2160,14 @@ public class GUI {
                         rank[0] = (int) enterRankSp.getValue();
                     });
 
-                    JOptionPane.showOptionDialog(null, inputs, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
+                    JOptionPane.showOptionDialog(null, inputs, differentiationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
                     if (cancelPressed[0]) return;
 
 
                     Polynomial ans = Differentiation.Newton_GregoryForwardSubtractions.getIFAP(pointsFunction, degree[0], rank[0]);
 
                     JLabel interTitle = new JLabel();
-                    interTitle.setText("Differentiation answer using Newton-Gregory Forward Subtraction : ");
+                    interTitle.setText("<html>" + languageBundle.getString("differentialAnswer") + " " + languageBundle.getString("NGFSDiffTitle") + " : " + "</html>");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
 
@@ -1940,16 +2186,16 @@ public class GUI {
                     contentPanel.add(polyAnsScrollPane);
 
 
-                    String[] response = {"Cancel", "Continue with Polynomial"};
+                    String[] response = {cancel, continueWithPoly};
 
-                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, differentiationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
                         polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             };
             panelsStack.add(chooseFunctionPanel);
@@ -1961,15 +2207,15 @@ public class GUI {
         //***********************************************************************
 
         //init Newton-Gregory Backward Subtractions Card
-        title = "Newton-Gregory Backward Subtractions";
-        description = "Get Differential Function As Polynomial using Newton-Gregory Backward Subtractions";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("NGBSDiffTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("NGFBDiffDescription") + "</html>";
+        button = enter;
         ActionListener enterNGBS = e -> {
             doAction = pointsFunction -> {
                 try {
 
                     // inputs : degree
-                    JLabel enterDegreeTitle = new JLabel("Enter degree of the required polynomial : ");
+                    JLabel enterDegreeTitle = new JLabel(enterDegreeReqPoly);
                     enterDegreeTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
                     enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
@@ -1979,13 +2225,19 @@ public class GUI {
                     editor.getTextField().setColumns(2); // Adjust the width as needed
 
                     JPanel enterDegree = new JPanel();
-                    enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
-                    enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
-                    enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
+                    if (local.getLanguage().equals("en")) {
+                        enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                        enterDegree.add(enterDegreeTitle);
+                        enterDegree.add(enterDegreeSp);
+                    } else {
+                        enterDegree.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                        enterDegree.add(enterDegreeSp);
+                        enterDegree.add(enterDegreeTitle);
+                    }
                     //enterDegree.setBorder(BorderFactory.createEmptyBorder(10,0,-10,0));
 
                     // inputs : rank
-                    JLabel enterRankTitle = new JLabel("Enter rank of the required differentiation : ");
+                    JLabel enterRankTitle = new JLabel(enterRankDiff);
                     enterRankTitle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
                     enterRankTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
@@ -1995,22 +2247,28 @@ public class GUI {
                     editorRank.getTextField().setColumns(2); // Adjust the width as needed
 
                     JPanel enterRank = new JPanel();
-                    enterRank.setLayout(new FlowLayout(FlowLayout.LEFT));
-                    enterRank.add(enterRankTitle, BorderLayout.WEST);
-                    enterRank.add(enterRankSp, BorderLayout.CENTER);
+                    if (local.getLanguage().equals("en")) {
+                        enterRank.setLayout(new FlowLayout(FlowLayout.LEFT));
+                        enterRank.add(enterRankTitle);
+                        enterRank.add(enterRankSp);
+                    } else {
+                        enterRank.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                        enterRank.add(enterRankSp);
+                        enterRank.add(enterRankTitle);
+                    }
                     //enterRank.setBorder(BorderFactory.createEmptyBorder(10,0,-10,0));
 
                     JPanel inputs = new JPanel(new GridLayout(2, 1));
                     inputs.add(enterDegree);
                     inputs.add(enterRank);
 
-                    JButton solveButton = new JButton("Solve");
+                    JButton solveButton = new JButton(Solve);
                     solveButton.setFocusPainted(false);
                     Color customGreen = new Color(34, 139, 34);  // RGB values for green color
                     solveButton.setBackground(customGreen);
                     solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
 
-                    JButton cancelButton = new JButton("Cancel");
+                    JButton cancelButton = new JButton(cancel);
                     cancelButton.setFocusPainted(false);
 
                     Object[] buttons = {cancelButton, solveButton};
@@ -2031,14 +2289,14 @@ public class GUI {
                         rank[0] = (int) enterRankSp.getValue();
                     });
 
-                    JOptionPane.showOptionDialog(null, inputs, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
+                    JOptionPane.showOptionDialog(null, inputs, differentiationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
                     if (cancelPressed[0]) return;
 
 
                     Polynomial ans = Differentiation.Newton_GregoryBackwardSubtractions.getIFAP(pointsFunction, degree[0], rank[0]);
 
                     JLabel interTitle = new JLabel();
-                    interTitle.setText("Differentiation answer using Newton-Gregory Backward Subtraction : ");
+                    interTitle.setText("<html>" + languageBundle.getString("differentialAnswer") + " " + languageBundle.getString("NGBSDiffTitle") + " : " + "</html>");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
 
@@ -2057,16 +2315,16 @@ public class GUI {
                     contentPanel.add(polyAnsScrollPane);
 
 
-                    String[] response = {"Cancel", "Continue with Polynomial"};
+                    String[] response = {cancel, continueWithPoly};
 
-                    int feed = JOptionPane.showOptionDialog(null, contentPanel, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
+                    int feed = JOptionPane.showOptionDialog(null, contentPanel, differentiationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[1]);
                     if (feed == 1) {
                         polynomial = ans;
                         panelsStack.add(polynomialsPanel);
                         updateMainPanel();
                     }
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             };
             panelsStack.add(chooseFunctionPanel);
@@ -2079,26 +2337,29 @@ public class GUI {
         //***********************************************************************
 
         //init Central,Forward,Backward Subtractions Card
-        title = "Central,Forward,Backward Subtractions";
-        description = "Calculate the differential function of a specified value using Central/Forward/Backward Subtractions";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("CFBSTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("CFBDescription") + "</html>";
+        button = enter;
         ActionListener enterCFBS = e -> {
             doAction = pointsFunction -> {
                 try {
 
-                    JLabel enterXLabel = new JLabel("Enter x value to get differentiation at it : ");
+                    JLabel enterXLabel = new JLabel("<html>" + languageBundle.getString("enterXDiff") + " : " + "</html>");
                     enterXLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
 
                     JTextField enterXField = new JTextField();
                     enterXField.setColumns(25);
 
-                    JLabel enterMethodLabel = new JLabel("Choose a method : ");
+                    JLabel enterMethodLabel = new JLabel("<html>" + languageBundle.getString("chooseMethod") + " : " + "</html>");
                     enterMethodLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
 
                     JComboBox<String> enterMethodCombo = new JComboBox<>();
-                    enterMethodCombo.addItem("Backward Subtractions");
-                    enterMethodCombo.addItem("Central Subtractions");
-                    enterMethodCombo.addItem("Forward Subtractions");
+                    String BS = "<html>" + languageBundle.getString("BS") + "</html>";
+                    String CS = "<html>" + languageBundle.getString("CF") + "</html>";
+                    String FS = "<html>" + languageBundle.getString("FS") + "</html>";
+                    enterMethodCombo.addItem(BS);
+                    enterMethodCombo.addItem(CS);
+                    enterMethodCombo.addItem(FS);
 
                     JPanel inputs = new JPanel(new GridBagLayout());
                     GridBagConstraints gbc = new GridBagConstraints();
@@ -2115,7 +2376,7 @@ public class GUI {
                     gbc.gridx++;
                     inputs.add(enterMethodCombo, gbc);
 
-                    JButton solveButton = new JButton("Solve");
+                    JButton solveButton = new JButton(Solve);
                     solveButton.setFocusPainted(false);
                     Color customGreen = new Color(34, 139, 34);  // RGB values for green color
                     solveButton.setBackground(customGreen);
@@ -2126,58 +2387,49 @@ public class GUI {
                     fields.add(enterXField);
                     addDocumentListenerToFields(solveButton, fields);
 
-                    JButton cancelButton = new JButton("Cancel");
+                    JButton cancelButton = new JButton(cancel);
                     cancelButton.setFocusPainted(false);
 
                     Object[] buttons = {cancelButton, solveButton};
 
-                    final boolean[] cancelPressed = {false};
                     cancelButton.addActionListener(cancel -> {
-                        cancelPressed[0] = true;
                         Window optionDialog = SwingUtilities.getWindowAncestor(inputs);
                         optionDialog.dispose();
                     });
 
                     final BigDecimal[] x = {new BigDecimal(0)};
                     final String[] method = {""};
+                    final boolean[] solvePressed = {false};
                     solveButton.addActionListener(solve -> {
+                        solvePressed[0] = true;
                         Window optionDialog = SwingUtilities.getWindowAncestor(inputs);
                         optionDialog.dispose();
                         x[0] = EvaluateString.evaluate(enterXField.getText());
                         method[0] = String.valueOf(enterMethodCombo.getSelectedItem());
                     });
 
-                    JOptionPane.showOptionDialog(null, inputs, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
-                    if (cancelPressed[0]) return;
+                    JOptionPane.showOptionDialog(null, inputs, differentiationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon64, buttons, null);
+                    if (!solvePressed[0]) return;
 
                     BigDecimal ans;
-
-                    switch (method[0]) {
-                        case "Backward Subtractions": {
-                            ans = Differentiation.Subtractions.Backward.getValueAt(function, x[0]);
-                            break;
-                        }
-                        case "Central Subtractions": {
-                            ans = Differentiation.Subtractions.Central.getValueAt(function, x[0]);
-                            break;
-                        }
-                        case "Forward Subtractions": {
-                            ans = Differentiation.Subtractions.Forward.getValueAt(function, x[0]);
-                            break;
-                        }
-                        default: {
-                            throw new Exception("Invalid Inputs");
-                        }
+                    if (method[0].equals(BS)) {
+                        ans = Differentiation.Subtractions.Backward.getValueAt(function, x[0]);
+                    } else if (method[0].equals(CS)) {
+                        ans = Differentiation.Subtractions.Central.getValueAt(function, x[0]);
+                    } else if (method[0].equals(FS)) {
+                        ans = Differentiation.Subtractions.Forward.getValueAt(function, x[0]);
+                    } else {
+                        throw new Exception(invalidInputs);
                     }
 
 
                     JLabel interTitle = new JLabel();
-                    interTitle.setText("Differentiation answer using " + method[0] + " : ");
+                    interTitle.setText("<html>" + languageBundle.getString("differentialAnswer") + " " + method[0] + " : " + "</html>");
                     interTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
 
                     JTextArea polyAns = new JTextArea();
-                    polyAns.append("Answer : ");
+                    polyAns.append("Answer = ");
                     polyAns.append(String.valueOf(fixAccuracy(ans)));
                     polyAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     polyAns.setEditable(false);
@@ -2191,12 +2443,12 @@ public class GUI {
                     contentPanel.add(polyAnsScrollPane);
 
 
-                    String[] response = {"OK"};
+                    String[] response = {OK};
 
-                    JOptionPane.showOptionDialog(null, contentPanel, "Differentiation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, null);
+                    JOptionPane.showOptionDialog(null, contentPanel, differentiationTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, null);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             };
             panelsStack.add(chooseFunctionPanel);
@@ -2223,62 +2475,92 @@ public class GUI {
         startLayout.setHgap(5);
         startLayout.setVgap(5);
         differentialEquationsPanel.setLayout(startLayout);
+        differentialEquationsPanel.setComponentOrientation(orientation);
+        String diffEqTitle = "<html>" + languageBundle.getString("differentialTitle") + "</html>";
 
         //***********************************************************************
 
         //init Euler Card
-        String title = "Euler";
-        String description = "Solving a differential equation using the Euler method";
-        String button = "Enter";
+        String title = "<html>" + languageBundle.getString("eulerTitle") + "</html>";
+        String description = "<html>" + languageBundle.getString("eulerDescription") + "</html>";
+        String button = enter;
         ActionListener enterEuler = e -> {
-            JLabel eulerTitle = new JLabel("Euler's Method");
+            JLabel eulerTitle = new JLabel("<html>" + languageBundle.getString("eulerMethod") + "</html>");
+            eulerTitle.setComponentOrientation(orientation);
             eulerTitle.setFont(new Font(mainFont, Font.BOLD, 25));
 
-            JLabel enterYTitle = new JLabel("Enter Y ' : ");
+            JLabel enterYTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " Y ' : " + "</html>");
+            enterYTitle.setComponentOrientation(orientation);
             enterYTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterYField = new JTextField();
             enterYField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterYField.setPreferredSize(new Dimension(250, 50));
 
-            JLabel enterX0Title = new JLabel("Enter x0 : ");
+            JLabel enterX0Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " X0 : " + "</html>");
+            enterX0Title.setComponentOrientation(orientation);
             enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterX0Field = new JTextField();
             enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterX0Field.setPreferredSize(new Dimension(250, 50));
 
-            JLabel enterY0Title = new JLabel("Enter Y0 : ");
+            JLabel enterY0Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " Y0 : " + "</html>");
+            enterY0Title.setComponentOrientation(orientation);
             enterY0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterY0Field = new JTextField();
             enterY0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterY0Field.setPreferredSize(new Dimension(250, 50));
 
-            JLabel enterHTitle = new JLabel("Enter h : ");
+            JLabel enterHTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " h : " + "</html>");
+            enterHTitle.setComponentOrientation(orientation);
             enterHTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterHField = new JTextField();
             enterHField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterHField.setPreferredSize(new Dimension(250, 50));
 
-            JLabel enterXTitle = new JLabel("Enter x : ");
+            JLabel enterXTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " X : " + "</html>");
+            enterXTitle.setComponentOrientation(orientation);
             enterXTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterXField = new JTextField();
             enterXField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterXField.setPreferredSize(new Dimension(250, 50));
 
-            JPanel contentPanel = new JPanel(new GridLayout(6, 2, -150, 0));
-            contentPanel.add(eulerTitle);
-            contentPanel.add(new JPanel());
-            contentPanel.add(enterYTitle);
-            contentPanel.add(enterYField);
-            contentPanel.add(enterX0Title);
-            contentPanel.add(enterX0Field);
-            contentPanel.add(enterY0Title);
-            contentPanel.add(enterY0Field);
-            contentPanel.add(enterHTitle);
-            contentPanel.add(enterHField);
-            contentPanel.add(enterXTitle);
-            contentPanel.add(enterXField);
+            JPanel contentPanel;
+            if (local.getLanguage().equals("en"))
+                contentPanel = new JPanel(new GridLayout(6, 2, -150, 0));
+            else {
+                contentPanel = new JPanel(new GridLayout(6, 2, 20, 0));
+                contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, -120));
+            }
+            contentPanel.setComponentOrientation(orientation);
+            if (local.getLanguage().equals("en")) {
+                contentPanel.add(eulerTitle);
+                contentPanel.add(new JPanel());
+                contentPanel.add(enterYTitle);
+                contentPanel.add(enterYField);
+                contentPanel.add(enterX0Title);
+                contentPanel.add(enterX0Field);
+                contentPanel.add(enterY0Title);
+                contentPanel.add(enterY0Field);
+                contentPanel.add(enterHTitle);
+                contentPanel.add(enterHField);
+                contentPanel.add(enterXTitle);
+                contentPanel.add(enterXField);
+            } else {
+                contentPanel.add(new JPanel());
+                contentPanel.add(eulerTitle);
+                contentPanel.add(enterYField);
+                contentPanel.add(enterYTitle);
+                contentPanel.add(enterX0Field);
+                contentPanel.add(enterX0Title);
+                contentPanel.add(enterY0Field);
+                contentPanel.add(enterY0Title);
+                contentPanel.add(enterHField);
+                contentPanel.add(enterHTitle);
+                contentPanel.add(enterXField);
+                contentPanel.add(enterXTitle);
+            }
 
-            JButton solveButton = new JButton("Solve");
+            JButton solveButton = new JButton(Solve);
             solveButton.setFocusPainted(false);
             solveButton.setPreferredSize(new Dimension(80, 40));
             solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -2287,7 +2569,7 @@ public class GUI {
             solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
             solveButton.setEnabled(false);
 
-            JButton cancelButton = new JButton("Cancel");
+            JButton cancelButton = new JButton(cancel);
             cancelButton.setFocusPainted(false);
             cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -2321,12 +2603,12 @@ public class GUI {
 
                     //create title
                     JLabel difeqTitle = new JLabel();
-                    difeqTitle.setText("Differential Equation solution using Euler's method : ");
+                    difeqTitle.setText("<html>" + languageBundle.getString("eulerDescription") + " : " + "</html>");
                     difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
-                    difeqAns.append("Answer : ");
+                    difeqAns.append("Answer = ");
                     difeqAns.append(String.valueOf(fixAccuracy(ans)));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
@@ -2338,14 +2620,14 @@ public class GUI {
                     ansContentPanel.add(difeqTitle);
                     ansContentPanel.add(polyAnsScrollPane);
 
-                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, diffEqTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
-            JOptionPane.showOptionDialog(null, contentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
+            JOptionPane.showOptionDialog(null, contentPanel, diffEqTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
 
         };
         JPanel eulerCard = createCard(title, description, button, enterEuler);
@@ -2354,18 +2636,18 @@ public class GUI {
         //***********************************************************************
 
         //init Taylor Card
-        title = "Taylor";
-        description = "Solving a differential equation using the Taylor method";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("taylorTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("taylorDescription") + "</html>";
+        button = enter;
         ActionListener enterTaylor = e -> {
-            JLabel heinTitleLabel = new JLabel("Taylor's Method");
-            heinTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
-            JPanel heinTitle = new JPanel();
-            heinTitle.add(heinTitleLabel);
-            heinTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+            JLabel taylorTitleLabel = new JLabel("<html>" + languageBundle.getString("taylorMethod") + "</html>");
+            taylorTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
+            JPanel taylotTitle = new JPanel();
+            taylotTitle.add(taylorTitleLabel);
+            taylotTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
             // inputs : n
-            JLabel enterNTitle = new JLabel("Enter n – The number of terms in the Taylor series :");
+            JLabel enterNTitle = new JLabel("<html>" + languageBundle.getString("enterNTermTylor") + "</html>");
             enterNTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             enterNTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
@@ -2374,18 +2656,26 @@ public class GUI {
             JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterNSp.getEditor();
             editor.getTextField().setColumns(2); // Adjust the width as needed
 
-            JButton confirmButton = new JButton("Confirm");
+            JButton confirmButton = new JButton(Confirm);
             confirmButton.setPreferredSize(new Dimension(80, 30));
 
             JPanel enterN = new JPanel();
-            enterN.setLayout(new FlowLayout(FlowLayout.LEFT));
-            enterN.add(enterNTitle, BorderLayout.WEST);
-            enterN.add(enterNSp, BorderLayout.CENTER);
-            enterN.add(confirmButton, BorderLayout.EAST);
+            if (local.getLanguage().equals("en")) {
+                enterN.setLayout(new FlowLayout(FlowLayout.LEFT));
+                enterN.add(enterNTitle);
+                enterN.add(enterNSp);
+                enterN.add(confirmButton);
+            } else {
+                enterN.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                enterN.add(confirmButton);
+                enterN.add(enterNSp);
+                enterN.add(enterNTitle);
+            }
 
 
             // input
-            JLabel enterDivsTitle = new JLabel("Enter Derivatives : ");
+            JLabel enterDivsTitle = new JLabel("<html>" + languageBundle.getString("enterDerivatives") + " : " + "</html>");
+            enterDivsTitle.setComponentOrientation(orientation);
             enterDivsTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             enterDivsTitle.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0)); // Adjust the top and bottom padding
 
@@ -2395,10 +2685,14 @@ public class GUI {
 
             // inputs panel
             JPanel inputsPanel = new JPanel(new GridBagLayout());
+            inputsPanel.setComponentOrientation(orientation);
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
-            gbc.anchor = GridBagConstraints.WEST;
+            if (local.getLanguage().equals("en"))
+                gbc.anchor = GridBagConstraints.WEST;
+            else
+                gbc.anchor = GridBagConstraints.EAST;
             gbc.insets = new Insets(5, 0, 5, 0); // Add vertical spacing between components
 
             inputsPanel.add(enterN, gbc);
@@ -2412,25 +2706,25 @@ public class GUI {
             inputsPanel.add(enterDivsScroll, gbc);
 
 
-            JLabel enterX0Title = new JLabel("Enter x0 : ");
+            JLabel enterX0Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " X0 : " + "</html>");
             enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterX0Field = new JTextField();
             enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterX0Field.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterY0Title = new JLabel("Enter Y0 : ");
+            JLabel enterY0Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " Y0 : " + "</html>");
             enterY0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterY0Field = new JTextField();
             enterY0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterY0Field.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterHTitle = new JLabel("Enter h : ");
+            JLabel enterHTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " h : " + "</html>");
             enterHTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterHField = new JTextField();
             enterHField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterHField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterXTitle = new JLabel("Enter x : ");
+            JLabel enterXTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " X : " + "</html>");
             enterXTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterXField = new JTextField();
             enterXField.setFont(new Font(secondFont, Font.PLAIN, 18));
@@ -2439,55 +2733,82 @@ public class GUI {
             JPanel contentPanel = new JPanel();
             GridBagLayout layout = new GridBagLayout();
             contentPanel.setLayout(layout);
+            contentPanel.setComponentOrientation(orientation);
 
             GridBagConstraints constraints = new GridBagConstraints();
             constraints.fill = GridBagConstraints.HORIZONTAL;
-            constraints.insets = new Insets(5, -130, 5, 10); // Adjust the padding as needed
+            if (local.getLanguage().equals("en"))
+                constraints.insets = new Insets(5, -130, 5, 10); // Adjust the padding as needed
+            else constraints.insets = new Insets(5, 0, 5, 10); // Adjust the padding as needed
 
 
-            constraints.gridx = 0;
+            if (local.getLanguage().equals("en"))
+                constraints.gridx = 0;
+            else
+                constraints.gridx = 1;
             constraints.gridy = 0;
             contentPanel.add(enterX0Title, constraints);
 
-            constraints.gridx = 1;
+            if (local.getLanguage().equals("en"))
+                constraints.gridx = 1;
+            else
+                constraints.gridx = 0;
             constraints.weightx = 1.0; // Make the text field expand horizontally
             contentPanel.add(enterX0Field, constraints);
 
             constraints.gridy++;
 
-            constraints.gridx = 0;
+            if (local.getLanguage().equals("en"))
+                constraints.gridx = 0;
+            else
+                constraints.gridx = 1;
             contentPanel.add(enterY0Title, constraints);
 
-            constraints.gridx = 1;
+            if (local.getLanguage().equals("en"))
+                constraints.gridx = 1;
+            else
+                constraints.gridx = 0;
             constraints.weightx = 1.0; // Make the text field expand horizontally
             contentPanel.add(enterY0Field, constraints);
 
             constraints.gridy++;
 
-            constraints.gridx = 0;
+            if (local.getLanguage().equals("en"))
+                constraints.gridx = 0;
+            else
+                constraints.gridx = 1;
             contentPanel.add(enterHTitle, constraints);
 
-            constraints.gridx = 1;
+            if (local.getLanguage().equals("en"))
+                constraints.gridx = 1;
+            else
+                constraints.gridx = 0;
             constraints.weightx = 1.0; // Make the text field expand horizontally
             contentPanel.add(enterHField, constraints);
 
             constraints.gridy++;
 
-            constraints.gridx = 0;
+            if (local.getLanguage().equals("en"))
+                constraints.gridx = 0;
+            else
+                constraints.gridx = 1;
             contentPanel.add(enterXTitle, constraints);
 
-            constraints.gridx = 1;
+            if (local.getLanguage().equals("en"))
+                constraints.gridx = 1;
+            else
+                constraints.gridx = 0;
             constraints.weightx = 1.0; // Make the text field expand horizontally
             contentPanel.add(enterXField, constraints);
 
             contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50));
 
             JPanel showPanel = new JPanel(new BorderLayout());
-            showPanel.add(heinTitle, BorderLayout.NORTH);
+            showPanel.add(taylotTitle, BorderLayout.NORTH);
             showPanel.add(inputsPanel, BorderLayout.CENTER);
             showPanel.add(contentPanel, BorderLayout.SOUTH);
 
-            JButton solveButton = new JButton("Solve");
+            JButton solveButton = new JButton(Solve);
             solveButton.setFocusPainted(false);
             solveButton.setPreferredSize(new Dimension(80, 40));
             solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -2548,7 +2869,7 @@ public class GUI {
                 addDocumentListenerToFields(solveButton, fields);
             });
 
-            JButton cancelButton = new JButton("Cancel");
+            JButton cancelButton = new JButton(cancel);
             cancelButton.setFocusPainted(false);
             cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -2579,12 +2900,12 @@ public class GUI {
 
                     //create title
                     JLabel difeqTitle = new JLabel();
-                    difeqTitle.setText("Differential Equation solution using Taylor's method : ");
+                    difeqTitle.setText("<html>" + languageBundle.getString("taylorDescription") + " : " + "</html>");
                     difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
-                    difeqAns.append("Answer : ");
+                    difeqAns.append("Answer = ");
                     difeqAns.append(String.valueOf(fixAccuracy(ans)));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
@@ -2596,14 +2917,14 @@ public class GUI {
                     ansContentPanel.add(difeqTitle);
                     ansContentPanel.add(polyAnsScrollPane);
 
-                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, diffEqTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
-            JOptionPane.showOptionDialog(null, showPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
+            JOptionPane.showOptionDialog(null, showPanel, diffEqTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel taylorCard = createCard(title, description, button, enterTaylor);
         differentialEquationsPanel.add(taylorCard);
@@ -2611,63 +2932,80 @@ public class GUI {
         //***********************************************************************
 
         //init Modified Euler Card
-        title = "Modified Euler";
-        description = "Solving a differential equation using the Modified Euler method";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("modifiedEulerTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("modifiedEulerDescription") + "</html>";
+        button = enter;
         ActionListener enterModifiedEuler = e -> {
-            JLabel modEulerTitleLabel = new JLabel("MidPoint : Modified Euler's Method");
+            JLabel modEulerTitleLabel = new JLabel("<html>" + languageBundle.getString("midpointEuler") + "</html>");
+            modEulerTitleLabel.setComponentOrientation(orientation);
             modEulerTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
             JPanel modEulerTitle = new JPanel();
             modEulerTitle.add(modEulerTitleLabel);
             modEulerTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
-            JLabel enterYTitle = new JLabel("Enter Y ' : ");
+            JLabel enterYTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " Y ' : " + "</html>");
             enterYTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterYField = new JTextField();
             enterYField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterYField.setPreferredSize(new Dimension(250, 50));
 
-            JLabel enterX0Title = new JLabel("Enter x0 : ");
+            JLabel enterX0Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " X0 : " + "</html>");
             enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterX0Field = new JTextField();
             enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterX0Field.setPreferredSize(new Dimension(250, 50));
 
-            JLabel enterY0Title = new JLabel("Enter Y0 : ");
+            JLabel enterY0Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " Y0 : " + "</html>");
             enterY0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterY0Field = new JTextField();
             enterY0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterY0Field.setPreferredSize(new Dimension(250, 50));
 
-            JLabel enterHTitle = new JLabel("Enter h : ");
+            JLabel enterHTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " h : " + "</html>");
             enterHTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterHField = new JTextField();
             enterHField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterHField.setPreferredSize(new Dimension(250, 50));
 
-            JLabel enterXTitle = new JLabel("Enter x : ");
+            JLabel enterXTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " X : " + "</html>");
             enterXTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterXField = new JTextField();
             enterXField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterXField.setPreferredSize(new Dimension(250, 50));
 
-            JPanel contentPanel = new JPanel(new GridLayout(5, 2, -180, 0));
-            contentPanel.add(enterYTitle);
-            contentPanel.add(enterYField);
-            contentPanel.add(enterX0Title);
-            contentPanel.add(enterX0Field);
-            contentPanel.add(enterY0Title);
-            contentPanel.add(enterY0Field);
-            contentPanel.add(enterHTitle);
-            contentPanel.add(enterHField);
-            contentPanel.add(enterXTitle);
-            contentPanel.add(enterXField);
+            JPanel contentPanel;
+            if (local.getLanguage().equals("en")) {
+                contentPanel = new JPanel(new GridLayout(5, 2, -180, 0));
+                contentPanel.add(enterYTitle);
+                contentPanel.add(enterYField);
+                contentPanel.add(enterX0Title);
+                contentPanel.add(enterX0Field);
+                contentPanel.add(enterY0Title);
+                contentPanel.add(enterY0Field);
+                contentPanel.add(enterHTitle);
+                contentPanel.add(enterHField);
+                contentPanel.add(enterXTitle);
+                contentPanel.add(enterXField);
+            } else {
+                contentPanel = new JPanel(new GridLayout(5, 2, 20, 0));
+                contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, -120));
+                contentPanel.add(enterYField);
+                contentPanel.add(enterYTitle);
+                contentPanel.add(enterX0Field);
+                contentPanel.add(enterX0Title);
+                contentPanel.add(enterY0Field);
+                contentPanel.add(enterY0Title);
+                contentPanel.add(enterHField);
+                contentPanel.add(enterHTitle);
+                contentPanel.add(enterXField);
+                contentPanel.add(enterXTitle);
+            }
 
             JPanel showPanel = new JPanel(new BorderLayout());
             showPanel.add(modEulerTitle, BorderLayout.NORTH);
             showPanel.add(contentPanel, BorderLayout.CENTER);
 
-            JButton solveButton = new JButton("Solve");
+            JButton solveButton = new JButton(Solve);
             solveButton.setFocusPainted(false);
             solveButton.setPreferredSize(new Dimension(80, 40));
             solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -2676,7 +3014,7 @@ public class GUI {
             solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
             solveButton.setEnabled(false);
 
-            JButton cancelButton = new JButton("Cancel");
+            JButton cancelButton = new JButton(cancel);
             cancelButton.setFocusPainted(false);
             cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -2710,12 +3048,12 @@ public class GUI {
 
                     //create title
                     JLabel difeqTitle = new JLabel();
-                    difeqTitle.setText("Differential Equation solution using Modified Euler's method : ");
+                    difeqTitle.setText("<html>" + languageBundle.getString("modifiedEulerDescription") + " : " + "</html>");
                     difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
-                    difeqAns.append("Answer : ");
+                    difeqAns.append("Answer = ");
                     difeqAns.append(String.valueOf(fixAccuracy(ans)));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
@@ -2727,14 +3065,14 @@ public class GUI {
                     ansContentPanel.add(difeqTitle);
                     ansContentPanel.add(polyAnsScrollPane);
 
-                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, diffEqTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
-            JOptionPane.showOptionDialog(null, showPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
+            JOptionPane.showOptionDialog(null, showPanel, diffEqTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel modifiedEulerCard = createCard(title, description, button, enterModifiedEuler);
         differentialEquationsPanel.add(modifiedEulerCard);
@@ -2743,63 +3081,80 @@ public class GUI {
         //***********************************************************************
 
         //init Hein Card
-        title = "Hein";
-        description = "Solving a differential equation using the Hein method";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("heinTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("heinDescription") + "</html>";
+        button = enter;
         ActionListener enterHein = e -> {
-            JLabel heinTitleLabel = new JLabel("MidPoint : Hein's Method");
+            JLabel heinTitleLabel = new JLabel("<html>" + languageBundle.getString("midpointHein") + "</html>");
+            heinTitleLabel.setComponentOrientation(orientation);
             heinTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
             JPanel heinTitle = new JPanel();
             heinTitle.add(heinTitleLabel);
             heinTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
-            JLabel enterYTitle = new JLabel("Enter Y ' : ");
+            JLabel enterYTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " Y ' : " + "</html>");
             enterYTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterYField = new JTextField();
             enterYField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterYField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterX0Title = new JLabel("Enter x0 : ");
+            JLabel enterX0Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " X0 : " + "</html>");
             enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterX0Field = new JTextField();
             enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterX0Field.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterY0Title = new JLabel("Enter Y0 : ");
+            JLabel enterY0Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " Y0 : " + "</html>");
             enterY0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterY0Field = new JTextField();
             enterY0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterY0Field.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterHTitle = new JLabel("Enter h : ");
+            JLabel enterHTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " h : " + "</html>");
             enterHTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterHField = new JTextField();
             enterHField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterHField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterXTitle = new JLabel("Enter x : ");
+            JLabel enterXTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " X : " + "</html>");
             enterXTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterXField = new JTextField();
             enterXField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterXField.setPreferredSize(new Dimension(200, 50));
 
-            JPanel contentPanel = new JPanel(new GridLayout(5, 2, -100, 0));
-            contentPanel.add(enterYTitle);
-            contentPanel.add(enterYField);
-            contentPanel.add(enterX0Title);
-            contentPanel.add(enterX0Field);
-            contentPanel.add(enterY0Title);
-            contentPanel.add(enterY0Field);
-            contentPanel.add(enterHTitle);
-            contentPanel.add(enterHField);
-            contentPanel.add(enterXTitle);
-            contentPanel.add(enterXField);
+            JPanel contentPanel;
+            if (local.getLanguage().equals("en")) {
+                contentPanel = new JPanel(new GridLayout(5, 2, -100, 0));
+                contentPanel.add(enterYTitle);
+                contentPanel.add(enterYField);
+                contentPanel.add(enterX0Title);
+                contentPanel.add(enterX0Field);
+                contentPanel.add(enterY0Title);
+                contentPanel.add(enterY0Field);
+                contentPanel.add(enterHTitle);
+                contentPanel.add(enterHField);
+                contentPanel.add(enterXTitle);
+                contentPanel.add(enterXField);
+            } else {
+                contentPanel = new JPanel(new GridLayout(5, 2, 20, 0));
+                contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, -100));
+                contentPanel.add(enterYField);
+                contentPanel.add(enterYTitle);
+                contentPanel.add(enterX0Field);
+                contentPanel.add(enterX0Title);
+                contentPanel.add(enterY0Field);
+                contentPanel.add(enterY0Title);
+                contentPanel.add(enterHField);
+                contentPanel.add(enterHTitle);
+                contentPanel.add(enterXField);
+                contentPanel.add(enterXTitle);
+            }
 
             JPanel showPanel = new JPanel(new BorderLayout());
             showPanel.add(heinTitle, BorderLayout.NORTH);
             showPanel.add(contentPanel, BorderLayout.CENTER);
 
-            JButton solveButton = new JButton("Solve");
+            JButton solveButton = new JButton(Solve);
             solveButton.setFocusPainted(false);
             solveButton.setPreferredSize(new Dimension(80, 40));
             solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -2808,7 +3163,7 @@ public class GUI {
             solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
             solveButton.setEnabled(false);
 
-            JButton cancelButton = new JButton("Cancel");
+            JButton cancelButton = new JButton(cancel);
             cancelButton.setFocusPainted(false);
             cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -2842,12 +3197,12 @@ public class GUI {
 
                     //create title
                     JLabel difeqTitle = new JLabel();
-                    difeqTitle.setText("Differential Equation solution using Hein's method : ");
+                    difeqTitle.setText("<html>" + languageBundle.getString("heinDescription") + " : " + "</html>");
                     difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
-                    difeqAns.append("Answer : ");
+                    difeqAns.append("Answer = ");
                     difeqAns.append(String.valueOf(fixAccuracy(ans)));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
@@ -2859,14 +3214,14 @@ public class GUI {
                     ansContentPanel.add(difeqTitle);
                     ansContentPanel.add(polyAnsScrollPane);
 
-                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, diffEqTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
-            JOptionPane.showOptionDialog(null, showPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
+            JOptionPane.showOptionDialog(null, showPanel, diffEqTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel heinCard = createCard(title, description, button, enterHein);
         differentialEquationsPanel.add(heinCard);
@@ -2874,63 +3229,80 @@ public class GUI {
         //***********************************************************************
 
         //init Ralston Card
-        title = "Ralston";
-        description = "Solving a differential equation using the Ralston method";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("ralstonTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("ralstonDescription") + "</html>";
+        button = enter;
         ActionListener enterRalston = e -> {
-            JLabel ralstonTitleLabel = new JLabel("MidPoint : Ralston's Method");
+            JLabel ralstonTitleLabel = new JLabel("<html>" + languageBundle.getString("midpointRalston") + "</html>");
+            ralstonTitleLabel.setComponentOrientation(orientation);
             ralstonTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
             JPanel ralstonTitle = new JPanel();
             ralstonTitle.add(ralstonTitleLabel);
             ralstonTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
-            JLabel enterYTitle = new JLabel("Enter Y ' : ");
+            JLabel enterYTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " Y ' : " + "</html>");
             enterYTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterYField = new JTextField();
             enterYField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterYField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterX0Title = new JLabel("Enter x0 : ");
+            JLabel enterX0Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " X0 : " + "</html>");
             enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterX0Field = new JTextField();
             enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterX0Field.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterY0Title = new JLabel("Enter Y0 : ");
+            JLabel enterY0Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " Y0 : " + "</html>");
             enterY0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterY0Field = new JTextField();
             enterY0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterY0Field.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterHTitle = new JLabel("Enter h : ");
+            JLabel enterHTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " h : " + "</html>");
             enterHTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterHField = new JTextField();
             enterHField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterHField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterXTitle = new JLabel("Enter x : ");
+            JLabel enterXTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " X : " + "</html>");
             enterXTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterXField = new JTextField();
             enterXField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterXField.setPreferredSize(new Dimension(200, 50));
 
-            JPanel contentPanel = new JPanel(new GridLayout(5, 2, -100, 0));
-            contentPanel.add(enterYTitle);
-            contentPanel.add(enterYField);
-            contentPanel.add(enterX0Title);
-            contentPanel.add(enterX0Field);
-            contentPanel.add(enterY0Title);
-            contentPanel.add(enterY0Field);
-            contentPanel.add(enterHTitle);
-            contentPanel.add(enterHField);
-            contentPanel.add(enterXTitle);
-            contentPanel.add(enterXField);
+            JPanel contentPanel;
+            if (local.getLanguage().equals("en")) {
+                contentPanel = new JPanel(new GridLayout(5, 2, -100, 0));
+                contentPanel.add(enterYTitle);
+                contentPanel.add(enterYField);
+                contentPanel.add(enterX0Title);
+                contentPanel.add(enterX0Field);
+                contentPanel.add(enterY0Title);
+                contentPanel.add(enterY0Field);
+                contentPanel.add(enterHTitle);
+                contentPanel.add(enterHField);
+                contentPanel.add(enterXTitle);
+                contentPanel.add(enterXField);
+            } else {
+                contentPanel = new JPanel(new GridLayout(5, 2, 20, 0));
+                contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, -100));
+                contentPanel.add(enterYField);
+                contentPanel.add(enterYTitle);
+                contentPanel.add(enterX0Field);
+                contentPanel.add(enterX0Title);
+                contentPanel.add(enterY0Field);
+                contentPanel.add(enterY0Title);
+                contentPanel.add(enterHField);
+                contentPanel.add(enterHTitle);
+                contentPanel.add(enterXField);
+                contentPanel.add(enterXTitle);
+            }
 
             JPanel showPanel = new JPanel(new BorderLayout());
             showPanel.add(ralstonTitle, BorderLayout.NORTH);
             showPanel.add(contentPanel, BorderLayout.CENTER);
 
-            JButton solveButton = new JButton("Solve");
+            JButton solveButton = new JButton(Solve);
             solveButton.setFocusPainted(false);
             solveButton.setPreferredSize(new Dimension(80, 40));
             solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -2939,7 +3311,7 @@ public class GUI {
             solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
             solveButton.setEnabled(false);
 
-            JButton cancelButton = new JButton("Cancel");
+            JButton cancelButton = new JButton(cancel);
             cancelButton.setFocusPainted(false);
             cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -2973,12 +3345,12 @@ public class GUI {
 
                     //create title
                     JLabel difeqTitle = new JLabel();
-                    difeqTitle.setText("Differential Equation solution using Ralston's method : ");
+                    difeqTitle.setText("<html>" + languageBundle.getString("ralstonDescription") + " : " + "</html>");
                     difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
-                    difeqAns.append("Answer : ");
+                    difeqAns.append("Answer = ");
                     difeqAns.append(String.valueOf(fixAccuracy(ans)));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
@@ -2990,14 +3362,14 @@ public class GUI {
                     ansContentPanel.add(difeqTitle);
                     ansContentPanel.add(polyAnsScrollPane);
 
-                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, diffEqTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
-            JOptionPane.showOptionDialog(null, showPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
+            JOptionPane.showOptionDialog(null, showPanel, diffEqTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel ralstonCard = createCard(title, description, button, enterRalston);
         differentialEquationsPanel.add(ralstonCard);
@@ -3005,63 +3377,80 @@ public class GUI {
         //***********************************************************************
 
         //init Runge_Kutta Card
-        title = "Runge-Kutta";
-        description = "Solving a differential equation using the Runge-Kutta method";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("rungeKuttaTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("rungeKuttaDescription") + "</html>";
+        button = enter;
         ActionListener enterRunge_Kutta = e -> {
-            JLabel rangeTitleLabel = new JLabel("Runge-Kutta Method");
+            JLabel rangeTitleLabel = new JLabel("<html>" + languageBundle.getString("rungeKuttaMethod") + "</html>");
+            rangeTitleLabel.setComponentOrientation(orientation);
             rangeTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
             JPanel rangeTitle = new JPanel();
             rangeTitle.add(rangeTitleLabel);
             rangeTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
-            JLabel enterYTitle = new JLabel("Enter Y ' : ");
+            JLabel enterYTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " Y ' : " + "</html>");
             enterYTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterYField = new JTextField();
             enterYField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterYField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterX0Title = new JLabel("Enter x0 : ");
+            JLabel enterX0Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " X0 : " + "</html>");
             enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterX0Field = new JTextField();
             enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterX0Field.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterY0Title = new JLabel("Enter Y0 : ");
+            JLabel enterY0Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " Y0 : " + "</html>");
             enterY0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterY0Field = new JTextField();
             enterY0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterY0Field.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterHTitle = new JLabel("Enter h : ");
+            JLabel enterHTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " h : " + "</html>");
             enterHTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterHField = new JTextField();
             enterHField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterHField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterXTitle = new JLabel("Enter x : ");
+            JLabel enterXTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " X : " + "</html>");
             enterXTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterXField = new JTextField();
             enterXField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterXField.setPreferredSize(new Dimension(200, 50));
 
-            JPanel contentPanel = new JPanel(new GridLayout(5, 2, -100, 0));
-            contentPanel.add(enterYTitle);
-            contentPanel.add(enterYField);
-            contentPanel.add(enterX0Title);
-            contentPanel.add(enterX0Field);
-            contentPanel.add(enterY0Title);
-            contentPanel.add(enterY0Field);
-            contentPanel.add(enterHTitle);
-            contentPanel.add(enterHField);
-            contentPanel.add(enterXTitle);
-            contentPanel.add(enterXField);
+            JPanel contentPanel;
+            if (local.getLanguage().equals("en")) {
+                contentPanel = new JPanel(new GridLayout(5, 2, -100, 0));
+                contentPanel.add(enterYTitle);
+                contentPanel.add(enterYField);
+                contentPanel.add(enterX0Title);
+                contentPanel.add(enterX0Field);
+                contentPanel.add(enterY0Title);
+                contentPanel.add(enterY0Field);
+                contentPanel.add(enterHTitle);
+                contentPanel.add(enterHField);
+                contentPanel.add(enterXTitle);
+                contentPanel.add(enterXField);
+            } else {
+                contentPanel = new JPanel(new GridLayout(5, 2, 20, 0));
+                contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, -100));
+                contentPanel.add(enterYField);
+                contentPanel.add(enterYTitle);
+                contentPanel.add(enterX0Field);
+                contentPanel.add(enterX0Title);
+                contentPanel.add(enterY0Field);
+                contentPanel.add(enterY0Title);
+                contentPanel.add(enterHField);
+                contentPanel.add(enterHTitle);
+                contentPanel.add(enterXField);
+                contentPanel.add(enterXTitle);
+            }
 
             JPanel showPanel = new JPanel(new BorderLayout());
             showPanel.add(rangeTitle, BorderLayout.NORTH);
             showPanel.add(contentPanel, BorderLayout.CENTER);
 
-            JButton solveButton = new JButton("Solve");
+            JButton solveButton = new JButton(Solve);
             solveButton.setFocusPainted(false);
             solveButton.setPreferredSize(new Dimension(80, 40));
             solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -3070,7 +3459,7 @@ public class GUI {
             solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
             solveButton.setEnabled(false);
 
-            JButton cancelButton = new JButton("Cancel");
+            JButton cancelButton = new JButton(cancel);
             cancelButton.setFocusPainted(false);
             cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -3104,12 +3493,12 @@ public class GUI {
 
                     //create title
                     JLabel difeqTitle = new JLabel();
-                    difeqTitle.setText("Differential Equation solution using Runge-Kutta method : ");
+                    difeqTitle.setText("<html>" + languageBundle.getString("rungeKuttaDescription") + " : " + "</html>");
                     difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
-                    difeqAns.append("Answer : ");
+                    difeqAns.append("Answer = ");
                     difeqAns.append(String.valueOf(fixAccuracy(ans)));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
@@ -3121,14 +3510,14 @@ public class GUI {
                     ansContentPanel.add(difeqTitle);
                     ansContentPanel.add(polyAnsScrollPane);
 
-                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, diffEqTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
-            JOptionPane.showOptionDialog(null, showPanel, "Differential Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
+            JOptionPane.showOptionDialog(null, showPanel, diffEqTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel runge_KuttaCard = createCard(title, description, button, enterRunge_Kutta);
         differentialEquationsPanel.add(runge_KuttaCard);
@@ -3144,67 +3533,84 @@ public class GUI {
      */
     private void initNonLinEQPanel() {
         nonLinearEquationsPanel = new JPanel();
-        nonLinearEquationsPanel.setName("Non-Linear Equations");
+        nonLinearEquationsPanel.setName("Non Linear Equations");
         nonLinearEquationsPanel.setPreferredSize(mainFrame.getSize());
         nonLinearEquationsPanel.setBackground(new Color(100, 100, 100));
         GridLayout startLayout = new GridLayout(3, 2);
         startLayout.setHgap(5);
         startLayout.setVgap(5);
         nonLinearEquationsPanel.setLayout(startLayout);
+        nonLinearEquationsPanel.setComponentOrientation(orientation);
+        String NonLineaEqsTitle = "<html>" + languageBundle.getString("nonLinearEquationsTitle") + "</html>";
 
         //***********************************************************************
 
         //init Bisection Card
-        String title = "Bisection";
-        String description = "Solving non-linear equations using the Bisection method";
-        String button = "Enter";
+        String title = "<html>" + languageBundle.getString("bisectionTitle") + "</html>";
+        String description = "<html>" + languageBundle.getString("bisectionDescription") + "</html>";
+        String button = enter;
         ActionListener enterBisection = e -> {
-            JLabel bisTitleLabel = new JLabel("Bisection Method");
+            JLabel bisTitleLabel = new JLabel("<html>" + languageBundle.getString("bisectionMethod") + "</html>");
+            bisTitleLabel.setComponentOrientation(orientation);
             bisTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
             JPanel bisTitle = new JPanel();
             bisTitle.add(bisTitleLabel);
             bisTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
-            JLabel enterFTitle = new JLabel("Enter f(x) : ");
+            JLabel enterFTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " f(x) : " + "</html>");
             enterFTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterFField = new JTextField();
             enterFField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterFField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterATitle = new JLabel("Enter a : ");
+            JLabel enterATitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " a : " + "</html>");
             enterATitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterAField = new JTextField();
             enterAField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterAField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterBTitle = new JLabel("Enter b : ");
+            JLabel enterBTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " b : " + "</html>");
             enterBTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterBField = new JTextField();
             enterBField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterBField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterETitle = new JLabel("Enter e : ");
+            JLabel enterETitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " e : " + "</html>");
             enterETitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterEField = new JTextField();
             enterEField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterEField.setPreferredSize(new Dimension(200, 50));
 
 
-            JPanel contentPanel = new JPanel(new GridLayout(4, 2, -100, 0));
-            contentPanel.add(enterFTitle);
-            contentPanel.add(enterFField);
-            contentPanel.add(enterATitle);
-            contentPanel.add(enterAField);
-            contentPanel.add(enterBTitle);
-            contentPanel.add(enterBField);
-            contentPanel.add(enterETitle);
-            contentPanel.add(enterEField);
+            JPanel contentPanel;
+            if (local.getLanguage().equals("en")) {
+                contentPanel = new JPanel(new GridLayout(4, 2, -100, 0));
+                contentPanel.add(enterFTitle);
+                contentPanel.add(enterFField);
+                contentPanel.add(enterATitle);
+                contentPanel.add(enterAField);
+                contentPanel.add(enterBTitle);
+                contentPanel.add(enterBField);
+                contentPanel.add(enterETitle);
+                contentPanel.add(enterEField);
+            } else {
+                contentPanel = new JPanel(new GridLayout(4, 2, 20, 0));
+                contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, -100));
+                contentPanel.add(enterFField);
+                contentPanel.add(enterFTitle);
+                contentPanel.add(enterAField);
+                contentPanel.add(enterATitle);
+                contentPanel.add(enterBField);
+                contentPanel.add(enterBTitle);
+                contentPanel.add(enterEField);
+                contentPanel.add(enterETitle);
+            }
 
             JPanel showPanel = new JPanel(new BorderLayout());
             showPanel.add(bisTitle, BorderLayout.NORTH);
             showPanel.add(contentPanel, BorderLayout.CENTER);
 
-            JButton solveButton = new JButton("Solve");
+            JButton solveButton = new JButton(Solve);
             solveButton.setFocusPainted(false);
             solveButton.setPreferredSize(new Dimension(80, 40));
             solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -3213,7 +3619,7 @@ public class GUI {
             solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
             solveButton.setEnabled(false);
 
-            JButton cancelButton = new JButton("Cancel");
+            JButton cancelButton = new JButton(cancel);
             cancelButton.setFocusPainted(false);
             cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -3245,12 +3651,12 @@ public class GUI {
 
                     //create title
                     JLabel difeqTitle = new JLabel();
-                    difeqTitle.setText("Non-Linear Equation solution using Bisection method : ");
+                    difeqTitle.setText("<html>" + languageBundle.getString("bisectionDescription") + " : " + "</html>");
                     difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
-                    difeqAns.append("Answer : ");
+                    difeqAns.append("Answer = ");
                     difeqAns.append(String.valueOf(fixAccuracy(ans)));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
@@ -3262,13 +3668,13 @@ public class GUI {
                     ansContentPanel.add(difeqTitle);
                     ansContentPanel.add(polyAnsScrollPane);
 
-                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, NonLineaEqsTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
-            JOptionPane.showOptionDialog(null, showPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
+            JOptionPane.showOptionDialog(null, showPanel, NonLineaEqsTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel bisectionCard = createCard(title, description, button, enterBisection);
         nonLinearEquationsPanel.add(bisectionCard);
@@ -3276,56 +3682,71 @@ public class GUI {
         //***********************************************************************
 
         //init False Position Card
-        title = "False Position";
-        description = "Solving non-linear equations using the False Position method";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("falsePositionTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("falsePositionDescription") + "</html>";
+        button = enter;
         ActionListener enterFalsePosition = e -> {
-            JLabel flsTitleLabel = new JLabel("False Position Method");
+            JLabel flsTitleLabel = new JLabel("<html>" + languageBundle.getString("falsePositionMethod") + "</html>");
+            flsTitleLabel.setComponentOrientation(orientation);
             flsTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
             JPanel flsTitle = new JPanel();
             flsTitle.add(flsTitleLabel);
             flsTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
-            JLabel enterFTitle = new JLabel("Enter f(x) : ");
+            JLabel enterFTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " f(x) : " + "</html>");
             enterFTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterFField = new JTextField();
             enterFField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterFField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterATitle = new JLabel("Enter a : ");
+            JLabel enterATitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " a : " + "</html>");
             enterATitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterAField = new JTextField();
             enterAField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterAField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterBTitle = new JLabel("Enter b : ");
+            JLabel enterBTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " b : " + "</html>");
             enterBTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterBField = new JTextField();
             enterBField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterBField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterETitle = new JLabel("Enter e : ");
+            JLabel enterETitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " e : " + "</html>");
             enterETitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterEField = new JTextField();
             enterEField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterEField.setPreferredSize(new Dimension(200, 50));
 
 
-            JPanel contentPanel = new JPanel(new GridLayout(4, 2, -100, 0));
-            contentPanel.add(enterFTitle);
-            contentPanel.add(enterFField);
-            contentPanel.add(enterATitle);
-            contentPanel.add(enterAField);
-            contentPanel.add(enterBTitle);
-            contentPanel.add(enterBField);
-            contentPanel.add(enterETitle);
-            contentPanel.add(enterEField);
+            JPanel contentPanel;
+            if (local.getLanguage().equals("en")) {
+                contentPanel = new JPanel(new GridLayout(4, 2, -100, 0));
+                contentPanel.add(enterFTitle);
+                contentPanel.add(enterFField);
+                contentPanel.add(enterATitle);
+                contentPanel.add(enterAField);
+                contentPanel.add(enterBTitle);
+                contentPanel.add(enterBField);
+                contentPanel.add(enterETitle);
+                contentPanel.add(enterEField);
+            } else {
+                contentPanel = new JPanel(new GridLayout(4, 2, 20, 0));
+                contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, -100));
+                contentPanel.add(enterFField);
+                contentPanel.add(enterFTitle);
+                contentPanel.add(enterAField);
+                contentPanel.add(enterATitle);
+                contentPanel.add(enterBField);
+                contentPanel.add(enterBTitle);
+                contentPanel.add(enterEField);
+                contentPanel.add(enterETitle);
+            }
 
             JPanel showPanel = new JPanel(new BorderLayout());
             showPanel.add(flsTitle, BorderLayout.NORTH);
             showPanel.add(contentPanel, BorderLayout.CENTER);
 
-            JButton solveButton = new JButton("Solve");
+            JButton solveButton = new JButton(Solve);
             solveButton.setFocusPainted(false);
             solveButton.setPreferredSize(new Dimension(80, 40));
             solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -3334,7 +3755,7 @@ public class GUI {
             solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
             solveButton.setEnabled(false);
 
-            JButton cancelButton = new JButton("Cancel");
+            JButton cancelButton = new JButton(cancel);
             cancelButton.setFocusPainted(false);
             cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -3366,12 +3787,12 @@ public class GUI {
 
                     //create title
                     JLabel difeqTitle = new JLabel();
-                    difeqTitle.setText("Non-Linear Equation solution using False Position method : ");
+                    difeqTitle.setText("<html>" + languageBundle.getString("falsePositionDescription") + " : " + "</html>");
                     difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
-                    difeqAns.append("Answer : ");
+                    difeqAns.append("Answer = ");
                     difeqAns.append(String.valueOf(fixAccuracy(ans)));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
@@ -3383,13 +3804,13 @@ public class GUI {
                     ansContentPanel.add(difeqTitle);
                     ansContentPanel.add(polyAnsScrollPane);
 
-                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, NonLineaEqsTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
-            JOptionPane.showOptionDialog(null, showPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
+            JOptionPane.showOptionDialog(null, showPanel, NonLineaEqsTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel falsePositionCard = createCard(title, description, button, enterFalsePosition);
         nonLinearEquationsPanel.add(falsePositionCard);
@@ -3397,56 +3818,71 @@ public class GUI {
         //***********************************************************************
 
         //init Secant Card
-        title = "Secant";
-        description = "Solving non-linear equations using the Secant method";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("secantTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("secantDescription") + "</html>";
+        button = enter;
         ActionListener enterSecant = e -> {
-            JLabel secTitleLabel = new JLabel("Secant Method");
+            JLabel secTitleLabel = new JLabel("<html>" + languageBundle.getString("secantMethod") + "</html>");
+            secTitleLabel.setComponentOrientation(orientation);
             secTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
             JPanel secTitle = new JPanel();
             secTitle.add(secTitleLabel);
             secTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
-            JLabel enterFTitle = new JLabel("Enter f(x) : ");
+            JLabel enterFTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " f(x) : " + "</html>");
             enterFTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterFField = new JTextField();
             enterFField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterFField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterX0Title = new JLabel("Enter X0 : ");
+            JLabel enterX0Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " X0 : " + "</html>");
             enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterX0Field = new JTextField();
             enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterX0Field.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterX1Title = new JLabel("Enter X1 : ");
+            JLabel enterX1Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " X1 : " + "</html>");
             enterX1Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterX1Field = new JTextField();
             enterX1Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterX1Field.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterETitle = new JLabel("Enter e : ");
+            JLabel enterETitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " e : " + "</html>");
             enterETitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterEField = new JTextField();
             enterEField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterEField.setPreferredSize(new Dimension(200, 50));
 
 
-            JPanel contentPanel = new JPanel(new GridLayout(4, 2, -100, 0));
-            contentPanel.add(enterFTitle);
-            contentPanel.add(enterFField);
-            contentPanel.add(enterX0Title);
-            contentPanel.add(enterX0Field);
-            contentPanel.add(enterX1Title);
-            contentPanel.add(enterX1Field);
-            contentPanel.add(enterETitle);
-            contentPanel.add(enterEField);
+            JPanel contentPanel;
+            if (local.getLanguage().equals("en")) {
+                contentPanel = new JPanel(new GridLayout(4, 2, -100, 0));
+                contentPanel.add(enterFTitle);
+                contentPanel.add(enterFField);
+                contentPanel.add(enterX0Title);
+                contentPanel.add(enterX0Field);
+                contentPanel.add(enterX1Title);
+                contentPanel.add(enterX1Field);
+                contentPanel.add(enterETitle);
+                contentPanel.add(enterEField);
+            } else {
+                contentPanel = new JPanel(new GridLayout(4, 2, 20, 0));
+                contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, -100));
+                contentPanel.add(enterFField);
+                contentPanel.add(enterFTitle);
+                contentPanel.add(enterX0Field);
+                contentPanel.add(enterX0Title);
+                contentPanel.add(enterX1Field);
+                contentPanel.add(enterX1Title);
+                contentPanel.add(enterEField);
+                contentPanel.add(enterETitle);
+            }
 
             JPanel showPanel = new JPanel(new BorderLayout());
             showPanel.add(secTitle, BorderLayout.NORTH);
             showPanel.add(contentPanel, BorderLayout.CENTER);
 
-            JButton solveButton = new JButton("Solve");
+            JButton solveButton = new JButton(Solve);
             solveButton.setFocusPainted(false);
             solveButton.setPreferredSize(new Dimension(80, 40));
             solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -3455,7 +3891,7 @@ public class GUI {
             solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
             solveButton.setEnabled(false);
 
-            JButton cancelButton = new JButton("Cancel");
+            JButton cancelButton = new JButton(cancel);
             cancelButton.setFocusPainted(false);
             cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -3487,12 +3923,12 @@ public class GUI {
 
                     //create title
                     JLabel difeqTitle = new JLabel();
-                    difeqTitle.setText("Non-Linear Equation solution using Secant method : ");
+                    difeqTitle.setText("<html>" + languageBundle.getString("secantDescription") + " : " + "</html>");
                     difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
-                    difeqAns.append("Answer : ");
+                    difeqAns.append("Answer = ");
                     difeqAns.append(String.valueOf(fixAccuracy(ans)));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
@@ -3504,13 +3940,13 @@ public class GUI {
                     ansContentPanel.add(difeqTitle);
                     ansContentPanel.add(polyAnsScrollPane);
 
-                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, NonLineaEqsTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
-            JOptionPane.showOptionDialog(null, showPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
+            JOptionPane.showOptionDialog(null, showPanel, NonLineaEqsTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel secantCard = createCard(title, description, button, enterSecant);
         nonLinearEquationsPanel.add(secantCard);
@@ -3519,57 +3955,72 @@ public class GUI {
         //***********************************************************************
 
         //init Newton_Raphson Card
-        title = "Newton-Raphson";
-        description = "Solving non-linear equations using the Newton-Raphson method";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("newtonRaphsonTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("newtonRaphsonDescription") + "</html>";
+        button = enter;
         ActionListener enterNewton_Raphson = e -> {
-            JLabel newtTitleLabel = new JLabel("Newton-Raphson Method");
+            JLabel newtTitleLabel = new JLabel("<html>" + languageBundle.getString("newtonRaphsonMethod") + "</html>");
+            newtTitleLabel.setComponentOrientation(orientation);
             newtTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
             JPanel newtTitle = new JPanel();
             newtTitle.add(newtTitleLabel);
             newtTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
-            JLabel enterFTitle = new JLabel("Enter f(x) : ");
+            JLabel enterFTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " f(x) : " + "</html>");
             enterFTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterFField = new JTextField();
             enterFField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterFField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterDFTitle = new JLabel("Enter f '(x) : ");
+            JLabel enterDFTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " f '(x) : " + "</html>");
             enterDFTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterDFField = new JTextField();
             enterDFField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterDFField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterX0Title = new JLabel("Enter X0 : ");
+            JLabel enterX0Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " X0 : " + "</html>");
             enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterX0Field = new JTextField();
             enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterX0Field.setPreferredSize(new Dimension(200, 50));
 
 
-            JLabel enterETitle = new JLabel("Enter e : ");
+            JLabel enterETitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " e : " + "</html>");
             enterETitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterEField = new JTextField();
             enterEField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterEField.setPreferredSize(new Dimension(200, 50));
 
 
-            JPanel contentPanel = new JPanel(new GridLayout(4, 2, -100, 0));
-            contentPanel.add(enterFTitle);
-            contentPanel.add(enterFField);
-            contentPanel.add(enterDFTitle);
-            contentPanel.add(enterDFField);
-            contentPanel.add(enterX0Title);
-            contentPanel.add(enterX0Field);
-            contentPanel.add(enterETitle);
-            contentPanel.add(enterEField);
+            JPanel contentPanel;
+            if (local.getLanguage().equals("en")) {
+                contentPanel = new JPanel(new GridLayout(4, 2, -100, 0));
+                contentPanel.add(enterFTitle);
+                contentPanel.add(enterFField);
+                contentPanel.add(enterDFTitle);
+                contentPanel.add(enterDFField);
+                contentPanel.add(enterX0Title);
+                contentPanel.add(enterX0Field);
+                contentPanel.add(enterETitle);
+                contentPanel.add(enterEField);
+            } else {
+                contentPanel = new JPanel(new GridLayout(4, 2, 20, 0));
+                contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, -100));
+                contentPanel.add(enterFField);
+                contentPanel.add(enterFTitle);
+                contentPanel.add(enterDFField);
+                contentPanel.add(enterDFTitle);
+                contentPanel.add(enterX0Field);
+                contentPanel.add(enterX0Title);
+                contentPanel.add(enterEField);
+                contentPanel.add(enterETitle);
+            }
 
             JPanel showPanel = new JPanel(new BorderLayout());
             showPanel.add(newtTitle, BorderLayout.NORTH);
             showPanel.add(contentPanel, BorderLayout.CENTER);
 
-            JButton solveButton = new JButton("Solve");
+            JButton solveButton = new JButton(Solve);
             solveButton.setFocusPainted(false);
             solveButton.setPreferredSize(new Dimension(80, 40));
             solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -3578,7 +4029,7 @@ public class GUI {
             solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
             solveButton.setEnabled(false);
 
-            JButton cancelButton = new JButton("Cancel");
+            JButton cancelButton = new JButton(cancel);
             cancelButton.setFocusPainted(false);
             cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -3611,12 +4062,12 @@ public class GUI {
 
                     //create title
                     JLabel difeqTitle = new JLabel();
-                    difeqTitle.setText("Non-Linear Equation solution using Newton-Raphson method : ");
+                    difeqTitle.setText("<html>" + languageBundle.getString("newtonRaphsonDescription") + " : " + "</html>");
                     difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
-                    difeqAns.append("Answer : ");
+                    difeqAns.append("Answer = ");
                     difeqAns.append(String.valueOf(fixAccuracy(ans)));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
@@ -3628,13 +4079,13 @@ public class GUI {
                     ansContentPanel.add(difeqTitle);
                     ansContentPanel.add(polyAnsScrollPane);
 
-                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, NonLineaEqsTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
-            JOptionPane.showOptionDialog(null, showPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
+            JOptionPane.showOptionDialog(null, showPanel, NonLineaEqsTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel newton_RaphsonCard = createCard(title, description, button, enterNewton_Raphson);
         nonLinearEquationsPanel.add(newton_RaphsonCard);
@@ -3642,65 +4093,82 @@ public class GUI {
         //***********************************************************************
 
         //init Halley Card
-        title = "Halley";
-        description = "Solving non-linear equations using the Halley method";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("halleyTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("halleyDescription") + "</html>";
+        button = enter;
         ActionListener enterHalley = e -> {
-            JLabel hallTitleLabel = new JLabel("Halley's Method");
+            JLabel hallTitleLabel = new JLabel("<html>" + languageBundle.getString("halleyMethod") + "</html>");
+            hallTitleLabel.setComponentOrientation(orientation);
             hallTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
             JPanel hallTitle = new JPanel();
             hallTitle.add(hallTitleLabel);
             hallTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
-            JLabel enterFTitle = new JLabel("Enter f(x) : ");
+            JLabel enterFTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " f(x) : " + "</html>");
             enterFTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterFField = new JTextField();
             enterFField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterFField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterDFTitle = new JLabel("Enter f '(x) : ");
+            JLabel enterDFTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " f '(x) : " + "</html>");
             enterDFTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterDFField = new JTextField();
             enterDFField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterDFField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterD2FTitle = new JLabel("Enter f ''(x) : ");
+            JLabel enterD2FTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " f ''(x) : " + "</html>");
             enterD2FTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterD2FField = new JTextField();
             enterD2FField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterD2FField.setPreferredSize(new Dimension(200, 50));
 
-            JLabel enterX0Title = new JLabel("Enter X0 : ");
+            JLabel enterX0Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " X0 : " + "</html>");
             enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterX0Field = new JTextField();
             enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterX0Field.setPreferredSize(new Dimension(200, 50));
 
 
-            JLabel enterETitle = new JLabel("Enter e : ");
+            JLabel enterETitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " e : " + "</html>");
             enterETitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterEField = new JTextField();
             enterEField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterEField.setPreferredSize(new Dimension(200, 50));
 
 
-            JPanel contentPanel = new JPanel(new GridLayout(5, 2, -100, 0));
-            contentPanel.add(enterFTitle);
-            contentPanel.add(enterFField);
-            contentPanel.add(enterDFTitle);
-            contentPanel.add(enterDFField);
-            contentPanel.add(enterD2FTitle);
-            contentPanel.add(enterD2FField);
-            contentPanel.add(enterX0Title);
-            contentPanel.add(enterX0Field);
-            contentPanel.add(enterETitle);
-            contentPanel.add(enterEField);
+            JPanel contentPanel;
+            if (local.getLanguage().equals("en")) {
+                contentPanel = new JPanel(new GridLayout(5, 2, -100, 0));
+                contentPanel.add(enterFTitle);
+                contentPanel.add(enterFField);
+                contentPanel.add(enterDFTitle);
+                contentPanel.add(enterDFField);
+                contentPanel.add(enterD2FTitle);
+                contentPanel.add(enterD2FField);
+                contentPanel.add(enterX0Title);
+                contentPanel.add(enterX0Field);
+                contentPanel.add(enterETitle);
+                contentPanel.add(enterEField);
+            } else {
+                contentPanel = new JPanel(new GridLayout(5, 2, 20, 0));
+                contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, -100));
+                contentPanel.add(enterFField);
+                contentPanel.add(enterFTitle);
+                contentPanel.add(enterDFField);
+                contentPanel.add(enterDFTitle);
+                contentPanel.add(enterD2FField);
+                contentPanel.add(enterD2FTitle);
+                contentPanel.add(enterX0Field);
+                contentPanel.add(enterX0Title);
+                contentPanel.add(enterEField);
+                contentPanel.add(enterETitle);
+            }
 
             JPanel showPanel = new JPanel(new BorderLayout());
             showPanel.add(hallTitle, BorderLayout.NORTH);
             showPanel.add(contentPanel, BorderLayout.CENTER);
 
-            JButton solveButton = new JButton("Solve");
+            JButton solveButton = new JButton(Solve);
             solveButton.setFocusPainted(false);
             solveButton.setPreferredSize(new Dimension(80, 40));
             solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -3709,7 +4177,7 @@ public class GUI {
             solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
             solveButton.setEnabled(false);
 
-            JButton cancelButton = new JButton("Cancel");
+            JButton cancelButton = new JButton(cancel);
             cancelButton.setFocusPainted(false);
             cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -3745,12 +4213,12 @@ public class GUI {
 
                     //create title
                     JLabel difeqTitle = new JLabel();
-                    difeqTitle.setText("Non-Linear Equation solution using Halley's method : ");
+                    difeqTitle.setText("<html>" + languageBundle.getString("halleyDescription") + " : " + "</html>");
                     difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
-                    difeqAns.append("Answer : ");
+                    difeqAns.append("Answer = ");
                     difeqAns.append(String.valueOf(fixAccuracy(ans)));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
@@ -3762,13 +4230,13 @@ public class GUI {
                     ansContentPanel.add(difeqTitle);
                     ansContentPanel.add(polyAnsScrollPane);
 
-                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, NonLineaEqsTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
-            JOptionPane.showOptionDialog(null, showPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
+            JOptionPane.showOptionDialog(null, showPanel, NonLineaEqsTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel halleyCard = createCard(title, description, button, enterHalley);
         nonLinearEquationsPanel.add(halleyCard);
@@ -3776,50 +4244,63 @@ public class GUI {
         //***********************************************************************
 
         //init Fixed Point Iteration Card
-        title = "Fixed Point Iteration";
-        description = "Solving non-linear equations using the Fixed Point Iteration method";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("fixedPointIterationTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("fixedPointIterationDescription") + "</html>";
+        button = enter;
         ActionListener enterFixedPointIteration = e -> {
-            JLabel fpiTitleLabel = new JLabel("Fixed Point Iteration Method");
+            JLabel fpiTitleLabel = new JLabel("<html>" + languageBundle.getString("fixedPointIterationMethod") + "</html>");
+            fpiTitleLabel.setComponentOrientation(orientation);
             fpiTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
             JPanel fpiTitle = new JPanel();
             fpiTitle.add(fpiTitleLabel);
             fpiTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
-            JLabel enterGTitle = new JLabel("Enter g(x) : ");
+            JLabel enterGTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " g(x) : " + "</html>");
             enterGTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterGField = new JTextField();
             enterGField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterGField.setPreferredSize(new Dimension(200, 50));
 
 
-            JLabel enterX0Title = new JLabel("Enter X0 : ");
+            JLabel enterX0Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " X0 : " + "</html>");
             enterX0Title.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterX0Field = new JTextField();
             enterX0Field.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterX0Field.setPreferredSize(new Dimension(200, 50));
 
 
-            JLabel enterETitle = new JLabel("Enter e : ");
+            JLabel enterETitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " e : " + "</html>");
             enterETitle.setFont(new Font(mainFont, Font.PLAIN, 20));
             JTextField enterEField = new JTextField();
             enterEField.setFont(new Font(secondFont, Font.PLAIN, 18));
             enterEField.setPreferredSize(new Dimension(200, 50));
 
 
-            JPanel contentPanel = new JPanel(new GridLayout(3, 2, -100, 0));
-            contentPanel.add(enterGTitle);
-            contentPanel.add(enterGField);
-            contentPanel.add(enterX0Title);
-            contentPanel.add(enterX0Field);
-            contentPanel.add(enterETitle);
-            contentPanel.add(enterEField);
+            JPanel contentPanel;
+            if (local.getLanguage().equals("en")) {
+                contentPanel = new JPanel(new GridLayout(3, 2, -100, 0));
+                contentPanel.add(enterGTitle);
+                contentPanel.add(enterGField);
+                contentPanel.add(enterX0Title);
+                contentPanel.add(enterX0Field);
+                contentPanel.add(enterETitle);
+                contentPanel.add(enterEField);
+            } else {
+                contentPanel = new JPanel(new GridLayout(3, 2, 20, 0));
+                contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, -100));
+                contentPanel.add(enterGField);
+                contentPanel.add(enterGTitle);
+                contentPanel.add(enterX0Field);
+                contentPanel.add(enterX0Title);
+                contentPanel.add(enterEField);
+                contentPanel.add(enterETitle);
+            }
 
             JPanel showPanel = new JPanel(new BorderLayout());
             showPanel.add(fpiTitle, BorderLayout.NORTH);
             showPanel.add(contentPanel, BorderLayout.CENTER);
 
-            JButton solveButton = new JButton("Solve");
+            JButton solveButton = new JButton(Solve);
             solveButton.setFocusPainted(false);
             solveButton.setPreferredSize(new Dimension(80, 40));
             solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -3828,7 +4309,7 @@ public class GUI {
             solveButton.setForeground(Color.white);  // Set the text color to white for better visibility
             solveButton.setEnabled(false);
 
-            JButton cancelButton = new JButton("Cancel");
+            JButton cancelButton = new JButton(cancel);
             cancelButton.setFocusPainted(false);
             cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -3858,12 +4339,12 @@ public class GUI {
 
                     //create title
                     JLabel difeqTitle = new JLabel();
-                    difeqTitle.setText("Non-Linear Equation solution using Fixed Point Iteration method : ");
+                    difeqTitle.setText("<html>" + languageBundle.getString("fixedPointIterationDescription") + " : " + "</html>");
                     difeqTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea difeqAns = new JTextArea();
-                    difeqAns.append("Answer : ");
+                    difeqAns.append("Answer = ");
                     difeqAns.append(String.valueOf(fixAccuracy(ans)));
                     difeqAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     difeqAns.setEditable(false);
@@ -3875,13 +4356,13 @@ public class GUI {
                     ansContentPanel.add(difeqTitle);
                     ansContentPanel.add(polyAnsScrollPane);
 
-                    JOptionPane.showConfirmDialog(null, ansContentPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
+                    JOptionPane.showConfirmDialog(null, ansContentPanel, NonLineaEqsTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
-            JOptionPane.showOptionDialog(null, showPanel, "Non-Linear Equations", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
+            JOptionPane.showOptionDialog(null, showPanel, NonLineaEqsTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
         };
         JPanel fixedPointIterationCard = createCard(title, description, button, enterFixedPointIteration);
         nonLinearEquationsPanel.add(fixedPointIterationCard);
@@ -3904,22 +4385,25 @@ public class GUI {
         startLayout.setHgap(5);
         startLayout.setVgap(5);
         polynomialsPanel.setLayout(startLayout);
+        polynomialsPanel.setComponentOrientation(orientation);
+        String polynomialTitle = "<html>" + languageBundle.getString("polynomialsTitle") + "</html>";
 
         //***********************************************************************
 
         //init Value At x Card
-        String title = "Value At x";
-        String description = "Evaluates the polynomial at the specified value of x using Horner's method";
-        String button = "Enter";
+        String title = "<html>" + languageBundle.getString("valueAtTitle") + "</html>";
+        String description = "<html>" + languageBundle.getString("valueAtDescription") + "</html>";
+        String button = enter;
         ActionListener enterValueAt = e -> {
-            JLabel enterPolyLabel = new JLabel("Enter Polynomials : ");
+            JLabel enterPolyLabel = new JLabel("<html>" + languageBundle.getString("enterPolys") + "</html>");
+            enterPolyLabel.setComponentOrientation(orientation);
             enterPolyLabel.setFont(new Font(mainFont, Font.BOLD, 25));
             JPanel enterPoly = new JPanel();
             enterPoly.add(enterPolyLabel);
 
 
             // inputs : degree
-            JLabel enterDegreeTitle = new JLabel("Enter degree of Polynomial :");
+            JLabel enterDegreeTitle = new JLabel("<html>" + languageBundle.getString("enterDegreePoly") + " : " + "</html>");
             enterDegreeTitle.setFont(new Font(secondFont, Font.PLAIN, 20));
             enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
@@ -3928,18 +4412,26 @@ public class GUI {
             JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterDegreeSp.getEditor();
             editor.getTextField().setColumns(3); // Adjust the width as needed
 
-            JButton confirmButton = new JButton("Confirm");
+            JButton confirmButton = new JButton(Confirm);
             confirmButton.setPreferredSize(new Dimension(80, 30));
 
             JPanel enterDegree = new JPanel();
-            enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
-            enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
-            enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
-            enterDegree.add(confirmButton, BorderLayout.EAST);
+            if (local.getLanguage().equals("en")) {
+                enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                enterDegree.add(enterDegreeTitle);
+                enterDegree.add(enterDegreeSp);
+                enterDegree.add(confirmButton);
+            } else {
+                enterDegree.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                enterDegree.add(confirmButton);
+                enterDegree.add(enterDegreeSp);
+                enterDegree.add(enterDegreeTitle);
+            }
 
 
             // input coeffs
-            JLabel enterCoeffsTitle = new JLabel("Enter Coefficients : ");
+            JLabel enterCoeffsTitle = new JLabel("<html>" + languageBundle.getString("enterCoeffs") + " : " + "</html>");
+            enterCoeffsTitle.setComponentOrientation(orientation);
             enterCoeffsTitle.setFont(new Font(secondFont, Font.PLAIN, 20));
             enterCoeffsTitle.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0)); // Adjust the top and bottom padding
 
@@ -3948,9 +4440,13 @@ public class GUI {
 
             JPanel inputsPanel = new JPanel(new GridBagLayout());
             GridBagConstraints gbc = new GridBagConstraints();
+            inputsPanel.setComponentOrientation(orientation);
             gbc.gridx = 0;
             gbc.gridy = 0;
-            gbc.anchor = GridBagConstraints.WEST;
+            if (local.getLanguage().equals("en"))
+                gbc.anchor = GridBagConstraints.WEST;
+            else
+                gbc.anchor = GridBagConstraints.EAST;
             gbc.insets = new Insets(5, 0, 5, 0); // Add vertical spacing between components
 
             inputsPanel.add(enterPoly, gbc);
@@ -3966,7 +4462,7 @@ public class GUI {
             gbc.gridy++;
             inputsPanel.add(enterCoeffsScroll, gbc);
 
-            JButton continueButton = new JButton("Continue");
+            JButton continueButton = new JButton(Continue);
             continueButton.setFocusPainted(false);
             continueButton.setPreferredSize(new Dimension(100, 40));
             continueButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -4020,27 +4516,26 @@ public class GUI {
                 addDocumentListenerToFields(continueButton, fields);
             });
 
-            JButton cancelButton = new JButton("Cancel");
+            JButton cancelButton = new JButton(cancel);
             cancelButton.setFocusPainted(false);
             cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
 
             Object[] buttons = {cancelButton, continueButton};
 
-            final boolean[] cancelPressed = {false};
             cancelButton.addActionListener(cancel -> {
                 try {
-                    cancelPressed[0] = true;
                     Window optionDialog = SwingUtilities.getWindowAncestor(inputsPanel);
                     optionDialog.dispose();
                 } catch (Exception ignored) {
                 }
             });
-
+            final boolean[] confirmPressed = {false};
             continueButton.addActionListener(solve -> {
                 Window optionDialog = SwingUtilities.getWindowAncestor(inputsPanel);
                 optionDialog.dispose();
                 try {
+                    confirmPressed[0] = true;
                     ArrayList<BigDecimal> coeffs = new ArrayList<>();
                     for (JTextField field : coeffsFields) {
                         BigDecimal coeff = EvaluateString.evaluate(field.getText());
@@ -4049,22 +4544,26 @@ public class GUI {
                     polynomial = new Polynomial(coeffs);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
             if (polynomial == null) {
-                JOptionPane.showOptionDialog(null, inputsPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
-                if (cancelPressed[0]) return;
+                JOptionPane.showOptionDialog(null, inputsPanel, polynomialTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
+                if (!confirmPressed[0])
+                    return;
+
             }
 
-            JLabel horTitleLabel = new JLabel("Horner's Method");
+            JLabel horTitleLabel = new JLabel("<html>" + languageBundle.getString("hornerMethod") + "</html>");
+            horTitleLabel.setComponentOrientation(orientation);
             horTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
             JPanel hornerTitle = new JPanel();
             hornerTitle.add(horTitleLabel);
 
             //create title
             JLabel polyTitle = new JLabel();
-            polyTitle.setText("Your Polynomial : ");
+            polyTitle.setText("<html>" + languageBundle.getString("yourPoly") + " : " + "</html>");
+            polyTitle.setComponentOrientation(orientation);
             polyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
             //create ans scrolled
@@ -4077,7 +4576,7 @@ public class GUI {
             polyAnsScrollPane.setPreferredSize(new Dimension(250, 65));
 
             // inter x label
-            JLabel enterXLabel = new JLabel("Enter x : ");
+            JLabel enterXLabel = new JLabel("<html>" + languageBundle.getString("enterButton") + " x : " + "</html>");
             enterXLabel.setFont(new Font(mainFont, Font.PLAIN, 20));
 
             // inter x field
@@ -4086,10 +4585,14 @@ public class GUI {
 
             //create content panel
             JPanel contentPanel = new JPanel(new GridBagLayout());
+            contentPanel.setComponentOrientation(orientation);
             gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
-            gbc.anchor = GridBagConstraints.WEST;
+            if (local.getLanguage().equals("en"))
+                gbc.anchor = GridBagConstraints.WEST;
+            else
+                gbc.anchor = GridBagConstraints.EAST;
             gbc.insets = new Insets(10, 0, 10, 0);
 
             contentPanel.add(hornerTitle, gbc);
@@ -4099,11 +4602,16 @@ public class GUI {
             contentPanel.add(polyAnsScrollPane, gbc);
             gbc.gridy++;
             contentPanel.add(enterXLabel, gbc);
-            gbc.insets = new Insets(10, -150, 10, 0);
-            gbc.gridx++;
+            if (local.getLanguage().equals("en")) {
+                gbc.insets = new Insets(10, -150, 10, 0);
+                gbc.gridx++;
+            } else {
+                gbc.anchor = GridBagConstraints.WEST;
+                gbc.insets = new Insets(10, 50, 10, 0);
+            }
             contentPanel.add(enterXField, gbc);
 
-            JButton solveButton = new JButton("Solve");
+            JButton solveButton = new JButton(Solve);
             solveButton.setFocusPainted(false);
             solveButton.setPreferredSize(new Dimension(100, 40));
             solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -4132,12 +4640,12 @@ public class GUI {
 
                     //create title
                     JLabel solTitle = new JLabel();
-                    solTitle.setText("Value at x using Horner's Method : ");
+                    solTitle.setText("<html>" + languageBundle.getString("valueAtAnswer") + " : " + "</html>");
                     solTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea solAns = new JTextArea();
-                    solAns.append("Answer : ");
+                    solAns.append("Answer = ");
                     solAns.append(String.valueOf(fixAccuracy(ans)));
                     solAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     solAns.setEditable(false);
@@ -4145,22 +4653,22 @@ public class GUI {
                     solAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
                     //create content panel
-                    JPanel solContentPanel = new JPanel(new GridLayout(2, 1));
+                    JPanel solContentPanel = new JPanel(new GridLayout(2, 1, 10, 10));
                     solContentPanel.add(solTitle);
                     solContentPanel.add(solAnsScrollPane);
 
-                    String[] response = {"OK"};
+                    String[] response = {OK};
 
-                    JOptionPane.showOptionDialog(null, solContentPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+                    JOptionPane.showOptionDialog(null, solContentPanel, polynomialTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
             Object[] solvedButtons = {cancelButton, solveButton};
 
-            JOptionPane.showOptionDialog(null, contentPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, solvedButtons, null);
+            JOptionPane.showOptionDialog(null, contentPanel, polynomialTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, solvedButtons, null);
         };
         JPanel valueAtCard = createCard(title, description, button, enterValueAt);
         polynomialsPanel.add(valueAtCard);
@@ -4168,18 +4676,20 @@ public class GUI {
         //***********************************************************************
 
         //init Divide on (x - a) Card
-        title = "Divide on (x - a)";
-        description = "Divides the polynomial by (x - a) using Horner's method and returns the resulting polynomial";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("divideOnTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("divideOnDescription") + "</html>";
+        button = enter;
         ActionListener enterDivideOn = e -> {
-            JLabel enterPolyLabel = new JLabel("Enter Polynomials : ");
+            JLabel enterPolyLabel = new JLabel("<html>" + languageBundle.getString("enterPolys") + "</html>");
+            enterPolyLabel.setComponentOrientation(orientation);
             enterPolyLabel.setFont(new Font(mainFont, Font.BOLD, 25));
             JPanel enterPoly = new JPanel();
             enterPoly.add(enterPolyLabel);
 
 
             // inputs : degree
-            JLabel enterDegreeTitle = new JLabel("Enter degree of Polynomial :");
+            JLabel enterDegreeTitle = new JLabel("<html>" + languageBundle.getString("enterDegreePoly") + " : " + "</html>");
+            enterDegreeTitle.setComponentOrientation(orientation);
             enterDegreeTitle.setFont(new Font(secondFont, Font.PLAIN, 20));
             enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
@@ -4188,18 +4698,26 @@ public class GUI {
             JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterDegreeSp.getEditor();
             editor.getTextField().setColumns(3); // Adjust the width as needed
 
-            JButton confirmButton = new JButton("Confirm");
+            JButton confirmButton = new JButton(Confirm);
             confirmButton.setPreferredSize(new Dimension(80, 30));
 
             JPanel enterDegree = new JPanel();
-            enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
-            enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
-            enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
-            enterDegree.add(confirmButton, BorderLayout.EAST);
+            if (local.getLanguage().equals("en")) {
+                enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                enterDegree.add(enterDegreeTitle);
+                enterDegree.add(enterDegreeSp);
+                enterDegree.add(confirmButton);
+            } else {
+                enterDegree.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                enterDegree.add(confirmButton);
+                enterDegree.add(enterDegreeSp);
+                enterDegree.add(enterDegreeTitle);
+            }
 
 
             // input coeffs
-            JLabel enterCoeffsTitle = new JLabel("Enter Coefficients : ");
+            JLabel enterCoeffsTitle = new JLabel("<html>" + languageBundle.getString("enterCoeffs") + " : " + "</html>");
+            enterCoeffsTitle.setComponentOrientation(orientation);
             enterCoeffsTitle.setFont(new Font(secondFont, Font.PLAIN, 20));
             enterCoeffsTitle.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0)); // Adjust the top and bottom padding
 
@@ -4207,10 +4725,14 @@ public class GUI {
             enterCoeffsScroll.setPreferredSize(new Dimension(220, 150));
 
             JPanel inputsPanel = new JPanel(new GridBagLayout());
+            inputsPanel.setComponentOrientation(orientation);
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
-            gbc.anchor = GridBagConstraints.WEST;
+            if (local.getLanguage().equals("en"))
+                gbc.anchor = GridBagConstraints.WEST;
+            else
+                gbc.anchor = GridBagConstraints.EAST;
             gbc.insets = new Insets(5, 0, 5, 0); // Add vertical spacing between components
 
             inputsPanel.add(enterPoly, gbc);
@@ -4226,7 +4748,7 @@ public class GUI {
             gbc.gridy++;
             inputsPanel.add(enterCoeffsScroll, gbc);
 
-            JButton continueButton = new JButton("Continue");
+            JButton continueButton = new JButton(Continue);
             continueButton.setFocusPainted(false);
             continueButton.setPreferredSize(new Dimension(100, 40));
             continueButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -4280,27 +4802,26 @@ public class GUI {
                 addDocumentListenerToFields(continueButton, fields);
             });
 
-            JButton cancelButton = new JButton("Cancel");
+            JButton cancelButton = new JButton(cancel);
             cancelButton.setFocusPainted(false);
             cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
 
             Object[] buttons = {cancelButton, continueButton};
 
-            final boolean[] cancelPressed = {false};
             cancelButton.addActionListener(cancel -> {
                 try {
-                    cancelPressed[0] = true;
                     Window optionDialog = SwingUtilities.getWindowAncestor(inputsPanel);
                     optionDialog.dispose();
                 } catch (Exception ignored) {
                 }
             });
-
+            final boolean[] confirmPressed = {false};
             continueButton.addActionListener(solve -> {
                 Window optionDialog = SwingUtilities.getWindowAncestor(inputsPanel);
                 optionDialog.dispose();
                 try {
+                    confirmPressed[0] = true;
                     ArrayList<BigDecimal> coeffs = new ArrayList<>();
                     for (JTextField field : coeffsFields) {
                         BigDecimal coeff = EvaluateString.evaluate(field.getText());
@@ -4309,22 +4830,24 @@ public class GUI {
                     polynomial = new Polynomial(coeffs);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
             if (polynomial == null) {
-                JOptionPane.showOptionDialog(null, inputsPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
-                if (cancelPressed[0]) return;
+                JOptionPane.showOptionDialog(null, inputsPanel, polynomialTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
+                if (!confirmPressed[0]) return;
             }
 
-            JLabel horTitleLabel = new JLabel("Horner's Method");
+            JLabel horTitleLabel = new JLabel("<html>" + languageBundle.getString("hornerMethod") + "</html>");
+            horTitleLabel.setComponentOrientation(orientation);
             horTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
             JPanel hornerTitle = new JPanel();
             hornerTitle.add(horTitleLabel);
 
             //create title
             JLabel polyTitle = new JLabel();
-            polyTitle.setText("Your Polynomial : ");
+            polyTitle.setText("<html>" + languageBundle.getString("yourPoly") + " : " + "</html>");
+            polyTitle.setComponentOrientation(orientation);
             polyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
             //create ans scrolled
@@ -4337,7 +4860,8 @@ public class GUI {
             polyAnsScrollPane.setPreferredSize(new Dimension(250, 65));
 
             // inter a label
-            JLabel enterALabel = new JLabel("Enter a : ");
+            JLabel enterALabel = new JLabel("<html>" + languageBundle.getString("enterButton") + " a : " + "</html>");
+            enterALabel.setComponentOrientation(orientation);
             enterALabel.setFont(new Font(mainFont, Font.PLAIN, 20));
 
             // inter a field
@@ -4346,10 +4870,14 @@ public class GUI {
 
             //create content panel
             JPanel contentPanel = new JPanel(new GridBagLayout());
+            contentPanel.setComponentOrientation(orientation);
             gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
-            gbc.anchor = GridBagConstraints.WEST;
+            if (local.getLanguage().equals("en"))
+                gbc.anchor = GridBagConstraints.WEST;
+            else
+                gbc.anchor = GridBagConstraints.EAST;
             gbc.insets = new Insets(10, 0, 10, 0);
 
             contentPanel.add(hornerTitle, gbc);
@@ -4359,11 +4887,16 @@ public class GUI {
             contentPanel.add(polyAnsScrollPane, gbc);
             gbc.gridy++;
             contentPanel.add(enterALabel, gbc);
-            gbc.insets = new Insets(10, -150, 10, 0);
-            gbc.gridx++;
+            if (local.getLanguage().equals("en")) {
+                gbc.insets = new Insets(10, -150, 10, 0);
+                gbc.gridx++;
+            } else {
+                gbc.anchor = GridBagConstraints.WEST;
+                gbc.insets = new Insets(10, 50, 10, 0);
+            }
             contentPanel.add(enterAField, gbc);
 
-            JButton solveButton = new JButton("Solve");
+            JButton solveButton = new JButton(Solve);
             solveButton.setFocusPainted(false);
             solveButton.setPreferredSize(new Dimension(100, 40));
             solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -4392,7 +4925,7 @@ public class GUI {
 
                     //create title
                     JLabel solTitle = new JLabel();
-                    solTitle.setText("<html>" + "The result Polynomial by dividing on (x-a) <br>" + "using Horner's Method : " + "</html>");
+                    solTitle.setText(languageBundle.getString("divideOnAnswer"));
                     solTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
@@ -4405,22 +4938,22 @@ public class GUI {
                     solAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
                     //create content panel
-                    JPanel solContentPanel = new JPanel(new GridLayout(2, 1));
+                    JPanel solContentPanel = new JPanel(new GridLayout(2, 1, 20, 20));
                     solContentPanel.add(solTitle);
                     solContentPanel.add(solAnsScrollPane);
 
-                    String[] response = {"OK"};
+                    String[] response = {OK};
 
-                    JOptionPane.showOptionDialog(null, solContentPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+                    JOptionPane.showOptionDialog(null, solContentPanel, polynomialTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
             Object[] solvedButtons = {cancelButton, solveButton};
 
-            JOptionPane.showOptionDialog(null, contentPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, solvedButtons, null);
+            JOptionPane.showOptionDialog(null, contentPanel, polynomialTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, solvedButtons, null);
         };
         JPanel divideOnCard = createCard(title, description, button, enterDivideOn);
         polynomialsPanel.add(divideOnCard);
@@ -4428,18 +4961,20 @@ public class GUI {
         //***********************************************************************
 
         //init Diff at x Card
-        title = "Diff at x";
-        description = "Calculates the value of the derivative of the polynomial at the specified value of x and rank using Horner's method";
-        button = "Enter";
+        title = "<html>" + languageBundle.getString("diffAtTitle") + "</html>";
+        description = "<html>" + languageBundle.getString("diffAtDescription") + "</html>";
+        button = enter;
         ActionListener enterDiffAt = e -> {
-            JLabel enterPolyLabel = new JLabel("Enter Polynomials : ");
+            JLabel enterPolyLabel = new JLabel("<html>" + languageBundle.getString("enterPolys") + "</html>");
+            enterPolyLabel.setComponentOrientation(orientation);
             enterPolyLabel.setFont(new Font(mainFont, Font.BOLD, 25));
             JPanel enterPoly = new JPanel();
             enterPoly.add(enterPolyLabel);
 
 
             // inputs : degree
-            JLabel enterDegreeTitle = new JLabel("Enter degree of Polynomial :");
+            JLabel enterDegreeTitle = new JLabel("<html>" + languageBundle.getString("enterDegreePoly") + " : " + "</html>");
+            enterDegreeTitle.setComponentOrientation(orientation);
             enterDegreeTitle.setFont(new Font(secondFont, Font.PLAIN, 20));
             enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
@@ -4448,18 +4983,26 @@ public class GUI {
             JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterDegreeSp.getEditor();
             editor.getTextField().setColumns(3); // Adjust the width as needed
 
-            JButton confirmButton = new JButton("Confirm");
+            JButton confirmButton = new JButton(Confirm);
             confirmButton.setPreferredSize(new Dimension(80, 30));
 
             JPanel enterDegree = new JPanel();
-            enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
-            enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
-            enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
-            enterDegree.add(confirmButton, BorderLayout.EAST);
+            if (local.getLanguage().equals("en")) {
+                enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                enterDegree.add(enterDegreeTitle);
+                enterDegree.add(enterDegreeSp);
+                enterDegree.add(confirmButton);
+            } else {
+                enterDegree.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                enterDegree.add(confirmButton);
+                enterDegree.add(enterDegreeSp);
+                enterDegree.add(enterDegreeTitle);
+            }
 
 
             // input coeffs
-            JLabel enterCoeffsTitle = new JLabel("Enter Coefficients : ");
+            JLabel enterCoeffsTitle = new JLabel("<html>" + languageBundle.getString("enterCoeffs") + " : " + "</html>");
+            enterCoeffsTitle.setComponentOrientation(orientation);
             enterCoeffsTitle.setFont(new Font(secondFont, Font.PLAIN, 20));
             enterCoeffsTitle.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0)); // Adjust the top and bottom padding
 
@@ -4467,10 +5010,14 @@ public class GUI {
             enterCoeffsScroll.setPreferredSize(new Dimension(220, 150));
 
             JPanel inputsPanel = new JPanel(new GridBagLayout());
+            inputsPanel.setComponentOrientation(orientation);
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
-            gbc.anchor = GridBagConstraints.WEST;
+            if (local.getLanguage().equals("en"))
+                gbc.anchor = GridBagConstraints.WEST;
+            else
+                gbc.anchor = GridBagConstraints.EAST;
             gbc.insets = new Insets(5, 0, 5, 0); // Add vertical spacing between components
 
             inputsPanel.add(enterPoly, gbc);
@@ -4486,7 +5033,7 @@ public class GUI {
             gbc.gridy++;
             inputsPanel.add(enterCoeffsScroll, gbc);
 
-            JButton continueButton = new JButton("Continue");
+            JButton continueButton = new JButton(Continue);
             continueButton.setFocusPainted(false);
             continueButton.setPreferredSize(new Dimension(100, 40));
             continueButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -4540,27 +5087,26 @@ public class GUI {
                 addDocumentListenerToFields(continueButton, fields);
             });
 
-            JButton cancelButton = new JButton("Cancel");
+            JButton cancelButton = new JButton(cancel);
             cancelButton.setFocusPainted(false);
             cancelButton.setPreferredSize(new Dimension(100, 40));
             cancelButton.setFont(new Font("Arial", Font.PLAIN, 17));
 
             Object[] buttons = {cancelButton, continueButton};
 
-            final boolean[] cancelPressed = {false};
             cancelButton.addActionListener(cancel -> {
                 try {
-                    cancelPressed[0] = true;
                     Window optionDialog = SwingUtilities.getWindowAncestor(inputsPanel);
                     optionDialog.dispose();
                 } catch (Exception ignored) {
                 }
             });
-
+            final boolean[] confirmPressed = {false};
             continueButton.addActionListener(solve -> {
                 Window optionDialog = SwingUtilities.getWindowAncestor(inputsPanel);
                 optionDialog.dispose();
                 try {
+                    confirmPressed[0] = true;
                     ArrayList<BigDecimal> coeffs = new ArrayList<>();
                     for (JTextField field : coeffsFields) {
                         BigDecimal coeff = EvaluateString.evaluate(field.getText());
@@ -4569,22 +5115,24 @@ public class GUI {
                     polynomial = new Polynomial(coeffs);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
             if (polynomial == null) {
-                JOptionPane.showOptionDialog(null, inputsPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
-                if (cancelPressed[0]) return;
+                JOptionPane.showOptionDialog(null, inputsPanel, polynomialTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, buttons, null);
+                if (!confirmPressed[0]) return;
             }
 
-            JLabel horTitleLabel = new JLabel("Horner's Method");
+            JLabel horTitleLabel = new JLabel("<html>" + languageBundle.getString("hornerMethod") + "</html>");
+            horTitleLabel.setComponentOrientation(orientation);
             horTitleLabel.setFont(new Font(mainFont, Font.BOLD, 25));
             JPanel hornerTitle = new JPanel();
             hornerTitle.add(horTitleLabel);
 
             //create title
             JLabel polyTitle = new JLabel();
-            polyTitle.setText("Your Polynomial : ");
+            polyTitle.setText("<html>" + languageBundle.getString("yourPoly") + " : " + "</html>");
+            polyTitle.setComponentOrientation(orientation);
             polyTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
             //create ans scrolled
@@ -4597,7 +5145,8 @@ public class GUI {
             polyAnsScrollPane.setPreferredSize(new Dimension(250, 65));
 
             // inter x label
-            JLabel enterXLabel = new JLabel("Enter x : ");
+            JLabel enterXLabel = new JLabel("<html>" + languageBundle.getString("enterButton") + " x : " + "</html>");
+            enterXLabel.setComponentOrientation(orientation);
             enterXLabel.setFont(new Font(mainFont, Font.PLAIN, 20));
 
             // inter x field
@@ -4605,7 +5154,8 @@ public class GUI {
             enterXField.setColumns(10);
 
             // inputs : degree
-            JLabel enterDiffDegreeTitle = new JLabel("Enter degree of Differentiation :");
+            JLabel enterDiffDegreeTitle = new JLabel("<html>" + languageBundle.getString("enterRankDiff") + " : " + "</html>");
+            enterDiffDegreeTitle.setComponentOrientation(orientation);
             enterDiffDegreeTitle.setFont(new Font(secondFont, Font.PLAIN, 20));
             enterDiffDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
@@ -4615,17 +5165,27 @@ public class GUI {
             editorDiff.getTextField().setColumns(2); // Adjust the width as needed
 
             JPanel enterDiffDegree = new JPanel();
-            enterDiffDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
-            enterDiffDegree.add(enterDiffDegreeTitle, BorderLayout.WEST);
-            enterDiffDegree.add(enterDiffDegreeSp, BorderLayout.CENTER);
+            if (local.getLanguage().equals("en")) {
+                enterDiffDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                enterDiffDegree.add(enterDiffDegreeTitle);
+                enterDiffDegree.add(enterDiffDegreeSp);
+            } else {
+                enterDiffDegree.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                enterDiffDegree.add(enterDiffDegreeSp);
+                enterDiffDegree.add(enterDiffDegreeTitle);
+            }
             enterDiffDegree.setBorder(BorderFactory.createEmptyBorder(0, -5, 0, 0));
 
             //create content panel
             JPanel contentPanel = new JPanel(new GridBagLayout());
+            contentPanel.setComponentOrientation(orientation);
             gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
-            gbc.anchor = GridBagConstraints.WEST;
+            if (local.getLanguage().equals("en"))
+                gbc.anchor = GridBagConstraints.WEST;
+            else
+                gbc.anchor = GridBagConstraints.EAST;
             gbc.insets = new Insets(10, 0, 10, 0);
 
             contentPanel.add(hornerTitle, gbc);
@@ -4635,15 +5195,25 @@ public class GUI {
             contentPanel.add(polyAnsScrollPane, gbc);
             gbc.gridy++;
             contentPanel.add(enterXLabel, gbc);
-            gbc.insets = new Insets(10, -220, 10, 0);
-            gbc.gridx++;
+            contentPanel.add(enterXLabel, gbc);
+            if (local.getLanguage().equals("en")) {
+                gbc.insets = new Insets(10, -350, 10, 0);
+                gbc.gridx++;
+            } else {
+                gbc.anchor = GridBagConstraints.WEST;
+                gbc.insets = new Insets(10, 100, 10, 0);
+            }
             contentPanel.add(enterXField, gbc);
+            if (local.getLanguage().equals("en"))
+                gbc.anchor = GridBagConstraints.WEST;
+            else
+                gbc.anchor = GridBagConstraints.EAST;
             gbc.gridx = 0;
             gbc.gridy++;
             gbc.insets = new Insets(10, 0, 10, 0);
             contentPanel.add(enterDiffDegree, gbc);
 
-            JButton solveButton = new JButton("Solve");
+            JButton solveButton = new JButton(Solve);
             solveButton.setFocusPainted(false);
             solveButton.setPreferredSize(new Dimension(100, 40));
             solveButton.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -4673,12 +5243,12 @@ public class GUI {
 
                     //create title
                     JLabel solTitle = new JLabel();
-                    solTitle.setText("<html> " + "Derivative Polynomial answer at x <br>" + "using Horner's Method : " + "</html>");
+                    solTitle.setText(languageBundle.getString("diffAtAnswer"));
                     solTitle.setFont(new Font(mainFont, Font.PLAIN, 20));
 
                     //create ans scrolled
                     JTextArea solAns = new JTextArea();
-                    solAns.append("Ans : ");
+                    solAns.append("Ans = ");
                     solAns.append(String.valueOf(fixAccuracy(ans)));
                     solAns.setFont(new Font(mainFont, Font.PLAIN, 20));
                     solAns.setEditable(false);
@@ -4686,22 +5256,22 @@ public class GUI {
                     solAnsScrollPane.setPreferredSize(new Dimension(100, 50));
 
                     //create content panel
-                    JPanel solContentPanel = new JPanel(new GridLayout(2, 1));
+                    JPanel solContentPanel = new JPanel(new GridLayout(2, 1, 20, 20));
                     solContentPanel.add(solTitle);
                     solContentPanel.add(solAnsScrollPane);
 
-                    String[] response = {"OK"};
+                    String[] response = {OK};
 
-                    JOptionPane.showOptionDialog(null, solContentPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
+                    JOptionPane.showOptionDialog(null, solContentPanel, polynomialTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, solutionIcon, response, response[0]);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
             Object[] solvedButtons = {cancelButton, solveButton};
 
-            JOptionPane.showOptionDialog(null, contentPanel, "Polynomials", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, solvedButtons, null);
+            JOptionPane.showOptionDialog(null, contentPanel, polynomialTitle, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, keyboardIcon128, solvedButtons, null);
         };
         JPanel diffAtCard = createCard(title, description, button, enterDiffAt);
         polynomialsPanel.add(diffAtCard);
@@ -4725,6 +5295,7 @@ public class GUI {
         startLayout.setHgap(5);
         startLayout.setVgap(5);
         expressionFunctionPanel.setLayout(startLayout);
+        expressionFunctionPanel.setComponentOrientation(orientation);
 
         JPanel pointsCard = new JPanel();
         JTextArea pointsText;
@@ -4735,7 +5306,7 @@ public class GUI {
             //points card title
             JPanel titlePanel = new JPanel();
             JLabel pointsTitle = new JLabel();
-            pointsTitle.setText("Generated Points : ");
+            pointsTitle.setText("<html>" + languageBundle.getString("generatedPoints") + "</html>");
             pointsTitle.setFont(new Font(mainFont, Font.BOLD, 25));
             titlePanel.add(pointsTitle, BorderLayout.CENTER);
 
@@ -4748,7 +5319,7 @@ public class GUI {
             pointsScrollPane.setPreferredSize(new Dimension(450, 492));
 
             // Continue Button
-            continueButton = new JButton("Continue");
+            continueButton = new JButton(Continue);
             continueButton.setFont(new Font(buttonFont, Font.BOLD, 20));
             continueButton.setFocusPainted(false);
             continueButton.setPreferredSize(new Dimension(60, 50));
@@ -4774,23 +5345,31 @@ public class GUI {
         {
             //title
             JLabel cardTitle = new JLabel();
-            cardTitle.setText("Expression Function");
+            cardTitle.setText("<html>" + languageBundle.getString("expressionFunctionTitle") + "</html>");
+            cardTitle.setComponentOrientation(orientation);
             cardTitle.setFont(new Font(mainFont, Font.BOLD, 25));
 
 
             // description
             JLabel cardDescription = new JLabel();
-            cardDescription.setText("<html>" + "Supported Functions : <br>" + " <b>Polynomials </b> : x^3 + 9*x^2 -5*x +10 <br>" + " <b>Exponential </b> : exp(x^2) .. exp(1/x) <br>" + " <b>Binary Logarithm </b> : log(3*x) .. log(-x) <br>" + " <b>Trigonometric Functions </b> : sin(x),cos(x),tan(x) <br>" + " <b>Inverse Trigonometric Functions </b> : asin(x),acos(x),atan(x) <br>" + " <b>Hyperbolic Trigonometric Functions </b> : sinh(x),cosh(x),tanh(x) <br>" + "</html>");
-            cardDescription.setFont(new Font(secondFont, Font.ITALIC, 15));
+            cardDescription.setText(languageBundle.getString("supportedFunction"));
+            cardDescription.setComponentOrientation(orientation);
+            cardDescription.setFont(new Font(secondFont, Font.PLAIN, 15));
             cardDescription.setBackground(inputCard.getBackground());
 
             //info panel
-            JPanel infoPanel = new JPanel(new GridLayout(2, 1, 0, -20));
+            JPanel infoPanel;
+            if (local.getLanguage().equals("en"))
+                infoPanel = new JPanel(new GridLayout(2, 1, 0, -32));
+            else
+                infoPanel = new JPanel(new GridLayout(2, 1, 0, -45));
+            infoPanel.setBorder(BorderFactory.createEmptyBorder(-15, 0, 0, 0));
             infoPanel.add(cardTitle);
             infoPanel.add(cardDescription);
 
             // inputs : exp
-            JLabel enterExpTitle = new JLabel("Enter Expression Function :");
+            JLabel enterExpTitle = new JLabel("<html>" + languageBundle.getString("enterExpFun") + " : " + "</html>");
+            enterExpTitle.setComponentOrientation(orientation);
 
             JTextField enterExpField = new JTextField();
             enterExpField.setPreferredSize(new Dimension(100, 40));
@@ -4802,7 +5381,8 @@ public class GUI {
             enterExp.add(enterExpField);
 
             // inputs : a
-            JLabel enterATitle = new JLabel("Enter a – The lower bound of the x-coordinate range :");
+            JLabel enterATitle = new JLabel("<html>" + languageBundle.getString("enterA") + " : " + "</html>");
+            enterATitle.setComponentOrientation(orientation);
 
             JTextField enterAField = new JTextField();
             //enterAField.setPreferredSize(new Dimension(100, 50));
@@ -4813,7 +5393,8 @@ public class GUI {
             enterA.add(enterAField);
 
             // inputs : b
-            JLabel enterBTitle = new JLabel("Enter b – The upper bound of the x-coordinate range :");
+            JLabel enterBTitle = new JLabel("<html>" + languageBundle.getString("enterB") + " : " + "</html>");
+            enterBTitle.setComponentOrientation(orientation);
 
             JTextField enterBField = new JTextField();
             //enterBField.setPreferredSize(new Dimension(100, 50));
@@ -4824,7 +5405,8 @@ public class GUI {
             enterB.add(enterBField);
 
             // inputs : n
-            JLabel enterNTitle = new JLabel("Enter n – The number of points (including a and b) :");
+            JLabel enterNTitle = new JLabel("<html>" + languageBundle.getString("enterNNumberOfPoints") + " : " + "</html>");
+            enterNTitle.setComponentOrientation(orientation);
             enterNTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
             SpinnerNumberModel spinnerModel = new SpinnerNumberModel(2, 2, 1000, 1);
@@ -4834,8 +5416,15 @@ public class GUI {
 
             JPanel enterN = new JPanel();
             enterN.setLayout(new FlowLayout(FlowLayout.LEFT));
-            enterN.add(enterNTitle, BorderLayout.WEST);
-            enterN.add(enterNSp, BorderLayout.CENTER);
+            if (local.getLanguage().equals("en")) {
+                enterN.setLayout(new FlowLayout(FlowLayout.LEFT));
+                enterN.add(enterNTitle, BorderLayout.WEST);
+                enterN.add(enterNSp, BorderLayout.CENTER);
+            } else {
+                enterN.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                enterN.add(enterNSp, BorderLayout.WEST);
+                enterN.add(enterNTitle, BorderLayout.EAST);
+            }
 
             // inputs panel
             JPanel inputsPanel = new JPanel(new GridLayout(4, 1, -5, 10));
@@ -4845,7 +5434,7 @@ public class GUI {
             inputsPanel.add(enterN);
 
             // Generate Button
-            JButton generateButton = new JButton("Generate");
+            JButton generateButton = new JButton(Generate);
             generateButton.setFont(new Font(buttonFont, Font.BOLD, 20));
             generateButton.setFocusPainted(false);
             generateButton.setPreferredSize(new Dimension(60, 50));
@@ -4871,7 +5460,7 @@ public class GUI {
                     function = pointsFunc;
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
@@ -4894,10 +5483,7 @@ public class GUI {
 
         }
         expressionFunctionPanel.add(inputCard);
-
-
         expressionFunctionPanel.add(pointsCard);
-
     }
 
     /**
@@ -4915,6 +5501,7 @@ public class GUI {
         startLayout.setHgap(5);
         startLayout.setVgap(5);
         pointsFunctionPanel.setLayout(startLayout);
+        pointsFunctionPanel.setComponentOrientation(orientation);
 
         JPanel pointsCard = new JPanel();
         JTextArea pointsText;
@@ -4925,7 +5512,7 @@ public class GUI {
             //points card title
             JPanel titlePanel = new JPanel();
             JLabel pointsTitle = new JLabel();
-            pointsTitle.setText("Generated Points : ");
+            pointsTitle.setText("<html>" + languageBundle.getString("generatedPoints") + "</html>");
             pointsTitle.setFont(new Font(mainFont, Font.BOLD, 25));
             titlePanel.add(pointsTitle, BorderLayout.CENTER);
 
@@ -4937,7 +5524,7 @@ public class GUI {
             pointsScrollPane.setPreferredSize(new Dimension(450, 485));
 
             // Continue Button
-            continueButton = new JButton("Continue");
+            continueButton = new JButton(Continue);
             continueButton.setFont(new Font(buttonFont, Font.BOLD, 20));
             continueButton.setFocusPainted(false);
             continueButton.setPreferredSize(new Dimension(60, 50));
@@ -4963,24 +5550,28 @@ public class GUI {
         {
             //title
             JLabel cardTitle = new JLabel();
-            cardTitle.setText("Points Function");
+            cardTitle.setText("<html>" + languageBundle.getString("pointsFunctionTitle") + "</html>");
+            cardTitle.setComponentOrientation(orientation);
             cardTitle.setFont(new Font(mainFont, Font.BOLD, 25));
 
 
             // description
             JLabel cardDescription = new JLabel();
-            cardDescription.setText("<html>" + "Supported Points Type : <br>" + " <b>BigDecimal </b> : 1.919239 <br>" + " <b>Integer </b> : 12392 <br>" + " <b>PI </b> : pi, 2*pi, pi/4 <br>" + "</html>");
-            cardDescription.setFont(new Font(secondFont, Font.ITALIC, 15));
+            cardDescription.setText(languageBundle.getString("supportedPoints"));
+            cardDescription.setComponentOrientation(orientation);
+            cardDescription.setFont(new Font(secondFont, Font.PLAIN, 15));
             cardDescription.setBackground(inputCard.getBackground());
 
             //info panel
-            JPanel infoPanel = new JPanel(new GridLayout(2, 1, 0, -10));
+            JPanel infoPanel = new JPanel(new GridLayout(2, 1, 0, -15));
+            infoPanel.setBorder(BorderFactory.createEmptyBorder(-15, 0, 0, 0));
             infoPanel.add(cardTitle);
             infoPanel.add(cardDescription);
 
 
             // inputs : n
-            JLabel enterNTitle = new JLabel("Enter n – The number of points (x points) :");
+            JLabel enterNTitle = new JLabel("<html>" + languageBundle.getString("enterNXPoints") + "</html>");
+            enterNTitle.setComponentOrientation(orientation);
             enterNTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
             SpinnerNumberModel spinnerModel = new SpinnerNumberModel(2, 2, 1000, 1);
@@ -4988,18 +5579,25 @@ public class GUI {
             JSpinner.NumberEditor editor = (JSpinner.NumberEditor) enterNSp.getEditor();
             editor.getTextField().setColumns(3); // Adjust the width as needed
 
-            JButton confirmButton = new JButton("Confirm");
+            JButton confirmButton = new JButton(Confirm);
             confirmButton.setPreferredSize(new Dimension(80, 30));
-
             JPanel enterN = new JPanel();
-            enterN.setLayout(new FlowLayout(FlowLayout.LEFT));
-            enterN.add(enterNTitle, BorderLayout.WEST);
-            enterN.add(enterNSp, BorderLayout.CENTER);
-            enterN.add(confirmButton, BorderLayout.EAST);
+            if (local.getLanguage().equals("en")) {
+                enterN.setLayout(new FlowLayout(FlowLayout.LEFT));
+                enterN.add(enterNTitle);
+                enterN.add(enterNSp);
+                enterN.add(confirmButton);
+            } else {
+                enterN.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                enterN.add(confirmButton);
+                enterN.add(enterNSp);
+                enterN.add(enterNTitle);
+            }
 
 
             // input x and y
-            JLabel enterPointsTitle = new JLabel("Enter x and y points : ");
+            JLabel enterPointsTitle = new JLabel("<html>" + languageBundle.getString("enterXY") + "</html>");
+            enterPointsTitle.setComponentOrientation(orientation);
             enterPointsTitle.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0)); // Adjust the top and bottom padding
 
             JScrollPane enterPointsScroll = new JScrollPane();
@@ -5008,10 +5606,14 @@ public class GUI {
 
             // inputs panel
             JPanel inputsPanel = new JPanel(new GridBagLayout());
+            inputsPanel.setComponentOrientation(orientation);
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
-            gbc.anchor = GridBagConstraints.WEST;
+            if (local.getLanguage().equals("en"))
+                gbc.anchor = GridBagConstraints.WEST;
+            else
+                gbc.anchor = GridBagConstraints.EAST;
             gbc.insets = new Insets(5, 0, 5, 0); // Add vertical spacing between components
 
             inputsPanel.add(enterN, gbc);
@@ -5025,7 +5627,7 @@ public class GUI {
             inputsPanel.add(enterPointsScroll, gbc);
 
             // Generate Button
-            JButton generateButton = new JButton("Generate");
+            JButton generateButton = new JButton(Generate);
             generateButton.setFont(new Font(buttonFont, Font.BOLD, 20));
             generateButton.setFocusPainted(false);
             generateButton.setPreferredSize(new Dimension(60, 50));
@@ -5116,7 +5718,7 @@ public class GUI {
                     function = pointsFunc;
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
@@ -5152,6 +5754,7 @@ public class GUI {
         startLayout.setHgap(5);
         startLayout.setVgap(5);
         polynomialFunctionPanel.setLayout(startLayout);
+        polynomialFunctionPanel.setComponentOrientation(orientation);
 
         JPanel pointsCard = new JPanel();
         JTextArea pointsText;
@@ -5162,7 +5765,7 @@ public class GUI {
             //points card title
             JPanel titlePanel = new JPanel();
             JLabel pointsTitle = new JLabel();
-            pointsTitle.setText("Generated Points : ");
+            pointsTitle.setText("<html>" + languageBundle.getString("generatedPoints") + "</html>");
             pointsTitle.setFont(new Font(mainFont, Font.BOLD, 25));
             titlePanel.add(pointsTitle, BorderLayout.CENTER);
 
@@ -5171,10 +5774,10 @@ public class GUI {
             pointsText.setFont(new Font(mainFont, Font.PLAIN, 20));
             pointsText.setEnabled(false);
             pointsScrollPane = new JScrollPane(pointsText);
-            pointsScrollPane.setPreferredSize(new Dimension(450, 482));
+            pointsScrollPane.setPreferredSize(new Dimension(450, 484));
 
             // Continue Button
-            continueButton = new JButton("Continue");
+            continueButton = new JButton(Continue);
             continueButton.setFont(new Font(buttonFont, Font.BOLD, 20));
             continueButton.setFocusPainted(false);
             continueButton.setPreferredSize(new Dimension(60, 50));
@@ -5200,46 +5803,51 @@ public class GUI {
         {
             //title
             JLabel cardTitle = new JLabel();
-            cardTitle.setText("Polynomial Function");
+            cardTitle.setText("<html>" + languageBundle.getString("polynomialFunctionTitle") + "</html>");
+            cardTitle.setComponentOrientation(orientation);
             cardTitle.setFont(new Font(mainFont, Font.BOLD, 25));
 
 
             // description
             JLabel cardDescription = new JLabel();
-            cardDescription.setText("<html>" + "Supported Coefficients Type : <br>" + " <b>BigDecimal </b> : 1.919239 <br>" + " <b>Integer </b> : 12392 <br>" + " <b>PI </b> : pi, 2*pi, pi/4 <br>" + "</html>");
-            cardDescription.setFont(new Font(secondFont, Font.ITALIC, 15));
+            cardDescription.setText("<html>" + languageBundle.getString("supportedCoeffs") + "</html>");
+            cardDescription.setComponentOrientation(orientation);
+            cardDescription.setFont(new Font(secondFont, Font.PLAIN, 15));
             cardDescription.setBackground(inputCard.getBackground());
 
             //info panel
-            JPanel infoPanel = new JPanel(new GridLayout(2, 1, 0, -10));
+            JPanel infoPanel = new JPanel(new GridLayout(2, 1, 0, -25));
+            infoPanel.setBorder(BorderFactory.createEmptyBorder(-10, 0, 0, 0));
             infoPanel.add(cardTitle);
             infoPanel.add(cardDescription);
 
             // inputs : a
-            JLabel enterATitle = new JLabel("Enter a – The lower bound of the x-coordinate range :");
+            JLabel enterATitle = new JLabel("<html>" + languageBundle.getString("enterAX") + " : " + "</html>");
 
             JTextField enterAField = new JTextField();
             //enterAField.setPreferredSize(new Dimension(100, 50));
 
             JPanel enterA = new JPanel();
-            GridLayout inputLayout = new GridLayout(2, 1, 0, -5);
+            GridLayout inputLayout = new GridLayout(2, 1, 0, 0);
             enterA.setLayout(inputLayout);
+            enterA.setComponentOrientation(orientation);
             enterA.add(enterATitle);
             enterA.add(enterAField);
 
             // inputs : b
-            JLabel enterBTitle = new JLabel("Enter b – The upper bound of the x-coordinate range :");
+            JLabel enterBTitle = new JLabel("<html>" + languageBundle.getString("enterBX") + " : " + "</html>");
 
             JTextField enterBField = new JTextField();
             //enterBField.setPreferredSize(new Dimension(100, 50));
 
             JPanel enterB = new JPanel();
             enterB.setLayout(inputLayout);
+            enterB.setComponentOrientation(orientation);
             enterB.add(enterBTitle);
             enterB.add(enterBField);
 
             // inputs : n
-            JLabel enterNTitle = new JLabel("Enter n – The number of points (including a and b) :");
+            JLabel enterNTitle = new JLabel("<html>" + languageBundle.getString("enterNXPoints") + "</html>");
             enterNTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
             SpinnerNumberModel spinnerModel = new SpinnerNumberModel(2, 2, 1000, 1);
@@ -5248,12 +5856,18 @@ public class GUI {
             editor.getTextField().setColumns(3); // Adjust the width as needed
 
             JPanel enterN = new JPanel();
-            enterN.setLayout(new FlowLayout(FlowLayout.LEFT));
-            enterN.add(enterNTitle, BorderLayout.WEST);
-            enterN.add(enterNSp, BorderLayout.CENTER);
+            if (local.getLanguage().equals("en")) {
+                enterN.setLayout(new FlowLayout(FlowLayout.LEFT));
+                enterN.add(enterNTitle);
+                enterN.add(enterNSp);
+            } else {
+                enterN.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                enterN.add(enterNSp);
+                enterN.add(enterNTitle);
+            }
 
             // inputs : degree
-            JLabel enterDegreeTitle = new JLabel("Enter degree of Polynomial :");
+            JLabel enterDegreeTitle = new JLabel("<html>" + languageBundle.getString("enterDegreePoly") + "</html>");
             enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
             spinnerModel = new SpinnerNumberModel(0, 0, 1000, 1);
@@ -5261,18 +5875,26 @@ public class GUI {
             editor = (JSpinner.NumberEditor) enterDegreeSp.getEditor();
             editor.getTextField().setColumns(3); // Adjust the width as needed
 
-            JButton confirmButton = new JButton("Confirm");
+            JButton confirmButton = new JButton(Confirm);
             confirmButton.setPreferredSize(new Dimension(80, 30));
 
             JPanel enterDegree = new JPanel();
-            enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
-            enterDegree.add(enterDegreeTitle, BorderLayout.WEST);
-            enterDegree.add(enterDegreeSp, BorderLayout.CENTER);
-            enterDegree.add(confirmButton, BorderLayout.EAST);
+            if (local.getLanguage().equals("en")) {
+                enterDegree.setLayout(new FlowLayout(FlowLayout.LEFT));
+                enterDegree.add(enterDegreeTitle);
+                enterDegree.add(enterDegreeSp);
+                enterDegree.add(confirmButton);
+            } else {
+                enterDegree.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                enterDegree.add(confirmButton);
+                enterDegree.add(enterDegreeSp);
+                enterDegree.add(enterDegreeTitle);
+            }
 
 
             // input coeffs
-            JLabel enterCoeffsTitle = new JLabel("Enter Coefficients : ");
+            JLabel enterCoeffsTitle = new JLabel("<html>" + languageBundle.getString("enterCoeffs") + "</html>");
+            enterCoeffsTitle.setComponentOrientation(orientation);
             enterCoeffsTitle.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0)); // Adjust the top and bottom padding
 
             JScrollPane enterCoeffsScroll = new JScrollPane();
@@ -5280,10 +5902,14 @@ public class GUI {
 
 
             JPanel inputsPanel = new JPanel(new GridBagLayout());
+            inputsPanel.setComponentOrientation(orientation);
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
-            gbc.anchor = GridBagConstraints.WEST;
+            if (local.getLanguage().equals("en"))
+                gbc.anchor = GridBagConstraints.WEST;
+            else
+                gbc.anchor = GridBagConstraints.EAST;
             gbc.insets = new Insets(5, 0, 5, 0); // Add vertical spacing between components
 
             gbc.gridy++;
@@ -5306,7 +5932,7 @@ public class GUI {
             inputsPanel.add(enterCoeffsScroll, gbc);
 
             // Generate Button
-            JButton generateButton = new JButton("Generate");
+            JButton generateButton = new JButton(Generate);
             generateButton.setFont(new Font(buttonFont, Font.BOLD, 20));
             generateButton.setFocusPainted(false);
             generateButton.setPreferredSize(new Dimension(60, 50));
@@ -5387,7 +6013,7 @@ public class GUI {
                     function = ptsFunc;
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
@@ -5423,6 +6049,7 @@ public class GUI {
         startLayout.setHgap(5);
         startLayout.setVgap(5);
         systemOfNonLinearEquationsPanel.setLayout(startLayout);
+        systemOfNonLinearEquationsPanel.setComponentOrientation(orientation);
 
         JPanel pointsCard = new JPanel();
         JTextArea pointsText;
@@ -5434,12 +6061,14 @@ public class GUI {
             //points card title
             JPanel titlePanel = new JPanel(new BorderLayout());
             JLabel pointsTitle = new JLabel();
-            pointsTitle.setText("Solution Approximations : ");
+            pointsTitle.setText("<html>" + languageBundle.getString("solutionApproximations") + "</html>");
+            pointsTitle.setComponentOrientation(orientation);
             pointsTitle.setFont(new Font(mainFont, Font.BOLD, 25));
             titlePanel.add(pointsTitle, BorderLayout.NORTH);
 
             // inputs : n
-            JLabel enterNTitle = new JLabel("Enter n – The number of iterations :");
+            JLabel enterNTitle = new JLabel("<html>" + languageBundle.getString("enterNIteration") + " : " + "</html>");
+            enterNTitle.setComponentOrientation(orientation);
             enterNTitle.setHorizontalAlignment(SwingConstants.LEFT);
 
             SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, 1000, 1);
@@ -5448,9 +6077,15 @@ public class GUI {
             editor.getTextField().setColumns(3); // Adjust the width as needed
 
             JPanel enterN = new JPanel();
-            enterN.setLayout(new FlowLayout(FlowLayout.LEFT));
-            enterN.add(enterNTitle, BorderLayout.WEST);
-            enterN.add(enterNSp, BorderLayout.CENTER);
+            if (local.getLanguage().equals("en")) {
+                enterN.setLayout(new FlowLayout(FlowLayout.LEFT));
+                enterN.add(enterNTitle);
+                enterN.add(enterNSp);
+            } else {
+                enterN.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                enterN.add(enterNSp);
+                enterN.add(enterNTitle);
+            }
 
             titlePanel.add(enterN, BorderLayout.CENTER);
 
@@ -5463,7 +6098,7 @@ public class GUI {
             pointsScrollPane.setPreferredSize(new Dimension(450, 480));
 
             // Continue Button
-            solveButton = new JButton("Solve");
+            solveButton = new JButton(Solve);
             solveButton.setFont(new Font(buttonFont, Font.BOLD, 20));
             solveButton.setFocusPainted(false);
             solveButton.setPreferredSize(new Dimension(60, 50));
@@ -5488,16 +6123,16 @@ public class GUI {
         {
             //title
             JLabel cardTitle = new JLabel();
-            cardTitle.setText("<html>" + "System of Non-Linear Equations <br>" + "Newton-Raphson Method <br> " + "</html>");
+            cardTitle.setText(languageBundle.getString("newtonRaphsonSystemMethod"));
             cardTitle.setFont(new Font(mainFont, Font.BOLD, 25));
 
             //info panel
-            JPanel infoPanel = new JPanel(new GridLayout(1, 1, 0, -30));
+            JPanel infoPanel = new JPanel(new GridLayout(1, 1, 0, -50));
             infoPanel.add(cardTitle);
 
             // inputs : fx
-            JLabel enterFxTitle = new JLabel("Enter f(x,y) :");
-
+            JLabel enterFxTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " f(x,y) :" + "</html>");
+            enterFxTitle.setComponentOrientation(orientation);
             JTextField enterFxField = new JTextField();
             enterFxField.setPreferredSize(new Dimension(100, 40));
 
@@ -5508,8 +6143,8 @@ public class GUI {
             enterFx.add(enterFxField);
 
             // inputs : gx
-            JLabel enterGxTitle = new JLabel("Enter g(x,y) :");
-
+            JLabel enterGxTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " g(x,y) :" + "</html>");
+            enterGxTitle.setComponentOrientation(orientation);
             JTextField enterGxField = new JTextField();
             enterGxField.setPreferredSize(new Dimension(100, 40));
 
@@ -5519,8 +6154,8 @@ public class GUI {
             enterGx.add(enterGxField);
 
             // inputs : dfdx
-            JLabel enterDfdxTitle = new JLabel("Enter dfdx :");
-
+            JLabel enterDfdxTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " dfdx :" + "</html>");
+            enterDfdxTitle.setComponentOrientation(orientation);
             JTextField enterDfdxField = new JTextField();
             //enterAField.setPreferredSize(new Dimension(100, 50));
 
@@ -5530,8 +6165,8 @@ public class GUI {
             enterDfdx.add(enterDfdxField);
 
             // inputs : dfdy
-            JLabel enterDfdyTitle = new JLabel("Enter dfdy :");
-
+            JLabel enterDfdyTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " dfdy :" + "</html>");
+            enterDfdyTitle.setComponentOrientation(orientation);
             JTextField enterDfdyField = new JTextField();
             //enterAField.setPreferredSize(new Dimension(100, 50));
 
@@ -5541,8 +6176,8 @@ public class GUI {
             enterDfdy.add(enterDfdyField);
 
             // inputs : dgdx
-            JLabel enterDgdxTitle = new JLabel("Enter dgdx :");
-
+            JLabel enterDgdxTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " dgdx :" + "</html>");
+            enterDgdxTitle.setComponentOrientation(orientation);
             JTextField enterDgdxField = new JTextField();
             //enterBField.setPreferredSize(new Dimension(100, 50));
 
@@ -5552,8 +6187,8 @@ public class GUI {
             enterDgdx.add(enterDgdxField);
 
             // inputs : dgdy
-            JLabel enterDgdyTitle = new JLabel("Enter dgdy :");
-
+            JLabel enterDgdyTitle = new JLabel("<html>" + languageBundle.getString("enterButton") + " dgdy :" + "</html>");
+            enterDgdyTitle.setComponentOrientation(orientation);
             JTextField enterDgdyField = new JTextField();
             //enterBField.setPreferredSize(new Dimension(100, 50));
 
@@ -5563,8 +6198,8 @@ public class GUI {
             enterDgdy.add(enterDgdyField);
 
             // inputs : x0
-            JLabel enterX0Title = new JLabel("Enter X0 :");
-
+            JLabel enterX0Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " X0 :" + "</html>");
+            enterX0Title.setComponentOrientation(orientation);
             JTextField enterX0Field = new JTextField();
             //enterBField.setPreferredSize(new Dimension(100, 50));
 
@@ -5574,8 +6209,8 @@ public class GUI {
             enterX0.add(enterX0Field);
 
             // inputs : y0
-            JLabel enterY0Title = new JLabel("Enter Y0 :");
-
+            JLabel enterY0Title = new JLabel("<html>" + languageBundle.getString("enterButton") + " Y0 :" + "</html>");
+            enterY0Title.setComponentOrientation(orientation);
             JTextField enterY0Field = new JTextField();
             //enterBField.setPreferredSize(new Dimension(100, 50));
 
@@ -5626,7 +6261,7 @@ public class GUI {
                     pointsText.repaint();
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? "Invalid inputs" : ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage() == null ? invalidInputs : ex.getMessage(), error, JOptionPane.ERROR_MESSAGE);
                 }
             });
 
@@ -5691,7 +6326,7 @@ public class GUI {
 
         JLabel cardDescription = new JLabel();
         cardDescription.setText(description);
-        cardDescription.setFont(new Font(secondFont, Font.ITALIC, 15));
+        cardDescription.setFont(new Font(secondFont, Font.PLAIN, 15));
         cardDescription.setHorizontalAlignment(SwingConstants.CENTER);
 
         JButton cardButton = new JButton(button);
@@ -5735,7 +6370,7 @@ public class GUI {
         cardDescription.setFont(new Font(secondFont, Font.ITALIC, 15));
         cardDescription.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel tipLabel = new JLabel("More info");
+        JLabel tipLabel = new JLabel("<html>" + languageBundle.getString("moreInfo") + "</html>");
         tipLabel.setIcon(bulbIcon);
         tipLabel.setHorizontalAlignment(SwingConstants.CENTER);
         tipLabel.setToolTipText(toolTipString);
@@ -5949,5 +6584,60 @@ public class GUI {
                 break;
             }
         }
+    }
+
+    /**
+     * Sets the application's language and updates UI elements accordingly.
+     *
+     * @param lang The language code to set (e.g., "en" for English, "ar" for Arabic).
+     *             This method changes the display language and text direction of UI components.
+     */
+    private void setLangauge(String lang) {
+        local = new Locale(lang);
+        languageBundle = ResourceBundle.getBundle("Bundles.language", local);
+        String textDirection = languageBundle.getString("dir");
+        if ("RIGHT_TO_LEFT".equalsIgnoreCase(textDirection)) {
+            orientation = ComponentOrientation.RIGHT_TO_LEFT;
+        } else {
+            orientation = ComponentOrientation.LEFT_TO_RIGHT;
+        }
+        if (lang.equals("en")) {
+            mainFont = englishFont;
+            secondFont = englishFont;
+            buttonFont = englishFont;
+            Locale.setDefault(Locale.ENGLISH);
+        } else {
+            mainFont = arabicFont;
+            secondFont = arabicFont;
+            buttonFont = arabicFont;
+            Locale.setDefault(new Locale("ar", "SA"));
+        }
+    }
+
+    /**
+     * Saves the current application settings to the configuration file.
+     * The settings include accuracy, light and dark themes, and selected language.
+     * If an I/O exception occurs during the save process, it is caught and logged.
+     */
+    private void saveSettings() {
+        settings.setAccuracy(Accuracy.getValue());
+        settings.setLightTheme(mainLightTheme);
+        settings.setDarkTheme(mainDarkTheme);
+        settings.setLangauge(local.getLanguage());
+        settings.saveSettings();
+    }
+
+    /**
+     * Loads previously saved application settings from the configuration file.
+     * The settings include light and dark themes, accuracy, and language.
+     * If the configuration file does not exist, default settings are applied.
+     * If an I/O exception occurs during the loading process, it is caught and logged.
+     */
+    private void loadSettings() {
+        settings = new SettingsManager();
+        mainLightTheme = settings.getLightTheme();
+        mainDarkTheme = settings.getDarkTheme();
+        Accuracy.setValue(settings.getAccuracy());
+        setLangauge(settings.getLanguage());
     }
 }
