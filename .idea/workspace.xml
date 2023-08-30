@@ -12,16 +12,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Create English bundle - language_en.properties">
+    <list default="true" id="ce5333e9-5254-4e4d-8e0b-cc0cd09e869e" name="Changes" comment="Build the project with the new jar and apply the new changes and settings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/NumericCalc_jar/NumericCalc.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/NumericCalc_jar/NumericCalc.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/res/Bundles/language_ar.properties" beforeDir="false" afterPath="$PROJECT_DIR$/res/Bundles/language_ar.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/Bundles/language_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/res/Bundles/language_en.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Util/Language.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Util/SettingsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/SettingsManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,22 +93,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/src/Util/SettingsManager.java",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "editor.preferences.tabs",
-    "two.files.diff.last.used.file": "C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/src/Util/SettingsManager.java"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/src/Util/SettingsManager.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.tabs&quot;,
+    &quot;two.files.diff.last.used.file&quot;: &quot;C:/Users/Lenovo/OneDrive/Documents/Idea Projects/NumericCalc/src/Util/SettingsManager.java&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Lenovo\OneDrive\Documents\Idea Projects\NumericCalc\res\Settings" />
@@ -138,41 +133,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1688290629737</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٩١" summary="Fix freezing , move setVisible to last">
-      <created>1689784362310</created>
-      <option name="number" value="٠٠٢٩١" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٩١" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689784362310</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٩٢" summary="Add SwingUtilities.invokeLater for thread safety">
-      <created>1689796241342</created>
-      <option name="number" value="٠٠٢٩٢" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٩٢" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689796241342</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٩٣" summary="Add Dark Mode">
-      <created>1689806963825</created>
-      <option name="number" value="٠٠٢٩٣" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٩٣" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689806963825</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٩٤" summary="Add JAVA DOC to Dark Mode class">
-      <created>1689807168296</created>
-      <option name="number" value="٠٠٢٩٤" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٩٤" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689807168296</updated>
-    </task>
-    <task id="LOCAL؜-٠٠٢٩٥" summary="Testing translation">
-      <created>1689810979314</created>
-      <option name="number" value="٠٠٢٩٥" />
-      <option name="presentableId" value="LOCAL؜-٠٠٢٩٥" />
-      <option name="project" value="LOCAL؜" />
-      <updated>1689810979314</updated>
     </task>
     <task id="LOCAL؜-٠٠٢٩٦" summary="Add theme button &#10;Add dark theme Flatlaf&#10;Removing non-usable elements">
       <created>1689869777101</created>
@@ -482,7 +442,42 @@
       <option name="project" value="LOCAL؜" />
       <updated>1693058754088</updated>
     </task>
-    <option name="localTasksCounter" value="340" />
+    <task id="LOCAL؜-٠٠٣٤٠" summary="Update English bundle - language_en.properties">
+      <created>1693352720075</created>
+      <option name="number" value="٠٠٣٤٠" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٤٠" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1693352720075</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٤١" summary="Create and Update Arabic bundle - language_ar.properties">
+      <created>1693352739429</created>
+      <option name="number" value="٠٠٣٤١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٤١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1693352739429</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٤٢" summary="Add language settings to SettingsManager">
+      <created>1693352769334</created>
+      <option name="number" value="٠٠٣٤٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٤٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1693352769334</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٤٣" summary="Apply the new changes of adding Localisation into the GUI class with bugs fixing">
+      <created>1693352835281</created>
+      <option name="number" value="٠٠٣٤٣" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٤٣" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1693352835281</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٣٤٤" summary="Build the project with the new jar and apply the new changes and settings">
+      <created>1693352877392</created>
+      <option name="number" value="٠٠٣٤٤" />
+      <option name="presentableId" value="LOCAL؜-٠٠٣٤٤" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1693352877392</updated>
+    </task>
+    <option name="localTasksCounter" value="345" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -525,11 +520,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fix equals bug" />
-    <MESSAGE value="Fix printing ' + ' in Polynomial" />
-    <MESSAGE value="Fix showing trailing zeros" />
-    <MESSAGE value="Fix Accuracy in Lagrange short Hand Polynomial" />
-    <MESSAGE value="Fix Matrix 0^j exception" />
     <MESSAGE value="Testing new changes" />
     <MESSAGE value="Fix Euler bug" />
     <MESSAGE value="Fix pow in BigDecimalUtil" />
@@ -550,6 +540,11 @@
     <MESSAGE value="Rebuild JAR file" />
     <MESSAGE value="Initialize Bundles &amp; Language class" />
     <MESSAGE value="Create English bundle - language_en.properties" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create English bundle - language_en.properties" />
+    <MESSAGE value="Update English bundle - language_en.properties" />
+    <MESSAGE value="Create and Update Arabic bundle - language_ar.properties" />
+    <MESSAGE value="Add language settings to SettingsManager" />
+    <MESSAGE value="Apply the new changes of adding Localisation into the GUI class with bugs fixing" />
+    <MESSAGE value="Build the project with the new jar and apply the new changes and settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Build the project with the new jar and apply the new changes and settings" />
   </component>
 </project>

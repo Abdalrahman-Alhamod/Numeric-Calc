@@ -387,7 +387,7 @@ public class GUI {
         mainFrame.setTitle("Numerical Analysis Calculator");
         mainFrame.setMinimumSize(new Dimension(940, 620));
         mainFrame.setLocationRelativeTo(null);
-        // mainFrame.setResizable(false);
+        mainFrame.setResizable(false);
         mainFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -539,6 +539,7 @@ public class GUI {
             enterAccuracyTitle.setComponentOrientation(orientation);
             enterAccuracyTitle.setFont(new Font(mainFont, Font.PLAIN, 15));
             enterAccuracyTitle.setHorizontalAlignment(SwingConstants.LEFT);
+            enterAccuracyTitle.setBorder(BorderFactory.createEmptyBorder(0,0,5,0));
 
             SpinnerNumberModel spinnerModel = new SpinnerNumberModel(Accuracy.getValue(), 1, 30, 1);
             JSpinner enterAccuracySp = new JSpinner(spinnerModel);
@@ -2293,7 +2294,7 @@ public class GUI {
                     if (cancelPressed[0]) return;
 
 
-                    Polynomial ans = Differentiation.Newton_GregoryBackwardSubtractions.getIFAP(pointsFunction, degree[0], rank[0]);
+                    Polynomial ans = Differentiation.Newton_GregoryForwardSubtractions.getIFAP(pointsFunction, degree[0], rank[0]);
 
                     JLabel interTitle = new JLabel();
                     interTitle.setText("<html>" + languageBundle.getString("differentialAnswer") + " " + languageBundle.getString("NGBSDiffTitle") + " : " + "</html>");
@@ -2345,13 +2346,15 @@ public class GUI {
                 try {
 
                     JLabel enterXLabel = new JLabel("<html>" + languageBundle.getString("enterXDiff") + " : " + "</html>");
-                    enterXLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+                    enterXLabel.setFont(new Font(mainFont, Font.PLAIN, 15));
+                    enterXLabel.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
 
                     JTextField enterXField = new JTextField();
-                    enterXField.setColumns(25);
+                    enterXField.setColumns(23);
 
                     JLabel enterMethodLabel = new JLabel("<html>" + languageBundle.getString("chooseMethod") + " : " + "</html>");
-                    enterMethodLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+                    enterMethodLabel.setFont(new Font(mainFont, Font.PLAIN, 15));
+                    enterMethodLabel.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
 
                     JComboBox<String> enterMethodCombo = new JComboBox<>();
                     String BS = "<html>" + languageBundle.getString("BS") + "</html>";
@@ -2371,10 +2374,17 @@ public class GUI {
                     gbc.insets = new Insets(5, 5, 5, 5);
                     inputs.add(enterXField, gbc);
                     gbc.gridy++;
-                    gbc.insets = new Insets(5, -150, 5, 5);
-                    inputs.add(enterMethodLabel, gbc);
-                    gbc.gridx++;
-                    inputs.add(enterMethodCombo, gbc);
+                    if(local.getLanguage().equals("en")) {
+                        gbc.insets = new Insets(5, -150, 5, 5);
+                        inputs.add(enterMethodLabel, gbc);
+                        gbc.gridx++;
+                        inputs.add(enterMethodCombo, gbc);
+                    }else{
+                        gbc.insets = new Insets(5, -100, 5, 5);
+                        inputs.add(enterMethodCombo, gbc);
+                        gbc.gridx++;
+                        inputs.add(enterMethodLabel, gbc);
+                    }
 
                     JButton solveButton = new JButton(Solve);
                     solveButton.setFocusPainted(false);
@@ -5408,6 +5418,7 @@ public class GUI {
             JLabel enterNTitle = new JLabel("<html>" + languageBundle.getString("enterNNumberOfPoints") + " : " + "</html>");
             enterNTitle.setComponentOrientation(orientation);
             enterNTitle.setHorizontalAlignment(SwingConstants.LEFT);
+            enterNTitle.setBorder(BorderFactory.createEmptyBorder(0,0,5,0));
 
             SpinnerNumberModel spinnerModel = new SpinnerNumberModel(2, 2, 1000, 1);
             JSpinner enterNSp = new JSpinner(spinnerModel);
@@ -5573,6 +5584,7 @@ public class GUI {
             JLabel enterNTitle = new JLabel("<html>" + languageBundle.getString("enterNXPoints") + "</html>");
             enterNTitle.setComponentOrientation(orientation);
             enterNTitle.setHorizontalAlignment(SwingConstants.LEFT);
+            enterNTitle.setBorder(BorderFactory.createEmptyBorder(0,0,5,0));
 
             SpinnerNumberModel spinnerModel = new SpinnerNumberModel(2, 2, 1000, 1);
             JSpinner enterNSp = new JSpinner(spinnerModel);
@@ -5849,6 +5861,7 @@ public class GUI {
             // inputs : n
             JLabel enterNTitle = new JLabel("<html>" + languageBundle.getString("enterNXPoints") + "</html>");
             enterNTitle.setHorizontalAlignment(SwingConstants.LEFT);
+            enterNTitle.setBorder(BorderFactory.createEmptyBorder(0,0,5,0));
 
             SpinnerNumberModel spinnerModel = new SpinnerNumberModel(2, 2, 1000, 1);
             JSpinner enterNSp = new JSpinner(spinnerModel);
@@ -5869,6 +5882,7 @@ public class GUI {
             // inputs : degree
             JLabel enterDegreeTitle = new JLabel("<html>" + languageBundle.getString("enterDegreePoly") + "</html>");
             enterDegreeTitle.setHorizontalAlignment(SwingConstants.LEFT);
+            enterDegreeTitle.setBorder(BorderFactory.createEmptyBorder(0,0,5,0));
 
             spinnerModel = new SpinnerNumberModel(0, 0, 1000, 1);
             JSpinner enterDegreeSp = new JSpinner(spinnerModel);
