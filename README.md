@@ -15,7 +15,7 @@
   <a href="https://github.com/Abdalrahman-Alhamod/Numeric-Calc/stargazers">
     <img src="https://img.shields.io/github/stars/Abdalrahman-Alhamod/Numeric-Calc"/> 
   </a>
-    <a href="https://github.com/Abdalrahman-Alhamod/Numeric-Calc/blob/master/LICENSE">
+    <a href="https://github.com/Abdalrahman-Alhamod/Numeric-Calc/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/Abdalrahman-Alhamod/Numeric-Calc"/> 
   </a>
 
@@ -175,7 +175,7 @@ Support 15 themes :
 > ![Screenshot 2023-07-26 055228](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/assets/137921143/4be42e0c-73e3-4a92-9d21-1880053099b7)
 
 ## Installation
-> This project comes with two installer. One for Windows and one for Unix system :
+> This project comes with three installer. Two for Windows and one for Unix system :
 
 - [Windows Installer 32-bit](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/v3.1.0/Numerical_Analysis_Calculator_Windows_Installer_32-bit.exe)
 - [Windows Installer 64-bit](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/v3.1.0/Numerical_Analysis_Calculator_Windows_Installer_64-bit.exe)
