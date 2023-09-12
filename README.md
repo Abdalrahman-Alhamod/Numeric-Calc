@@ -177,7 +177,7 @@ Support 15 themes :
 ## Installation
 > This project comes with three installer. Two for Windows and one for Unix system :
 
-- [Windows Installer 32-bit](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/v3.1.0/Numerical_Analysis_Calculator_Windows_Installer_32-bit.exe)
-- [Windows Installer 64-bit](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/v3.1.0/Numerical_Analysis_Calculator_Windows_Installer_64-bit.exe)
-- [Unix Installer](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/3.0.0/Numerical_Analysis_Calculator_Unix_Installer.sh)
+- [Windows 32-bit Installer](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/v3.1.0/Numerical_Analysis_Calculator_Windows_x32_Installer.exe)
+- [Windows 64-bit Installer](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/v3.1.0/Numerical_Analysis_Calculator_Windows_x64_Installer.exe)
+- [Unix Installer](https://github.com/Abdalrahman-Alhamod/Numeric-Calc/releases/download/v3.1.0/Numerical_Analysis_Calculator_Unix_Installer.sh)
 
